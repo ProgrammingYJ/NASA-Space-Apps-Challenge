@@ -8,13 +8,15 @@ Planet X and SPHEREx — 실제 관측과 과학적 가설을 연결하는 우�
 node app.js
 ```
 
-또는 `npm start`를 사용한다. 서버 실행에 Python 설치·Python 프로세스·별도 Python API가 필요하지 않고 Node 외부 패키지도 없다. 기본 접속은 `http://127.0.0.1:8000/`, bind는 `0.0.0.0`이다. 포트는 `PORT`→`APP_PORT`→8000 순서로 선택하며 영속 상태는 `APP_STATE_DIR` 또는 기본 `var/node/`에 보관한다. 호스팅의 시작 파일 항목에는 **`app.js`**, 시작 명령 항목에는 **`node app.js`**를 지정한다. `.env` 파일은 자동으로 읽지 않으므로 환경변수는 호스팅 설정에서 지정한다. 전체 실행·필수 자료·복구는 [배포 안내](deploy/README.md)를 따른다.
+또는 `npm start`를 사용한다. 서버 실행에 Python 설치·Python 프로세스·별도 Python API가 필요하지 않고 Node 외부 패키지도 없다. **v0.9.1부터 기본 접속은 `http://127.0.0.1:3002/`**, bind는 `0.0.0.0`이다. 포트는 `PORT`→`APP_PORT`→3002 순서로 선택하며 영속 상태는 `APP_STATE_DIR` 또는 기본 `var/node/`에 보관한다. 호스팅의 시작 파일 항목에는 **`app.js`**, 시작 명령 항목에는 **`node app.js`**를 지정한다. 기존 포트 환경변수가8000이면 제거하거나3002로 바꾼다. `.env` 파일은 자동으로 읽지 않으므로 환경변수는 호스팅 설정에서 지정한다. 전체 실행·필수 자료·MCSM 포트 매핑/프록시·복구는 [배포 안내](deploy/README.md)를 따른다.
 
-현재 **DEV-012 / v0.9.0**은 Node 전용 호스팅으로 전환하는 구현·검사 단계다. Node14검사·Python 없는 PATH의 독립 HTTP/과학 대조67검사와 Node 서버 대상 기존 배포 smoke를 통과했다. 프런트 strict/Vite `DLJsfpSc`·Vitest71(1.62초)을 확인했고 전체Python550PASS(113.36초,기존Starlette경고1)도확인했다. Node8081의 Chrome23고유경로(22+1후속)를 확인했으며 정확v0.9 ZIP 실행·실제 Node 재시작 복원도 통과했다. 검증된 이전 v0.8 ZIP은 그대로 보존한다.
+현재 **OPS-013 / v0.9.1**은 MCSM 할당 포트3002에 맞춰 기본 앱 포트와 Docker/compose·실행 안내를 수정했다. 환경변수 없는 실제 `node app.js` 시작과 명시 포트 우선권을 포함해 Node18검사 PASS10.909초를 확인했다. 기본 포트 변경이 nginx 대상 주소나 MCSM 컨테이너 매핑을 자동 수정하지는 않는다. 새 ZIP 검증과 공개 서비스502의 최종 복구 여부는 각각 별도로 확인한다.
+
+보존된 **DEV-012 / v0.9.0**은 Node 전용 호스팅 전환본이다. Node14검사·Python 없는 PATH의 독립 HTTP/과학 대조67검사와 Node 서버 대상 기존 배포 smoke를 통과했다. 프런트 strict/Vite `DLJsfpSc`·Vitest71(1.62초)을 확인했고 전체Python550PASS(113.36초,기존Starlette경고1)도확인했다. Node8081의 Chrome23고유경로(22+1후속)를 확인했으며 정확v0.9 ZIP 실행·실제 Node 재시작 복원도 통과했다. 검증된 이전 v0.8 ZIP은 그대로 보존한다.
 
 Node의 관측 비교는 실제 FITS에서 빌드 시 새로 계산한 두 쌍의 **출처 검증 결과 캐시**를 재사용한다. 요청 시 FITS를 새로 분석하는 기능과 구분해 화면에 안내한다. 원본/보정·캐시 해시가 없거나 맞지 않으면 오류/재계산 필요로 남기며 합성 사진이나 과거 참고 숫자로 채우지 않는다.
 
-필수 묶음은 `data/node-runtime/`의99개 실제 reader snapshot과 순서별4비교, 총103JSON66,642,151B다. [정본 manifest](data/manifests/node_runtime.json)는473,765B/SHA256 `9dfe12f530da0e6993ced98cc1a94932eb8aef161b6ca68e1a5cb081df44a2af`이며 source1859항목의1564필수/295선택을 구분한다. 서버는 같은바이트의 `data/node-runtime/runtime_manifest.json`도 사용한다. 큰 파생 JSON과 원자료는 Git clone만으로 준비되지 않으므로 완결ZIP 또는 출처검증 빌드 산출물이 필요하다. 현재 v0.9 ZIP의 정확 검증은 대기 중이다.
+필수 묶음은 `data/node-runtime/`의99개 실제 reader snapshot과 순서별4비교, 총103JSON66,642,151B다. [정본 manifest](data/manifests/node_runtime.json)는473,765B/SHA256 `9dfe12f530da0e6993ced98cc1a94932eb8aef161b6ca68e1a5cb081df44a2af`이며 source1859항목의1564필수/295선택을 구분한다. 서버는 같은바이트의 `data/node-runtime/runtime_manifest.json`도 사용한다. 큰 파생 JSON과 원자료는 Git clone만으로 준비되지 않으므로 완결ZIP 또는 출처검증 빌드 산출물이 필요하다. 이전v0.9.0 ZIP의 정확 검증과 새v0.9.1 ZIP 검증은 별도 기록으로 구분한다.
 
 2026 NASA Space Apps Seoul · 제작 11월 14일 09:00부터 · 최신 공식 마감 11월 15일 23:59 KST(권장 완료23:55).
 

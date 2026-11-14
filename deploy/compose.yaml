@@ -4,7 +4,7 @@ services:
       context: ..
       dockerfile: deploy/Dockerfile
     ports:
-      - "${APP_BIND_IP:-127.0.0.1}:${APP_PORT:-8000}:8000"
+      - "${APP_BIND_IP:-127.0.0.1}:${APP_PORT:-3002}:3002"
     volumes:
       - ../data:/app/data:ro
       - ../var:/app/var
@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
     stop_grace_period: 15s
     healthcheck:
-      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8000/health/ready').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3002/health/ready').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
       interval: 30s
       timeout: 6s
       start_period: 30s

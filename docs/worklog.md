@@ -1,5 +1,18 @@
 # 작업 기록
 
+## OPS-013 · 2026-11-14 21:57:35 KST 확인부터 · MCSM 공개 502 진단
+
+- 후속 통합검사: `npm test` Node전체18PASS/0FAIL/10.909초. 변경 배포 Python2파일 Ruff/check-format 및 git diff check PASS. 새포트 child 검사 프로세스는 전부 종료했다. 새 v0.9.1 완결ZIP은 원본/프런트/103JSON을 그대로 사용해 별도 패키징·기본3002/실제Node재시작검사 예정이며 v0.9.0 ZIP은 수정하지 않는다.
+
+- 후속 사용자 지시(22:03:48 KST 착수): app.js를 수정해 기본3002로 제공한다. 실제 CLI와 내부서버의 기본값, Docker/compose 및 환경변수 예제를3002로 맞추고 명시 PORT/APP_PORT 우선권은 유지했다. v0.9.1로 구분하며 실제 childprocess 기본3002·PORT우선·APP_PORT단독 회귀4PASS521.7ms를 확인했다. 기존 불변 ZIP과 과학자료·Data_Spec/103JSON/프런트 빌드는 재생성하지 않는다. 전체 Node/깨끗한 새ZIP의 환경변수 없는3002 실행·재시작 검사는 후속 결과로 확정한다.
+
+- 사용자: `Planet X Node runtime listening on port 8000` 이후 공개502, 인스턴스 할당 포트3002 확인. 실제 nginx upstream/컨테이너 매핑은 아직 제공되지 않았다.
+- 실제 HTTPS GET 네 경로(`/`, `/health/live`, `/health/ready`, `/api/v1/runtime`) 모두 nginx/1.24.0 (Ubuntu)의502 HTML을 확인했다. 공개8000/3002 HTTP health 조회는 각각5초 timeout으로 방화벽/매핑/대상 주소 중 원인을 확정할 수 없다. TLS 검증을 우회하지 않았다.
+- debug/documentation 실제 스킬 및 별도 읽기 검토를 적용했다. Node 소스는0.0.0.0 HTTP, PORT→APP_PORT→8000, 성공 바인딩 뒤 로그이며 앱ready 실패는503이다. 공개 프록시 연결/포트 불일치가 유력하되 확정 버그로 보고하지 않는다.
+- 로컬 기존8081의 live/ready200을 확인했다. 독립 임시 상태로 `node -e "process.env.PORT='3002';require('./app.js').start()"`를 실제 실행해3002 listening 및 `/`, live, ready200을 확인하고 이 검사 프로세스만 종료했다. 기존 사용자 상태/실행 서버/원본/ZIP은 보존했다.
+- 직접 실행은 PORT=3002, `호스트3002→컨테이너8000`이면 내부PORT8000 유지로 구분해 안내한다. nginx upstream은HTTP이며 실제 접근 가능한 IP/포트와 일치해야 한다. 근거: node/server.js34/135–141/239–245, deploy/compose.yaml7, nginx 공식 proxy_pass 문서. FSD17.2에 운영 상태를 기록했다. 과학/데이터/기능 변경은 없다.
+- 공용 Notion 지정 URL 재열람은 도구접근 실패였다. 최신 팀 요청을 확인했다고 주장하지 않는다. 실제 MCSM/프록시 서버 설정 변경과 공개 복구 검증은 아직 수행하지 않았다.
+
 각 작업에 ID·KST 시각·목적·영향 파일·출처/입력·결정·검사·실제 결과·남은 문제를 기록한다. 완료와 예정/확인 중을 구분하며 비밀값·개인 식별 정보는 넣지 않는다.
 
 ## SETUP-001 · 2026-11-14 · 행사 시작 후 저장소 초기 설정

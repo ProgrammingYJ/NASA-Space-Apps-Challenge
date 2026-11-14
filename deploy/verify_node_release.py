@@ -392,7 +392,12 @@ def stop_owned(process: subprocess.Popen | None):
         process.wait(timeout=15)
 
 
-def main(archive: Path, port: int = 8011, node_executable: Path | None = None) -> dict:
+def main(
+    archive: Path,
+    port: int = 8011,
+    node_executable: Path | None = None,
+    use_default_port: bool = False,
+) -> dict:
     repository = Path(__file__).resolve().parents[1]
     (repository / "tmp").mkdir(exist_ok=True)
     temporary = Path(
@@ -454,6 +459,9 @@ def main(archive: Path, port: int = 8011, node_executable: Path | None = None) -
             "invalid_Node_executable",
         )
         environment, lookup = server_environment(node, target, port)
+        if use_default_port:
+            require(port == release["runtime"].get("default_http_port"), "default_port_mismatch")
+            environment.pop("PORT")
         with (
             (temporary / "node-version.stdout.log").open("wb") as stdout,
             (temporary / "node-version.stderr.log").open("wb") as stderr,
@@ -656,7 +664,10 @@ def main(archive: Path, port: int = 8011, node_executable: Path | None = None) -
                 "executable": str(node),
                 "argv": [str(node), "app.js"],
                 "PATH": environment["PATH"],
-                "PORT": port,
+                "PORT": environment.get("PORT"),
+                "APP_PORT": environment.get("APP_PORT"),
+                "actual_http_port": port,
+                "startup_port_source": "code_default" if use_default_port else "PORT_environment",
                 "APP_STATE_DIR": str(state),
                 "owned_process_ids": pids,
                 "worker_model": "node:worker_threads, verified through actual health/source responses",
@@ -724,7 +735,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path)
     parser.add_argument("--port", type=int, default=8011)
+    parser.add_argument("--use-default-port", action="store_true")
     parser.add_argument("--node", "--node-executable", dest="node_executable", type=Path)
     arguments = parser.parse_args()
-    result = main(arguments.archive, arguments.port, arguments.node_executable)
+    result = main(
+        arguments.archive, arguments.port, arguments.node_executable, arguments.use_default_port
+    )
     raise SystemExit(0 if result["status"] == "passed" else 1)

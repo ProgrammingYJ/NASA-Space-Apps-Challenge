@@ -31,7 +31,7 @@ function queryNumber(url, key, fallback, integer = false) {
 async function start(options = {}) {
   const root = path.resolve(options.root || path.join(__dirname, '..'));
   const state = path.resolve(options.stateDir || process.env.APP_STATE_DIR || path.join(root, 'var', 'node'));
-  const port = options.port ?? Number(process.env.PORT || process.env.APP_PORT || 8000), host = options.host || '0.0.0.0';
+  const port = options.port ?? Number(process.env.PORT || process.env.APP_PORT || 3002), host = options.host || '0.0.0.0';
   if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('invalid_port');
   const unlock = lock(state), sources = new Sources(root);
   const validate = validator(parse(fs.readFileSync(path.join(root, 'contracts/openapi.json'), 'utf8')));

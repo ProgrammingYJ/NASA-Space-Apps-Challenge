@@ -1,4 +1,14 @@
 {
+  "ops013_port_patch": {
+    "release": "0.9.1",
+    "user_request": "Change app.js default HTTP port to MCSM assigned port 3002",
+    "default_http_port": 3002,
+    "explicit_environment_override_precedence": ["PORT", "APP_PORT"],
+    "changes": ["Node entrypoint/server default", "Docker/compose and run instructions", "actual child-process startup regression", "exact ZIP verification without port environment variables"],
+    "science_data_frontend_changed": false,
+    "public_proxy_or_MCSM_settings_changed": false,
+    "exact_release_verification": "pending external checksum/verification JSON"
+  },
   "schema_version": "1.0",
   "date_kst": "2026-11-14",
   "tool": "Codex",

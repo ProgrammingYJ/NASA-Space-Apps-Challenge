@@ -225,8 +225,8 @@ def prepare(built_at):
     )
     manifest = {
         "release": version,
-        "work_id": "DEV-012",
-        "work_ids": ["DEV-009", "DEV-010", "DEV-011", "DEV-012"],
+        "work_id": "OPS-013",
+        "work_ids": ["DEV-009", "DEV-010", "DEV-011", "DEV-012", "OPS-013"],
         "built_at": built_at,
         "base_commit": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
@@ -238,6 +238,7 @@ def prepare(built_at):
             "engine": "Node.js >=22.17.0",
             "entrypoint": "app.js",
             "start_command": "node app.js",
+            "default_http_port": 3002,
             "python_required_on_server": False,
             "science_results": "actual Python FITS calculations verified and cached at build time",
         },
