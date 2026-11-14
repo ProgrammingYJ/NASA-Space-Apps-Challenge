@@ -418,6 +418,8 @@
   "criteriaStatus_unknown": "資料不足",
   "criteriaStatus_not_applicable": "不適用",
   "criteriaMinimumMass": "最小質量：{{minimum}} M⊕（目前質量：{{current}}）",
+  "criteriaMinimumMassHypothesis": "最小質量：{{minimum}} M⊕（目前質量 ≈ {{current}} M⊕）",
+  "criteriaMassAssumption": "這是假設質量，依來源半徑與套用密度 {{density}} kg/m³計算。本體質量的實測值及官方分類維持不變。",
   "criteriaMassUnknown": "尚未採用本體單獨質量",
   "criteriaModelLabel": "圓軌道清除模型的參考值",
   "criteriaModelNote": "採用1 M☉太陽、100億年清除時間及C=2√3的圓軌道近似。此閾值不是IAU正式數值規則，也不是實際完全清除的證據。",
@@ -542,5 +544,6 @@
   "blackHoleRay_truncated": "達到積分上限",
   "observerSourceError": "無法讀取物理模型來源資料。",
   "observerLoading": "正在讀取物理模型來源…",
-  "blackHoleSourceError": "無法讀取黑洞來源資料。"
+  "blackHoleSourceError": "無法讀取黑洞來源資料。",
+  "verifiedObservationCacheNote": "這些預先計算結果已核對原始檔案、校正及處理版本。曝光時間與原始品質資訊均予以保留。"
 }

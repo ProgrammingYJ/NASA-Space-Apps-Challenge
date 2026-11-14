@@ -96,3 +96,27 @@ Codex와분리에이전트는실제소스조회/문헌근거·provider/reference
 최종Data_Spec은1,791,636B/3061줄/SHA `e848ee7025f315a6cfa127f67b3120a2c7ef2f5bee2d3515e26bbd7a1c3aba33`·26정본/2041전수항목(data1987+public53+helper1)/1,211,512,385B다. 정본참조1079/sidecar포함1084·내장32·복제53및독립전체SHA/바이트/문서경로set·최초102원본987,987,584B보존검사에서불일치0이다. 브라우저13회귀/마지막간격교정2검사의완료범위는위기록을따른다. 정확v0.8ZIP해제·실제서버재시작은 통과했고 Linux/공개서버·사람/원어민검수와모든물리법칙/Kerr/강착/내부/세계선복원완료는미확정/미구현범위대로남긴다.
 
 DEV-011 최종 완결 ZIP의2095파일/484956608B·원본SHA/정적빌드와 실제 API/worker 재시작 후 εB/Pluto 근거/새 가정 복원을20:24:20KST에 확인했다. source45375fc clean tree, 상세 [v0.8.0 검증 기록](releases/v0.8.0.json). 사후 검증문서는 불변 ZIP 밖에 추가하며 Linux/공개 서비스·사람/원어민 검수는 수행하지 않았다.
+
+
+DEV-012 / v0.9.0: 사용자가Node.js전용호스팅을확인해Codex와분리에이전트가app.js/CommonJS·NodebuiltinHTTP/fs/worker_threads1개·원자적파일상태/배타잠금·기존UI API/실제자료snapshot exporter·관측캐시고지·근거schema/해시/복원을구현하고검토했다. 운영중Python실행/프록시는없고기존PythonAPI/Astropy는빌드/참조검산으로보존한다. 새외부Node의존성·AI API/키·이미지/영상/음성생성서비스·새프로젝트라이선스는추가하지않았다.
+
+실제FITS/보정에서빌드중새로계산한두쌍/양순서4비교와실제reader99snapshot을출처해시와묶었다. 103JSON66,642,151B는파생물이며독립관측수나새관측사진이아니다. 정본473,765B/SHA `9dfe12f530da0e6993ced98cc1a94932eb8aef161b6ca68e1a5cb081df44a2af`는1859source/1564필수/295선택을추적한다. Node는검증된캐시를재사용하며없는원자료/결과를AI/샘플로채우지않는다. Pythonrawfloat·cmp ID/내용SHA·원S01/S02/S12/S14날짜/품질/판단·3새상태/카메라를보존한다.
+
+AI지원은Node일반질량/Hermite/Kepler식이식·OpenAPI입력검증·동결자료/경로/8MB·취소/재시작·정적서빙,채택질량null의default984kg/m³근사가정과축약/확장입력공유,위성선택시mesh/geometry/groupscale을키우지않고카메라만이동하는교정·5언어/메타데이터갱신도포함한다. 추정질량은실측본체질량이나IAU판정을덮지않고UTC/TDB매듭선형대응은표시근사다. 원사진/원본/계수는AI로생성·변형하지않았다.
+
+현재Node14PASS21.90초·Python없는PATH의독립HTTP/과학67PASS19.13초·Node서버대상기존release_smoke/실관측29/32·31지도/카탈로그·근거복원,strict/Vite DLJsfpSc·Vitest71PASS1.62초를확인했다. 최초Node통합검사의ISO24시500을422로교정하고테스트필드명2건을바로잡아재검했다. 전체Python550PASS113.36초(기존Starlette경고1)와최종Data_Spec동결도확인했다. Node8081 Chrome23/정확v0.9ZIP해제·실제재시작은아직확정전이다. 이전v0.8ZIP/소스b6b4545와검증기록은불변이력으로보존하며Linux/공개서비스·사람/원어민검수·대회제출완료로확대하지않는다.
+
+
+최종 DEV-012 [Data_Spec.md](../Data_Spec.md)는 **2,026,860B/3422줄**, SHA256 `e441b64d2d22dfda73342cb5465825b9e74fc7ca8a21ca44b0565337cfe796c5`다. 정본27개·물리2146항목(data2092+public53+명시helper1),총1,279,102,066B이며부록A102+B2044·정본참조1932/sidecar포함1937·내장응답32·정적복제53을기록한다. 독립전체SHA/바이트/경로·참조/중복/복제검사불일치0,최초102파일987,987,584B보존불일치0이다. Node source1859중필수1564개531,456,149B와선택295개를구분하며로컬감사전용 `/upstream/` 사본필수0·보류96개선택을유지한다. 기존reader에필요한NASA/JPL전체원응답은각source의필수표시를따른다. 파일수/순서별파생수는독립관측수·물리정확도/사람검수·실제배포성공수가아니다.
+
+DEV-012 전체Python 첫 실행은483PASS/67공유fixture setup ERROR(약172초)였다. Node cold-source 준비 확인의2초 health probe가TimeoutError를냈는데검사fixture가URLError만처리해독립67경로가시작되지않았다. 제품수치/모형실패와구분하고fixture의TimeoutError처리를추가한뒤전체550PASS113.36초(기존Starlette경고1)로확인했다. 별도로완료한Python없는PATH의독립67PASS19.13초·Node14PASS와이번전체실행의범위를구분한다.
+
+
+DEV-012 검증 최적화: 초기 Node UI 부분검사는 완료19개 중15 PASS/4 응답·전체시간 한도 실패였고20번째 중단/3미실행으로 보존했다. 수치·분류·원질량·geometry의 실패 증거는 없었으나, job/result/save/import가 약700MB의 필수/파생/서빙 복제 원바이트를 반복해서 읽어 지연됐다. `sha256-stat-fingerprint-v1`은 최초 전체SHA 검증 후 매transaction 모든 필수 실경로와 dev/ino/size/mtimeNs/ctimeNs를 검사한다. 같은 식별/메타이면 이미 검증한digest를 재사용하고 변경되면 사용 전 원바이트 SHA를 다시 계산한다. 동시에 이미 대기하는 요청만 검증pass를 공유하며 시간TTL은 없다. 원 비교raw SHA는 매읽기 확인하고 시작/CLI/정확ZIP의 full audit는 유지한다. 입력은 읽기전용·불변 운영 계약이며 관리자가 파일식별과모든시각까지 위조하는 상황의 보증으로 확대하지 않는다. `node app.js --verify-sources`는 서버 시작 대신 필수자료 전체SHA 감사를 실행한다.
+
+Node14 회귀는 같은크기+mtime복원변조/누락/강재fullaudit/동시5요청1검증을 포함해9.701초에통과했다. root 재검 Node14 PASS9.515초·Python 없는 PATH 실제 HTTP/과학67 PASS14.12초를 확인했고 source key의 prototype 상속을 실제 천체로 허용하지 않도록 Object.hasOwn 검사를 보강한 뒤 HTTP6후속 PASS10.265초를 확인했다. 실제 warm Windows/이미 SHA확인된 Node8081에서12GET동시480ms·job185ms·manifest173ms·save332ms·import490ms,합계1.836초를 관찰했다(`var/qa/dev012-node-performance.json`). 초기/다른호스트 성능 보장이 아니다. 수치/결과ID·동결103JSON/원본해시는 변경하지 않았고 최종 Chrome/ZIP 검증은 별도로 확정한다.
+
+
+DEV-012 최종 브라우저 확정: Node8081/최종 client `index-DLJsfpSc.js`·runtime manifest9dfe…에서23고유경로를 확인했다. 23개 batch는22 PASS/1복합workflow 전체60초 timeout(374.878초)이었고 개별15초 기대값 실패는0이다. 5언어/깜빡임/PNG·JSON·CSV/새문맥복원/공식4대상왕복을한case로묶은검사만전체120초로명시해별도후속1 PASS68.454초(2026-11-14T12:35:11.024Z시작)를확인했다. 과학기대값·단계별15초·제품/Node/source를변경하지않았다. 23개가같은batch모두통과했다고주장하지않고22+1후속으로기록한다. 초기최적화전부분실행15PASS/4지연실패와도구분한다. 정본은 var/qa/dev012-node-final-browser-results.json,dev012-node-observation-followup.json과review보고서다.
+
+Moon의표시R0.20874/물리R1737.4km·group/mesh scale1은선택전후유지됐고camera eye-target은3.089216→0.923769표시단위로접근했다. Phobos의표시R0.036108/물리R11.08km도유지됐고camera거리는0.159789였다. bounding sphere≤1.5e-9차이는12→64 subdivision Float32정점반올림이며확대scale가아니다. 실측첨부 var/qa/dev012-moon-geometry-evidence.json에원수치를보존했다. 질량approx/원mass null/IAU분류·늦은결과·실제촬영시각/품질·관측자/근거/복원·Node사전계산5언어고지도검사했다. 정확v0.9 ZIP의실제Node실행/재시작검증은최종사후기록으로확정한다.

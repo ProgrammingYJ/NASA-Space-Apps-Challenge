@@ -1,8 +1,16 @@
 import {describe, expect, it} from 'vitest';
-import {displayPosition, displayDirection, displayRadius, displayOrbitPoints, displayMoonOffset, bodyDisplayPositions, focusDistance, makeFocus, makeGalaxyFocus, sampleFocus, advanceNavigationForBody, validCamera, type CameraState} from './sceneMath';
+import {displayPosition, displayDirection, displayRadius, displayMoonRadius, displayOrbitPoints, displayMoonOffset, bodyDisplayPositions, focusDistance, makeFocus, makeGalaxyFocus, sampleFocus, advanceNavigationForBody, validCamera, type CameraState} from './sceneMath';
 
 const camera: CameraState = {position:[0,65,100],target:[0,0,0],representation_version:'solar-display-v1'};
 describe('source coordinates and navigable display',()=>{
+  it('keeps moon geometry fixed and moves the camera closer to resolve a small moon',()=>{
+    expect(displayMoonRadius(null)).toBe(.035);expect(displayMoonRadius(NaN)).toBe(.035);expect(displayMoonRadius(1737.4)).toBeCloseTo(.20874,12);expect(displayMoonRadius(2634.1)).toBe(.22);
+    const radius=displayMoonRadius(6),center:[number,number,number]=[18,3,0];
+    const transition=makeFocus(camera,'moon-small',center,radius,48,1.5,0,false,false,.05);
+    const distance=Math.hypot(...transition.to.position.map((value,index)=>value-center[index]));
+    expect(distance).toBeGreaterThan(radius*3);expect(distance).toBeLessThan(.2);expect(validCamera(transition.to)).toBe(true);expect(radius).toBeCloseTo(.0356,12);
+    expect(focusDistance(radius,48,1.5)).toBe(2.5);
+  });
   it('preserves heliocentric directions under declared radial compression and maps ecliptic axes explicitly',()=>{
     expect(displayPosition([0,0,0])).toEqual([0,0,0]);
     expect(displayPosition([1,0,0])[0]).toBeCloseTo(18*Math.log(2));

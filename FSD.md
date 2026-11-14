@@ -1,14 +1,16 @@
 # Planet X and SPHEREx — 기능·개발 명세서
 
-문서 버전 `FSD-0.14` · 갱신일 2026-11-14 KST · 현재 작업 `DEV-011 / v0.8.0` 구현·Windows 완결 ZIP 검증 완료 · 보존된 소스 체크포인트 `v0.7.0 / bb386f38` · 검증된 완결 ZIP `v0.8.0` · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
+문서 버전 `FSD-0.15` · 갱신일 2026-11-14 KST · 현재 작업 `DEV-012 / v0.9.0` Node 전용 실행 전환·검사 중 · 보존된 소스/검증 기록 `v0.8.0 / b6b4545` · 검증된 완결 ZIP `v0.8.0` · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
 
 **이 파일은 프로젝트의 기능·화면·계산·API·데이터·실행·검사·배포 명세를 통합 관리하는 문서다.** 기능이나 계약을 바꾸는 작업에서는 관련 절과 아래 구현 현황을 함께 갱신한다. 규칙은 [AGENTS.md](./AGENTS.md), 실제 작업 증거는 [작업 기록](./docs/worklog.md), 적용 스킬은 [SKILLS.md](./SKILLS.md)에서 연결한다. 기능·개발 명세는 이 파일에서 유지한다. 사용자의 명시적 요청으로 만든 [Data_Spec.md](./Data_Spec.md)는 실제 사용/확보/이전 데이터의 전수 목록·출처·해시·가공/권리·한계를 담당하며 실행 manifest/타입과 함께 갱신한다. OpenAPI/타입/스키마·lockfile·테스트는 실행 가능한 계약으로 별도 유지하고 이 문서에서 경로/버전을 참조한다.
 
-현재 DEV-011은 **반지름·비교위성의 밀도를 가정한 질량 실험**과 출처/실측을 분리한 제한된 관측자·블랙홀 물리 실험을 v0.8.0으로 확장한다. 질량가정은 기존 본체질량/공식3요건을 바꾸지 않으며 위성6개×대상6개의 조건부36비교와 직접입력실험을 구분한다. 물리자료/새App·API 연결을 마쳤고 모든물리법칙·실제이동관측·블랙홀내부/회전시공간·실제새사진을 구현했다는 주장은 하지 않는다. 전체Python483/Vitest70·자료/Data_Spec동결을 확인했다. CNYGnNg7 빌드의 Chrome13회귀와 마지막 간격교정 빌드 BfRDPmgL의 후속2검사를 통과했으며 정확v0.8 ZIP의 새폴더 해제·실제서버재시작 복원도 통과했다. 최종 절과 docs/releases/v0.8.0.json을 따른다.
+현재 DEV-012는 사용자가 확인한 **Node.js만 실행 가능한 호스팅**에 맞춰 루트 `app.js`/`node app.js`를 기본으로 한다. 실제자료 검증 캐시·기존 UI API·파일근거 및 질량/Hermite/Kepler 계산을 Node로 제공하고 Python은 선택적 빌드/참조로 보존한다. Node14검사·Python 없는 PATH에서 독립 HTTP/과학67검사·기존 Node대상 배포smoke와 strict/Vite DLJsfpSc/Vitest71을 통과했다. 전체Python550PASS113.36초(기존Starlette경고1)도확인했다. Node8081의 Chrome23고유경로(22+1후속)를 확인했고 정확v0.9 ZIP 검증은 후속 확정한다. 기존원본/근거·v0.8 불변ZIP을 보존한다.
+
+보존된 DEV-011은 **반지름·비교위성의 밀도를 가정한 질량 실험**과 출처/실측을 분리한 제한된 관측자·블랙홀 물리 실험을 v0.8.0으로 확장한다. 질량가정은 기존 본체질량/공식3요건을 바꾸지 않으며 위성6개×대상6개의 조건부36비교와 직접입력실험을 구분한다. 물리자료/새App·API 연결을 마쳤고 모든물리법칙·실제이동관측·블랙홀내부/회전시공간·실제새사진을 구현했다는 주장은 하지 않는다. 전체Python483/Vitest70·자료/Data_Spec동결을 확인했다. CNYGnNg7 빌드의 Chrome13회귀와 마지막 간격교정 빌드 BfRDPmgL의 후속2검사를 통과했으며 정확v0.8 ZIP의 새폴더 해제·실제서버재시작 복원도 통과했다. 최종 절과 docs/releases/v0.8.0.json을 따른다.
 
 DEV-009/010의 실존확인 목록/외관·지구명/EMB·통합시간·행성3요건은 v0.7.0 소스 체크포인트 `bb386f38b4a5e971041befc9fe18c5a5be626858`까지 GitHub에 보존했다. 기존6470행성/4862host방향·실제외계행성3사진과실제역사5영상, 후보/집단추론 분리 및 원관측/근거보존을 유지한다. 이 소스저장은 새완결ZIP/공개서버배포와별개다. 이전검사빌드별성공과의미문구교정후좁은재검사의정확범위는20절/작업기록을따른다.
 
-직전 v0.6.0은 **우주 탐색→천체 선택/자동 포커스→실제 ε Indi B/명왕성 관측→품질→근거 저장/복원**을 검증했다. 빅뱅/우주 역사는 **실제 관측5사례·공개 처리영상·출처의 추정 연대/범위**만 표시하고 가상35은하·성장/연속Gyr장면은 비활성으로 보존한다. v0.6.0 당시 전체Python276·후속 영향29/Vitest55 및 관련Chrome13고유경로를 단계별 검사했고 최종D7 ZIP의 새폴더 해제/실제 서버재시작을 통과했다. 정확한 범위와 불변 최종본은17.1/20절·동명외부검증JSON을 따른다. Planet X/TESS 실험·정밀 측정/운동 판정·공개 서버 배포와 사람/원어민 검수는 미완료다.
+보존된 v0.6.0은 **우주 탐색→천체 선택/자동 포커스→실제 ε Indi B/명왕성 관측→품질→근거 저장/복원**을 검증했다. 빅뱅/우주 역사는 **실제 관측5사례·공개 처리영상·출처의 추정 연대/범위**만 표시하고 가상35은하·성장/연속Gyr장면은 비활성으로 보존한다. v0.6.0 당시 전체Python276·후속 영향29/Vitest55 및 관련Chrome13고유경로를 단계별 검사했고 최종D7 ZIP의 새폴더 해제/실제 서버재시작을 통과했다. 정확한 범위와 불변 최종본은17.1/20절·동명외부검증JSON을 따른다. Planet X/TESS 실험·정밀 측정/운동 판정·공개 서버 배포와 사람/원어민 검수는 미완료다.
 
 ## 1. 제품 목표와 범위
 
@@ -120,7 +122,7 @@ DEV-001은관측기능의첫독립작업대였다. 사용자는우주를탐색�
 
 사용자는 태양계 왜행성·위성과 태양계 밖 외계행성을 **둘 다 포함**하라고 확인했다. 기존 실노출/근거 경로를 보존하며 공개 원본 지도·실제 위성 천체력·전체 공개 외계행성 카탈로그를 추가한다.
 
-- `science/appearance.py`·`appearance.json`: 공개 지도31개와 거대행성 고리4개, 채택 지도 원본102,820,603B. 원 URL·전체 SHA·바이트·촬영시기·credit·미관측 영역을 보존하며 원본 이미지를 고치지 않는다. 논문 그림의 지도 창은 `texture_region_px`를 GPU UV에 적용해 축/캡션을 제외한다. 선택 천체와 그 부모 행성의 최대2지도만 고해상도로 읽고 다른 천체는 설명용 LOD를 쓴다. 위성은 선택 전 점/간략도형, 선택 후 확대 상세표시다. 31지도에 NAIF PCK 극방향/자전율 출처를 기록하되 texture 경도·자전위상 정합은 미검증이다. Earth의 IAU pole은 정밀 EOP 기반 지구 자세가 아니다. 관측 모자이크/레이더/대표 대기와 설명용 외관, 지도촬영시기와 모형시각을 구분한다.
+- `science/appearance.py`·`appearance.json`: 공개 지도31개와 거대행성 고리4개, 채택 지도 원본102,820,603B. 원 URL·전체 SHA·바이트·촬영시기·credit·미관측 영역을 보존하며 원본 이미지를 고치지 않는다. 논문 그림의 지도 창은 `texture_region_px`를 GPU UV에 적용해 축/캡션을 제외한다. 선택 천체와 그 부모 행성의 최대2지도만 고해상도로 읽고 다른 천체는 설명용 LOD를 쓴다. DEV-012에서는 위성 선택 전후 mesh/geometry·표면group의 표시크기를 유지하고 카메라만 근접 프레이밍한다(2.18절). 31지도에 NAIF PCK 극방향/자전율 출처를 기록하되 texture 경도·자전위상 정합은 미검증이다. Earth의 IAU pole은 정밀 EOP 기반 지구 자세가 아니다. 관측 모자이크/레이더/대표 대기와 설명용 외관, 지도촬영시기와 모형시각을 구분한다.
 - `science/extended_solar.py`·`extended_solar.json`: 위성468개+추가 왜행성/후보8개=476개 등록, 실제2026-11-13~16 천체력 지원471개(위성463개). 미지원5개는 목록/사유만 표시한다. 인정된 왜행성5개(기존 명왕성+추가4개)와 외곽 후보4개를 구분하며 모든 소행성·모든 왜행성 후보를 구현했다는 뜻은 아니다. 부모중심·TDB/UTC·J2000황도·AU/AU-day·cadence를 보존한다. TNO위성5개는 모천체 PRIMARY 중심과 정합한 원본을 별도로 사용한다.
 - 위성의 실제 부모상대 벡터와 태양중심 합성값을 구분한다. 화면은 부모 표시위치에 별도 확대 거리를 더한다. 미측정 반지름은 과학값 `null`, 표시 크기만 사용하며 부모 반지름 미상시 표시 기준0.0001AU는 물리값이 아니다. 위치지원으로등록된천체가부모별표본을아직받는중이면로딩으로표시하고미지원/오류와구분한다. 부모 선택시 위성 목록/표식을 열고 상시 라벨은 큰 위성/선택 위성으로 제한한다. 추가 천체의 선은 확보한72시간의 **예측 표본 경로**로 열린 선이며 완전 궤도/실측 운동이 아니다.
 - `science/exoplanets.py`/`nasa_catalog.py`·`exoplanets.json`: NASA Science 공개6470행성·4862모항성계의 날짜 고정 전체 목록. TAP호스트 timeout후 공식 NASA 공개 REST115페이지로 대체 취득했으며 PS 문헌 기본해를 취득한 것으로 주장하지 않는다. 원문 표시이름·추정 질량/반지름 표기·누락값을 보존한다. 게시물 오류 제목 대신 원본 `acf.display_name`을 사용한다.
@@ -257,6 +259,17 @@ JPL의 fitted elements는 평균궤도요소가 아니며 mean ecliptic and equi
 
 사용자의중국제공자료제외요청은새아카이브/서비스제공자채택에적용한다. NED는NASA/IPAC의배포카탈로그이고원측정참여기관은이번selected값에서미확인이다. paperhost(arXiv/A&A등)·provider·문헌reference·원관측기여는서로다르며‘비중국원관측전수확인’이나저자국적을추정해보증하지않는다.
 
+
+### 2.18 DEV-012 Node 전용 호스팅과 선택 표시 보존
+
+사용자는 운영 서버에서 Node.js만 실행할 수 있다고 확인했다. 기본 시작 파일은 루트 `app.js`, 명령은 `node app.js`이며 Node22.17.0 이상·CommonJS·외부 런타임 의존성 없는 구성을 채택한다. `PORT || APP_PORT || 8000`, host `0.0.0.0`, `APP_STATE_DIR` 또는 기본 `var/node`를 사용한다. Node가 Python을 실행·프록시하거나 별도 Python 서비스를 필수로 요구하지 않는다. 기존 Python API/reader는 빌드·독립 참조 경로로 보존한다.
+
+기존 우주·지도·위성·6470행성/성원·관측자/BH와 εB/명왕성 API를 Node로 제공한다. 실제 S01/S02·S12/S14 각각의 정/역순서4비교는 빌드 시 기존 과학 함수가 실제 FITS/보정을 새로 읽어 계산한 정본이다. Node는 원본·결과 해시를 확인해 이 정본을 재사용하며 임의 FITS/ROI의 새 분석·새 검출로 표시하지 않는다. `GET /api/v1/runtime`과 관측 작업대의5언어 안내가 `verified_build_cache`임을 밝힌다. 캐시/원자료 누락은503 또는 근거 재계산 필요이며 샘플로 대체하지 않는다.
+
+6대상에서 채택 본체질량이null이면 선택창의 조건3에 밀도 가정의 **근사 질량**을 별도로 표시한다. 기본 가정은 Tethys 명목bulk밀도984kg/m³이며 현재 적용한 비교위성/직접입력값을 축약창과 확장 질량패널이 공유한다. 실측/문헌 본체질량·공식3요건·IAU분류·Π미상 상태는 그대로다. default984도 해당 대상의 측정밀도/실측질량이라는 뜻이 아니다.
+
+위성을 선택해도 장면 mesh/geometry·표면group scale을 더 키우지 않는다. 선택 전후 기존 표시 반지름과 세계좌표를 유지하고 카메라만 작은 위성을 보기에 적절한 거리로 이동한다. 전체 장면의 이미 선언한 반지름/위성간격 확대는 별도 표시가정이다. 근접 카메라 최소거리.05와 작은위성의 프레이밍을 검사하며 메타데이터 갱신이 늦은 이전 선택을 덮지 않게 한다. 새브라우저23경로의 실제 결과는20절에 별도로 확정한다.
+
 ## 3. 언어·라이브러리·프로세스 책임
 
 | 위치 | 언어/기본 기술 | 책임 |
@@ -265,19 +278,21 @@ JPL의 fitted elements는 평균궤도요소가 아니며 mean ecliptic and equi
 | 3D/천구/그래프 | Three.js / Aladin Lite / Plotly.js | 모형 공간·천구 관측·과학 그래프. 큰 모듈/자료는 필요 시 로드 |
 | 클라이언트 상태 | Zustand, TanStack Query | 세션/선택과 서버 조회·취소/오래된 응답 구분 |
 | 국제화 | i18next/react-i18next | `ko/en/ja/zh-Hant/fr` 문맥별 키·수치/단위 형식 |
-| `api/` | Python 3.12 계열, FastAPI/Uvicorn/Pydantic | 요청 검증·목록·작업 상태의 유일한 작성자·근거 파일/정적 빌드 제공 |
+| `app.js`, `node/` | Node22.17.0 이상·CommonJS·builtin HTTP/fs/worker_threads | 기본 운영서버·현재 UI API/정적빌드·상태의 유일한 작성자·근거 저장/복원 |
+| `api/` | Python 3.12 계열, FastAPI/Uvicorn/Pydantic | 보존된 선택적 빌드/참조 API와 검증 스키마 |
 | `science/` | Python, Astropy/NumPy; 필요 시 SciPy/Photutils/reproject | FITS·WCS·시간/단위·품질·검증된 계산. UI/HTTP와 분리 |
-| `worker/` | 별도 Python 프로세스, 초기 동시 작업 1개 | 무거운 과학 처리·임시 산출물·IPC 결과 보고 |
+| `node/source-worker.js` | Node worker thread1개 | 파일 해시/캐시 읽기·heartbeat 보고, 상태파일 쓰기 없음 |
+| `worker/` | 선택적 Python 참조 프로세스 | 실제 FITS 분석/빌드·IPC, Node 운영의 필수 프로세스 아님 |
 | 외부 자료 조회 | 검증된 HTTP 클라이언트/PyVO 등 | 허용된 아카이브·bounded 요청·TLS·출처 보존 |
 | `contracts/` | OpenAPI/JSON Schema·TypeScript 타입 | 입력/출력·오류·버전 계약 |
-| `deploy/` | Dockerfile/설정·검증한 시작/복구 스크립트 | Node 정적 빌드→Python 3.12 Debian slim 계열에서 API/정적파일·별도 worker |
+| `deploy/` | Node 기본 Dockerfile/설정·시작/복구 스크립트 | 미리 검증한 web/dist와 Node 런타임 제공; 이전 Python Dockerfile은 Dockerfile.python으로 보존. Linux 실행은 별도 미검증 |
 | `tests/` | Python pytest/Ruff, TS typecheck/lint/Vitest, Playwright | 실제 위험에 맞는 원본/과학·상태/복원·대표 브라우저 검사 |
 
-위 목록은 기본 선택안이며 설치 완료 목록이 아니다. 실제 Node/Python/라이브러리 버전·플랫폼 검사를 기록하고 lockfile/이미지 digest를 고정한다. 무거운 FITS 계산을 API 이벤트 루프에서 실행하지 않는다. AI API는 핵심 조회·계산의 필수가 아니며 과학 판정을 LLM 응답으로 대체하지 않는다.
+이전 Python 기본안을 포함한 기술 이력과 현재 Node 운영 책임은 위 표에서 구분한다. 실제 설치/실행 여부는 검사 기록을 따른다. 실제 Node/Python/라이브러리 버전·플랫폼 검사를 기록하고 lockfile/이미지 digest를 고정한다. 무거운 FITS 계산을 API 이벤트 루프에서 실행하지 않는다. AI API는 핵심 조회·계산의 필수가 아니며 과학 판정을 LLM 응답으로 대체하지 않는다.
 
 ## 4. 파일 구조와 데이터 흐름
 
-`web/ → /api/v1 → api/ → worker/IPC → science/ → 파생 파일 → api/ 상태 확정 → web/` 흐름을 기본으로 한다. API 하나가 상태 파일 갱신을 직렬화한다. worker는 상태 파일을 직접 덮어쓰지 않는다.
+Node 운영 흐름은 `web/dist → /api/v1 → node/server.js → source-worker 검증/정본캐시·Node 수식 → Node API 상태 확정 → web`이다. 빌드/독립참조에서는 보존된 `api/worker/science`가 실제 FITS를 계산해 검증된 bundle을 만든다. API 하나가 상태 파일 갱신을 직렬화하고 worker는 상태파일을 쓰지 않는다.
 
 | 경로 | 저장 내용/정책 |
 | --- | --- |
@@ -300,6 +315,7 @@ JPL의 fitted elements는 평균궤도요소가 아니며 mean ecliptic and equi
 | data/manifests/long_term_model.json, long_term_validation.json | JPL적합요소·TDB달력범위·공식표/별도Horizons검산; data/reference/long-term/ |
 | data/manifests/universe_catalog.json | 출처확인 성원/계층·개별방향/역할·미상깊이·기존카탈로그참조; data/reference/universe-catalog/ |
 | data/manifests/object_names.json | 476ID×5언어 표시형/방법·기관원문·catalog/helper SHA; data/reference/object-names/ |
+| `data/node-runtime/`, `data/manifests/node_runtime.json` | DEV-012 검증된 reader snapshot99/실제 FITS 비교4·source SHA/필수범위·원Python cmp ID/내용해시. Git제외된 큰파생JSON도완결ZIP에는필수 |
 | `data/raw/`, `data/calibration/`, `data/reference/` | 불변 원본/보정/문헌·참조. Git 제외 |
 | `data/derived/` | 행사 중 계산한 파생 결과. 입력·처리 버전/설정 추적 |
 | `var/jobs/`, `var/cache/`, `var/evidence/`, `var/logs/` | 작업/캐시·근거·로그; 실제 `.env` 디렉터리 키와 맞춰 영속 volume 구성 |
@@ -492,6 +508,17 @@ precomputed36개사례는독립Decimal재계산을통과했다. 새전체Python/
 
 공개EHT2JPEG103,617B+2sidecar1,363B는public/dist의 `/observations/black-holes/`에서필수서빙한다. SgrA*62,877B/SHA `43bef2802a78a06ca7dc41089dff623d59da63640a9898c8807f483f9ea84879`, M87*40,740B/SHA `c23f0006c68d2c35168c1db870be338dd850f6408e27ae9fcbbec286c08d3dc1`다. credit는 EHT Collaboration, ESO의CC-BY4.0조건/공식이미지페이지를연결한다. 관측연도2017·전파강도재구성/표시색·미분해표면을보존하고자연가시색/내부나실험관측자의새영상으로바꾸지않는다. 개별전수메타/권리는Data_Spec/THIRD_PARTY_NOTICES와연결한다.
 
+
+### 8.11 DEV-012 Node 자료 캐시와 계산 경계
+
+`deploy/export_node_runtime.py`는 기존 실제 reader/API 출력을 `data/node-runtime/`에 작성한다. 정본은 `data/node-runtime/runtime_manifest.json`과 같은바이트의 `data/manifests/node_runtime.json`이며473,765B/SHA256 `9dfe12f530da0e6993ced98cc1a94932eb8aef161b6ca68e1a5cb081df44a2af`, `schema_version:1.0`·`algorithm_version:python-built-node-snapshot-v1`이다. 생성103JSON66,642,151B는99개snapshot+순서별4비교이고 원source1859항목 중1564필수/295선택을 구분한다. 원102개 전체를 런타임 필수로 바꾸지 않으며 보류96개와로컬감사전용 `/upstream/` 사본은선택/감사범위를유지한다. 기존reader가요구하는NASA/JPL전체원응답까지선택으로바꾸는뜻은아니다.
+
+worker thread1개가 생성파일·필수source의 SHA/바이트/상대경로를 검증하고 heartbeat를 보고한다. 일반 조회는 변경된 파일의 해시를 재확인하며 비교/저장/import는 강검증 경로를 쓴다. 선언된 public이미지의 동일SHA `serving_copy_path`만 누락된원public경로의서빙복제로허용한다. 존재하는 변조원본을 정상복제로 숨기지 않는다. runtime manifest가 실행중 바뀌면 새묶음을 조용히 혼합하지 않고 재시작을 요구한다. 정적자산·원문권리·출처는 이전manifest/고지를 유지한다.
+
+Node `science.js`는 임의 지원밀도의 구형질량/source-corner·연구청소지표, cubic Hermite와 JPL 장기 적합요소/Kepler식을 일반 입력으로 계산한다. 장기연도0/음수·실제유효달력·hour/24 산술을 Python 참조와 대조하고 특정연도/밀도를 고정출력으로 만들지 않는다. Node Hermite는 브라우저처럼 **저장된 UTC/TDB 매듭 사이를 선형 대응**해 `time_mapping:linear_between_saved_utc_tdb_knots`를 명시한다. 원4매듭의 위치/속도·εB방향은 그대로 반환한다. 이는 정밀 UTC↔TDB 변환이나 별도 천체력 정확도 보증이 아니며 기존 표본차이·표시전용 한계를 유지한다.
+
+비교의 기존 cmp ID·Python 정본내용SHA·소프트웨어/원관측일·예측/품질은 보존한다. 근거 JSON에는 비교의 Python 정본 raw바이트를 삽입해 `1.0`/`1` 차이로 해시를 바꾸지 않는다. 가져온비교는 기존SHA와구조동등성을함께검사하고변조는409다. 요청시FITS를읽는Python경로와Node캐시재사용을 `runtime` 응답/화면에서 구분한다. 코드지원·사실추출·계산 파생물은 원관측/실제사진의 AI생성을 뜻하지 않는다.
+
 ## 9. Planet X와 외계행성 실험
 
 ### Planet X
@@ -524,6 +551,7 @@ HiPS는 102개 파장층이며 시간/거리축이 아니다. NHITS는 방문 �
 
 | 메서드·경로 | 입력→출력/조건 | 상태 |
 | --- | --- | --- |
+| GET `/runtime` | runtime node/python·관측처리 verified_build_cache/runtime_fits_or_verified_cache·bundle시각·지원2쌍·임의FITS입력false | DEV-012 구현·Node/API검사;화면5언어고지·Chrome대기 |
 | GET `/observations` | object_id→ε Indi B/명왕성 각각실제2노출 목록; 다른4개는 available_sources·unverified, next_cursor:null | 로컬 구현·API 검사 |
 | POST `/comparison-jobs` | distinct S01/S02 또는S12/S14 두 문자열ID(순서 유지)→202/job_id | 로컬 구현·API 검사 |
 | GET `/jobs/{id}` | state·stage·progress·error·result_id | 로컬 구현·API 검사 |
@@ -556,6 +584,8 @@ HiPS는 102개 파장층이며 시간/거리축이 아니다. NHITS는 방문 �
 | GET /long-term-simulation | year정수,month/day기본1,hour유한0≤h<24→지원날짜8대표위치·EMB·TDB/단위/미지원목록 | DEV-008 과학/API·범위/달력검사, 관련Chrome경로완료; 빌드/범위20절 |
 | GET /catalog/universe | optional galaxy_id/parent_id→기본24/은하별성원·MW4871·호스트자식,출처/역할/미상값 | DEV-008 계층19·전체Python276검사, 관련Chrome경로완료; 빌드/범위20절 |
 | POST `/simulation-jobs` | 범위 내 가정/epoch/관측자 검증→예측 경로/곡선 | 예정 |
+
+DEV-012에서 위현재 UI API를Node기본서버가제공한다. 비교는두쌍/양순서4개정본만허용하며`stage:validating_built_fits_cache`와완료의`runtime_processing:source_verified_build_time_fits_result_cache_reused_no_runtime_fits_analysis`로실행의미를남긴다. 런타임GET의schema1.0/처리모드와정본bundle버전은비교schema1.0·과학알고리즘/결과ID를조용히교체하지않는다. `app.js`는운영중Python/외부fetch를호출하지않고임의파일/URL은받지않는다.
 
 health는 prefix와 구분해 `/health/live`(프로세스 응답), `/health/ready`(실제 저장 쓰기/읽기·worker alive/heartbeat60초 이내)를 구현했다. 저장 불가·worker 미준비는503이다. 입력 오류422, 미존재404, 무결성/선택 불일치409,8MB 초과413, worker/queue/자료목록 미준비503을 공통 code/message_key/details/request_id로 반환한다. 결과ID는 cmp_+정본내용SHA 앞24자리, 근거ID는 ev_+UUID32자리다. 두 번째 API는 동일상태영역 잠금에 실패해 시작하지 않는다.
 
@@ -607,6 +637,8 @@ DEV-011 관측자/BH계약: GET `/black-holes`·`/observer-physics`는동결된�
 
 DEV-001: 단일 API+별도 spawn worker/Pipe·직렬화RLock·OS 인스턴스잠금의 세부 결정은 ADR-001에 기록했다. worker는 초기 목록을 한 번 보고하고, job은 최대8개 대기/실행한다. API가 원자적 결과를 기록·읽어 hash/입력순서·attempt를 검사한 뒤 succeeded로 전이한다. 저장/복원 때 원본S01/S02 및 보정S10의 현재 manifest·실파일 SHA/바이트를 검사한다. import JSON의 전체 comparison SHA를 검증하고, 로컬 정본 결과와 같고 알고리즘이 현재 버전일 때만 화면을 복원한다. 로컬 정본/원본이 없거나 알고리즘/manifest가 바뀌면 comparison:null·재계산 이유를 반환한다. 다른 서버로JSON만 가져가면 결과 정본이 없으므로 재계산이 필요하다. 미지원스키마는422로 거부하며 자동 변환하지 않는다. 깜빡임은 복원 후 자동 재생하지 않는다.
 
+DEV-012 Node운영은배타 `node-api.lock` 디렉터리/PID확인으로같은상태의두작성자를거부하고이전살아있는Python worker기록도검사한다. Node기본루트는var/node이며기존Pythonvar를초기화하지않는다. API만임시파일/fsync/rename을통해원자적으로상태를쓴다. worker thread종료/서버재시작때미완료는interrupted,취소요청은안전단계의cancelled로분리한다. `/health/ready`는실제쓰기/읽기·worker생존/60초heartbeat와bundle검증을확인해실패503이다. 요청8MB·엄격JSON/현재OpenAPI추가필드금지·유한수/도메인·실경로/symlink경계·정적허용prefix를검사한다.
+
 ## 14. 국제화·접근성
 
 핵심 UI·설명·오류·상태·단위·조건·검증/실험 안내를 `ko/en/ja/zh-Hant/fr`로 제공한다. 데이터 원문·논문은 원출처 링크를 유지한다. 런타임 번역 API를 필수 경로에 넣지 않는다.
@@ -655,11 +687,16 @@ DEV-001: 단일 API+별도 spawn worker/Pipe·직렬화RLock·OS 인스턴스잠
 | QA26 | 6source위성×6대상36가정·SI단위/R³·source-corner비신뢰구간·필요ρ/Π·실측/공식분류보존·analogue불일치·invalid/늦은결과·source503·전역가정저장/해시변경복원·5언어/filter0범위 | DEV-011 Decimal36/순수계산39·질량API8·TyRAtsbd의5고유Chrome완료(4초회+null생략기대교정후1재검). CNYGnNg7 통합13회귀 중 질량5 재검 통과. 정확v0.8 ZIP2095파일/실제재시작복원 PASS |
 | QA27 | 관측자명시활성·원관측z/가정z/부호보존·SR/정적GR/FLRW분리·sourceprovider/원관측기여·실제사진무변형·BH질량null/공개영상credit·Rs/null경로/자료표·저장복원 | DEV-011 source동결/relativity36·관측자API27(9.75초)/전체Python483완료. CNYGnNg7 통합13/13 Chrome PASS(142.460초), 간격교정 BfRDPmgL의 전역/언어2/2 후속 PASS(9.647초). 정확v0.8 ZIP2095파일/실제재시작복원 PASS |
 
+| QA28 | Python없는PATH의Node기동·모든UI API/필터·실제두쌍양순서4캐시·원본/내용SHA·Pythonrawfloat/기존schema·source누락/변조·8MB/lock/취소·재시작복원 | Node14PASS21.90초·독립HTTP/과학67PASS19.13초·기존Node대상smokePASS. 새Chrome23/정확v0.9ZIP대기 |
+| QA29 | 채택질량null의default984/currentρ근사가정과축약/확장공유·실측/공식판정보존·위성선택mesh/geometry/groupscale불변/카메라만근접·5언어/metadata갱신 | strict/Vite DLJsfpSc·Vitest71PASS1.62초. 새실제Chrome대기 |
+
 각 검사에 실제 입력·기대/실제·실행 명령·버전·pass/fail/not-run·증거 경로를 남긴다. 아직 없는 명령/브라우저 경로를 통과로 기록하지 않는다. 앱 구현 전 과거 연구 검사·파일 확보를 이 표의 통과로 올리지 않는다.
 
 정밀 과학/상태·복원/동기화 위험에 의미 있는 테스트를 작성한다. 단순 문서 변경에 구현을 복사한 테스트를 만들지 않는다. 내부 사용자 점검은 팀원2명의 제한된 과업 사례이며 일반인/연구자 전체 효과나 외부 검증으로 확대하지 않는다.
 
 ## 17. 배포와 서버 전달
+
+기본운영시작은완결릴리스루트의 `node app.js`다. `npm start`도같은진입점을사용하며Python설치/별도API는필수가아니다. 기본Dockerfile도검증된web/dist를제공하는Node22.17.0계열로전환하고이전파일은Dockerfile.python으로보존한다. composehealth는NodeHTTP확인을쓰며data읽기전용/상태쓰기volume을분리한다. 구체설정/복구는deploy/README.md와ADR-003을따른다. Node/Windows확인을Linux컨테이너/공개서비스통과로확대하지않는다.
 
 서비스는 `https://nasaspaceappschallenge.marulee.dev/`. MCSM 컨테이너의 실제 CPU/RAM/포트/volume/proxy/HTTPS를 확인한다. 도메인 연결은 앱 배포·저장·복원 검사와 구분한다. Plan B는 사용자가 직접 관리하는 기존 호스트이나 실제 전환 endpoint/장애 독립성은 미확인이다.
 
@@ -691,6 +728,8 @@ Notion 접근이 안 되면 접근 실패/마지막 확인본을 구분하고 �
 영어요약50–200단어·제목 포함7장 이하 슬라이드 또는30초 이하 영상 단일 데모 링크·공개 링크/영어 프로젝트와 자막·이미지10MB·실제 Submit 성공 상태 등은 최신 공식 규정을 따른다. AI/SI 고지·외부 자료/코드 라이선스·NASA 로고/브랜드·만18세 미만 식별정보를 공개 웹/영상/자막/계정/크레딧/저장소까지 확인한다. 외부 제출/메시지/서버 변경은 사용자 승인 범위를 따른다.
 
 ## 20. 구현 상태·미확정·변경 이력
+
+DEV-012 · FSD0.15 · v0.9.0: 사용자Node전용호스팅에따라app.js/builtinNodeHTTP·worker1·파일근거/lock·기존UI API와검증된실자료bundle을구현했다. Node14PASS21.900초,Python없는PATH의독립HTTP/과학67PASS19.13초(일반밀도48·장기8·보간6·invalid5),기존release_smoke의Node서버대상실관측29/32·31지도·카탈로그/저장복원을통과했다. 최초Node통합검사에서ISO24시정규화의500을422로교정했고테스트의필드명2건도수정해재검했다. strict/Vite DLJsfpSc·Vitest71PASS1.62초·전체Python550PASS113.36초(기존Starlette경고1)를확인했다. Node8081 대상 Chrome23·정확v0.9ZIP해제/실제재시작결과는대기중이다. v0.8 ZIP/Git b6b4545와원본/이전근거를보존한다.
 
 DEV-011 · FSD0.14 · v0.8.0 통합: 질량정본130355B/SHA7668…·BH106361B/SHA481870…·observer271921B/SHA61ca…와runtime53facts/EHT2사진,App/두물리GET·질량GET/POST/optional근거를연결했다. 질량순수39/API8·관측자API27(9.75초)/relativity36·Decimal36·Vitest70(최신1.76초)과전체Python483(76.49초,기존Starlette경고1)/Ruff63 check·format을통과했다. TyRAtsbd질량Chrome5고유경로는초회4와nullable JSONnull생략기대조건교정후마지막1재검(30.1초)으로완료했다. 정본은 var/qa/dev011-mass-browser-review.json이다. DbNwNokf관측자실행은5PASS/1QA source-ready타이밍조건교정이었고직접화면검토에서BH제목위검색/소개겹침을발견해App표시조건을교정했다. CNYGnNg7에서 관측자6+질량5+기존관측2의13/13 Chrome 회귀를142.460초에통과했다(시작2026-11-14T11:17:28.357Z, skip/flaky/unexpected/error0). 정본은 `var/qa/dev011-final-browser-results.json`이다. 새브라우저문맥에서 R=7.5Rs·β=.001·λ=600nm·M87선택/두물리SHA·카메라 및 실제S01/S02·29픽셀품질 복원을 확인했다. 이후 직접시각검토에서 관측자 닫기/블랙홀 버튼의16px겹침을발견해 CSS 위간격24→50px를교정했다. 마지막 `index-BfRDPmgL.js`/`index-DZOoVrJ5.css`의strict/Vite 및전역/언어2/2후속Chrome(9.647초,시작2026-11-14T11:20:48.806Z)을통과했고 bounding 비겹침/직접사진도확인했다. 이최종2검사를이전13회귀와구분하며정본은 `var/qa/dev011-observer-review.json`이다. 카메라추가100ms throttle제거와원UniverseScene150ms/end emit보존·source/JS수식/원102자료불변을기록한다. 정확v0.8 ZIP의 새해제·실제서버재시작 복원도 통과했다. 사후 기록 docs/releases/v0.8.0.json을 따른다.
 
@@ -746,6 +785,7 @@ DEV-002/v0.2.0은우주기본화면·9궤도선·Pluto입력을포함한다. Pyt
 | FSD-0.11 / DEV-008 | 위성/왜행성5언어·별도TDB장기근사/EMB·성원/호스트계층·선택확대·상단빅뱅진입·simulation_context | 재개초기Python276/최신Vitest55·strict/Vite·장기/API29완료; 관련Chrome13고유경로단계별통과; 최종D7O_yXx_/13고유검사+copy4재검·Windows준비번들해제/재시작완료; 최종정확ZIP은외부검증JSON |
 | FSD-0.12 / DEV-009 | 실존확인-only·6470행성/4862host방향·외부은하후보분리·실제3사진/설명외관·지구명/EMB·단일auto시간·상시gear·기존8소천체색/shape/ring제약·근거optionalSHA/time_preference | 전체317후sparsefield영향46·앞선빌드Chrome21후직접화면2문제교정·새소천체12source동결/reader12. 최종빌드/영향QA·DataSpec·완결ZIP 결과는후속실제확정 |
 | FSD-0.13 / DEV-010 | 팀회의공동결정의17천체3요건/최소질량·정적궤도그림·본체/계질량·Margot모형분리·새API/근거SHA | source동결168453B/SHAe6124a…·전체Python372/Vitest64/Ruff57·Bp6N6jEm16Chrome·lsFtNhUt후속locale1완료. v0.7소스체크포인트보존,새완결ZIP미전달 |
+| FSD-0.15 / DEV-012 | Node전용app.js/worker·실제FITS빌드정본/원SHA/float호환·Node일반수식·질량가정축약공유·위성mesh불변 | Node14·독립HTTP/과학67·Node서버smoke·strict/Vitest71완료. 전체Python550PASS113.36초,Node8081 Chrome23/정확v0.9ZIP은대기 |
 | FSD-0.14 / DEV-011 | 6×6질량가정/비CIcorner·고정필터/필요ρ·독립전역가정·Pluto설명·관측자/BH제한모형·출처/사진·optional상태 | 3새정본/최종DataSpec동결·전체Python483/Ruff63·질량39/API8·관측자API27/relativity36·Decimal36/Vitest70·TyRAtsbd질량Chrome5완료. CNYGnNg7 Chrome13/13(142.460초)·간격교정 BfRDPmgL 후속2/2(9.647초)완료. 정확v0.8 ZIP2095파일/실제재시작복원 PASS |
 
 
@@ -773,3 +813,18 @@ Resume: read AGENTS,SKILLS,FSD,START_HERE,Data_Spec and this checkpoint; preserv
 `NASA_SPACE_APPS_CHALLENGE_v0.8.0_20261114_202331KST.zip`는 **484956608B/2095파일**, SHA256 **`1bb76a9158cf6d36c0c632b4d32cf0b7edd380a07e1f3031b8a6bdcbaa3253e3`**이다. source `45375fc52300c41211063160b1cf9f2dee45ef67`의 clean tree와 최종 BfRDPmgL/DZOoVrJ5 빌드로 생성했다. 추적 manifest/source sidecar 32개의 Git index와 동결 working bytes가 모두 일치함을 확인하고 origin/main의 정확 SHA도 대조했다.
 
 정확한 최종 ZIP을 새 폴더 `tmp/release-verify-y39fvc3n/extracted`에 풀어2094개 manifest 항목의 경로/대소문자/바이트/SHA와 금지 파일 제외를 확인했다. Windows에서 health·대표/신규 API·실제 지도/사진 원바이트·질량 가정·11BH/2EHT/2049표를 확인하고 실제 API/worker 재시작 뒤 같은 εB/Pluto result/evidence ID·세션/판단·새 가정을 복원했다. 검사시각 `2026-11-14T11:24:20.927409+00:00`, 재사용한 독립 runtime이며 새 의존성 설치·Linux·공개 서비스 검증은 아니다. 상세 정본은 [v0.8.0 검증 기록](./docs/releases/v0.8.0.json)과 ZIP 밖 동명 checksum/verification JSON이다. 이 사후 문서와 커밋은 이미 검증한 불변 ZIP에 추가하지 않는다. 이전 v0.6 ZIP/기존 원본/Git 이력도 보존한다.
+
+
+최종 DEV-012 [Data_Spec.md](./Data_Spec.md)는 **2,026,860B/3422줄**, SHA256 `e441b64d2d22dfda73342cb5465825b9e74fc7ca8a21ca44b0565337cfe796c5`다. 정본27개·물리2146항목(data2092+public53+명시helper1),총1,279,102,066B이며부록A102+B2044·정본참조1932/sidecar포함1937·내장응답32·정적복제53을기록한다. 독립전체SHA/바이트/경로·참조/중복/복제검사불일치0,최초102파일987,987,584B보존불일치0이다. Node source1859중필수1564개531,456,149B와선택295개를구분하며로컬감사전용 `/upstream/` 사본필수0·보류96개선택을유지한다. 기존reader에필요한NASA/JPL전체원응답은각source의필수표시를따른다. 파일수/순서별파생수는독립관측수·물리정확도/사람검수·실제배포성공수가아니다.
+
+DEV-012 전체Python 첫 실행은483PASS/67공유fixture setup ERROR(약172초)였다. Node cold-source 준비 확인의2초 health probe가TimeoutError를냈는데검사fixture가URLError만처리해독립67경로가시작되지않았다. 제품수치/모형실패와구분하고fixture의TimeoutError처리를추가한뒤전체550PASS113.36초(기존Starlette경고1)로확인했다. 별도로완료한Python없는PATH의독립67PASS19.13초·Node14PASS와이번전체실행의범위를구분한다.
+
+
+DEV-012 검증 최적화: 초기 Node UI 부분검사는 완료19개 중15 PASS/4 응답·전체시간 한도 실패였고20번째 중단/3미실행으로 보존했다. 수치·분류·원질량·geometry의 실패 증거는 없었으나, job/result/save/import가 약700MB의 필수/파생/서빙 복제 원바이트를 반복해서 읽어 지연됐다. `sha256-stat-fingerprint-v1`은 최초 전체SHA 검증 후 매transaction 모든 필수 실경로와 dev/ino/size/mtimeNs/ctimeNs를 검사한다. 같은 식별/메타이면 이미 검증한digest를 재사용하고 변경되면 사용 전 원바이트 SHA를 다시 계산한다. 동시에 이미 대기하는 요청만 검증pass를 공유하며 시간TTL은 없다. 원 비교raw SHA는 매읽기 확인하고 시작/CLI/정확ZIP의 full audit는 유지한다. 입력은 읽기전용·불변 운영 계약이며 관리자가 파일식별과모든시각까지 위조하는 상황의 보증으로 확대하지 않는다. `node app.js --verify-sources`는 서버 시작 대신 필수자료 전체SHA 감사를 실행한다.
+
+Node14 회귀는 같은크기+mtime복원변조/누락/강재fullaudit/동시5요청1검증을 포함해9.701초에통과했다. root 재검 Node14 PASS9.515초·Python 없는 PATH 실제 HTTP/과학67 PASS14.12초를 확인했고 source key의 prototype 상속을 실제 천체로 허용하지 않도록 Object.hasOwn 검사를 보강한 뒤 HTTP6후속 PASS10.265초를 확인했다. 실제 warm Windows/이미 SHA확인된 Node8081에서12GET동시480ms·job185ms·manifest173ms·save332ms·import490ms,합계1.836초를 관찰했다(`var/qa/dev012-node-performance.json`). 초기/다른호스트 성능 보장이 아니다. 수치/결과ID·동결103JSON/원본해시는 변경하지 않았고 최종 Chrome/ZIP 검증은 별도로 확정한다.
+
+
+DEV-012 최종 브라우저 확정: Node8081/최종 client `index-DLJsfpSc.js`·runtime manifest9dfe…에서23고유경로를 확인했다. 23개 batch는22 PASS/1복합workflow 전체60초 timeout(374.878초)이었고 개별15초 기대값 실패는0이다. 5언어/깜빡임/PNG·JSON·CSV/새문맥복원/공식4대상왕복을한case로묶은검사만전체120초로명시해별도후속1 PASS68.454초(2026-11-14T12:35:11.024Z시작)를확인했다. 과학기대값·단계별15초·제품/Node/source를변경하지않았다. 23개가같은batch모두통과했다고주장하지않고22+1후속으로기록한다. 초기최적화전부분실행15PASS/4지연실패와도구분한다. 정본은 var/qa/dev012-node-final-browser-results.json,dev012-node-observation-followup.json과review보고서다.
+
+Moon의표시R0.20874/물리R1737.4km·group/mesh scale1은선택전후유지됐고camera eye-target은3.089216→0.923769표시단위로접근했다. Phobos의표시R0.036108/물리R11.08km도유지됐고camera거리는0.159789였다. bounding sphere≤1.5e-9차이는12→64 subdivision Float32정점반올림이며확대scale가아니다. 실측첨부 var/qa/dev012-moon-geometry-evidence.json에원수치를보존했다. 질량approx/원mass null/IAU분류·늦은결과·실제촬영시각/품질·관측자/근거/복원·Node사전계산5언어고지도검사했다. 정확v0.9 ZIP의실제Node실행/재시작검증은최종사후기록으로확정한다.

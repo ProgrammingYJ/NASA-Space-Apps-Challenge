@@ -10,21 +10,31 @@ export interface AppliedMassScenario {input:MassScenarioInput;source_manifest_sh
 interface Target {name:string;radius_km:number;radius_low_km:number|null;radius_high_km:number|null;radius_definition:string;radius_source:Source;volume_assumption:string}
 interface Analogue {object_id:string;name:string;radius_km:number;density_kg_m3:number;density_sigma_kg_m3:number|null;source:Source}
 interface Catalogue {source_manifest_sha256:string;model:{density_input_min_kg_m3:number;density_input_max_kg_m3:number};targets:Record<string,Target>;analogues:Record<string,Analogue>;summary:{conditional_target_count_meets_model_range:number;source_analogue_parameter_corner_envelopes:Record<string,{can_meet_model_within_source_parameter_corners:boolean}>};limitations:string[]}
-interface Result {status:'hypothesis';radius_km:number;density_kg_m3:number;mass_kg:number;mass_earth:number;mass_bounds:{low_earth:number;high_earth:number}|null;clearing:{minimum_mass_earth:number;pi:number;model_classification:string;required_density_for_model_kg_m3:number;required_density_exceeds_operating_max:boolean};inputs:MassScenarioInput;source_manifest_sha256:string}
+export interface MassScenarioResult {status:'hypothesis';radius_km:number;density_kg_m3:number;mass_kg:number;mass_earth:number;mass_bounds:{low_earth:number;high_earth:number}|null;clearing:{minimum_mass_earth:number;pi:number;model_classification:string;required_density_for_model_kg_m3:number;required_density_exceeds_operating_max:boolean};inputs:MassScenarioInput;source_manifest_sha256:string}
 const ids=new Set(['sedna','eris','makemake','quaoar','orcus','gonggong']);
 
-export default function MassScenarioPanel({objectId,labels={},saved,onApplied}:{objectId:string;labels?:Record<string,string>;saved?:AppliedMassScenario|null;onApplied?:(value:AppliedMassScenario)=>void}){
-  const {t,i18n}=useTranslation();const supported=ids.has(objectId);
+/** One controller supplies compact criteria, the expanded editor and evidence input. */
+export function useMassScenarioModel({objectId,saved,onApplied}:{objectId:string;saved?:AppliedMassScenario|null;onApplied?:(value:AppliedMassScenario)=>void}){
+  const supported=ids.has(objectId);
   const source=useQuery({queryKey:['mass-scenarios'],queryFn:({signal})=>request<Catalogue>('/mass-scenarios',{signal}),enabled:supported,retry:false,staleTime:Infinity});
-  const [input,setInput]=useState<MassScenarioInput|null>(null);const [draft,setDraft]=useState('');const [invalid,setInvalid]=useState(false);const [onlyMeeting,setOnlyMeeting]=useState(false);
+  const [input,setInput]=useState<MassScenarioInput|null>(null);const [lastValid,setLastValid]=useState<MassScenarioResult>();
   const lastInit=useRef(''),lastReported=useRef(''),callback=useRef(onApplied);callback.current=onApplied;
   useEffect(()=>{if(!source.data?.targets[objectId])return;const signature=objectId+source.data.source_manifest_sha256;if(lastInit.current===signature)return;lastInit.current=signature;
     const old=saved?.input.target_id===objectId&&saved.source_manifest_sha256===source.data.source_manifest_sha256?saved.input:null;
-    const chosen=old??{target_id:objectId,density_kg_m3:source.data.analogues.tethys.density_kg_m3,analogue_id:'tethys',include_source_ranges:true};setInput({...chosen,analogue_id:chosen.analogue_id??null});setDraft(String(chosen.density_kg_m3));setInvalid(false);
+    const chosen=old??{target_id:objectId,density_kg_m3:source.data.analogues.tethys.density_kg_m3,analogue_id:'tethys',include_source_ranges:true};setInput({...chosen,analogue_id:chosen.analogue_id??null});
   },[source.data,objectId,saved]);
-  const result=useQuery({queryKey:['mass-scenario-result',source.data?.source_manifest_sha256,input],queryFn:({signal})=>request<Result>('/mass-scenarios/calculate',{method:'POST',signal,body:JSON.stringify(input)}),enabled:supported&&input!==null&&source.data!==undefined,retry:false,staleTime:Infinity});
-  const value=result.data?.source_manifest_sha256===source.data?.source_manifest_sha256&&result.data?.inputs.target_id===objectId?result.data:undefined;
-  useEffect(()=>{if(!value)return;const signature=JSON.stringify([value.inputs,value.source_manifest_sha256]);if(lastReported.current===signature)return;lastReported.current=signature;callback.current?.({input:value.inputs,source_manifest_sha256:value.source_manifest_sha256});},[value]);
+  const result=useQuery({queryKey:['mass-scenario-result',source.data?.source_manifest_sha256,input],queryFn:({signal})=>request<MassScenarioResult>('/mass-scenarios/calculate',{method:'POST',signal,body:JSON.stringify(input)}),enabled:supported&&input?.target_id===objectId&&source.data!==undefined,retry:false,staleTime:Infinity});
+  const current=result.data?.source_manifest_sha256===source.data?.source_manifest_sha256&&result.data?.inputs.target_id===objectId?result.data:undefined;
+  const value=current??(lastValid?.source_manifest_sha256===source.data?.source_manifest_sha256&&lastValid?.inputs.target_id===objectId?lastValid:undefined);
+  useEffect(()=>{if(!current)return;setLastValid(current);const signature=JSON.stringify([current.inputs,current.source_manifest_sha256]);if(lastReported.current===signature)return;lastReported.current=signature;callback.current?.({input:current.inputs,source_manifest_sha256:current.source_manifest_sha256});},[current]);
+  return {objectId,supported,source,result,input,setInput,value};
+}
+export type MassScenarioModel=ReturnType<typeof useMassScenarioModel>;
+
+export default function MassScenarioPanel({objectId,labels={},model}:{objectId:string;labels?:Record<string,string>;model:MassScenarioModel}){
+  const {t,i18n}=useTranslation();const {supported,source,result,input,setInput,value}=model;
+  const [draft,setDraft]=useState(String(input?.density_kg_m3??''));const [invalid,setInvalid]=useState(false);const [onlyMeeting,setOnlyMeeting]=useState(false);
+  useEffect(()=>{if(input)setDraft(String(input.density_kg_m3));},[input?.density_kg_m3]);
   if(!supported)return null;
   const data=source.data,target=data?.targets[objectId];const number=(value:number)=>value.toLocaleString(i18n.language,{maximumSignificantDigits:6});
   function apply(){const density=Number(draft);if(!draft.trim()||!Number.isFinite(density)||density<100||density>10000){setInvalid(true);return;}setInvalid(false);setInput(previous=>({target_id:objectId,density_kg_m3:density,analogue_id:previous?.analogue_id&&data?.analogues[previous.analogue_id].density_kg_m3===density?previous.analogue_id:null,include_source_ranges:previous?.include_source_ranges??true}));}

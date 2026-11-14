@@ -174,6 +174,22 @@ FLRW모형은H0=67.66km/s/Mpc·Ωm=.3111·ΩΛ=.6889의flat matter+Λ참고모�
 | Sagittarius A* | 62,877B · `43bef2802a78a06ca7dc41089dff623d59da63640a9898c8807f483f9ea84879` | 2017전파간섭관측의처리재구성,1280×1280. EHT Collaboration·ESO CC-BY4.0 |
 | M87* | 40,740B · `c23f0006c68d2c35168c1db870be338dd850f6408e27ae9fcbbec286c08d3dc1` | 2017전파간섭관측의처리재구성,1280×746. EHT Collaboration·ESO CC-BY4.0 |
 
-JPEG2개103,617B와sidecar2개1,363B를 public/dist의 `/observations/black-holes/`에포함한다. 자연가시색표면/블랙홀내부/새관측자영상이아니며원사진은변경하지않는다. 실제JPEG와분리된2Dnull경로/정적shadow·Rs계산은모형표시다. 상대론자료36·관측자API27(9.75초),질량순수39/API8/Decimal36·Vitest70(최신1.76초),전체Python483(76.49초)/Ruff63검사를통과했다. 중간TyRAtsbd 질량5검사와observer타이밍/직접화면교정뒤 CNYGnNg7 통합13/13 Chrome(142.460초), 마지막버튼간격교정 BfRDPmgL 전역/언어후속2/2(9.647초)를통과했다. 두빌드의검사범위를구분하며정본은 `var/qa/dev011-final-browser-results.json`·`var/qa/dev011-observer-review.json`이다. 새문맥의원S01/S02·29픽셀품질/물리입력/선택/두SHA/카메라복원을확인했다. 정확v0.8 ZIP 해제·실제서버재시작은아직대기중이다.
+JPEG2개103,617B와sidecar2개1,363B를 public/dist의 `/observations/black-holes/`에포함한다. 자연가시색표면/블랙홀내부/새관측자영상이아니며원사진은변경하지않는다. 실제JPEG와분리된2Dnull경로/정적shadow·Rs계산은모형표시다. 상대론자료36·관측자API27(9.75초),질량순수39/API8/Decimal36·Vitest70(최신1.76초),전체Python483(76.49초)/Ruff63검사를통과했다. 중간TyRAtsbd 질량5검사와observer타이밍/직접화면교정뒤 CNYGnNg7 통합13/13 Chrome(142.460초), 마지막버튼간격교정 BfRDPmgL 전역/언어후속2/2(9.647초)를통과했다. 두빌드의검사범위를구분하며정본은 `var/qa/dev011-final-browser-results.json`·`var/qa/dev011-observer-review.json`이다. 새문맥의원S01/S02·29픽셀품질/물리입력/선택/두SHA/카메라복원을확인했다. 정확v0.8 ZIP의Windows해제·실제서버재시작은후속검증에서통과했다(docs/releases/v0.8.0.json). 새v0.9 ZIP은별도대기다.
 
 최종 [Data_Spec.md](../Data_Spec.md)는1,791,636B/3061줄/SHA `e848ee7025f315a6cfa127f67b3120a2c7ef2f5bee2d3515e26bbd7a1c3aba33`다. 26정본/2041물리항목(data1987+public53+helper1),총1,211,512,385B,부록A102+B1939·정본참조1079/sidecar포함1084·내장원응답32·정적복제53을기록한다. 독립전체SHA/바이트/문서경로set검증에서누락/추가/중복/불일치0,최초102원본987,987,584B보존불일치0이다. 새최종빌드/ZIP실행검증과모든물리모형정확도/사람/공개서버보장은별개다.
+
+
+### DEV-012 Node 전용 런타임 파생 묶음
+
+`data/node-runtime/runtime_manifest.json`과 같은바이트의 [node_runtime.json](../data/manifests/node_runtime.json)은473,765B/SHA256 `9dfe12f530da0e6993ced98cc1a94932eb8aef161b6ca68e1a5cb081df44a2af`다. `schema_version:1.0`·`algorithm_version:python-built-node-snapshot-v1`이며export시각은2026-11-14T12:00:18.388103UTC다. 생성103JSON66,642,151B는실제reader/API snapshot99개와실제FITS에서새로계산한순서별4비교다. 원source1859항목의1564필수/295선택을분리하며보류96관측/참조·전체upstream원문을새런타임필수로승격하지않는다. source경로/전체SHA/바이트·대응원manifest와계산버전은전수목록에연결한다.
+
+S01/S02와S12/S14를각각정/역순으로계산해원Python정본raw JSON·cmp ID·내용해시를보존했다. 같은두노출의순서변경/새cutout/재처리는독립관측으로세지않는다. Node는운영중FITS를새로분석하지않으며요청한관측쌍과원본/보정·캐시무결성이맞을때이정본을재사용한다. 없는자료/캐시를합성사진·과거참고수치로채우지않는다. runtime API/관측작업대5언어고지가검증된빌드캐시임을밝힌다.
+
+Node의질량/Hermite/장기Kepler는임의지원입력을일반식으로계산한다. 원4UTC/TDB매듭을그대로사용하며구간사이의선형UTC→TDB대응은브라우저와같은표시근사다. 정밀시간변환·새독립천체력·새검출이아니다. Python3.12/Astropy/원API는빌드와독립검산용으로보존하고서버의필수실행환경으로요구하지않는다. 공개원사진/31지도·권리·원102파일과실제본체질량/null은변경하지않는다. public원본이미지가없는배포에서는명시된동일SHA serving_copy_path만허용하며원자료와서빙복제를구분한다.
+
+Node14검사21.90초·Python없는PATH의독립HTTP/과학67검사19.13초와기존Node서버대상release_smoke를통과했다. strict/Vite DLJsfpSc·Vitest71·전체Python550PASS113.36초도확인했다. 최종Data_Spec은아래동결값을따르고Node8081 Chrome23·정확v0.9 ZIP/실제재시작은후속실제결과로확정한다. 이전v0.8 ZIP의2095파일/484956608B와2026-11-14T11:24:20.927409UTC의Windows해제/재시작검증은보존된이력이다.
+
+
+최종 DEV-012 [Data_Spec.md](../Data_Spec.md)는 **2,026,860B/3422줄**, SHA256 `e441b64d2d22dfda73342cb5465825b9e74fc7ca8a21ca44b0565337cfe796c5`다. 정본27개·물리2146항목(data2092+public53+명시helper1),총1,279,102,066B이며부록A102+B2044·정본참조1932/sidecar포함1937·내장응답32·정적복제53을기록한다. 독립전체SHA/바이트/경로·참조/중복/복제검사불일치0,최초102파일987,987,584B보존불일치0이다. Node source1859중필수1564개531,456,149B와선택295개를구분하며로컬감사전용 `/upstream/` 사본필수0·보류96개선택을유지한다. 기존reader에필요한NASA/JPL전체원응답은각source의필수표시를따른다. 파일수/순서별파생수는독립관측수·물리정확도/사람검수·실제배포성공수가아니다.
+
+DEV-012 전체Python 첫 실행은483PASS/67공유fixture setup ERROR(약172초)였다. Node cold-source 준비 확인의2초 health probe가TimeoutError를냈는데검사fixture가URLError만처리해독립67경로가시작되지않았다. 제품수치/모형실패와구분하고fixture의TimeoutError처리를추가한뒤전체550PASS113.36초(기존Starlette경고1)로확인했다. 별도로완료한Python없는PATH의독립67PASS19.13초·Node14PASS와이번전체실행의범위를구분한다.

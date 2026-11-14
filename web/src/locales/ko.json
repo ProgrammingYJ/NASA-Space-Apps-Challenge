@@ -418,6 +418,8 @@
   "criteriaStatus_unknown": "자료 부족",
   "criteriaStatus_not_applicable": "적용 대상 아님",
   "criteriaMinimumMass": "최소 질량: {{minimum}} M⊕ (현재 질량: {{current}})",
+  "criteriaMinimumMassHypothesis": "최소 질량: {{minimum}} M⊕ (현재 질량 ≈ {{current}} M⊕)",
+  "criteriaMassAssumption": "가정 질량입니다. 출처 반지름과 적용 밀도 {{density}} kg/m³로 계산했으며, 실측 본체 질량과 공식 분류는 바꾸지 않습니다.",
   "criteriaMassUnknown": "본체 단독값 미확보",
   "criteriaModelLabel": "원형 궤도 청소 모형 참고값",
   "criteriaModelNote": "태양 1 M☉, 청소 시간 100억 년, C=2√3의 원형 궤도 근사입니다. 임계 질량은 정식 IAU 수치 규칙이나 실제 완전 청소의 증거가 아닙니다.",
@@ -542,5 +544,6 @@
   "blackHoleRay_truncated": "적분 한도 도달",
   "observerSourceError": "물리 모형 근거 자료를 읽지 못했습니다.",
   "observerLoading": "물리 모형 근거를 읽는 중…",
-  "blackHoleSourceError": "블랙홀 근거 자료를 읽지 못했습니다."
+  "blackHoleSourceError": "블랙홀 근거 자료를 읽지 못했습니다.",
+  "verifiedObservationCacheNote": "원본·보정·처리 버전이 일치하는 검증된 사전 계산 결과입니다. 촬영 시각과 원본 품질은 그대로 보존됩니다."
 }

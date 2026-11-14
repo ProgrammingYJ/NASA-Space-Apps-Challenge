@@ -1,22 +1,15 @@
-FROM node:22.17.0-bookworm-slim AS frontend
-WORKDIR /build/web
-COPY web/package*.json ./
-RUN npm ci
-COPY web/ ./
-RUN npm run build
-
-FROM python:3.12-slim-bookworm
-ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 APP_STATE_DIR=/app/var
+FROM node:22.17.0-bookworm-slim
 WORKDIR /app
-COPY requirements.runtime.lock.txt ./
-RUN pip install --no-cache-dir -r requirements.runtime.lock.txt
-COPY api/ api/
-COPY science/ science/
-COPY worker/ worker/
-COPY THIRD_PARTY_NOTICES.md ./
+ENV NODE_ENV=production APP_STATE_DIR=/app/var PORT=8000
+COPY package.json package-lock.json app.js ./
+COPY node/ node/
+COPY contracts/ contracts/
+COPY web/dist/ web/dist/
+COPY web/public/ web/public/
+COPY web/src/objectNames.ts web/src/objectNames.ts
 COPY data/manifests/ data/manifests/
-COPY --from=frontend /build/web/dist web/dist
-COPY --from=frontend /build/web/public web/public
+COPY THIRD_PARTY_NOTICES.md ./
 EXPOSE 8000
-# Exactly one API writer. It launches one science process via IPC.
-CMD ["python", "-m", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
+# The complete data directory and persistent state are mounted by compose.
+# Built-in Node modules only: no Python or runtime npm dependency is needed.
+CMD ["node", "app.js"]

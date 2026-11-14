@@ -20,6 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]
 RUNTIME = {"fastapi", "uvicorn", "pydantic", "astropy", "numpy", "scipy", "python-dotenv", "psutil"}
 DIRECTORIES = (
     "api",
+    "node",
+    "data/node-runtime",
     "science",
     "worker",
     "contracts",
@@ -48,6 +50,10 @@ DIRECTORIES = (
     "data/reference/relativity/facts",
 )
 FILES = (
+    "app.js",
+    "package.json",
+    "package-lock.json",
+    "data/manifests/node_runtime.json",
     "README.md",
     "FSD.md",
     "Data_Spec.md",
@@ -101,6 +107,7 @@ FILES = (
     "docs/ai_usage.json",
     "docs/decisions/ADR-001.md",
     "docs/decisions/ADR-002.md",
+    "docs/decisions/ADR-003.md",
 )
 
 
@@ -218,8 +225,8 @@ def prepare(built_at):
     )
     manifest = {
         "release": version,
-        "work_id": "DEV-011",
-        "work_ids": ["DEV-009", "DEV-010", "DEV-011"],
+        "work_id": "DEV-012",
+        "work_ids": ["DEV-009", "DEV-010", "DEV-011", "DEV-012"],
         "built_at": built_at,
         "base_commit": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
@@ -227,7 +234,15 @@ def prepare(built_at):
         "working_tree_has_uncommitted_changes": bool(
             subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip()
         ),
+        "runtime": {
+            "engine": "Node.js >=22.17.0",
+            "entrypoint": "app.js",
+            "start_command": "node app.js",
+            "python_required_on_server": False,
+            "science_results": "actual Python FITS calculations verified and cached at build time",
+        },
         "algorithm_versions": [
+            "python-built-node-snapshot-v1",
             "spherex-native-v1",
             "pluto-native-v1",
             "solar-display-v1",

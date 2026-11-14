@@ -4,6 +4,8 @@ async function selectObject(page:Page,id:string){await page.locator('#universe-s
 async function openLab(page:Page,id='epsilon-indi-b'){await selectObject(page,id);await page.getByTestId('open-object-observations').click();await expect(page.getByTestId('observation-panel')).toBeVisible();}
 
 test('real ε Indi B originals → quality → evidence → fresh-context restore, five locales and other routes',async({page,browser})=>{
+  // Five locales, imaging controls, two exports, fresh restore and four other routes share this workflow. Individual expectations retain their 15-second limit.
+  test.setTimeout(120000);
   const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));await page.goto('/');await openLab(page);const panel=page.getByTestId('observation-panel');
   await expect(panel.locator('option').filter({hasText:'S01 · 2025-04-30T02:06:28.716'})).toHaveCount(2);await panel.getByRole('button',{name:'관측 비교 열기',exact:true}).click();
   await expect(page.getByTestId('frame-A')).toBeVisible();await expect(page.getByTestId('frame-B')).toBeVisible();await expect(page.getByTestId('frame-A')).toContainText('2025-04-30T02:06:28.716');await expect(page.getByTestId('frame-B')).toContainText('2026-09-23T17:21:46.185');await expect(panel.getByText('원본 픽셀 잘라보기 · 각각 중심 배치 · 영상 정합 없음')).toBeVisible();await expect(panel.getByRole('table')).toContainText('29');

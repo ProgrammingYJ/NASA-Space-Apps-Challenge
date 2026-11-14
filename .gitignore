@@ -48,6 +48,7 @@ htmlcov/
 /data/calibration/
 /data/reference/
 /data/derived/
+/data/node-runtime/
 /data/research/
 /var/
 /tmp/

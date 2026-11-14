@@ -418,6 +418,8 @@
   "criteriaStatus_unknown": "Données insuffisantes",
   "criteriaStatus_not_applicable": "Non applicable",
   "criteriaMinimumMass": "Masse minimale : {{minimum}} M⊕ (masse actuelle : {{current}})",
+  "criteriaMinimumMassHypothesis": "Masse minimale : {{minimum}} M⊕ (masse actuelle ≈ {{current}} M⊕)",
+  "criteriaMassAssumption": "Cette masse est une hypothèse calculée à partir du rayon sourcé et de la densité appliquée de {{density}} kg/m³. La masse mesurée du corps principal et la classification officielle restent inchangées.",
   "criteriaMassUnknown": "Masse propre non adoptée",
   "criteriaModelLabel": "Valeurs de référence d’un modèle de nettoyage sur orbite circulaire",
   "criteriaModelNote": "Approximation circulaire avec un Soleil de 1 M☉, un temps de nettoyage de 10 milliards d’années et C=2√3. Ce seuil n’est ni une règle numérique officielle de l’UAI ni la preuve d’un nettoyage complet.",
@@ -542,5 +544,6 @@
   "blackHoleRay_truncated": "Limite d’intégration atteinte",
   "observerSourceError": "Les sources du modèle physique sont indisponibles.",
   "observerLoading": "Lecture des sources du modèle physique…",
-  "blackHoleSourceError": "Les sources des trous noirs sont indisponibles."
+  "blackHoleSourceError": "Les sources des trous noirs sont indisponibles.",
+  "verifiedObservationCacheNote": "Ces résultats précalculés ont été vérifiés avec les fichiers d’origine, l’étalonnage et la version du traitement. Les instants d’exposition et les informations de qualité d’origine sont conservés."
 }

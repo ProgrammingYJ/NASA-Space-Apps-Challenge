@@ -418,6 +418,8 @@
   "criteriaStatus_unknown": "Insufficient evidence",
   "criteriaStatus_not_applicable": "Not applicable",
   "criteriaMinimumMass": "Minimum mass: {{minimum}} M⊕ (current mass: {{current}})",
+  "criteriaMinimumMassHypothesis": "Minimum mass: {{minimum}} M⊕ (current mass ≈ {{current}} M⊕)",
+  "criteriaMassAssumption": "This mass is an assumption calculated from the source radius and the applied density of {{density}} kg/m³. The measured primary mass and official classification remain unchanged.",
   "criteriaMassUnknown": "No adopted primary mass",
   "criteriaModelLabel": "Reference values from a circular orbit clearing model",
   "criteriaModelNote": "Circular-orbit approximation with a 1 M☉ Sun, a 10-billion-year clearing time and C=2√3. The threshold is neither an official numerical IAU rule nor evidence of complete clearing.",
@@ -542,5 +544,6 @@
   "blackHoleRay_truncated": "Integration limit reached",
   "observerSourceError": "Physics source data are unavailable.",
   "observerLoading": "Reading physics sources…",
-  "blackHoleSourceError": "Black-hole sources are unavailable."
+  "blackHoleSourceError": "Black-hole sources are unavailable.",
+  "verifiedObservationCacheNote": "These precomputed results were verified against the original files, calibration and processing version. Exposure times and original quality information are preserved."
 }

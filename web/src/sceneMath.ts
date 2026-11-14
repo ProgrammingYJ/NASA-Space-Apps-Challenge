@@ -63,9 +63,15 @@ export function displayRadius(radiusKm: number, isSun = false): number {
   return Math.min(1.65, Math.max(0.32, 0.4 + 0.43 * Math.log1p(Math.max(0, radiusKm) / 6371)));
 }
 
-export function focusDistance(radius: number, verticalFovDeg: number, aspect: number): number {
+/** Fixed navigation marker radius. Selection and texture LOD never change a moon's geometry. */
+export function displayMoonRadius(radiusKm:number|null):number {
+  const knownRadius=radiusKm!==null&&Number.isFinite(radiusKm)&&radiusKm>0?radiusKm:0;
+  return Math.max(.035,Math.min(.22,knownRadius/10000+.035));
+}
+
+export function focusDistance(radius: number, verticalFovDeg: number, aspect: number,minimumDistance=2.5): number {
   const limitingHalfFov = Math.atan(Math.tan(verticalFovDeg * Math.PI / 360) * Math.min(1, Math.max(0.2, aspect)));
-  return Math.max(radius * 3.5, radius / Math.sin(limitingHalfFov) * 1.8, 2.5);
+  return Math.max(radius * 3.5, radius / Math.sin(limitingHalfFov) * 1.8, minimumDistance);
 }
 
 export interface FocusTransition {
@@ -111,10 +117,11 @@ export function makeFocus(
   startedAt: number,
   reducedMotion: boolean,
   directionOnly = false,
+  minimumDistance = 2.5,
 ): FocusTransition {
   const offset = normalized(subtract(current.position, current.target));
   const target = directionOnly ? add(current.position, scale(displayDirection(center), 80)) : center;
-  const position = directionOnly ? [...current.position] as Vec3 : add(center, scale(offset, focusDistance(radius, fov, aspect)));
+  const position = directionOnly ? [...current.position] as Vec3 : add(center, scale(offset, focusDistance(radius, fov, aspect,minimumDistance)));
   const travel = magnitude(subtract(current.position, position));
   return {
     from: { ...current, position: [...current.position], target: [...current.target] },

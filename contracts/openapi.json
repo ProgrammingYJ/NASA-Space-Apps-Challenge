@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Planet X · SPHEREx",
-    "version": "0.8.0"
+    "version": "0.9.0"
   },
   "paths": {
     "/health/live": {
@@ -25,6 +25,22 @@
       "get": {
         "summary": "Ready",
         "operationId": "ready_health_ready_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/runtime": {
+      "get": {
+        "summary": "Runtime Capabilities",
+        "operationId": "runtime_capabilities_api_v1_runtime_get",
         "responses": {
           "200": {
             "description": "Successful Response",

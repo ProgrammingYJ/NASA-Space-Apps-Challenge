@@ -5,7 +5,8 @@
 !.env.example
 node_modules
 web/node_modules
-web/dist
+!web/dist/
+!web/dist/**
 var
 tmp
 artifacts

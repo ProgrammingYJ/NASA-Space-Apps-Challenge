@@ -418,6 +418,8 @@
   "criteriaStatus_unknown": "根拠不足",
   "criteriaStatus_not_applicable": "適用対象外",
   "criteriaMinimumMass": "最小質量：{{minimum}} M⊕（現在の質量：{{current}}）",
+  "criteriaMinimumMassHypothesis": "最小質量：{{minimum}} M⊕（現在の質量 ≈ {{current}} M⊕）",
+  "criteriaMassAssumption": "出典の半径と適用密度 {{density}} kg/m³から計算した仮定の質量です。本体質量の測定値や公式分類は変更しません。",
   "criteriaMassUnknown": "本体単独の採用値なし",
   "criteriaModelLabel": "円軌道の一掃モデルによる参考値",
   "criteriaModelNote": "太陽1 M☉、一掃時間100億年、C=2√3の円軌道近似です。この閾値はIAUの正式な数値規則でも、実際の完全な一掃の証拠でもありません。",
@@ -542,5 +544,6 @@
   "blackHoleRay_truncated": "積分上限に到達",
   "observerSourceError": "物理モデルの出典資料を読み込めません。",
   "observerLoading": "物理モデルの出典を読み込み中…",
-  "blackHoleSourceError": "ブラックホールの出典資料を読み込めません。"
+  "blackHoleSourceError": "ブラックホールの出典資料を読み込めません。",
+  "verifiedObservationCacheNote": "原本・較正・処理バージョンとの一致を検証した事前計算結果です。露光時刻と原本の品質情報を保持しています。"
 }

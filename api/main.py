@@ -45,7 +45,7 @@ def create_app(state_dir: Path | None = None):
         yield
         app.state.service.close()
 
-    app = FastAPI(title="Planet X · SPHEREx", version="0.8.0", lifespan=lifespan)
+    app = FastAPI(title="Planet X · SPHEREx", version="0.9.0", lifespan=lifespan)
 
     @app.middleware("http")
     async def bounds(request, call_next):
@@ -125,6 +125,16 @@ def create_app(state_dir: Path | None = None):
                 "worker_alive": heartbeat_ok,
             },
         )
+
+    @app.get("/api/v1/runtime")
+    def runtime_capabilities():
+        return {
+            "schema_version": "1.0",
+            "runtime": "python",
+            "observation_processing": "runtime_fits_or_verified_cache",
+            "supported_observation_pairs": [["S01", "S02"], ["S12", "S14"]],
+            "arbitrary_fits_inputs": False,
+        }
 
     @app.get("/api/v1/objects")
     def objects():

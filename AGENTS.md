@@ -215,7 +215,7 @@ JSON에 NaN/Infinity를 숫자로 내보내지 않는다. `null`과 status/reaso
 
 내부 사용자 점검은 팀원 2명(익숙한 사람/덜 익숙한 사람)의 소수 사례다. 얼굴/실명 없이 과업 완료·도움 요청·오류·시간·조건 이해·근거 저장을 기록하고 내부 편향을 명시한다. 외부 연구/일반 사용자 효과/전천 발견 성능으로 확대하지 않는다.
 
-배포 기본안은 Node로 Vite 정적 빌드 → Python 3.12 Debian slim 계열 이미지에서 API/정적파일 제공, API와 과학 worker를 별도 프로세스로 운영한다. MCSM의 실제 할당 CPU/RAM/포트/volume/proxy/HTTPS를 확인한다. 원본/근거/로그는 로컬 영속 volume을 사용한다.
+2026-11-14의 최신 사용자 확인에 따라 **현재 운영 서버는 Node.js만 실행 가능**하다. DEV-012부터 배포 진입점은 루트 `app.js`, 명령은 `node app.js`다. Node의 단일 API 작성자와 worker thread가 검증된 빌드 관측 캐시·카탈로그·근거 상태를 제공하며 서버에 Python을 요구하지 않는다. 실제 FITS 계산은 기존 Python 3.12 과학 코드로 빌드 때 수행하고 원본/보정·알고리즘·산출물 SHA가 맞을 때만 재사용한다. 이를 새 런타임 FITS 분석/검출로 표시하지 않는다. 기존 Python API/별도 worker 프로세스와 이전 Dockerfile은 선택적 재검산·개발 경로로 보존한다. 상세 계약은 FSD와 ADR-003을 따른다. MCSM의 실제 CPU/RAM/할당포트/volume/proxy/HTTPS는 확인 전 미확정이며 원본/근거/로그는 영속 경로를 사용한다.
 
 - `/health/live`: 프로세스 응답. `/health/ready`: 실제 저장 쓰기·worker heartbeat·채택한 DB 등의 준비 상태. 구현 전 health 경로 존재를 가정하지 않는다.
 - 서비스 URL에서 실제 접속·선택·비교·내보내기·새 세션 복원·재시작을 검사한다. 도메인 정상만으로 앱 완료라고 하지 않는다.

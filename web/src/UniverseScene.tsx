@@ -1,7 +1,7 @@
 import {useEffect, useMemo, useRef, useState} from 'react';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {displayDirection, displayRadius, displayOrbitPoints, displayMoonOffset, bodyDisplayPositions, advanceNavigationForBody, makeFocus, makeGalaxyFocus, sampleFocus, validCamera, type CameraState, type FocusTransition, type Vec3} from './sceneMath';
+import {displayDirection, displayRadius, displayMoonRadius, displayOrbitPoints, displayMoonOffset, bodyDisplayPositions, advanceNavigationForBody, makeFocus, makeGalaxyFocus, sampleFocus, validCamera, type CameraState, type FocusTransition, type Vec3} from './sceneMath';
 import {createBodyAppearance,scaledRingBands,type AppearanceManifest,type AppearanceStatus,type AppearanceEntry,type RingEntry,type BodyAppearance} from './planetAppearance';
 import {createKuiperIllustration,galaxyPositionAu,icrsToEclipticUnit,type GalaxyData,type GalaxyObject} from './universeLayers';
 import {createGalaxyAppearance,galaxyDisplayProfile} from './galaxyAppearance';
@@ -188,7 +188,7 @@ export default function UniverseScene(props:UniverseSceneProps) {
     const rt:Runtime={renderer,scene,camera,controls,bodies:new Map(),orbits:new Map(),kuiper,skyStars,focus:null,mode:'overview',focusedId:null,followedId:null,focusRequest:null,restoredRequest:null,lastFollowEmitted:undefined,motionTick:0,lastEmit:0,disposed:false,animationId:0,pausedAt:null,resume:()=>{},
       cameraState:()=>({position:camera.position.toArray() as Vec3,target:controls.target.toArray() as Vec3,representation_version:'solar-display-v1'}),
       applyCamera:value=>{camera.position.fromArray(value.position);controls.target.fromArray(value.target);controls.update();},
-      emit:()=>{latest.current.onCameraChange?.(rt.cameraState());if(rt.lastFollowEmitted!==rt.followedId){rt.lastFollowEmitted=rt.followedId;latest.current.onFollowChange?.(rt.followedId);}container.dataset.cameraPosition=camera.position.toArray().map(n=>n.toFixed(5)).join(',');container.dataset.cameraTarget=controls.target.toArray().map(n=>n.toFixed(5)).join(',');container.dataset.cameraMode=rt.mode;container.dataset.focusedObject=rt.focusedId??'';container.dataset.followObject=rt.followedId??'';container.dataset.focusStartedAt=rt.focus?String(rt.focus.startedAt):'';},
+      emit:()=>{latest.current.onCameraChange?.(rt.cameraState());if(rt.lastFollowEmitted!==rt.followedId){rt.lastFollowEmitted=rt.followedId;latest.current.onFollowChange?.(rt.followedId);}container.dataset.cameraPosition=camera.position.toArray().map(n=>n.toFixed(5)).join(',');container.dataset.cameraTarget=controls.target.toArray().map(n=>n.toFixed(5)).join(',');container.dataset.controlsMinDistance=String(controls.minDistance);container.dataset.cameraMode=rt.mode;container.dataset.focusedObject=rt.focusedId??'';container.dataset.followObject=rt.followedId??'';container.dataset.focusStartedAt=rt.focus?String(rt.focus.startedAt):'';},
     };
     runtime.current=rt;
     const cancelFocus=()=>{rt.focus=null;rt.mode='manual';rt.focusedId=null;rt.followedId=null;controls.enableDamping=true;rt.emit();};
@@ -280,7 +280,7 @@ export default function UniverseScene(props:UniverseSceneProps) {
       const sourceAppearance=props.appearance?.objects[body.object_id];const displayReferenceRadius=sourceAppearance?.physical_profile?.reference_radius_km??body.radius_km??0;
       const galaxyInput=body.kind==='galaxy'?{object_id:body.object_id,morphology:body.galaxy_morphology,appearance:body.galaxy_appearance,direction_icrs_deg:body.direction_icrs_deg!}:null;
       const profile=galaxyInput?galaxyDisplayProfile(galaxyInput):null;
-      const radius=directionOnly?1.05:profile?profile.radius:body.kind==='moon'?(body.object_id===props.selectedObjectId?Math.max(.32,displayRadius(body.radius_km??0)):Math.max(.035,Math.min(.22,(body.radius_km??0)/10000+.035))):displayRadius(displayReferenceRadius,body.object_id==='sun');
+      const radius=directionOnly?1.05:profile?profile.radius:body.kind==='moon'?displayMoonRadius(body.radius_km??null):displayRadius(displayReferenceRadius,body.object_id==='sun');
       let view=rt.bodies.get(body.object_id);
       if(view&&(rt.focus?.objectId===body.object_id||rt.followedId===body.object_id)){
         const updated=advanceNavigationForBody({camera:rt.cameraState(),transition:rt.focus,followedObjectId:rt.followedId},body.object_id,view.position.toArray() as Vec3,position.toArray() as Vec3,directionOnly);
@@ -326,9 +326,13 @@ export default function UniverseScene(props:UniverseSceneProps) {
       view.label.dataset.sourcePositionAu=body.position_au?.map(value=>value.toFixed(12)).join(',')??'';
       view.label.dataset.positionKind=body.position_kind??body.kind;
       view.label.dataset.surfaceRepresentation=appearanceEntry?.texture_url?'published_map':smallProfile?'literature_constraints_unresolved':'neutral_unresolved_body';view.label.dataset.shapeAxes=smallBodyAxes(smallProfile).join(',');view.label.dataset.ringCenterRadiiKm=smallProfile?.rings.map(ring=>ring.center_radius_km).join(',')??'';view.label.dataset.profileColor=smallProfile?.color_hex??'';view.label.dataset.displayRadius=String(view.radius);view.label.dataset.framingRadius=String(view.framingRadius);view.label.dataset.physicalReferenceRadiusKm=String(physicalReference);
+      const surfaceMesh=view.appearance?.surface??view.fallback;
+      view.label.dataset.bodyGroupScale=view.group.scale.toArray().join(',');
+      if(surfaceMesh){if(!surfaceMesh.geometry.boundingSphere)surfaceMesh.geometry.computeBoundingSphere();const geometryRadius=surfaceMesh.geometry.boundingSphere?.radius;const worldScale=surfaceMesh.getWorldScale(new THREE.Vector3());view.label.dataset.meshGeometryRadius=geometryRadius===undefined?'':String(geometryRadius);view.label.dataset.meshWorldRadius=geometryRadius===undefined?'':String(geometryRadius*Math.max(...worldScale.toArray()));view.label.dataset.surfaceMeshScale=surfaceMesh.scale.toArray().join(',');}
       if(profile){view.label.dataset.representation='source_informed_morphology_with_illustrative_detail';view.label.dataset.galaxyRenderer=profile.renderer;view.label.dataset.armCount=String(profile.modeledArms);view.label.dataset.companionCount=String(profile.companions);view.label.dataset.dustLaneCount=String(profile.dustLanes);view.label.dataset.asymmetry=String(profile.asymmetric);view.label.dataset.axisRatio=String(profile.projectedAxisRatio);view.label.dataset.inclinationDeg=String(profile.inclinationDeg);view.label.dataset.orientationAssumed=String(profile.inclinationAssumed||profile.positionAngleAssumed);}
     }
     if(props.frameSelectedSystem&&props.selectedObjectId){const parent=rt.bodies.get(props.selectedObjectId);if(parent){for(const view of rt.bodies.values()){if(view.body.kind==='moon'&&view.body.parent_id===props.selectedObjectId)parent.framingRadius=Math.max(parent.framingRadius,parent.position.distanceTo(view.position)+view.radius);}}}
+    for(const view of rt.bodies.values())view.label.dataset.framingRadius=String(view.framingRadius);
     rt.motionTick++;if(host.current){host.current.dataset.modelEpoch=props.data?.epoch??'';host.current.dataset.motionTick=String(rt.motionTick);const ids=sceneObjects.filter(body=>body.kind==='galaxy'&&rt.bodies.has(body.object_id)).map(body=>body.object_id);host.current.dataset.galaxyCount=String(ids.length);host.current.dataset.galaxyIds=ids.join(',');}
   },[sceneObjects,props.data,props.labels,props.directionLabel,props.selectedObjectId,props.appearance,props.frameSelectedSystem,props.active]);
 
@@ -373,11 +377,11 @@ export default function UniverseScene(props:UniverseSceneProps) {
     rt.controls.enableDamping=false;rt.controls.update();
     const current=rt.cameraState();const center=view.direction?(view.body.direction_ecliptic??view.body.direction_ecliptic_unit)!:view.position.toArray() as Vec3;
     rt.focusRequest={objectId:props.selectedObjectId,sequence,system};rt.followedId=view.body.object_id;
-    rt.focus=view.body.kind==='galaxy'&&!view.direction?makeGalaxyFocus(current,view.body.object_id,center,view.framingRadius,rt.camera.fov,rt.camera.aspect,performance.now(),window.matchMedia('(prefers-reduced-motion: reduce)').matches):makeFocus(current,view.body.object_id,center,view.framingRadius,rt.camera.fov,rt.camera.aspect,performance.now(),window.matchMedia('(prefers-reduced-motion: reduce)').matches,Boolean(view.direction));
-    rt.focusedId=view.body.object_id;rt.mode='focusing';rt.controls.minDistance=props.observerMode?.05:view.direction?0.2:view.radius*1.2;rt.emit();
+    rt.focus=view.body.kind==='galaxy'&&!view.direction?makeGalaxyFocus(current,view.body.object_id,center,view.framingRadius,rt.camera.fov,rt.camera.aspect,performance.now(),window.matchMedia('(prefers-reduced-motion: reduce)').matches):makeFocus(current,view.body.object_id,center,view.framingRadius,rt.camera.fov,rt.camera.aspect,performance.now(),window.matchMedia('(prefers-reduced-motion: reduce)').matches,Boolean(view.direction),view.body.kind==='moon'?.05:2.5);
+    rt.focusedId=view.body.object_id;rt.mode='focusing';rt.controls.minDistance=props.observerMode?.05:view.direction?0.2:Math.max(.05,view.radius*1.2);rt.emit();
   },[props.data,props.galaxies,props.selectedObjectId,props.selectionSequence,props.overviewSequence,props.restoredCamera,props.restoredFollowObjectId,props.restoreSequence,props.frameSelectedSystem,props.appearance]);
 
-  useEffect(()=>{const rt=runtime.current;if(rt){const view=props.selectedObjectId?rt.bodies.get(props.selectedObjectId):undefined;rt.controls.minDistance=props.observerMode?.05:view&&!view.direction?view.radius*1.2:.2;}},[props.observerMode,props.selectedObjectId]);
+  useEffect(()=>{const rt=runtime.current;if(rt){const view=props.selectedObjectId?rt.bodies.get(props.selectedObjectId):undefined;rt.controls.minDistance=props.observerMode?.05:view&&!view.direction?Math.max(.05,view.radius*1.2):.2;rt.emit();}},[props.observerMode,props.selectedObjectId]);
   useEffect(()=>{runtime.current?.renderer.domElement.setAttribute('aria-label',props.controlsLabel??'3D universe');},[props.controlsLabel]);
   useEffect(()=>{
     const rt=runtime.current;if(!rt)return;

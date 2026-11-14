@@ -62,3 +62,8 @@ DEV-011 E2/E3: 비교 위성 6종×대상6종의 출처/구형밀도 가정과 �
 DEV-011 E4: 전체 Python483/Vitest70·strict/Vite/Ruff와 `CNYGnNg7` Chrome13/13 PASS142.460초를 확인했다. 마지막 CSS 여백 교정 뒤 `BfRDPmgL`의 관측자 이동/5언어2경로 PASS9.647초를 따로 확인했다. 실제 εB 근거의 새 세션 복원과 마지막 질량 가정·선택 블랙홀·r/Rs/β/파장/source SHA를 대조했다. 세부는 `var/qa/dev011-mass-browser-review.json`, `dev011-observer-review.json`, `dev011-final-browser-results.json`, `dev011-observer-spacing-followup.json` 및 FSD QA26/27·작업기록에 있다. 최종 ZIP의 해제/실제 OS 서버 재시작 검사는 동명 verification/checksum 및 `docs/releases/v0.8.0.json`에서 별도 확정하며 여기의 Chrome 성공만으로 배포 성공을 주장하지 않는다. 공개 서비스·Linux·원어민/팀원 과업 검수와 미완료 관측/F04/F05의 한계는 유지한다.
 
 DEV-011 E4/QA09 최종 확정: 정확 v0.8.0 ZIP 2095파일/484956608B/SHA1bb76a91…의 새폴더 해제 및 API/worker 실제 재시작 뒤 동일 εB/Pluto 근거·새 가정 복원을20:24:20KST에 통과했다. source45375fc clean tree이며 상세는 [검증 정본](releases/v0.8.0.json)을 따른다. 이 사후 기록은 검증한 불변 ZIP 밖의 별도 문서이며 공개/Linux 검증이 아니다.
+
+
+DEV-012 최종 브라우저 확정: Node8081/최종 client `index-DLJsfpSc.js`·runtime manifest9dfe…에서23고유경로를 확인했다. 23개 batch는22 PASS/1복합workflow 전체60초 timeout(374.878초)이었고 개별15초 기대값 실패는0이다. 5언어/깜빡임/PNG·JSON·CSV/새문맥복원/공식4대상왕복을한case로묶은검사만전체120초로명시해별도후속1 PASS68.454초(2026-11-14T12:35:11.024Z시작)를확인했다. 과학기대값·단계별15초·제품/Node/source를변경하지않았다. 23개가같은batch모두통과했다고주장하지않고22+1후속으로기록한다. 초기최적화전부분실행15PASS/4지연실패와도구분한다. 정본은 var/qa/dev012-node-final-browser-results.json,dev012-node-observation-followup.json과review보고서다.
+
+Moon의표시R0.20874/물리R1737.4km·group/mesh scale1은선택전후유지됐고camera eye-target은3.089216→0.923769표시단위로접근했다. Phobos의표시R0.036108/물리R11.08km도유지됐고camera거리는0.159789였다. bounding sphere≤1.5e-9차이는12→64 subdivision Float32정점반올림이며확대scale가아니다. 실측첨부 var/qa/dev012-moon-geometry-evidence.json에원수치를보존했다. 질량approx/원mass null/IAU분류·늦은결과·실제촬영시각/품질·관측자/근거/복원·Node사전계산5언어고지도검사했다. 정확v0.9 ZIP의실제Node실행/재시작검증은최종사후기록으로확정한다.
