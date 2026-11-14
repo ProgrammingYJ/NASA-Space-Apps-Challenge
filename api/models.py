@@ -37,7 +37,7 @@ class SimulationContext(StrictModel):
     algorithm_version: Literal["jpl-kepler-long-term-v1"]
     source_manifest_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
     model_calendar_ms: float = Field(ge=-8640000000000000, le=8640000000000000)
-    playback_rate_hours_per_second: Literal[72, 8766, 87660, 876600] = 8766
+    playback_rate_hours_per_second: Literal[1, 6, 24, 72, 8766, 87660, 876600] = 8766
     playback_paused: Literal[True] = True
 
 
@@ -50,16 +50,29 @@ class UniverseContext(StrictModel):
     orbit_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
     show_orbits: bool = True
     timeline_algorithm_version: Literal["display-hermite-v1"] | None = None
-    playback_rate_hours_per_second: Literal[1, 6, 24, 72] = 6
+    playback_rate_hours_per_second: Literal[1, 6, 24, 72, 8766, 87660, 876600] = 6
     playback_paused: Literal[True] = True
     follow_object_id: str | None = Field(default=None, max_length=50)
     appearance_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    small_body_appearance_manifest_sha256: str | None = Field(
+        default=None, pattern=r"^[a-f0-9]{64}$"
+    )
+    planet_criteria_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    time_preference: Literal["auto", "ephemeris", "simulation"] | None = None
     extended_solar_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
     galaxy_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
     show_kuiper_belt: bool = False
     show_galaxies: bool = False
     kuiper_display_version: Literal["kuiper-region-v1"] | None = None
     simulation_context: SimulationContext | None = None
+
+    @model_validator(mode="after")
+    def consistent_time_preference(self):
+        if self.time_preference == "ephemeris" and self.simulation_context is not None:
+            raise ValueError("Ephemeris-only preference cannot carry fitted-model time")
+        if self.time_preference == "simulation" and self.simulation_context is None:
+            raise ValueError("Fitted-model preference requires fitted-model time")
+        return self
 
 
 class Session(StrictModel):

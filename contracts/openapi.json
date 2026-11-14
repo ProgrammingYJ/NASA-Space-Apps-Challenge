@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Planet X · SPHEREx",
-    "version": "0.6.0"
+    "version": "0.7.0"
   },
   "paths": {
     "/health/live": {
@@ -166,6 +166,50 @@
         }
       }
     },
+    "/api/v1/catalog/exoplanet-observations": {
+      "get": {
+        "summary": "Exoplanet Observations",
+        "operationId": "exoplanet_observations_api_v1_catalog_exoplanet_observations_get",
+        "parameters": [
+          {
+            "name": "object_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Object Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/catalog/solar-system": {
       "get": {
         "summary": "Extended Solar",
@@ -220,6 +264,66 @@
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/small-body-appearance": {
+      "get": {
+        "summary": "Small Body Appearance",
+        "operationId": "small_body_appearance_api_v1_small_body_appearance_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/planet-criteria": {
+      "get": {
+        "summary": "Planet Criteria",
+        "operationId": "planet_criteria_api_v1_planet_criteria_get",
+        "parameters": [
+          {
+            "name": "object_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Object Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -448,6 +552,50 @@
                 }
               ],
               "title": "Parent Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/catalog/extragalactic-planets": {
+      "get": {
+        "summary": "Extragalactic Planets",
+        "operationId": "extragalactic_planets_api_v1_catalog_extragalactic_planets_get",
+        "parameters": [
+          {
+            "name": "galaxy_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Galaxy Id"
             }
           }
         ],
@@ -1072,6 +1220,9 @@
           "playback_rate_hours_per_second": {
             "type": "integer",
             "enum": [
+              1,
+              6,
+              24,
               72,
               8766,
               87660,
@@ -1163,7 +1314,10 @@
               1,
               6,
               24,
-              72
+              72,
+              8766,
+              87660,
+              876600
             ],
             "title": "Playback Rate Hours Per Second",
             "default": 6
@@ -1197,6 +1351,46 @@
               }
             ],
             "title": "Appearance Manifest Sha256"
+          },
+          "small_body_appearance_manifest_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Small Body Appearance Manifest Sha256"
+          },
+          "planet_criteria_manifest_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Planet Criteria Manifest Sha256"
+          },
+          "time_preference": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "auto",
+                  "ephemeris",
+                  "simulation"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Preference"
           },
           "extended_solar_manifest_sha256": {
             "anyOf": [

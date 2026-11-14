@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import {displayDirection,type Vec3} from './sceneMath';
+import {smallBodyAxes,smallBodyRingRadii,type SmallBodyProfile} from './smallBodyAppearance';
 
-export type AppearanceKind='observed_mosaic'|'radar_mosaic'|'representative_atmosphere'|'illustration';
+export type AppearanceKind='observed_mosaic'|'radar_mosaic'|'representative_atmosphere'|'illustration'|'literature_constrained';
 export interface AppearanceSource {url:string;label:string}
 export interface BodyOrientation {
   kind?:string;
@@ -15,6 +16,7 @@ export interface BodyOrientation {
   rotation_phase_verified?:boolean;
 }
 export interface AppearanceEntry {
+  physical_profile?:SmallBodyProfile;
   texture_url:string|null;
   kind:AppearanceKind;
   source:AppearanceSource;
@@ -132,19 +134,17 @@ function makeSurfaceMaterial(color:string,radius:number,bands:ScaledBand[],entry
   const material=new THREE.MeshStandardMaterial({color,roughness:1,metalness:0});
   const sun={value:new THREE.Vector3(0,1,0)};
   const ringNormal={value:new THREE.Vector3(0,1,0)};
-  const procedural={value:entry?.texture_url?0:1};
+  const procedural={value:entry?.texture_url?0:['jupiter','saturn','uranus','neptune','venus'].includes(objectId)?1:0};
   let seed=[...objectId].reduce((value,char)=>((value*31+char.charCodeAt(0))>>>0),7919);
-  const random=()=>{seed=(1664525*seed+1013904223)>>>0;return seed/4294967296;};
-  const craterCenters=new Float32Array(36),craterRadii=new Float32Array(12);for(let i=0;i<12;i++){const z=random()*2-1;const angle=random()*Math.PI*2;const r=Math.sqrt(1-z*z);craterCenters.set([r*Math.cos(angle),z,r*Math.sin(angle)],i*3);craterRadii[i]=.045+random()*.19;}
   const window=textureWindow(entry??{});
   const bandInner=new Float32Array(MAX_BANDS),bandOuter=new Float32Array(MAX_BANDS),bandOpacity=new Float32Array(MAX_BANDS);
   bands.forEach((band,index)=>{bandInner[index]=band.inner;bandOuter[index]=band.outer;bandOpacity[index]=band.opacity;});
   material.onBeforeCompile=shader=>{
     shader.uniforms.appSunDirection=sun;shader.uniforms.appRingNormal=ringNormal;shader.uniforms.appBodyRadius={value:radius};shader.uniforms.appBandCount={value:bands.length};shader.uniforms.appBandInner={value:bandInner};shader.uniforms.appBandOuter={value:bandOuter};shader.uniforms.appBandOpacity={value:bandOpacity};shader.uniforms.appTextureOffset={value:new THREE.Vector2().fromArray(window.offset)};shader.uniforms.appTextureRepeat={value:new THREE.Vector2().fromArray(window.repeat)};shader.uniforms.appLatitudes={value:new THREE.Vector2().fromArray(window.latitude)};shader.uniforms.appTextureFlipX={value:entry?.texture_flip_x?1:0};
-    shader.uniforms.appProcedural=procedural;shader.uniforms.appCraterCenters={value:craterCenters};shader.uniforms.appCraterRadii={value:craterRadii};shader.uniforms.appSeed={value:seed%997};shader.uniforms.appGasGiant={value:['jupiter','saturn','uranus','neptune','venus'].includes(objectId)?1:0};
+    shader.uniforms.appProcedural=procedural;shader.uniforms.appSeed={value:seed%997};shader.uniforms.appGasGiant={value:['jupiter','saturn','uranus','neptune','venus'].includes(objectId)?1:0};
     shader.vertexShader='varying vec3 appLocalPosition; varying vec3 appLocalNormal; varying vec2 appRawUv;\n'+shader.vertexShader;
     shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nappLocalPosition=transformed;appLocalNormal=normal;appRawUv=uv;');
-    shader.fragmentShader=shadowUniforms+'\nvarying vec2 appRawUv;uniform vec2 appTextureOffset;uniform vec2 appTextureRepeat;uniform vec2 appLatitudes;uniform float appTextureFlipX;uniform float appProcedural;uniform vec3 appCraterCenters[12];uniform float appCraterRadii[12];uniform float appSeed;uniform float appGasGiant;\n'+shader.fragmentShader;
+    shader.fragmentShader=shadowUniforms+'\nvarying vec2 appRawUv;uniform vec2 appTextureOffset;uniform vec2 appTextureRepeat;uniform vec2 appLatitudes;uniform float appTextureFlipX;uniform float appProcedural;uniform float appSeed;uniform float appGasGiant;\n'+shader.fragmentShader;
     shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',/* glsl */`
       #ifdef USE_MAP
         float appLatitude=appRawUv.y*180.0-90.0;
@@ -156,12 +156,8 @@ function makeSurfaceMaterial(color:string,radius:number,bands:ScaledBand[],entry
       #else
         if(appProcedural>0.5){
           vec3 appPoint=normalize(appLocalPosition);
-          float appTerrain=sin(appPoint.x*31.0+appSeed)*sin(appPoint.y*27.0-appSeed)*sin(appPoint.z*39.0+appSeed*0.37);
-          appTerrain+=0.35*sin(appPoint.x*89.0+appPoint.z*51.0)*sin(appPoint.y*73.0);
-          float appCraters=0.0;
-          for(int i=0;i<12;i++){float d=length(appPoint-appCraterCenters[i]);float r=appCraterRadii[i];appCraters-=0.22*(1.0-smoothstep(r*0.1,r,d));appCraters+=0.18*smoothstep(r*.72,r*.92,d)*(1.0-smoothstep(r*.92,r*1.1,d));}
           float appBands=0.86+0.12*sin(appPoint.y*29.0+0.8*sin(appPoint.z*7.0+appSeed));
-          diffuseColor.rgb*=mix(clamp(0.88+appTerrain*.18+appCraters,.38,1.25),appBands,appGasGiant);
+          diffuseColor.rgb*=appBands;
         }
       #endif
     `);
@@ -203,21 +199,28 @@ export function createBodyAppearance(options:{objectId:string;displayRadius:numb
   let mappingValid=true;try{textureWindow(appearance??{});}catch{mappingValid=false;}
   const bands=scaledRingBands(subtractRingGaps(rings?.bands_km??[],rings?.gaps_km??[]),physicalRadiusKm,displayRadius);
   const group=new THREE.Group();const surfaceGroup=new THREE.Group();const ringGroup=new THREE.Group();group.add(surfaceGroup,ringGroup);
-  const surfaceData=makeSurfaceMaterial(options.fallbackColor,displayRadius,bands,mappingValid?appearance:undefined,objectId);
+  const surfaceData=makeSurfaceMaterial(appearance?.physical_profile?.color_hex??options.fallbackColor,displayRadius,bands,mappingValid?appearance:undefined,objectId);
   const material:THREE.MeshStandardMaterial|THREE.MeshBasicMaterial=objectId==='sun'?new THREE.MeshBasicMaterial({color:options.fallbackColor}):surfaceData.material;
   if(objectId==='sun')surfaceData.material.dispose();
   const surface=new THREE.Mesh(new THREE.SphereGeometry(displayRadius,64,48),material);surface.userData.objectId=objectId;surface.castShadow=true;surface.receiveShadow=true;surfaceGroup.add(surface);
+  const axisScales=smallBodyAxes(appearance?.physical_profile);surface.geometry.scale(...axisScales);
+  surface.userData.surfaceRepresentation=appearance?.texture_url?'published_map':appearance?.physical_profile?'literature_constraints_unresolved':'neutral_unresolved_body';
+  const centerRadii=smallBodyRingRadii(appearance?.physical_profile,physicalRadiusKm,displayRadius);
+  for(const [index,radius] of centerRadii.entries()){
+    const vertices=Array.from({length:256},(_,index)=>new THREE.Vector3(Math.cos(index/256*Math.PI*2)*radius,0,Math.sin(index/256*Math.PI*2)*radius));
+    const guide=new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(vertices),new THREE.LineBasicMaterial({color:'#c4c1b7',transparent:true,opacity:.55,depthWrite:false}));guide.userData.representation='published_ring_center_one_pixel_guide';const pole=appearance?.physical_profile?.rings[index]?.pole_j2000_deg;if(pole)guide.quaternion.copy(orientationQuaternion({pole_icrs_deg:pole},0,false));ringGroup.add(guide);
+  }
   const ringMaterials:{material:THREE.ShaderMaterial;sun:{value:THREE.Vector3}}[]=[];
   let usesNarrowGuide=false;
   for(const band of bands){const data=makeRingMaterial(band.color,band.opacity,displayRadius);ringMaterials.push(data);const geometry=new THREE.RingGeometry(band.inner,band.outer,256,4);geometry.rotateX(-Math.PI/2);const mesh=new THREE.Mesh(geometry,data.material);mesh.receiveShadow=true;mesh.castShadow=true;ringGroup.add(mesh);if(band.outer-band.inner<displayRadius*.006&&band.opacity>=.02){usesNarrowGuide=true;const lineData=makeRingMaterial(band.color,Math.min(.6,band.opacity),displayRadius);ringMaterials.push(lineData);const radius=(band.inner+band.outer)/2;const vertices=Array.from({length:256},(_,index)=>new THREE.Vector3(Math.cos(index/256*Math.PI*2)*radius,0,Math.sin(index/256*Math.PI*2)*radius));ringGroup.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(vertices),lineData.material));}}
   const atmosphere=objectId==='earth'?makeAtmosphere(displayRadius):null;if(atmosphere)surfaceGroup.add(atmosphere.mesh);
   const hasPole=Boolean(appearance?.body_orientation?.pole_ecliptic||appearance?.body_orientation?.pole_icrs_deg);
-  const status:AppearanceStatus={object_id:objectId,state:!mappingValid?'failed':appearance?.texture_url?'loading':'fallback',kind:appearance?.kind??'illustration',orientation_assumed:appearance?.body_orientation?.kind?.includes('assumed')||appearance?.body_orientation?.rotation_phase_verified!==true||!hasPole||!appearance?.body_orientation?.source,source:appearance?.source??null,credit:appearance?.credit??'',limitations:[...RENDER_LIMITATIONS,...(appearance?.limitations??[]),...(rings?.limitations??[]),...(!appearance?.texture_url?[['sun','jupiter','saturn','uranus','neptune','venus'].includes(objectId)?'procedural_atmosphere_is_illustration_not_observed_surface':'procedural_terrain_is_illustration_not_observed_surface']:[]),...(!mappingValid?['invalid_texture_window_using_illustrative_color']:[]),...(!hasPole?['spin_axis_assumed_for_display']:[]),...(usesNarrowGuide?['narrow_rings_use_one_pixel_display_guides']:[]),...(appearance?.kind==='radar_mosaic'?['radar_texture_is_not_optical_albedo']:[]),...(atmosphere?['atmosphere_is_a_visual_scattering_approximation']:[])]};
+  const status:AppearanceStatus={object_id:objectId,state:!mappingValid?'failed':appearance?.texture_url?'loading':appearance?.physical_profile?'ready':'fallback',kind:appearance?.kind??'illustration',orientation_assumed:appearance?.body_orientation?.kind?.includes('assumed')||appearance?.body_orientation?.rotation_phase_verified!==true||!hasPole||!appearance?.body_orientation?.source,source:appearance?.source??null,credit:appearance?.credit??'',limitations:[...RENDER_LIMITATIONS,...(appearance?.limitations??[]),...(rings?.limitations??[]),...(!appearance?.texture_url?[['sun','jupiter','saturn','uranus','neptune','venus'].includes(objectId)?'procedural_atmosphere_is_illustration_not_observed_surface':'unresolved_solid_body_has_no_invented_surface_geography']:[]),...(!mappingValid?['invalid_texture_window_using_illustrative_color']:[]),...(!hasPole?['spin_axis_assumed_for_display']:[]),...(usesNarrowGuide?['narrow_rings_use_one_pixel_display_guides']:[]),...(appearance?.kind==='radar_mosaic'?['radar_texture_is_not_optical_albedo']:[]),...(atmosphere?['atmosphere_is_a_visual_scattering_approximation']:[])]};
   let disposed=false;let texture:THREE.Texture|null=null;
   const emit=()=>{options.onStatus?.({...status,limitations:[...status.limitations]});return status;};
   const ready=appearance?.texture_url&&mappingValid?(async()=>{
     try{const url=new URL(appearance.texture_url!,window.location.href);if(url.origin!==window.location.origin||(!url.pathname.startsWith('/textures/')&&!url.pathname.startsWith('/api/v1/appearance/')))throw new Error('appearance_url_not_allowed');const loaded=await new THREE.TextureLoader().loadAsync(url.href);if(disposed){loaded.dispose();return status;}if(appearance.pixel_dimensions&&(loaded.image.width!==appearance.pixel_dimensions[0]||loaded.image.height!==appearance.pixel_dimensions[1])){loaded.dispose();throw new Error('texture_dimensions_mismatch');}texture=loaded;texture.colorSpace=THREE.SRGBColorSpace;texture.wrapS=THREE.RepeatWrapping;texture.wrapT=THREE.ClampToEdgeWrapping;texture.anisotropy=Math.max(1,Math.min(8,options.anisotropy??1));material.map=texture;material.color.set('#ffffff');material.needsUpdate=true;status.state='ready';return emit();}
-    catch{if(!disposed){status.state='failed';status.kind='illustration';status.source=null;status.credit='';surfaceData.procedural.value=1;status.limitations.push('texture_unavailable_using_procedural_illustration');return emit();}return status;}
+    catch{if(!disposed){status.state='failed';status.kind='illustration';status.source=null;status.credit='';surfaceData.procedural.value=['jupiter','saturn','uranus','neptune','venus'].includes(objectId)?1:0;status.limitations.push('texture_unavailable_using_unresolved_fallback');return emit();}return status;}
   })():Promise.resolve(emit());
   const surfaceWorld=new THREE.Quaternion(),ringWorld=new THREE.Quaternion();
   return {group,surface,status,ready,update:(epochMs,sunDirectionWorld)=>{

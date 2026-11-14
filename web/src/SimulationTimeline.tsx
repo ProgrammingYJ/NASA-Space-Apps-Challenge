@@ -1,7 +1,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {modelDateMs,modelDateParts,parseModelDateDraft,type LongTermModel,type ModelDateDraft} from './longTermMath';
-import {SIMULATION_RATES} from './useSimulationClock';
+import {MODEL_TIME_RATES as SIMULATION_RATES} from './modelTime';
 import styles from './SimulationTimeline.module.css';
 interface Clock {ms:number;playing:boolean;rate:number;seek:(ms:number)=>boolean;pause:()=>void;toggle:()=>void;setRate:(rate:number)=>void}
 const draftFor=(ms:number):ModelDateDraft=>{const date=modelDateParts(ms);return {year:String(date.year),month:String(date.month),day:String(date.day)};};
@@ -19,7 +19,7 @@ export default function SimulationTimeline({model,clock,onPrecise,onHistory,erro
       <input data-testid="simulation-day" aria-label={t('simDay')} type="number" min="1" max="31" disabled={!model} value={draft.day} aria-invalid={invalid} onChange={e=>change('day',e.target.value)}/>
       <button type="submit" data-testid="simulation-apply" disabled={!model}>{t('simApply')}</button>
     </form><output data-testid="simulation-clock">{modelDateParts(clock.ms).year} / {modelDateParts(clock.ms).month} / {modelDateParts(clock.ms).day} · TDB</output></div>
-    <label>{t('playbackSpeed')}<select data-testid="simulation-rate" value={clock.rate} onChange={e=>clock.setRate(Number(e.target.value))}>{SIMULATION_RATES.map(rate=><option key={rate} value={rate}>{rate===72?t('playbackRate',{hours:72}):t('simYearsPerSecond',{years:rate/8766})}</option>)}</select></label>
+    <label>{t('playbackSpeed')}<select data-testid="simulation-rate" value={clock.rate} onChange={e=>clock.setRate(Number(e.target.value))}>{SIMULATION_RATES.map(rate=><option key={rate} value={rate}>{rate<=72?t('playbackRate',{hours:rate}):t('simYearsPerSecond',{years:rate/8766})}</option>)}</select></label>
     <div className={styles.range}><input data-testid="simulation-range" aria-label={t('simTitle')} type="range" min={bounds?.start??clock.ms} max={bounds?.end??clock.ms} step="86400000" value={clock.ms} disabled={!model} onChange={e=>{editing.current=false;clock.seek(Number(e.target.value));setInvalid(false);}}/><div>{min?.year??'…'} — {max?.year??'…'}</div><p>{t('simInputHelp')}</p><p>{t('simNote')} {t('simAccuracyNote')}</p>{invalid&&<p role="alert">{t('simInvalid')}</p>}{error&&<p role="alert">{t('simLoadError')} <button onClick={onRetry}>{t('retry')}</button></p>}</div>
     <div className={styles.links}><button data-testid="simulation-exit" onClick={onPrecise}>{t('preciseTime')}</button><button onClick={onHistory}>{t('bigBangMode')}</button></div>
   </section>;

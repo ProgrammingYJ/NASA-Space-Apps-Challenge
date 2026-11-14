@@ -56,7 +56,7 @@ test('continuous playback moves sourced planets, preserves follow offset, and re
 });
 
 test('the bounded clock pauses at the end and an explicit replay restarts at the beginning',async({page})=>{
-  await start(page);await page.getByTestId('timeline-rate').selectOption('24');
+  await start(page);await page.getByTestId('time-source-details').locator('summary').click();await page.getByTestId('time-mode').selectOption('ephemeris');await page.getByTestId('timeline-rate').selectOption('24');
   await page.locator('#model-epoch').fill('2026-11-15T23:59');await page.locator('#model-epoch').press('Tab');
   await expect.poll(()=>modelTime(page)).toBe(Date.parse('2026-11-15T23:59:00Z'));
   await play(page).click();await expect.poll(()=>modelTime(page)).toBe(Date.parse('2026-11-16T00:00:00Z'));

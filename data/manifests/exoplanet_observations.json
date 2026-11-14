@@ -1,0 +1,402 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "published-exoplanet-observations-v1",
+  "created_utc": "2026-11-14T09:49:44.101926+00:00",
+  "coverage": "three_adopted_confirmed_planet_observation_releases_not_complete_census",
+  "observations": [
+    {
+      "observation_id": "hip65426b-jwst-2022",
+      "object_id": "exo-27e52bc5e4a85faba3a2",
+      "planet_name": "HIP 65426 b",
+      "image_source_url": "https://cdn.esawebb.org/archives/images/large/HIP-65426b.jpg",
+      "title": "HIP 65426 b: JWST infrared observation collage",
+      "publication_date": "2022-09-01",
+      "source_asset_type": "Collage",
+      "credit": "NASA/ESA/CSA, A Carter (UCSC), the ERS 1386 team, and A. Pagan (STScI)",
+      "instruments": [
+        "JWST/NIRCam",
+        "JWST/MIRI"
+      ],
+      "wavelengths_um": [
+        3.0,
+        4.44,
+        11.4,
+        15.5
+      ],
+      "observation_dates": [
+        "2022-07-17",
+        "2022-07-30"
+      ],
+      "processing": [
+        "Four infrared-filter views are displayed with assigned colors.",
+        "Coronagraphy and image processing suppress the host star; white star symbols mark its location.",
+        "NIRCam bar-shaped features are optical artifacts, not additional objects."
+      ],
+      "limitations": [
+        "The planet is an unresolved light source; these blobs do not resolve a planetary surface.",
+        "Assigned infrared colors do not show human-eye surface colors.",
+        "The 2022 release was preliminary; the observation paper is separately linked as Carter et al., doi:10.3847/2041-8213/acd93e."
+      ],
+      "kind": "processed_direct_imaging",
+      "surface_resolved": false,
+      "image_alt": "HIP 65426 b: JWST infrared observation collage. Processed telescope signal; planetary surface unresolved.",
+      "image_url": "/observations/exoplanets/hip65426b-jwst-2022.jpg",
+      "local_relative_path": "web/public/observations/exoplanets/hip65426b-jwst-2022.jpg",
+      "bytes": 441043,
+      "sha256": "47bb8c3abd7bd5d7cc37f4609ecb0635370bbf269088eaca6e0de56b4d9db280",
+      "width": 1528,
+      "height": 1130,
+      "retrieved_utc": "2026-11-14T09:48:40.914919+00:00",
+      "asset_source": {
+        "url": "https://cdn.esawebb.org/archives/images/large/HIP-65426b.jpg",
+        "resolved_url": "https://cdn.esawebb.org/archives/images/large/HIP-65426b.jpg",
+        "local_relative_path": "web/public/observations/exoplanets/hip65426b-jwst-2022.jpg",
+        "bytes": 441043,
+        "sha256": "47bb8c3abd7bd5d7cc37f4609ecb0635370bbf269088eaca6e0de56b4d9db280",
+        "retrieved_utc": "2026-11-14T09:48:40.914919+00:00",
+        "redistribution": "CC-BY-4.0_published_asset_unmodified"
+      },
+      "source": {
+        "source_id": "hip65426b-esawebb",
+        "url": "https://esawebb.org/images/HIP-65426b/",
+        "label": "HIP 65426 b: JWST infrared observation collage",
+        "local_relative_path": "data/reference/exoplanet-observations/facts/hip65426b-esawebb.json",
+        "bytes": 1661,
+        "sha256": "21772055d8f77051594f238ed0015816022b50346114db9aaebe965483274124",
+        "retrieved_utc": "2026-11-14T09:48:35.847999+00:00",
+        "upstream_sha256": "b941eb97237eba1eec30e5c2f2feadd38b1484e98e6d08975234879f2751abec",
+        "upstream_bytes": 70952,
+        "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/hip65426b-esawebb.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "additional_sources": [
+        {
+          "source_id": "hip65426b-nasa-metadata",
+          "url": "https://science.nasa.gov/asset/webb/image-of-exoplanet-hip-65426-b-in-near-and-mid-infrared/",
+          "label": "NASA JWST image observation metadata",
+          "local_relative_path": "data/reference/exoplanet-observations/facts/hip65426b-nasa-metadata.json",
+          "bytes": 660,
+          "sha256": "c0849f632f541fe0de477f8f1039f05d20f2b804ffba9b4913cbe3d90c904f45",
+          "retrieved_utc": "2026-11-14T09:48:38.341357+00:00",
+          "upstream_sha256": "fbd3e23b31e7e4a09c0705a90f87e2fb5f6ceb451167122ab997915b3cb240b2",
+          "upstream_bytes": 284220,
+          "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/hip65426b-nasa-metadata.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        {
+          "source_id": "hip65426b-paper",
+          "url": "https://arxiv.org/abs/2208.14990",
+          "label": "Carter et al., JWST ERS direct observations of HIP 65426 b",
+          "local_relative_path": "data/reference/exoplanet-observations/facts/hip65426b-paper.json",
+          "bytes": 526,
+          "sha256": "013403f44ca0e9cd4ec3abfbc0ffbc98defc259aa56a6d09fbc0ede57c6a1580",
+          "retrieved_utc": "2026-11-14T09:48:38.264048+00:00",
+          "upstream_sha256": "5c1f2576a9bc8bc6914f08041d31ca5062db72d7ce280ae4ecd396a31eaf0841",
+          "upstream_bytes": 67509,
+          "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/hip65426b-paper.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      ],
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "source": {
+          "source_id": "esawebb-rights",
+          "url": "https://esawebb.org/copyright/",
+          "label": "ESA/Webb public media usage conditions",
+          "local_relative_path": "data/reference/exoplanet-observations/facts/esawebb-rights.json",
+          "bytes": 613,
+          "sha256": "5da0c29092ffe18092378d2ab3e703a22cf96ee7a151b28aad0004b1d5d3aaa2",
+          "retrieved_utc": "2026-11-14T09:48:38.014060+00:00",
+          "upstream_sha256": "dddf1654061affe7435864884c22d9564acbafd24b2e016c1d5a864453aa3d2c",
+          "upstream_bytes": 58839,
+          "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/esawebb-rights.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "project_modifications": "none; the published JPEG bytes are served unchanged"
+    },
+    {
+      "observation_id": "beta-pic-b-sphere-2018",
+      "object_id": "exo-b3de4ed79fcf6cd22853",
+      "planet_name": "Beta Pictoris b",
+      "image_source_url": "https://cdn.eso.org/images/large/potw1846a.jpg",
+      "title": "Beta Pictoris b: VLT/SPHERE observation sequence collage",
+      "publication_date": "2018-11-12",
+      "source_asset_type": "Collage",
+      "credit": "ESO/Lagrange/SPHERE consortium.",
+      "instruments": [
+        "VLT/SPHERE"
+      ],
+      "wavelengths_um": [
+        2.11,
+        1.593,
+        2.251,
+        1.667
+      ],
+      "observation_dates": [],
+      "processing": [
+        "Published collage combines a sequence of direct observations with the bright stellar glow blocked.",
+        "The source release describes monitoring in late 2014-2016 and a later reappearance in 2018.",
+        "Listed wavelengths are the release-page filter metadata for the sequence, not a per-frame calibration."
+      ],
+      "limitations": [
+        "The sequence resolves the planet from its host star, not details across the planet's surface.",
+        "The apparent passage across the stellar halo is not a measured transit across the star.",
+        "The published collage is not a current-position ephemeris or an interactive orbital solution."
+      ],
+      "kind": "processed_direct_imaging",
+      "surface_resolved": false,
+      "image_alt": "Beta Pictoris b: VLT/SPHERE observation sequence collage. Processed telescope signal; planetary surface unresolved.",
+      "image_url": "/observations/exoplanets/beta-pic-b-sphere-2018.jpg",
+      "local_relative_path": "web/public/observations/exoplanets/beta-pic-b-sphere-2018.jpg",
+      "bytes": 710171,
+      "sha256": "ba16c9cc24f66b4f2ba0e89c4b74c44964337e0fdbaa02dff39c92d5e03eb4c0",
+      "width": 2628,
+      "height": 1950,
+      "retrieved_utc": "2026-11-14T09:48:41.780082+00:00",
+      "asset_source": {
+        "url": "https://cdn.eso.org/images/large/potw1846a.jpg",
+        "resolved_url": "https://cdn.eso.org/images/large/potw1846a.jpg",
+        "local_relative_path": "web/public/observations/exoplanets/beta-pic-b-sphere-2018.jpg",
+        "bytes": 710171,
+        "sha256": "ba16c9cc24f66b4f2ba0e89c4b74c44964337e0fdbaa02dff39c92d5e03eb4c0",
+        "retrieved_utc": "2026-11-14T09:48:41.780082+00:00",
+        "redistribution": "CC-BY-4.0_published_asset_unmodified"
+      },
+      "source": {
+        "source_id": "beta-pic-b-eso",
+        "url": "https://www.eso.org/public/images/potw1846a/",
+        "label": "Beta Pictoris b: VLT/SPHERE observation sequence collage",
+        "local_relative_path": "data/reference/exoplanet-observations/facts/beta-pic-b-eso.json",
+        "bytes": 1630,
+        "sha256": "339affdd55f18f2f79e8262bc3e842b9d688d874a99dbb677f759f5316578dcf",
+        "retrieved_utc": "2026-11-14T09:48:35.981601+00:00",
+        "upstream_sha256": "b9c58dafe24d57bdebe5463064a7beb5688c8dbaaaceebe4f9d7d1ab8711d522",
+        "upstream_bytes": 84510,
+        "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/beta-pic-b-eso.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "additional_sources": [],
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "source": {
+          "source_id": "eso-rights",
+          "url": "https://www.eso.org/public/copyright/",
+          "label": "ESO public media usage conditions",
+          "local_relative_path": "data/reference/exoplanet-observations/facts/eso-rights.json",
+          "bytes": 606,
+          "sha256": "c93cab1c265091ea449f5d4c9f4138ced429b99fe02f2b4693fef94cad3360fc",
+          "retrieved_utc": "2026-11-14T09:48:37.434341+00:00",
+          "upstream_sha256": "a03b421fae55e52b3d353c0be5409020611408d0948ee9f234483a42259a9298",
+          "upstream_bytes": 82865,
+          "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/eso-rights.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "project_modifications": "none; the published JPEG bytes are served unchanged"
+    },
+    {
+      "observation_id": "hr8799c-naco-2010",
+      "object_id": "exo-037ff94cfb7621193437",
+      "planet_name": "HR 8799 c",
+      "image_source_url": "https://cdn.eso.org/images/large/eso1002b.jpg",
+      "title": "HR 8799 c: annotated VLT/NACO observation",
+      "publication_date": "2010-01-13",
+      "source_asset_type": "Observation",
+      "credit": "ESO/M. Janson",
+      "instruments": [
+        "VLT/NACO"
+      ],
+      "wavelengths_um": [],
+      "observation_dates": [],
+      "processing": [
+        "Near-infrared adaptive-optics observation with the planetary signal marked in the published image.",
+        "The host-star image contains diffraction artifacts that must not be identified as extra planets."
+      ],
+      "limitations": [
+        "The companion is detected separately from the star but its surface is unresolved.",
+        "This is a dated processed image, not a raw calibrated exposure or a present-day position.",
+        "The release's historic three-planet description is not adopted as the system's current planet count."
+      ],
+      "kind": "processed_direct_imaging",
+      "surface_resolved": false,
+      "image_alt": "HR 8799 c: annotated VLT/NACO observation. Processed telescope signal; planetary surface unresolved.",
+      "image_url": "/observations/exoplanets/hr8799c-naco-2010.jpg",
+      "local_relative_path": "web/public/observations/exoplanets/hr8799c-naco-2010.jpg",
+      "bytes": 119465,
+      "sha256": "238ffb34518706cdd4825f8c502ecb7d39fffdab2e8e6e8efbd83898ad6a07c9",
+      "width": 1500,
+      "height": 1500,
+      "retrieved_utc": "2026-11-14T09:48:42.648335+00:00",
+      "asset_source": {
+        "url": "https://cdn.eso.org/images/large/eso1002b.jpg",
+        "resolved_url": "https://cdn.eso.org/images/large/eso1002b.jpg",
+        "local_relative_path": "web/public/observations/exoplanets/hr8799c-naco-2010.jpg",
+        "bytes": 119465,
+        "sha256": "238ffb34518706cdd4825f8c502ecb7d39fffdab2e8e6e8efbd83898ad6a07c9",
+        "retrieved_utc": "2026-11-14T09:48:42.648335+00:00",
+        "redistribution": "CC-BY-4.0_published_asset_unmodified"
+      },
+      "source": {
+        "source_id": "hr8799c-eso",
+        "url": "https://www.eso.org/public/images/eso1002b/",
+        "label": "HR 8799 c: annotated VLT/NACO observation",
+        "local_relative_path": "data/reference/exoplanet-observations/facts/hr8799c-eso.json",
+        "bytes": 1421,
+        "sha256": "9e0a5b71ecf5167d677a13365a62074dba5ad397736b7ea7ce1e3e77cf2bdf01",
+        "retrieved_utc": "2026-11-14T09:48:37.359165+00:00",
+        "upstream_sha256": "41067f329e6a6b1e8545aa53ba84312ca80696415266e2c8a60451d6fb6f7e0c",
+        "upstream_bytes": 81383,
+        "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/hr8799c-eso.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "additional_sources": [
+        {
+          "source_id": "hr8799c-paper-context",
+          "url": "https://www.eso.org/public/news/eso1002/",
+          "label": "ESO release linked to Janson et al., ApJ 710 L35 (2010)",
+          "local_relative_path": "data/reference/exoplanet-observations/facts/hr8799c-paper-context.json",
+          "bytes": 530,
+          "sha256": "621591343eb07518caadce78e2eeeac819022093bee4439b9be32e45392a9809",
+          "retrieved_utc": "2026-11-14T09:48:39.762839+00:00",
+          "upstream_sha256": "e07b4e72e058b515c58986907fc8614e9963b72d9dabb9ca9e76b75d78e4ae58",
+          "upstream_bytes": 87677,
+          "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/hr8799c-paper-context.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      ],
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "source": {
+          "source_id": "eso-rights",
+          "url": "https://www.eso.org/public/copyright/",
+          "label": "ESO public media usage conditions",
+          "local_relative_path": "data/reference/exoplanet-observations/facts/eso-rights.json",
+          "bytes": 606,
+          "sha256": "c93cab1c265091ea449f5d4c9f4138ced429b99fe02f2b4693fef94cad3360fc",
+          "retrieved_utc": "2026-11-14T09:48:37.434341+00:00",
+          "upstream_sha256": "a03b421fae55e52b3d353c0be5409020611408d0948ee9f234483a42259a9298",
+          "upstream_bytes": 82865,
+          "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/eso-rights.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "project_modifications": "none; the published JPEG bytes are served unchanged"
+    }
+  ],
+  "sources": {
+    "hip65426b-esawebb": {
+      "source_id": "hip65426b-esawebb",
+      "url": "https://esawebb.org/images/HIP-65426b/",
+      "label": "HIP 65426 b: JWST infrared observation collage",
+      "local_relative_path": "data/reference/exoplanet-observations/facts/hip65426b-esawebb.json",
+      "bytes": 1661,
+      "sha256": "21772055d8f77051594f238ed0015816022b50346114db9aaebe965483274124",
+      "retrieved_utc": "2026-11-14T09:48:35.847999+00:00",
+      "upstream_sha256": "b941eb97237eba1eec30e5c2f2feadd38b1484e98e6d08975234879f2751abec",
+      "upstream_bytes": 70952,
+      "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/hip65426b-esawebb.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "beta-pic-b-eso": {
+      "source_id": "beta-pic-b-eso",
+      "url": "https://www.eso.org/public/images/potw1846a/",
+      "label": "Beta Pictoris b: VLT/SPHERE observation sequence collage",
+      "local_relative_path": "data/reference/exoplanet-observations/facts/beta-pic-b-eso.json",
+      "bytes": 1630,
+      "sha256": "339affdd55f18f2f79e8262bc3e842b9d688d874a99dbb677f759f5316578dcf",
+      "retrieved_utc": "2026-11-14T09:48:35.981601+00:00",
+      "upstream_sha256": "b9c58dafe24d57bdebe5463064a7beb5688c8dbaaaceebe4f9d7d1ab8711d522",
+      "upstream_bytes": 84510,
+      "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/beta-pic-b-eso.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "hr8799c-eso": {
+      "source_id": "hr8799c-eso",
+      "url": "https://www.eso.org/public/images/eso1002b/",
+      "label": "HR 8799 c: annotated VLT/NACO observation",
+      "local_relative_path": "data/reference/exoplanet-observations/facts/hr8799c-eso.json",
+      "bytes": 1421,
+      "sha256": "9e0a5b71ecf5167d677a13365a62074dba5ad397736b7ea7ce1e3e77cf2bdf01",
+      "retrieved_utc": "2026-11-14T09:48:37.359165+00:00",
+      "upstream_sha256": "41067f329e6a6b1e8545aa53ba84312ca80696415266e2c8a60451d6fb6f7e0c",
+      "upstream_bytes": 81383,
+      "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/hr8799c-eso.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "eso-rights": {
+      "source_id": "eso-rights",
+      "url": "https://www.eso.org/public/copyright/",
+      "label": "ESO public media usage conditions",
+      "local_relative_path": "data/reference/exoplanet-observations/facts/eso-rights.json",
+      "bytes": 606,
+      "sha256": "c93cab1c265091ea449f5d4c9f4138ced429b99fe02f2b4693fef94cad3360fc",
+      "retrieved_utc": "2026-11-14T09:48:37.434341+00:00",
+      "upstream_sha256": "a03b421fae55e52b3d353c0be5409020611408d0948ee9f234483a42259a9298",
+      "upstream_bytes": 82865,
+      "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/eso-rights.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "esawebb-rights": {
+      "source_id": "esawebb-rights",
+      "url": "https://esawebb.org/copyright/",
+      "label": "ESA/Webb public media usage conditions",
+      "local_relative_path": "data/reference/exoplanet-observations/facts/esawebb-rights.json",
+      "bytes": 613,
+      "sha256": "5da0c29092ffe18092378d2ab3e703a22cf96ee7a151b28aad0004b1d5d3aaa2",
+      "retrieved_utc": "2026-11-14T09:48:38.014060+00:00",
+      "upstream_sha256": "dddf1654061affe7435864884c22d9564acbafd24b2e016c1d5a864453aa3d2c",
+      "upstream_bytes": 58839,
+      "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/esawebb-rights.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "hip65426b-nasa-metadata": {
+      "source_id": "hip65426b-nasa-metadata",
+      "url": "https://science.nasa.gov/asset/webb/image-of-exoplanet-hip-65426-b-in-near-and-mid-infrared/",
+      "label": "NASA JWST image observation metadata",
+      "local_relative_path": "data/reference/exoplanet-observations/facts/hip65426b-nasa-metadata.json",
+      "bytes": 660,
+      "sha256": "c0849f632f541fe0de477f8f1039f05d20f2b804ffba9b4913cbe3d90c904f45",
+      "retrieved_utc": "2026-11-14T09:48:38.341357+00:00",
+      "upstream_sha256": "fbd3e23b31e7e4a09c0705a90f87e2fb5f6ceb451167122ab997915b3cb240b2",
+      "upstream_bytes": 284220,
+      "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/hip65426b-nasa-metadata.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "hip65426b-paper": {
+      "source_id": "hip65426b-paper",
+      "url": "https://arxiv.org/abs/2208.14990",
+      "label": "Carter et al., JWST ERS direct observations of HIP 65426 b",
+      "local_relative_path": "data/reference/exoplanet-observations/facts/hip65426b-paper.json",
+      "bytes": 526,
+      "sha256": "013403f44ca0e9cd4ec3abfbc0ffbc98defc259aa56a6d09fbc0ede57c6a1580",
+      "retrieved_utc": "2026-11-14T09:48:38.264048+00:00",
+      "upstream_sha256": "5c1f2576a9bc8bc6914f08041d31ca5062db72d7ce280ae4ecd396a31eaf0841",
+      "upstream_bytes": 67509,
+      "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/hip65426b-paper.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "hr8799c-paper-context": {
+      "source_id": "hr8799c-paper-context",
+      "url": "https://www.eso.org/public/news/eso1002/",
+      "label": "ESO release linked to Janson et al., ApJ 710 L35 (2010)",
+      "local_relative_path": "data/reference/exoplanet-observations/facts/hr8799c-paper-context.json",
+      "bytes": 530,
+      "sha256": "621591343eb07518caadce78e2eeeac819022093bee4439b9be32e45392a9809",
+      "retrieved_utc": "2026-11-14T09:48:39.762839+00:00",
+      "upstream_sha256": "e07b4e72e058b515c58986907fc8614e9963b72d9dabb9ca9e76b75d78e4ae58",
+      "upstream_bytes": 87677,
+      "upstream_original_local_only": "data/reference/exoplanet-observations/upstream/hr8799c-paper-context.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    }
+  },
+  "confirmed_catalog_dependency": {
+    "path": "data/manifests/exoplanets.json",
+    "sha256": "5b803ea060a52b50ca9afa61ec1a49ee889a7617864c5ba51469e828757f4c06",
+    "bytes": 3955802
+  },
+  "release_rule": "Include facts/, published images and sidecars; exclude upstream/ source-page copies."
+}

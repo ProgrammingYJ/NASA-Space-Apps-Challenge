@@ -40,6 +40,10 @@ DIRECTORIES = (
     "data/reference/object-names",
     "data/reference/galaxies",
     "data/reference/kuiper",
+    "data/reference/extragalactic-planets/facts",
+    "data/reference/exoplanet-observations/facts",
+    "data/reference/small-body-appearance/facts",
+    "data/reference/planet-criteria/facts",
 )
 FILES = (
     "README.md",
@@ -69,6 +73,10 @@ FILES = (
     "data/manifests/timeline_validation.json",
     "data/manifests/appearance.json",
     "data/manifests/exoplanets.json",
+    "data/manifests/extragalactic_planets.json",
+    "data/manifests/exoplanet_observations.json",
+    "data/manifests/small_body_appearance.json",
+    "data/manifests/planet_criteria.json",
     "data/manifests/extended_solar.json",
     "data/manifests/cosmic_history.json",
     "data/manifests/cosmic_morphology.json",
@@ -205,7 +213,8 @@ def prepare(built_at):
     )
     manifest = {
         "release": version,
-        "work_id": "DEV-008",
+        "work_id": "DEV-010",
+        "work_ids": ["DEV-009", "DEV-010"],
         "built_at": built_at,
         "base_commit": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
@@ -231,6 +240,10 @@ def prepare(built_at):
             "official-rounded-galaxy-context-v1",
             "observed-morphology-guide-v1",
             "kuiper-region-v1",
+            "published-exoplanet-observations-v1",
+            "extragalactic-evidence-v1",
+            "sourced-small-body-appearance-v1",
+            "iau-margot-criteria-v1",
         ],
         "inactive_conceptual_renderers": ["cosmic-concept-v1", "cosmic-diversity-v1"],
         "cosmic_history_ui": "published_observation_images_only",

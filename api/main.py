@@ -45,7 +45,7 @@ def create_app(state_dir: Path | None = None):
         yield
         app.state.service.close()
 
-    app = FastAPI(title="Planet X · SPHEREx", version="0.6.0", lifespan=lifespan)
+    app = FastAPI(title="Planet X · SPHEREx", version="0.7.0", lifespan=lifespan)
 
     @app.middleware("http")
     async def bounds(request, call_next):
@@ -191,6 +191,21 @@ def create_app(state_dir: Path | None = None):
             raise HTTPException(404, "object_not_found")
         return value
 
+    @app.get("/api/v1/catalog/exoplanet-observations")
+    def exoplanet_observations(object_id: str | None = None):
+        from science.exoplanet_observations import get_exoplanet_observations
+
+        try:
+            return get_exoplanet_observations(ROOT, object_id=object_id)
+        except FileNotFoundError:
+            raise HTTPException(503, "planet_observation_unavailable") from None
+        except ValueError as error:
+            if str(error) == "invalid_exoplanet_observation_object_id":
+                raise HTTPException(422, "unsupported_catalog_selection") from None
+            if str(error) == "unknown_exoplanet_observation_object_id":
+                raise HTTPException(404, "object_not_found") from None
+            raise HTTPException(503, "planet_observation_unavailable") from None
+
     @lru_cache(maxsize=1)
     def extended_catalog():
         from science.extended_solar import get_extended_solar
@@ -247,6 +262,28 @@ def create_app(state_dir: Path | None = None):
     @app.get("/api/v1/appearance")
     def appearance():
         return appearance_catalog()
+
+    @app.get("/api/v1/small-body-appearance")
+    def small_body_appearance():
+        from science.small_body_appearance import get_small_body_appearance
+
+        try:
+            return get_small_body_appearance(ROOT)
+        except (ValueError, FileNotFoundError):
+            raise HTTPException(503, "small_body_appearance_unavailable") from None
+
+    @app.get("/api/v1/planet-criteria")
+    def planet_criteria(object_id: str | None = None):
+        from science.planet_criteria import get_planet_criteria
+
+        try:
+            return get_planet_criteria(ROOT, object_id=object_id)
+        except FileNotFoundError:
+            raise HTTPException(503, "planet_criteria_unavailable") from None
+        except ValueError as error:
+            if str(error) == "unknown_planet_criteria_object":
+                raise HTTPException(422, "unsupported_planet_criteria_object") from None
+            raise HTTPException(503, "planet_criteria_unavailable") from None
 
     @app.get("/api/v1/cosmic-history")
     def cosmic_history():
@@ -331,6 +368,19 @@ def create_app(state_dir: Path | None = None):
                 raise HTTPException(422, "unsupported_catalog_selection") from None
             raise HTTPException(503, "universe_catalog_unavailable") from None
 
+    @app.get("/api/v1/catalog/extragalactic-planets")
+    def extragalactic_planets(galaxy_id: str | None = None):
+        from science.extragalactic_planets import get_extragalactic_planets
+
+        try:
+            return get_extragalactic_planets(ROOT, galaxy_id=galaxy_id)
+        except FileNotFoundError:
+            raise HTTPException(503, "planet_review_unavailable") from None
+        except ValueError as exc:
+            if str(exc) == "unknown_extragalactic_galaxy":
+                raise HTTPException(422, "unsupported_catalog_selection") from None
+            raise HTTPException(503, "planet_review_unavailable") from None
+
     def context_reasons(session):
         context = session.universe_context
         if context is None:
@@ -368,7 +418,17 @@ def create_app(state_dir: Path | None = None):
                 return ["orbit_ephemeris_changed"]
         for expected, filename, reason in (
             (context.galaxy_manifest_sha256, "galaxies.json", "galaxy_sources_changed"),
+            (
+                context.planet_criteria_manifest_sha256,
+                "planet_criteria.json",
+                "planet_criteria_sources_changed",
+            ),
             (context.appearance_manifest_sha256, "appearance.json", "appearance_sources_changed"),
+            (
+                context.small_body_appearance_manifest_sha256,
+                "small_body_appearance.json",
+                "small_body_appearance_sources_changed",
+            ),
             (
                 context.extended_solar_manifest_sha256,
                 "extended_solar.json",
@@ -409,6 +469,20 @@ def create_app(state_dir: Path | None = None):
                 get_galaxies(ROOT)
             except (ValueError, FileNotFoundError):
                 return ["galaxy_data_unavailable"]
+        if context.small_body_appearance_manifest_sha256:
+            from science.small_body_appearance import get_small_body_appearance
+
+            try:
+                get_small_body_appearance(ROOT)
+            except (ValueError, FileNotFoundError):
+                return ["small_body_appearance_data_unavailable"]
+        if context.planet_criteria_manifest_sha256:
+            from science.planet_criteria import get_planet_criteria
+
+            try:
+                get_planet_criteria(ROOT)
+            except (ValueError, FileNotFoundError):
+                return ["planet_criteria_data_unavailable"]
         if context.simulation_context:
             from science.long_term_model import get_long_term_model
 

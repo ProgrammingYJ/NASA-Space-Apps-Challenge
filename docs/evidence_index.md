@@ -50,7 +50,9 @@ Resume: read AGENTS,SKILLS,FSD,START_HERE,Data_Spec and this checkpoint; preserv
 
 DEV-008 재개 검증: E2/E3에 JPL fitted-element 장기8계 모형과32long/16short 검산,5언어476이름의 기관/프로젝트 표기 구분, 실제 은하구성원23개·4862host/6470planet 참조 및 Data_Spec1632항목/877참조/43복제 무결성을 연결한다. E4에는 연도0/음수/미래 Enter·Tab·이동 적용·빈/잘못된 입력 보존·503복구·G1방향확대/host→planet자동포커스·εB/Pluto 원본/판단/근거 복원을 연결했다. 재개 전체Python276·변경영향29·Vitest55·strict/Vite/Ruff 및 실제Chrome13고유 경로를 확인했다. 빌드별 범위/초기실패·수정은 작업기록과 var/qa/dev008-*에 보존한다. 전구간 정확도·우주전수목록·해상 외계행성 표면·과학적 발견·사람/원어민/공개서버 검증으로 확대하지 않는다.
 
-DEV-008 E4/QA09: ?? ?? ZIP?1807??/???/health???API??B/Pluto????? ?? ?????? ??evidence/result??? Windows??????(18:22:00KST). ??D7???????? NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip??? ?????ZIP??????SHA/????????verification/checksum JSON??????. ????isolatedruntime?????Linux/????/??????????.
+DEV-008 E4/QA09: Windows 준비번들의 새 폴더 해제·manifest/입력SHA·health·대표 API·εB/Pluto 근거 및 실제 서버 재시작 복원을 확인했다. 후속 최종 정본 ZIP의 정확한 바이트·해시·실행 결과는 아래 최종 확정 기록과 동명 verification/checksum JSON을 따른다. Linux/공개 서버 검증은 수행하지 않았다.
 
 
 DEV-008 최종 전달 정본 확정: source bf1a09f의 clean tree로 생성한 NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip(481,789,033B/1807파일/SHA af2759fc30eb844dc5ba440f76580beb7b4ca2e92444c39235bfafc38bda0d28)을 정확히 새해제·실행/실제재시작복원 검사해2026-11-14T09:25:16.188578+00:00 PASS했다. 폴더tmp/release-verify-zdv3hisw/extracted, metadata1806항목검증, εB ev_bfe8b26234a4451bba85f355210b700c/Pluto ev_e0003ef4c8b54dc98c35241c6b46239b의 같은 result/세션/판단 복원을 확인했다. 상세 docs/releases/v0.6.0.json과외부verification/checksum이정본이다. 이사후기록은검증완료불변ZIP과분리하며제품/데이터변경없다. 원격반영은일반push/원격SHA대조결과로최종보고한다.
+
+DEV-009/010 소스 체크포인트: E2/E3에 실제19출처/17천체의IAU공식정의와Margot조건부원형청소질량,8소천체외관/실제사진3과본체·계질량분리를연결한다. E4는wholePython372/Vitest64/Chrome빌드별21+9+16검사와직접화면기록이며중복실행과후속문구수정을구분한다. source관련정본은var/qa/dev009-browser-review.json,dev010-browser-review.json과DataSpecf26ba122...다. 아직새ZIP/공개서버/새DEV011질량가정·관측자물리·블랙홀검증이아니다.

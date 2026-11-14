@@ -4,6 +4,8 @@
 *.ts text eol=lf
 *.tsx text eol=lf
 *.json text eol=lf
+/data/manifests/*.json -text -eol
+/web/public/**/*.source.json -text -eol
 *.toml text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf

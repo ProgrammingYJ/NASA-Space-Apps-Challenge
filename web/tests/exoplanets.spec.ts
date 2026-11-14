@@ -8,7 +8,7 @@ test('all public exoplanets are searchable and a seven-planet system has explici
   const index=await(await page.request.get('/api/v1/catalog/exoplanets')).json();expect(index.objects).toHaveLength(6470);
   await page.locator('#exo-search').fill('TRAPPIST-1');await expect(explorer.getByRole('option')).toHaveCount(7);
   const selected=index.objects.find((row:{name:string})=>row.name==='TRAPPIST-1 e');
-  await page.getByTestId(`catalog-${selected.object_id}`).click();const detail=page.getByTestId('exoplanet-detail');await expect(detail.getByRole('heading')).toHaveText('TRAPPIST-1 e');
+  await page.getByTestId(`catalog-${selected.object_id}`).click();const detail=page.getByTestId('exoplanet-detail');await expect(detail.getByRole('heading',{level:2})).toHaveText('TRAPPIST-1 e');
   await expect(page.getByTestId('exoplanet-scene')).toHaveAttribute('data-selected-object',selected.object_id);
   await expect(page.getByTestId('exoplanet-scene')).toHaveAttribute('data-surface-status','unresolved_illustration');
   await expect(detail).toContainText('not observed surfaces');await expect(detail).toContainText('phase are assumed');await expect(detail).toContainText('6.101013');

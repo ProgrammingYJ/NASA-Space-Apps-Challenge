@@ -1,4 +1,4 @@
-"""Offline, dated inventory of every default confirmed-planet archive solution.
+"""Offline dated NASA Science catalogue or PS default-solution inventory.
 
 The catalog supplies published parameters, never measured surface maps or
 instantaneous 3D orbital positions. Acquisition is an explicit development CLI.
@@ -169,6 +169,10 @@ def load_catalog(root: Path) -> dict:
         if path.name.startswith("exoplanet_"):
             original_entries.update({entry["id"]: entry for entry in json.loads(raw)})
     if data["catalog_version"] == "nasa-science-catalog-v1":
+        data["limitations"] = [
+            *data["limitations"],
+            "This NASA Science snapshot does not supply pl_controv_flag or per-row discovery/parameter-paper references. Missing controversy flags are unknown, not evidence that a confirmation is undisputed. The project has not independently reviewed every discovery paper.",
+        ]
         for row in data["records"]:
             original = original_entries[row["nasa"]["id"]]
             row["nasa"]["description"] = html.unescape(
@@ -195,7 +199,7 @@ def index(data: dict) -> dict:
                 "radius_earth": row["pl_rade"],
                 "appearance_class": row.get("nasa", {}).get("appearance_class", "Unknown"),
                 "discovery_year": row["disc_year"],
-                "disputed": row["pl_controv_flag"] == 1,
+                "disputed": None if row["pl_controv_flag"] is None else row["pl_controv_flag"] == 1,
             }
             for row in data["records"]
         ]
@@ -214,6 +218,7 @@ def planet(data: dict, identifier: str) -> dict | None:
         "parameter_reference": reference(row["pl_refname"]),
         "discovery_reference": reference(row["disc_refname"]),
         "surface_status": "unresolved_illustration",
+        "confirmation_review_status": "institutional_catalogue_listing_not_individual_paper_review",
         "catalog_version": data["catalog_version"],
         "catalog_raw_sha256": data["raw_sha256"],
         "retrieved_utc": data["retrieved_utc"],

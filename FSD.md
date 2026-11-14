@@ -1,10 +1,12 @@
 # Planet X and SPHEREx — 기능·개발 명세서
 
-문서 버전 `FSD-0.11` · 갱신일 2026-11-14 KST · 현재 릴리스 로컬 검증 완료 `v0.6.0` · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
+문서 버전 `FSD-0.13` · 갱신일 2026-11-14 KST · 현재 작업 `DEV-009 + DEV-010 / v0.7.0` 구현·통합 검사 중 · 직전 로컬 검증 릴리스 `v0.6.0` · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
 
 **이 파일은 프로젝트의 기능·화면·계산·API·데이터·실행·검사·배포 명세를 통합 관리하는 문서다.** 기능이나 계약을 바꾸는 작업에서는 관련 절과 아래 구현 현황을 함께 갱신한다. 규칙은 [AGENTS.md](./AGENTS.md), 실제 작업 증거는 [작업 기록](./docs/worklog.md), 적용 스킬은 [SKILLS.md](./SKILLS.md)에서 연결한다. 기능·개발 명세는 이 파일에서 유지한다. 사용자의 명시적 요청으로 만든 [Data_Spec.md](./Data_Spec.md)는 실제 사용/확보/이전 데이터의 전수 목록·출처·해시·가공/권리·한계를 담당하며 실행 manifest/타입과 함께 갱신한다. OpenAPI/타입/스키마·lockfile·테스트는 실행 가능한 계약으로 별도 유지하고 이 문서에서 경로/버전을 참조한다.
 
-현재 v0.6.0은 **우주 탐색→천체 선택/자동 포커스→실제 ε Indi B/명왕성 관측→품질→근거 저장/복원**을 보존하며 위성·왜행성 표시명 5언어, 별도 과거·미래 태양계 근사 시뮬레이션, 은하 내부 천체 계층 탐색과 상단 빅뱅 진입을 추가했다. 빅뱅/우주 역사는 사용자가 선택한 **실제 관측5사례·공개 처리영상·출처의 추정 연대/범위**만 표시하고 가상35은하·성장/연속Gyr장면은 비활성으로 보존한다. 이동 전37d9548은 GitHub main에 저장했고 현재 중단했던 통합 검증을 재개했다. 재개초기 전체Python276과 최신Vitest55·strict/Vite 및 수정후장기/API29검사는 통과했고 관련Chrome13개고유경로와Windows준비번들의해제/실제서버재시작검증을통과했다. 최종D7아카이브는동명외부검증JSON으로정확한바이트/커밋/실행결과를추적한다. 72시간 천체력·장기근사·문헌방향·설명용외관·원본관측을 구분한다. Planet X/TESS 실험·정밀 측정/운동 판정·공개 서버 배포와 사람/원어민 검수는 미완료다. 실제 결과는20절·작업 기록에 확정한다.
+DEV-009는 최신 지시인 **논문/공개 확인 목록에 근거한 실제 별·행성만 탐색하고 외관까지 제공**하는 범위를 적용한다. 앞서 잠시 허용한 가상 외부은하 행성계는 후속 지시로 취소했으며 활성 목록·지도·장면에 추가하지 않는다. 기존 NASA 확인 목록6470행성의 직접 선택,4862실제 모항성 방향 표식, 외부은하 후보/집단추론의 확정목록 제외, 실제 외계행성 공개 관측사진3개와 설명용3D 외관의 분리를 구현한다. 지구의 화면 이름은5언어 모두 지구로 유지하고 장기모형의 지구–달질량중심 기준은 상세 정보에 표시한다. 천체력/근사모형의 시간 조작 통합은2.13절의 지원 범위 안에서 진행한다. 이 작업의 새 전체 검사·브라우저·v0.7.0 ZIP 검증은 아직 확정하지 않았으며20절과 작업기록에 실제 실행 후 갱신한다.
+
+직전 v0.6.0은 **우주 탐색→천체 선택/자동 포커스→실제 ε Indi B/명왕성 관측→품질→근거 저장/복원**을 검증했다. 빅뱅/우주 역사는 **실제 관측5사례·공개 처리영상·출처의 추정 연대/범위**만 표시하고 가상35은하·성장/연속Gyr장면은 비활성으로 보존한다. v0.6.0 당시 전체Python276·후속 영향29/Vitest55 및 관련Chrome13고유경로를 단계별 검사했고 최종D7 ZIP의 새폴더 해제/실제 서버재시작을 통과했다. 정확한 범위와 불변 최종본은17.1/20절·동명외부검증JSON을 따른다. Planet X/TESS 실험·정밀 측정/운동 판정·공개 서버 배포와 사람/원어민 검수는 미완료다.
 
 ## 1. 제품 목표와 범위
 
@@ -14,7 +16,7 @@
 | --- | --- | --- |
 | 1 · F01 | 공개 배포 기반, 좌표/관측·시간 비교, ε Indi B 원본→품질→근거 저장/새 세션 복원, 공식 5대상 검사 경로 | ε Indi B 로컬 경로 구현·검사; 나머지4대상은 실제 자료목록/품질 미검증 경로. 자유좌표·공개서버는 미완료 |
 | 2 · F02 | 공식 Resources의 DR1/QR3 실제 입력을 기능과 결과에 연결; source URL→file ID/SHA→기능→결과 추적 | S01/S02·S10 실제 reader→결과→근거 추적 구현; 전체 자료 검증 완료 아님 |
-| 3 · F03 | 최소 3D 태양계→명왕성 선택→실제 SPHEREx 노출 연결 | 기본 흐름·9궤도/72시간·DEV-004지도/카탈로그 검사 완료. DEV-005/006 은하/카이퍼대·우주 역사 검증 완료; DEV-007 실제관측 전용 교체 검사 완료, DEV-008 이름/장기근사/계층 탐색 구현 후 통합 검증 재개. HiPS미채택 |
+| 3 · F03 | 최소 3D 태양계→명왕성 선택→실제 SPHEREx 노출 연결 | 기본 흐름·지도/카탈로그·실제5역사관측과 DEV-008까지 로컬 검사 완료. DEV-009는 실제 확인목록 직접선택·실제별 방향·공개 외계행성사진·지구 표시명·시간통합을 구현/검사 중. HiPS미채택 |
 | 4 · F04 | 개별 Planet X 가설 경로의 관측 투영과 별도의 문헌 조건부 위치 분포 | 입력 자료 확보, 미구현 |
 | 5 · F05 | WASP-4 b의 실제 TESS 광도곡선·통과 모형·조건부 기하 통과확률 | 입력 자료 확보, 미구현 |
 | 6 · F06 | 핵심 5언어·검사·근거 묶음·제출 완성; 첫 구현부터 병행 | 첫 경로5언어 UI 구현; 사람 검수/후속경로·제출 미완료 |
@@ -184,6 +186,51 @@ M31의77°경사, M81의두팔, LMC의중심막대/한팔은 각 원문이 명�
 
 JPL의 fitted elements는 평균궤도요소가 아니며 mean ecliptic and equinox of J2000의 mean은 기준면명이다. 이 근사모형은 행성 형성/소멸·관측광행시간·수십억년 진화나 관측사진을 계산하지 않는다. 이름사전에 없는 새항목은 원명을 유지하고 untranslated로 남긴다.
 
+### 2.12 DEV-009 실제 확인 천체·외관·근거 탐색
+
+사용자는 가상 행성계도 허용한 직후 **실제 존재하는 별/행성, 실제 논문에서 확인된 대상만**이라는 지시로 범위를 정정했다. 이 최신 지시를 적용해 가상 외부은하 행성·호스트·궤도·표면을 생성하지 않는다. 기존6470개는 NASA의 날짜 고정 확인 목록에 있는 천체이며6470개의 개별 발견 논문을 모두 직접 읽어 재확인했다는 주장은 하지 않는다. 원 NASA snapshot에는6470행 모두 `pl_controv_flag`·`pl_refname`·`disc_refname`이 없으므로 논란상태/개별논문 참조는 미상이며 누락을 ‘논란 없음’으로 바꾸지 않는다. 원 목록과 논문 탐색 링크는 개별 논문해 취득/재검증 완료와 구분한다. 공개된 값·추정/누락을 유지한다.
+
+- `UniverseCatalogExplorer`의 성원/확인 행성 보기를 분리한다. 우리은하 확인 행성 보기에서는 기존6470개 ID를 그대로 검색·선택하며 즉시 기존 항성계3D와 자동 포커스로 연결한다. 지도 위치는 모항성의 카탈로그 방향 참조이고 분해 관측한 행성의 위치나 깊이가 아니다. 좌표 없는 항목은 목록에 남기고 방향을 만들지 않는다.
+- 외부9은하의 확인 행성 보기는 새 `extragalactic_planets.json`의 `confirmed_objects`만 읽는다. 채택한 검토에서 확인된 개별 행성은0개이며 `objects:[]`·`confirmed_objects:[]`다. M51-ULS-1 b/PA-99-N2의 후보2건과 렌즈은하의 집단추론3건은 별도 문헌 검토란에만 연결하고 실제 행성 목록·지도·3D·확정 개수에 넣지 않는다. 이 빈 목록은 우주 전체의 부재 증명이나 모든 논문의 전수 검토가 아니다. 자료 로딩/실패와 정상 빈 결과를 구분하고 오류에는 재시도를 제공한다.
+- `catalogSky.ts`는 NASA 원 목록의 유효 좌표가 있는 실제 모항성을 이름의 정확한 trim 후 중복 제거한다. 현 snapshot에서4862개다. 각 호스트의 첫 유효 원행을 채택하며 평균 좌표나 새별을 만들지 않는다. 기존1400개의 임의 장식별 생성은 활성 태양계 장면에서 제거했다. 표식은 고정색/크기의 방향 참조이며 카메라 중심을 따르는 반지름1800의 표시구는 물리거리·밝기·시차가 아니다. 원 RA/Dec의 frame/epoch 실현과 고유운동 전파는 미검증이므로 이를 현재/고대의 정밀 항성배치로 주장하지 않는다. 카탈로그 실패 때 가상별로 대체하지 않는다.
+- 태양계는 기존 실제 지도31개/고리와 미관측 영역·촬영시기를 유지한다. 실제 표면이 분해되지 않은 외계행성은 기존 공개 물리량/분류에 따른3D 설명용 구·지형/대기 외관을 제공하고 미측정 색·방향/위상·24시간자전은 표시 가정으로 안내한다. 실존 천체를 선택했다는 사실이 설명용 외관을 실측 지형으로 바꾸지는 않는다.
+- `ExoplanetObservationPanel`은 HIP65426b/JWST, BetaPictorisb/VLT-SPHERE, HR8799c/VLT-NACO의 공개 처리 관측사진3개를 기존 천체ID로 연결한다. 원 JPEG를 변경하지 않고 미리보기/확대 보기, source·전체credit·CC-BY4.0 링크·공개일·기기·처리/한계·SHA를 제공한다. 모두 별과 분리한 미분해 광원이며 표면 지도가 아니다. 사진의 과거 취득/공개일은 현재 모형시각과 별도다. 사진이 채택되지 않은 다른 천체는 ‘이 앱에서 채택한 영상 없음’으로 표시하며 존재하지 않거나 관측된 적이 없다고 단정하지 않는다.
+- 선택 변경시 이전 천체의 사진/오류를 새 대상에 표시하지 않는다. 조회 key와 응답의 `object_filter`/object ID로 연결하고 사진 실패는 오류/재시도로 구분한다. 실제 사진은 기존3D 설명용 장면과 별도 표시한다. 실제 관측과 설명용 표면을 합성해 관측 복원으로 주장하지 않는다.
+- 지구의 선택명·목록·장면 라벨은 모든 모드에서5언어의 지구 표기를 사용한다. 장기 근사모형만 상세 `position-reference`에 지구–달질량중심임을 표시한다. 모형/원본/ID는 변경하지 않으며 지구 본체의 물리반지름을 EMB의 값으로 표시하지 않는다.
+
+### 2.13 DEV-009 하나의 시간 조작과 적용 자료 선택
+
+사용자는2026년 천체력 입력도 모든 날짜에 적용되도록 근사 시뮬레이션과의 통합을 요청했다. `modelTime.ts`·`useModelTime.ts`·`UnifiedTimeline.tsx`와 App은 기본 `auto`의 단일 날짜입력/시간선을 제공한다. **채택한 실제72시간 표본 범위에는 천체력 표시 보간, 그 밖의 지원 날짜에는 JPL 장기 적합요소 근사**를 자동 선택한다. 활성 자료와 UTC/TDB 달력 라벨을 시각 옆에 표시한다. 구현과 최종브라우저/복원 검증은 구분하며 실제 결과는20절/DEV-009 작업기록에서 확정한다.
+
+자료 범위는 기존 원본과 같다. 실제 천체력은2026-11-13~16 UTC, 장기근사는 천문학적연도−2999-01-01~3000-01-01의 TDB 달력값이다. 이 자동선택은 출처별 달력 라벨을 고르는 것이며 정밀 UTC↔TDB 물리시간 변환이 아니다. 전 날짜의 정밀천체력 취득·무한 범위의 동역학·수십억년 태양계 역산을 제공하지 않는다. `#model-epoch`는 부호 있는 연도를 받는 문자열 입력으로 `2500-01-01T12:00:00`·`0000-01-01`·`-2999-01-01`을 지원하고 Enter/포커스이탈로 적용한다. 0년은기원전1년이고 월/일/시각의 유효성을 검사한다. 편집/수동변경은 정지하며 지원 밖/잘못된 날짜는 오류와 마지막 유효 장면을 유지한다.
+
+시간속도는1/6/24/72h/s와1/10/100Julian년/s(8766/87660/876600h/s)를 공통 clock으로 지원한다. 기본6h/s·정지 시작, 끝정지/끝에서재시작·숨김탭정지·숨겨진시간누적금지를 유지한다. 상세 `시간 자료 상세`에서 자동/확보한 천체력만/근사만/우주역사를 고를 수 있다. 수동 천체력은72시간 안으로 제한하고 근사는 기존 별도 입력 UI를 유지한다. 기본 auto에서 자료범위를 넘으면 새 데이터조회 없이 채택 자료를 전환하며 근사에서Sun+8대표행성계만 지원하고 명왕성/위성의 새 위치는 만들지 않는다. 지구 이름은 유지하며 EMB 기준/대표아이콘·반지름비표시를 상세정보에 남긴다. 선택 천체·카메라·원 SPHEREx 촬영시각/관측/판단을 조작 전후 보존한다. 근거의 `model_epoch`는 보관된 실제72시간UTC시각, optional `simulation_context`는 별도TDB달력/원manifestSHA/속도/정지상태로 저장한다.
+
+설정 진입은 **오른쪽 위 톱니바퀴→카이퍼 벨트 checkbox**다. 좁은화면을 포함한48×48px 아이콘·5언어 접근성 이름/포커스를 제공하고 태양계/외계행성/천체계층/우주역사 모든 보기에서 진입할 수 있다. DRyIMrA 빌드의 직접 화면검토에서 새세션버튼 겹침을 발견해 고정폭 아이콘으로 교정 중이며 후속실제화면검사로 확정한다. 기존 on/off는 실제 천체목록이 아니라30–50au 주영역의650점 설명층을 제어한다. 실제 개별 KBO의 전수위치/궤도는 미구현이며, 근사모형/우주역사에서 과거의 카이퍼 분포를 복원하지 않는다. 근사모형에서는8대표계만 지원해 설명층을 숨기는 이유, 다른보기에서는 태양계 장면에 적용되는 설정이라는 안내를 표시한다. checkbox값은 보존되며 확보한 천체력 보기로 돌아가면 적용된다. 켜짐을 과거 분포 측정으로 해석하지 않는다.
+
+### 2.14 DEV-009 작은 천체의 관측 제약과 외관
+
+세드나 등 작은천체도 실제 모습에 근거하도록 기존8개ID(Ceres/Haumea/Makemake/Eris/Sedna/Quaoar/Orcus/Gonggong)의 문헌 외관 제약을 추가한다. `science/small_body_appearance.py`·`small_body_appearance.json`의 `sourced-small-body-appearance-v1`을 기존 외관manifest와 별도로 조회한다. Ceres는 기존 공개지도를 우선 보존하고 나머지7개의 미분해지형을 생성하지 않는다. `render_profile_enabled:false`·`preserve_existing_map` 또는 기존 `texture_url`이 있으면 추가프로필로 덮지 않는다. 원31지도·관측/천체력·기존물리반지름은 변경하지 않는다.
+
+- 무지도 고체천체의 임의크레이터/지형 shader를 제거하고 중립적인 미분해 외관을 사용한다. 새profile은 `literature_constrained`로 구분해 관측의 정성색/밝기·shape조건/반지름정의·고리근거와 미측정항목을 상세에 표시한다. 실제확인천체라는 이유로 미관측 지형·국소얼음분포·현재회전위상/경도를 만들어내지 않는다.
+- Sedna의 붉은색, Makemake의 붉은갈색, Quaoar/Gonggong의 붉은 광학색, Orcus의 중성색/스펙트럼과 Eris/Haumea의 높은반사도 제약을 채택한다. `color_hex`는 이러한 정성근거를 반영한 표시RGB이며 보정된 자연색·측정스펙트럼의 RGB변환이 아니다. 알베도는 정확한 색상이나 화면밝기 측정값과 같지 않다.
+- Haumea의 occultation/light-curve 삼축모형을 축비로 표시하며 원문모형의 ring-light 무시·불확실성/모형의존성을 보존한다. `smallBodyAxes`는 원축 `[a,b,c]`를 렌더축 `[a,c,b]`에 대응시키고 `(abc)^(1/3)`로 정규화해 표시구의 부피를 유지한다. 미측정3D형상은 `null`이고 `[1,1,1]` 표시구는 가정이다. 논문의 열모형 구가정을 측정된 구형형상으로 승격하지 않는다.
+- Haumea 고리1개·Quaoar Q1R/Q2R의 문헌중심거리를 출처에 연결한1px 중심선으로 표시한다. 작은천체 표시반지름과 원문 `reference_radius_km`의 정의/조건으로 비율을 환산한다. 원문 `pole_j2000_deg`는기존J2000→황도→화면회전으로각고리안내선의정적기준면에적용한다. source의 폭/광학두께·입자/반사·방위각별변화·현재자세/세차를 복원하지 않는다. 정적원문pole적용은현재시각의정밀자세/기준계실현정합을검증한것이아니며 미검증몸체자세/회전위상은 가정으로 남긴다. Haumea몸체축을고리면에맞추는공면조건은원문근거확인후별도표시가정으로관리한다. Quaoar의 후속고리fit과 이전fit 차이는 실측고리운동이 아니고 확인되지 않은 세번째고리는 추가하지 않는다.
+- 자료로딩·정상무지도·source503/재시도를 구분한다. 새프로필 실패가 기존31지도나 원SPHEREx관측을 지우지 않는다. 새자료/reader·축/고리helper·무지도렌더·화면/저장복원 검증을 후속영향검사로 실행하며 기존DRyIMrA21개Chrome통과를 새프로필 완료로 재사용하지 않는다.
+
+### 2.15 DEV-010 회의에서 승인한 핵심: 행성 3요건과 궤도 청소 모형
+
+사용자가 팀 회의의 공동 결정을 전달하며 세드나·에리스 등 선택 시 3요건과 최소 질량을 핵심 기능으로 지정했다. 이 명시적 범위 변경을 적용하되 기존 실제 관측·품질·근거 저장/새 세션 복원 경로와 미완료 범위를 보존한다.
+
+- 행성8개와 공식 왜소행성5개(Pluto/Ceres/Haumea/Makemake/Eris), 후보4개(Sedna/Quaoar/Orcus/Gonggong), 총17개를 우선 지원한다. 선택 정보창에 태양 공전 / 자체중력이 지배하는 거의 둥근 평형 형태 / 궤도 주변 지배력의 충족·미충족·자료 부족을 바로 표시한다. 펼치면 별도 대화상자에 근거와 궤도 그림·계산을 제공한다. 위성·태양·갈색왜성·외계행성에 IAU2006 태양계 정의를 억지로 적용해 미충족으로 판정하지 않는다.
+- 공식 IAU분류와 정량 연구 진단은 분리한다. 공식 행성/왜소행성의 조건2행은 해당 분류 정의를 따른 것이며 새 정수압평형 측정이 아니다. 후보의 크기나 표시 구체만으로 조건2를 충족시키지 않는다. Sedna의 조건2·3과 실측 본체 질량/Π는 unknown/null이다. 궤도 청소는 잔해0·모두 위성화나 완벽한 진공을 뜻하지 않는다.
+- 사용자가 요청한 조건3 형식은 ‘최소 질량: X M⊕ (현재 질량: Y)’다. 미측정 본체 질량은 미측정으로 표시하고 0으로 채우지 않는다. Eris/Quaoar/Orcus/Gonggong의 문헌 계 전체 질량은 위성을 포함한 보조값으로 표시하며 본체 단독 질량/Π에 자동 대입하지 않는다. nominal 계질량 proxy는 통계 신뢰상한이나 본체 측정값이 아니다.
+- 채택 계산은 Margot2015 및 Margot·Gladman·Yang2024의 태양1M☉, 청소시간10Gyr, C=2√3 조건에서 m_clear/M⊕=0.001239(a/au)^(9/8)다. Π=m/m_clear로 직접 계산해 별도 반올림 상수807과 혼합하지 않는다. 이는 IAU의 공식 수치 규칙이나 존재 확률이 아니다. 원형궤도 확산 모형이며 실제 이심률이 큰 Sedna에는 동일 긴반지름의 원형 참고값으로만 제시한다. N-body/다른 행성/공명/이동 역사·실제 청소 시간·확률은 새로 계산하지 않는다.
+- a는 타원 중심에서 끝까지의 긴반지름이고 현재 태양 거리나 원일점이 아니다. 출처의 a/e/q/Q와 TDB요소 epoch를 보존한다. SVG는 해당 요소의 궤도면 모식도이며 태양을 초점 x=−ae에 놓고 a와 q/Q를 구분한다. 현재 천체 위치·실제3D자세·공통2026epoch로 가장하지 않는다. 요소 시각과 모형 재생 시각은 별개다.
+- GET /api/v1/planet-criteria는 17객체 dictionary와 공식 분류/3행 근거, 출처 요소/단위/질량 정의, 모델 상수·한계, source manifest SHA를 반환한다. object_id 필터를 지원하며 미지원422·자료/무결성503을 정상 빈 결과와 구분한다. 실행 계약은 science/planet_criteria.py와 PlanetCriteriaPanel.tsx다. source facts/sidecar는 런타임 필수, upstream 전체 문헌은 로컬 감사용·배포 제외다. 기존9천체의 실제 Horizons 요소/물리 HTML과 새SBDB8을 원 출처·컨테이너·내장응답/처리해시로 구분한다.
+- 기존 근거의 optional planet_criteria_manifest_sha256를 저장·복원한다. 누락된 옛 스키마1.0은 호환하고, 채택 해시/reader가 맞지 않으면 재계산 필요다. 정적 판정창이 기존 실제 노출 DATE-AVG/관측자/질량 원자료나 사용자 판단을 초기화하지 않는다. 5언어가 단위/모형/후보·미측정 의미를 공유한다.
+- 검증: 독립 Decimal 재계산/원문 단위/질량 정의를 대조했고 자료·계산·API/근거40검사를 통과한 상태다. source 최종동결, 최종production/browser·Data_Spec·ZIP 정확 바이트/실행 검사는 완료 후 실제 결과로 확정한다.
+
 ## 3. 언어·라이브러리·프로세스 책임
 
 | 위치 | 언어/기본 기술 | 책임 |
@@ -214,7 +261,10 @@ JPL의 fitted elements는 평균궤도요소가 아니며 mean ecliptic and equi
 | `data/manifests/timeline_validation.json` | DEV-003 표시 보간의 별도 JPL 중간 시각 27개 검산·원응답/해시. 관측102파일 목록과 분리 |
 | `data/manifests/extended_solar.json` | DEV-004 위성468개/추가 왜행성·후보8개와 실제 위치지원/미지원, 부모중심·출처509개·SHA·검산. 불변 원응답은 `data/reference/solar-extension/` |
 | `data/manifests/exoplanets.json` | NASA Science 공개 외계행성6470개/모항성계4862개의 날짜 고정 목록. 원본115페이지는 `data/reference/catalog/nasa_science/`; PS 기본해와 구분 |
+| `data/manifests/extragalactic_planets.json` | DEV-009 확인 행성 collection은 비어 있고 후보2/집단추론3은 별도 문헌 검토. `data/reference/extragalactic-planets/facts/`만 런타임/ZIP, upstream 원문은 로컬 감사용 |
+| `data/manifests/exoplanet_observations.json` | DEV-009 확인된 기존 행성ID에 연결한 공개 처리사진3개·미분해표면·credit/CC-BY4.0/해시. facts와 `web/public/observations/exoplanets/`는 런타임/ZIP, upstream 원문은 로컬 감사용 |
 | `data/manifests/appearance.json` | 공개 원본 지도·지도창 UV/미관측 영역·credit와 고리 반지름/IAU pole. 이미지 원본은 `web/public/textures/`, 참조는 `data/reference/appearance/` |
+| `data/manifests/small_body_appearance.json` | DEV-009 기존8소천체의 문헌 정성색/shape·크기정의/고리 제약, Ceres지도보존. `data/reference/small-body-appearance/facts/`는 런타임/ZIP, upstream원문은 로컬감사/배포제외. 12source동결/reader12검사, 최종빌드전수/영향QA 대기 |
 | `data/manifests/cosmic_history.json` | DEV-005 약13.8Gyr기준10개 개념적 역사 지점·채택/상충 설명·NASA/ESA4원문; `data/reference/history/` |
 | `data/manifests/galaxies.json` | DEV-0069은하·공식17원문(HTML16/PDF1), 방향/거리·관측 형태와 미상각도/표시 가정; 기존4개 snapshot도 보존; `data/reference/galaxies/` |
 | `data/manifests/kuiper_display.json` | NASA주영역30–50AU와별도scattered disk,650점/두께 등의 표시 가정; `data/reference/kuiper/` |
@@ -364,7 +414,31 @@ reader는 허용된 사례ID/원 URL·대상/표본의 연대·reference경로/�
 
 이름정본은 object_names.json(1,019,484B/SHAca2dce9b7cdec5c9f7053ce1081196841b3e3cfffcca109b9ee90077d07ef6df)과정적objectNames.ts다. 기관12원본30,323,543B/sidecar와표기별출처/방법·미확보요청을구분한다. 원과학명/ID/벡터는변경하지않는다. 기관표기/프로젝트음역·국제지정명원문·원어민검수미확보는Data_Spec7.2/부록과manifest에서확인한다.
 
-Data_Spec의현재전수snapshot1632개는 data1588+public43의1631물리자료파일에명시참조helper1개를더한값이다. 참조경로877개·내장원응답32개·정적복제43개를기록한다. 파일수는독립관측수/새측정수가아니다. 기능계산계약은FSD에두고 파일별원URL/전체SHA·바이트/취득시각·권리는Data_Spec과canonicalmanifest로연결한다.
+DEV-008 당시 Data_Spec 전수snapshot1632개는 data1588+public43의1631물리자료파일에명시참조helper1개를더한값이다. 당시 참조경로877개·내장원응답32개·정적복제43개를기록한다. DEV-009 새 자료/빌드까지 포함한 전수값은 Data_Spec의 갱신 snapshot을 따른다. 파일수는독립관측수/새측정수가아니다. 기능계산계약은FSD에두고 파일별원URL/전체SHA·바이트/취득시각·권리는Data_Spec과canonicalmanifest로연결한다.
+
+### 8.7 DEV-009 확인 상태·직접촬영 영상의 정본
+
+외부은하 검토 정본은 `science/extragalactic_planets.py`·`extragalactic_planets.json`의 `extragalactic-evidence-v1`이다. manifest39,826B/SHA256 `80f4532b8a93db37a072da0e56b2bef5303365cb9d26e1f4d61a599b6824fe3a`, 작성 사실추출JSON12개8,041B와 sidecar를 오프라인 검증한다. 원문12개1,036,181B는 로컬 감사용으로 보존하되 재배포 권한을 자동 가정하지 않아 ZIP에서 제외한다. 확인 목록을 후보로 채우거나 알려지지 않은 깊이/궤도/표면을 추가하면 reader가 거부한다.
+
+PA-99-N2의 질량비0.0122와 약6.34목성질량은 **0.5태양질량 렌즈를 가정한 조건부 해석**이며 측정된 독립 행성질량/궤도주기가 아니다. 세 렌즈은하 집단추론은 개별 행성의 신원/수/좌표가 아니며 원문의 원시블랙홀 대안도 보존한다. 명확한 기준계를 확인하지 못한 M51 caption 좌표는 `null`로 두고 임의 ICRS로 선언하지 않는다. PA-99-N2의 명시적 ICRS/J2000 방향도 미분해 렌즈사건의 시선이며 행성표면/행성위치가 아니다. 세 집단추론의 foreground lens와 background quasar sightline을 혼동하지 않는다. 채택 NASA6470목록과 후보별칭의 정확명 대조는0건이며 이는 전우주 확인 행성0개의 증명이 아니다.
+
+실제 외계행성사진 정본은 `science/exoplanet_observations.py`·`exoplanet_observations.json`의 `published-exoplanet-observations-v1`이다. manifest21,746B/SHA256 `9f342bab497683425e7907417a8df587fbe69f0e5557086f3c138a516a094ea0`는 기존 `exoplanets.json`의 SHA/바이트·확인행성ID에 의존한다. 사진3JPEG 총1,270,679B를 원바이트 보존하고 사실추출8JSON7,647B+sidecar를 런타임/ZIP에 포함한다. upstream8HTML817,955B는 로컬 감사용으로만 보존한다. 동적 endpoint는 보존한 로컬파일만 읽고 네트워크를 조회하지 않는다.
+
+| 기존 천체/관측 ID | 실제 관측 제품·한계 | 원 JPEG 크기·SHA256 |
+| --- | --- | --- |
+| HIP65426b · `hip65426b-jwst-2022` | JWST NIRCam/MIRI4필터 collage,2022관측/공개. 할당색·별차폐/처리·광학 artefact를 보존하며 표면분해 아님 | 441,043B · `47bb8c3abd7bd5d7cc37f4609ecb0635370bbf269088eaca6e0de56b4d9db280` |
+| BetaPictorisb · `beta-pic-b-sphere-2018` | VLT/SPHERE2014–2016 및2018 관측 모음. 별에서 분리한 광원이며 별표면의 통과/현재 궤도해 아님 | 710,171B · `ba16c9cc24f66b4f2ba0e89c4b74c44964337e0fdbaa02dff39c92d5e03eb4c0` |
+| HR8799c · `hr8799c-naco-2010` | VLT/NACO 근적외선 처리영상. 표시원과 회절 artefact는 원 공개영상 요소. 역사적3행성 설명을 현재 계의 행성 수로 채택하지 않음 | 119,465B · `238ffb34518706cdd4825f8c502ecb7d39fffdab2e8e6e8efbd83898ad6a07c9` |
+
+사진별 전체credit와 CC-BY4.0 출처는 manifest/Data_Spec/THIRD_PARTY_NOTICES와 실제 사진 옆에 유지한다. `publication_date`를 모든 관측의 촬영일로 바꾸지 않는다. 이미지의 bytes/SHA·dimension·허용경로·source/권리·대상ID를 검사하며 분해표면/artist concept으로 변경된 주장은 거부한다. 사진이 없는 실제 확인대상은 정상 빈 결과, 원본 누락/무결성 실패는503으로 분리한다. 사진/원문 수는 새 SPHEREx노출·측정성공·독립행성 발견 수가 아니다.
+
+### 8.8 DEV-009 소천체 외관 자료의 과학 경계
+
+`small_body_appearance.json`은47,999B/SHA256 `33b3662b6978137bf172ab65064aa73a40f119519cfaf6365e89ab0f60db18ec`이며2026-11-14T10:07:34UTC에12source/8개기존ID로동결했다. 기존 `appearance.json`·`extended_solar.json`의 전체SHA/바이트에 의존하며 사실추출/권리/원문참조를 검증한다. facts12JSON8,716B+sidecar8,987B는 런타임/ZIP에 포함하고 upstream12원문3,562,951B+sidecar6,006B는 로컬감사전용으로보존해배포에서제외한다. 새48참조파일의전수목록은최종빌드뒤Data_Spec에갱신한다. reader12검사를통과했고최종빌드/helper·Chrome/저장복원검사는후속확정한다. 이자료를완성한8개해상표면/새관측8건으로 세지 않는다.
+
+문헌크기는기존JPL반지름을교체하지않고표시비율의참고값으로별도보존한다. Herschel/ALMA 열복사크기·occultation투영면적등가반지름·삼축모형의부피등가반지름은서로다른정의다. 공통sphere반지름이나직접해상경계측정으로조용히치환하지않는다. Haumea삼축해는ring-light조건과원문b축불확실성의본문/Methods차이를보존한다. Quaoar의원문reference는특정시각투영면적등가반지름으로부피반지름이아니고2025고리모형의체계차/방위각변화는실제시간변화측정으로확대하지않는다. Eris의가까운구형limb는전체3D축/지형해상복원과다르다. Ceres는기존Dawn해상지도/credit를유지한다.
+
+`smallBodyAxes`의부피정규화와축순서, `smallBodyRingRadii`의단위/비율은표시계산의수치일관성검사대상이며독립측정정밀도보증이아니다. 모든정성색의RGB/조명·미측정3D형상/자세·경도/회전위상·고리1px색/opacity는표시가정이다. 무지도고체천체의랜덤크레이터제거와기존31지도/고리의SHA불변을별도로검사한다.
 
 ## 9. Planet X와 외계행성 실험
 
@@ -394,7 +468,7 @@ HiPS는 102개 파장층이며 시간/거리축이 아니다. NHITS는 방문 �
 
 ## 11. HTTP API
 
-데이터 API의 기본 prefix는 `/api/v1`이다. /textures/*와 /observations/cosmic/*는 prefix 없는 정적경로이며 health도별도운영경로다. 실제 Pydantic 계약은 `api/models.py`, OpenAPI는 `contracts/openapi.json`, 프런트 타입은 `web/src/types.ts`다. DEV-001에서 아래 구현 상태를 갱신했다. 자유좌표·원격 아카이브 검색을 구현한 것으로 읽지 않는다.
+데이터 API의 기본 prefix는 `/api/v1`이다. /textures/*와 /observations/cosmic/*·/observations/exoplanets/*는 prefix 없는 정적경로이며 health도별도운영경로다. 실제 Pydantic 계약은 `api/models.py`, OpenAPI는 `contracts/openapi.json`, 프런트 타입은 `web/src/types.ts`와 각 카탈로그의 실행 타입이다. 아래 표는 실제 구현 상태를 구분하며 자유좌표·원격 아카이브 검색을 구현한 것으로 읽지 않는다.
 
 | 메서드·경로 | 입력→출력/조건 | 상태 |
 | --- | --- | --- |
@@ -411,9 +485,12 @@ HiPS는 102개 파장층이며 시간/거리축이 아니다. NHITS는 방문 �
 | GET `/universe` | optional timezone 명시 epoch(72시간 범위)→원본 또는 표시 보간 천체/방향·기준계/단위·원출처SHA·고정 기준 궤도 | DEV-003 API/Chrome 검사 완료 |
 | GET `/timeline` | 원본 네 매듭의 UTC/TDB·아홉 위치/속도·방향·보간버전·범위·검산 요약/SHA | DEV-003 API/Chrome 검사 완료 |
 | GET `/appearance` | 지도/고리·credit·UV·표시 가정·출처/manifest SHA, 이미지 `/textures` | DEV-004 로컬 구현·통합 검사 진행 |
+| GET `/small-body-appearance` | 기존8소천체profile·정성색/RGB가정·축비/반지름정의/고리근거·자료SHA, Ceres기존지도우선 | DEV-009 12source동결/reader12검사; API·Chrome/저장복원 후속영향검사 대기. 누락/무결성503 |
 | GET `/catalog/solar-system` | 전체 목록은 시간배열 제외; optional parent_id→해당 부모 위성의 검증된 실제 시간표본/미지원 사유 | DEV-004 reader20검사·API/Chrome 통합 검사 진행 |
 | GET `/catalog/exoplanets` | 날짜 고정 NASA6470행성의 전체 가벼운 색인·source SHA/한계 | DEV-004 로컬 구현·API 검사 |
 | GET `/catalog/exoplanets/{object_id}` | 문자열 ID→원 수치·추정/누락·모항성계/행별 출처 | DEV-004 로컬 구현·API 검사 |
+| GET `/catalog/extragalactic-planets` | optional galaxy_id→확인객체0/별도 후보2·집단추론3 검토·출처/SHA·adopted-only범위. 미지원은하422/자료실패503 | DEV-009 전체Python317후 sparse필드교정 영향46검사 통과; Chrome 통합 대기 |
+| GET `/catalog/exoplanet-observations` | optional 기존 object_id→공개 처리사진3 또는 대상별0/1·source/credit/license/처리·SHA. 잘못된형식422/미등록404/자료실패503 | DEV-009 전체Python317후 sparse필드교정 영향46검사 통과; Chrome 통합 대기 |
 | GET `/cosmic-history` | 기존10지점/연대SHA와 morphology_reference; 과거/중간 계약 보존 | 레거시 읽기 API, 현재 관측-only UI는 사용하지 않음 |
 | GET `/cosmic-history/sample` | finite age_gyr0~13.8→요청age/lookback·최근대표stage/anchor/source; 범위/NaN/Infinity422 | DEV-005 과학/API 검사 |
 | GET `/cosmic-observations` | 실제5관측 이미지·근사우주나이/CEERS범위·원URL/credit/license/processing·SHA; 가상위치/성장없음 | DEV-007 reader/API·이전빌드Chrome6완료; DEV-008 회귀재개 |
@@ -441,6 +518,10 @@ DEV-005 additive 계약: 정밀 `playback_rate_hours_per_second`는1/6/24/72를 
 DEV-008 additive계약: UniverseContext.simulation_context는optional/null이다. 있으면 algorithm_version은jpl-kepler-long-term-v1, source_manifest_sha256는64자리SHA, model_calendar_ms는유한JS달력숫자, playback_rate_hours_per_second는72/8766/87660/876600(기본8766), playback_paused는true다. 서버는JS숫자경계±8.64e15ms를검사한뒤모형의−2999-01-01~3000-01-01 TDB달력JD범위를다시확인한다. 원 model_epoch는정밀72시간시각이다. 모형원문누락/해시변경·범위불일치는 simulation_data_unavailable/simulation_model_changed/unsupported_simulation_date로재계산필요이며필드없는이전근거는호환한다.
 
 장기metadata와스냅샷의원문누락/무결성문제는503 simulation_source_unavailable,스냅샷날짜/형식·범위오류는422 unsupported_simulation_date다. 계층의unknown galaxy/parent·모순조합은422 unsupported_catalog_selection,원문/해시문제는503 universe_catalog_unavailable이다. 새읽기API는보존한로컬자료로계산하며기존비동기simulation-jobs/measurement-jobs구현을뜻하지않는다.
+
+DEV-009 읽기 계약: `/catalog/extragalactic-planets`는 `objects`·`confirmed_objects`와 `reviewed_unconfirmed_evidence`를 분리한다. `summary_counts`·`coverage`·`catalog_audit`·`sources`·`source_manifest_sha256`를 보존하고 review의 후보/집단추론을 confirmed 필드로 승격하지 않는다. 정상 비어 있음과 `planet_review_unavailable`503을 구별한다. `/catalog/exoplanet-observations`는 `object_filter`·`observations`·`source_manifest_sha256`와 기존 카탈로그 SHA 의존성을 반환한다. 실제 영상 경로는 `/observations/exoplanets/`이고 잘못된/미등록 대상은422/404, 필요한 사실추출/사진 누락·변조는 `planet_observation_unavailable`503이다. 새 파일의 upstream 원문 경로는 감사 참조만이며 런타임 필수파일로 요구하지 않는다. 두 endpoint의 API/OpenAPI·브라우저·ZIP 최종 검증은20절/작업기록에 별도로 확정한다.
+
+DEV-009 소천체 추가계약: `/small-body-appearance`는 `sourced-small-body-appearance-v1`·8개 `profiles`·`sources`·기존두manifest의 `dependencies`·`source_manifest_sha256`를 반환한다. 누락/무결성오류는503 `small_body_appearance_unavailable`이고 원문전체복제본은 필수가 아니다. App은 기존외관조회와독립적으로읽고실제지도를우선해병합한다. `UniverseContext.small_body_appearance_manifest_sha256`는optional64자리SHA이고변경은 `small_body_appearance_sources_changed`, 실제reader/원문필수입력문제는 `small_body_appearance_data_unavailable`로재계산필요다. 새optional `time_preference`는 `auto/ephemeris/simulation`을허용해자동시간UI를그대로복원한다. 명시적ephemeris모드+simulation_context 또는명시적simulation모드+근사context없음은422로거부한다. 기존값없는근거는 simulation_context가있으면수동근사,없으면auto로호환한다. 시간속도는두context모두1/6/24/72/8766/87660/876600h/s를허용하고정지복원한다. 새계약의API/OpenAPI/타입·복원검사는후속실제기록에확정한다.
 
 ## 12. 저장 데이터·에러 계약
 
@@ -506,6 +587,10 @@ DEV-001: 단일 API+별도 spawn worker/Pipe·직렬화RLock·OS 인스턴스잠
 | QA18 | 476ID×5언어표시명/검색alias·293지정명원문·기관/프로젝트표기·선택/자식위성동기화 | 단위4·Vitest55 및 새Chrome의5언어이름/별칭경로완료; 빌드/실제범위는20절 |
 | QA19 | TDB달력0/99/BCE·Enter/blur/이동적용·초안보존/invalid마지막장면·범위·EMB대표아이콘/반지름비표시·8지원·미지원숨김·재생/정지·80벡터parity·simulation_context변조/복원 | 재개초기Python276·수정후장기29/Vitest55·연도입력/EMB/오류복귀Chrome검사완료; Windows준비번들해제/재시작완료,최종ZIP은외부검증JSON |
 | QA20 | 실제성원/개별좌표·참조역할/깊이null·선택확대/수동·host→7자식→행성3D·εB보존 | 계층19·초기전체Python276·G1/host/9은하·εB보존Chrome완료; Windows준비번들해제/재시작완료,최종ZIP은외부검증JSON |
+| QA21 | 기존6470확인행성 직접선택·외부9은하 확인객체빈상태·후보/집단추론 제외·오래된 응답/503·실제4862host방향/출처·카메라중심 방향층·가상별 미대체 | DEV-009 전체Python317후영향46·중간Vitest61/strict/Ruff53파일 통과; 새Chrome 통합 대기 |
+| QA22 | 실제외계행성3사진 원HTTP SHA/bytes·미분해표면/공개일·credit/license·확대/닫기·다른 대상 정상빈상태·선택경쟁/사진실패 재시도 | DEV-009 전체Python317후영향46에reader/API포함·사진3개 시각검토; 새Chrome 대기 |
+| QA23 | 단일 날짜입력/자동 천체력↔근사전환·0/99/BCE·Enter/blur/invalid·양끝/재생·출처/UTC-TDB라벨·미지원천체/카이퍼상태·관측/카메라/근거보존 | DEV-009 시간통합 구현/검사 진행; 기존QA19 통과를 새UI검증으로 재사용하지 않음 |
+| QA24 | 기존8소천체의정성색/shape조건/고리근거·Ceres/31지도보존·랜덤고체지형제거·축부피/순서·고리단위·source503·optionalSHA/time_preference저장복원·gear/출처note겹침 | DEV-009 12source동결/reader12검사; 후속소천체/화면교정 최종빌드영향검사 대기 |
 
 각 검사에 실제 입력·기대/실제·실행 명령·버전·pass/fail/not-run·증거 경로를 남긴다. 아직 없는 명령/브라우저 경로를 통과로 기록하지 않는다. 앱 구현 전 과거 연구 검사·파일 확보를 이 표의 통과로 올리지 않는다.
 
@@ -522,9 +607,9 @@ DEV-001: 단일 API+별도 spawn worker/Pipe·직렬화RLock·OS 인스턴스잠
 
 ### 17.1 v0.6.0 전달본과 실행 검증 범위
 
-서버 전달 최종본의 로컬 경로는 artifacts/NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip다. 정확한 최종ZIP 바이트/SHA256·커밋·해제실행 시각/결과는 패키지 옆 동명 .zip.sha256.json과 .verification.json을 정본으로 따른다. 최종묶음은 현재동결제품D7O_yXx_와 이 문서를 포함해 clean Git소스에서 생성하며, 정확한최종아카이브의새폴더해제/재시작검사는 패키징후 별도로 실행한다.
+직전 전달 최종본은 `artifacts/NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip`이며481,789,033B/1807파일, SHA256 `af2759fc30eb844dc5ba440f76580beb7b4ca2e92444c39235bfafc38bda0d28`이다. source commit `bf1a09f5ebafc5fdd74abe82231e522b3eec9b95`의 깨끗한 tree와 D7O_yXx_ 빌드에서 생성했다. 정확한 최종 ZIP을 새폴더에 해제한 검증은2026-11-14 18:25:16 KST에 PASS했으며 현재 DEV-009 파일은 이 불변 아카이브에 들어 있지 않다. [사후 검증 기록](docs/releases/v0.6.0.json)과 패키지 옆 동명 checksum/verification JSON이 정본이다.
 
-Windows 준비번들 검증은 2026-11-14 18:22:00 KST(2026-11-14T09:22:00.694531+00:00)에 PASS했다. 대상은 내부보존용 NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_181913KST.zip(BaIOI0V5 UI)이며 tmp/release-verify-f5vt0brn/extracted의 새폴더에서 manifest1806파일+release_manifest1개를대조했다. 이전에검증한동일독립Python런타임을재사용했으며새설치로주장하지않는다. health·31지도SHA·확장476/외계행성6470·역사5실관측/9은하·장기8대표위치와−2999/0/99/2500/3000년·curated24/MW4871/TRAPPIST7을실행했다. εB/Pluto근거저장과실제API서버재시작뒤동일evidence/result ID복원도통과했다. 이초기준비번들검사를후속D7최종ZIP의정확동일바이트검사와혼동하지않는다. 최종ZIP의실제검사는동명검증JSON에서확인한다. Linux/컨테이너/공개서버는검증하지않았다.
+Windows에서 manifest1806항목+release_manifest1개를 대조하고 health·31지도SHA·확장476/외계행성6470·역사5실관측/9은하·장기8대표위치와−2999/0/99/2500/3000년·curated24/MW4871/TRAPPIST7을 실행했다. εB/Pluto 저장과 실제API서버재시작뒤 동일evidence/result ID복원도 통과했다. 이전에 검증한 동일 독립Python런타임을 재사용했으며 새설치로 주장하지 않는다. 먼저 검사한 내부준비번들과 최종D7아카이브는 별도이며 최종실행의 해제경로는 `tmp/release-verify-zdv3hisw/extracted`다. Linux/컨테이너/공개서버는 검증하지 않았다. DEV-009 v0.7.0 전달본은 별도 생성/검증 뒤 확정한다.
 
 ## 18. 협업·노션·기록·심사
 
@@ -543,6 +628,15 @@ Notion 접근이 안 되면 접근 실패/마지막 확인본을 구분하고 �
 영어요약50–200단어·제목 포함7장 이하 슬라이드 또는30초 이하 영상 단일 데모 링크·공개 링크/영어 프로젝트와 자막·이미지10MB·실제 Submit 성공 상태 등은 최신 공식 규정을 따른다. AI/SI 고지·외부 자료/코드 라이선스·NASA 로고/브랜드·만18세 미만 식별정보를 공개 웹/영상/자막/계정/크레딧/저장소까지 확인한다. 외부 제출/메시지/서버 변경은 사용자 승인 범위를 따른다.
 
 ## 20. 구현 상태·미확정·변경 이력
+
+DEV-009+DEV-010의 v0.7 소스 체크포인트: 전체Python372 PASS76.33초·strict/Vitest64 PASS1.20초·Ruff57파일, Bp6N6jEm production과 실제Chrome16개 PASS206.567초를 확인했다. 앞선DRy21개/Cmk9개와 중복·빌드별 범위를 구분한다. 실제한국어Sedna/Eris·Earth/Pluto·5언어와820프랑스어 직접화면을 확인했고 최소(현재질량)·공식분류/미확정·계질량 보조·초점/a/qQ·원형모형 한계/실제εB근거복원을 검사했다. 마지막으로 q/Q숫자의locale 및 미채택 본체질량의 문구 범위를 교정한 lsFtNhUt 빌드의 좁은회귀를 추가한다. DataSpec은23정본/1846파일/SHAf26ba122e0bac9fdfdabbe6881bd7686a7692582f62b0efbd376606e1f7e1b9e로 해당범위를 동결했다. lsFtNhUt의마지막5언어회귀1개도PASS6.568초로확인했다. Git에는과학manifest/관측sidecar의줄바꿈자동변환을해제하고실제동결바이트를저장한다. 이전6manifest의Git LF정규화만바로잡았으며현재입력파일/수치/원본바이트는불변이다. v0.7 ZIP/실서버 배포 완료를 주장하지 않는다.
+
+사용자의 후속 DEV-011 요청은 별도 개발 중이다: 명왕성 분류 교훈, 가정밀도·관측크기에 따른 질량범위와 조건부 청소지표, 카메라를 실제관측자 위치로 간주하는 적색편이 실험, 실제 블랙홀 자료/모형이다. 밀도는 중력압축·조성·공극률과 무관하지 않으므로 유사위성의밀도를 가정으로만 사용한다. 관측 질량/분류를 추정치로 교체하거나 Π를 진위확률로 바꾸지 않는다. 카메라 공간압축과 실제거리의환산/관측z·가상거리/SR/중력모형을 구분하고 UI팬 속도를 실제물리속도로 만들지 않는다. 사용자는 중국기관 제공자료를 새로 쓰지 말라고 명시했다. 제공기관/아카이브를 확인하며 연구자국적을 추정하지 않는다. 이 요청은 모든물리법칙 구현완료나 새데이터의 검증완료를 뜻하지 않으며 최종스펙/검사는 구현과 함께 갱신한다.
+
+
+DEV-009 후속소천체/화면교정: 기존8개ID의 `sourced-small-body-appearance-v1` 자료12source를동결했고 reader12검사를통과했다. Ceres/31실제지도보존, 미분해고체의랜덤크레이터제거, 정성색/RGB가정·Haumea조건부삼축/부피보존·고리중심선/정적pole·참고반지름정의를구분한표현과optional근거SHA/time_preference를추가한다. 앞선DRyIMrA빌드21개고유Chrome검사는통과했으나직접화면검토에서gear–새세션겹침/별출처note가시간선에가림2건을발견했다. 48px상시아이콘과검색아래출처배치로교정하며새소천체자료/최종빌드의영향API/helper/Chrome·저장복원·전수Data_Spec/ZIP검증은대기다. 기존21PASS나직전잠정21manifest/1720항목snapshot을이후변경의최종통과로확대하지않는다.
+
+DEV-009 · FSD0.12 · 목표v0.7.0 현재상태: 사용자의 가상행성 허용 직후 실제 논문/확인목록의 실존 별·행성만이라는 정정 지시를 적용했다. 활성 가상 외부은하 시스템은 추가하지 않았고 기존 NASA6470확인행성 직접선택/기존3D 연결,4862실제 모항성방향 표식, 지구5언어표시명과 별도EMB기준, 확인목록에서 외부은하 후보2/집단추론3을 제외한 문헌검토, 실제 관측사진3개를 구현한다. 전체Python317을 통과한 뒤 NASA 원행에 없는 논란필드를false로 바꾸던 파생표시를null로 교정하고 `confirmation_review_status`·개별논문 미재검토 안내를 추가했으며 영향46검사(4.16초)를 통과했다. source snapshot/SHA는 불변이다. 중간Vitest61(1.15초,modelTime3포함)·strict/Ruff53파일 및 사진3개 로컬 시각검토도 완료했다. 최종production build·API재시작·Chrome·v0.7.0 ZIP해제/재시작은 아직 확정하지 않았다. 하나의시간입력/자동자료선택과 설정 진입 개선은 구현 중이며 최종범위는2.13절/후속 실제기록을 따른다. 이전v0.6검증을 이 변경의 통과로 바꾸지 않는다. 공개서버/Linux·사람/원어민검수·F01잔여/F04/F05는 계속 미완료다.
 
 DEV-008 · FSD0.11 · v0.6.0 현재상태: 이동전37d9548까지소스/데이터명세를origin/main에저장했고 사용자재개지시에따라통합검증을진행한다. 이름476ID×5언어·장기적합모형·은하내계층/선택확대·상단빅뱅진입을구현했다. 재개초기전체Python276PASS(76.90초,기존Starlette경고1)·Vitest54·strict/Vite/Ruff를통과했다. 이후사용자가보고한0년/다른연도입력문제를재현해문자열초안·Enter/blur/이동적용·편집정지/잘못된입력보존을교정했고최신Vitest55·strict/Vite(index-1XZd56Et.js)와장기/API29검사(1.66초)를통과했다. API원문무결성오류는입력422와구분해503으로교정했다. 초기프랑스어검색위에설정버튼이겹치는문제도검색z-index수정후새Chrome회귀로확인한다. 이전275PASS/테스트준비실패1건은경계값준비수정후이전체실행으로해결했다. 관련Chrome13개고유경로를통과했다. index-1XZd56Et.js에서새6경로(names/time/error/G1/host/9은하+εB)를72.98초에통과했고,EMB물리반지름비표시·대표아이콘교정뒤index-2USPLncj.js에서cosmic4+EMB/time1(46.54초) 및관측2(49.96초)를재검사했다. 마지막loading조건교정빌드index-BaIOI0V5.js에서지연위성로딩1경로(검사3.8초/실행5.4초)를통과했다. 중복된time경로를빼면새6+기존cosmic4/관측2+loading1=13고유다. 13모두를마지막빌드에서한번에재실행한것은아니다. 마지막으로지원위성대기의일반관측loading문구를천체력timelineLoading으로교정해 관측원본을새로읽는다는오해를없앴다. 최종index-D7O_yXx_.js에서simulation-names4경로를추가로통과했다(26.4초:이름10.3/연도6.1/오류5.2/로딩3.0초). 최종제품코드는동결했고 Windows초기준비ZIP의해제/실제서버재시작검증은통과했다. 최종D7 ZIP의정확동일바이트검사는패키징후별도실행하며결과는동명외부검증JSON을따른다. 브라우저정본은 var/qa/dev008-browser-review.json이다. 새6+기존6+loading1의13고유경로에time1중복재검을더해14PASS실행을기록했고최종문구교정뒤이름/시간/오류/로딩4경로를추가통과했다. 17사진을직접대조했다. 신규uncaught page error는0이지만전GLSL/console항목감사를보장하지않고원어민/사람동료검수로확대하지않는다.
 
@@ -583,6 +677,7 @@ DEV-002/v0.2.0은우주기본화면·9궤도선·Pluto입력을포함한다. Pyt
 | FSD-0.9 / DEV-006 | 기존4개좌표/거리 보존+LMC/SMC/M51/M104/Centaurus A확장,9개 관측형태·출처 있는 각도/팔과 미상값/표시가정·공식참고페이지 분리 | 과학14·Python185/Vitest40·Chrome21경로 및 최종4재검·strict/Vite/Ruff·완결 ZIP 해제/재시작 복원 통과; Linux/공개배포 미수행 |
 | FSD-0.10 / DEV-007 | 실제관측-only5사례·추정연대/credit/가공한계·사진슬라이드·Data_Spec전수기록 | 당시Python227/Vitest45/Chrome6·strict/Vite/Ruff완료; 중간가상시안미게시/v0.6통합 |
 | FSD-0.11 / DEV-008 | 위성/왜행성5언어·별도TDB장기근사/EMB·성원/호스트계층·선택확대·상단빅뱅진입·simulation_context | 재개초기Python276/최신Vitest55·strict/Vite·장기/API29완료; 관련Chrome13고유경로단계별통과; 최종D7O_yXx_/13고유검사+copy4재검·Windows준비번들해제/재시작완료; 최종정확ZIP은외부검증JSON |
+| FSD-0.12 / DEV-009 | 실존확인-only·6470행성/4862host방향·외부은하후보분리·실제3사진/설명외관·지구명/EMB·단일auto시간·상시gear·기존8소천체색/shape/ring제약·근거optionalSHA/time_preference | 전체317후sparsefield영향46·앞선빌드Chrome21후직접화면2문제교정·새소천체12source동결/reader12. 최종빌드/영향QA·DataSpec·완결ZIP 결과는후속실제확정 |
 
 
 ### 보존 이력: DEV-008 urgent travel checkpoint - 2026-11-14T15:54:38+09:00

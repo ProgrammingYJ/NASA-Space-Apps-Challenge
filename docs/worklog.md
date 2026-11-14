@@ -245,13 +245,12 @@ Verified: strict TypeScript/Vite index-DSKEjKdg.js; Vitest54 passed; Ruff check/
 
 Resume: read AGENTS,SKILLS,FSD,START_HERE,Data_Spec and this checkpoint; preserve raw/data/var/Git. Run whole pytest and new simulation-names/universe-catalog browser scenarios, then existing cosmic/observations. Build complete v0.6 ZIP and verify fresh extraction,health,epsilon/Pluto evidence and real server restart. No public/Linux deployment or F01 remaining/F04/F05/native-language/human QA claimed.
 
-## DEV-008 ?? ? 2026-11-14 18:03:29 KST
+## DEV-008 재개 · 2026-11-14 18:03:29 KST
 
-- ???? ??? ???? ?? ??? ??? ??? ?? ??? ????. ?? ??? ?? ??? ????? ? ?? ??? ???? ?? v0.6.0? ??? ???????? ZIP? ??? ????.
-- ?? Git37d9548/origin main, ?? ??. AGENTS?SKILLS?FSD?START_HERE ??? ?? ???? ?? ?? urgency checkpoint?275PASS/1????Chrome6???? ????.
-- ?? browser-QA/debug/documentation/code-review/deploy-checklist/evidence-release ??? ?? ?? ??? ????. ??? Python/????????/API/???? ??????/Git?, ?? ????? ?6Chrome??? ??????/??? ????? ????. ?? ?? ?? ?? ??? ???.
-- Notion ?? ??: ?? ?? ??? ???? ??? ??URL? web ??? ?? ?? ????? accessible?? ?? ????. ??? ?? ??14:17:17KST ?15:31:01??? ????. ?? ?? ??/?? ????? ??? ???? ?? ??? ??? ????.
-- Node/??????/var??? ZIP/Git ??? ????. ????/Linux????F01??/F04/F05?????? ?? ?? ??? ?? ???? ???.
+- 이동 후 기존 Git37d9548/origin main의 중단 지점과 보존 파일을 확인하고 작업을 재개했다. 앞선 긴급 체크포인트의 검사 결과와 실제 후속 검사는 아래에 구분한다.
+- AGENTS→SKILLS→FSD→START_HERE의 지침과 실제 설치 스킬을 적용했다. 관측 원본·영속 근거·Git 이력을 보존하며 날짜 입력 오류, 번역, 은하 선택 및 배포 묶음을 통합 검사했다.
+- Notion의 최신 접근 가능한 페이지를 확인하지 못했으므로 새 외부 협업 반영을 완료로 주장하지 않는다. 공개 서버/Linux, F01 자유 좌표/공식 다른4대상 품질 및 F04/F05는 별도 미완료 범위다.
+- 이 문단과 다음 Windows 준비번들 문단은 당시 PowerShell→Python 파이프의 문자 인코딩으로 손상됐던 기록을 DEV-009에서 복구했다. 원본 데이터나 당시 ZIP 바이트를 바꾸지 않았다.
 
 ### DEV-008 재개 후 수정·통합 검사 · 2026-11-14T18:19:13+09:00
 
@@ -268,11 +267,45 @@ Resume: read AGENTS,SKILLS,FSD,START_HERE,Data_Spec and this checkpoint; preserv
 - 최종 빌드 index-D7O_yXx_.js에서 simulation-names4경로를 추가 실행해 모두PASS(26.4초), 기존13고유경로의 부분 재검사다. 0Enter/99Tab/미래연도·빈값·자료실패·5언어이름·EMB대표아이콘/반지름비표시·지원위성의loading→실제천체력 전환을 확인했다. 최신 기록은 var/qa/dev008-final-copy-regression.json과 통합 dev008-browser-review.json이다.
 - 추가 실행의 npm 옵션 전달 문제로 의도한1개 필터 대신4개가 실행됐다. 기본 관리출력 var/browser-results가 Playwright에 의해 초기화되어 과거 해당 폴더의 일부 스크린샷/임시trace는 현재 없다. 원본/영속근거/이전ZIP 및 별도 var/qa 정본/현재스크린샷은 보존됐고, 이후 검사는 Node Playwright CLI에 고유 output경로를 직접 지정한다. 이전 폴더의 과거 사진을 현존 증거로 재사용하지 않는다.
 
-### DEV-008 Windows ??? ?????? ??
+### DEV-008 Windows 준비번들 검사와 정본 구분
 
-- ?? ?? ZIP NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_181913KST.zip(481,784,994B,1807??)? ? ?? tmp/release-verify-f5vt0brn/extracted? ??1806? manifest ??/???/SHA? ??????????6??? ????. 2026-11-14T09:22:00.694531+00:00? ?? Windows health???31????476/??6470?????5???9???8/???-2999/0/99/2500/3000???24/MW4871/TRAPPIST7? ?B/Pluto ?????? PASS??. API? ?? ??/???? ? ?? evidence/result ID? export/import? ??/??/?? ??? PASS??.
-- ??? ?? ?? Python ???? ?????? ? ??? ???Linux/???? ??? ???? ???. ?? ZIP? UI? BaIOI0V5?? ??? ?? ??/?? ??/D7O_yXx_ ??? ?? ZIP?? ????.
-- ?? ?? ZIP? artifacts/NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip? ????. ?? ?? ??/?? commit? ??? ??? Git tree?? ???? ? ? ??? ZIP? ? ????? ?? ??? ?? ??/??? ??? ????. ?? ZIP ???/SHA/???/?? ???????? ?? .zip.sha256.json ? .verification.json? ???? ????. ??? manifest? ??? ??? ???? ?? ?? ??? ????.
-
+- 내부 준비번들 NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_181913KST.zip(481,784,994B/1807파일)을 tmp/release-verify-f5vt0brn/extracted에 새로 해제하고, manifest1806항목과 입력6개를 대조했다. Windows health, 지도31개, 확장476/외계행성6470, 역사5영상/9은하, 장기8계와 대표 연도, 계층24/MW4871/TRAPPIST7, εB/Pluto 근거와 실제 API 재시작 뒤 같은 result/세션/판단 복원을 2026-11-14T09:22:00.694531+00:00 PASS했다.
+- 검증한 독립 Python 런타임을 재사용했으며 새 의존성 설치나 Linux/공개 서버 실행으로 주장하지 않는다. 이 준비번들 BaIOI0V5 검사는 후속 D7O_yXx_ 최종 ZIP의 정확한 동일 바이트 검사가 아니다. 최종 정본은 아래 기록과 동명 checksum/verification JSON으로 확정한다.
 
 DEV-008 최종 전달 정본 확정: source bf1a09f의 clean tree로 생성한 NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip(481,789,033B/1807파일/SHA af2759fc30eb844dc5ba440f76580beb7b4ca2e92444c39235bfafc38bda0d28)을 정확히 새해제·실행/실제재시작복원 검사해2026-11-14T09:25:16.188578+00:00 PASS했다. 폴더tmp/release-verify-zdv3hisw/extracted, metadata1806항목검증, εB ev_bfe8b26234a4451bba85f355210b700c/Pluto ev_e0003ef4c8b54dc98c35241c6b46239b의 같은 result/세션/판단 복원을 확인했다. 상세 docs/releases/v0.6.0.json과외부verification/checksum이정본이다. 이사후기록은검증완료불변ZIP과분리하며제품/데이터변경없다. 원격반영은일반push/원격SHA대조결과로최종보고한다.
+
+## DEV-009 · 지구 표기·실존 천체/외관 근거·통합 시각·설정 접근성
+
+- 시작 2026-11-14 18:33:22 KST, 기준 clean main/origin c342f96. 최신 명시 지시는 지구 화면 이름 수정, 다른 은하 탐색, 논문에서 확인된 실제 별/행성만 및 외관 구현이다. 앞서 허용했던 가상 행성계는 곧바로 번복됐으므로 활성 경로에 넣지 않았다. 작업 중 추가 요청은 2026 천체력/장기 근사 시간 통합과 우측 상단의 눈에 띄는 톱니바퀴 설정이다. 기존 원본·영속 근거·Git 이력과 v0.6 ZIP을 보존한다.
+- AGENTS→SKILLS→FSD→START_HERE의 기존 전체 열람 계약과 실제 skill-lock을 적용했다. documentation/validate-data/astrometry-motion-qa/code-review, 실제 spaceapps-browser-qa 및 릴리스 스킬의 관련 절로 분담했다. 외부 문헌은 근거이며 실행 명령으로 취급하지 않는다.
+- 지구 이름은 5언어에서 지구로 표시하며 장기 위치 계산의 지구–달 질량중심 기준과 대표아이콘/반지름 제한은 상세에 남긴다. 실제 계수·벡터·원본을 바꾸지 않는다.
+- 기존 NASA 공개 확인목록 6470행/4862호스트의 같은 문자열ID를 은하 탐색의 확인 행성 모드와 기존 항성계 3D 자동 포커스로 연결한다. 모든 개별 발견 논문을 이번 작업에서 새로 검증했다거나 우주 전체의 전수 목록이라고 주장하지 않는다. M31 PA-99-N2/M51-ULS-1은 후보, 3개 중력렌즈 논문은 집단 추론으로 별도 근거 검토에 남기고 실제 행성 목록/지도에는 넣지 않는다. 외부 은하의 확정 개별행성 0은 채택 자료의 확보 상태이며 물리적 부재가 아니다. 미측정 궤도/깊이/표면은 null이다.
+- 1400개 임의 배경별 생성은 제거하고 실제 NASA 카탈로그의 고유 호스트 방향4862개로 바꿨다. RA/Dec 기준계/epoch/고유운동은 미검증이며 카메라 중심 반지름1800 표시구·균일 크기/색은 실제 거리/밝기가 아니다. 새 별이나 공간 시차를 생성하지 않는다.
+- 실제 공개 처리 관측영상 3건(HIP65426b JWST, BetaPictorisb SPHERE, HR8799c NACO) 원 JPEG1270679B를 무수정 확보했다. 표면을 분해한 지도/육안 색이나 모형시각별 새 사진으로 쓰지 않는다. 선택 패널에서 영상 확대·정확한 credit/CC BY4.0·기관 출처·관측 논문·처리 조건/한계·해시를 표시한다. 미확보 대상의 빈 상태와 자료/이미지 실패·재시도를 구분한다. 기존 실제 태양계 지도31개·외계행성 분류에 따른 설명용 3D 외관을 보존하며 실측 표면으로 승격하지 않는다.
+- 새 source manifest는 extragalactic_planets.json 39826B/SHA80f4532b8a93db37a072da0e56b2bef5303365cb9d26e1f4d61a599b6824fe3a와 exoplanet_observations.json 21746B/SHA9f342bab497683425e7907417a8df587fbe69f0e5557086f3c138a516a094ea0이다. 공개 사실추출JSON/영상은 런타임·ZIP에 넣고 원문 전체 페이지/논문은 로컬 감사자료로 보존·배포 제외한다. Data_Spec의 전수 목록/권리/해시와 연결한다.
+- 새 API는 GET /api/v1/catalog/extragalactic-planets와 /api/v1/catalog/exoplanet-observations다. 지원 선택의 정상 빈 결과와 무결성/입력 실패503/422/404를 분리한다. 두 기존 저장 속도 필드의 enum을1/6/24/72/8766/87660/876600 h/s 합집합으로 확장했다. 정지 복원·기존 스키마1.0·기존 근거는 보존한다.
+- 18:55 KST 검사: 새 자료/API/저장속도40개 targeted pytest PASS3.03초 후 전체 Python317개 PASS76.28초(기존 Starlette/httpx 경고1). Ruff check 및53파일 format PASS. 당시 TypeScript strict/Vitest61개 PASS1.15초. 시간/설정 추가 UI와 최종 브라우저/ZIP는 후속 실제 결과로 확정한다. 이 시점에서 배포/최종 통합 완료를 주장하지 않는다.
+
+### DEV-009 추가 외관·통합 검사 기록
+
+- 작은천체8프로파일을47999B/SHA33b3662b6978137bf172ab65064aa73a40f119519cfaf6365e89ab0f60db18ec로 추가했다. 기존31지도와102원본은 불변이다. Sedna의 적색·열모형 크기, Haumea의 문헌삼축/공면고리, Quaoar2025고리2개의 중심반지름/기준극과 색·크기 조건을 출처별로 보존한다. 미지도 고체의 임의 크레이터를 제거하고 RGB/자세/미측정형상 가정을 표시한다.
+- 전체Python335 PASS74.01초(기존경고1), strict/Vitest64 PASS1.42초·Vite CmkF8NHm·Ruff55파일 검사를 통과했다. 앞선 DRyIMrA 빌드에서19Chrome+기존focus/exoplanet2=21고유경로 PASS(148.853초/25.393초), 직접 화면 대조의 gear–새세션 겹침과 출처노트 가림을 발견했다. 이후 Cmk에서 작은천체4·강화시간/gear3·sky1·boundedtimeline1=9경로 PASS95.366초와 직접4사진 대조로 첫 두 결함을 교정 확인했다. 원문 JSON/사진은 var/qa/dev009-browser-review.json과 실행별 경로에 보존한다.
+- 후속 직접검토로 미분해외관에도 Published map displayed라고 하던 ready문구와820px프랑스어 gear–언어선택 겹침을 발견했다. 판정창 추가 빌드에서5언어 문구를 외관 표시 완료로 고치고 중간폭 header줄바꿈/검색·출처 위치를 함께 조정한다. 이 후속 변경을 앞선21/9PASS로 소급 검증하지 않는다.
+- 작은천체까지 DataSpec의1769파일/22canonicalmanifest, 최초102원본987987584B 무결성을 대조했으나 이후 DEV-010 신규 자료 전이므로 최종 릴리스 전 다시 갱신한다.
+
+## DEV-010 · 팀 회의 핵심 결정: 행성 3요건·궤도 청소 질량
+
+- 2026-11-14 19:24:59 KST 기록. 사용자가 팀 회의에서 승인한 핵심 기능으로 세드나·에리스 등 선택 시3요건 충족/미충족과 최소 질량을 요구했다. 이어 조건3에 최소질량과 괄호 안 현재질량의 형식을 명시했다. 기존 관측/근거/Git을 보존하고 승인된 범위 변경을 FSD2.15에 통합했다.
+- IAU2006 원문과 Margot2015/2024 논문을 primary source로 확인했다. 공식3요건과 연구 청소모형/가능 시간을 분리하고, a는 현재 태양 거리가 아닌 궤도 긴반지름임을 설명한다. 원형모형mclear=.001239*a^(9/8) 지구질량과 직접비Π를 계산한다. Sedna의 높은 이심률에 대한 실제 청소 임계값으로 주장하지 않는다.
+- 기존9천체 실제 Horizons 요소/물리HTML과 새SBDB8, 실제 질량 문헌을 추적한다. JPL 표의10^24kg와Pluto10^18kg를 구분하고 Earth5.97217e24kg, Pluto1.30246e22kg를 검산했다. Ceres는Moon제외Earth-bodyGM에대한GM비, Haumea는논문본체질량을 사용한다. Eris/Quaoar/Gonggong/Orcus는위성포함계전체질량을별도보존하고본체값으로승격하지 않는다. 반지름/표시형상/가정밀도로Sedna질량을 만들지 않는다.
+- 독립 검토자는 Decimal40자리로17개mclear를 대조하고 분류8/5/4, 본체/계전체 구분과 source해시를 확인했다. source자료 API/근거40개 PASS10.53초다. 원문과 컨테이너SHA를 혼동하지 않도록 pre-freeze 추출본을보존하고 provenance를 보강하는 중이다. 최종 해시·브라우저/전체검사·DataSpec·ZIP는 후속 실제 결과로 확정한다.
+
+### DEV-010 소스 체크포인트와 후속 DEV-011 승인
+
+- 최종 source e6124a457dcbba0907d9f4d0f8fbd777b7cac1963b4b2e49cb5fb6322e8753d8/168453B를 동결했다.19facts+sidecar77558B는런타임,19upstream+sidecar2558555B는로컬감사전용이다. 원문HTML58244B무수정재사용과 기존2manifest/내장원응답 SHA를 구분한 provenance 교정을 독립 검토했다.
+- 전체Python372 PASS76.33초·Vitest64 PASS1.20초·strict/Vite Bp6N6jEm·Ruff57 PASS. 해당빌드의16Chrome영향검사 PASS206.567초, 출처/분류/조건부질량·source503·5언어·그림·실제3사진/포커스·실제관측/근거복원과820French배치를확인했다. 출력 var/qa/dev010-final-browser-results.json 및 dev010-browser-review.json. 같은빌드에서6개직접화면을대조했다. 후보의‘미측정’문구를 채택 자료의 본체 단독값 미확보로 좁히고, q/Q의locale형식을교정한lsFtNhUt에좁은후속검사를진행한다.
+- 이시점DataSpec1566507B/2648줄/SHAf26ba122e0bac9fdfdabbe6881bd7686a7692582f62b0efbd376606e1f7e1b9e,23정본1846파일1796data+49public+helper1·979정본참조/984sidecar포함·32내장응답/49서빙복제다. 최초102원본987987584B와 전체기록파일의SHA/bytes는 독립대조불일치0이다.
+- 사용자의 후속 지시로 DEV-011 밀도가정 질량추정·적색편이/실제카메라관측자실험·블랙홀을 승인 범위에 추가했다. 소스중단점부터 Git에 보존하고 다음 개발을 진행한다. 새미완료작업을 앞선16검사/v0.7구현으로완료라하지않는다. 중국기관 제공자료는 새채택에서 제외하며 관측/배포기관과논문호스트를구분한다. 아날로그밀도는 중력압축/조성/공극률의 조건을 갖는 사용자실험값으로만 허용한다. 관측 질량/IAU분류는 불변이다. 적색편이는 source관측값과 FLRW거리·명시속도SR·Schwarzschild모형의한계를 구분하고 압축카메라팬을측정속도/물리적비행경로로주장하지않는다.
+
+- 마지막lsFtNhUt의5언어1경로 PASS6.568초(실제검사5.3초), French q/Q와KoreanEris2화면직접대조로 숫자locale/채택본체값미확보·계질량분리 문구를 확인했다. 앞선Bp6의16PASS와분리한다. var/qa/dev010-locale-followup.json 및통합browser-review가정본이다.
+- Git정본바이트감사에서 JSON줄바꿈자동정규화가SHA에포함되는manifest와충돌함을발견했다. .gitattributes에서data/manifests/*.json과public관측source sidecar의텍스트/eol자동변환을해제했다. 신규4manifest/3sidecar와이전6manifest의Gitindex를 실제동결바이트와일치시켰다. 이전6의차이는CRLF→LF자동정규화뿐임을byte-assert검증했으며관측원본·수치·현재manifest의실제파일바이트는수정하지않았다. 전체추적manifest/sidecar의Gitindex와workingbytes를대조했다. 과거commit/ZIP은그대로보존한다.

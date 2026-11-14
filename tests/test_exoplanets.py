@@ -46,6 +46,11 @@ def test_index_is_complete_without_inventing_distances_or_surface_maps(catalog):
     assert all(o["distance_pc"] is None for o in value["objects"])
     assert all(0 <= o["ra_deg"] < 360 and -90 <= o["dec_deg"] <= 90 for o in value["objects"])
     assert "sources" not in value and "raw_relative_path" not in value
+    assert all(o["disputed"] is None for o in value["objects"])
+    assert all(
+        row["disc_refname"] is None and row["pl_refname"] is None for row in catalog["records"]
+    )
+    assert any("unknown, not evidence" in note for note in value["limitations"])
     assert object_id("TRAPPIST-1 e") == object_id("TRAPPIST-1 e")
     assert object_id("TRAPPIST-1 e") != object_id("TRAPPIST-1 f")
 

@@ -1,0 +1,2957 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "iau-margot-criteria-v1",
+  "created_utc": "2026-11-14T10:25:22.550055+00:00",
+  "sources": {
+    "iau-2006": {
+      "source_id": "iau-2006",
+      "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+      "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+      "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+      "bytes": 849,
+      "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+      "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+      "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+      "upstream_bytes": 82627,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "nasa-dwarfs": {
+      "source_id": "nasa-dwarfs",
+      "url": "https://science.nasa.gov/dwarf-planets/",
+      "label": "NASA Science current recognized dwarf-planet overview",
+      "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+      "bytes": 654,
+      "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+      "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+      "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+      "upstream_bytes": 307832,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "margot-2015": {
+      "source_id": "margot-2015",
+      "url": "https://arxiv.org/html/1507.06300v4",
+      "label": "Margot (2015), AJ 150 185, doi:10.1088/0004-6256/150/6/185",
+      "local_relative_path": "data/reference/planet-criteria/facts/margot-2015.json",
+      "bytes": 801,
+      "sha256": "415cadcae23fd92d73f1f9addb616496a5aad1e0a701503a54faa1eaf5ba1bd7",
+      "retrieved_utc": "2026-11-14T10:17:10.547539+00:00",
+      "upstream_sha256": "4d0b4502270341c3b266ade6a6acc945ff8948bc05b65def911fd2c25bad2330",
+      "upstream_bytes": 136836,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2015.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "margot-2024": {
+      "source_id": "margot-2024",
+      "url": "https://arxiv.org/html/2407.07590v1",
+      "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+      "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+      "bytes": 1026,
+      "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+      "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+      "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+      "upstream_bytes": 156656,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "sbdb-documentation": {
+      "source_id": "sbdb-documentation",
+      "url": "https://ssd-api.jpl.nasa.gov/doc/sbdb.html",
+      "label": "NASA/JPL Small-Body Database API documentation",
+      "local_relative_path": "data/reference/planet-criteria/facts/sbdb-documentation.json",
+      "bytes": 695,
+      "sha256": "25a13968afa58b237805240c0cbdf8fe612a2f362bd14cba2b7546c404723c17",
+      "retrieved_utc": "2026-11-14T10:17:11.514978+00:00",
+      "upstream_sha256": "a7361e4de7c45407c2d929f3ec40db3bcedd4312fd322fe8a854b37065311390",
+      "upstream_bytes": 97329,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-documentation.json",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "haumea-mass": {
+      "source_id": "haumea-mass",
+      "url": "https://arxiv.org/html/0903.4213v1",
+      "label": "Ragozzine & Brown (2009), AJ 137 4766, Table 2, doi:10.1088/0004-6256/137/6/4766",
+      "local_relative_path": "data/reference/planet-criteria/facts/haumea-mass.json",
+      "bytes": 657,
+      "sha256": "9e475927905c3d69c1d765a213faad41e76962fbc28dffef202ea98615a1557c",
+      "retrieved_utc": "2026-11-14T10:20:20.395413+00:00",
+      "upstream_sha256": "0cd2fc7f6d23ddd4934e826bf089e3992dcfba7474c58fe8bca5d4793b0f1df9",
+      "upstream_bytes": 225172,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/haumea-mass.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "eris-system-mass": {
+      "source_id": "eris-system-mass",
+      "url": "https://ntrs.nasa.gov/api/citations/20210012932/downloads/21-49.pdf",
+      "label": "Holler et al. (2021), Icarus 355 114130, doi:10.1016/j.icarus.2020.114130",
+      "local_relative_path": "data/reference/planet-criteria/facts/eris-system-mass.json",
+      "bytes": 661,
+      "sha256": "f06487e10fa26304c2bc474c8458a21b48c75c30b387208d720e5b16505e45de",
+      "retrieved_utc": "2026-11-14T10:20:21.733657+00:00",
+      "upstream_sha256": "e9cac9fd2e7989053e21d96620bc0b772d7ccf3d40034eb3f1d66be28d1ce1a1",
+      "upstream_bytes": 847643,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/eris-system-mass.pdf",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "gonggong-system-mass": {
+      "source_id": "gonggong-system-mass",
+      "url": "https://arxiv.org/html/1903.05439v1",
+      "label": "Kiss et al. (2019), Icarus, doi:10.1016/j.icarus.2019.03.013, section 3/Table 2",
+      "local_relative_path": "data/reference/planet-criteria/facts/gonggong-system-mass.json",
+      "bytes": 677,
+      "sha256": "adffc01d390579123114aea82a41d0840d4b955bb7f4a56e17d8a63144cf049c",
+      "retrieved_utc": "2026-11-14T10:20:20.647351+00:00",
+      "upstream_sha256": "47277a6a033b3cb9f5975d61d9f56a56209e8a6ee335f272698795ba5f28d58e",
+      "upstream_bytes": 218063,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/gonggong-system-mass.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "quaoar-system-mass": {
+      "source_id": "quaoar-system-mass",
+      "url": "https://arxiv.org/html/2304.09237v1",
+      "label": "Pereira et al. (2023), A&A 673 L4, doi:10.1051/0004-6361/202346365, Table 3",
+      "local_relative_path": "data/reference/planet-criteria/facts/quaoar-system-mass.json",
+      "bytes": 666,
+      "sha256": "2ba70a27f056018028d7cdc78f49c936a824846be62098bd32569b810ba56621",
+      "retrieved_utc": "2026-11-14T10:20:20.981310+00:00",
+      "upstream_sha256": "c7e04aa0bfbc078e5ab0c7e134712cbe4ffb04973b0cf4548b435a764bce9540",
+      "upstream_bytes": 284211,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/quaoar-system-mass.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "orcus-dynamical-ratio": {
+      "source_id": "orcus-dynamical-ratio",
+      "url": "https://arxiv.org/html/2307.04848v1",
+      "label": "Brown & Butler (2023), PSJ, doi:10.3847/PSJ/ace52a, section 2.1/Table 2",
+      "local_relative_path": "data/reference/planet-criteria/facts/orcus-dynamical-ratio.json",
+      "bytes": 839,
+      "sha256": "ac26ede30685da5196d04cf6a815c679a879aac9078be6cd3e643e5cf98d8c56",
+      "retrieved_utc": "2026-11-14T10:20:21.230551+00:00",
+      "upstream_sha256": "26cef52497cc7f3f53564bb0d2bbb0e27ac3d5794948fac74945335194ae5d41",
+      "upstream_bytes": 109379,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/orcus-dynamical-ratio.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "sbdb-ceres": {
+      "source_id": "sbdb-ceres",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=1&phys-par=true&full-prec=true",
+      "label": "NASA/JPL SBDB 1 Ceres (A801 AA)",
+      "local_relative_path": "data/reference/planet-criteria/facts/sbdb-ceres.json",
+      "bytes": 9199,
+      "sha256": "b0bff970cc12d8a1c9764cfe200b14e7ae62f291a20ee6b1c0b5bfd38459c063",
+      "retrieved_utc": "2026-11-14T10:17:12.064835+00:00",
+      "upstream_sha256": "57b4eac77f7861040e938450057cfb3dcc5170137b3f2b324f0658ec3de28edd",
+      "upstream_bytes": 5088,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-ceres.json",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "sbdb-haumea": {
+      "source_id": "sbdb-haumea",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=136108&phys-par=true&full-prec=true",
+      "label": "NASA/JPL SBDB 136108 Haumea (2003 EL61)",
+      "local_relative_path": "data/reference/planet-criteria/facts/sbdb-haumea.json",
+      "bytes": 6499,
+      "sha256": "e5a21f0f8039089fcdb3788783ed53bcc3c14e75880d54c5b118d4e9d368cf0a",
+      "retrieved_utc": "2026-11-14T10:17:23.840476+00:00",
+      "upstream_sha256": "0b842f8ce0627d090ef96886ab44110e56ff2ffe5f4944a2fe92023c8db9c387",
+      "upstream_bytes": 3518,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-haumea.json",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "sbdb-makemake": {
+      "source_id": "sbdb-makemake",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=136472&phys-par=true&full-prec=true",
+      "label": "NASA/JPL SBDB 136472 Makemake (2005 FY9)",
+      "local_relative_path": "data/reference/planet-criteria/facts/sbdb-makemake.json",
+      "bytes": 5775,
+      "sha256": "3dccbe9eaca9d21adba213704d87fa13c403bf625f63a983e97fe19aa53563bf",
+      "retrieved_utc": "2026-11-14T10:17:24.345564+00:00",
+      "upstream_sha256": "1b3663679144a76f12bf4f54c0b9380c4e33a02f29b6907ee96d24ca7eeb3508",
+      "upstream_bytes": 2793,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-makemake.json",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "sbdb-eris": {
+      "source_id": "sbdb-eris",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=136199&phys-par=true&full-prec=true",
+      "label": "NASA/JPL SBDB 136199 Eris (2003 UB313)",
+      "local_relative_path": "data/reference/planet-criteria/facts/sbdb-eris.json",
+      "bytes": 5717,
+      "sha256": "a907b5645a4a543dd4bc4f28ba2ecbc44a2b5a0812a8410850c9f67343f6acd4",
+      "retrieved_utc": "2026-11-14T10:17:24.880880+00:00",
+      "upstream_sha256": "026c5249ccb9a3d3aec70e240d7e5c708c5ebfc5949c22965f3539b35cc5a4d8",
+      "upstream_bytes": 2739,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-eris.json",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "sbdb-sedna": {
+      "source_id": "sbdb-sedna",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=90377&phys-par=true&full-prec=true",
+      "label": "NASA/JPL SBDB 90377 Sedna (2003 VB12)",
+      "local_relative_path": "data/reference/planet-criteria/facts/sbdb-sedna.json",
+      "bytes": 5747,
+      "sha256": "fd771707b16b0b0415c14efcd63c56ba6d7692a91216e2c68c0825d45716fc0f",
+      "retrieved_utc": "2026-11-14T10:17:25.442687+00:00",
+      "upstream_sha256": "53d48e286eb6604999d071d3c56be2c9053079e6265fa3d08370eab0b6185c25",
+      "upstream_bytes": 2777,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-sedna.json",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "sbdb-quaoar": {
+      "source_id": "sbdb-quaoar",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=50000&phys-par=true&full-prec=true",
+      "label": "NASA/JPL SBDB 50000 Quaoar (2002 LM60)",
+      "local_relative_path": "data/reference/planet-criteria/facts/sbdb-quaoar.json",
+      "bytes": 5740,
+      "sha256": "a3cf82c6fc276c21f7d46037ff087926bce30ff6086efd724415ed20a5eb3939",
+      "retrieved_utc": "2026-11-14T10:17:25.979824+00:00",
+      "upstream_sha256": "f70f51ab75ac1cf325f3ba4e25eec182a726f3a4f39bdec54f46b1cfc24a2ddc",
+      "upstream_bytes": 2759,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-quaoar.json",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "sbdb-orcus": {
+      "source_id": "sbdb-orcus",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=90482&phys-par=true&full-prec=true",
+      "label": "NASA/JPL SBDB 90482 Orcus (2004 DW)",
+      "local_relative_path": "data/reference/planet-criteria/facts/sbdb-orcus.json",
+      "bytes": 5734,
+      "sha256": "4f33ea621da5ff6d8ee59cf5d83be171920010311cf9c78620e5b16c79d64c35",
+      "retrieved_utc": "2026-11-14T10:17:26.514097+00:00",
+      "upstream_sha256": "2997bb5039c6a0f1ba6e16016fadbf51ad157343e68ae8536c242624f0a61f17",
+      "upstream_bytes": 2755,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-orcus.json",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "sbdb-gonggong": {
+      "source_id": "sbdb-gonggong",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=225088&phys-par=true&full-prec=true",
+      "label": "NASA/JPL SBDB 225088 Gonggong (2007 OR10)",
+      "local_relative_path": "data/reference/planet-criteria/facts/sbdb-gonggong.json",
+      "bytes": 5734,
+      "sha256": "de01c46733e75303ef01adcc9f8a13fff3e760ea7c86d0ca4d9f146f01c57a75",
+      "retrieved_utc": "2026-11-14T10:17:27.015033+00:00",
+      "upstream_sha256": "130177535bfff6b61645c657fddb910ccfaed7493fa00d47324c4ce11f9c4b54",
+      "upstream_bytes": 2756,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-gonggong.json",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "major-inputs": {
+      "source_id": "major-inputs",
+      "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "label": "Existing JPL physical mass table and heliocentric osculating-element snapshot",
+      "local_relative_path": "data/reference/planet-criteria/facts/major-inputs.json",
+      "bytes": 6336,
+      "sha256": "31af3b273cc9e4a98dd21f13777822af92c05fc70ad104a4e63ca15fc24ad63b",
+      "retrieved_utc": "2026-11-14T02:08:20.356887+00:00",
+      "upstream_sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+      "upstream_bytes": 58244,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/jpl-physical-table.html",
+      "upstream_original_requirement": "optional_not_runtime",
+      "upstream_acquisition_kind": "unmodified_embedded_response_reused_not_new_download",
+      "reused_from_manifest": {
+        "path": "data/manifests/solar_system_ephemeris.json",
+        "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a",
+        "embedded_field": "physical_parameters_source.raw_response_html"
+      }
+    }
+  },
+  "dependencies": {
+    "orbit": {
+      "path": "data/manifests/solar_system_orbits.json",
+      "bytes": 105261,
+      "sha256": "b58622f6ce82c686c644c26c48625ab3d3af8a36fb426790939ab6473ba6c623"
+    },
+    "ephemeris": {
+      "path": "data/manifests/solar_system_ephemeris.json",
+      "bytes": 172715,
+      "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a"
+    }
+  },
+  "coverage": "17_existing_solar_system_bodies_not_a_complete_census",
+  "model": {
+    "id": "margot-solar-10gyr-v1",
+    "coefficient_earth_mass": 0.001239,
+    "semimajor_exponent": 1.125,
+    "host_mass_solar": 1,
+    "clearing_time_gyr": 10,
+    "hill_zone_factor": 3.4641016151377544,
+    "formula": "m_clear/M_earth = 0.001239 (a/au)^(9/8)",
+    "published_rounded_pi_coefficient": 807,
+    "pi_computation": "mass_earth / minimum_mass_earth",
+    "source": {
+      "source_id": "margot-2024",
+      "url": "https://arxiv.org/html/2407.07590v1",
+      "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+      "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+      "bytes": 1026,
+      "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+      "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+      "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+      "upstream_bytes": 156656,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "additional_source": {
+      "source_id": "margot-2015",
+      "url": "https://arxiv.org/html/1507.06300v4",
+      "label": "Margot (2015), AJ 150 185, doi:10.1088/0004-6256/150/6/185",
+      "local_relative_path": "data/reference/planet-criteria/facts/margot-2015.json",
+      "bytes": 801,
+      "sha256": "415cadcae23fd92d73f1f9addb616496a5aad1e0a701503a54faa1eaf5ba1bd7",
+      "retrieved_utc": "2026-11-14T10:17:10.547539+00:00",
+      "upstream_sha256": "4d0b4502270341c3b266ade6a6acc945ff8948bc05b65def911fd2c25bad2330",
+      "upstream_bytes": 136836,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2015.html",
+      "upstream_original_requirement": "optional_not_runtime"
+    },
+    "limitations": [
+      "The IAU 2006 resolution supplies a qualitative definition; this numeric clearing threshold is a research model, not an official IAU numeric test.",
+      "The adopted published shortcut assumes a solar-mass host, a 10-billion-year clearing time and C=2 sqrt(3) Hill radii. This is not the current age of the Solar System.",
+      "The expression is an idealized circular-orbit diffusive clearing model. Evaluating it at the semimajor axis of an eccentric orbit is a reference calculation, not a validated eccentric-orbit clearance requirement.",
+      "Other planets, resonances, dynamical friction, gas drag, disk tides, migration and full N-body history are not solved.",
+      "A clearing ability under a specified time horizon is not an observation that all neighbouring bodies are absent. Satellites, Trojan populations and orbit-crossing minor bodies can remain.",
+      "The coefficient 0.001239 is adopted as published. Pi is calculated by direct division; the separately rounded published 807 coefficient is metadata only. Rounded general-form constants need not reproduce this shortcut to machine precision.",
+      "Pi is dimensionless, not an existence probability, confidence percentage, measured clearing fraction or independent reclassification."
+    ]
+  },
+  "release_rule": "Include facts/ and sidecars; upstream documents are local-only. Existing dependency manifests are required.",
+  "objects": {
+    "mercury": {
+      "object_id": "mercury",
+      "name": "Mercury",
+      "official_classification": "planet",
+      "classification_source": {
+        "source_id": "iau-2006",
+        "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+        "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+        "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+        "bytes": 849,
+        "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+        "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+        "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+        "upstream_bytes": 82627,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27199%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+            "label": "JPL Horizons heliocentric geometric osculating elements",
+            "sha256": "2ed198622e160d21358a3faef41410c751386410694d5d8bc1632697a9a78a53",
+            "bytes": 6918,
+            "retrieved_utc": "2026-11-14T02:29:33.861369+00:00",
+            "dependency_manifest": "data/manifests/solar_system_orbits.json"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_dominant",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 0.3870976993005595,
+        "eccentricity": 0.2056375593568061,
+        "perihelion_au": 0.3074958731837578,
+        "aphelion_au": 0.4666995254173613,
+        "period_days": 87.96892321087506,
+        "epoch_tdb_jd": 2461358.500800726,
+        "frame": "Ecliptic of J2000.0",
+        "center": "Sun (10)",
+        "source_time_scale": "TDB",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27199%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+          "label": "JPL Horizons heliocentric geometric osculating elements",
+          "sha256": "2ed198622e160d21358a3faef41410c751386410694d5d8bc1632697a9a78a53",
+          "bytes": 6918,
+          "retrieved_utc": "2026-11-14T02:29:33.861369+00:00",
+          "dependency_manifest": "data/manifests/solar_system_orbits.json"
+        }
+      },
+      "mass": {
+        "earth_masses": 0.0552735437872666,
+        "mass_kg": 3.3010299999999994e+23,
+        "uncertainty_kg": 2.1e+19,
+        "status": "measured_or_literature",
+        "source": {
+          "source_id": "major-inputs",
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "Existing JPL physical mass table and heliocentric osculating-element snapshot",
+          "local_relative_path": "data/reference/planet-criteria/facts/major-inputs.json",
+          "bytes": 6336,
+          "sha256": "31af3b273cc9e4a98dd21f13777822af92c05fc70ad104a4e63ca15fc24ad63b",
+          "retrieved_utc": "2026-11-14T02:08:20.356887+00:00",
+          "upstream_sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+          "upstream_bytes": 58244,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/jpl-physical-table.html",
+          "upstream_original_requirement": "optional_not_runtime",
+          "upstream_acquisition_kind": "unmodified_embedded_response_reused_not_new_download",
+          "reused_from_manifest": {
+            "path": "data/manifests/solar_system_ephemeris.json",
+            "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a",
+            "embedded_field": "physical_parameters_source.raw_response_html"
+          }
+        },
+        "definition": "JPL tabulated body mass; converted to Earth masses with the same table's Earth body mass, not the Earth–Moon barycenter.",
+        "conversion_earth_mass_kg": 5.97217e+24,
+        "original_column_power_of_ten": 24
+      },
+      "system_mass": null,
+      "clearing": {
+        "minimum_mass_earth": 0.0004259606393820763,
+        "pi": 129.7620922615049,
+        "status": "computed",
+        "model_classification": "meets_model",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated."
+      ]
+    },
+    "venus": {
+      "object_id": "venus",
+      "name": "Venus",
+      "official_classification": "planet",
+      "classification_source": {
+        "source_id": "iau-2006",
+        "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+        "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+        "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+        "bytes": 849,
+        "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+        "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+        "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+        "upstream_bytes": 82627,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27299%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+            "label": "JPL Horizons heliocentric geometric osculating elements",
+            "sha256": "ab4743e85d9ac7f11e5dcf69ba19429fec01eee9a68620d5fb4130193e8e6cdc",
+            "bytes": 6918,
+            "retrieved_utc": "2026-11-14T02:29:34.358178+00:00",
+            "dependency_manifest": "data/manifests/solar_system_orbits.json"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_dominant",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 0.7233375060054001,
+        "eccentricity": 0.006743921035309493,
+        "perihelion_au": 0.7184593749830218,
+        "aphelion_au": 0.7282156370277784,
+        "period_days": 224.703259351562,
+        "epoch_tdb_jd": 2461358.500800726,
+        "frame": "Ecliptic of J2000.0",
+        "center": "Sun (10)",
+        "source_time_scale": "TDB",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27299%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+          "label": "JPL Horizons heliocentric geometric osculating elements",
+          "sha256": "ab4743e85d9ac7f11e5dcf69ba19429fec01eee9a68620d5fb4130193e8e6cdc",
+          "bytes": 6918,
+          "retrieved_utc": "2026-11-14T02:29:34.358178+00:00",
+          "dependency_manifest": "data/manifests/solar_system_orbits.json"
+        }
+      },
+      "mass": {
+        "earth_masses": 0.8149985683595744,
+        "mass_kg": 4.867309999999999e+24,
+        "uncertainty_kg": 2.3e+20,
+        "status": "measured_or_literature",
+        "source": {
+          "source_id": "major-inputs",
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "Existing JPL physical mass table and heliocentric osculating-element snapshot",
+          "local_relative_path": "data/reference/planet-criteria/facts/major-inputs.json",
+          "bytes": 6336,
+          "sha256": "31af3b273cc9e4a98dd21f13777822af92c05fc70ad104a4e63ca15fc24ad63b",
+          "retrieved_utc": "2026-11-14T02:08:20.356887+00:00",
+          "upstream_sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+          "upstream_bytes": 58244,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/jpl-physical-table.html",
+          "upstream_original_requirement": "optional_not_runtime",
+          "upstream_acquisition_kind": "unmodified_embedded_response_reused_not_new_download",
+          "reused_from_manifest": {
+            "path": "data/manifests/solar_system_ephemeris.json",
+            "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a",
+            "embedded_field": "physical_parameters_source.raw_response_html"
+          }
+        },
+        "definition": "JPL tabulated body mass; converted to Earth masses with the same table's Earth body mass, not the Earth–Moon barycenter.",
+        "conversion_earth_mass_kg": 5.97217e+24,
+        "original_column_power_of_ten": 24
+      },
+      "system_mass": null,
+      "clearing": {
+        "minimum_mass_earth": 0.0008606566204831914,
+        "pi": 946.9497462321459,
+        "status": "computed",
+        "model_classification": "meets_model",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated."
+      ]
+    },
+    "earth": {
+      "object_id": "earth",
+      "name": "Earth",
+      "official_classification": "planet",
+      "classification_source": {
+        "source_id": "iau-2006",
+        "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+        "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+        "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+        "bytes": 849,
+        "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+        "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+        "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+        "upstream_bytes": 82627,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+            "label": "JPL Horizons heliocentric geometric osculating elements",
+            "sha256": "a58fd698b739819fc8e1e8ff805ff6932bde67ed35ec9a3f1cce6fbb00f209ee",
+            "bytes": 6918,
+            "retrieved_utc": "2026-11-14T02:29:34.852930+00:00",
+            "dependency_manifest": "data/manifests/solar_system_orbits.json"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_dominant",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 1.000532343107907,
+        "eccentricity": 0.01721642665762426,
+        "perihelion_au": 0.983306751404209,
+        "aphelion_au": 1.017757934811605,
+        "period_days": 365.548051169173,
+        "epoch_tdb_jd": 2461358.500800726,
+        "frame": "Ecliptic of J2000.0",
+        "center": "Sun (10)",
+        "source_time_scale": "TDB",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+          "label": "JPL Horizons heliocentric geometric osculating elements",
+          "sha256": "a58fd698b739819fc8e1e8ff805ff6932bde67ed35ec9a3f1cce6fbb00f209ee",
+          "bytes": 6918,
+          "retrieved_utc": "2026-11-14T02:29:34.852930+00:00",
+          "dependency_manifest": "data/manifests/solar_system_orbits.json"
+        }
+      },
+      "mass": {
+        "earth_masses": 1.0,
+        "mass_kg": 5.97217e+24,
+        "uncertainty_kg": 2.7999999999999997e+20,
+        "status": "measured_or_literature",
+        "source": {
+          "source_id": "major-inputs",
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "Existing JPL physical mass table and heliocentric osculating-element snapshot",
+          "local_relative_path": "data/reference/planet-criteria/facts/major-inputs.json",
+          "bytes": 6336,
+          "sha256": "31af3b273cc9e4a98dd21f13777822af92c05fc70ad104a4e63ca15fc24ad63b",
+          "retrieved_utc": "2026-11-14T02:08:20.356887+00:00",
+          "upstream_sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+          "upstream_bytes": 58244,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/jpl-physical-table.html",
+          "upstream_original_requirement": "optional_not_runtime",
+          "upstream_acquisition_kind": "unmodified_embedded_response_reused_not_new_download",
+          "reused_from_manifest": {
+            "path": "data/manifests/solar_system_ephemeris.json",
+            "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a",
+            "embedded_field": "physical_parameters_source.raw_response_html"
+          }
+        },
+        "definition": "JPL tabulated body mass; converted to Earth masses with the same table's Earth body mass, not the Earth–Moon barycenter.",
+        "conversion_earth_mass_kg": 5.97217e+24,
+        "original_column_power_of_ten": 24
+      },
+      "system_mass": null,
+      "clearing": {
+        "minimum_mass_earth": 0.0012397420444337703,
+        "pi": 806.6194128769198,
+        "status": "computed",
+        "model_classification": "meets_model",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated."
+      ]
+    },
+    "mars": {
+      "object_id": "mars",
+      "name": "Mars",
+      "official_classification": "planet",
+      "classification_source": {
+        "source_id": "iau-2006",
+        "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+        "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+        "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+        "bytes": 849,
+        "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+        "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+        "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+        "upstream_bytes": 82627,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27499%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+            "label": "JPL Horizons heliocentric geometric osculating elements",
+            "sha256": "17e85664c146dbb9deac1f4e2ba740bd6de2e2d8bb1ef3264741c828b4bec763",
+            "bytes": 6919,
+            "retrieved_utc": "2026-11-14T02:29:35.389296+00:00",
+            "dependency_manifest": "data/manifests/solar_system_orbits.json"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_dominant",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 1.523744140446621,
+        "eccentricity": 0.09339506791397338,
+        "perihelion_au": 1.38143395296609,
+        "aphelion_au": 1.666054327927152,
+        "period_days": 687.015332601877,
+        "epoch_tdb_jd": 2461358.500800726,
+        "frame": "Ecliptic of J2000.0",
+        "center": "Sun (10)",
+        "source_time_scale": "TDB",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27499%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+          "label": "JPL Horizons heliocentric geometric osculating elements",
+          "sha256": "17e85664c146dbb9deac1f4e2ba740bd6de2e2d8bb1ef3264741c828b4bec763",
+          "bytes": 6919,
+          "retrieved_utc": "2026-11-14T02:29:35.389296+00:00",
+          "dependency_manifest": "data/manifests/solar_system_orbits.json"
+        }
+      },
+      "mass": {
+        "earth_masses": 0.10744687441918097,
+        "mass_kg": 6.41691e+23,
+        "uncertainty_kg": 3e+19,
+        "status": "measured_or_literature",
+        "source": {
+          "source_id": "major-inputs",
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "Existing JPL physical mass table and heliocentric osculating-element snapshot",
+          "local_relative_path": "data/reference/planet-criteria/facts/major-inputs.json",
+          "bytes": 6336,
+          "sha256": "31af3b273cc9e4a98dd21f13777822af92c05fc70ad104a4e63ca15fc24ad63b",
+          "retrieved_utc": "2026-11-14T02:08:20.356887+00:00",
+          "upstream_sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+          "upstream_bytes": 58244,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/jpl-physical-table.html",
+          "upstream_original_requirement": "optional_not_runtime",
+          "upstream_acquisition_kind": "unmodified_embedded_response_reused_not_new_download",
+          "reused_from_manifest": {
+            "path": "data/manifests/solar_system_ephemeris.json",
+            "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a",
+            "embedded_field": "physical_parameters_source.raw_response_html"
+          }
+        },
+        "definition": "JPL tabulated body mass; converted to Earth masses with the same table's Earth body mass, not the Earth–Moon barycenter.",
+        "conversion_earth_mass_kg": 5.97217e+24,
+        "original_column_power_of_ten": 24
+      },
+      "system_mass": null,
+      "clearing": {
+        "minimum_mass_earth": 0.0019899738113244047,
+        "pi": 53.994114800772635,
+        "status": "computed",
+        "model_classification": "meets_model",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated."
+      ]
+    },
+    "jupiter": {
+      "object_id": "jupiter",
+      "name": "Jupiter",
+      "official_classification": "planet",
+      "classification_source": {
+        "source_id": "iau-2006",
+        "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+        "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+        "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+        "bytes": 849,
+        "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+        "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+        "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+        "upstream_bytes": 82627,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27599%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+            "label": "JPL Horizons heliocentric geometric osculating elements",
+            "sha256": "098f57e4408e2a8cb9ad9250bcf3e90febcdbf59eb3bc1684901275a8341b4fc",
+            "bytes": 6934,
+            "retrieved_utc": "2026-11-14T02:29:35.923680+00:00",
+            "dependency_manifest": "data/manifests/solar_system_orbits.json"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_dominant",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 5.202127737639464,
+        "eccentricity": 0.04817814357824998,
+        "perihelion_au": 4.951498880583074,
+        "aphelion_au": 5.452756594695854,
+        "period_days": 4331.74373851479,
+        "epoch_tdb_jd": 2461358.500800726,
+        "frame": "Ecliptic of J2000.0",
+        "center": "Sun (10)",
+        "source_time_scale": "TDB",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27599%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+          "label": "JPL Horizons heliocentric geometric osculating elements",
+          "sha256": "098f57e4408e2a8cb9ad9250bcf3e90febcdbf59eb3bc1684901275a8341b4fc",
+          "bytes": 6934,
+          "retrieved_utc": "2026-11-14T02:29:35.923680+00:00",
+          "dependency_manifest": "data/manifests/solar_system_orbits.json"
+        }
+      },
+      "mass": {
+        "earth_masses": 317.82836054566434,
+        "mass_kg": 1.898125e+27,
+        "uncertainty_kg": 8.8e+22,
+        "status": "measured_or_literature",
+        "source": {
+          "source_id": "major-inputs",
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "Existing JPL physical mass table and heliocentric osculating-element snapshot",
+          "local_relative_path": "data/reference/planet-criteria/facts/major-inputs.json",
+          "bytes": 6336,
+          "sha256": "31af3b273cc9e4a98dd21f13777822af92c05fc70ad104a4e63ca15fc24ad63b",
+          "retrieved_utc": "2026-11-14T02:08:20.356887+00:00",
+          "upstream_sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+          "upstream_bytes": 58244,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/jpl-physical-table.html",
+          "upstream_original_requirement": "optional_not_runtime",
+          "upstream_acquisition_kind": "unmodified_embedded_response_reused_not_new_download",
+          "reused_from_manifest": {
+            "path": "data/manifests/solar_system_ephemeris.json",
+            "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a",
+            "embedded_field": "physical_parameters_source.raw_response_html"
+          }
+        },
+        "definition": "JPL tabulated body mass; converted to Earth masses with the same table's Earth body mass, not the Earth–Moon barycenter.",
+        "conversion_earth_mass_kg": 5.97217e+24,
+        "original_column_power_of_ten": 24
+      },
+      "system_mass": null,
+      "clearing": {
+        "minimum_mass_earth": 0.007920907559716805,
+        "pi": 40125.24551631399,
+        "status": "computed",
+        "model_classification": "meets_model",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated."
+      ]
+    },
+    "saturn": {
+      "object_id": "saturn",
+      "name": "Saturn",
+      "official_classification": "planet",
+      "classification_source": {
+        "source_id": "iau-2006",
+        "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+        "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+        "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+        "bytes": 849,
+        "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+        "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+        "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+        "upstream_bytes": 82627,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27699%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+            "label": "JPL Horizons heliocentric geometric osculating elements",
+            "sha256": "a301d564a1398c672787f9b72257d92637b1cc3ddf098f8d35ea53e196ed7ca0",
+            "bytes": 6920,
+            "retrieved_utc": "2026-11-14T02:29:36.487135+00:00",
+            "dependency_manifest": "data/manifests/solar_system_orbits.json"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_dominant",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 9.53651157791642,
+        "eccentricity": 0.05524641336428856,
+        "perihelion_au": 9.009653517229525,
+        "aphelion_au": 10.06336963860331,
+        "period_days": 10755.25427384387,
+        "epoch_tdb_jd": 2461358.500800726,
+        "frame": "Ecliptic of J2000.0",
+        "center": "Sun (10)",
+        "source_time_scale": "TDB",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27699%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+          "label": "JPL Horizons heliocentric geometric osculating elements",
+          "sha256": "a301d564a1398c672787f9b72257d92637b1cc3ddf098f8d35ea53e196ed7ca0",
+          "bytes": 6920,
+          "retrieved_utc": "2026-11-14T02:29:36.487135+00:00",
+          "dependency_manifest": "data/manifests/solar_system_orbits.json"
+        }
+      },
+      "mass": {
+        "earth_masses": 95.1608879184618,
+        "mass_kg": 5.68317e+26,
+        "uncertainty_kg": 2.6e+22,
+        "status": "measured_or_literature",
+        "source": {
+          "source_id": "major-inputs",
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "Existing JPL physical mass table and heliocentric osculating-element snapshot",
+          "local_relative_path": "data/reference/planet-criteria/facts/major-inputs.json",
+          "bytes": 6336,
+          "sha256": "31af3b273cc9e4a98dd21f13777822af92c05fc70ad104a4e63ca15fc24ad63b",
+          "retrieved_utc": "2026-11-14T02:08:20.356887+00:00",
+          "upstream_sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+          "upstream_bytes": 58244,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/jpl-physical-table.html",
+          "upstream_original_requirement": "optional_not_runtime",
+          "upstream_acquisition_kind": "unmodified_embedded_response_reused_not_new_download",
+          "reused_from_manifest": {
+            "path": "data/manifests/solar_system_ephemeris.json",
+            "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a",
+            "embedded_field": "physical_parameters_source.raw_response_html"
+          }
+        },
+        "definition": "JPL tabulated body mass; converted to Earth masses with the same table's Earth body mass, not the Earth–Moon barycenter.",
+        "conversion_earth_mass_kg": 5.97217e+24,
+        "original_column_power_of_ten": 24
+      },
+      "system_mass": null,
+      "clearing": {
+        "minimum_mass_earth": 0.01566334592015214,
+        "pi": 6075.386983315599,
+        "status": "computed",
+        "model_classification": "meets_model",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated."
+      ]
+    },
+    "uranus": {
+      "object_id": "uranus",
+      "name": "Uranus",
+      "official_classification": "planet",
+      "classification_source": {
+        "source_id": "iau-2006",
+        "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+        "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+        "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+        "bytes": 849,
+        "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+        "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+        "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+        "upstream_bytes": 82627,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27799%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+            "label": "JPL Horizons heliocentric geometric osculating elements",
+            "sha256": "0f37162f35509579de566d00b5469fdeb11aadf76d5e01e34a08c6644807be5a",
+            "bytes": 6934,
+            "retrieved_utc": "2026-11-14T02:29:36.995380+00:00",
+            "dependency_manifest": "data/manifests/solar_system_orbits.json"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_dominant",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 19.26013739748618,
+        "eccentricity": 0.04764097461034683,
+        "perihelion_au": 18.34256568074075,
+        "aphelion_au": 20.17770911423161,
+        "period_days": 30872.94209173106,
+        "epoch_tdb_jd": 2461358.500800726,
+        "frame": "Ecliptic of J2000.0",
+        "center": "Sun (10)",
+        "source_time_scale": "TDB",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27799%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+          "label": "JPL Horizons heliocentric geometric osculating elements",
+          "sha256": "0f37162f35509579de566d00b5469fdeb11aadf76d5e01e34a08c6644807be5a",
+          "bytes": 6934,
+          "retrieved_utc": "2026-11-14T02:29:36.995380+00:00",
+          "dependency_manifest": "data/manifests/solar_system_orbits.json"
+        }
+      },
+      "mass": {
+        "earth_masses": 14.53573826599042,
+        "mass_kg": 8.68099e+25,
+        "uncertainty_kg": 4e+21,
+        "status": "measured_or_literature",
+        "source": {
+          "source_id": "major-inputs",
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "Existing JPL physical mass table and heliocentric osculating-element snapshot",
+          "local_relative_path": "data/reference/planet-criteria/facts/major-inputs.json",
+          "bytes": 6336,
+          "sha256": "31af3b273cc9e4a98dd21f13777822af92c05fc70ad104a4e63ca15fc24ad63b",
+          "retrieved_utc": "2026-11-14T02:08:20.356887+00:00",
+          "upstream_sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+          "upstream_bytes": 58244,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/jpl-physical-table.html",
+          "upstream_original_requirement": "optional_not_runtime",
+          "upstream_acquisition_kind": "unmodified_embedded_response_reused_not_new_download",
+          "reused_from_manifest": {
+            "path": "data/manifests/solar_system_ephemeris.json",
+            "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a",
+            "embedded_field": "physical_parameters_source.raw_response_html"
+          }
+        },
+        "definition": "JPL tabulated body mass; converted to Earth masses with the same table's Earth body mass, not the Earth–Moon barycenter.",
+        "conversion_earth_mass_kg": 5.97217e+24,
+        "original_column_power_of_ten": 24
+      },
+      "system_mass": null,
+      "clearing": {
+        "minimum_mass_earth": 0.03453926646868994,
+        "pi": 420.8467565218027,
+        "status": "computed",
+        "model_classification": "meets_model",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated."
+      ]
+    },
+    "neptune": {
+      "object_id": "neptune",
+      "name": "Neptune",
+      "official_classification": "planet",
+      "classification_source": {
+        "source_id": "iau-2006",
+        "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+        "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+        "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+        "bytes": 849,
+        "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+        "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+        "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+        "upstream_bytes": 82627,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27899%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+            "label": "JPL Horizons heliocentric geometric osculating elements",
+            "sha256": "d0188bdbced0724122a7a99cd10b57339f5ab788d05366156e4dc7560b388f5d",
+            "bytes": 6934,
+            "retrieved_utc": "2026-11-14T02:29:37.522437+00:00",
+            "dependency_manifest": "data/manifests/solar_system_orbits.json"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_dominant",
+          "source": {
+            "source_id": "iau-2006",
+            "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx",
+            "label": "IAU adopted Solar-System planet definition, 24 August 2006",
+            "local_relative_path": "data/reference/planet-criteria/facts/iau-2006.json",
+            "bytes": 849,
+            "sha256": "916669286f648a03a8b2d12164d4219a7d16458823ac695b2288b470c6cff170",
+            "retrieved_utc": "2026-11-14T10:17:10.245940+00:00",
+            "upstream_sha256": "ee4922d320b740777c8d48a869aa6b59c0dc5448c012239d701d69e9e6882ffb",
+            "upstream_bytes": 82627,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/iau-2006.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 30.0547997283707,
+        "eccentricity": 0.00955938149888943,
+        "perihelion_au": 29.76749443189449,
+        "aphelion_au": 30.34210502484691,
+        "period_days": 60180.80614217661,
+        "epoch_tdb_jd": 2461358.500800726,
+        "frame": "Ecliptic of J2000.0",
+        "center": "Sun (10)",
+        "source_time_scale": "TDB",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27899%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+          "label": "JPL Horizons heliocentric geometric osculating elements",
+          "sha256": "d0188bdbced0724122a7a99cd10b57339f5ab788d05366156e4dc7560b388f5d",
+          "bytes": 6934,
+          "retrieved_utc": "2026-11-14T02:29:37.522437+00:00",
+          "dependency_manifest": "data/manifests/solar_system_orbits.json"
+        }
+      },
+      "mass": {
+        "earth_masses": 17.147736919746087,
+        "mass_kg": 1.024092e+26,
+        "uncertainty_kg": 4.8e+21,
+        "status": "measured_or_literature",
+        "source": {
+          "source_id": "major-inputs",
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "Existing JPL physical mass table and heliocentric osculating-element snapshot",
+          "local_relative_path": "data/reference/planet-criteria/facts/major-inputs.json",
+          "bytes": 6336,
+          "sha256": "31af3b273cc9e4a98dd21f13777822af92c05fc70ad104a4e63ca15fc24ad63b",
+          "retrieved_utc": "2026-11-14T02:08:20.356887+00:00",
+          "upstream_sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+          "upstream_bytes": 58244,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/jpl-physical-table.html",
+          "upstream_original_requirement": "optional_not_runtime",
+          "upstream_acquisition_kind": "unmodified_embedded_response_reused_not_new_download",
+          "reused_from_manifest": {
+            "path": "data/manifests/solar_system_ephemeris.json",
+            "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a",
+            "embedded_field": "physical_parameters_source.raw_response_html"
+          }
+        },
+        "definition": "JPL tabulated body mass; converted to Earth masses with the same table's Earth body mass, not the Earth–Moon barycenter.",
+        "conversion_earth_mass_kg": 5.97217e+24,
+        "original_column_power_of_ten": 24
+      },
+      "system_mass": null,
+      "clearing": {
+        "minimum_mass_earth": 0.05698025317194244,
+        "pi": 300.941746748675,
+        "status": "computed",
+        "model_classification": "meets_model",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated."
+      ]
+    },
+    "pluto": {
+      "object_id": "pluto",
+      "name": "Pluto",
+      "official_classification": "dwarf_planet",
+      "classification_source": {
+        "source_id": "nasa-dwarfs",
+        "url": "https://science.nasa.gov/dwarf-planets/",
+        "label": "NASA Science current recognized dwarf-planet overview",
+        "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+        "bytes": 654,
+        "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+        "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+        "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+        "upstream_bytes": 307832,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27999%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+            "label": "JPL Horizons heliocentric geometric osculating elements",
+            "sha256": "647527c7cb754ac4b4403f56b7b1199f06a934eea1ed4219b609e584742eee2f",
+            "bytes": 6934,
+            "retrieved_utc": "2026-11-14T02:29:38.039088+00:00",
+            "dependency_manifest": "data/manifests/solar_system_orbits.json"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "not_met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_not_dominant",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 38.92487123708416,
+        "eccentricity": 0.2457694491993494,
+        "perihelion_au": 29.35832707299039,
+        "aphelion_au": 48.49141540117792,
+        "period_days": 88703.18262019457,
+        "epoch_tdb_jd": 2461358.500800726,
+        "frame": "Ecliptic of J2000.0",
+        "center": "Sun (10)",
+        "source_time_scale": "TDB",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27999%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27ELEMENTS%27&CENTER=%27500%4010%27&TLIST=%272461357.500800726004+2461358.500800726004+2461359.500800726470+2461360.500800726470%27&TLIST_TYPE=%27JD%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&CSV_FORMAT=%27YES%27&ELEM_LABELS=%27YES%27&TIME_TYPE=%27TDB%27&TP_TYPE=%27ABSOLUTE%27",
+          "label": "JPL Horizons heliocentric geometric osculating elements",
+          "sha256": "647527c7cb754ac4b4403f56b7b1199f06a934eea1ed4219b609e584742eee2f",
+          "bytes": 6934,
+          "retrieved_utc": "2026-11-14T02:29:38.039088+00:00",
+          "dependency_manifest": "data/manifests/solar_system_orbits.json"
+        }
+      },
+      "mass": {
+        "earth_masses": 0.0021808823258547567,
+        "mass_kg": 1.30246e+22,
+        "uncertainty_kg": 6e+18,
+        "status": "measured_or_literature",
+        "source": {
+          "source_id": "major-inputs",
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "Existing JPL physical mass table and heliocentric osculating-element snapshot",
+          "local_relative_path": "data/reference/planet-criteria/facts/major-inputs.json",
+          "bytes": 6336,
+          "sha256": "31af3b273cc9e4a98dd21f13777822af92c05fc70ad104a4e63ca15fc24ad63b",
+          "retrieved_utc": "2026-11-14T02:08:20.356887+00:00",
+          "upstream_sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+          "upstream_bytes": 58244,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/jpl-physical-table.html",
+          "upstream_original_requirement": "optional_not_runtime",
+          "upstream_acquisition_kind": "unmodified_embedded_response_reused_not_new_download",
+          "reused_from_manifest": {
+            "path": "data/manifests/solar_system_ephemeris.json",
+            "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a",
+            "embedded_field": "physical_parameters_source.raw_response_html"
+          }
+        },
+        "definition": "JPL tabulated body mass; converted to Earth masses with the same table's Earth body mass, not the Earth–Moon barycenter.",
+        "conversion_earth_mass_kg": 5.97217e+24,
+        "original_column_power_of_ten": 18
+      },
+      "system_mass": null,
+      "clearing": {
+        "minimum_mass_earth": 0.07622139431730549,
+        "pi": 0.0286124695748265,
+        "status": "computed",
+        "model_classification": "below_model",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated."
+      ]
+    },
+    "ceres": {
+      "object_id": "ceres",
+      "name": "Ceres",
+      "official_classification": "dwarf_planet",
+      "classification_source": {
+        "source_id": "nasa-dwarfs",
+        "url": "https://science.nasa.gov/dwarf-planets/",
+        "label": "NASA Science current recognized dwarf-planet overview",
+        "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+        "bytes": 654,
+        "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+        "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+        "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+        "upstream_bytes": 307832,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-ceres",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=1&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 1 Ceres (A801 AA)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-ceres.json",
+            "bytes": 9199,
+            "sha256": "b0bff970cc12d8a1c9764cfe200b14e7ae62f291a20ee6b1c0b5bfd38459c063",
+            "retrieved_utc": "2026-11-14T10:17:12.064835+00:00",
+            "upstream_sha256": "57b4eac77f7861040e938450057cfb3dcc5170137b3f2b324f0658ec3de28edd",
+            "upstream_bytes": 5088,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-ceres.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "not_met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_not_dominant",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 2.765552595034094,
+        "eccentricity": 0.07969229514816586,
+        "perihelion_au": 2.545159361382861,
+        "aphelion_au": 2.985945828685327,
+        "period_days": 1679.853119758983,
+        "epoch_tdb_jd": 2461200.5,
+        "frame": "JPL SBDB ecliptic/equinox J2000",
+        "center": "heliocentric osculating solution",
+        "source_time_scale": "TDB",
+        "source": {
+          "source_id": "sbdb-ceres",
+          "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=1&phys-par=true&full-prec=true",
+          "label": "NASA/JPL SBDB 1 Ceres (A801 AA)",
+          "local_relative_path": "data/reference/planet-criteria/facts/sbdb-ceres.json",
+          "bytes": 9199,
+          "sha256": "b0bff970cc12d8a1c9764cfe200b14e7ae62f291a20ee6b1c0b5bfd38459c063",
+          "retrieved_utc": "2026-11-14T10:17:12.064835+00:00",
+          "upstream_sha256": "57b4eac77f7861040e938450057cfb3dcc5170137b3f2b324f0658ec3de28edd",
+          "upstream_bytes": 5088,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-ceres.json",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "element_uncertainties": {
+          "a": "1.0134E-11",
+          "e": "4.7755E-12",
+          "q": "1.9113E-11",
+          "ad": "1.0942E-11",
+          "per": "9.2333E-9"
+        }
+      },
+      "mass": {
+        "earth_masses": 0.00015712075159048772,
+        "status": "measured_or_literature",
+        "source": {
+          "source_id": "sbdb-ceres",
+          "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=1&phys-par=true&full-prec=true",
+          "label": "NASA/JPL SBDB 1 Ceres (A801 AA)",
+          "local_relative_path": "data/reference/planet-criteria/facts/sbdb-ceres.json",
+          "bytes": 9199,
+          "sha256": "b0bff970cc12d8a1c9764cfe200b14e7ae62f291a20ee6b1c0b5bfd38459c063",
+          "retrieved_utc": "2026-11-14T10:17:12.064835+00:00",
+          "upstream_sha256": "57b4eac77f7861040e938450057cfb3dcc5170137b3f2b324f0658ec3de28edd",
+          "upstream_bytes": 5088,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-ceres.json",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "definition": "Ratio of reported Ceres GM to Earth-body GM; gravitational constant cancels. No radius/density mass estimate.",
+        "gm_km3_s2": 62.6284,
+        "gm_sigma_km3_s2": 0.0009,
+        "earth_gm_km3_s2": 398600.435436,
+        "earth_reference_source": {
+          "source_id": "major-inputs",
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "Existing JPL physical mass table and heliocentric osculating-element snapshot",
+          "local_relative_path": "data/reference/planet-criteria/facts/major-inputs.json",
+          "bytes": 6336,
+          "sha256": "31af3b273cc9e4a98dd21f13777822af92c05fc70ad104a4e63ca15fc24ad63b",
+          "retrieved_utc": "2026-11-14T02:08:20.356887+00:00",
+          "upstream_sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+          "upstream_bytes": 58244,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/jpl-physical-table.html",
+          "upstream_original_requirement": "optional_not_runtime",
+          "upstream_acquisition_kind": "unmodified_embedded_response_reused_not_new_download",
+          "reused_from_manifest": {
+            "path": "data/manifests/solar_system_ephemeris.json",
+            "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a",
+            "embedded_field": "physical_parameters_source.raw_response_html"
+          }
+        },
+        "literature_reference": "Nature vol. 537, pp515-517 (22 September 2016)"
+      },
+      "system_mass": null,
+      "clearing": {
+        "minimum_mass_earth": 0.003891132046272884,
+        "pi": 0.04037918778443555,
+        "status": "computed",
+        "model_classification": "below_model",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated."
+      ]
+    },
+    "haumea": {
+      "object_id": "haumea",
+      "name": "Haumea",
+      "official_classification": "dwarf_planet",
+      "classification_source": {
+        "source_id": "nasa-dwarfs",
+        "url": "https://science.nasa.gov/dwarf-planets/",
+        "label": "NASA Science current recognized dwarf-planet overview",
+        "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+        "bytes": 654,
+        "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+        "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+        "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+        "upstream_bytes": 307832,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-haumea",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=136108&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 136108 Haumea (2003 EL61)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-haumea.json",
+            "bytes": 6499,
+            "sha256": "e5a21f0f8039089fcdb3788783ed53bcc3c14e75880d54c5b118d4e9d368cf0a",
+            "retrieved_utc": "2026-11-14T10:17:23.840476+00:00",
+            "upstream_sha256": "0b842f8ce0627d090ef96886ab44110e56ff2ffe5f4944a2fe92023c8db9c387",
+            "upstream_bytes": 3518,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-haumea.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "not_met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_not_dominant",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 43.06029023650952,
+        "eccentricity": 0.1944430148898797,
+        "perihelion_au": 34.68751758088936,
+        "aphelion_au": 51.43306289212968,
+        "period_days": 103208.1173403618,
+        "epoch_tdb_jd": 2461200.5,
+        "frame": "JPL SBDB ecliptic/equinox J2000",
+        "center": "heliocentric osculating solution",
+        "source_time_scale": "TDB",
+        "source": {
+          "source_id": "sbdb-haumea",
+          "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=136108&phys-par=true&full-prec=true",
+          "label": "NASA/JPL SBDB 136108 Haumea (2003 EL61)",
+          "local_relative_path": "data/reference/planet-criteria/facts/sbdb-haumea.json",
+          "bytes": 6499,
+          "sha256": "e5a21f0f8039089fcdb3788783ed53bcc3c14e75880d54c5b118d4e9d368cf0a",
+          "retrieved_utc": "2026-11-14T10:17:23.840476+00:00",
+          "upstream_sha256": "0b842f8ce0627d090ef96886ab44110e56ff2ffe5f4944a2fe92023c8db9c387",
+          "upstream_bytes": 3518,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-haumea.json",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "element_uncertainties": {
+          "a": "4.0486E-5",
+          "e": "1.1561E-6",
+          "q": "6.4457E-5",
+          "ad": "4.8358E-5",
+          "per": ".14556"
+        }
+      },
+      "mass": {
+        "earth_masses": 0.0006707779584305203,
+        "mass_kg": 4.006e+21,
+        "uncertainty_kg": 4e+19,
+        "status": "measured_or_literature",
+        "source": {
+          "source_id": "haumea-mass",
+          "url": "https://arxiv.org/html/0903.4213v1",
+          "label": "Ragozzine & Brown (2009), AJ 137 4766, Table 2, doi:10.1088/0004-6256/137/6/4766",
+          "local_relative_path": "data/reference/planet-criteria/facts/haumea-mass.json",
+          "bytes": 657,
+          "sha256": "9e475927905c3d69c1d765a213faad41e76962fbc28dffef202ea98615a1557c",
+          "retrieved_utc": "2026-11-14T10:20:20.395413+00:00",
+          "upstream_sha256": "0cd2fc7f6d23ddd4934e826bf089e3992dcfba7474c58fe8bca5d4793b0f1df9",
+          "upstream_bytes": 225172,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/haumea-mass.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "definition": "Haumea primary mass from a resolved three-point-mass satellite-orbit fit; satellite masses are separate fit parameters.",
+        "conversion_earth_mass_kg": 5.97217e+24
+      },
+      "system_mass": null,
+      "clearing": {
+        "minimum_mass_earth": 0.08539017000709576,
+        "pi": 0.007855447042379468,
+        "status": "computed",
+        "model_classification": "below_model",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated.",
+        "Haumea's recognized dwarf-planet classification is retained. Its elongated occultation shape and disputed homogeneous-hydrostatic interpretation are not an automatic failure or independent proof of IAU criterion 2."
+      ]
+    },
+    "makemake": {
+      "object_id": "makemake",
+      "name": "Makemake",
+      "official_classification": "dwarf_planet",
+      "classification_source": {
+        "source_id": "nasa-dwarfs",
+        "url": "https://science.nasa.gov/dwarf-planets/",
+        "label": "NASA Science current recognized dwarf-planet overview",
+        "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+        "bytes": 654,
+        "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+        "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+        "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+        "upstream_bytes": 307832,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-makemake",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=136472&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 136472 Makemake (2005 FY9)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-makemake.json",
+            "bytes": 5775,
+            "sha256": "3dccbe9eaca9d21adba213704d87fa13c403bf625f63a983e97fe19aa53563bf",
+            "retrieved_utc": "2026-11-14T10:17:24.345564+00:00",
+            "upstream_sha256": "1b3663679144a76f12bf4f54c0b9380c4e33a02f29b6907ee96d24ca7eeb3508",
+            "upstream_bytes": 2793,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-makemake.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "not_met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_not_dominant",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 45.57093317300052,
+        "eccentricity": 0.1588889953992523,
+        "perihelion_au": 38.33021338173601,
+        "aphelion_au": 52.81165296426503,
+        "period_days": 112364.8068762869,
+        "epoch_tdb_jd": 2461200.5,
+        "frame": "JPL SBDB ecliptic/equinox J2000",
+        "center": "heliocentric osculating solution",
+        "source_time_scale": "TDB",
+        "source": {
+          "source_id": "sbdb-makemake",
+          "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=136472&phys-par=true&full-prec=true",
+          "label": "NASA/JPL SBDB 136472 Makemake (2005 FY9)",
+          "local_relative_path": "data/reference/planet-criteria/facts/sbdb-makemake.json",
+          "bytes": 5775,
+          "sha256": "3dccbe9eaca9d21adba213704d87fa13c403bf625f63a983e97fe19aa53563bf",
+          "retrieved_utc": "2026-11-14T10:17:24.345564+00:00",
+          "upstream_sha256": "1b3663679144a76f12bf4f54c0b9380c4e33a02f29b6907ee96d24ca7eeb3508",
+          "upstream_bytes": 2793,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-makemake.json",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "element_uncertainties": {
+          "a": "5.3653E-5",
+          "e": "1.185E-6",
+          "q": "9.0359E-5",
+          "ad": "6.2178E-5",
+          "per": ".19844"
+        }
+      },
+      "mass": {
+        "earth_masses": null,
+        "status": "unknown",
+        "source": null,
+        "definition": "No separately adopted primary mass; not inferred from radius, assumed density or rendered shape."
+      },
+      "system_mass": null,
+      "clearing": {
+        "minimum_mass_earth": 0.09101127917944009,
+        "pi": null,
+        "status": "mass_unknown",
+        "model_classification": "unknown",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated.",
+        "No primary mass is adopted: Pi and the mass-based model classification remain unknown; no mass is created from size or assumed density."
+      ]
+    },
+    "eris": {
+      "object_id": "eris",
+      "name": "Eris",
+      "official_classification": "dwarf_planet",
+      "classification_source": {
+        "source_id": "nasa-dwarfs",
+        "url": "https://science.nasa.gov/dwarf-planets/",
+        "label": "NASA Science current recognized dwarf-planet overview",
+        "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+        "bytes": 654,
+        "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+        "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+        "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+        "upstream_bytes": 307832,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-eris",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=136199&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 136199 Eris (2003 UB313)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-eris.json",
+            "bytes": 5717,
+            "sha256": "a907b5645a4a543dd4bc4f28ba2ecbc44a2b5a0812a8410850c9f67343f6acd4",
+            "retrieved_utc": "2026-11-14T10:17:24.880880+00:00",
+            "upstream_sha256": "026c5249ccb9a3d3aec70e240d7e5c708c5ebfc5949c22965f3539b35cc5a4d8",
+            "upstream_bytes": 2739,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-eris.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "not_met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_not_dominant",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 67.93394687853566,
+        "eccentricity": 0.4382385347971672,
+        "perihelion_au": 38.16267353549761,
+        "aphelion_au": 97.70522022157373,
+        "period_days": 204516.6629430732,
+        "epoch_tdb_jd": 2461200.5,
+        "frame": "JPL SBDB ecliptic/equinox J2000",
+        "center": "heliocentric osculating solution",
+        "source_time_scale": "TDB",
+        "source": {
+          "source_id": "sbdb-eris",
+          "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=136199&phys-par=true&full-prec=true",
+          "label": "NASA/JPL SBDB 136199 Eris (2003 UB313)",
+          "local_relative_path": "data/reference/planet-criteria/facts/sbdb-eris.json",
+          "bytes": 5717,
+          "sha256": "a907b5645a4a543dd4bc4f28ba2ecbc44a2b5a0812a8410850c9f67343f6acd4",
+          "retrieved_utc": "2026-11-14T10:17:24.880880+00:00",
+          "upstream_sha256": "026c5249ccb9a3d3aec70e240d7e5c708c5ebfc5949c22965f3539b35cc5a4d8",
+          "upstream_bytes": 2739,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-eris.json",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "element_uncertainties": {
+          "a": ".0002545",
+          "e": "3.4663E-6",
+          "q": ".00015516",
+          "ad": ".00036603",
+          "per": "1.1493"
+        }
+      },
+      "mass": {
+        "earth_masses": null,
+        "status": "unknown",
+        "source": null,
+        "definition": "No separately adopted primary mass; not inferred from radius, assumed density or rendered shape."
+      },
+      "system_mass": {
+        "earth_masses": 0.00275712178320443,
+        "mass_kg": 1.6466e+22,
+        "uncertainty_earth": 1.4232682592759417e-05,
+        "definition": "combined_primary_satellite_system",
+        "source": {
+          "source_id": "eris-system-mass",
+          "url": "https://ntrs.nasa.gov/api/citations/20210012932/downloads/21-49.pdf",
+          "label": "Holler et al. (2021), Icarus 355 114130, doi:10.1016/j.icarus.2020.114130",
+          "local_relative_path": "data/reference/planet-criteria/facts/eris-system-mass.json",
+          "bytes": 661,
+          "sha256": "f06487e10fa26304c2bc474c8458a21b48c75c30b387208d720e5b16505e45de",
+          "retrieved_utc": "2026-11-14T10:20:21.733657+00:00",
+          "upstream_sha256": "e9cac9fd2e7989053e21d96620bc0b772d7ccf3d40034eb3f1d66be28d1ce1a1",
+          "upstream_bytes": 847643,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/eris-system-mass.pdf",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "adopted_as_primary_mass": false,
+        "limitations": [
+          "Combined Eris–Dysnomia system mass; not an independently separated Eris primary mass.",
+          "Not silently substituted for a separately measured primary mass. A system nominal value is not a statistical upper confidence bound on primary mass."
+        ]
+      },
+      "clearing": {
+        "minimum_mass_earth": 0.14261624895248246,
+        "pi": null,
+        "status": "mass_unknown",
+        "model_classification": "unknown",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "system_mass_proxy_pi": 0.019332451971325236,
+        "system_mass_proxy_status": "all_nominal_system_mass_assigned_to_primary_not_a_confidence_upper_bound"
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated.",
+        "No primary mass is adopted: Pi and the mass-based model classification remain unknown; no mass is created from size or assumed density."
+      ]
+    },
+    "sedna": {
+      "object_id": "sedna",
+      "name": "Sedna",
+      "official_classification": "dwarf_candidate",
+      "classification_source": {
+        "source_id": "nasa-dwarfs",
+        "url": "https://science.nasa.gov/dwarf-planets/",
+        "label": "NASA Science current recognized dwarf-planet overview",
+        "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+        "bytes": 654,
+        "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+        "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+        "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+        "upstream_bytes": 307832,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-sedna",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=90377&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 90377 Sedna (2003 VB12)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-sedna.json",
+            "bytes": 5747,
+            "sha256": "fd771707b16b0b0415c14efcd63c56ba6d7692a91216e2c68c0825d45716fc0f",
+            "retrieved_utc": "2026-11-14T10:17:25.442687+00:00",
+            "upstream_sha256": "53d48e286eb6604999d071d3c56be2c9053079e6265fa3d08370eab0b6185c25",
+            "upstream_bytes": 2777,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-sedna.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "equilibrium_shape_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "dominance_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 543.7195289104732,
+        "eccentricity": 0.8598824585187618,
+        "perihelion_au": 76.18464364627253,
+        "aphelion_au": 1011.254414174674,
+        "period_days": 4630851.183590915,
+        "epoch_tdb_jd": 2461200.5,
+        "frame": "JPL SBDB ecliptic/equinox J2000",
+        "center": "heliocentric osculating solution",
+        "source_time_scale": "TDB",
+        "source": {
+          "source_id": "sbdb-sedna",
+          "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=90377&phys-par=true&full-prec=true",
+          "label": "NASA/JPL SBDB 90377 Sedna (2003 VB12)",
+          "local_relative_path": "data/reference/planet-criteria/facts/sbdb-sedna.json",
+          "bytes": 5747,
+          "sha256": "fd771707b16b0b0415c14efcd63c56ba6d7692a91216e2c68c0825d45716fc0f",
+          "retrieved_utc": "2026-11-14T10:17:25.442687+00:00",
+          "upstream_sha256": "53d48e286eb6604999d071d3c56be2c9053079e6265fa3d08370eab0b6185c25",
+          "upstream_bytes": 2777,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-sedna.json",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "element_uncertainties": {
+          "a": ".1459",
+          "e": "3.7251E-5",
+          "q": ".0011033",
+          "ad": ".27137",
+          "per": "1864."
+        }
+      },
+      "mass": {
+        "earth_masses": null,
+        "status": "unknown",
+        "source": null,
+        "definition": "No separately adopted primary mass; not inferred from radius, assumed density or rendered shape."
+      },
+      "system_mass": null,
+      "clearing": {
+        "minimum_mass_earth": 1.4803626010357875,
+        "pi": null,
+        "status": "mass_unknown",
+        "model_classification": "unknown",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        }
+      },
+      "limitations": [
+        "High eccentricity: the source orbit is far from the model's circular derivation. This value is only a circular reference at the same semimajor axis, not an actual eccentric clearing threshold.",
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated.",
+        "No primary mass is adopted: Pi and the mass-based model classification remain unknown; no mass is created from size or assumed density."
+      ]
+    },
+    "quaoar": {
+      "object_id": "quaoar",
+      "name": "Quaoar",
+      "official_classification": "dwarf_candidate",
+      "classification_source": {
+        "source_id": "nasa-dwarfs",
+        "url": "https://science.nasa.gov/dwarf-planets/",
+        "label": "NASA Science current recognized dwarf-planet overview",
+        "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+        "bytes": 654,
+        "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+        "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+        "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+        "upstream_bytes": 307832,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-quaoar",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=50000&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 50000 Quaoar (2002 LM60)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-quaoar.json",
+            "bytes": 5740,
+            "sha256": "a3cf82c6fc276c21f7d46037ff087926bce30ff6086efd724415ed20a5eb3939",
+            "retrieved_utc": "2026-11-14T10:17:25.979824+00:00",
+            "upstream_sha256": "f70f51ab75ac1cf325f3ba4e25eec182a726f3a4f39bdec54f46b1cfc24a2ddc",
+            "upstream_bytes": 2759,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-quaoar.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "equilibrium_shape_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "dominance_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 43.15617622670811,
+        "eccentricity": 0.03520019261837198,
+        "perihelion_au": 41.63707051085558,
+        "aphelion_au": 44.67528194256064,
+        "period_days": 103553.0425468722,
+        "epoch_tdb_jd": 2461200.5,
+        "frame": "JPL SBDB ecliptic/equinox J2000",
+        "center": "heliocentric osculating solution",
+        "source_time_scale": "TDB",
+        "source": {
+          "source_id": "sbdb-quaoar",
+          "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=50000&phys-par=true&full-prec=true",
+          "label": "NASA/JPL SBDB 50000 Quaoar (2002 LM60)",
+          "local_relative_path": "data/reference/planet-criteria/facts/sbdb-quaoar.json",
+          "bytes": 5740,
+          "sha256": "a3cf82c6fc276c21f7d46037ff087926bce30ff6086efd724415ed20a5eb3939",
+          "retrieved_utc": "2026-11-14T10:17:25.979824+00:00",
+          "upstream_sha256": "f70f51ab75ac1cf325f3ba4e25eec182a726f3a4f39bdec54f46b1cfc24a2ddc",
+          "upstream_bytes": 2759,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-quaoar.json",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "element_uncertainties": {
+          "a": "2.8726E-5",
+          "e": "1.6333E-6",
+          "q": "7.0451E-5",
+          "ad": "2.9737E-5",
+          "per": ".10339"
+        }
+      },
+      "mass": {
+        "earth_masses": null,
+        "status": "unknown",
+        "source": null,
+        "definition": "No separately adopted primary mass; not inferred from radius, assumed density or rendered shape."
+      },
+      "system_mass": {
+        "earth_masses": 0.00020093198954483882,
+        "mass_kg": 1.2e+21,
+        "uncertainty_earth": 8.372166231034951e-06,
+        "definition": "combined_primary_satellite_system",
+        "source": {
+          "source_id": "quaoar-system-mass",
+          "url": "https://arxiv.org/html/2304.09237v1",
+          "label": "Pereira et al. (2023), A&A 673 L4, doi:10.1051/0004-6361/202346365, Table 3",
+          "local_relative_path": "data/reference/planet-criteria/facts/quaoar-system-mass.json",
+          "bytes": 666,
+          "sha256": "2ba70a27f056018028d7cdc78f49c936a824846be62098bd32569b810ba56621",
+          "retrieved_utc": "2026-11-14T10:20:20.981310+00:00",
+          "upstream_sha256": "c7e04aa0bfbc078e5ab0c7e134712cbe4ffb04973b0cf4548b435a764bce9540",
+          "upstream_bytes": 284211,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/quaoar-system-mass.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "adopted_as_primary_mass": false,
+        "limitations": [
+          "Adopted dynamical mass from the Quaoar–Weywot binary orbit, used as a system-mass proxy, not a separated primary measurement.",
+          "Not silently substituted for a separately measured primary mass. A system nominal value is not a statistical upper confidence bound on primary mass."
+        ]
+      },
+      "clearing": {
+        "minimum_mass_earth": 0.08560411346185455,
+        "pi": null,
+        "status": "mass_unknown",
+        "model_classification": "unknown",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "system_mass_proxy_pi": 0.0023472235318969187,
+        "system_mass_proxy_status": "all_nominal_system_mass_assigned_to_primary_not_a_confidence_upper_bound"
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated.",
+        "No primary mass is adopted: Pi and the mass-based model classification remain unknown; no mass is created from size or assumed density."
+      ]
+    },
+    "orcus": {
+      "object_id": "orcus",
+      "name": "Orcus",
+      "official_classification": "dwarf_candidate",
+      "classification_source": {
+        "source_id": "nasa-dwarfs",
+        "url": "https://science.nasa.gov/dwarf-planets/",
+        "label": "NASA Science current recognized dwarf-planet overview",
+        "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+        "bytes": 654,
+        "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+        "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+        "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+        "upstream_bytes": 307832,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-orcus",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=90482&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 90482 Orcus (2004 DW)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-orcus.json",
+            "bytes": 5734,
+            "sha256": "4f33ea621da5ff6d8ee59cf5d83be171920010311cf9c78620e5b16c79d64c35",
+            "retrieved_utc": "2026-11-14T10:17:26.514097+00:00",
+            "upstream_sha256": "2997bb5039c6a0f1ba6e16016fadbf51ad157343e68ae8536c242624f0a61f17",
+            "upstream_bytes": 2755,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-orcus.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "equilibrium_shape_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "dominance_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 39.37686537914865,
+        "eccentricity": 0.2205240628250881,
+        "perihelion_au": 30.69331904442224,
+        "aphelion_au": 48.06041171387506,
+        "period_days": 90252.68650688507,
+        "epoch_tdb_jd": 2461200.5,
+        "frame": "JPL SBDB ecliptic/equinox J2000",
+        "center": "heliocentric osculating solution",
+        "source_time_scale": "TDB",
+        "source": {
+          "source_id": "sbdb-orcus",
+          "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=90482&phys-par=true&full-prec=true",
+          "label": "NASA/JPL SBDB 90482 Orcus (2004 DW)",
+          "local_relative_path": "data/reference/planet-criteria/facts/sbdb-orcus.json",
+          "bytes": 5734,
+          "sha256": "4f33ea621da5ff6d8ee59cf5d83be171920010311cf9c78620e5b16c79d64c35",
+          "retrieved_utc": "2026-11-14T10:17:26.514097+00:00",
+          "upstream_sha256": "2997bb5039c6a0f1ba6e16016fadbf51ad157343e68ae8536c242624f0a61f17",
+          "upstream_bytes": 2755,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-orcus.json",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "element_uncertainties": {
+          "a": "2.1925E-5",
+          "e": "4.9013E-7",
+          "q": "3.6081E-5",
+          "ad": "2.676E-5",
+          "per": ".075379"
+        }
+      },
+      "mass": {
+        "earth_masses": null,
+        "status": "unknown",
+        "source": null,
+        "definition": "No separately adopted primary mass; not inferred from radius, assumed density or rendered shape."
+      },
+      "system_mass": {
+        "earth_masses": 0.00010582418116028179,
+        "mass_kg": 6.32e+20,
+        "uncertainty_earth": null,
+        "definition": "combined_primary_satellite_system",
+        "source": {
+          "source_id": "orcus-dynamical-ratio",
+          "url": "https://arxiv.org/html/2307.04848v1",
+          "label": "Brown & Butler (2023), PSJ, doi:10.3847/PSJ/ace52a, section 2.1/Table 2",
+          "local_relative_path": "data/reference/planet-criteria/facts/orcus-dynamical-ratio.json",
+          "bytes": 839,
+          "sha256": "ac26ede30685da5196d04cf6a815c679a879aac9078be6cd3e643e5cf98d8c56",
+          "retrieved_utc": "2026-11-14T10:20:21.230551+00:00",
+          "upstream_sha256": "26cef52497cc7f3f53564bb0d2bbb0e27ac3d5794948fac74945335194ae5d41",
+          "upstream_bytes": 109379,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/orcus-dynamical-ratio.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "adopted_as_primary_mass": false,
+        "limitations": [
+          "Nominal primary mass derived from reported dynamical system mass and measured mass ratio; not a density/size estimate or a directly tabulated independent mass.",
+          "Not silently substituted for a separately measured primary mass. A system nominal value is not a statistical upper confidence bound on primary mass."
+        ]
+      },
+      "clearing": {
+        "minimum_mass_earth": 0.07721782948322613,
+        "pi": null,
+        "status": "mass_unknown",
+        "model_classification": "unknown",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "system_mass_proxy_pi": 0.001370463037727184,
+        "system_mass_proxy_status": "all_nominal_system_mass_assigned_to_primary_not_a_confidence_upper_bound"
+      },
+      "limitations": [
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated.",
+        "No primary mass is adopted: Pi and the mass-based model classification remain unknown; no mass is created from size or assumed density."
+      ]
+    },
+    "gonggong": {
+      "object_id": "gonggong",
+      "name": "Gonggong",
+      "official_classification": "dwarf_candidate",
+      "classification_source": {
+        "source_id": "nasa-dwarfs",
+        "url": "https://science.nasa.gov/dwarf-planets/",
+        "label": "NASA Science current recognized dwarf-planet overview",
+        "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+        "bytes": 654,
+        "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+        "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+        "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+        "upstream_bytes": 307832,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-gonggong",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=225088&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 225088 Gonggong (2007 OR10)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-gonggong.json",
+            "bytes": 5734,
+            "sha256": "de01c46733e75303ef01adcc9f8a13fff3e760ea7c86d0ca4d9f146f01c57a75",
+            "retrieved_utc": "2026-11-14T10:17:27.015033+00:00",
+            "upstream_sha256": "130177535bfff6b61645c657fddb910ccfaed7493fa00d47324c4ce11f9c4b54",
+            "upstream_bytes": 2756,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-gonggong.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "equilibrium_shape_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "dominance_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "orbit": {
+        "semimajor_axis_au": 66.86666567773766,
+        "eccentricity": 0.5042510000302973,
+        "perihelion_au": 33.14908264104688,
+        "aphelion_au": 100.5842487144284,
+        "period_days": 199716.0317096358,
+        "epoch_tdb_jd": 2461200.5,
+        "frame": "JPL SBDB ecliptic/equinox J2000",
+        "center": "heliocentric osculating solution",
+        "source_time_scale": "TDB",
+        "source": {
+          "source_id": "sbdb-gonggong",
+          "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=225088&phys-par=true&full-prec=true",
+          "label": "NASA/JPL SBDB 225088 Gonggong (2007 OR10)",
+          "local_relative_path": "data/reference/planet-criteria/facts/sbdb-gonggong.json",
+          "bytes": 5734,
+          "sha256": "de01c46733e75303ef01adcc9f8a13fff3e760ea7c86d0ca4d9f146f01c57a75",
+          "retrieved_utc": "2026-11-14T10:17:27.015033+00:00",
+          "upstream_sha256": "130177535bfff6b61645c657fddb910ccfaed7493fa00d47324c4ce11f9c4b54",
+          "upstream_bytes": 2756,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-gonggong.json",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "element_uncertainties": {
+          "a": ".002095",
+          "e": "1.8857E-5",
+          "q": ".0011603",
+          "ad": ".0031514",
+          "per": "9.386"
+        }
+      },
+      "mass": {
+        "earth_masses": null,
+        "status": "unknown",
+        "source": null,
+        "definition": "No separately adopted primary mass; not inferred from radius, assumed density or rendered shape."
+      },
+      "system_mass": {
+        "earth_masses": 0.00029302581808622326,
+        "mass_kg": 1.75e+21,
+        "uncertainty_earth": 1.1721032723448932e-05,
+        "definition": "combined_primary_satellite_system",
+        "source": {
+          "source_id": "gonggong-system-mass",
+          "url": "https://arxiv.org/html/1903.05439v1",
+          "label": "Kiss et al. (2019), Icarus, doi:10.1016/j.icarus.2019.03.013, section 3/Table 2",
+          "local_relative_path": "data/reference/planet-criteria/facts/gonggong-system-mass.json",
+          "bytes": 677,
+          "sha256": "adffc01d390579123114aea82a41d0840d4b955bb7f4a56e17d8a63144cf049c",
+          "retrieved_utc": "2026-11-14T10:20:20.647351+00:00",
+          "upstream_sha256": "47277a6a033b3cb9f5975d61d9f56a56209e8a6ee335f272698795ba5f28d58e",
+          "upstream_bytes": 218063,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/gonggong-system-mass.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "adopted_as_primary_mass": false,
+        "limitations": [
+          "Combined Gonggong–Xiangliu system mass; the two-body satellite solution does not independently separate primary and satellite masses.",
+          "Not silently substituted for a separately measured primary mass. A system nominal value is not a statistical upper confidence bound on primary mass."
+        ]
+      },
+      "clearing": {
+        "minimum_mass_earth": 0.1400980796460658,
+        "pi": null,
+        "status": "mass_unknown",
+        "model_classification": "unknown",
+        "model_id": "margot-solar-10gyr-v1",
+        "eccentricity_is_used_in_shortcut": false,
+        "evaluation_scope": "circular_reference_at_catalogue_semimajor_axis_not_eccentric_clearing_solution",
+        "source": {
+          "source_id": "margot-2024",
+          "url": "https://arxiv.org/html/2407.07590v1",
+          "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+          "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+          "bytes": 1026,
+          "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+          "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+          "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+          "upstream_bytes": 156656,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "system_mass_proxy_pi": 0.002091576264474885,
+        "system_mass_proxy_status": "all_nominal_system_mass_assigned_to_primary_not_a_confidence_upper_bound"
+      },
+      "limitations": [
+        "High eccentricity: the source orbit is far from the model's circular derivation. This value is only a circular reference at the same semimajor axis, not an actual eccentric clearing threshold.",
+        "Official classification and its criterion rows are separate from the numeric Margot research diagnostic; changing an assumed mass never changes the official rows.",
+        "The nearly-round criterion rows for recognized planets/dwarf planets follow the published classification, not a new measurement of hydrostatic equilibrium. A displayed sphere, radius or elongated ellipsoid alone cannot settle equilibrium.",
+        "Osculating elements are frozen at their own source epoch and are not synchronized to the animation clock, a long-term N-body trajectory or the object's current solar distance.",
+        "Source uncertainties are retained, but no joint covariance or propagated confidence interval for the model threshold/Pi is calculated.",
+        "No primary mass is adopted: Pi and the mass-based model classification remain unknown; no mass is created from size or assumed density."
+      ]
+    }
+  }
+}

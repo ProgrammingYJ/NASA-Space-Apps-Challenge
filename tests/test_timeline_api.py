@@ -311,3 +311,62 @@ def test_simulation_context_roundtrip_is_separate_from_original_observation_time
     blocked = client.post("/api/v1/evidence/import", json=changed).json()
     assert blocked["status"] == "recalculation_required"
     assert "unsupported_simulation_date" in blocked["reasons"]
+
+
+def test_small_body_provenance_and_auto_time_preference_survive_and_reject_changed_sources(
+    timeline_api,
+):
+    from science.small_body_appearance import get_small_body_appearance
+
+    client, _, _, result, saved = timeline_api
+    session = deepcopy(saved["session"])
+    context = session["universe_context"]
+    context["time_preference"] = "auto"
+    context["small_body_appearance_manifest_sha256"] = get_small_body_appearance(ROOT)[
+        "source_manifest_sha256"
+    ]
+    response = client.post(
+        "/api/v1/evidence",
+        json={
+            "result_id": result["result_id"],
+            "session": session,
+            "judgment": "Source profile retained.",
+        },
+    )
+    assert response.status_code == 201, response.text
+    evidence = response.json()
+    restored = client.post("/api/v1/evidence/import", json=evidence).json()
+    assert restored["status"] == "restored" and restored["session"] == session
+    assert restored["comparison"] == result
+    changed = deepcopy(evidence)
+    changed["session"]["universe_context"]["small_body_appearance_manifest_sha256"] = "f" * 64
+    rejected = client.post("/api/v1/evidence/import", json=changed).json()
+    assert rejected["status"] == "recalculation_required"
+    assert "small_body_appearance_sources_changed" in rejected["reasons"]
+
+
+def test_planet_criteria_hash_is_preserved_and_changed_sources_require_recalculation(timeline_api):
+    from science.planet_criteria import get_planet_criteria
+
+    client, _, _, result, saved = timeline_api
+    session = deepcopy(saved["session"])
+    session["universe_context"]["planet_criteria_manifest_sha256"] = get_planet_criteria(ROOT)[
+        "source_manifest_sha256"
+    ]
+    response = client.post(
+        "/api/v1/evidence",
+        json={
+            "result_id": result["result_id"],
+            "session": session,
+            "judgment": "Classification sources retained.",
+        },
+    )
+    assert response.status_code == 201, response.text
+    evidence = response.json()
+    restored = client.post("/api/v1/evidence/import", json=evidence).json()
+    assert restored["status"] == "restored" and restored["session"] == session
+    changed = deepcopy(evidence)
+    changed["session"]["universe_context"]["planet_criteria_manifest_sha256"] = "f" * 64
+    rejected = client.post("/api/v1/evidence/import", json=changed).json()
+    assert rejected["status"] == "recalculation_required"
+    assert "planet_criteria_sources_changed" in rejected["reasons"]

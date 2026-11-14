@@ -5,6 +5,8 @@ import {displayDirection, displayRadius, displayOrbitPoints, displayMoonOffset, 
 import {createBodyAppearance,scaledRingBands,type AppearanceManifest,type AppearanceStatus,type AppearanceEntry,type RingEntry,type BodyAppearance} from './planetAppearance';
 import {createKuiperIllustration,galaxyPositionAu,icrsToEclipticUnit,type GalaxyData,type GalaxyObject} from './universeLayers';
 import {createGalaxyAppearance,galaxyDisplayProfile} from './galaxyAppearance';
+import {smallBodyAxes,smallBodyRingRadii} from './smallBodyAppearance';
+import {CATALOG_SKY_RADIUS,CATALOG_SKY_FRAME_STATUS,type CatalogSkyStar} from './catalogSky';
 import styles from './UniverseScene.module.css';
 
 export type {CameraState} from './sceneMath';
@@ -60,6 +62,10 @@ export interface UniverseSceneProps {
   showOrbits?: boolean;
   showKuiperBelt?:boolean;
   galaxies?:GalaxyData|null;
+  skyStars?:CatalogSkyStar[];
+  skySourceUrl?:string;
+  skySourceSha256?:string;
+  skyNote?:string;
   appearance?:AppearanceManifest|null;
   onAppearanceStatus?:(status:AppearanceStatus)=>void;
   frameSelectedSystem?:boolean;
@@ -86,6 +92,7 @@ interface Runtime {
   bodies: Map<string,BodyView>;
   orbits: Map<string,THREE.Line<THREE.BufferGeometry,THREE.LineBasicMaterial>>;
   kuiper:THREE.Group;
+  skyStars:THREE.Points<THREE.BufferGeometry,THREE.PointsMaterial>;
   focus: FocusTransition | null;
   mode: 'overview' | 'focusing' | 'focused' | 'manual' | 'restored';
   focusedId: string | null;
@@ -140,17 +147,13 @@ function makeGlow(color:string, size:number):THREE.Sprite {
   sprite.scale.set(size,size,1);return sprite;
 }
 
-function addDecorativeStars(scene:THREE.Scene) {
-  // This deterministic field is illustrative scenery, not an astronomical catalog.
-  let seed=918273;
-  const random=()=>{seed=(1664525*seed+1013904223)>>>0;return seed/4294967296;};
-  const vertices:number[]=[];
-  for(let i=0;i<1400;i++){
-    const z=2*random()-1;const angle=random()*Math.PI*2;const circle=Math.sqrt(1-z*z);const radius=1000+random()*1500;
-    vertices.push(circle*Math.cos(angle)*radius,z*radius,circle*Math.sin(angle)*radius);
-  }
-  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
-  scene.add(new THREE.Points(geometry,new THREE.PointsMaterial({color:'#adbed8',size:1.05,sizeAttenuation:false,transparent:true,opacity:.48,depthWrite:false})));
+function createCatalogSky() {
+  // Uniform marker styling and sphere radius are display choices, not measured
+  // stellar brightness, physical depth, or a substitute for a missing catalogue.
+  const stars=new THREE.Points(new THREE.BufferGeometry(),new THREE.PointsMaterial({color:'#adbed8',size:1.05,sizeAttenuation:false,transparent:true,opacity:.48,depthWrite:false}));
+  stars.name='nasa-catalog-host-directions';stars.userData.representation='catalog_host_directions';
+  stars.frustumCulled=false;stars.raycast=()=>{};
+  return stars;
 }
 
 export default function UniverseScene(props:UniverseSceneProps) {
@@ -177,11 +180,11 @@ export default function UniverseScene(props:UniverseSceneProps) {
     // Artistic fill makes the exaggerated globes legible; this is not a radiative model.
     scene.add(new THREE.HemisphereLight('#dce8fa','#101827',.85));
     const fill=new THREE.DirectionalLight('#fff2df',1.8);fill.position.set(-35,45,70);scene.add(fill);
-    addDecorativeStars(scene);
+    const skyStars=createCatalogSky();scene.add(skyStars);
     const kuiper=createKuiperIllustration();kuiper.visible=latest.current.showKuiperBelt!==false;scene.add(kuiper);
     const camera=new THREE.PerspectiveCamera(48,container.clientWidth/Math.max(1,container.clientHeight),.025,6000);camera.position.fromArray(INITIAL.position);
     const controls=new OrbitControls(camera,renderer.domElement);controls.target.fromArray(INITIAL.target);controls.enableDamping=true;controls.dampingFactor=.08;controls.rotateSpeed=.65;controls.zoomSpeed=.85;controls.panSpeed=.7;controls.minDistance=.2;controls.maxDistance=1100;controls.screenSpacePanning=true;controls.update();
-    const rt:Runtime={renderer,scene,camera,controls,bodies:new Map(),orbits:new Map(),kuiper,focus:null,mode:'overview',focusedId:null,followedId:null,focusRequest:null,restoredRequest:null,lastFollowEmitted:undefined,motionTick:0,lastEmit:0,disposed:false,animationId:0,pausedAt:null,resume:()=>{},
+    const rt:Runtime={renderer,scene,camera,controls,bodies:new Map(),orbits:new Map(),kuiper,skyStars,focus:null,mode:'overview',focusedId:null,followedId:null,focusRequest:null,restoredRequest:null,lastFollowEmitted:undefined,motionTick:0,lastEmit:0,disposed:false,animationId:0,pausedAt:null,resume:()=>{},
       cameraState:()=>({position:camera.position.toArray() as Vec3,target:controls.target.toArray() as Vec3,representation_version:'solar-display-v1'}),
       applyCamera:value=>{camera.position.fromArray(value.position);controls.target.fromArray(value.target);controls.update();},
       emit:()=>{latest.current.onCameraChange?.(rt.cameraState());if(rt.lastFollowEmitted!==rt.followedId){rt.lastFollowEmitted=rt.followedId;latest.current.onFollowChange?.(rt.followedId);}container.dataset.cameraPosition=camera.position.toArray().map(n=>n.toFixed(5)).join(',');container.dataset.cameraTarget=controls.target.toArray().map(n=>n.toFixed(5)).join(',');container.dataset.cameraMode=rt.mode;container.dataset.focusedObject=rt.focusedId??'';container.dataset.followObject=rt.followedId??'';container.dataset.focusStartedAt=rt.focus?String(rt.focus.startedAt):'';},
@@ -245,6 +248,9 @@ export default function UniverseScene(props:UniverseSceneProps) {
           view.label.style.transform=`translate(${x}px,${y}px) translateX(-50%)`;view.label.dataset.selected=String(id===latest.current.selectedObjectId);
         }
       }
+      // Translate the reference sphere with the eye, retaining fixed sky
+      // directions when the free camera pans; never create a stellar parallax.
+      if(!skyStars.position.equals(camera.position)||!container.dataset.skyCenter){skyStars.position.copy(camera.position);container.dataset.skyCenter=camera.position.toArray().map(n=>n.toFixed(5)).join(',');}
       renderer.render(scene,camera);
     };
     rt.resume=()=>{if(rt.disposed||rt.animationId!==0||latest.current.active===false)return;const now=performance.now();if(rt.pausedAt!==null&&rt.focus)rt.focus.startedAt+=now-rt.pausedAt;rt.pausedAt=null;previous=now;rt.animationId=requestAnimationFrame(animate);};
@@ -270,9 +276,10 @@ export default function UniverseScene(props:UniverseSceneProps) {
       if(!directionOnly&&!locations.has(body.object_id))continue;
       if(directionOnly&&!sourceDirection)continue;
       const position=new THREE.Vector3().fromArray(directionOnly?displayDirection(sourceDirection!):locations.get(body.object_id)!);
+      const sourceAppearance=props.appearance?.objects[body.object_id];const displayReferenceRadius=sourceAppearance?.physical_profile?.reference_radius_km??body.radius_km??0;
       const galaxyInput=body.kind==='galaxy'?{object_id:body.object_id,morphology:body.galaxy_morphology,appearance:body.galaxy_appearance,direction_icrs_deg:body.direction_icrs_deg!}:null;
       const profile=galaxyInput?galaxyDisplayProfile(galaxyInput):null;
-      const radius=directionOnly?1.05:profile?profile.radius:body.kind==='moon'?(body.object_id===props.selectedObjectId?Math.max(.32,displayRadius(body.radius_km??0)):Math.max(.035,Math.min(.22,(body.radius_km??0)/10000+.035))):displayRadius(body.radius_km??0,body.object_id==='sun');
+      const radius=directionOnly?1.05:profile?profile.radius:body.kind==='moon'?(body.object_id===props.selectedObjectId?Math.max(.32,displayRadius(body.radius_km??0)):Math.max(.035,Math.min(.22,(body.radius_km??0)/10000+.035))):displayRadius(displayReferenceRadius,body.object_id==='sun');
       let view=rt.bodies.get(body.object_id);
       if(view&&(rt.focus?.objectId===body.object_id||rt.followedId===body.object_id)){
         const updated=advanceNavigationForBody({camera:rt.cameraState(),transition:rt.focus,followedObjectId:rt.followedId},body.object_id,view.position.toArray() as Vec3,position.toArray() as Vec3,directionOnly);
@@ -295,18 +302,20 @@ export default function UniverseScene(props:UniverseSceneProps) {
         view={body,group,radius,framingRadius:radius,position,direction:directionOnly?position.clone():null,label,appearance:null,appearanceEntry:undefined,ringEntry:undefined,fallback:group.children.find(child=>child instanceof THREE.Mesh) as THREE.Mesh??null};rt.bodies.set(body.object_id,view);rt.scene.add(group);
       }
       if(view.radius!==radius&&view.fallback){view.fallback.geometry.dispose();view.fallback.geometry=new THREE.SphereGeometry(radius,body.kind==='moon'?12:48,body.kind==='moon'?8:32);}
-      view.radius=radius;view.framingRadius=radius;
+      const previousFramingRadius=view.framingRadius;view.radius=radius;view.framingRadius=radius;
       if(galaxyInput&&!directionOnly){
         let shape=view.group.children.find(child=>child.userData.galaxyProfile);
         if(shape&&view.group.userData.galaxySpec!==body.galaxy_appearance){view.group.remove(shape);disposeObject(shape);shape=undefined;}
         if(!shape){view.group.add(createGalaxyAppearance(galaxyInput));view.group.userData.galaxySpec=body.galaxy_appearance;}
       }
-      const appearanceEntry=body.object_id===props.selectedObjectId||body.object_id===selectedTextureParent?props.appearance?.objects[body.object_id]:undefined;const ringEntry=props.appearance?.rings[body.object_id];
+      const appearanceEntry=body.object_id===props.selectedObjectId||body.object_id===selectedTextureParent||sourceAppearance?.physical_profile?sourceAppearance:undefined;const ringEntry=props.appearance?.rings[body.object_id];const smallProfile=appearanceEntry?.physical_profile;const physicalReference=smallProfile?.reference_radius_km??body.radius_km??0;
       const wantsAppearance=!directionOnly&&body.kind!=='galaxy'&&Boolean(props.appearance)&&(body.kind!=='moon'||body.object_id===props.selectedObjectId);
       if(view.appearance&&(!wantsAppearance||view.appearanceEntry!==appearanceEntry||view.ringEntry!==ringEntry)){view.group.remove(view.appearance.group);view.appearance.dispose();view.appearance=null;}
-      if(wantsAppearance&&!view.appearance){if(view.fallback){view.group.remove(view.fallback);disposeObject(view.fallback);view.fallback=null;}const activeView=view;view.appearance=createBodyAppearance({objectId:body.object_id,displayRadius:radius,physicalRadiusKm:body.radius_km??0,fallbackColor:body.color??COLORS[body.object_id]??'#a7a19b',appearance:appearanceEntry,rings:ringEntry,anisotropy:rt.renderer.capabilities.getMaxAnisotropy(),onStatus:status=>{activeView.label.dataset.appearanceState=status.state;activeView.label.dataset.appearanceKind=status.kind;latest.current.onAppearanceStatus?.(status);}});view.group.add(view.appearance.group);view.appearanceEntry=appearanceEntry;view.ringEntry=ringEntry;}
+      if(wantsAppearance&&!view.appearance){if(view.fallback){view.group.remove(view.fallback);disposeObject(view.fallback);view.fallback=null;}const activeView=view;view.appearance=createBodyAppearance({objectId:body.object_id,displayRadius:radius,physicalRadiusKm:physicalReference,fallbackColor:body.color??COLORS[body.object_id]??'#a7a19b',appearance:appearanceEntry,rings:ringEntry,anisotropy:rt.renderer.capabilities.getMaxAnisotropy(),onStatus:status=>{activeView.label.dataset.appearanceState=status.state;activeView.label.dataset.appearanceKind=status.kind;latest.current.onAppearanceStatus?.(status);}});view.group.add(view.appearance.group);view.appearanceEntry=appearanceEntry;view.ringEntry=ringEntry;}
       if(!wantsAppearance&&!view.fallback&&!directionOnly&&body.kind!=='galaxy'){const mesh=new THREE.Mesh(new THREE.SphereGeometry(radius,12,8),new THREE.MeshStandardMaterial({color:body.color??COLORS[body.object_id]??'#9a9690',roughness:1}));mesh.userData.objectId=body.object_id;view.group.add(mesh);view.fallback=mesh;}
-      const bands=scaledRingBands(ringEntry?.bands_km??[],body.radius_km??0,radius).filter(band=>band.opacity>=.08);if(bands.length)view.framingRadius=Math.max(radius,...bands.map(band=>band.outer));
+      const bands=scaledRingBands(ringEntry?.bands_km??[],physicalReference,radius).filter(band=>band.opacity>=.08);if(bands.length)view.framingRadius=Math.max(radius,...bands.map(band=>band.outer));
+      view.framingRadius=Math.max(view.framingRadius,...smallBodyAxes(smallProfile).map(axis=>axis*radius),...smallBodyRingRadii(smallProfile,physicalReference,radius));
+      if(Math.abs(previousFramingRadius-view.framingRadius)>1e-6&&props.selectedObjectId===body.object_id&&(rt.followedId===body.object_id||rt.focus?.objectId===body.object_id))rt.focusRequest=null;
       view.body=body;view.position.copy(position);view.direction=directionOnly?position.clone():null;
       if(!directionOnly)view.group.position.copy(position);
       const name=props.labels?.[body.object_id]??body.name;const text=directionOnly?`${name} · ${props.directionLabel??'direction'}`:name;if(view.label.textContent!==text)view.label.textContent=text;if(view.label.getAttribute('aria-label')!==name)view.label.setAttribute('aria-label',name);
@@ -315,6 +324,7 @@ export default function UniverseScene(props:UniverseSceneProps) {
       view.label.dataset.worldPosition=position.toArray().map(value=>value.toFixed(9)).join(',');
       view.label.dataset.sourcePositionAu=body.position_au?.map(value=>value.toFixed(12)).join(',')??'';
       view.label.dataset.positionKind=body.position_kind??body.kind;
+      view.label.dataset.surfaceRepresentation=appearanceEntry?.texture_url?'published_map':smallProfile?'literature_constraints_unresolved':'neutral_unresolved_body';view.label.dataset.shapeAxes=smallBodyAxes(smallProfile).join(',');view.label.dataset.ringCenterRadiiKm=smallProfile?.rings.map(ring=>ring.center_radius_km).join(',')??'';view.label.dataset.profileColor=smallProfile?.color_hex??'';view.label.dataset.displayRadius=String(view.radius);view.label.dataset.framingRadius=String(view.framingRadius);view.label.dataset.physicalReferenceRadiusKm=String(physicalReference);
       if(profile){view.label.dataset.representation='source_informed_morphology_with_illustrative_detail';view.label.dataset.galaxyRenderer=profile.renderer;view.label.dataset.armCount=String(profile.modeledArms);view.label.dataset.companionCount=String(profile.companions);view.label.dataset.dustLaneCount=String(profile.dustLanes);view.label.dataset.asymmetry=String(profile.asymmetric);view.label.dataset.axisRatio=String(profile.projectedAxisRatio);view.label.dataset.inclinationDeg=String(profile.inclinationDeg);view.label.dataset.orientationAssumed=String(profile.inclinationAssumed||profile.positionAngleAssumed);}
     }
     if(props.frameSelectedSystem&&props.selectedObjectId){const parent=rt.bodies.get(props.selectedObjectId);if(parent){for(const view of rt.bodies.values()){if(view.body.kind==='moon'&&view.body.parent_id===props.selectedObjectId)parent.framingRadius=Math.max(parent.framingRadius,parent.position.distanceTo(view.position)+view.radius);}}}
@@ -364,15 +374,22 @@ export default function UniverseScene(props:UniverseSceneProps) {
     rt.focusRequest={objectId:props.selectedObjectId,sequence,system};rt.followedId=view.body.object_id;
     rt.focus=view.body.kind==='galaxy'&&!view.direction?makeGalaxyFocus(current,view.body.object_id,center,view.framingRadius,rt.camera.fov,rt.camera.aspect,performance.now(),window.matchMedia('(prefers-reduced-motion: reduce)').matches):makeFocus(current,view.body.object_id,center,view.framingRadius,rt.camera.fov,rt.camera.aspect,performance.now(),window.matchMedia('(prefers-reduced-motion: reduce)').matches,Boolean(view.direction));
     rt.focusedId=view.body.object_id;rt.mode='focusing';rt.controls.minDistance=view.direction?0.2:view.radius*1.2;rt.emit();
-  },[props.data,props.galaxies,props.selectedObjectId,props.selectionSequence,props.overviewSequence,props.restoredCamera,props.restoredFollowObjectId,props.restoreSequence,props.frameSelectedSystem]);
+  },[props.data,props.galaxies,props.selectedObjectId,props.selectionSequence,props.overviewSequence,props.restoredCamera,props.restoredFollowObjectId,props.restoreSequence,props.frameSelectedSystem,props.appearance]);
 
   useEffect(()=>{runtime.current?.renderer.domElement.setAttribute('aria-label',props.controlsLabel??'3D universe');},[props.controlsLabel]);
+  useEffect(()=>{
+    const rt=runtime.current;if(!rt)return;
+    const vertices=(props.skyStars??[]).flatMap(star=>star.display_direction.map(value=>value*CATALOG_SKY_RADIUS));
+    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
+    rt.skyStars.geometry.dispose();rt.skyStars.geometry=geometry;rt.skyStars.position.copy(rt.camera.position);
+    rt.skyStars.userData.sourceUrl=props.skySourceUrl??null;rt.skyStars.userData.sourceSha256=props.skySourceSha256??null;
+  },[props.skyStars,props.skySourceUrl,props.skySourceSha256]);
   useEffect(()=>{const rt=runtime.current;if(!rt)return;rt.kuiper.visible=props.showKuiperBelt!==false;if(host.current){host.current.dataset.kuiperVisible=String(rt.kuiper.visible);host.current.dataset.kuiperRepresentation='seeded_illustrative_annulus_not_individual_positions_counts_or_density';host.current.dataset.kuiperInnerAu='30';host.current.dataset.kuiperOuterAu='50';}},[props.showKuiperBelt]);
   useEffect(()=>{const rt=runtime.current;if(!rt)return;const active=props.active!==false;rt.renderer.domElement.tabIndex=active?0:-1;if(host.current)host.current.dataset.sceneActive=String(active);if(active)rt.resume();},[props.active]);
 
-  return <div ref={host} className={styles.scene} style={props.active===false?{visibility:'hidden'}:undefined} aria-hidden={props.active===false?true:undefined} data-testid="universe-scene" data-selected-object={props.selectedObjectId??''}>
+  return <div ref={host} className={styles.scene} style={props.active===false?{visibility:'hidden'}:undefined} aria-hidden={props.active===false?true:undefined} data-testid="universe-scene" data-selected-object={props.selectedObjectId??''} data-sky-star-count={props.skyStars?.length??0} data-sky-representation="catalog_host_directions" data-sky-state={props.skyStars?.length?'available':'empty'} data-sky-frame-status={CATALOG_SKY_FRAME_STATUS} data-sky-source-url={props.skySourceUrl??''} data-sky-source-sha256={props.skySourceSha256??''}>
     <div ref={labelsLayer} className={styles.labels} aria-label={props.controlsLabel}/>
-    <div className={styles.representation}>{props.representationLabel??'Distance compressed · radii enlarged · artistic appearance · illustrative starfield'}</div>
+    <div className={styles.representation}>{props.representationLabel??'Distance compressed · radii enlarged · artistic appearance'}{props.skyNote&&<span data-testid="catalog-sky-note">{props.skyNote} {props.skySourceUrl&&<a href={props.skySourceUrl} target="_blank" rel="noreferrer" style={{pointerEvents:'auto',color:'inherit'}}>NASA ↗</a>}</span>}</div>
     {error&&<div className={styles.error} role="alert"><p>{props.errorLabel??'3D rendering is unavailable in this browser.'}</p><div>{sceneObjects.map(body=><button key={body.object_id} onClick={()=>props.onSelect(body.object_id)}>{props.labels?.[body.object_id]??body.name}</button>)}</div></div>}
   </div>;
 }

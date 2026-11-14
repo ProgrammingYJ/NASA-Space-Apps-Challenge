@@ -100,3 +100,40 @@ universe_catalog.json은실제성원23사례와태양계참조를연결하고공
 object_names.json은476ID×5언어의표시형/표기방법/원출처와원catalog/helper SHA를연결한다. 이름이있는183개와국제지정명293개를구분한다. 기관HTML/PDF12원본30,323,543B와12sidecar는 data/reference/object-names/에보존하고미확보요청·원어민검수공백·기관표기/프로젝트음역을명시했다. 이름표시는새관측/새위치가아니며원과학명/ID/벡터는바꾸지않는다.
 
 최신전수명세 Data_Spec의1631자료파일+명시참조helper1·877참조경로는파일존재/SHA/바이트를대조한snapshot이며독립관측수/물리정확도·권리보장을뜻하지않는다. 현재기능/API/상태·최신실행검사는 FSD와작업기록을따른다.
+
+## DEV-009 실제 확인 대상과 공개 외계행성 관측사진
+
+최신 사용자 지시는 앞서 허용한 가상 외부은하 행성계 대신 실제 논문/확인목록에 근거한 실존 별·행성만 구현하는 것이다. 기존 NASA6470행성/4862호스트 snapshot과 원본102개는 변경하지 않는다. NASA 원행6470개 모두 `pl_controv_flag`·`pl_refname`·`disc_refname`이 없으므로 논란상태와 개별논문 reference는 미상이다. 확인목록 등재를 모든 개별논문 재검증/논란없음 보증으로 확대하지 않고 누락값을false로 바꾸지 않는다. 새 방향 표식4862개는 기존 카탈로그의 첫 유효 호스트 좌표를 참조하며 새로운 별/거리·밝기·epoch전파를 생성하지 않는다. 카메라 중심의 표시구반지름1800·색/크기는 표현 가정이다. 미검증 frame/epoch·고유운동·거리는 그대로 남기고 임의1400별 생성은 활성 태양계 장면에서 제거한다.
+
+| 자료 | 실제 채택/사용 | 정본과 배포 구분 |
+| --- | --- | --- |
+| 외부은하 행성 문헌 검토 | 후보2건(M51-ULS-1 b,PA-99-N2)·집단추론3건. 확인된 개별 행성 collection은0개이며 후보를 실제행성 목록/지도/3D에 넣지 않음 | [extragalactic_planets.json](../data/manifests/extragalactic_planets.json)39,826B/SHA `80f4532b8a93db37a072da0e56b2bef5303365cb9d26e1f4d61a599b6824fe3a`; facts12JSON8,041B+sidecar는 런타임/ZIP, upstream12원문1,036,181B는 로컬감사/배포제외 |
+| 실제 외계행성 사진 | 기존 확인 ID의 HIP65426b/JWST, BetaPictorisb/SPHERE, HR8799c/NACO3JPEG 총1,270,679B. 별과 분리된 광원 관측이며 표면 지도 아님 | [exoplanet_observations.json](../data/manifests/exoplanet_observations.json)21,746B/SHA `9f342bab497683425e7907417a8df587fbe69f0e5557086f3c138a516a094ea0`; facts8JSON7,647B+sidecar와 public3JPEG/sidecar는 런타임/ZIP, upstream8HTML817,955B는 로컬감사/배포제외 |
+
+새 사실추출JSON은 프로젝트가 작성한 검토 입력이며 원 논문/페이지를 재배포하는 것이 아니다. 전체 upstream 원문은 권한을 자동 가정하지 않고 로컬 감사용으로만 보존한다. 원 URL·전체 SHA/바이트·취득시각·원문 참조와 사실추출SHA는 manifest/Data_Spec에 연결한다. 두 reader는 upstream 복제본 없이 facts와 필수 사진/기존카탈로그만으로 오프라인 검증할 수 있어야 한다. 원문 누락/변조와 정상 빈 확인목록/미채택사진을 구별한다.
+
+PA-99-N2의 약6.34목성질량은0.5태양질량 렌즈가정에 조건부이며 새 독립질량 측정/궤도주기가 아니다. 렌즈은하의 집단추론은 개별 행성의 ID/위치/표면이 아니며 원시블랙홀 대안을 보존한다. 미명시 M51 caption 기준계는 임의 ICRS로 선언하지 않아 좌표를null로 둔다. 채택한 검토의 확인객체0은 전우주 행성 부재/논문 전수조사 완료를 뜻하지 않는다.
+
+사진 원바이트는 `web/public/observations/exoplanets/`와 최종 정적빌드에서 동일하게 제공한다. HIP65426b4필터 할당색·별차폐/광학artefact, BetaPictorisb의 여러시기 관측모음, HR8799c의 표시원/회절artefact를 원 제품의 처리/한계로 기록한다. 전체credit·CC-BY4.0 링크를 사진 옆에 표시하며 과거 관측/공개일을 현재 모형시각이나 자연색 지형으로 바꾸지 않는다. 상세3D 외관은 별도 설명모형이다. 사진이 미채택된 확인행성은 관측된 적이 없다고 단정하지 않는다.
+
+새 사진3개는 기관 원본과 직접 시각 대조했고 reader15검사, 외부은하 reader12검사를 완료했다. 이 기록은 실제 API/최신 Chrome·전체Python·완결ZIP 검증을 뜻하지 않으며 최종 실행결과는 DEV-009 작업기록/FSD20절을 따른다. Data_Spec의 앞 절1631+helper1/877참조는 DEV-008 snapshot이고 DEV-009의 새 원문·사실추출·사진·정적복제까지 포함한 전수값은 자료/빌드 동결 후 갱신한 Data_Spec을 따른다.
+
+## DEV-009 추가 소천체 외관 제약 · 자료동결/후속검사
+
+기존8개ID(Ceres/Haumea/Makemake/Eris/Sedna/Quaoar/Orcus/Gonggong)에 `science/small_body_appearance.py`·`small_body_appearance.json`의문헌제약을추가한다. Ceres는기존Dawn해상지도보존용metadata이고나머지7개는분해표면지도가아니다. 원31지도/102관측원본·기존JPL크기/천체력을변경하지않고무지도고체의임의크레이터를제거한다. 원문은NASA/JPL/ESO와실제논문의관측색·알베도/형상모형·크기정의/불확실성·고리조건을분리해추적한다.
+
+런타임/ZIP입력은 `data/reference/small-body-appearance/facts/`의프로젝트작성사실JSON/sidecar와대응manifest다. [small_body_appearance.json](../data/manifests/small_body_appearance.json)은47,999B/SHA `33b3662b6978137bf172ab65064aa73a40f119519cfaf6365e89ab0f60db18ec`이며2026-11-14T10:07:34UTC에12source/8ID로동결했다. facts12JSON8,716B+sidecar8,987B는런타임/ZIP, upstream12원문3,562,951B+sidecar6,006B는로컬감사자료/ZIP제외다. 원문/사실추출의전체SHA/바이트·취득시각/권리·기존두manifest의존성과새48참조파일은최종빌드후Data_Spec전수목록에갱신한다. reader12검사는통과했으며후속API/helper/Chrome/저장복원은실제결과로별도확정한다. 앞선DEV-009잠정21manifest/1720항목snapshot은이추가자료전의기록이며새최종전수값으로재사용하지않는다.
+
+Sedna·Makemake·Quaoar/Gonggong의붉은정성색, Orcus중성색/분광근거와Eris/Haumea높은알베도는표시RGB선택의근거이며측정된정확RGB가아니다. Haumea는occultation/light-curve삼축모형의조건/원문불확실성을보존하고미상3D형상은null이다. Herschel/ALMA열모형크기·투영면적등가반지름·부피등가반지름을같은측정으로바꾸지않는다. Haumea고리와Quaoar Q1R/Q2R은문헌중심거리를1px안내선으로표시하며고리폭/광학두께/현재자세·입자분포는복원하지않는다. 확인되지않은세번째고리·임의지형/국소얼음분포를추가하지않는다. 실제입력/전수해시·후속reader/API/helper/Chrome·저장복원검사결과는FSD2.14/8.8/20절과작업기록으로연결한다.
+
+## DEV-010 회의 승인 핵심 · 행성3요건/청소질량
+
+사용자가공유한팀회의의공동결정에따라기존행성8개·공식왜소행성5개·후보4개,총17개에공식분류/3요건과별도정량연구모형을연결한다. 새로운임의천체를추가하거나기존실제관측/품질/근거경로를교체하지않는다. 실행정본은 `science/planet_criteria.py`와 [planet_criteria.json](../data/manifests/planet_criteria.json)168,453B/SHA `e6124a457dcbba0907d9f4d0f8fbd777b7cac1963b4b2e49cb5fb6322e8753d8`다. 기존 `solar_system_ephemeris.json`·`solar_system_orbits.json`의원SHA/바이트에의존한다.
+
+런타임/ZIP에는 `data/reference/planet-criteria/facts/`의19사실JSON+19sidecar총77,558B를포함한다. upstream19원문+19sidecar총2,558,555B는로컬감사전용/ZIP제외다. 18개는이번새취득이고1개는기존내장JPL물리HTML58,244B를변경없이재사용했다. 기존9천체의원Horizons요소/물리표와새SBDB8응답을원출처·컨테이너/내장원문·추출해시별로추적하며파일수를새독립관측/발견수로세지않는다. 요청중외부파일을임의취득하지않는다.
+
+공식IAU2006태양계정의·NASA의공식왜소행성목록, Margot2015/2024연구모형, JPL요소/단위와실제질량논문을분리한다. 공식행성/왜소행성의형태요건은분류정의에따른표시이며새정수압평형측정이아니다. 후보4개의shape/지배력은자료부족으로유지한다. 질량은행성표의10^24kg와Pluto표의10^18kg를구분하고, Haumea본문질량과Eris/Quaoar/Orcus/Gonggong의계질량정의를원문대로보존한다. 채택본체질량11개·미확보6개와계질량보조4개를분리하며누락을0으로채우거나계질량을본체질량/Π에자동대입하지않는다. ‘채택자료에미확보’는전체문헌에측정이없다는단정이아니다.
+
+연구모형은태양1M☉·10Gyr·C=2√3에서 `m_clear/M⊕ = 0.001239(a/au)^(9/8)`이고Π는채택본체질량/m_clear를직접나눈값이다. 별도반올림상수807을혼합하지않는다. 공식IAU수치규칙·존재확률/청소율·전주기N체모형이아니다. Sedna는a≈543.7195au/e≈0.85988의출처요소에서약1.4803626M⊕라는동일긴반지름원형궤도참고값이며고이심률실궤도의검증된최소질량이아니다. 실제본체질량/Π는null이고정적요소epoch는재생시각과별도다. 긴반지름a·태양초점x=−ae·근일점q/원일점Q의SVG는요소를설명하는모식도다.
+
+현재통합 전체Python372(76.33초)·Vitest64(1.20초)·strict/Vite Bp6N6jEm·Ruff57검사는통과했고새브라우저16경로와후속의미문구교정/좁은재검사·최종ZIP은확정대기다. Data_Spec최종동결은1,566,507B/2648줄/SHA `f26ba122e0bac9fdfdabbe6881bd7686a7692582f62b0efbd376606e1f7e1b9e`,23정본manifest·1846항목(data1796+public49+명시helper1)·총1,193,228,742B다. 정본참조979/sidecar포함984·내장원응답32·dist복제49를추적하고1846항목의독립전체SHA/원102개987,987,584B보존검사에서불일치0을확인했다. 파일전수검증은물리모형정확도/독립발견·공개서버/사람검수를뜻하지않는다.

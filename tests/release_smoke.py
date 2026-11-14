@@ -82,6 +82,22 @@ def main(base):
         if body.get("orbit")
     )
     appearance = call(base, "/api/v1/appearance")
+    small_bodies = call(base, "/api/v1/small-body-appearance")
+    criteria = call(base, "/api/v1/planet-criteria")
+    assert len(criteria["objects"]) == 17
+    assert criteria["objects"]["sedna"]["mass"]["earth_masses"] is None
+    assert criteria["objects"]["sedna"]["clearing"]["pi"] is None
+    assert 1.48 < criteria["objects"]["sedna"]["clearing"]["minimum_mass_earth"] < 1.49
+    assert criteria["objects"]["eris"]["mass"]["earth_masses"] is None
+    assert (
+        criteria["objects"]["eris"]["system_mass"]["definition"]
+        == "combined_primary_satellite_system"
+    )
+    assert len(small_bodies["profiles"]) == 8
+    assert small_bodies["profiles"]["ceres"]["preserve_existing_map"] is True
+    assert small_bodies["profiles"]["sedna"]["reference_radius_km"] == 497.5
+    assert len(small_bodies["profiles"]["haumea"]["rings"]) == 1
+    assert len(small_bodies["profiles"]["quaoar"]["rings"]) == 2
     assert len(appearance["objects"]) >= 31 and len(appearance["rings"]) == 4
     assert "saturn" in appearance["objects"] and "moon-301" in appearance["objects"]
     for entry in appearance["objects"].values():
@@ -100,6 +116,17 @@ def main(base):
     exoplanet = call(base, "/api/v1/catalog/exoplanets/" + selected["object_id"])
     assert exoplanet["surface_status"] == "unresolved_illustration"
     assert len(exoplanet["system_planets"]) == 7
+    review = call(base, "/api/v1/catalog/extragalactic-planets")
+    assert review["objects"] == review["confirmed_objects"] == []
+    assert len(review["reviewed_unconfirmed_evidence"]) == 5
+    assert all(not item["confirmed"] for item in review["reviewed_unconfirmed_evidence"])
+    planet_images = call(base, "/api/v1/catalog/exoplanet-observations")
+    assert len(planet_images["observations"]) == 3
+    for photo in planet_images["observations"]:
+        assert photo["surface_resolved"] is False and photo["credit"]
+        assert photo["license"]["name"] == "CC BY 4.0"
+        raw = call(base, photo["image_url"])
+        assert len(raw) == photo["bytes"] and hashlib.sha256(raw).hexdigest() == photo["sha256"]
     history = call(base, "/api/v1/cosmic-history")
     assert len(history["stages"]) == 10 and history["reference_age_gyr"] == 13.8
     assert len(history["morphology_reference"]["examples"]) == 6
@@ -177,6 +204,9 @@ def main(base):
                     "show_kuiper_belt": False,
                     "show_galaxies": True,
                     "kuiper_display_version": "kuiper-region-v1",
+                    "time_preference": "auto",
+                    "small_body_appearance_manifest_sha256": small_bodies["source_manifest_sha256"],
+                    "planet_criteria_manifest_sha256": criteria["source_manifest_sha256"],
                     "simulation_context": {
                         "algorithm_version": "jpl-kepler-long-term-v1",
                         "source_manifest_sha256": model["source_manifest_sha256"],
@@ -209,8 +239,19 @@ def main(base):
                 "timeline_midpoint": moving_scene["epoch"],
                 "timeline_validation_samples": timeline["validation"]["sample_count"],
                 "appearance_maps": len(appearance["objects"]),
+                "small_body_profiles": len(small_bodies["profiles"]),
+                "planet_criteria_objects": len(criteria["objects"]),
+                "sedna_circular_reference_minimum_earth_mass": criteria["objects"]["sedna"][
+                    "clearing"
+                ]["minimum_mass_earth"],
+                "small_body_ring_centers": sum(
+                    len(profile["rings"]) for profile in small_bodies["profiles"].values()
+                ),
                 "solar_extension_objects": len(extended["objects"]),
                 "exoplanets": len(exoplanets["objects"]),
+                "published_planet_observations": len(planet_images["observations"]),
+                "confirmed_extragalactic_planets": len(review["confirmed_objects"]),
+                "excluded_literature_cases": len(review["reviewed_unconfirmed_evidence"]),
                 "legacy_history_milestones": len(history["stages"]),
                 "history_morphology_examples": len(history["morphology_reference"]["examples"]),
                 "simulation_model_bodies": len(model["tables"]["long"]["bodies"]),
