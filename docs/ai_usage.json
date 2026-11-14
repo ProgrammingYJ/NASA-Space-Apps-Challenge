@@ -23,7 +23,8 @@
     "DEV-007",
     "DEV-008",
     "DEV-009",
-    "DEV-010"
+    "DEV-010",
+    "DEV-011"
   ],
   "assistance": [
     "repository_configuration",
@@ -84,7 +85,13 @@
     "iau_classification_and_separate_margot_clearing_mass_model",
     "source_mass_definitions_and_unknown_primary_mass_preservation",
     "focus_correct_orbit_schematic_and_five_locale_criteria_panel",
-    "optional_planet_criteria_hash_evidence_restore"
+    "optional_planet_criteria_hash_evidence_restore",
+    "source_radius_density_mass_hypotheses",
+    "independent_decimal_validation_of_36_moon_target_cases",
+    "parameter_corner_ranges_and_fixed_source_survey_not_probabilities",
+    "global_mass_hypothesis_source_hash_evidence_restore",
+    "bounded_observer_relativity_and_black_hole_source_integration",
+    "provider_publication_host_and_original_observation_provenance_separation"
   ],
   "application_code_generated_in_this_setup": true,
   "science_detection_or_fit_performed": false,
@@ -514,29 +521,72 @@
     "locale_keys": 261
   },
   "current_checkpoint": {
-    "version": "0.7.0",
-    "work_id": "DEV-009+DEV-010",
-    "work_ids": [
-      "DEV-009",
-      "DEV-010"
-    ],
-    "status": "source_checkpoint_before_new_dev011_physics",
-    "full_python": "372 passed, 76.33 seconds",
+    "version": "0.8.0",
+    "work_id": "DEV-011",
+    "status": "source_data_inventory_full_python_and_browser_verified_exact_archive_pending",
+    "full_python": {
+      "passed": 483,
+      "seconds": 76.49,
+      "warnings": "one pre-existing Starlette/httpx deprecation warning"
+    },
+    "ruff": {
+      "files": 63,
+      "check": "passed",
+      "format": "passed"
+    },
     "vitest": {
-      "passed": 64,
-      "seconds": 1.2
+      "passed": 70,
+      "seconds": 1.76
     },
     "strict_typecheck": "passed",
-    "production_build": "index-lsFtNhUt.js; final locale-only follow-up pending",
-    "ruff": {
+    "production_build": {
+      "latest_identifier": "BfRDPmgL",
       "status": "passed",
-      "files": 57
+      "prior_mass_browser_build": "TyRAtsbd",
+      "intermediate_observer_build": "DbNwNokf",
+      "latest_css_identifier": "DZOoVrJ5",
+      "integrated_regression_build": "CNYGnNg7"
     },
-    "browser": "index-Bp6N6jEm: 16 passed, 206.567 seconds; earlier stage runs recorded separately",
-    "release_zip": "not_packaged; subsequent requested DEV-011 scope in progress",
+    "mass_browser": {
+      "unique_passed": 5,
+      "scope": "TyRAtsbd: first four passed, final scenario passed after null-omission test-expectation correction",
+      "report": "var/qa/dev011-mass-browser-review.json"
+    },
+    "intermediate_observer_browser": {
+      "build": "DbNwNokf",
+      "passed": 5,
+      "qa_assertion_failed": 1,
+      "test_condition": "source-ready timing corrected",
+      "direct_visual_issue": "main search/intro overlaid black-hole heading; App visibility corrected"
+    },
+    "final_browser": {
+      "build": "CNYGnNg7",
+      "passed": 13,
+      "scope": "observer6 + mass5 + original observation2",
+      "duration_ms": 142460.26,
+      "start_time": "2026-11-14T11:17:28.357Z",
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "errors": 0,
+      "report": "var/qa/dev011-final-browser-results.json",
+      "fresh_context_restore": "R=7.5Rs, beta=.001, wavelength=600nm, selected M87, both physics source hashes, camera, actual S01/S02 and 29-pixel quality"
+    },
+    "release_zip": "pending exact archive extraction/runtime/server-restart verification",
     "public_deployment": "not_performed",
     "linux_container": "not_run",
-    "human_native_review": "not_performed"
+    "human_native_review": "not_performed",
+    "final_spacing_followup": {
+      "build": "BfRDPmgL",
+      "css": "DZOoVrJ5",
+      "passed": 2,
+      "scope": "global and locale regression after CSS top spacing 24px to 50px; close/black-hole button bounding non-overlap and direct screenshot inspection",
+      "duration_ms": 9647,
+      "start_time": "2026-11-14T11:20:48.806Z",
+      "report": "var/qa/dev011-observer-review.json",
+      "source_math_and_data_changed": false,
+      "scope_boundary": "The complete 13-case regression belongs to CNYGnNg7; the final CSS build received these two affected checks."
+    }
   },
   "travel_checkpoint_v0_6": {
     "version": "0.6.0",
@@ -583,25 +633,27 @@
   },
   "data_specification": {
     "path": "Data_Spec.md",
-    "bytes": 1566507,
-    "lines": 2648,
-    "sha256": "f26ba122e0bac9fdfdabbe6881bd7686a7692582f62b0efbd376606e1f7e1b9e",
-    "canonical_manifests": 23,
-    "snapshot_entries": 1846,
-    "data_files": 1796,
-    "public_files": 49,
-    "data_public_files": 1845,
+    "bytes": 1791636,
+    "lines": 3061,
+    "sha256": "e848ee7025f315a6cfa127f67b3120a2c7ef2f5bee2d3515e26bbd7a1c3aba33",
+    "canonical_manifests": 26,
+    "snapshot_entries": 2041,
+    "data_files": 1987,
+    "public_files": 53,
+    "data_public_files": 2040,
     "explicit_helper_file": 1,
-    "snapshot_total_bytes": 1193228742,
-    "manifest_references": 979,
-    "references_including_sidecars": 984,
+    "snapshot_total_bytes": 1211512385,
+    "appendix_original_entries": 102,
+    "appendix_other_entries": 1939,
+    "manifest_references": 1079,
+    "references_including_sidecars": 1084,
     "embedded_responses": 32,
-    "static_replicas": 49,
-    "integrity_audit": "1846-entry independent full SHA/size audit and original 102-file preservation passed; no mismatch.",
+    "static_replicas": 53,
+    "integrity_audit": "Independent full SHA/size/path-set audit, original preservation and replica checks: no missing/extra/duplicate/hash/size/reference mismatch.",
     "original_source_files": 102,
     "original_source_bytes": 987987584,
     "independent_human_review": false,
-    "snapshot_scope": "DEV-009+DEV-010 frozen source/data snapshot; final build/archive/browser checks remain separate."
+    "snapshot_scope": "DEV-011/v0.8 frozen source/data/public snapshot; final browser/exact-archive/runtime checks remain separate."
   },
   "v0_6_prepared_archive_verification": {
     "checked_at": "2026-11-14T09:22:00.694531+00:00",
@@ -895,5 +947,219 @@
     "image_generation_service_or_new_ai_api_used": false,
     "nbody_fit_new_discovery_or_probability_claimed": false,
     "final_meaning_copy_browser_and_zip_checks": "pending; see final worklog and exact archive verification"
+  },
+  "v0_7_source_checkpoint": {
+    "commit": "bb386f38b4a5e971041befc9fe18c5a5be626858",
+    "remote_status": "verified and preserved in DEV-010 worklog",
+    "full_python_passed": 372,
+    "python_seconds": 76.33,
+    "vitest_passed": 64,
+    "vitest_seconds": 1.2,
+    "strict_typecheck": "passed",
+    "ruff_files": 57,
+    "browser_build": "Bp6N6jEm",
+    "browser_affected_passed": 16,
+    "browser_seconds": 206.567,
+    "later_copy_locale_build": "lsFtNhUt",
+    "later_locale_scenarios_passed": 1,
+    "later_locale_seconds": 6.568,
+    "earlier_dev009_staged_passes": [
+      21,
+      9
+    ],
+    "exact_new_release_zip": "not_delivered",
+    "public_deployment": "not_performed",
+    "scope": "Historical source/build-specific verification; not DEV-011 validation."
+  },
+  "dev011_density_hypotheses": {
+    "algorithm_version": "spherical-density-hypothesis-v1",
+    "manifest": "data/manifests/mass_scenarios.json",
+    "manifest_bytes": 130355,
+    "manifest_sha256": "7668d7caf418aaae363acf41fa50e9a69795ff1e3c99a178534a83552fc82112",
+    "targets": [
+      "makemake",
+      "eris",
+      "sedna",
+      "quaoar",
+      "orcus",
+      "gonggong"
+    ],
+    "comparison_moons": [
+      "tethys",
+      "dione",
+      "rhea",
+      "iapetus",
+      "ariel",
+      "umbriel"
+    ],
+    "case_count": 36,
+    "independent_decimal_cases_passed": 36,
+    "target_original_adopted_primary_masses_remain_null": true,
+    "observational_masses_iau_criteria_or_official_classification_replaced": false,
+    "density_definition": "Source-specific bulk density derived from GM and equivalent-volume radius; not target measurement or material density.",
+    "formula": "M[kg] = rho[kg/m^3] * (4*pi/3) * (R[km]*1000)^3",
+    "earth_mass_kg": 5.97217e+24,
+    "shape": "assumed sphere; source radius definition retained",
+    "density_interface_limits_kg_m3": [
+      100,
+      10000
+    ],
+    "input_limits_are_physical_bounds": false,
+    "range_definition": "Source radius offsets and comparison-moon density sigma used as parameter corners; not a target-mass confidence interval, prior or joint-covariance result.",
+    "custom_density_and_source_survey_separate": true,
+    "fixed_survey": "Envelope across all six source-moon density bounds and each target source-radius bounds; distinct from current custom rho.",
+    "conditional_source_range_target_count_meets_model": 0,
+    "zero_count_means_zero_probability_or_universe_absence": false,
+    "clearing_comparison": "Existing circular solar 10 Gyr Margot reference; no validated eccentric-orbit clearing or reclassification.",
+    "required_density": "Reverse model calculation at the same assumed radius; values beyond UI limits do not establish physical feasibility.",
+    "runtime_fact_and_sidecar_files": 4,
+    "runtime_fact_and_sidecar_bytes": 9607,
+    "local_only_upstream_and_sidecar_files": 4,
+    "local_only_upstream_and_sidecar_bytes": 1457981,
+    "upstream_redistributed": false,
+    "dependencies": [
+      "planet_criteria",
+      "small_body_appearance"
+    ],
+    "api": [
+      "GET /api/v1/mass-scenarios",
+      "POST /api/v1/mass-scenarios/calculate"
+    ],
+    "inputs": [
+      "target_id",
+      "density_kg_m3",
+      "analogue_id",
+      "include_source_ranges"
+    ],
+    "analogue_density_mismatch_or_invalid_input": 422,
+    "source_integrity_or_missing_data": 503,
+    "new_optional_evidence_fields": [
+      "mass_scenarios_manifest_sha256",
+      "mass_scenario"
+    ],
+    "source_hash_required_when_scenario_present": true,
+    "last_global_hypothesis_independent_of_epsilon_pluto_observation_target": true,
+    "legacy_payload_compatible": true,
+    "new_observations_or_source_coefficients_ai_generated": false,
+    "fact_extracts_and_calculated_hypotheses_are_project_authored": true,
+    "whole_build_browser_exact_zip_validation": "Full Python483, Vitest70 and CNYGnNg7 integrated Chrome13 passed; final BfRDPmgL CSS affected Chrome2 passed. Exact ZIP extraction/runtime restart pending.",
+    "validation": {
+      "independent_decimal_cases": 36,
+      "pure_tests": 39,
+      "api_tests": 8,
+      "unique_browser_scenarios": 5,
+      "browser_build": "TyRAtsbd",
+      "final_CNYGnNg7_regression": "13/13 integrated passed, including all five mass scenarios, 142.46026s"
+    }
+  },
+  "dev011_observer_black_hole_extension": {
+    "status": "source frozen, App/API integrated, full and affected browser checks passed; exact archive verification pending",
+    "science_module": "science/relativity.py",
+    "algorithm_version": "bounded-observer-relativity-v1",
+    "camera_interpretation": "Explicit opt-in hypothetical coordinate snapshot; not SPHEREx observer, measured velocity, physical travel path or light cone.",
+    "source_observed_redshifts_including_negative_values_preserved": true,
+    "observed_redshift_and_hypothetical_model_redshift_separate": true,
+    "wavelength_factor": "lambda_received/lambda_emitted; explicit radial SR/static Schwarzschild/incremental factors only",
+    "distance_model": "Fixed flat matter+Lambda reference H0=67.66 km/s/Mpc, Omega_m=0.3111, Tcmb0=0, 0<=z<=20; not a precision full cosmological reconstruction.",
+    "null_ray_model": "Schwarzschild equatorial null RK4 coordinate paths; not observed sky brightness, radiative transfer, Kerr or interior model.",
+    "actual_images_modified_into_new_viewpoint_observations": false,
+    "all_physical_laws_or_observed_worldlines_claimed_complete": false,
+    "new_source_provider_policy": "Exclude Chinese archive/service providers as requested; do not infer author nationality or certify unknown original contributions as non-Chinese.",
+    "provider_paper_host_reference_original_observation_contribution_separate": true,
+    "new_image_generation_service_or_ai_api_used": false,
+    "exact_sources_images_credits_and_final_browser_release_validation": "Sources and credits verified; CNYGnNg7 integrated Chrome13 passed in142.46026s and final BfRDPmgL CSS affected Chrome2 passed in9.647s. Exact ZIP extraction/runtime restart pending.",
+    "black_holes_manifest": {
+      "path": "data/manifests/black_holes.json",
+      "bytes": 106361,
+      "sha256": "4818701162f76fe3bc97383c1b0d2cd8d750b95466d15c95f046b229126cbbbd"
+    },
+    "observer_manifest": {
+      "path": "data/manifests/observer_physics.json",
+      "bytes": 271921,
+      "sha256": "61ca1cf4d24dfe337adb905070328d525ac982d4857db335906a7dbac1bea105"
+    },
+    "frozen_at_utc": "2026-11-14T10:54:02.621956+00:00",
+    "black_hole_objects": 11,
+    "adopted_masses": 9,
+    "unavailable_masses": 2,
+    "processed_eht_images": 2,
+    "redshift_rows": 14,
+    "galaxy_rows": 9,
+    "cosmic_rows": 5,
+    "adopted_redshift_values": 10,
+    "null_redshifts": 4,
+    "negative_catalogue_values_preserved": true,
+    "missing_redshifts_generated_from_ages": false,
+    "unique_runtime_fact_json_files": 53,
+    "runtime_fact_json_bytes": 46880,
+    "runtime_sidecar_files": 53,
+    "runtime_sidecar_bytes": 42665,
+    "new_local_only_upstream_files": 37,
+    "new_local_only_upstream_bytes": 16091431,
+    "new_local_only_sidecar_files": 37,
+    "new_local_only_sidecar_bytes": 21462,
+    "earlier_upstream_documents_referenced_without_reacquisition": 16,
+    "new_upstream_redistributed": false,
+    "eht_image_bytes": 103617,
+    "eht_image_sidecar_bytes": 1363,
+    "image_credit": "EHT Collaboration",
+    "image_license": "CC BY 4.0 via ESO terms",
+    "image_observation_year": 2017,
+    "eht_interpretation": "Unmodified published radio-interferometric intensity/shadow reconstructions; not visible-light surfaces, interiors or images from the hypothetical observer.",
+    "camera_snapshot": "Explicit opt-in inverse R=18 ln(1+r/au), with existing display-axis rotation; no measured velocity, travel time, worldline or light-cone reconstruction.",
+    "input_domains": {
+      "radial_beta": [
+        -0.99,
+        0.99
+      ],
+      "emitted_wavelength_nm": [
+        0.001,
+        1000000000.0
+      ],
+      "static_radii_rs": [
+        1.01,
+        1000000.0
+      ],
+      "local_azimuth_rad": [
+        -1000000.0,
+        1000000.0
+      ]
+    },
+    "cosmology": {
+      "h0_km_s_mpc": 67.66,
+      "omega_m": 0.3111,
+      "omega_lambda": 0.6889,
+      "redshift_domain": [
+        0,
+        20
+      ],
+      "inverse_table_rows": 2049,
+      "tcmb0_setting": 0,
+      "setting_means": "Computational radiation-disable switch, not a physical 0-K CMB",
+      "is_full_astropy_planck18": false,
+      "radiation_neutrino_evolution_included": false
+    },
+    "ray_model": "Finite static-observer local-angle null backtracing and separate infinity diagnostics in a Schwarzschild equatorial coordinate plane; captured/escaped/truncated states are numerical/model outcomes, not observed images.",
+    "ned_provider": "NASA/IPAC distribution; original selected-measurement contributing institutions not fully ascertained and not certified as non-Chinese.",
+    "api": [
+      "GET /api/v1/black-holes",
+      "GET /api/v1/observer-physics"
+    ],
+    "optional_evidence_fields": [
+      "observer_physics_manifest_sha256",
+      "black_holes_manifest_sha256",
+      "observer_experiment",
+      "observer_panel_open",
+      "selected_black_hole_id"
+    ],
+    "observer_state_requires_physics_hash": true,
+    "selected_black_hole_requires_catalog_hash": true,
+    "import_behavior": "Restore parameters/selection but open quality first; observer/BH panels remain closed until reopened.",
+    "original_observations_and_judgments_preserved": true,
+    "legacy_payload_compatible": true,
+    "relativity_tests_passed": 36,
+    "observer_api_tests_passed": 27,
+    "observer_api_seconds": 9.75,
+    "frontend_camera_update_correction": "Removed extra App100ms throttle that could drop final camera end event; original UniverseScene150ms/end emit retained; no source/formula change."
   }
 }

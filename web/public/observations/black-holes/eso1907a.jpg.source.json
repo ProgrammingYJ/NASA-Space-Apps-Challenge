@@ -1,0 +1,14 @@
+{
+  "url": "https://cdn.eso.org/images/screen/eso1907a.jpg",
+  "resolved_url": "https://cdn.eso.org/images/screen/eso1907a.jpg",
+  "local_relative_path": "web/public/observations/black-holes/eso1907a.jpg",
+  "bytes": 40740,
+  "sha256": "c23f0006c68d2c35168c1db870be338dd850f6408e27ae9fcbbec286c08d3dc1",
+  "retrieved_utc": "2026-11-14T10:42:32.380457+00:00",
+  "acquisition_client": "Python urllib default TLS certificate and hostname validation",
+  "bytes_modified_locally": false,
+  "credit": "EHT Collaboration",
+  "license": "CC BY 4.0",
+  "license_url": "https://www.eso.org/public/copyright/",
+  "usage": "runtime_public_observation_image_required"
+}

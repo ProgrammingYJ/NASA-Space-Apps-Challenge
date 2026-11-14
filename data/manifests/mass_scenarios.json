@@ -1,0 +1,2730 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "spherical-density-hypothesis-v1",
+  "created_utc": "2026-11-14T10:41:27.086305+00:00",
+  "model": {
+    "id": "spherical-density-hypothesis-v1",
+    "volume_shape": "assumed_sphere",
+    "formula": "M[kg] = density[kg/m^3] * (4*pi/3) * (radius[km]*1000)^3",
+    "earth_mass_kg": 5.97217e+24,
+    "earth_mass_source": {
+      "source_id": "major-inputs",
+      "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "label": "Existing JPL physical mass table and heliocentric osculating-element snapshot",
+      "local_relative_path": "data/reference/planet-criteria/facts/major-inputs.json",
+      "bytes": 6336,
+      "sha256": "31af3b273cc9e4a98dd21f13777822af92c05fc70ad104a4e63ca15fc24ad63b",
+      "retrieved_utc": "2026-11-14T02:08:20.356887+00:00",
+      "upstream_sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+      "upstream_bytes": 58244,
+      "upstream_original_local_only": "data/reference/planet-criteria/upstream/jpl-physical-table.html",
+      "upstream_original_requirement": "optional_not_runtime",
+      "upstream_acquisition_kind": "unmodified_embedded_response_reused_not_new_download",
+      "reused_from_manifest": {
+        "path": "data/manifests/solar_system_ephemeris.json",
+        "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a",
+        "embedded_field": "physical_parameters_source.raw_response_html"
+      }
+    },
+    "density_input_min_kg_m3": 100,
+    "density_input_max_kg_m3": 10000,
+    "density_input_range_kind": "interface_operating_range_not_universal_physical_bounds",
+    "clearing_model": {
+      "id": "margot-solar-10gyr-v1",
+      "coefficient_earth_mass": 0.001239,
+      "semimajor_exponent": 1.125,
+      "host_mass_solar": 1,
+      "clearing_time_gyr": 10,
+      "hill_zone_factor": 3.4641016151377544,
+      "formula": "m_clear/M_earth = 0.001239 (a/au)^(9/8)",
+      "published_rounded_pi_coefficient": 807,
+      "pi_computation": "mass_earth / minimum_mass_earth",
+      "source": {
+        "source_id": "margot-2024",
+        "url": "https://arxiv.org/html/2407.07590v1",
+        "label": "Margot, Gladman & Yang (2024), PSJ, doi:10.3847/PSJ/ad55f3, equations 3–5",
+        "local_relative_path": "data/reference/planet-criteria/facts/margot-2024.json",
+        "bytes": 1026,
+        "sha256": "b288904f724850a00ed5136c3ba56562fa0a99100a1bede23fd3343903ee6d4d",
+        "retrieved_utc": "2026-11-14T10:17:10.552686+00:00",
+        "upstream_sha256": "a896e1b98cea153d4cc4ce758e836fcfe090452598bab4599ee5bc7458d1af1c",
+        "upstream_bytes": 156656,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2024.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "additional_source": {
+        "source_id": "margot-2015",
+        "url": "https://arxiv.org/html/1507.06300v4",
+        "label": "Margot (2015), AJ 150 185, doi:10.1088/0004-6256/150/6/185",
+        "local_relative_path": "data/reference/planet-criteria/facts/margot-2015.json",
+        "bytes": 801,
+        "sha256": "415cadcae23fd92d73f1f9addb616496a5aad1e0a701503a54faa1eaf5ba1bd7",
+        "retrieved_utc": "2026-11-14T10:17:10.547539+00:00",
+        "upstream_sha256": "4d0b4502270341c3b266ade6a6acc945ff8948bc05b65def911fd2c25bad2330",
+        "upstream_bytes": 136836,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/margot-2015.html",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "limitations": [
+        "The IAU 2006 resolution supplies a qualitative definition; this numeric clearing threshold is a research model, not an official IAU numeric test.",
+        "The adopted published shortcut assumes a solar-mass host, a 10-billion-year clearing time and C=2 sqrt(3) Hill radii. This is not the current age of the Solar System.",
+        "The expression is an idealized circular-orbit diffusive clearing model. Evaluating it at the semimajor axis of an eccentric orbit is a reference calculation, not a validated eccentric-orbit clearance requirement.",
+        "Other planets, resonances, dynamical friction, gas drag, disk tides, migration and full N-body history are not solved.",
+        "A clearing ability under a specified time horizon is not an observation that all neighbouring bodies are absent. Satellites, Trojan populations and orbit-crossing minor bodies can remain.",
+        "The coefficient 0.001239 is adopted as published. Pi is calculated by direct division; the separately rounded published 807 coefficient is metadata only. Rounded general-form constants need not reproduce this shortcut to machine precision.",
+        "Pi is dimensionless, not an existence probability, confidence percentage, measured clearing fraction or independent reclassification."
+      ]
+    },
+    "uncertainty_kind": "parameter_corner_range_not_confidence_interval"
+  },
+  "sources": {
+    "jpl-icy-moons": {
+      "source_id": "jpl-icy-moons",
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "label": "NASA/JPL SSD planetary satellite physical parameters, six named icy moons",
+      "provider": "NASA/JPL Solar System Dynamics",
+      "publication_host": "ssd.jpl.nasa.gov",
+      "local_relative_path": "data/reference/mass-scenarios/facts/jpl-icy-moons.json",
+      "bytes": 6748,
+      "sha256": "91cf838ea79627064a9a00a7dbcd6077d06b7a251f49562462d7a1e5fd399f4e",
+      "retrieved_utc": "2026-11-14T10:38:54.084662+00:00",
+      "upstream_sha256": "9a9c004d950923ea368a8c4815d813c9c232c332d1586402a23b15d9581370d1",
+      "upstream_bytes": 96641,
+      "upstream_original_local_only": "data/reference/mass-scenarios/upstream/jpl-icy-moons.html",
+      "upstream_original_requirement": "optional_not_runtime",
+      "redistribution": "authored_factual_extract_only"
+    },
+    "density-interpretation": {
+      "source_id": "density-interpretation",
+      "url": "https://ntrs.nasa.gov/api/citations/20240002686/downloads/CukLongTermEvolSaturnSys.pdf",
+      "label": "Cuk et al., Long-Term Evolution of the Saturnian System, NASA NTRS 20240002686, section 6",
+      "provider": "NASA Technical Reports Server; qualitative physical interpretation only",
+      "publication_host": "ntrs.nasa.gov",
+      "local_relative_path": "data/reference/mass-scenarios/facts/density-interpretation.json",
+      "bytes": 1084,
+      "sha256": "073e2b4f7b6f8fc5eb28f6c1f5378651bdde756e91fb4f54e09e0cf7e764e57b",
+      "retrieved_utc": "2026-11-14T10:39:10.181677+00:00",
+      "upstream_sha256": "995d2817e1ced26762eb42366eacbfe0fd0dce88fd1befb099ec335dc14d9b16",
+      "upstream_bytes": 1360204,
+      "upstream_original_local_only": "data/reference/mass-scenarios/upstream/density-interpretation.pdf",
+      "upstream_original_requirement": "optional_not_runtime",
+      "redistribution": "authored_factual_extract_only"
+    }
+  },
+  "dependencies": {
+    "planet_criteria": {
+      "path": "data/manifests/planet_criteria.json",
+      "bytes": 168453,
+      "sha256": "e6124a457dcbba0907d9f4d0f8fbd777b7cac1963b4b2e49cb5fb6322e8753d8",
+      "use": "immutable existing adopted source and calculation dependency"
+    },
+    "small_body_appearance": {
+      "path": "data/manifests/small_body_appearance.json",
+      "bytes": 47999,
+      "sha256": "33b3662b6978137bf172ab65064aa73a40f119519cfaf6365e89ab0f60db18ec",
+      "use": "immutable existing adopted source and calculation dependency"
+    }
+  },
+  "analogues": {
+    "tethys": {
+      "object_id": "moon-603",
+      "name": "Tethys",
+      "parent_name": "Saturn",
+      "radius_km": 531.1,
+      "radius_sigma_km": 0.6,
+      "radius_definition": "volume_equivalent_mean_radius",
+      "density_kg_m3": 984.0,
+      "density_sigma_kg_m3": 3.3,
+      "original_density_g_cm3": 0.984,
+      "original_density_sigma_g_cm3": 0.0033,
+      "density_definition": "bulk_density_derived_from_GM_and_volume_equivalent_mean_radius",
+      "gm_km3_s2": 41.21353,
+      "gm_sigma_km3_s2": 0.00031,
+      "gm_ephemeris": "SAT441",
+      "radius_reference": "Archinal et al. 2018, Celestial Mechanics 130:22, IAU cartographic report 2015",
+      "original_cells": [
+        "Saturn",
+        "Tethys",
+        "603",
+        "41.21353",
+        "0.00031",
+        "SAT441",
+        "531.10",
+        "0.60",
+        "1",
+        "0.9840",
+        "0.0033",
+        "*"
+      ],
+      "source": {
+        "source_id": "jpl-icy-moons",
+        "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+        "label": "NASA/JPL SSD planetary satellite physical parameters, six named icy moons",
+        "provider": "NASA/JPL Solar System Dynamics",
+        "publication_host": "ssd.jpl.nasa.gov",
+        "local_relative_path": "data/reference/mass-scenarios/facts/jpl-icy-moons.json",
+        "bytes": 6748,
+        "sha256": "91cf838ea79627064a9a00a7dbcd6077d06b7a251f49562462d7a1e5fd399f4e",
+        "retrieved_utc": "2026-11-14T10:38:54.084662+00:00",
+        "upstream_sha256": "9a9c004d950923ea368a8c4815d813c9c232c332d1586402a23b15d9581370d1",
+        "upstream_bytes": 96641,
+        "upstream_original_local_only": "data/reference/mass-scenarios/upstream/jpl-icy-moons.html",
+        "upstream_original_requirement": "optional_not_runtime",
+        "redistribution": "authored_factual_extract_only"
+      }
+    },
+    "dione": {
+      "object_id": "moon-604",
+      "name": "Dione",
+      "parent_name": "Saturn",
+      "radius_km": 561.4,
+      "radius_sigma_km": 0.4,
+      "radius_definition": "volume_equivalent_mean_radius",
+      "density_kg_m3": 1478.1,
+      "density_sigma_kg_m3": 3.2,
+      "original_density_g_cm3": 1.4781,
+      "original_density_sigma_g_cm3": 0.0032,
+      "density_definition": "bulk_density_derived_from_GM_and_volume_equivalent_mean_radius",
+      "gm_km3_s2": 73.11607,
+      "gm_sigma_km3_s2": 5e-05,
+      "gm_ephemeris": "SAT441",
+      "radius_reference": "Archinal et al. 2018, Celestial Mechanics 130:22, IAU cartographic report 2015",
+      "original_cells": [
+        "Saturn",
+        "Dione",
+        "604",
+        "73.11607",
+        "0.00005",
+        "SAT441",
+        "561.40",
+        "0.40",
+        "1",
+        "1.4781",
+        "0.0032",
+        "*"
+      ],
+      "source": {
+        "source_id": "jpl-icy-moons",
+        "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+        "label": "NASA/JPL SSD planetary satellite physical parameters, six named icy moons",
+        "provider": "NASA/JPL Solar System Dynamics",
+        "publication_host": "ssd.jpl.nasa.gov",
+        "local_relative_path": "data/reference/mass-scenarios/facts/jpl-icy-moons.json",
+        "bytes": 6748,
+        "sha256": "91cf838ea79627064a9a00a7dbcd6077d06b7a251f49562462d7a1e5fd399f4e",
+        "retrieved_utc": "2026-11-14T10:38:54.084662+00:00",
+        "upstream_sha256": "9a9c004d950923ea368a8c4815d813c9c232c332d1586402a23b15d9581370d1",
+        "upstream_bytes": 96641,
+        "upstream_original_local_only": "data/reference/mass-scenarios/upstream/jpl-icy-moons.html",
+        "upstream_original_requirement": "optional_not_runtime",
+        "redistribution": "authored_factual_extract_only"
+      }
+    },
+    "rhea": {
+      "object_id": "moon-605",
+      "name": "Rhea",
+      "parent_name": "Saturn",
+      "radius_km": 763.5,
+      "radius_sigma_km": 0.6,
+      "radius_definition": "volume_equivalent_mean_radius",
+      "density_kg_m3": 1237.2,
+      "density_sigma_kg_m3": 2.9,
+      "original_density_g_cm3": 1.2372,
+      "original_density_sigma_g_cm3": 0.0029,
+      "density_definition": "bulk_density_derived_from_GM_and_volume_equivalent_mean_radius",
+      "gm_km3_s2": 153.94175,
+      "gm_sigma_km3_s2": 0.00041,
+      "gm_ephemeris": "SAT441",
+      "radius_reference": "Archinal et al. 2018, Celestial Mechanics 130:22, IAU cartographic report 2015",
+      "original_cells": [
+        "Saturn",
+        "Rhea",
+        "605",
+        "153.94175",
+        "0.00041",
+        "SAT441",
+        "763.50",
+        "0.60",
+        "1",
+        "1.2372",
+        "0.0029",
+        "*"
+      ],
+      "source": {
+        "source_id": "jpl-icy-moons",
+        "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+        "label": "NASA/JPL SSD planetary satellite physical parameters, six named icy moons",
+        "provider": "NASA/JPL Solar System Dynamics",
+        "publication_host": "ssd.jpl.nasa.gov",
+        "local_relative_path": "data/reference/mass-scenarios/facts/jpl-icy-moons.json",
+        "bytes": 6748,
+        "sha256": "91cf838ea79627064a9a00a7dbcd6077d06b7a251f49562462d7a1e5fd399f4e",
+        "retrieved_utc": "2026-11-14T10:38:54.084662+00:00",
+        "upstream_sha256": "9a9c004d950923ea368a8c4815d813c9c232c332d1586402a23b15d9581370d1",
+        "upstream_bytes": 96641,
+        "upstream_original_local_only": "data/reference/mass-scenarios/upstream/jpl-icy-moons.html",
+        "upstream_original_requirement": "optional_not_runtime",
+        "redistribution": "authored_factual_extract_only"
+      }
+    },
+    "iapetus": {
+      "object_id": "moon-608",
+      "name": "Iapetus",
+      "parent_name": "Saturn",
+      "radius_km": 734.3,
+      "radius_sigma_km": 2.8,
+      "radius_definition": "volume_equivalent_mean_radius",
+      "density_kg_m3": 1088.7,
+      "density_sigma_kg_m3": 12.5,
+      "original_density_g_cm3": 1.0887,
+      "original_density_sigma_g_cm3": 0.0125,
+      "density_definition": "bulk_density_derived_from_GM_and_volume_equivalent_mean_radius",
+      "gm_km3_s2": 120.51511,
+      "gm_sigma_km3_s2": 0.00242,
+      "gm_ephemeris": "SAT441",
+      "radius_reference": "Archinal et al. 2018, Celestial Mechanics 130:22, IAU cartographic report 2015",
+      "original_cells": [
+        "Saturn",
+        "Iapetus",
+        "608",
+        "120.51511",
+        "0.00242",
+        "SAT441",
+        "734.30",
+        "2.80",
+        "1",
+        "1.0887",
+        "0.0125",
+        "*"
+      ],
+      "source": {
+        "source_id": "jpl-icy-moons",
+        "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+        "label": "NASA/JPL SSD planetary satellite physical parameters, six named icy moons",
+        "provider": "NASA/JPL Solar System Dynamics",
+        "publication_host": "ssd.jpl.nasa.gov",
+        "local_relative_path": "data/reference/mass-scenarios/facts/jpl-icy-moons.json",
+        "bytes": 6748,
+        "sha256": "91cf838ea79627064a9a00a7dbcd6077d06b7a251f49562462d7a1e5fd399f4e",
+        "retrieved_utc": "2026-11-14T10:38:54.084662+00:00",
+        "upstream_sha256": "9a9c004d950923ea368a8c4815d813c9c232c332d1586402a23b15d9581370d1",
+        "upstream_bytes": 96641,
+        "upstream_original_local_only": "data/reference/mass-scenarios/upstream/jpl-icy-moons.html",
+        "upstream_original_requirement": "optional_not_runtime",
+        "redistribution": "authored_factual_extract_only"
+      }
+    },
+    "ariel": {
+      "object_id": "moon-701",
+      "name": "Ariel",
+      "parent_name": "Uranus",
+      "radius_km": 578.9,
+      "radius_sigma_km": 0.6,
+      "radius_definition": "volume_equivalent_mean_radius",
+      "density_kg_m3": 1539.0,
+      "density_sigma_kg_m3": 26.0,
+      "original_density_g_cm3": 1.539,
+      "original_density_sigma_g_cm3": 0.026,
+      "density_definition": "bulk_density_derived_from_GM_and_volume_equivalent_mean_radius",
+      "gm_km3_s2": 83.5,
+      "gm_sigma_km3_s2": 1.4,
+      "gm_ephemeris": "URA111",
+      "radius_reference": "Archinal et al. 2018, Celestial Mechanics 130:22, IAU cartographic report 2015",
+      "original_cells": [
+        "Uranus",
+        "Ariel",
+        "701",
+        "83.5",
+        "1.4",
+        "URA111",
+        "578.9",
+        "0.6",
+        "1",
+        "1.539",
+        "0.026",
+        "*"
+      ],
+      "source": {
+        "source_id": "jpl-icy-moons",
+        "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+        "label": "NASA/JPL SSD planetary satellite physical parameters, six named icy moons",
+        "provider": "NASA/JPL Solar System Dynamics",
+        "publication_host": "ssd.jpl.nasa.gov",
+        "local_relative_path": "data/reference/mass-scenarios/facts/jpl-icy-moons.json",
+        "bytes": 6748,
+        "sha256": "91cf838ea79627064a9a00a7dbcd6077d06b7a251f49562462d7a1e5fd399f4e",
+        "retrieved_utc": "2026-11-14T10:38:54.084662+00:00",
+        "upstream_sha256": "9a9c004d950923ea368a8c4815d813c9c232c332d1586402a23b15d9581370d1",
+        "upstream_bytes": 96641,
+        "upstream_original_local_only": "data/reference/mass-scenarios/upstream/jpl-icy-moons.html",
+        "upstream_original_requirement": "optional_not_runtime",
+        "redistribution": "authored_factual_extract_only"
+      }
+    },
+    "umbriel": {
+      "object_id": "moon-702",
+      "name": "Umbriel",
+      "parent_name": "Uranus",
+      "radius_km": 584.7,
+      "radius_sigma_km": 2.8,
+      "radius_definition": "volume_equivalent_mean_radius",
+      "density_kg_m3": 1523.0,
+      "density_sigma_kg_m3": 41.0,
+      "original_density_g_cm3": 1.523,
+      "original_density_sigma_g_cm3": 0.041,
+      "density_definition": "bulk_density_derived_from_GM_and_volume_equivalent_mean_radius",
+      "gm_km3_s2": 85.1,
+      "gm_sigma_km3_s2": 1.9,
+      "gm_ephemeris": "URA111",
+      "radius_reference": "Archinal et al. 2018, Celestial Mechanics 130:22, IAU cartographic report 2015",
+      "original_cells": [
+        "Uranus",
+        "Umbriel",
+        "702",
+        "85.1",
+        "1.9",
+        "URA111",
+        "584.7",
+        "2.8",
+        "1",
+        "1.523",
+        "0.041",
+        "*"
+      ],
+      "source": {
+        "source_id": "jpl-icy-moons",
+        "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+        "label": "NASA/JPL SSD planetary satellite physical parameters, six named icy moons",
+        "provider": "NASA/JPL Solar System Dynamics",
+        "publication_host": "ssd.jpl.nasa.gov",
+        "local_relative_path": "data/reference/mass-scenarios/facts/jpl-icy-moons.json",
+        "bytes": 6748,
+        "sha256": "91cf838ea79627064a9a00a7dbcd6077d06b7a251f49562462d7a1e5fd399f4e",
+        "retrieved_utc": "2026-11-14T10:38:54.084662+00:00",
+        "upstream_sha256": "9a9c004d950923ea368a8c4815d813c9c232c332d1586402a23b15d9581370d1",
+        "upstream_bytes": 96641,
+        "upstream_original_local_only": "data/reference/mass-scenarios/upstream/jpl-icy-moons.html",
+        "upstream_original_requirement": "optional_not_runtime",
+        "redistribution": "authored_factual_extract_only"
+      }
+    }
+  },
+  "targets": {
+    "eris": {
+      "object_id": "eris",
+      "name": "Eris",
+      "official_classification": "dwarf_planet",
+      "radius_km": 1163,
+      "radius_low_km": 1157,
+      "radius_high_km": 1169,
+      "radius_definition": "Half the 2010-occultation diameter 2326 +/- 12 km.",
+      "radius_uncertainty_status": "source_offsets_used_as_parameter_endpoints_not_joint_probability",
+      "radius_source": {
+        "source_id": "eris-occultation",
+        "url": "https://www.eso.org/public/news/eso1142/",
+        "label": "ESO 26 October 2011, Sicardy et al. Nature occultation results",
+        "local_relative_path": "data/reference/small-body-appearance/facts/eris-occultation.json",
+        "bytes": 687,
+        "sha256": "5ae64cd0a5ad1bc217116ad0239cf6a54008ee4fb15e10c2f20bcfb240176628",
+        "retrieved_utc": "2026-11-14T10:07:28.021086+00:00",
+        "upstream_sha256": "6ca2b3270f76cc19d8dc26d0e8a66b0d23ad1bfae275a64c84c3d372f2d4e611",
+        "upstream_bytes": 95701,
+        "upstream_original_local_only": "data/reference/small-body-appearance/upstream/eris-occultation.html",
+        "upstream_original_requirement": "optional_not_runtime",
+        "redistribution": "authored_factual_extract_only"
+      },
+      "radius_provenance": {
+        "observation_provider": "ESO report of the Sicardy et al. 2010 stellar-occultation campaign",
+        "original_publication_host": "www.eso.org",
+        "radius_kind": "occultation_nearly_spherical_limb_radius",
+        "volume_assumption": "Use half the near-spherical occultation diameter as an assumed spherical volume; not a new full 3D shape reconstruction."
+      },
+      "semimajor_axis_au": 67.93394687853566,
+      "eccentricity": 0.4382385347971672,
+      "orbit_epoch_tdb_jd": 2461200.5,
+      "orbit_source": {
+        "source_id": "sbdb-eris",
+        "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=136199&phys-par=true&full-prec=true",
+        "label": "NASA/JPL SBDB 136199 Eris (2003 UB313)",
+        "local_relative_path": "data/reference/planet-criteria/facts/sbdb-eris.json",
+        "bytes": 5717,
+        "sha256": "a907b5645a4a543dd4bc4f28ba2ecbc44a2b5a0812a8410850c9f67343f6acd4",
+        "retrieved_utc": "2026-11-14T10:17:24.880880+00:00",
+        "upstream_sha256": "026c5249ccb9a3d3aec70e240d7e5c708c5ebfc5949c22965f3539b35cc5a4d8",
+        "upstream_bytes": 2739,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-eris.json",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "measured_primary_mass": {
+        "earth_masses": null,
+        "status": "unknown",
+        "source": null,
+        "definition": "No separately adopted primary mass; not inferred from radius, assumed density or rendered shape."
+      },
+      "published_system_mass": {
+        "earth_masses": 0.00275712178320443,
+        "mass_kg": 1.6466e+22,
+        "uncertainty_earth": 1.4232682592759417e-05,
+        "definition": "combined_primary_satellite_system",
+        "source": {
+          "source_id": "eris-system-mass",
+          "url": "https://ntrs.nasa.gov/api/citations/20210012932/downloads/21-49.pdf",
+          "label": "Holler et al. (2021), Icarus 355 114130, doi:10.1016/j.icarus.2020.114130",
+          "local_relative_path": "data/reference/planet-criteria/facts/eris-system-mass.json",
+          "bytes": 661,
+          "sha256": "f06487e10fa26304c2bc474c8458a21b48c75c30b387208d720e5b16505e45de",
+          "retrieved_utc": "2026-11-14T10:20:21.733657+00:00",
+          "upstream_sha256": "e9cac9fd2e7989053e21d96620bc0b772d7ccf3d40034eb3f1d66be28d1ce1a1",
+          "upstream_bytes": 847643,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/eris-system-mass.pdf",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "adopted_as_primary_mass": false,
+        "limitations": [
+          "Combined Eris–Dysnomia system mass; not an independently separated Eris primary mass.",
+          "Not silently substituted for a separately measured primary mass. A system nominal value is not a statistical upper confidence bound on primary mass."
+        ]
+      },
+      "adopted_criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-eris",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=136199&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 136199 Eris (2003 UB313)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-eris.json",
+            "bytes": 5717,
+            "sha256": "a907b5645a4a543dd4bc4f28ba2ecbc44a2b5a0812a8410850c9f67343f6acd4",
+            "retrieved_utc": "2026-11-14T10:17:24.880880+00:00",
+            "upstream_sha256": "026c5249ccb9a3d3aec70e240d7e5c708c5ebfc5949c22965f3539b35cc5a4d8",
+            "upstream_bytes": 2739,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-eris.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "not_met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_not_dominant",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "analogue_scenarios": {
+        "tethys": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 1163.0,
+          "density_kg_m3": 984.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 6.589125106392852e+18,
+          "mass_kg": 6.483699104690566e+21,
+          "mass_earth": 0.001085652133929638,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 6.362457018119255e+21,
+            "high_kg": 6.606649695301512e+21,
+            "low_earth": 0.001065350955870187,
+            "high_earth": 0.0011062393895856133,
+            "radius_low_km": 1157.0,
+            "radius_high_km": 1169.0,
+            "density_low_kg_m3": 980.7,
+            "density_high_kg_m3": 987.3,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.14261624895248246,
+            "pi": 0.007612401405195846,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 67.93394687853566,
+            "required_density_kg_m3_at_this_assumed_radius": 129262.75791609866,
+            "required_density_for_model_kg_m3": 129262.75791609866,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.007470053122944958,
+              "high": 0.007756755613129295,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "dione": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 1163.0,
+          "density_kg_m3": 1478.1,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 6.589125106392852e+18,
+          "mass_kg": 9.739385819759276e+21,
+          "mass_earth": 0.0016307951414241853,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 9.568663052945942e+21,
+            "high_kg": 9.912316614656265e+21,
+            "low_earth": 0.0016022087537605162,
+            "high_earth": 0.0016597512486510374,
+            "radius_low_km": 1157.0,
+            "radius_high_km": 1169.0,
+            "density_low_kg_m3": 1474.8999999999999,
+            "density_high_kg_m3": 1481.3,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.14261624895248246,
+            "pi": 0.011434848086402421,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 67.93394687853566,
+            "required_density_kg_m3_at_this_assumed_radius": 129262.75791609866,
+            "required_density_for_model_kg_m3": 129262.75791609866,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.011234405374764467,
+              "high": 0.011637883206450346,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "rhea": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 1163.0,
+          "density_kg_m3": 1237.2,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 6.589125106392852e+18,
+          "mass_kg": 8.152065581629238e+21,
+          "mass_earth": 0.001365008963513972,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 8.007729884230238e+21,
+            "high_kg": 8.298294628930829e+21,
+            "low_earth": 0.0013408409144800364,
+            "high_earth": 0.0013894940413502678,
+            "radius_low_km": 1157.0,
+            "radius_high_km": 1169.0,
+            "density_low_kg_m3": 1234.3,
+            "density_high_kg_m3": 1240.1000000000001,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.14261624895248246,
+            "pi": 0.009571202254581608,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 67.93394687853566,
+            "required_density_kg_m3_at_this_assumed_radius": 129262.75791609866,
+            "required_density_for_model_kg_m3": 129262.75791609866,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.009401740154635423,
+              "high": 0.009742887304610192,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "iapetus": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 1163.0,
+          "density_kg_m3": 1088.7,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 6.589125106392852e+18,
+          "mass_kg": 7.173580503329899e+21,
+          "mass_earth": 0.0012011681689117857,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 6.982029410523036e+21,
+            "high_kg": 7.368826744116303e+21,
+            "low_earth": 0.0011690942170974766,
+            "high_earth": 0.0012338608485887546,
+            "radius_low_km": 1157.0,
+            "radius_high_km": 1169.0,
+            "density_low_kg_m3": 1076.2,
+            "density_high_kg_m3": 1101.2,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.14261624895248246,
+            "pi": 0.00842237948154138,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 67.93394687853566,
+            "required_density_kg_m3_at_this_assumed_radius": 129262.75791609866,
+            "required_density_for_model_kg_m3": 129262.75791609866,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.008197482584800003,
+              "high": 0.00865161478899826,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "ariel": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 1163.0,
+          "density_kg_m3": 1539.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 6.589125106392852e+18,
+          "mass_kg": 1.01406635387386e+22,
+          "mass_earth": 0.0016979864167862937,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 9.815843243004415e+21,
+            "high_kg": 1.0472406333583375e+22,
+            "low_earth": 0.0016435974265642834,
+            "high_earth": 0.0017535345332740655,
+            "radius_low_km": 1157.0,
+            "radius_high_km": 1169.0,
+            "density_low_kg_m3": 1513.0,
+            "density_high_kg_m3": 1565.0,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.14261624895248246,
+            "pi": 0.01190598146605326,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 67.93394687853566,
+            "required_density_kg_m3_at_this_assumed_radius": 129262.75791609866,
+            "required_density_for_model_kg_m3": 129262.75791609866,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.011524615453263708,
+              "high": 0.012295475067909803,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "umbriel": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 1163.0,
+          "density_kg_m3": 1523.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 6.589125106392852e+18,
+          "mass_kg": 1.0035237537036313e+22,
+          "mass_earth": 0.0016803335365597955,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 9.614725503061827e+21,
+            "high_kg": 1.0465714700143387e+22,
+            "low_earth": 0.0016099216035480952,
+            "high_earth": 0.0017524140639237308,
+            "radius_low_km": 1157.0,
+            "radius_high_km": 1169.0,
+            "density_low_kg_m3": 1482.0,
+            "density_high_kg_m3": 1564.0,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.14261624895248246,
+            "pi": 0.011782202581415928,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 67.93394687853566,
+            "required_density_kg_m3_at_this_assumed_radius": 129262.75791609866,
+            "required_density_for_model_kg_m3": 129262.75791609866,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.01128848651800186,
+              "high": 0.012287618534320085,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        }
+      },
+      "volume_assumption": "Use half the near-spherical occultation diameter as an assumed spherical volume; not a new full 3D shape reconstruction.",
+      "high_eccentricity_circular_reference_warning": false
+    },
+    "gonggong": {
+      "object_id": "gonggong",
+      "name": "Gonggong",
+      "official_classification": "dwarf_candidate",
+      "radius_km": 615,
+      "radius_low_km": 590,
+      "radius_high_km": 640,
+      "radius_definition": "Half the 1230 +/- 50 km thermophysical diameter, assuming a sphere and equatorial satellite orbit.",
+      "radius_uncertainty_status": "source_offsets_used_as_parameter_endpoints_not_joint_probability",
+      "radius_source": {
+        "source_id": "gonggong-size",
+        "url": "https://arxiv.org/abs/1903.05439",
+        "label": "Kiss et al. (2019), Icarus, doi:10.1016/j.icarus.2019.03.013",
+        "local_relative_path": "data/reference/small-body-appearance/facts/gonggong-size.json",
+        "bytes": 650,
+        "sha256": "506fe955dee5ce48b63dc6028dde42cfc4bdcd34b09252ce99174678f0d996ec",
+        "retrieved_utc": "2026-11-14T10:07:29.185454+00:00",
+        "upstream_sha256": "2c1e6f59fd0723b17590a7a8391a86cde85c989d8a7d4ccbcfc58a0bdfc04f37",
+        "upstream_bytes": 45672,
+        "upstream_original_local_only": "data/reference/small-body-appearance/upstream/gonggong-size.html",
+        "upstream_original_requirement": "optional_not_runtime",
+        "redistribution": "authored_factual_extract_only"
+      },
+      "radius_provenance": {
+        "observation_provider": "ESA Herschel thermal observations and NASA/ESA Hubble satellite observations in Kiss et al. 2019",
+        "original_publication_host": "arxiv.org (author manuscript of Kiss et al. 2019, Icarus)",
+        "radius_kind": "conditional_thermal_model_sphere_radius",
+        "volume_assumption": "The adopted size already assumes a spherical thermal model and an equatorial satellite orbit; it does not measure spherical shape."
+      },
+      "semimajor_axis_au": 66.86666567773766,
+      "eccentricity": 0.5042510000302973,
+      "orbit_epoch_tdb_jd": 2461200.5,
+      "orbit_source": {
+        "source_id": "sbdb-gonggong",
+        "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=225088&phys-par=true&full-prec=true",
+        "label": "NASA/JPL SBDB 225088 Gonggong (2007 OR10)",
+        "local_relative_path": "data/reference/planet-criteria/facts/sbdb-gonggong.json",
+        "bytes": 5734,
+        "sha256": "de01c46733e75303ef01adcc9f8a13fff3e760ea7c86d0ca4d9f146f01c57a75",
+        "retrieved_utc": "2026-11-14T10:17:27.015033+00:00",
+        "upstream_sha256": "130177535bfff6b61645c657fddb910ccfaed7493fa00d47324c4ce11f9c4b54",
+        "upstream_bytes": 2756,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-gonggong.json",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "measured_primary_mass": {
+        "earth_masses": null,
+        "status": "unknown",
+        "source": null,
+        "definition": "No separately adopted primary mass; not inferred from radius, assumed density or rendered shape."
+      },
+      "published_system_mass": {
+        "earth_masses": 0.00029302581808622326,
+        "mass_kg": 1.75e+21,
+        "uncertainty_earth": 1.1721032723448932e-05,
+        "definition": "combined_primary_satellite_system",
+        "source": {
+          "source_id": "gonggong-system-mass",
+          "url": "https://arxiv.org/html/1903.05439v1",
+          "label": "Kiss et al. (2019), Icarus, doi:10.1016/j.icarus.2019.03.013, section 3/Table 2",
+          "local_relative_path": "data/reference/planet-criteria/facts/gonggong-system-mass.json",
+          "bytes": 677,
+          "sha256": "adffc01d390579123114aea82a41d0840d4b955bb7f4a56e17d8a63144cf049c",
+          "retrieved_utc": "2026-11-14T10:20:20.647351+00:00",
+          "upstream_sha256": "47277a6a033b3cb9f5975d61d9f56a56209e8a6ee335f272698795ba5f28d58e",
+          "upstream_bytes": 218063,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/gonggong-system-mass.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "adopted_as_primary_mass": false,
+        "limitations": [
+          "Combined Gonggong–Xiangliu system mass; the two-body satellite solution does not independently separate primary and satellite masses.",
+          "Not silently substituted for a separately measured primary mass. A system nominal value is not a statistical upper confidence bound on primary mass."
+        ]
+      },
+      "adopted_criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-gonggong",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=225088&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 225088 Gonggong (2007 OR10)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-gonggong.json",
+            "bytes": 5734,
+            "sha256": "de01c46733e75303ef01adcc9f8a13fff3e760ea7c86d0ca4d9f146f01c57a75",
+            "retrieved_utc": "2026-11-14T10:17:27.015033+00:00",
+            "upstream_sha256": "130177535bfff6b61645c657fddb910ccfaed7493fa00d47324c4ce11f9c4b54",
+            "upstream_bytes": 2756,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-gonggong.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "equilibrium_shape_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "dominance_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "analogue_scenarios": {
+        "tethys": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 615.0,
+          "density_kg_m3": 984.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 9.743476827512795e+17,
+          "mass_kg": 9.58758119827259e+20,
+          "mass_earth": 0.00016053764709096679,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 8.436859552798759e+20,
+            "high_kg": 1.0841207784565907e+21,
+            "low_earth": 0.0001412695812878528,
+            "high_earth": 0.00018152878743515183,
+            "radius_low_km": 590.0,
+            "radius_high_km": 640.0,
+            "density_low_kg_m3": 980.7,
+            "density_high_kg_m3": 987.3,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.1400980796460658,
+            "pi": 0.0011458947010304361,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 66.86666567773766,
+            "required_density_kg_m3_at_this_assumed_radius": 858717.6457969013,
+            "required_density_for_model_kg_m3": 858717.6457969013,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0010083620107052616,
+              "high": 0.0012957264503107662,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "dione": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 615.0,
+          "density_kg_m3": 1478.1,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 9.743476827512795e+17,
+          "mass_kg": 1.4401833098746661e+21,
+          "mass_earth": 0.0002411490814686565,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 1.2688410476621684e+21,
+            "high_kg": 1.6265654908616914e+21,
+            "low_earth": 0.0002124589634357643,
+            "high_earth": 0.00027235753350318085,
+            "radius_low_km": 590.0,
+            "radius_high_km": 640.0,
+            "density_low_kg_m3": 1474.8999999999999,
+            "density_high_kg_m3": 1481.3,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.1400980796460658,
+            "pi": 0.0017212875585295604,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 66.86666567773766,
+            "required_density_kg_m3_at_this_assumed_radius": 858717.6457969013,
+            "required_density_for_model_kg_m3": 858717.6457969013,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.001516501610675222,
+              "high": 0.0019440490133144314,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "rhea": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 615.0,
+          "density_kg_m3": 1237.2,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 9.743476827512795e+17,
+          "mass_kg": 1.205462953099883e+21,
+          "mass_earth": 0.00020184672457413018,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 1.0618553835035696e+21,
+            "high_kg": 1.3617119187319139e+21,
+            "low_earth": 0.00017780059568022505,
+            "high_earth": 0.00022800957084810277,
+            "radius_low_km": 590.0,
+            "radius_high_km": 640.0,
+            "density_low_kg_m3": 1234.3,
+            "density_high_kg_m3": 1240.1000000000001,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.1400980796460658,
+            "pi": 0.0014407529716614384,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 66.86666567773766,
+            "required_density_kg_m3_at_this_assumed_radius": 858717.6457969013,
+            "required_density_for_model_kg_m3": 858717.6457969013,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0012691151522519675,
+              "high": 0.0016274996161555573,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "iapetus": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 615.0,
+          "density_kg_m3": 1088.7,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 9.743476827512795e+17,
+          "mass_kg": 1.0607723222113181e+21,
+          "mass_earth": 0.00017761924429668247,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 9.258436066811486e+20,
+            "high_kg": 1.2091905208512083e+21,
+            "low_earth": 0.00015502633158151035,
+            "high_earth": 0.000202470880911161,
+            "radius_low_km": 590.0,
+            "radius_high_km": 640.0,
+            "density_low_kg_m3": 1076.2,
+            "density_high_kg_m3": 1101.2,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.1400980796460658,
+            "pi": 0.001267820692085199,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 66.86666567773766,
+            "required_density_kg_m3_at_this_assumed_radius": 858717.6457969013,
+            "required_density_for_model_kg_m3": 858717.6457969013,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0011065557213429211,
+              "high": 0.001445208110080235,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "ariel": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 615.0,
+          "density_kg_m3": 1539.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 9.743476827512795e+17,
+          "mass_kg": 1.499521083754219e+21,
+          "mass_earth": 0.0002510847956026401,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 1.3016180792683308e+21,
+            "high_kg": 1.7184736334291143e+21,
+            "low_earth": 0.00021794725857909785,
+            "high_earth": 0.00028774693845438334,
+            "radius_low_km": 590.0,
+            "radius_high_km": 640.0,
+            "density_low_kg_m3": 1513.0,
+            "density_high_kg_m3": 1565.0,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.1400980796460658,
+            "pi": 0.0017922072610628463,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 66.86666567773766,
+            "required_density_kg_m3_at_this_assumed_radius": 858717.6457969013,
+            "required_density_for_model_kg_m3": 858717.6457969013,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0015556762742908745,
+              "high": 0.002053896378746429,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "umbriel": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 615.0,
+          "density_kg_m3": 1523.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 9.743476827512795e+17,
+          "mass_kg": 1.4839315208301988e+21,
+          "mass_earth": 0.00024847442735725857,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 1.2749491034207974e+21,
+            "high_kg": 1.717375567209671e+21,
+            "low_earth": 0.00021348171659895773,
+            "high_earth": 0.000287563074595946,
+            "radius_low_km": 590.0,
+            "radius_high_km": 640.0,
+            "density_low_kg_m3": 1482.0,
+            "density_high_kg_m3": 1564.0,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.1400980796460658,
+            "pi": 0.0017735748268997503,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 66.86666567773766,
+            "required_density_kg_m3_at_this_assumed_radius": 858717.6457969013,
+            "required_density_for_model_kg_m3": 858717.6457969013,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0015238018760734145,
+              "high": 0.0020525839848941946,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        }
+      },
+      "volume_assumption": "The adopted size already assumes a spherical thermal model and an equatorial satellite orbit; it does not measure spherical shape.",
+      "high_eccentricity_circular_reference_warning": true
+    },
+    "makemake": {
+      "object_id": "makemake",
+      "name": "Makemake",
+      "official_classification": "dwarf_planet",
+      "radius_km": 715,
+      "radius_low_km": null,
+      "radius_high_km": null,
+      "radius_definition": "Half NASA's approximate 1430 km diameter; no uncertainty quoted.",
+      "radius_uncertainty_status": "not_quoted_in_adopted_source",
+      "radius_source": {
+        "source_id": "makemake-nasa",
+        "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+        "label": "NASA Science Makemake facts",
+        "local_relative_path": "data/reference/small-body-appearance/facts/makemake-nasa.json",
+        "bytes": 597,
+        "sha256": "89b654b0e8021e40e07c2862a478862882d6819b1298357e28c93991f8d57f27",
+        "retrieved_utc": "2026-11-14T10:07:25.851449+00:00",
+        "upstream_sha256": "2973d22ceb05763f4800d746cabbbf687daf188ad22c0a97fdd15a3bd74d234d",
+        "upstream_bytes": 279830,
+        "upstream_original_local_only": "data/reference/small-body-appearance/upstream/makemake-nasa.html",
+        "upstream_original_requirement": "optional_not_runtime",
+        "redistribution": "authored_factual_extract_only"
+      },
+      "radius_provenance": {
+        "observation_provider": "NASA Science factual summary of the adopted approximate diameter",
+        "original_publication_host": "science.nasa.gov",
+        "radius_kind": "approximate_summary_radius",
+        "volume_assumption": "Use half the approximate summary diameter as a spherical hypothesis; the source quotes no adopted uncertainty."
+      },
+      "semimajor_axis_au": 45.57093317300052,
+      "eccentricity": 0.1588889953992523,
+      "orbit_epoch_tdb_jd": 2461200.5,
+      "orbit_source": {
+        "source_id": "sbdb-makemake",
+        "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=136472&phys-par=true&full-prec=true",
+        "label": "NASA/JPL SBDB 136472 Makemake (2005 FY9)",
+        "local_relative_path": "data/reference/planet-criteria/facts/sbdb-makemake.json",
+        "bytes": 5775,
+        "sha256": "3dccbe9eaca9d21adba213704d87fa13c403bf625f63a983e97fe19aa53563bf",
+        "retrieved_utc": "2026-11-14T10:17:24.345564+00:00",
+        "upstream_sha256": "1b3663679144a76f12bf4f54c0b9380c4e33a02f29b6907ee96d24ca7eeb3508",
+        "upstream_bytes": 2793,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-makemake.json",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "measured_primary_mass": {
+        "earth_masses": null,
+        "status": "unknown",
+        "source": null,
+        "definition": "No separately adopted primary mass; not inferred from radius, assumed density or rendered shape."
+      },
+      "published_system_mass": null,
+      "adopted_criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-makemake",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=136472&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 136472 Makemake (2005 FY9)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-makemake.json",
+            "bytes": 5775,
+            "sha256": "3dccbe9eaca9d21adba213704d87fa13c403bf625f63a983e97fe19aa53563bf",
+            "retrieved_utc": "2026-11-14T10:17:24.345564+00:00",
+            "upstream_sha256": "1b3663679144a76f12bf4f54c0b9380c4e33a02f29b6907ee96d24ca7eeb3508",
+            "upstream_bytes": 2793,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-makemake.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_nearly_round",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "not_met",
+          "basis": "official_definition",
+          "reason_key": "official_classification_not_dominant",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "analogue_scenarios": {
+        "tethys": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 715.0,
+          "density_kg_m3": 984.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 1.5311112047959747e+18,
+          "mass_kg": 1.506613425519239e+21,
+          "mass_earth": 0.0002522723608871213,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 1.5015607585434124e+21,
+            "high_kg": 1.5116660924950656e+21,
+            "low_earth": 0.00025142632553048767,
+            "high_earth": 0.0002531183962437549,
+            "radius_low_km": 715.0,
+            "radius_high_km": 715.0,
+            "density_low_kg_m3": 980.7,
+            "density_high_kg_m3": 987.3,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.09101127917944009,
+            "pi": 0.002771880179705362,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 45.57093317300052,
+            "required_density_kg_m3_at_this_assumed_radius": 354993.6996571744,
+            "required_density_for_model_kg_m3": 354993.6996571744,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0027625842400783016,
+              "high": 0.0027811761193324226,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "dione": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 715.0,
+          "density_kg_m3": 1478.1,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 1.5311112047959747e+18,
+          "mass_kg": 2.26313547180893e+21,
+          "mass_earth": 0.0003789469274667215,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 2.2582359159535826e+21,
+            "high_kg": 2.268035027664277e+21,
+            "low_earth": 0.00037812652954513735,
+            "high_earth": 0.00037976732538830564,
+            "radius_low_km": 715.0,
+            "radius_high_km": 715.0,
+            "density_low_kg_m3": 1474.8999999999999,
+            "density_high_kg_m3": 1481.3,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.09101127917944009,
+            "pi": 0.004163735867502536,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 45.57093317300052,
+            "required_density_kg_m3_at_this_assumed_radius": 354993.6996571744,
+            "required_density_for_model_kg_m3": 354993.6996571744,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0041547216230156895,
+              "high": 0.004172750111989383,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "rhea": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 715.0,
+          "density_kg_m3": 1237.2,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 1.5311112047959747e+18,
+          "mass_kg": 1.89429078257358e+21,
+          "mass_earth": 0.00031718634643246595,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 1.8898505600796713e+21,
+            "high_kg": 1.8987310050674884e+21,
+            "low_earth": 0.0003164428608160303,
+            "high_earth": 0.00031792983204890156,
+            "radius_low_km": 715.0,
+            "radius_high_km": 715.0,
+            "density_low_kg_m3": 1234.3,
+            "density_high_kg_m3": 1240.1000000000001,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.09101127917944009,
+            "pi": 0.0034851322747271084,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 45.57093317300052,
+            "required_density_kg_m3_at_this_assumed_radius": 354993.6996571744,
+            "required_density_for_model_kg_m3": 354993.6996571744,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0034769631156609027,
+              "high": 0.003493301433793313,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "iapetus": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 715.0,
+          "density_kg_m3": 1088.7,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 1.5311112047959747e+18,
+          "mass_kg": 1.6669207686613778e+21,
+          "mass_earth": 0.00027911475538395223,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 1.647781878601428e+21,
+            "high_kg": 1.6860596587213273e+21,
+            "low_earth": 0.0002759100760027642,
+            "high_earth": 0.00028231943476514024,
+            "radius_low_km": 715.0,
+            "radius_high_km": 715.0,
+            "density_low_kg_m3": 1076.2,
+            "density_high_kg_m3": 1101.2,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.09101127917944009,
+            "pi": 0.0030668149915093787,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 45.57093317300052,
+            "required_density_kg_m3_at_this_assumed_radius": 354993.6996571744,
+            "required_density_for_model_kg_m3": 354993.6996571744,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.003031603098982633,
+              "high": 0.0031020268840361233,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "ariel": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 715.0,
+          "density_kg_m3": 1539.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 1.5311112047959747e+18,
+          "mass_kg": 2.356380144181005e+21,
+          "mass_earth": 0.0003945601254118696,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 2.3165712528563097e+21,
+            "high_kg": 2.3961890355057e+21,
+            "low_earth": 0.00038789439229899847,
+            "high_earth": 0.0004012258585247406,
+            "radius_low_km": 715.0,
+            "radius_high_km": 715.0,
+            "density_low_kg_m3": 1513.0,
+            "density_high_kg_m3": 1565.0,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.09101127917944009,
+            "pi": 0.004335288207892838,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 45.57093317300052,
+            "required_density_kg_m3_at_this_assumed_radius": 354993.6996571744,
+            "required_density_for_model_kg_m3": 354993.6996571744,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.004262047471437208,
+              "high": 0.004408528944348467,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "umbriel": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 715.0,
+          "density_kg_m3": 1523.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 1.5311112047959747e+18,
+          "mass_kg": 2.3318823649042694e+21,
+          "mass_earth": 0.0003904581358039489,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 2.2691068055076345e+21,
+            "high_kg": 2.3946579243009043e+21,
+            "low_earth": 0.0003799467874336522,
+            "high_earth": 0.0004009694841742456,
+            "radius_low_km": 715.0,
+            "radius_high_km": 715.0,
+            "density_low_kg_m3": 1482.0,
+            "density_high_kg_m3": 1564.0,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.09101127917944009,
+            "pi": 0.004290216985458605,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 45.57093317300052,
+            "required_density_kg_m3_at_this_assumed_radius": 354993.6996571744,
+            "required_density_for_model_kg_m3": 354993.6996571744,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.004174721977970881,
+              "high": 0.004405711992946327,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        }
+      },
+      "volume_assumption": "Use half the approximate summary diameter as a spherical hypothesis; the source quotes no adopted uncertainty.",
+      "high_eccentricity_circular_reference_warning": false
+    },
+    "orcus": {
+      "object_id": "orcus",
+      "name": "Orcus",
+      "official_classification": "dwarf_candidate",
+      "radius_km": 455,
+      "radius_low_km": 435,
+      "radius_high_km": 480,
+      "radius_definition": "Half the resolved-system thermal-radiometry diameter 910 (-40,+50) km.",
+      "radius_uncertainty_status": "source_offsets_used_as_parameter_endpoints_not_joint_probability",
+      "radius_source": {
+        "source_id": "orcus-size",
+        "url": "https://arxiv.org/html/1801.07221v2",
+        "label": "Brown & Butler (2018), AJ, doi:10.3847/1538-3881/aad9f2",
+        "local_relative_path": "data/reference/small-body-appearance/facts/orcus-size.json",
+        "bytes": 632,
+        "sha256": "a2545cb889b1234b84b3397c27cccbcdb27450c10f336bdb33d1b3c21c1dcfc1",
+        "retrieved_utc": "2026-11-14T10:07:28.521068+00:00",
+        "upstream_sha256": "f0d5f46e76a95c2c25453f0bc43b14897465861aa0797f0694aa59dca01ee858",
+        "upstream_bytes": 91923,
+        "upstream_original_local_only": "data/reference/small-body-appearance/upstream/orcus-size.html",
+        "upstream_original_requirement": "optional_not_runtime",
+        "redistribution": "authored_factual_extract_only"
+      },
+      "radius_provenance": {
+        "observation_provider": "ESO/NSF/NINS ALMA, NASA Spitzer and ESA Herschel thermal measurements",
+        "original_publication_host": "arxiv.org (author manuscript of Brown and Butler 2018, AJ)",
+        "radius_kind": "resolved_system_thermal_model_radius",
+        "volume_assumption": "Use the adopted primary thermal-model diameter in a spherical hypothesis; emissivity and thermal-model assumptions remain."
+      },
+      "semimajor_axis_au": 39.37686537914865,
+      "eccentricity": 0.2205240628250881,
+      "orbit_epoch_tdb_jd": 2461200.5,
+      "orbit_source": {
+        "source_id": "sbdb-orcus",
+        "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=90482&phys-par=true&full-prec=true",
+        "label": "NASA/JPL SBDB 90482 Orcus (2004 DW)",
+        "local_relative_path": "data/reference/planet-criteria/facts/sbdb-orcus.json",
+        "bytes": 5734,
+        "sha256": "4f33ea621da5ff6d8ee59cf5d83be171920010311cf9c78620e5b16c79d64c35",
+        "retrieved_utc": "2026-11-14T10:17:26.514097+00:00",
+        "upstream_sha256": "2997bb5039c6a0f1ba6e16016fadbf51ad157343e68ae8536c242624f0a61f17",
+        "upstream_bytes": 2755,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-orcus.json",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "measured_primary_mass": {
+        "earth_masses": null,
+        "status": "unknown",
+        "source": null,
+        "definition": "No separately adopted primary mass; not inferred from radius, assumed density or rendered shape."
+      },
+      "published_system_mass": {
+        "earth_masses": 0.00010582418116028179,
+        "mass_kg": 6.32e+20,
+        "uncertainty_earth": null,
+        "definition": "combined_primary_satellite_system",
+        "source": {
+          "source_id": "orcus-dynamical-ratio",
+          "url": "https://arxiv.org/html/2307.04848v1",
+          "label": "Brown & Butler (2023), PSJ, doi:10.3847/PSJ/ace52a, section 2.1/Table 2",
+          "local_relative_path": "data/reference/planet-criteria/facts/orcus-dynamical-ratio.json",
+          "bytes": 839,
+          "sha256": "ac26ede30685da5196d04cf6a815c679a879aac9078be6cd3e643e5cf98d8c56",
+          "retrieved_utc": "2026-11-14T10:20:21.230551+00:00",
+          "upstream_sha256": "26cef52497cc7f3f53564bb0d2bbb0e27ac3d5794948fac74945335194ae5d41",
+          "upstream_bytes": 109379,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/orcus-dynamical-ratio.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "adopted_as_primary_mass": false,
+        "limitations": [
+          "Nominal primary mass derived from reported dynamical system mass and measured mass ratio; not a density/size estimate or a directly tabulated independent mass.",
+          "Not silently substituted for a separately measured primary mass. A system nominal value is not a statistical upper confidence bound on primary mass."
+        ]
+      },
+      "adopted_criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-orcus",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=90482&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 90482 Orcus (2004 DW)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-orcus.json",
+            "bytes": 5734,
+            "sha256": "4f33ea621da5ff6d8ee59cf5d83be171920010311cf9c78620e5b16c79d64c35",
+            "retrieved_utc": "2026-11-14T10:17:26.514097+00:00",
+            "upstream_sha256": "2997bb5039c6a0f1ba6e16016fadbf51ad157343e68ae8536c242624f0a61f17",
+            "upstream_bytes": 2755,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-orcus.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "equilibrium_shape_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "dominance_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "analogue_scenarios": {
+        "tethys": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 455.0,
+          "density_kg_m3": 984.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 3.9456885292638566e+17,
+          "mass_kg": 3.882557512795635e+20,
+          "mass_earth": 6.501083379735733e-05,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 3.3813689119241994e+20,
+            "high_kg": 4.573634534113742e+20,
+            "low_earth": 5.661876523816636e-05,
+            "high_earth": 7.658245719920468e-05,
+            "radius_low_km": 435.0,
+            "radius_high_km": 480.0,
+            "density_low_kg_m3": 980.7,
+            "density_high_kg_m3": 987.3,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.07721782948322613,
+            "pi": 0.000841914804293735,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 39.37686537914865,
+            "required_density_kg_m3_at_this_assumed_radius": 1168764.339315137,
+            "required_density_for_model_kg_m3": 1168764.339315137,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0007332343529607438,
+              "high": 0.000991771689410676,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "dione": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 455.0,
+          "density_kg_m3": 1478.1,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 3.9456885292638566e+17,
+          "mass_kg": 5.832122215104906e+20,
+          "mass_earth": 9.76549933291401e-05,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 5.085327835420618e+20,
+            "high_kg": 6.86207316457276e+20,
+            "low_earth": 8.515041995490113e-05,
+            "high_earth": 0.00011490083444665441,
+            "radius_low_km": 435.0,
+            "radius_high_km": 480.0,
+            "density_low_kg_m3": 1474.8999999999999,
+            "density_high_kg_m3": 1481.3,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.07721782948322613,
+            "pi": 0.0012646689758400098,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 39.37686537914865,
+            "required_density_kg_m3_at_this_assumed_radius": 1168764.339315137,
+            "required_density_for_model_kg_m3": 1168764.339315137,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0011027300368938522,
+              "high": 0.001488009119339648,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "rhea": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 455.0,
+          "density_kg_m3": 1237.2,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 3.9456885292638566e+17,
+          "mass_kg": 4.8816058484052433e+20,
+          "mass_earth": 8.17392312744822e-05,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 4.255759812366716e+20,
+            "high_kg": 5.744722157150261e+20,
+            "low_earth": 7.125985717698452e-05,
+            "high_earth": 9.619153770154335e-05,
+            "radius_low_km": 435.0,
+            "radius_high_km": 480.0,
+            "density_low_kg_m3": 1234.3,
+            "density_high_kg_m3": 1240.1000000000001,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.07721782948322613,
+            "pi": 0.0010585538575937083,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 39.37686537914865,
+            "required_density_kg_m3_at_this_assumed_radius": 1168764.339315137,
+            "required_density_for_model_kg_m3": 1168764.339315137,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0009228420127046456,
+              "high": 0.001245716673795381,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "iapetus": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 455.0,
+          "density_kg_m3": 1088.7,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 3.9456885292638566e+17,
+          "mass_kg": 4.295671101809561e+20,
+          "mass_earth": 7.192814507640542e-05,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 3.7106446650482544e+20,
+            "high_kg": 5.1012725098410344e+20,
+            "low_earth": 6.213226792017398e-05,
+            "high_earth": 8.541740288439604e-05,
+            "radius_low_km": 435.0,
+            "radius_high_km": 480.0,
+            "density_low_kg_m3": 1076.2,
+            "density_high_kg_m3": 1101.2,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.07721782948322613,
+            "pi": 0.0009314965929213307,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 39.37686537914865,
+            "required_density_kg_m3_at_this_assumed_radius": 1168764.339315137,
+            "required_density_for_model_kg_m3": 1168764.339315137,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0008046362910740822,
+              "high": 0.0011061875664732468,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "ariel": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 455.0,
+          "density_kg_m3": 1539.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 3.9456885292638566e+17,
+          "mass_kg": 6.072414646537075e+20,
+          "mass_earth": 0.00010167852968915948,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 5.216693345305713e+20,
+            "high_kg": 7.249810641029076e+20,
+            "low_earth": 8.735004772646648e-05,
+            "high_earth": 0.00012139323966044296,
+            "radius_low_km": 435.0,
+            "radius_high_km": 480.0,
+            "density_low_kg_m3": 1513.0,
+            "density_high_kg_m3": 1565.0,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.07721782948322613,
+            "pi": 0.0013167752884228232,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 39.37686537914865,
+            "required_density_kg_m3_at_this_assumed_radius": 1168764.339315137,
+            "required_density_for_model_kg_m3": 1168764.339315137,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0011312160457118436,
+              "high": 0.001572088214248666,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "umbriel": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 455.0,
+          "density_kg_m3": 1523.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 3.9456885292638566e+17,
+          "mass_kg": 6.009283630068854e+20,
+          "mass_earth": 0.00010062144296074717,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 5.1098080223020935e+20,
+            "high_kg": 7.245178174165798e+20,
+            "low_earth": 8.556032434277815e-05,
+            "high_earth": 0.00012131567209516472,
+            "radius_low_km": 435.0,
+            "radius_high_km": 480.0,
+            "density_low_kg_m3": 1482.0,
+            "density_high_kg_m3": 1564.0,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.07721782948322613,
+            "pi": 0.0013030856168082911,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 39.37686537914865,
+            "required_density_kg_m3_at_this_assumed_radius": 1168764.339315137,
+            "required_density_for_model_kg_m3": 1168764.339315137,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.001108038453235263,
+              "high": 0.0015710836850382835,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        }
+      },
+      "volume_assumption": "Use the adopted primary thermal-model diameter in a spherical hypothesis; emissivity and thermal-model assumptions remain.",
+      "high_eccentricity_circular_reference_warning": false
+    },
+    "quaoar": {
+      "object_id": "quaoar",
+      "name": "Quaoar",
+      "official_classification": "dwarf_candidate",
+      "radius_km": 543,
+      "radius_low_km": 541,
+      "radius_high_km": 545,
+      "radius_definition": "Projected area-equivalent radius at the 2022-08-09 occultation, not a volume-equivalent sphere radius.",
+      "radius_uncertainty_status": "source_offsets_used_as_parameter_endpoints_not_joint_probability",
+      "radius_source": {
+        "source_id": "quaoar-occultation-2023",
+        "url": "https://arxiv.org/html/2304.09237v1",
+        "label": "Pereira et al. (2023), A&A 673 L4, doi:10.1051/0004-6361/202346365",
+        "local_relative_path": "data/reference/small-body-appearance/facts/quaoar-occultation-2023.json",
+        "bytes": 800,
+        "sha256": "20e2c49c25e26d6890bcce42c27ae2fcf588e5760f486d4fc6a7b226ead18a95",
+        "retrieved_utc": "2026-11-14T10:07:30.373191+00:00",
+        "upstream_sha256": "c7e04aa0bfbc078e5ab0c7e134712cbe4ffb04973b0cf4548b435a764bce9540",
+        "upstream_bytes": 284211,
+        "upstream_original_local_only": "data/reference/small-body-appearance/upstream/quaoar-occultation-2023.html",
+        "upstream_original_requirement": "optional_not_runtime",
+        "redistribution": "authored_factual_extract_only"
+      },
+      "radius_provenance": {
+        "observation_provider": "2022 occultation campaign in Hawaii, continental USA and Mexico; Gemini North, CFHT and partner observatories",
+        "original_publication_host": "arxiv.org (author manuscript of A&A 673 L4, 2023)",
+        "radius_kind": "projected_area_equivalent_radius",
+        "volume_assumption": "The measured radius is projected-area equivalent. Using it as a volume radius adds an explicit spherical assumption; projection/3D-shape systematics are not in the +/-2 km endpoint range."
+      },
+      "semimajor_axis_au": 43.15617622670811,
+      "eccentricity": 0.03520019261837198,
+      "orbit_epoch_tdb_jd": 2461200.5,
+      "orbit_source": {
+        "source_id": "sbdb-quaoar",
+        "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=50000&phys-par=true&full-prec=true",
+        "label": "NASA/JPL SBDB 50000 Quaoar (2002 LM60)",
+        "local_relative_path": "data/reference/planet-criteria/facts/sbdb-quaoar.json",
+        "bytes": 5740,
+        "sha256": "a3cf82c6fc276c21f7d46037ff087926bce30ff6086efd724415ed20a5eb3939",
+        "retrieved_utc": "2026-11-14T10:17:25.979824+00:00",
+        "upstream_sha256": "f70f51ab75ac1cf325f3ba4e25eec182a726f3a4f39bdec54f46b1cfc24a2ddc",
+        "upstream_bytes": 2759,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-quaoar.json",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "measured_primary_mass": {
+        "earth_masses": null,
+        "status": "unknown",
+        "source": null,
+        "definition": "No separately adopted primary mass; not inferred from radius, assumed density or rendered shape."
+      },
+      "published_system_mass": {
+        "earth_masses": 0.00020093198954483882,
+        "mass_kg": 1.2e+21,
+        "uncertainty_earth": 8.372166231034951e-06,
+        "definition": "combined_primary_satellite_system",
+        "source": {
+          "source_id": "quaoar-system-mass",
+          "url": "https://arxiv.org/html/2304.09237v1",
+          "label": "Pereira et al. (2023), A&A 673 L4, doi:10.1051/0004-6361/202346365, Table 3",
+          "local_relative_path": "data/reference/planet-criteria/facts/quaoar-system-mass.json",
+          "bytes": 666,
+          "sha256": "2ba70a27f056018028d7cdc78f49c936a824846be62098bd32569b810ba56621",
+          "retrieved_utc": "2026-11-14T10:20:20.981310+00:00",
+          "upstream_sha256": "c7e04aa0bfbc078e5ab0c7e134712cbe4ffb04973b0cf4548b435a764bce9540",
+          "upstream_bytes": 284211,
+          "upstream_original_local_only": "data/reference/planet-criteria/upstream/quaoar-system-mass.html",
+          "upstream_original_requirement": "optional_not_runtime"
+        },
+        "adopted_as_primary_mass": false,
+        "limitations": [
+          "Adopted dynamical mass from the Quaoar–Weywot binary orbit, used as a system-mass proxy, not a separated primary measurement.",
+          "Not silently substituted for a separately measured primary mass. A system nominal value is not a statistical upper confidence bound on primary mass."
+        ]
+      },
+      "adopted_criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-quaoar",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=50000&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 50000 Quaoar (2002 LM60)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-quaoar.json",
+            "bytes": 5740,
+            "sha256": "a3cf82c6fc276c21f7d46037ff087926bce30ff6086efd724415ed20a5eb3939",
+            "retrieved_utc": "2026-11-14T10:17:25.979824+00:00",
+            "upstream_sha256": "f70f51ab75ac1cf325f3ba4e25eec182a726f3a4f39bdec54f46b1cfc24a2ddc",
+            "upstream_bytes": 2759,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-quaoar.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "equilibrium_shape_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "dominance_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "analogue_scenarios": {
+        "tethys": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 543.0,
+          "density_kg_m3": 984.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 6.70637907478447e+17,
+          "mass_kg": 6.599077009587919e+20,
+          "mass_earth": 0.00011049713939134216,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 6.504539867795769e+20,
+            "high_kg": 6.694640386599828e+20,
+            "low_earth": 0.00010891417805916056,
+            "high_earth": 0.00011209728434722768,
+            "radius_low_km": 541.0,
+            "radius_high_km": 545.0,
+            "density_low_kg_m3": 980.7,
+            "density_high_kg_m3": 987.3,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.08560411346185455,
+            "pi": 0.001290792403808726,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 43.15617622670811,
+            "required_density_kg_m3_at_this_assumed_radius": 762322.4285303529,
+            "required_density_for_model_kg_m3": 762322.4285303529,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0012723007534876586,
+              "high": 0.0013094847877512168,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "dione": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 543.0,
+          "density_kg_m3": 1478.1,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 6.70637907478447e+17,
+          "mass_kg": 9.912698910438924e+20,
+          "mass_earth": 0.00016598152615278743,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 9.782345111667153e+20,
+            "high_kg": 1.0044333844495418e+21,
+            "low_earth": 0.00016379883880845913,
+            "high_earth": 0.000168185665252252,
+            "radius_low_km": 541.0,
+            "radius_high_km": 545.0,
+            "density_low_kg_m3": 1474.8999999999999,
+            "density_high_kg_m3": 1481.3,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.08560411346185455,
+            "pi": 0.001938943345599266,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 43.15617622670811,
+            "required_density_kg_m3_at_this_assumed_radius": 762322.4285303529,
+            "required_density_for_model_kg_m3": 762322.4285303529,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.001913445886936828,
+              "high": 0.0019646913968356912,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "rhea": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 543.0,
+          "density_kg_m3": 1237.2,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 6.70637907478447e+17,
+          "mass_kg": 8.297132191323347e+20,
+          "mass_earth": 0.0001389299398932607,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 8.186554052024388e+20,
+            "high_kg": 8.408815500275953e+20,
+            "low_earth": 0.00013707838276580183,
+            "high_earth": 0.0001408000023488272,
+            "radius_low_km": 541.0,
+            "radius_high_km": 545.0,
+            "density_low_kg_m3": 1234.3,
+            "density_high_kg_m3": 1240.1000000000001,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.08560411346185455,
+            "pi": 0.0016229353272278007,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 43.15617622670811,
+            "required_density_kg_m3_at_this_assumed_radius": 762322.4285303529,
+            "required_density_for_model_kg_m3": 762322.4285303529,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0016013060263381429,
+              "high": 0.0016447808014689398,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "iapetus": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 543.0,
+          "density_kg_m3": 1088.7,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 6.70637907478447e+17,
+          "mass_kg": 7.301234898717852e+20,
+          "mass_earth": 0.000122254304527799,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 7.137948206099527e+20,
+            "high_kg": 7.466968493592354e+20,
+            "low_earth": 0.00011952017785996594,
+            "high_earth": 0.00012502940294051166,
+            "radius_low_km": 541.0,
+            "radius_high_km": 545.0,
+            "density_low_kg_m3": 1076.2,
+            "density_high_kg_m3": 1101.2,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.08560411346185455,
+            "pi": 0.0014281358638481303,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 43.15617622670811,
+            "required_density_kg_m3_at_this_assumed_radius": 762322.4285303529,
+            "required_density_for_model_kg_m3": 762322.4285303529,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.001396196666568184,
+              "high": 0.0014605536800077386,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "ariel": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 543.0,
+          "density_kg_m3": 1539.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 6.70637907478447e+17,
+          "mass_kg": 1.03211173960933e+21,
+          "mass_earth": 0.0001728202210602394,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 1.0035045192184151e+21,
+            "high_kg": 1.0611883120661127e+21,
+            "low_earth": 0.0001680301329698276,
+            "high_earth": 0.00017768889902097776,
+            "radius_low_km": 541.0,
+            "radius_high_km": 545.0,
+            "density_low_kg_m3": 1513.0,
+            "density_high_kg_m3": 1565.0,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.08560411346185455,
+            "pi": 0.0020188308022984036,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 43.15617622670811,
+            "required_density_kg_m3_at_this_assumed_radius": 762322.4285303529,
+            "required_density_for_model_kg_m3": 762322.4285303529,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.00196287451822864,
+              "high": 0.002075705148212959,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "umbriel": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 543.0,
+          "density_kg_m3": 1523.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 6.70637907478447e+17,
+          "mass_kg": 1.0213815330896747e+21,
+          "mass_earth": 0.00017102351960672163,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 9.82943620278712e+20,
+            "high_kg": 1.0605102364673485e+21,
+            "low_earth": 0.00016458734769417348,
+            "high_earth": 0.00017757535978837652,
+            "radius_low_km": 541.0,
+            "radius_high_km": 545.0,
+            "density_low_kg_m3": 1482.0,
+            "density_high_kg_m3": 1564.0,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 0.08560411346185455,
+            "pi": 0.00199784230792753,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 43.15617622670811,
+            "required_density_kg_m3_at_this_assumed_radius": 762322.4285303529,
+            "required_density_for_model_kg_m3": 762322.4285303529,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 0.0019226569967051184,
+              "high": 0.002074378819044772,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        }
+      },
+      "volume_assumption": "The measured radius is projected-area equivalent. Using it as a volume radius adds an explicit spherical assumption; projection/3D-shape systematics are not in the +/-2 km endpoint range.",
+      "high_eccentricity_circular_reference_warning": false
+    },
+    "sedna": {
+      "object_id": "sedna",
+      "name": "Sedna",
+      "official_classification": "dwarf_candidate",
+      "radius_km": 497.5,
+      "radius_low_km": 457.5,
+      "radius_high_km": 537.5,
+      "radius_definition": "Half the Herschel thermophysical diameter 995 +/- 80 km; not a resolved limb measurement.",
+      "radius_uncertainty_status": "source_offsets_used_as_parameter_endpoints_not_joint_probability",
+      "radius_source": {
+        "source_id": "sedna-size",
+        "url": "https://arxiv.org/abs/1204.0899",
+        "label": "Pal et al. (2012), A&A 541 L6, doi:10.1051/0004-6361/201218874",
+        "local_relative_path": "data/reference/small-body-appearance/facts/sedna-size.json",
+        "bytes": 643,
+        "sha256": "e3bcd875f0cf2cccffce4e744c8f48b0c5eb51566c24958d81f4938ca275d333",
+        "retrieved_utc": "2026-11-14T10:07:12.587744+00:00",
+        "upstream_sha256": "dd1649697ac2e7b81c1b2c424e7897e98c5121e45ad17226139bde96a872ffd4",
+        "upstream_bytes": 46502,
+        "upstream_original_local_only": "data/reference/small-body-appearance/upstream/sedna-size.html",
+        "upstream_original_requirement": "optional_not_runtime",
+        "redistribution": "authored_factual_extract_only"
+      },
+      "radius_provenance": {
+        "observation_provider": "ESA Herschel/PACS; European-led instruments with NASA participation",
+        "original_publication_host": "arxiv.org (author manuscript of A&A 541 L6, 2012)",
+        "radius_kind": "thermal_model_effective_radius",
+        "volume_assumption": "Use half the thermal-model diameter as the radius of an assumed sphere; no resolved three-dimensional shape."
+      },
+      "semimajor_axis_au": 543.7195289104732,
+      "eccentricity": 0.8598824585187618,
+      "orbit_epoch_tdb_jd": 2461200.5,
+      "orbit_source": {
+        "source_id": "sbdb-sedna",
+        "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=90377&phys-par=true&full-prec=true",
+        "label": "NASA/JPL SBDB 90377 Sedna (2003 VB12)",
+        "local_relative_path": "data/reference/planet-criteria/facts/sbdb-sedna.json",
+        "bytes": 5747,
+        "sha256": "fd771707b16b0b0415c14efcd63c56ba6d7692a91216e2c68c0825d45716fc0f",
+        "retrieved_utc": "2026-11-14T10:17:25.442687+00:00",
+        "upstream_sha256": "53d48e286eb6604999d071d3c56be2c9053079e6265fa3d08370eab0b6185c25",
+        "upstream_bytes": 2777,
+        "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-sedna.json",
+        "upstream_original_requirement": "optional_not_runtime"
+      },
+      "measured_primary_mass": {
+        "earth_masses": null,
+        "status": "unknown",
+        "source": null,
+        "definition": "No separately adopted primary mass; not inferred from radius, assumed density or rendered shape."
+      },
+      "published_system_mass": null,
+      "adopted_criteria": [
+        {
+          "id": "orbits_sun",
+          "status": "met",
+          "basis": "literature_model",
+          "reason_key": "solar_orbit_catalogued",
+          "source": {
+            "source_id": "sbdb-sedna",
+            "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=90377&phys-par=true&full-prec=true",
+            "label": "NASA/JPL SBDB 90377 Sedna (2003 VB12)",
+            "local_relative_path": "data/reference/planet-criteria/facts/sbdb-sedna.json",
+            "bytes": 5747,
+            "sha256": "fd771707b16b0b0415c14efcd63c56ba6d7692a91216e2c68c0825d45716fc0f",
+            "retrieved_utc": "2026-11-14T10:17:25.442687+00:00",
+            "upstream_sha256": "53d48e286eb6604999d071d3c56be2c9053079e6265fa3d08370eab0b6185c25",
+            "upstream_bytes": 2777,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/sbdb-sedna.json",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "equilibrium_shape",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "equilibrium_shape_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        },
+        {
+          "id": "orbital_dominance",
+          "status": "unknown",
+          "basis": "insufficient_data",
+          "reason_key": "dominance_unverified",
+          "source": {
+            "source_id": "nasa-dwarfs",
+            "url": "https://science.nasa.gov/dwarf-planets/",
+            "label": "NASA Science current recognized dwarf-planet overview",
+            "local_relative_path": "data/reference/planet-criteria/facts/nasa-dwarfs.json",
+            "bytes": 654,
+            "sha256": "02fbddca98e979fcb160db410a0e6e35ce6e34464d0b6ab7788856024af5abfb",
+            "retrieved_utc": "2026-11-14T10:17:10.506809+00:00",
+            "upstream_sha256": "672231a04bce5b55db78ad5fbea390663713e86f1e1943b1ed373020c3b99ab8",
+            "upstream_bytes": 307832,
+            "upstream_original_local_only": "data/reference/planet-criteria/upstream/nasa-dwarfs.html",
+            "upstream_original_requirement": "optional_not_runtime"
+          }
+        }
+      ],
+      "analogue_scenarios": {
+        "tethys": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 497.5,
+          "density_kg_m3": 984.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 5.1578399842264723e+17,
+          "mass_kg": 5.075314544478849e+20,
+          "mass_earth": 8.49827540823327e-05,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 3.933671414354149e+20,
+            "high_kg": 6.42204215621562e+20,
+            "low_earth": 6.58667019584866e-05,
+            "high_earth": 0.0001075328089491026,
+            "radius_low_km": 457.5,
+            "radius_high_km": 537.5,
+            "density_low_kg_m3": 980.7,
+            "density_high_kg_m3": 987.3,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 1.4803626010357875,
+            "pi": 5.740671509998398e-05,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 543.7195289104732,
+            "required_density_kg_m3_at_this_assumed_radius": 17140851.872227654,
+            "required_density_for_model_kg_m3": 17140851.872227654,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 4.449362738048141e-05,
+              "high": 7.263950661403057e-05,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "dione": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 497.5,
+          "density_kg_m3": 1478.1,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 5.1578399842264723e+17,
+          "mass_kg": 7.623803280685148e+20,
+          "mass_earth": 0.00012765549675721136,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 5.915949800174297e+20,
+            "high_kg": 9.635339862252809e+20,
+            "low_earth": 9.905863028303442e-05,
+            "high_earth": 0.00016133733403859586,
+            "radius_low_km": 457.5,
+            "radius_high_km": 537.5,
+            "density_low_kg_m3": 1474.8999999999999,
+            "density_high_kg_m3": 1481.3,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 1.4803626010357875,
+            "pi": 8.623258698098203e-05,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 543.7195289104732,
+            "required_density_kg_m3_at_this_assumed_radius": 17140851.872227654,
+            "required_density_for_model_kg_m3": 17140851.872227654,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 6.691511269855411e-05,
+              "high": 0.00010898501078432443,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "rhea": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 497.5,
+          "density_kg_m3": 1237.2,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 5.1578399842264723e+17,
+          "mass_kg": 6.381279628484992e+20,
+          "mass_earth": 0.00010685026763278661,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 4.9508826621161675e+20,
+            "high_kg": 8.066417986349632e+20,
+            "low_earth": 8.28992252751708e-05,
+            "high_earth": 0.00013506678454145866,
+            "radius_low_km": 457.5,
+            "radius_high_km": 537.5,
+            "density_low_kg_m3": 1234.3,
+            "density_high_kg_m3": 1240.1000000000001,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 1.4803626010357875,
+            "pi": 7.217844300985791e-05,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 543.7195289104732,
+            "required_density_kg_m3_at_this_assumed_radius": 17140851.872227654,
+            "required_density_for_model_kg_m3": 17140851.872227654,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 5.599927019040298e-05,
+              "high": 9.123898729065058e-05,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "iapetus": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 497.5,
+          "density_kg_m3": 1088.7,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 5.1578399842264723e+17,
+          "mass_kg": 5.615340390827361e+20,
+          "mass_earth": 9.402512639170287e-05,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 4.316730066409641e+20,
+            "high_kg": 7.162921930947677e+20,
+            "low_earth": 7.228076338097611e-05,
+            "high_earth": 0.00011993834621163961,
+            "radius_low_km": 457.5,
+            "radius_high_km": 537.5,
+            "density_low_kg_m3": 1076.2,
+            "density_high_kg_m3": 1101.2,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 1.4803626010357875,
+            "pi": 6.351492960300058e-05,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 543.7195289104732,
+            "required_density_kg_m3_at_this_assumed_radius": 17140851.872227654,
+            "required_density_for_model_kg_m3": 17140851.872227654,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 4.882639113579494e-05,
+              "high": 8.101957326382101e-05,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "ariel": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 497.5,
+          "density_kg_m3": 1539.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 5.1578399842264723e+17,
+          "mass_kg": 7.93791573572454e+20,
+          "mass_earth": 0.00013291510013486792,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 6.06877215246031e+20,
+            "high_kg": 1.0179779169935629e+21,
+            "low_earth": 0.000101617538557347,
+            "high_earth": 0.00017045360681185615,
+            "radius_low_km": 457.5,
+            "radius_high_km": 537.5,
+            "density_low_kg_m3": 1513.0,
+            "density_high_kg_m3": 1565.0,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 1.4803626010357875,
+            "pi": 8.978550258015788e-05,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 543.7195289104732,
+            "required_density_kg_m3_at_this_assumed_radius": 17140851.872227654,
+            "required_density_for_model_kg_m3": 17140851.872227654,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 6.864368127528129e-05,
+              "high": 0.00011514314580265153,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        },
+        "umbriel": {
+          "status": "hypothesis",
+          "algorithm_version": "spherical-density-hypothesis-v1",
+          "radius_km": 497.5,
+          "density_kg_m3": 1523.0,
+          "volume_shape": "assumed_sphere",
+          "volume_m3": 5.1578399842264723e+17,
+          "mass_kg": 7.855390295976917e+20,
+          "mass_earth": 0.00013153326673515518,
+          "earth_mass_kg": 5.97217e+24,
+          "mass_bounds": {
+            "low_kg": 5.944428506243345e+20,
+            "high_kg": 1.0173274518708832e+21,
+            "low_earth": 9.953548720554413e-05,
+            "high_earth": 0.00017034469076916486,
+            "radius_low_km": 457.5,
+            "radius_high_km": 537.5,
+            "density_low_kg_m3": 1482.0,
+            "density_high_kg_m3": 1564.0,
+            "definition": "parameter_corner_range_not_confidence_interval"
+          },
+          "clearing": {
+            "minimum_mass_earth": 1.4803626010357875,
+            "pi": 8.88520600582069e-05,
+            "status": "conditional_hypothesis",
+            "model_classification": "below_model",
+            "semimajor_axis_au": 543.7195289104732,
+            "required_density_kg_m3_at_this_assumed_radius": 17140851.872227654,
+            "required_density_for_model_kg_m3": 17140851.872227654,
+            "required_density_exceeds_operating_max": true,
+            "pi_bounds": {
+              "low": 6.723723440182874e-05,
+              "high": 0.00011506957190756996,
+              "definition": "parameter_corner_range_not_confidence_interval"
+            },
+            "parameter_range_classification": "below_model",
+            "evaluation_scope": "circular_solar_10gyr_reference_not_eccentric_clearing_solution"
+          },
+          "replaces_measured_mass": false,
+          "changes_official_classification": false
+        }
+      },
+      "volume_assumption": "Use half the thermal-model diameter as the radius of an assumed sphere; no resolved three-dimensional shape.",
+      "high_eccentricity_circular_reference_warning": true
+    }
+  },
+  "summary": {
+    "target_count": 6,
+    "analogue_count": 6,
+    "scenario_count": 36,
+    "conditional_target_count_meets_model_range": 0,
+    "range_definition": "Envelope of six named source moon bulk densities +/- their reported sigma and each adopted target radius's quoted offsets, used only as arithmetic parameter corners; missing radius uncertainty is held at the nominal radius. Not a joint confidence interval, physical density bound, likelihood or exhaustive census.",
+    "source_analogue_parameter_corner_envelopes": {
+      "eris": {
+        "pi_low": 0.007470053122944958,
+        "pi_high": 0.012295475067909803,
+        "can_meet_model_within_source_parameter_corners": false
+      },
+      "gonggong": {
+        "pi_low": 0.0010083620107052616,
+        "pi_high": 0.002053896378746429,
+        "can_meet_model_within_source_parameter_corners": false
+      },
+      "makemake": {
+        "pi_low": 0.0027625842400783016,
+        "pi_high": 0.004408528944348467,
+        "can_meet_model_within_source_parameter_corners": false
+      },
+      "orcus": {
+        "pi_low": 0.0007332343529607438,
+        "pi_high": 0.001572088214248666,
+        "can_meet_model_within_source_parameter_corners": false
+      },
+      "quaoar": {
+        "pi_low": 0.0012723007534876586,
+        "pi_high": 0.002075705148212959,
+        "can_meet_model_within_source_parameter_corners": false
+      },
+      "sedna": {
+        "pi_low": 4.449362738048141e-05,
+        "pi_high": 0.00011514314580265153,
+        "can_meet_model_within_source_parameter_corners": false
+      }
+    }
+  },
+  "limitations": [
+    "Every computed mass is a conditional radius/density hypothesis, not a separately measured primary mass; the original mass, IAU criteria and official classification are unchanged.",
+    "Similar size or an icy surface does not establish equal bulk density: rock/ice composition, internal porosity, thermal history and gravitational compression can differ.",
+    "The six moons are named, size-comparable examples, not a statistically representative population, a calibrated density prior, or an exhaustive search of possible densities.",
+    "A spherical volume is assumed. Thermal-model size, projected occultation area, a rendered sphere and hydrostatic equilibrium are different concepts.",
+    "Source plus/minus offsets used as parameter endpoints do not become a confidence interval for this different body's mass; no joint covariance or probability is computed.",
+    "The density input interval 100 to 10000 kg/m^3 is an interface/model operating range, not a universal physical bound or a measured density interval for any target.",
+    "The optional Margot comparison remains the fixed circular solar 10 Gyr reference at the source semimajor axis; especially for Sedna it is not a validated eccentric-orbit clearing requirement.",
+    "Meeting a conditional numeric clearing model alone neither establishes hydrostatic equilibrium nor changes an IAU classification or supplies a planet-existence probability."
+  ],
+  "source_selection_policy": "New analogue inputs use NASA/JPL and qualitative NASA NTRS references; previously adopted radius facts retain their observatory/provider and publication-host identity. No new Chinese-agency data or archive is adopted; author nationality is not inferred or filtered.",
+  "coverage": "six_existing_bodies_without_adopted_separate_primary_mass_not_a_planet_likelihood_ranking",
+  "rights": "Project-authored factual snapshots and calculations; full upstream publications are local audit only."
+}

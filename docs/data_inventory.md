@@ -137,3 +137,43 @@ Sedna·Makemake·Quaoar/Gonggong의붉은정성색, Orcus중성색/분광근거�
 연구모형은태양1M☉·10Gyr·C=2√3에서 `m_clear/M⊕ = 0.001239(a/au)^(9/8)`이고Π는채택본체질량/m_clear를직접나눈값이다. 별도반올림상수807을혼합하지않는다. 공식IAU수치규칙·존재확률/청소율·전주기N체모형이아니다. Sedna는a≈543.7195au/e≈0.85988의출처요소에서약1.4803626M⊕라는동일긴반지름원형궤도참고값이며고이심률실궤도의검증된최소질량이아니다. 실제본체질량/Π는null이고정적요소epoch는재생시각과별도다. 긴반지름a·태양초점x=−ae·근일점q/원일점Q의SVG는요소를설명하는모식도다.
 
 현재통합 전체Python372(76.33초)·Vitest64(1.20초)·strict/Vite Bp6N6jEm·Ruff57검사는통과했고새브라우저16경로와후속의미문구교정/좁은재검사·최종ZIP은확정대기다. Data_Spec최종동결은1,566,507B/2648줄/SHA `f26ba122e0bac9fdfdabbe6881bd7686a7692582f62b0efbd376606e1f7e1b9e`,23정본manifest·1846항목(data1796+public49+명시helper1)·총1,193,228,742B다. 정본참조979/sidecar포함984·내장원응답32·dist복제49를추적하고1846항목의독립전체SHA/원102개987,987,584B보존검사에서불일치0을확인했다. 파일전수검증은물리모형정확도/독립발견·공개서버/사람검수를뜻하지않는다.
+
+## DEV-011 밀도 가정과 관측자 물리 · v0.8.0 개발 중
+
+이전23정본/1846항목 Data_Spec은 v0.7.0의 snapshot이다. v0.8.0의 질량가정·관측자/블랙홀 새자료까지 포함한 최종전수목록/해시는 자료·빌드 동결 후 갱신하며 이전값을 새최종본으로 재사용하지 않는다. v0.7 소스 체크포인트는 `bb386f38b4a5e971041befc9fe18c5a5be626858`에 보존했다. 그당시16Chrome 및 lsFtNhUt의후속locale1검사는 새v0.8 검증과 구분한다.
+
+질량 정본은 [mass_scenarios.json](../data/manifests/mass_scenarios.json)130,355B/SHA `7668d7caf418aaae363acf41fa50e9a69795ff1e3c99a178534a83552fc82112`, reader는 `science/mass_scenarios.py`의 `spherical-density-hypothesis-v1`이다. 기존planet_criteria·small_body_appearance의원SHA/바이트에의존한다. `data/reference/mass-scenarios/facts/`의2JSON+2sidecar9,607B는런타임/ZIP, upstreamHTML/PDF+sidecar1,457,981B는로컬감사전용/배포제외다. 원자료는NASA/JPL SSD위성물리표와NASA NTRS의내부진화정성해석이며원관측이나질량을AI로생성하지않는다.
+
+| 비교 위성 | 채택 bulk밀도 kg/m³ | 원 GM 솔루션 |
+| --- | --- | --- |
+| Tethys | 984.0 ± 3.3 | SAT441 |
+| Dione | 1478.1 ± 3.2 | SAT441 |
+| Rhea | 1237.2 ± 2.9 | SAT441 |
+| Iapetus | 1088.7 ± 12.5 | SAT441 |
+| Ariel | 1539 ± 26 | URA111 |
+| Umbriel | 1523 ± 41 | URA111 |
+
+JPL의밀도는GM/부피등가평균반지름에서유도된bulk값이고원g/cm³를1000배해kg/m³로쓴다. sigma는원보고값이며다른천체의밀도prior/신뢰구간이아니다. 여섯위성은크기차수의비교사례이며통계적대표/가능밀도전수목록이아니다. 조성·공극률·중력압축·열진화차이를정성한계로설명한다. 대상6개(Makemake/Eris/Sedna/Quaoar/Orcus/Gonggong)는채택자료의본체질량이null인상태를그대로유지하고sourceR정의/보고오차를보존한다.
+
+36개위성–대상조합에서 `M=ρ(4π/3)(R×1000)^3`을계산하고source오프셋/sigma의저·고corner로조건범위를구한다. 독립Decimal36검산을통과했다. 범위는실측질량오차/신뢰구간/공분산전파가아니며보고된R오차가없으면명목값에고정한다. 직접입력ρ100–10000kg/m³도별도가정이며UI한도를물리가능범위로주장하지않는다. 기존Margot원형모형Π/필요ρ비교는실제질량/공식분류를덮지않는다. 고정6위성전체조건범위의임계충족가능대상0개는현재customρ실험과별도이며확률0%/우주후보부재가아니다.
+
+새관측자/BH자료군은 `science/relativity.py`·`observer_physics.json`·`black_holes.json`의초안을통합중이다. 관측z/음의z·문헌질량/거리·기기/관측기여·provider/reference와SR/정적Schwarzschild/고정FLRW모형값을구분한다. 공개처리사진은출처바이트/credit/권리로연결하며새카메라/가정의사진을생성하지않는다. 자료개수/전체SHA/처리사진권리·표본/모형표/새API·프런트의최종완주는source동결/실행후확정한다. 무한대경계·미상자료·모형미지원도구분한다. 모든물리법칙/Kerr/블랙홀내부/실제빛원뿔·세계선복원을제공하는것이아니다.
+
+새채택에서중국아카이브/서비스제공자를제외하는요청은자료provider로추적한다. 논문호스트와원관측기관은별개이며NASA/ESO/arXiv등호스팅만으로모든원관측기여기관/저자국적을일괄판정하지않는다. ESA/Herschel·ALMA등공동관측의원기여는확인된범위대로기록하고미확인자료에비중국원관측보증을붙이지않는다. 새전체/API/브라우저·근거복원/완결v0.8ZIP은후속실제결과로확정한다.
+
+### DEV-011 관측자/BH 최종 자료 동결
+
+정본두개는2026-11-14T10:54:02.621956UTC에동결했다. [black_holes.json](../data/manifests/black_holes.json)106,361B/SHA `4818701162f76fe3bc97383c1b0d2cd8d750b95466d15c95f046b229126cbbbd`는출처선택11BH·채택질량9/null2·EHT2이미지를담는다. [observer_physics.json](../data/manifests/observer_physics.json)271,921B/SHA `61ca1cf4d24dfe337adb905070328d525ac982d4857db335906a7dbac1bea105`는14z행·고정모형/2049표·provider/reference/좌표해석과한계를담는다. 고유53factsJSON46,880B+53sidecar42,665B는 `data/reference/relativity/facts/`의런타임입력이다. 새37upstream원문16,091,431B+37sidecar21,462B는로컬감사/ZIP제외,기존16원문은재참조하며독립새관측으로중복세지않는다.
+
+14z행은9은하의NED값과5역사사례다. 채택수치10개(9NED+REBELS-25의7.31),미확보4개를유지한다. M31/M33/M81의음의값을0으로바꾸거나다른4사례의근사연대를단일z로전환하지않는다. NED배포자는NASA/IPAC이고원측정기여기관은채택카탈로그값만으로전수확인하지못했음을별도기록한다. publicationhost/reference는원관측참여기관/저자국적과다르다.
+
+FLRW모형은H0=67.66km/s/Mpc·Ωm=.3111·ΩΛ=.6889의flat matter+Λ참고모형이다. Tcmb0=0은방사성분을끄는계산설정이고0K의실제우주를가정하거나fullAstropyPlanck18을채택한것이아니다. 2049행표의z0~20범위에서만선형역보간하고범위밖/결합계의미지원과원관측z를구분한다. 현재카메라역압축좌표와공간분리거리는독립가정이며실제이동세계선·속도·다른방출시각의관측영상이아니다. SR/정적Schwarzschild/FLRW인자곱도자기일관전시공간해로승격하지않는다.
+
+| 실제 EHT 처리관측 | 필수 원 JPEG·SHA256 | 처리·권리 |
+| --- | --- | --- |
+| Sagittarius A* | 62,877B · `43bef2802a78a06ca7dc41089dff623d59da63640a9898c8807f483f9ea84879` | 2017전파간섭관측의처리재구성,1280×1280. EHT Collaboration·ESO CC-BY4.0 |
+| M87* | 40,740B · `c23f0006c68d2c35168c1db870be338dd850f6408e27ae9fcbbec286c08d3dc1` | 2017전파간섭관측의처리재구성,1280×746. EHT Collaboration·ESO CC-BY4.0 |
+
+JPEG2개103,617B와sidecar2개1,363B를 public/dist의 `/observations/black-holes/`에포함한다. 자연가시색표면/블랙홀내부/새관측자영상이아니며원사진은변경하지않는다. 실제JPEG와분리된2Dnull경로/정적shadow·Rs계산은모형표시다. 상대론자료36·관측자API27(9.75초),질량순수39/API8/Decimal36·Vitest70(최신1.76초),전체Python483(76.49초)/Ruff63검사를통과했다. 중간TyRAtsbd 질량5검사와observer타이밍/직접화면교정뒤 CNYGnNg7 통합13/13 Chrome(142.460초), 마지막버튼간격교정 BfRDPmgL 전역/언어후속2/2(9.647초)를통과했다. 두빌드의검사범위를구분하며정본은 `var/qa/dev011-final-browser-results.json`·`var/qa/dev011-observer-review.json`이다. 새문맥의원S01/S02·29픽셀품질/물리입력/선택/두SHA/카메라복원을확인했다. 정확v0.8 ZIP 해제·실제서버재시작은아직대기중이다.
+
+최종 [Data_Spec.md](../Data_Spec.md)는1,791,636B/3061줄/SHA `e848ee7025f315a6cfa127f67b3120a2c7ef2f5bee2d3515e26bbd7a1c3aba33`다. 26정본/2041물리항목(data1987+public53+helper1),총1,211,512,385B,부록A102+B1939·정본참조1079/sidecar포함1084·내장원응답32·정적복제53을기록한다. 독립전체SHA/바이트/문서경로set검증에서누락/추가/중복/불일치0,최초102원본987,987,584B보존불일치0이다. 새최종빌드/ZIP실행검증과모든물리모형정확도/사람/공개서버보장은별개다.

@@ -44,6 +44,8 @@ DIRECTORIES = (
     "data/reference/exoplanet-observations/facts",
     "data/reference/small-body-appearance/facts",
     "data/reference/planet-criteria/facts",
+    "data/reference/mass-scenarios/facts",
+    "data/reference/relativity/facts",
 )
 FILES = (
     "README.md",
@@ -77,6 +79,9 @@ FILES = (
     "data/manifests/exoplanet_observations.json",
     "data/manifests/small_body_appearance.json",
     "data/manifests/planet_criteria.json",
+    "data/manifests/mass_scenarios.json",
+    "data/manifests/black_holes.json",
+    "data/manifests/observer_physics.json",
     "data/manifests/extended_solar.json",
     "data/manifests/cosmic_history.json",
     "data/manifests/cosmic_morphology.json",
@@ -213,8 +218,8 @@ def prepare(built_at):
     )
     manifest = {
         "release": version,
-        "work_id": "DEV-010",
-        "work_ids": ["DEV-009", "DEV-010"],
+        "work_id": "DEV-011",
+        "work_ids": ["DEV-009", "DEV-010", "DEV-011"],
         "built_at": built_at,
         "base_commit": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
@@ -244,6 +249,10 @@ def prepare(built_at):
             "extragalactic-evidence-v1",
             "sourced-small-body-appearance-v1",
             "iau-margot-criteria-v1",
+            "spherical-density-hypothesis-v1",
+            "bounded-observer-relativity-v1",
+            "observer-coordinate-snapshot-v1",
+            "schwarzschild-equatorial-null-rk4-v1",
         ],
         "inactive_conceptual_renderers": ["cosmic-concept-v1", "cosmic-diversity-v1"],
         "cosmic_history_ui": "published_observation_images_only",

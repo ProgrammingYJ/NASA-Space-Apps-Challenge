@@ -1,6 +1,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {createPortal} from 'react-dom';
 import {useTranslation} from 'react-i18next';
+import MassScenarioPanel,{type AppliedMassScenario} from './MassScenarioPanel';
 import styles from './PlanetCriteriaPanel.module.css';
 
 interface Source {url:string;label?:string}
@@ -43,7 +44,7 @@ function OrbitDiagram({object}:{object:PlanetCriterionObject}){
   </figure>;
 }
 
-export default function PlanetCriteriaPanel({objectId,name,catalogue,loading,error,onRetry}:{objectId:string;name:string;catalogue?:PlanetCriteriaCatalogue;loading:boolean;error:boolean;onRetry:()=>void}){
+export default function PlanetCriteriaPanel({objectId,name,catalogue,loading,error,onRetry,labels,massScenario,onMassScenarioChange}:{objectId:string;name:string;catalogue?:PlanetCriteriaCatalogue;loading:boolean;error:boolean;onRetry:()=>void;labels?:Record<string,string>;massScenario?:AppliedMassScenario|null;onMassScenarioChange?:(value:AppliedMassScenario)=>void}){
   const {t,i18n}=useTranslation();const [expanded,setExpanded]=useState(false);const dialog=useRef<HTMLDivElement>(null);
   const object=catalogue?.objects[objectId];const applicable=hasPlanetCriteria(objectId);
   useEffect(()=>{setExpanded(false);},[objectId]);
@@ -62,7 +63,7 @@ export default function PlanetCriteriaPanel({objectId,name,catalogue,loading,err
     </>}
     {expanded&&object&&catalogue&&createPortal(<div className={styles.backdrop}><div ref={dialog} className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby="planet-criteria-title" data-testid="planet-criteria-dialog" data-object-id={objectId}>
       <header><div><small>{t('criteriaClassLabel')} · <span data-testid="criteria-official-class">{t(`criteriaClass_${object.official_classification}`)}</span></small><h1 id="planet-criteria-title">{name} · {t('criteriaTitle')}</h1></div><button autoFocus onClick={()=>setExpanded(false)}>{t('close')} ×</button></header>
-      <div className={styles.body}><section>{rows(true)}<p className={styles.notice}>{t('criteriaDefinitionNote')}</p>
+      <div className={styles.body}><section>{objectId==='pluto'&&<p data-testid="pluto-classification-lesson" className={styles.notice}>{t('criteriaPlutoLesson')} <a href="https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx" target="_blank" rel="noreferrer">IAU 2006 ↗</a></p>}{rows(true)}<MassScenarioPanel key={objectId} objectId={objectId} labels={labels} saved={massScenario} onApplied={onMassScenarioChange}/><p className={styles.notice}>{t('criteriaDefinitionNote')}</p>
         <section className={styles.calculation} data-testid="criteria-clearing-model"><h2>{t('criteriaModelLabel')}</h2><p className={styles.mass}>{massLine}</p><code>m_clear ≈ {catalogue.model.coefficient_earth_mass} (a / au)<sup>9/8</sup> M⊕</code><p>{t('criteriaModelNote')}</p><p className={styles.notice}>{t('criteriaEccentricNote',{eccentricity:number(object.orbit.eccentricity)})}</p>
           <dl><div><dt>{t('criteriaSemimajor')}</dt><dd data-testid="criteria-semimajor">{number(object.orbit.semimajor_axis_au)} au</dd></div><div><dt>{t('criteriaPi')}</dt><dd data-testid="criteria-pi">{object.clearing.pi===null?t('criteriaMassUnknown'):number(object.clearing.pi)} · {t(`criteria_${object.clearing.model_classification==='unknown'?'model_unknown':object.clearing.model_classification}`)}</dd></div><div><dt>{t('criteriaElementsEpoch')}</dt><dd>JD {object.orbit.epoch_tdb_jd} TDB <a href={object.orbit.source.url} target="_blank" rel="noreferrer">{t('source')} ↗</a></dd></div></dl>
           {object.mass.source&&<a href={object.mass.source.url} target="_blank" rel="noreferrer">{t('source')} · {object.mass.source.label??'JPL'} ↗</a>}<p><a href={catalogue.model.source.url} target="_blank" rel="noreferrer">{catalogue.model.source.label??'Margot'} ↗</a></p>

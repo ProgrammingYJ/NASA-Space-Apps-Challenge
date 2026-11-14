@@ -55,6 +55,7 @@ export interface UniverseData {
 }
 export interface UniverseSceneProps {
   active?:boolean;
+  observerMode?:boolean;
   data: UniverseData | null;
   selectedObjectId: string | null;
   selectionSequence?: number;
@@ -223,7 +224,7 @@ export default function UniverseScene(props:UniverseSceneProps) {
       controls.update();
       // Keep the free camera outside the exaggerated visible surfaces.
       for(const view of rt.bodies.values()){
-        if(view.direction)continue;
+        if(latest.current.observerMode||view.direction)continue;
         if(rt.mode==='manual'&&camera.position.distanceToSquared(previousEye)<1e-12)continue;
         clearance.copy(camera.position).sub(view.group.position);const distance=clearance.length();const minimum=view.radius*1.08;
         if(distance<minimum){if(distance<1e-8)clearance.set(0,0,1);else clearance.divideScalar(distance);clearance.multiplyScalar(minimum-distance);camera.position.add(clearance);controls.target.add(clearance);}
@@ -373,9 +374,10 @@ export default function UniverseScene(props:UniverseSceneProps) {
     const current=rt.cameraState();const center=view.direction?(view.body.direction_ecliptic??view.body.direction_ecliptic_unit)!:view.position.toArray() as Vec3;
     rt.focusRequest={objectId:props.selectedObjectId,sequence,system};rt.followedId=view.body.object_id;
     rt.focus=view.body.kind==='galaxy'&&!view.direction?makeGalaxyFocus(current,view.body.object_id,center,view.framingRadius,rt.camera.fov,rt.camera.aspect,performance.now(),window.matchMedia('(prefers-reduced-motion: reduce)').matches):makeFocus(current,view.body.object_id,center,view.framingRadius,rt.camera.fov,rt.camera.aspect,performance.now(),window.matchMedia('(prefers-reduced-motion: reduce)').matches,Boolean(view.direction));
-    rt.focusedId=view.body.object_id;rt.mode='focusing';rt.controls.minDistance=view.direction?0.2:view.radius*1.2;rt.emit();
+    rt.focusedId=view.body.object_id;rt.mode='focusing';rt.controls.minDistance=props.observerMode?.05:view.direction?0.2:view.radius*1.2;rt.emit();
   },[props.data,props.galaxies,props.selectedObjectId,props.selectionSequence,props.overviewSequence,props.restoredCamera,props.restoredFollowObjectId,props.restoreSequence,props.frameSelectedSystem,props.appearance]);
 
+  useEffect(()=>{const rt=runtime.current;if(rt){const view=props.selectedObjectId?rt.bodies.get(props.selectedObjectId):undefined;rt.controls.minDistance=props.observerMode?.05:view&&!view.direction?view.radius*1.2:.2;}},[props.observerMode,props.selectedObjectId]);
   useEffect(()=>{runtime.current?.renderer.domElement.setAttribute('aria-label',props.controlsLabel??'3D universe');},[props.controlsLabel]);
   useEffect(()=>{
     const rt=runtime.current;if(!rt)return;
@@ -387,7 +389,7 @@ export default function UniverseScene(props:UniverseSceneProps) {
   useEffect(()=>{const rt=runtime.current;if(!rt)return;rt.kuiper.visible=props.showKuiperBelt!==false;if(host.current){host.current.dataset.kuiperVisible=String(rt.kuiper.visible);host.current.dataset.kuiperRepresentation='seeded_illustrative_annulus_not_individual_positions_counts_or_density';host.current.dataset.kuiperInnerAu='30';host.current.dataset.kuiperOuterAu='50';}},[props.showKuiperBelt]);
   useEffect(()=>{const rt=runtime.current;if(!rt)return;const active=props.active!==false;rt.renderer.domElement.tabIndex=active?0:-1;if(host.current)host.current.dataset.sceneActive=String(active);if(active)rt.resume();},[props.active]);
 
-  return <div ref={host} className={styles.scene} style={props.active===false?{visibility:'hidden'}:undefined} aria-hidden={props.active===false?true:undefined} data-testid="universe-scene" data-selected-object={props.selectedObjectId??''} data-sky-star-count={props.skyStars?.length??0} data-sky-representation="catalog_host_directions" data-sky-state={props.skyStars?.length?'available':'empty'} data-sky-frame-status={CATALOG_SKY_FRAME_STATUS} data-sky-source-url={props.skySourceUrl??''} data-sky-source-sha256={props.skySourceSha256??''}>
+  return <div ref={host} className={styles.scene} style={props.active===false?{visibility:'hidden'}:undefined} aria-hidden={props.active===false?true:undefined} data-testid="universe-scene" data-observer-mode={String(Boolean(props.observerMode))} data-selected-object={props.selectedObjectId??''} data-sky-star-count={props.skyStars?.length??0} data-sky-representation="catalog_host_directions" data-sky-state={props.skyStars?.length?'available':'empty'} data-sky-frame-status={CATALOG_SKY_FRAME_STATUS} data-sky-source-url={props.skySourceUrl??''} data-sky-source-sha256={props.skySourceSha256??''}>
     <div ref={labelsLayer} className={styles.labels} aria-label={props.controlsLabel}/>
     <div className={styles.representation}>{props.representationLabel??'Distance compressed · radii enlarged · artistic appearance'}{props.skyNote&&<span data-testid="catalog-sky-note">{props.skyNote} {props.skySourceUrl&&<a href={props.skySourceUrl} target="_blank" rel="noreferrer" style={{pointerEvents:'auto',color:'inherit'}}>NASA ↗</a>}</span>}</div>
     {error&&<div className={styles.error} role="alert"><p>{props.errorLabel??'3D rendering is unavailable in this browser.'}</p><div>{sceneObjects.map(body=><button key={body.object_id} onClick={()=>props.onSelect(body.object_id)}>{props.labels?.[body.object_id]??body.name}</button>)}</div></div>}

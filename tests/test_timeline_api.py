@@ -370,3 +370,42 @@ def test_planet_criteria_hash_is_preserved_and_changed_sources_require_recalcula
     rejected = client.post("/api/v1/evidence/import", json=changed).json()
     assert rejected["status"] == "recalculation_required"
     assert "planet_criteria_sources_changed" in rejected["reasons"]
+
+
+def test_mass_hypothesis_is_restored_separately_from_observed_object_mass(timeline_api):
+    from science.mass_scenarios import get_mass_scenarios
+
+    client, _, _, result, saved = timeline_api
+    session = deepcopy(saved["session"])
+    session["universe_context"]["mass_scenarios_manifest_sha256"] = get_mass_scenarios(ROOT)[
+        "source_manifest_sha256"
+    ]
+    session["universe_context"]["mass_scenario"] = {
+        "target_id": "sedna",
+        "density_kg_m3": 2000,
+        "include_source_ranges": True,
+    }
+    response = client.post(
+        "/api/v1/evidence",
+        json={
+            "result_id": result["result_id"],
+            "session": session,
+            "judgment": "Density hypothesis, not measured mass.",
+        },
+    )
+    assert response.status_code == 201, response.text
+    evidence = response.json()
+    restored = client.post("/api/v1/evidence/import", json=evidence).json()
+    assert restored["status"] == "restored" and restored["session"] == session
+    assert restored["comparison"] == result
+    original = client.get("/api/v1/planet-criteria?object_id=sedna").json()["objects"]["sedna"]
+    assert (
+        original["mass"]["earth_masses"] is None and original["criteria"][2]["status"] == "unknown"
+    )
+    changed = deepcopy(evidence)
+    changed["session"]["universe_context"]["mass_scenarios_manifest_sha256"] = "f" * 64
+    rejected = client.post("/api/v1/evidence/import", json=changed).json()
+    assert (
+        rejected["status"] == "recalculation_required"
+        and "mass_scenario_sources_changed" in rejected["reasons"]
+    )

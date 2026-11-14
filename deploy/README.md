@@ -1,4 +1,4 @@
-# v0.7.0 실행·복구
+# v0.8.0 실행·복구
 
 팀 회의의 핵심 기능인 행성3요건 판정은 GET /api/v1/planet-criteria로17개 천체(행성8/공식왜소행성5/후보4)를 제공한다. 선택 정보창의3요건과 확장 대화상자, ‘최소 질량: X M⊕ (현재 질량: Y)’를 확인한다. IAU공식 분류와 태양1M☉·10Gyr·C=2√3 조건의 Margot 원형궤도 청소 참고모형을 구분한다. Sedna의 본체 질량/평형·지배력 미확정과 높은 이심률 한계를 숨기지 않으며, 위성포함 계 질량을 본체 단독값으로 쓰지 않는다. a는 현재 태양 거리가 아닌 source epoch의 긴반지름이다. data/manifests/planet_criteria.json과 data/reference/planet-criteria/facts/·sidecar19쌍이 필수이며 upstream 전체문헌은 로컬 감사용·배포 제외다. 같은 원 물리 HTML을 재사용한 값과 새SBDB8을 구별하고 새로운 독립 관측으로 세지 않는다. optional planet_criteria_manifest_sha256 저장/복원과 해시 변경 시 재계산 필요를 확인한다.
 
@@ -6,7 +6,7 @@
 
 DEV-009 / v0.7.0은 기존 우주 탐색·실제 ε Indi B/명왕성 관측·근거 저장/복원을 보존하며 실제 확인목록의 행성 직접선택, 실제 모항성 방향표식, 공개 외계행성 관측사진3개, 지구 표시명/EMB기준 분리, 하나의 시간 조작과 상시 설정 진입을 통합한다. 빅뱅은 실제5관측영상과 출처의 추정연대/범위만 표시한다. 가상 외부은하 행성계와 가상 초기은하 성장장면을 활성제품에 추가하지 않는다.
 
-현재 최종 production build·브라우저·완결v0.7.0 ZIP의 해제/실제재시작 검증은 진행 중이다. 정확한 파일명·source commit·ZIP바이트/SHA256·실행시각/결과는 최종 아카이브 옆 동명 `.zip.sha256.json`·`.verification.json`과 `docs/worklog.md`로 확정한다. 이전 v0.6.0의 검증을 새아카이브 통과로 재사용하지 않는다. 공개서버 업로드/기존서비스 변경·Linux컨테이너 실행을 수행한 것으로 주장하지 않는다. 적용환경의 실제 CPU/RAM/포트/volume/proxy/HTTPS 할당을 확인한다.
+v0.8.0은 위 경험과 행성 분류의 밀도 가정, 실제 블랙홀 자료, 제한된 관측자 이동 실험을 함께 담는다. 정확한 파일명·source commit·ZIP바이트/SHA256·실행시각/결과는 최종 아카이브 옆 동명 `.zip.sha256.json`·`.verification.json`과 `docs/worklog.md`로 확정한다. 이전 v0.6.0의 검증을 새아카이브 통과로 재사용하지 않는다. 공개서버 업로드/기존서비스 변경·Linux컨테이너 실행을 수행한 것으로 주장하지 않는다. 적용환경의 실제 CPU/RAM/포트/volume/proxy/HTTPS 할당을 확인한다.
 
 ## 업로드·시작
 
@@ -56,4 +56,15 @@ Git에서 제외된 채택원본도 완결ZIP에는 포함한다. Git clone만�
 
 ## 전달본 식별
 
-v0.7.0 최종ZIP/빌드·정확한해제실행결과는 아직 확정전이며동명외부검증JSON으로완료후기록한다. 직전불변검증본은 `NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip`(481,789,033B/1807파일,source `bf1a09f5ebafc5fdd74abe82231e522b3eec9b95`,SHA256 `af2759fc30eb844dc5ba440f76580beb7b4ca2e92444c39235bfafc38bda0d28`)이다. 2026-11-14 18:25:16KST에정확한최종ZIP의Windows새폴더해제/health·대표API/실제서버재시작뒤동일εB/Pluto근거복원을통과했다. 검증된기존독립runtime을재사용했으며새설치/Linux/공개서버검증이아니다. 상세는 `docs/releases/v0.6.0.json`을따르고이전성공을새v0.7.0의검증으로대체하지않는다.
+v0.7.0은 source checkpoint `bb386f38b4a5e971041befc9fe18c5a5be626858`로만 origin/main에 보존했다. 현재 v0.8.0의 정확한 최종 ZIP 검증은 `docs/releases/v0.8.0.json`과 동명 외부 verification/checksum JSON에서 확정한다. 직전 불변 검증본 `NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip`과 그 검사 기록은 보존한다. Windows 해제/실제 서버 재시작 검사는 Linux 또는 공개 서비스의 검증이 아니다.
+
+## v0.8.0 추가 런타임 자료와 검사
+
+`data/manifests/mass_scenarios.json`, `black_holes.json`, `observer_physics.json`과 `data/reference/mass-scenarios/facts/`, `data/reference/relativity/facts/`를 포함한다. 전체 논문·HTML의 `upstream/` 사본은 로컬 감사 전용으로 ZIP에서 제외하며 프로젝트 작성 사실 JSON과 출처/해시는 보존한다. EHT 실제 영상 2건과 권리/출처 sidecar는 `web/public/observations/black-holes/` 및 실제 서빙하는 `web/dist/observations/black-holes/` 양쪽에 필요하다. 원문 102개 및 이전 사용 자료는 변경하지 않는다.
+
+- 세드나 등의 3요건 창에서 6종 비교 위성 밀도와 직접 입력, 별도 추정 질량/범위/Π를 확인한다. 이 값은 원 실측 질량·IAU 분류를 대체하지 않는다. 고정 6×6 자료 경계의 조건부 필터는 0개이며 직접 입력과 별개다. 밀도 100–10000 kg/m³는 UI 운용 범위다.
+- 우측 상단 톱니바퀴 또는 선택 정보의 관측자 실험을 연다. 압축 카메라 위치의 역변환은 위치 스냅샷이며 실제 비행·시간·속도를 복원하지 않는다. 원 관측 적색편이(음수 포함), FLRW 잔여거리의 조건부 계산, 별도 입력 β의 SR, 정적 Schwarzschild 중력 계수를 구별한다. 거리 미상/부적합 모형은 미산출이다. 영상 자체는 재색칠하지 않는다.
+- 설정 또는 천체 목록의 블랙홀에서 11개 실제 대상·9개 채택 질량·2개 고정 EHT 관측 영상을 확인한다. 휠과 r/Rs 입력은 별도 정적 관측자 반지름, 드래그는 방위각을 바꾼다. 궤적은 구면 대칭 비회전 시공간의 적도 null 방정식 수치 경로이며 관측자 하늘 영상/강도·Kerr·강착/내부 복원이 아니다. 질량 미확보 2개에는 대상별 Rs를 만들지 않는다.
+- 선택한 블랙홀 ID, 관측자 실험 값, 질량 가정과 세 source SHA가 ε Indi B/명왕성 근거의 optional context에 함께 저장되는지 JSON 내보내기/새 세션 import와 재시작 후 확인한다. 변경된 source·유효하지 않은 파라미터·미지원 ID는 정상 복원으로 통과시키지 않는다. 원 노출·판단·관측자/시각은 그대로 보존한다.
+
+새 자료는 NASA/ESA/ESO/JPL 등 확인한 제공기관을 사용하며 중국 기관 자료 제공자는 새 채택에서 제외했다. NED의 NASA/IPAC 집계 제공자와 원 관측 기여기관은 다르다. 원 기여기관 미확인 행은 미확인으로 기록하며 연구자 국적이나 전수 비중국 기원을 확인했다고 주장하지 않는다.

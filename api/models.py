@@ -18,6 +18,25 @@ class ComparisonRequest(StrictModel):
         return self
 
 
+class MassScenarioInput(StrictModel):
+    target_id: Literal["sedna", "eris", "makemake", "quaoar", "orcus", "gonggong"]
+    density_kg_m3: float = Field(ge=100, le=10000)
+    analogue_id: Literal["tethys", "dione", "rhea", "iapetus", "ariel", "umbriel"] | None = None
+    include_source_ranges: bool = True
+
+
+class ObserverExperiment(StrictModel):
+    enabled: bool = False
+    mode: Literal["catalogue_camera", "black_hole_local"] = "catalogue_camera"
+    radial_beta: float = Field(default=0, ge=-0.99, le=0.99)
+    emitted_wavelength_nm: float = Field(default=550, ge=0.001, le=1e9)
+    cosmological_enabled: bool = True
+    gravitational_enabled: bool = False
+    emitter_radius_rs: float = Field(default=6, ge=1.01, le=1e6)
+    local_observer_radius_rs: float = Field(default=20, ge=1.01, le=1e6)
+    local_observer_azimuth_rad: float = Field(default=0, ge=-1e6, le=1e6)
+
+
 class CameraState(StrictModel):
     position: tuple[float, float, float]
     target: tuple[float, float, float]
@@ -58,6 +77,13 @@ class UniverseContext(StrictModel):
         default=None, pattern=r"^[a-f0-9]{64}$"
     )
     planet_criteria_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    mass_scenarios_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    mass_scenario: MassScenarioInput | None = None
+    observer_physics_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    black_holes_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    observer_experiment: ObserverExperiment | None = None
+    observer_panel_open: bool | None = None
+    selected_black_hole_id: str | None = Field(default=None, max_length=80)
     time_preference: Literal["auto", "ephemeris", "simulation"] | None = None
     extended_solar_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
     galaxy_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
@@ -68,6 +94,12 @@ class UniverseContext(StrictModel):
 
     @model_validator(mode="after")
     def consistent_time_preference(self):
+        if self.mass_scenario is not None and self.mass_scenarios_manifest_sha256 is None:
+            raise ValueError("Mass hypotheses require a source manifest hash")
+        if self.observer_experiment is not None and self.observer_physics_manifest_sha256 is None:
+            raise ValueError("Observer hypotheses require a source manifest hash")
+        if self.selected_black_hole_id is not None and self.black_holes_manifest_sha256 is None:
+            raise ValueError("Black-hole selections require a source manifest hash")
         if self.time_preference == "ephemeris" and self.simulation_context is not None:
             raise ValueError("Ephemeris-only preference cannot carry fitted-model time")
         if self.time_preference == "simulation" and self.simulation_context is None:

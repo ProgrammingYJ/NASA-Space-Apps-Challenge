@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Planet X · SPHEREx",
-    "version": "0.7.0"
+    "version": "0.8.0"
   },
   "paths": {
     "/health/live": {
@@ -324,6 +324,90 @@
                 "schema": {
                   "$ref": "#/components/schemas/HTTPValidationError"
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/mass-scenarios": {
+      "get": {
+        "summary": "Mass Scenarios",
+        "operationId": "mass_scenarios_api_v1_mass_scenarios_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/mass-scenarios/calculate": {
+      "post": {
+        "summary": "Mass Scenario Calculate",
+        "operationId": "mass_scenario_calculate_api_v1_mass_scenarios_calculate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MassScenarioInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/black-holes": {
+      "get": {
+        "summary": "Black Holes",
+        "operationId": "black_holes_api_v1_black_holes_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/observer-physics": {
+      "get": {
+        "summary": "Observer Physics",
+        "operationId": "observer_physics_api_v1_observer_physics_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -1118,6 +1202,125 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
+      "MassScenarioInput": {
+        "properties": {
+          "target_id": {
+            "type": "string",
+            "enum": [
+              "sedna",
+              "eris",
+              "makemake",
+              "quaoar",
+              "orcus",
+              "gonggong"
+            ],
+            "title": "Target Id"
+          },
+          "density_kg_m3": {
+            "type": "number",
+            "maximum": 10000.0,
+            "minimum": 100.0,
+            "title": "Density Kg M3"
+          },
+          "analogue_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "tethys",
+                  "dione",
+                  "rhea",
+                  "iapetus",
+                  "ariel",
+                  "umbriel"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Analogue Id"
+          },
+          "include_source_ranges": {
+            "type": "boolean",
+            "title": "Include Source Ranges",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "target_id",
+          "density_kg_m3"
+        ],
+        "title": "MassScenarioInput"
+      },
+      "ObserverExperiment": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled",
+            "default": false
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "catalogue_camera",
+              "black_hole_local"
+            ],
+            "title": "Mode",
+            "default": "catalogue_camera"
+          },
+          "radial_beta": {
+            "type": "number",
+            "maximum": 0.99,
+            "minimum": -0.99,
+            "title": "Radial Beta",
+            "default": 0
+          },
+          "emitted_wavelength_nm": {
+            "type": "number",
+            "maximum": 1000000000.0,
+            "minimum": 0.001,
+            "title": "Emitted Wavelength Nm",
+            "default": 550
+          },
+          "cosmological_enabled": {
+            "type": "boolean",
+            "title": "Cosmological Enabled",
+            "default": true
+          },
+          "gravitational_enabled": {
+            "type": "boolean",
+            "title": "Gravitational Enabled",
+            "default": false
+          },
+          "emitter_radius_rs": {
+            "type": "number",
+            "maximum": 1000000.0,
+            "minimum": 1.01,
+            "title": "Emitter Radius Rs",
+            "default": 6
+          },
+          "local_observer_radius_rs": {
+            "type": "number",
+            "maximum": 1000000.0,
+            "minimum": 1.01,
+            "title": "Local Observer Radius Rs",
+            "default": 20
+          },
+          "local_observer_azimuth_rad": {
+            "type": "number",
+            "maximum": 1000000.0,
+            "minimum": -1000000.0,
+            "title": "Local Observer Azimuth Rad",
+            "default": 0
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ObserverExperiment"
+      },
       "Session": {
         "properties": {
           "object_id": {
@@ -1375,6 +1578,85 @@
               }
             ],
             "title": "Planet Criteria Manifest Sha256"
+          },
+          "mass_scenarios_manifest_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mass Scenarios Manifest Sha256"
+          },
+          "mass_scenario": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MassScenarioInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "observer_physics_manifest_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observer Physics Manifest Sha256"
+          },
+          "black_holes_manifest_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Black Holes Manifest Sha256"
+          },
+          "observer_experiment": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ObserverExperiment"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "observer_panel_open": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observer Panel Open"
+          },
+          "selected_black_hole_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Selected Black Hole Id"
           },
           "time_preference": {
             "anyOf": [

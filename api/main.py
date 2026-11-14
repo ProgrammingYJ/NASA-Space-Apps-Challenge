@@ -15,7 +15,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
-from api.models import ComparisonRequest, Evidence, EvidenceRequest
+from api.models import ComparisonRequest, Evidence, EvidenceRequest, MassScenarioInput
 from api.service import Service, now
 from api.storage import atomic_json, canonical, digest, read_json
 
@@ -45,7 +45,7 @@ def create_app(state_dir: Path | None = None):
         yield
         app.state.service.close()
 
-    app = FastAPI(title="Planet X · SPHEREx", version="0.7.0", lifespan=lifespan)
+    app = FastAPI(title="Planet X · SPHEREx", version="0.8.0", lifespan=lifespan)
 
     @app.middleware("http")
     async def bounds(request, call_next):
@@ -285,6 +285,72 @@ def create_app(state_dir: Path | None = None):
                 raise HTTPException(422, "unsupported_planet_criteria_object") from None
             raise HTTPException(503, "planet_criteria_unavailable") from None
 
+    def mass_scenario_source():
+        from science.mass_scenarios import get_mass_scenarios
+
+        try:
+            return get_mass_scenarios(ROOT)
+        except (ValueError, FileNotFoundError):
+            raise HTTPException(503, "mass_scenario_source_unavailable") from None
+
+    def evaluate_mass_scenario(body: MassScenarioInput, source: dict):
+        from science.mass_scenarios import calculate_mass_scenario
+
+        target = source["targets"][body.target_id]
+        density_bounds = None
+        if body.analogue_id is not None:
+            analogue = source["analogues"][body.analogue_id]
+            if not abs(body.density_kg_m3 - analogue["density_kg_m3"]) < 1e-8:
+                raise ValueError("analogue_density_mismatch")
+            sigma = analogue.get("density_sigma_kg_m3")
+            if body.include_source_ranges and sigma is not None:
+                density_bounds = [body.density_kg_m3 - sigma, body.density_kg_m3 + sigma]
+        radius_bounds = None
+        if body.include_source_ranges and target.get("radius_low_km") is not None:
+            radius_bounds = [target["radius_low_km"], target["radius_high_km"]]
+        return calculate_mass_scenario(
+            target["radius_km"],
+            body.density_kg_m3,
+            radius_bounds_km=radius_bounds,
+            density_bounds_kg_m3=density_bounds,
+            semimajor_axis_au=target["semimajor_axis_au"],
+        )
+
+    @app.get("/api/v1/mass-scenarios")
+    def mass_scenarios():
+        return mass_scenario_source()
+
+    @app.post("/api/v1/mass-scenarios/calculate")
+    def mass_scenario_calculate(body: MassScenarioInput):
+        source = mass_scenario_source()
+        try:
+            result = evaluate_mass_scenario(body, source)
+        except ValueError:
+            raise HTTPException(422, "invalid_mass_scenario") from None
+        return {
+            **result,
+            "inputs": body.model_dump(),
+            "source_manifest_sha256": source["source_manifest_sha256"],
+        }
+
+    @app.get("/api/v1/black-holes")
+    def black_holes():
+        from science.relativity import get_black_holes
+
+        try:
+            return get_black_holes(ROOT)
+        except (ValueError, FileNotFoundError):
+            raise HTTPException(503, "black_hole_source_unavailable") from None
+
+    @app.get("/api/v1/observer-physics")
+    def observer_physics():
+        from science.relativity import get_observer_physics
+
+        try:
+            return get_observer_physics(ROOT)
+        except (ValueError, FileNotFoundError):
+            raise HTTPException(503, "observer_physics_source_unavailable") from None
+
     @app.get("/api/v1/cosmic-history")
     def cosmic_history():
         from science.history import get_cosmic_history
@@ -419,6 +485,17 @@ def create_app(state_dir: Path | None = None):
         for expected, filename, reason in (
             (context.galaxy_manifest_sha256, "galaxies.json", "galaxy_sources_changed"),
             (
+                context.observer_physics_manifest_sha256,
+                "observer_physics.json",
+                "observer_physics_sources_changed",
+            ),
+            (context.black_holes_manifest_sha256, "black_holes.json", "black_hole_sources_changed"),
+            (
+                context.mass_scenarios_manifest_sha256,
+                "mass_scenarios.json",
+                "mass_scenario_sources_changed",
+            ),
+            (
                 context.planet_criteria_manifest_sha256,
                 "planet_criteria.json",
                 "planet_criteria_sources_changed",
@@ -483,6 +560,28 @@ def create_app(state_dir: Path | None = None):
                 get_planet_criteria(ROOT)
             except (ValueError, FileNotFoundError):
                 return ["planet_criteria_data_unavailable"]
+        if context.mass_scenarios_manifest_sha256:
+            try:
+                source = mass_scenario_source()
+                if context.mass_scenario is not None:
+                    evaluate_mass_scenario(context.mass_scenario, source)
+            except (ValueError, FileNotFoundError, HTTPException):
+                return ["mass_scenario_data_unavailable"]
+        if context.observer_physics_manifest_sha256 or context.black_holes_manifest_sha256:
+            from science.relativity import get_black_holes, get_observer_physics
+
+            try:
+                if context.observer_physics_manifest_sha256:
+                    get_observer_physics(ROOT)
+                if context.black_holes_manifest_sha256:
+                    catalogue = get_black_holes(ROOT)
+                    if (
+                        context.selected_black_hole_id
+                        and context.selected_black_hole_id not in catalogue["objects"]
+                    ):
+                        return ["unsupported_black_hole_selection"]
+            except (ValueError, FileNotFoundError):
+                return ["observer_physics_data_unavailable"]
         if context.simulation_context:
             from science.long_term_model import get_long_term_model
 

@@ -84,6 +84,35 @@ def main(base):
     appearance = call(base, "/api/v1/appearance")
     small_bodies = call(base, "/api/v1/small-body-appearance")
     criteria = call(base, "/api/v1/planet-criteria")
+    mass_sources = call(base, "/api/v1/mass-scenarios")
+    mass_input = {
+        "target_id": "sedna",
+        "density_kg_m3": 2000,
+        "analogue_id": None,
+        "include_source_ranges": True,
+    }
+    mass = call(base, "/api/v1/mass-scenarios/calculate", mass_input)
+    assert mass["status"] == "hypothesis"
+    assert mass["source_manifest_sha256"] == mass_sources["source_manifest_sha256"]
+    assert len(mass_sources["analogues"]) == len(mass_sources["targets"]) == 6
+    assert mass_sources["summary"]["conditional_target_count_meets_model_range"] == 0
+    assert 1e21 < mass["mass_kg"] < 1.1e21 and mass["clearing"]["pi"] < 0.001
+    black_holes = call(base, "/api/v1/black-holes")
+    observer_physics = call(base, "/api/v1/observer-physics")
+    assert len(black_holes["objects"]) == 11
+    assert sum(obj["mass_solar"] is not None for obj in black_holes["objects"].values()) == 9
+    bh_images = [obj["image"] for obj in black_holes["objects"].values() if obj["image"]]
+    assert len(bh_images) == 2
+    for photo in bh_images:
+        raw = call(base, photo["url"])
+        assert len(raw) == photo["bytes"] and hashlib.sha256(raw).hexdigest() == photo["sha256"]
+        assert not photo["artist_concept"] and not photo["surface_resolved"]
+    assert len(observer_physics["cosmology"]["inverse_distance_table"]) == 2049
+    redshifts = observer_physics["source_redshifts"]
+    assert len(redshifts) == 14
+    assert redshifts["galaxy-m31"]["measured_redshift"] < 0
+    assert redshifts["rebels25_rotating_disc"]["measured_redshift"] == 7.31
+    assert redshifts["cosmic_gems_clusters"]["measured_redshift"] is None
     assert len(criteria["objects"]) == 17
     assert criteria["objects"]["sedna"]["mass"]["earth_masses"] is None
     assert criteria["objects"]["sedna"]["clearing"]["pi"] is None
@@ -207,6 +236,23 @@ def main(base):
                     "time_preference": "auto",
                     "small_body_appearance_manifest_sha256": small_bodies["source_manifest_sha256"],
                     "planet_criteria_manifest_sha256": criteria["source_manifest_sha256"],
+                    "mass_scenarios_manifest_sha256": mass_sources["source_manifest_sha256"],
+                    "mass_scenario": mass_input,
+                    "observer_physics_manifest_sha256": observer_physics["source_manifest_sha256"],
+                    "black_holes_manifest_sha256": black_holes["source_manifest_sha256"],
+                    "observer_panel_open": False,
+                    "selected_black_hole_id": "member-m87-black-hole",
+                    "observer_experiment": {
+                        "enabled": True,
+                        "mode": "black_hole_local",
+                        "radial_beta": 0.1,
+                        "emitted_wavelength_nm": 550,
+                        "cosmological_enabled": False,
+                        "gravitational_enabled": True,
+                        "emitter_radius_rs": 6,
+                        "local_observer_radius_rs": 8,
+                        "local_observer_azimuth_rad": 0.4,
+                    },
                     "simulation_context": {
                         "algorithm_version": "jpl-kepler-long-term-v1",
                         "source_manifest_sha256": model["source_manifest_sha256"],
@@ -241,6 +287,11 @@ def main(base):
                 "appearance_maps": len(appearance["objects"]),
                 "small_body_profiles": len(small_bodies["profiles"]),
                 "planet_criteria_objects": len(criteria["objects"]),
+                "mass_scenario_analogues": len(mass_sources["analogues"]),
+                "mass_hypothesis_kg": mass["mass_kg"],
+                "black_holes": len(black_holes["objects"]),
+                "actual_eht_images": len(bh_images),
+                "observer_inverse_table_rows": 2049,
                 "sedna_circular_reference_minimum_earth_mass": criteria["objects"]["sedna"][
                     "clearing"
                 ]["minimum_mass_earth"],
