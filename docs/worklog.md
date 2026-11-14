@@ -321,3 +321,12 @@ DEV-008 최종 전달 정본 확정: source bf1a09f의 clean tree로 생성한 N
 - 중간 TyRAtsbd 질량 Chrome5고유경로를 통과했다. 최초 optional null 생략의 테스트 기대를 정본의 의미에 맞춰 교정했으며 제품 수치는 바꾸지 않았다. 중간 DbNwNokf 관측자 Chrome5 PASS/1은 source 첫 로딩을 기다리지 않은 테스트 기대 문제였다. root가 직접 화면을 읽어 검색/소개 문구와 블랙홀 제목의 겹침을 발견했고 App hidden 조건을 교정했다. 최종 camera end 이벤트 누락을 막기 위해 중복 100ms throttle도 제거했다. 최종 빌드는 `index-CNYGnNg7.js`이며 현재 13경로 회귀와 정확 ZIP/실제 서버 재시작 검증을 후속 확정한다. 이전 통과를 새 아카이브의 성공으로 대체하지 않는다.
 
 - 후속 확정: `CNYGnNg7`에서 질량5+관측자6+기존실관측2의 **13/13 PASS/142.460초**(2026-11-14T11:17:28.357Z 시작), unexpected/flaky/skipped0이다. 실제 εB의 S01/S02·품질·원시각·판단과 새 context의 질량가정/블랙홀ID·r/Rs/β/파장·카메라/source SHA를 복원했다. root/검토자가 직접 화면에서 관측자 패널 닫기 버튼과 블랙홀 버튼의 작은 겹침도 확인해 CSS 상단 여백 한 값(24→50px)을 교정했다. 최종 **`index-BfRDPmgL.js`/`index-DZOoVrJ5.css`**의 영향2경로 **PASS/9.647초**(11:20:48.806Z 시작)와 비겹침 bounding/직접화면을 확인했다. 13개 전체를 마지막 CSS 빌드에서 재실행한 것은 아니며 두 실행을 분리한다. 정본은 `var/qa/dev011-final-browser-results.json`·`dev011-observer-spacing-followup.json`·`dev011-observer-review.json`이다. 최종 Vitest70 PASS1.76초/strict/Vite도 확인했다. 정확 ZIP/OS 서버 재시작은 아래 릴리스 확정 기록으로 별도 확인한다.
+
+
+### DEV-011 최종 완결 ZIP 확정 · 2026-11-14 20:24:20 KST
+
+`NASA_SPACE_APPS_CHALLENGE_v0.8.0_20261114_202331KST.zip`는 **484956608B/2095파일**, SHA256 **`1bb76a9158cf6d36c0c632b4d32cf0b7edd380a07e1f3031b8a6bdcbaa3253e3`**이다. source `45375fc52300c41211063160b1cf9f2dee45ef67`의 clean tree와 최종 BfRDPmgL/DZOoVrJ5 빌드로 생성했다. 추적 manifest/source sidecar 32개의 Git index와 동결 working bytes가 모두 일치함을 확인하고 origin/main의 정확 SHA도 대조했다.
+
+정확한 최종 ZIP을 새 폴더 `tmp/release-verify-y39fvc3n/extracted`에 풀어2094개 manifest 항목의 경로/대소문자/바이트/SHA와 금지 파일 제외를 확인했다. Windows에서 health·대표/신규 API·실제 지도/사진 원바이트·질량 가정·11BH/2EHT/2049표를 확인하고 실제 API/worker 재시작 뒤 같은 εB/Pluto result/evidence ID·세션/판단·새 가정을 복원했다. 검사시각 `2026-11-14T11:24:20.927409+00:00`, 재사용한 독립 runtime이며 새 의존성 설치·Linux·공개 서비스 검증은 아니다. 상세 정본은 [v0.8.0 검증 기록](./releases/v0.8.0.json)과 ZIP 밖 동명 checksum/verification JSON이다. 이 사후 문서와 커밋은 이미 검증한 불변 ZIP에 추가하지 않는다. 이전 v0.6 ZIP/기존 원본/Git 이력도 보존한다.
+
+- 릴리스 인계 전 Notion 가용성을 다시 확인했다. 현재 연결 도구 목록에 Notion 도구가 없고 기존 공용 URL의 읽기 시도는 도구 접근 불가로 반환됐다. 새 팀 요청/후속 공지를 최신 확인했다고 기록하지 않는다. 사용자 직접 지시와 현재 로컬 정본을 기준으로 승인된 개발/검증을 완료했다. 외부 메시지·페이지 편집·공개 배포/제출은 수행하지 않았다.

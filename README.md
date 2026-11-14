@@ -6,7 +6,7 @@ Planet X and SPHEREx — 실제 관측과 과학적 가설을 연결하는 우�
 
 기본 화면은 자유롭게 조작하는 우주 탐색이다. 실제 JPL 태양계 위치와9개 궤도 안내선을 둘러보다 천체를 선택하면 자동으로 포커스하고, 같은 화면에서 ε Indi B/명왕성의 실제 SPHEREx 관측·품질·근거를 연다. 대상별 작업과 카메라/모형시각·궤도표시조건을 보존·새 세션 복원한다. 공개 지도31개와 고리4개·확장 태양계476개·외계행성6470개를 연결했다. 공개 서버·Planet X/TESS 실험·정밀 운동/광도 측정은 미완료다. 전체 최신 명세와 범위는 FSD에서 관리한다.
 
-현재 작업은 **DEV-011 / v0.8.0 개발·통합 검사 중**이다. 행성 3요건 창에 반지름·밀도 가정으로 질량을 추정하는 실험을 추가한다. 대상의 실측/문헌 질량과 공식 분류는 유지하고, 비교 위성의 밀도를 옮겨 쓴 가정 결과를 별도로 보여준다. 관측자·블랙홀 App/API 연결과 자료 동결을 마쳤으며, 모든 물리법칙이나 실제 이동 관측을 완성했다는 뜻은 아니다. 현재 전체Python483검사·Vitest70·타입/빌드와 Chrome13회귀 및 마지막 간격교정 후속2검사를 통과했다. 완결v0.8 ZIP 해제·실제서버재시작 검증은 대기 중이다.
+현재 작업은 **DEV-011 / v0.8.0 구현·Windows ZIP 검증 완료**이다. 행성 3요건 창에 반지름·밀도 가정으로 질량을 추정하는 실험을 추가한다. 대상의 실측/문헌 질량과 공식 분류는 유지하고, 비교 위성의 밀도를 옮겨 쓴 가정 결과를 별도로 보여준다. 관측자·블랙홀 App/API 연결과 자료 동결을 마쳤으며, 모든 물리법칙이나 실제 이동 관측을 완성했다는 뜻은 아니다. 현재 전체Python483검사·Vitest70·타입/빌드와 Chrome13회귀 및 마지막 간격교정 후속2검사를 통과했다. 완결v0.8 ZIP의 새폴더 해제·실제서버재시작 복원도 통과했다. [정확 검증 기록](docs/releases/v0.8.0.json)을 따른다.
 
 이전 **v0.7.0 소스 체크포인트**는 `bb386f38b4a5e971041befc9fe18c5a5be626858`까지 GitHub에 보존했다. 실제 NASA 확인 목록6470행성/4862모항성 방향, 외계행성 공개 관측3사진, 실제 역사5영상, 소천체 문헌 외관, 통합시간/상시설정,17천체3요건·궤도 그림을 제공한다. 후보/집단추론은 확인 행성 목록에 넣지 않으며 개별 발견 논문 전수 검증을 주장하지 않는다. 지구의 화면 이름과 장기모형 EMB 기준도 분리한다. 소스 저장은 공개서비스 배포나 완결 ZIP 전달과 별개다.
 
@@ -128,7 +128,7 @@ v0.8 질량 API는 `GET /api/v1/mass-scenarios`와 `POST /api/v1/mass-scenarios/
 
 물리읽기 API는 `GET /api/v1/black-holes`와 `GET /api/v1/observer-physics`이며자료실패/무결성오류는503이다. 동결 `black_holes.json`106,361B/SHA `4818701162f76fe3bc97383c1b0d2cd8d750b95466d15c95f046b229126cbbbd`, `observer_physics.json`271,921B/SHA `61ca1cf4d24dfe337adb905070328d525ac982d4857db335906a7dbac1bea105`와 `data/reference/relativity/facts/`가필수다. 고유53facts/sidecar는런타임,새37upstream원문/sidecar는로컬감사전용/ZIP제외이며기존16원문은재참조한다. EHT2JPEG103,617B/sidecar1,363B는public/dist의 `/observations/black-holes/`에포함한다. optional `observer_experiment`·2source해시·선택BH를검증복원하고import는품질화면을먼저열며실험창은닫고파라미터를보존한다. 원실제관측시각/결과·판단은불변이다.
 
-v0.8 현재검사: 질량순수39/API8·relativity36/관측자API27, 독립Decimal36·Vitest70(최신1.76초)·전체Python483(76.49초,기존Starlette경고1)/Ruff63을통과했다. 중간TyRAtsbd 질량5검사와DbNwNokf 관측자5PASS/1QA타이밍교정·직접시각겹침교정뒤 CNYGnNg7에서 관측자6+질량5+기존관측2의13/13 Chrome을142.460초에통과했다. 정본은 `var/qa/dev011-final-browser-results.json`이다. 새브라우저문맥에서 관측자 R=7.5Rs·β=.001·λ=600nm·M87/두물리SHA·카메라 및 실제S01/S02·29픽셀품질 복원을확인했다. 이후닫기/블랙홀버튼간격을교정한최종 `index-BfRDPmgL.js`/`index-DZOoVrJ5.css`의strict/Vite와전역/언어후속2/2 Chrome(9.647초), bounding 비겹침/직접사진검토를통과했다(`var/qa/dev011-observer-review.json`). 13회귀와마지막간격교정2검사는서로다른빌드의검사다. 정확v0.8 ZIP 해제·실제서버재시작·Linux/공개서버·사람/원어민검수는대기/미실행이다.
+v0.8 현재검사: 질량순수39/API8·relativity36/관측자API27, 독립Decimal36·Vitest70(최신1.76초)·전체Python483(76.49초,기존Starlette경고1)/Ruff63을통과했다. 중간TyRAtsbd 질량5검사와DbNwNokf 관측자5PASS/1QA타이밍교정·직접시각겹침교정뒤 CNYGnNg7에서 관측자6+질량5+기존관측2의13/13 Chrome을142.460초에통과했다. 정본은 `var/qa/dev011-final-browser-results.json`이다. 새브라우저문맥에서 관측자 R=7.5Rs·β=.001·λ=600nm·M87/두물리SHA·카메라 및 실제S01/S02·29픽셀품질 복원을확인했다. 이후닫기/블랙홀버튼간격을교정한최종 `index-BfRDPmgL.js`/`index-DZOoVrJ5.css`의strict/Vite와전역/언어후속2/2 Chrome(9.647초), bounding 비겹침/직접사진검토를통과했다(`var/qa/dev011-observer-review.json`). 13회귀와마지막간격교정2검사는서로다른빌드의검사다. 정확v0.8 ZIP 해제·실제서버재시작은 통과했고 Linux/공개서버·사람/원어민검수는 미실행이다.
 
 최종Data_Spec은1,791,636B/3061줄/SHA `e848ee7025f315a6cfa127f67b3120a2c7ef2f5bee2d3515e26bbd7a1c3aba33`다. 26정본manifest/2041전수항목(data1987+public53+helper1),정본참조1079/sidecar포함1084·내장원응답32·정적복제53을추적하고독립전체SHA/바이트·원102파일보존검사에불일치0을확인했다. 파일전수검사를모든물리모형의정확도/독립발견·사람검수/배포완료로확대하지않는다.
 
@@ -138,7 +138,7 @@ v0.8 현재검사: 질량순수39/API8·relativity36/관측자API27, 독립Decim
 
 Git에는 작은 코드·계약·출처 목록을 보관하고, 대형 관측 파일과 내부 실명/공지 원문은 로컬 또는 별도 자료 저장소에 보관한다. 공개 산출물은 NASA 로고·이용 조건·만18세 미만 식별 정보 검사를 적용한다.
 
-직전 검증된 서버 전달본은 `artifacts/NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip`이다. 481,789,033B/1807파일이며 source commit `bf1a09f5ebafc5fdd74abe82231e522b3eec9b95`, SHA256 `af2759fc30eb844dc5ba440f76580beb7b4ca2e92444c39235bfafc38bda0d28`이다. 18:25:16 KST에 정확한 최종 ZIP을 새폴더에 해제해 파일/health·대표API와 실제 서버재시작 뒤 εB/Pluto 근거복원을 통과했다. 필수6원본/보정·공개지도/5역사관측영상·기존카탈로그/장기계수·계층/이름·정적빌드·코드/lock·라이선스/실행복구안내를 포함한다. 최종 결과는 [검증 기록](docs/releases/v0.6.0.json)과 ZIP밖 동명 checksum/verification JSON을 따른다. 이 불변 ZIP은 이후 DEV-009/010/011 변경을 포함하지 않으며 v0.8.0 전달본은 별도 생성/실행검증 뒤 확정한다. Linux/공개서버는 미검증이다. 업로드→새디렉터리해제→[실행/복구 안내](deploy/README.md)로 시작→health·시간/역사·카탈로그·저장복원을 확인한다. 이전 완결ZIP은 보존한다.
+보존된 v0.6.0 서버 전달본은 `artifacts/NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip`이다. 481,789,033B/1807파일이며 source commit `bf1a09f5ebafc5fdd74abe82231e522b3eec9b95`, SHA256 `af2759fc30eb844dc5ba440f76580beb7b4ca2e92444c39235bfafc38bda0d28`이다. 18:25:16 KST에 정확한 최종 ZIP을 새폴더에 해제해 파일/health·대표API와 실제 서버재시작 뒤 εB/Pluto 근거복원을 통과했다. 필수6원본/보정·공개지도/5역사관측영상·기존카탈로그/장기계수·계층/이름·정적빌드·코드/lock·라이선스/실행복구안내를 포함한다. 최종 결과는 [검증 기록](docs/releases/v0.6.0.json)과 ZIP밖 동명 checksum/verification JSON을 따른다. 이 불변 ZIP은 이후 DEV-009/010/011 변경을 포함하지 않으며 v0.8.0 전달본은 아래 별도 확정 기록을 따른다. Linux/공개서버는 미검증이다. 업로드→새디렉터리해제→[실행/복구 안내](deploy/README.md)로 시작→health·시간/역사·카탈로그·저장복원을 확인한다. 이전 완결ZIP은 보존한다.
 
 ## 보존 이력: DEV-008 urgent travel checkpoint - 2026-11-14T15:54:38+09:00
 
@@ -153,3 +153,10 @@ Resume: read AGENTS,SKILLS,FSD,START_HERE,Data_Spec and this checkpoint; preserv
 
 
 최종 v0.6.0 ZIP 검증 확정: 481,789,033B/1807파일, source bf1a09f. 18:25:16KST에 정확한 최종 ZIP의 새폴더 해제·health·카탈로그/장기모형·실제서버 재시작 후 εB/Pluto 근거복원을 통과했다. [검증 기록](docs/releases/v0.6.0.json)은 검증 후 추가한 문서이며 불변 ZIP에는 들어 있지 않다. 공개서버/Linux 배포는 수행하지 않았다.
+
+
+### DEV-011 최종 완결 ZIP 확정 · 2026-11-14 20:24:20 KST
+
+`NASA_SPACE_APPS_CHALLENGE_v0.8.0_20261114_202331KST.zip`는 **484956608B/2095파일**, SHA256 **`1bb76a9158cf6d36c0c632b4d32cf0b7edd380a07e1f3031b8a6bdcbaa3253e3`**이다. source `45375fc52300c41211063160b1cf9f2dee45ef67`의 clean tree와 최종 BfRDPmgL/DZOoVrJ5 빌드로 생성했다. 추적 manifest/source sidecar 32개의 Git index와 동결 working bytes가 모두 일치함을 확인하고 origin/main의 정확 SHA도 대조했다.
+
+정확한 최종 ZIP을 새 폴더 `tmp/release-verify-y39fvc3n/extracted`에 풀어2094개 manifest 항목의 경로/대소문자/바이트/SHA와 금지 파일 제외를 확인했다. Windows에서 health·대표/신규 API·실제 지도/사진 원바이트·질량 가정·11BH/2EHT/2049표를 확인하고 실제 API/worker 재시작 뒤 같은 εB/Pluto result/evidence ID·세션/판단·새 가정을 복원했다. 검사시각 `2026-11-14T11:24:20.927409+00:00`, 재사용한 독립 runtime이며 새 의존성 설치·Linux·공개 서비스 검증은 아니다. 상세 정본은 [v0.8.0 검증 기록](./docs/releases/v0.8.0.json)과 ZIP 밖 동명 checksum/verification JSON이다. 이 사후 문서와 커밋은 이미 검증한 불변 ZIP에 추가하지 않는다. 이전 v0.6 ZIP/기존 원본/Git 이력도 보존한다.

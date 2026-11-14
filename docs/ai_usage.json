@@ -521,72 +521,13 @@
     "locale_keys": 261
   },
   "current_checkpoint": {
-    "version": "0.8.0",
     "work_id": "DEV-011",
-    "status": "source_data_inventory_full_python_and_browser_verified_exact_archive_pending",
-    "full_python": {
-      "passed": 483,
-      "seconds": 76.49,
-      "warnings": "one pre-existing Starlette/httpx deprecation warning"
-    },
-    "ruff": {
-      "files": 63,
-      "check": "passed",
-      "format": "passed"
-    },
-    "vitest": {
-      "passed": 70,
-      "seconds": 1.76
-    },
-    "strict_typecheck": "passed",
-    "production_build": {
-      "latest_identifier": "BfRDPmgL",
-      "status": "passed",
-      "prior_mass_browser_build": "TyRAtsbd",
-      "intermediate_observer_build": "DbNwNokf",
-      "latest_css_identifier": "DZOoVrJ5",
-      "integrated_regression_build": "CNYGnNg7"
-    },
-    "mass_browser": {
-      "unique_passed": 5,
-      "scope": "TyRAtsbd: first four passed, final scenario passed after null-omission test-expectation correction",
-      "report": "var/qa/dev011-mass-browser-review.json"
-    },
-    "intermediate_observer_browser": {
-      "build": "DbNwNokf",
-      "passed": 5,
-      "qa_assertion_failed": 1,
-      "test_condition": "source-ready timing corrected",
-      "direct_visual_issue": "main search/intro overlaid black-hole heading; App visibility corrected"
-    },
-    "final_browser": {
-      "build": "CNYGnNg7",
-      "passed": 13,
-      "scope": "observer6 + mass5 + original observation2",
-      "duration_ms": 142460.26,
-      "start_time": "2026-11-14T11:17:28.357Z",
-      "skipped": 0,
-      "unexpected": 0,
-      "flaky": 0,
-      "errors": 0,
-      "report": "var/qa/dev011-final-browser-results.json",
-      "fresh_context_restore": "R=7.5Rs, beta=.001, wavelength=600nm, selected M87, both physics source hashes, camera, actual S01/S02 and 29-pixel quality"
-    },
-    "release_zip": "pending exact archive extraction/runtime/server-restart verification",
-    "public_deployment": "not_performed",
-    "linux_container": "not_run",
-    "human_native_review": "not_performed",
-    "final_spacing_followup": {
-      "build": "BfRDPmgL",
-      "css": "DZOoVrJ5",
-      "passed": 2,
-      "scope": "global and locale regression after CSS top spacing 24px to 50px; close/black-hole button bounding non-overlap and direct screenshot inspection",
-      "duration_ms": 9647,
-      "start_time": "2026-11-14T11:20:48.806Z",
-      "report": "var/qa/dev011-observer-review.json",
-      "source_math_and_data_changed": false,
-      "scope_boundary": "The complete 13-case regression belongs to CNYGnNg7; the final CSS build received these two affected checks."
-    }
+    "version": "0.8.0",
+    "status": "windows_exact_archive_verified",
+    "release_record": "docs/releases/v0.8.0.json",
+    "public_service_deployed": false,
+    "linux_verified": false,
+    "human_native_review": false
   },
   "travel_checkpoint_v0_6": {
     "version": "0.6.0",
@@ -1053,7 +994,7 @@
     }
   },
   "dev011_observer_black_hole_extension": {
-    "status": "source frozen, App/API integrated, full and affected browser checks passed; exact archive verification pending",
+    "status": "source frozen; App/API, full and affected browser checks, Windows exact archive extraction and actual server restart/evidence restore passed",
     "science_module": "science/relativity.py",
     "algorithm_version": "bounded-observer-relativity-v1",
     "camera_interpretation": "Explicit opt-in hypothetical coordinate snapshot; not SPHEREx observer, measured velocity, physical travel path or light cone.",
@@ -1067,7 +1008,7 @@
     "new_source_provider_policy": "Exclude Chinese archive/service providers as requested; do not infer author nationality or certify unknown original contributions as non-Chinese.",
     "provider_paper_host_reference_original_observation_contribution_separate": true,
     "new_image_generation_service_or_ai_api_used": false,
-    "exact_sources_images_credits_and_final_browser_release_validation": "Sources and credits verified; CNYGnNg7 integrated Chrome13 passed in142.46026s and final BfRDPmgL CSS affected Chrome2 passed in9.647s. Exact ZIP extraction/runtime restart pending.",
+    "exact_sources_images_credits_and_final_browser_release_validation": "Sources/credits, CNYGnNg7 Chrome13 in142.46026s, BfRDPmgL CSS Chrome2 in9.647s, exact2095-file ZIP extraction and actual API/worker restart passed. See docs/releases/v0.8.0.json; no Linux/public/native-human verification.",
     "black_holes_manifest": {
       "path": "data/manifests/black_holes.json",
       "bytes": 106361,
@@ -1161,5 +1102,128 @@
     "observer_api_tests_passed": 27,
     "observer_api_seconds": 9.75,
     "frontend_camera_update_correction": "Removed extra App100ms throttle that could drop final camera end event; original UniverseScene150ms/end emit retained; no source/formula change."
+  },
+  "v0_8_final_archive_verification": {
+    "release": "0.8.0",
+    "release_source_commit": "45375fc52300c41211063160b1cf9f2dee45ef67",
+    "archive": {
+      "filename": "NASA_SPACE_APPS_CHALLENGE_v0.8.0_20261114_202331KST.zip",
+      "bytes": 484956608,
+      "sha256": "1bb76a9158cf6d36c0c632b4d32cf0b7edd380a07e1f3031b8a6bdcbaa3253e3",
+      "file_count": 2095
+    },
+    "verification": {
+      "checked_at": "2026-11-14T11:24:20.927409+00:00",
+      "status": "passed",
+      "archive": "NASA_SPACE_APPS_CHALLENGE_v0.8.0_20261114_202331KST.zip",
+      "extracted": "tmp/release-verify-y39fvc3n/extracted",
+      "manifest_files_verified": 2094,
+      "fresh_runtime_install": "reused previously verified isolated runtime",
+      "windows_runtime": {
+        "status": "passed",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "evidence_id": "ev_51a740205d7d40039c33b8f3c4d1255c",
+        "quality_pixels": [
+          29,
+          32
+        ],
+        "scene_object_count": 11,
+        "timeline_midpoint": "2026-11-14T12:00:00Z",
+        "timeline_validation_samples": 27,
+        "appearance_maps": 31,
+        "small_body_profiles": 8,
+        "planet_criteria_objects": 17,
+        "mass_scenario_analogues": 6,
+        "mass_hypothesis_kg": 1.0315679968452945e+21,
+        "black_holes": 11,
+        "actual_eht_images": 2,
+        "observer_inverse_table_rows": 2049,
+        "sedna_circular_reference_minimum_earth_mass": 1.4803626010357875,
+        "small_body_ring_centers": 3,
+        "solar_extension_objects": 476,
+        "exoplanets": 6470,
+        "published_planet_observations": 3,
+        "confirmed_extragalactic_planets": 0,
+        "excluded_literature_cases": 5,
+        "legacy_history_milestones": 10,
+        "history_morphology_examples": 6,
+        "simulation_model_bodies": 8,
+        "simulation_dates_tested": [
+          -2999,
+          0,
+          99,
+          2500,
+          3000
+        ],
+        "curated_hierarchy_objects": 24,
+        "milky_way_entries": 4871,
+        "trappist_planets": 7,
+        "observed_history_cases": 5,
+        "galaxies": 9,
+        "kuiper_range_au": [
+          30,
+          50
+        ],
+        "pluto_result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+        "pluto_evidence_id": "ev_52bb429c427d444486a63b7d843e0381"
+      },
+      "server_restart_evidence_restore": "passed: same epsilon/pluto evidence and result IDs",
+      "linux_container": "not_run",
+      "public_service": "not_deployed"
+    },
+    "build": {
+      "entry": "index-BfRDPmgL.js",
+      "css": "index-DZOoVrJ5.css",
+      "python": "3.12.3",
+      "node": "v22.17.0"
+    },
+    "validation": {
+      "python_full_passed": 483,
+      "python_seconds": 76.49,
+      "dependency_warnings": 1,
+      "vitest_passed": 70,
+      "vitest_seconds": 1.76,
+      "ruff_files": 63,
+      "chrome_core_passed": 13,
+      "chrome_core_seconds": 142.46026,
+      "chrome_core_build": "index-CNYGnNg7.js",
+      "chrome_final_css_followup_passed": 2,
+      "chrome_final_css_followup_seconds": 9.647273,
+      "all_thirteen_rerun_after_css_spacing_change": false
+    },
+    "data_spec": {
+      "bytes": 1791636,
+      "sha256": "e848ee7025f315a6cfa127f67b3120a2c7ef2f5bee2d3515e26bbd7a1c3aba33",
+      "canonical_manifests": 26,
+      "physical_files": 2041,
+      "original_files_preserved": 102,
+      "original_bytes_preserved": 987987584,
+      "static_source_replicas": 53,
+      "independent_integrity_mismatches": 0
+    },
+    "new_runtime_data": {
+      "mass_scenarios": {
+        "analogue_moons": 6,
+        "target_bodies": 6,
+        "fixed_source_comparisons": 36,
+        "conditional_qualifying_targets": 0
+      },
+      "black_holes": 11,
+      "adopted_black_hole_masses": 9,
+      "fixed_eht_observation_images": 2,
+      "source_redshift_rows": 14,
+      "adopted_redshifts": 10,
+      "redshift_nulls": 4,
+      "inverse_distance_rows": 2049
+    },
+    "limits": [
+      "Windows exact-archive verification using the previously verified isolated runtime; not a fresh dependency installation.",
+      "No Linux container or public service deployment; no native-language or teammate task study.",
+      "Observer positions are inverse-compressed spatial snapshots; no velocity or worldline inferred from mouse movement.",
+      "FLRW matter+Lambda, independently entered radial SR and static Schwarzschild factors are bounded explanatory models; no Kerr, accretion intensity, interior or all-physics reconstruction.",
+      "Source observations, original images, primary masses, IAU classifications and judgments remain separate from hypotheses.",
+      "NASA/IPAC aggregation is distinguished from unascertained original contributing institutions; no exhaustive origin guarantee."
+    ],
+    "post_verification_record_outside_immutable_archive": true
   }
 }

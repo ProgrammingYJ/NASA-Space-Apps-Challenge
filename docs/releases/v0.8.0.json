@@ -1,0 +1,123 @@
+{
+  "release": "0.8.0",
+  "release_source_commit": "45375fc52300c41211063160b1cf9f2dee45ef67",
+  "archive": {
+    "filename": "NASA_SPACE_APPS_CHALLENGE_v0.8.0_20261114_202331KST.zip",
+    "bytes": 484956608,
+    "sha256": "1bb76a9158cf6d36c0c632b4d32cf0b7edd380a07e1f3031b8a6bdcbaa3253e3",
+    "file_count": 2095
+  },
+  "verification": {
+    "checked_at": "2026-11-14T11:24:20.927409+00:00",
+    "status": "passed",
+    "archive": "NASA_SPACE_APPS_CHALLENGE_v0.8.0_20261114_202331KST.zip",
+    "extracted": "tmp/release-verify-y39fvc3n/extracted",
+    "manifest_files_verified": 2094,
+    "fresh_runtime_install": "reused previously verified isolated runtime",
+    "windows_runtime": {
+      "status": "passed",
+      "result_id": "cmp_d88083664b6fd27592eb68c1",
+      "evidence_id": "ev_51a740205d7d40039c33b8f3c4d1255c",
+      "quality_pixels": [
+        29,
+        32
+      ],
+      "scene_object_count": 11,
+      "timeline_midpoint": "2026-11-14T12:00:00Z",
+      "timeline_validation_samples": 27,
+      "appearance_maps": 31,
+      "small_body_profiles": 8,
+      "planet_criteria_objects": 17,
+      "mass_scenario_analogues": 6,
+      "mass_hypothesis_kg": 1.0315679968452945e+21,
+      "black_holes": 11,
+      "actual_eht_images": 2,
+      "observer_inverse_table_rows": 2049,
+      "sedna_circular_reference_minimum_earth_mass": 1.4803626010357875,
+      "small_body_ring_centers": 3,
+      "solar_extension_objects": 476,
+      "exoplanets": 6470,
+      "published_planet_observations": 3,
+      "confirmed_extragalactic_planets": 0,
+      "excluded_literature_cases": 5,
+      "legacy_history_milestones": 10,
+      "history_morphology_examples": 6,
+      "simulation_model_bodies": 8,
+      "simulation_dates_tested": [
+        -2999,
+        0,
+        99,
+        2500,
+        3000
+      ],
+      "curated_hierarchy_objects": 24,
+      "milky_way_entries": 4871,
+      "trappist_planets": 7,
+      "observed_history_cases": 5,
+      "galaxies": 9,
+      "kuiper_range_au": [
+        30,
+        50
+      ],
+      "pluto_result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+      "pluto_evidence_id": "ev_52bb429c427d444486a63b7d843e0381"
+    },
+    "server_restart_evidence_restore": "passed: same epsilon/pluto evidence and result IDs",
+    "linux_container": "not_run",
+    "public_service": "not_deployed"
+  },
+  "build": {
+    "entry": "index-BfRDPmgL.js",
+    "css": "index-DZOoVrJ5.css",
+    "python": "3.12.3",
+    "node": "v22.17.0"
+  },
+  "validation": {
+    "python_full_passed": 483,
+    "python_seconds": 76.49,
+    "dependency_warnings": 1,
+    "vitest_passed": 70,
+    "vitest_seconds": 1.76,
+    "ruff_files": 63,
+    "chrome_core_passed": 13,
+    "chrome_core_seconds": 142.46026,
+    "chrome_core_build": "index-CNYGnNg7.js",
+    "chrome_final_css_followup_passed": 2,
+    "chrome_final_css_followup_seconds": 9.647273,
+    "all_thirteen_rerun_after_css_spacing_change": false
+  },
+  "data_spec": {
+    "bytes": 1791636,
+    "sha256": "e848ee7025f315a6cfa127f67b3120a2c7ef2f5bee2d3515e26bbd7a1c3aba33",
+    "canonical_manifests": 26,
+    "physical_files": 2041,
+    "original_files_preserved": 102,
+    "original_bytes_preserved": 987987584,
+    "static_source_replicas": 53,
+    "independent_integrity_mismatches": 0
+  },
+  "new_runtime_data": {
+    "mass_scenarios": {
+      "analogue_moons": 6,
+      "target_bodies": 6,
+      "fixed_source_comparisons": 36,
+      "conditional_qualifying_targets": 0
+    },
+    "black_holes": 11,
+    "adopted_black_hole_masses": 9,
+    "fixed_eht_observation_images": 2,
+    "source_redshift_rows": 14,
+    "adopted_redshifts": 10,
+    "redshift_nulls": 4,
+    "inverse_distance_rows": 2049
+  },
+  "limits": [
+    "Windows exact-archive verification using the previously verified isolated runtime; not a fresh dependency installation.",
+    "No Linux container or public service deployment; no native-language or teammate task study.",
+    "Observer positions are inverse-compressed spatial snapshots; no velocity or worldline inferred from mouse movement.",
+    "FLRW matter+Lambda, independently entered radial SR and static Schwarzschild factors are bounded explanatory models; no Kerr, accretion intensity, interior or all-physics reconstruction.",
+    "Source observations, original images, primary masses, IAU classifications and judgments remain separate from hypotheses.",
+    "NASA/IPAC aggregation is distinguished from unascertained original contributing institutions; no exhaustive origin guarantee."
+  ],
+  "post_verification_record_outside_immutable_archive": true
+}
