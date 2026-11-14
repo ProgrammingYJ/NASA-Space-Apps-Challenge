@@ -10,7 +10,7 @@ from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
@@ -36,6 +36,65 @@ LEGACY = {
 }
 
 
+def migrate_solar_session(session, appearance_hash=None, compatible_references=None):
+    """Retain typed legacy input fields only for explicit partial restoration."""
+    active = session.model_copy(deep=True)
+    omitted = []
+    groups = {
+        "galaxies": ["galaxy_manifest_sha256", "show_galaxies"],
+        "observer_physics": [
+            "observer_physics_manifest_sha256",
+            "observer_experiment",
+            "observer_panel_open",
+        ],
+        "black_holes": ["black_holes_manifest_sha256", "selected_black_hole_id"],
+    }
+    if active.universe_context:
+        changes = {}
+        for feature, keys in groups.items():
+            paths = [
+                "universe_context." + key
+                for key in keys
+                if getattr(active.universe_context, key) not in (None, False)
+            ]
+            changes.update({key: False if key == "show_galaxies" else None for key in keys})
+            if paths:
+                omitted.append(
+                    {
+                        "feature": feature,
+                        "paths": paths,
+                        "reason": "feature_removed_from_1000au_scope",
+                    }
+                )
+        if (
+            appearance_hash
+            and active.universe_context.appearance_manifest_sha256
+            and active.universe_context.appearance_manifest_sha256 != appearance_hash
+        ):
+            changes["appearance_manifest_sha256"] = None
+            omitted.append({
+                "feature": "appearance",
+                "paths": ["universe_context.appearance_manifest_sha256"],
+                "reason": "visual_sources_updated_observation_preserved",
+            })
+        for item in compatible_references or []:
+            field = item["field"]
+            if field in {"small_body_appearance_manifest_sha256", "mass_scenarios_manifest_sha256"} and getattr(active.universe_context, field) == item["from_sha256"]:
+                changes[field] = item["to_sha256"]
+                omitted.append({
+                    "feature": field.removesuffix("_manifest_sha256"),
+                    "paths": ["universe_context." + field],
+                    "reason": "display_dependency_refreshed_scientific_values_identical",
+                })
+        active.universe_context = active.universe_context.model_copy(update=changes)
+    value = active.model_dump(exclude_none=True)
+    if value.get("universe_context"):
+        for keys in groups.values():
+            for key in keys:
+                value["universe_context"].pop(key, None)
+    return active, value, omitted
+
+
 def create_app(state_dir: Path | None = None):
     @asynccontextmanager
     async def lifespan(app):
@@ -45,11 +104,16 @@ def create_app(state_dir: Path | None = None):
         yield
         app.state.service.close()
 
-    app = FastAPI(title="Planet X · SPHEREx", version="0.11.0", lifespan=lifespan)
+    app = FastAPI(title="Planet X · SPHEREx", version="0.13.0", lifespan=lifespan)
 
     @app.middleware("http")
     async def bounds(request, call_next):
         request.state.request_id = uuid.uuid4().hex
+        if re.match(
+            r"^/api/v1/(?:black-holes|observer-physics|cosmic-history|cosmic-observations|physics|catalog/(?:galaxies|galaxy-atlas|exoplanets|exoplanet-observations|extragalactic-planets|universe|comets))(?:/|$)",
+            request.url.path,
+        ):
+            return error(request, 410, "outside_1000au_scope")
         if request.method == "POST":
             if int(request.headers.get("content-length", "0")) > 8_000_000:
                 return error(request, 413, "request_too_large")
@@ -178,45 +242,6 @@ def create_app(state_dir: Path | None = None):
         return get_timeline(ROOT)
 
     @lru_cache(maxsize=1)
-    def exoplanet_catalog():
-        from science.exoplanets import load_catalog
-
-        try:
-            return load_catalog(ROOT)
-        except FileNotFoundError:
-            raise HTTPException(503, "catalog_unavailable") from None
-
-    @app.get("/api/v1/catalog/exoplanets")
-    def exoplanets():
-        from science.exoplanets import index
-
-        return index(exoplanet_catalog())
-
-    @app.get("/api/v1/catalog/exoplanets/{object_id}")
-    def exoplanet(object_id: str):
-        from science.exoplanets import planet
-
-        value = planet(exoplanet_catalog(), object_id)
-        if value is None:
-            raise HTTPException(404, "object_not_found")
-        return value
-
-    @app.get("/api/v1/catalog/exoplanet-observations")
-    def exoplanet_observations(object_id: str | None = None):
-        from science.exoplanet_observations import get_exoplanet_observations
-
-        try:
-            return get_exoplanet_observations(ROOT, object_id=object_id)
-        except FileNotFoundError:
-            raise HTTPException(503, "planet_observation_unavailable") from None
-        except ValueError as error:
-            if str(error) == "invalid_exoplanet_observation_object_id":
-                raise HTTPException(422, "unsupported_catalog_selection") from None
-            if str(error) == "unknown_exoplanet_observation_object_id":
-                raise HTTPException(404, "object_not_found") from None
-            raise HTTPException(503, "planet_observation_unavailable") from None
-
-    @lru_cache(maxsize=1)
     def extended_catalog():
         from science.extended_solar import get_extended_solar
 
@@ -242,65 +267,6 @@ def create_app(state_dir: Path | None = None):
             ).hexdigest(),
             "display_algorithm_version": "extended-solar-parent-hermite-v1",
         }
-
-    @app.get("/api/v1/catalog/comets")
-    def historical_comets():
-        from science.comets import get_comets
-
-        try:
-            return get_comets(ROOT)
-        except (FileNotFoundError, ValueError):
-            raise HTTPException(503, "comet_source_unavailable") from None
-
-    @app.get("/api/v1/physics/numerical-relativity")
-    def numerical_relativity():
-        from science.numerical_relativity import get_numerical_relativity
-
-        try:
-            return get_numerical_relativity(ROOT)
-        except (FileNotFoundError, ValueError):
-            raise HTTPException(503, "numerical_relativity_source_unavailable") from None
-
-    @app.get("/api/v1/catalog/galaxy-atlas")
-    def galaxy_atlas(query: str = "", cursor: str | None = None, limit: int = 50):
-        from science.galaxy_atlas import get_galaxy_atlas
-
-        try:
-            return get_galaxy_atlas(ROOT, query=query, cursor=cursor, limit=limit)
-        except ValueError as exc:
-            if (
-                str(exc).startswith("galaxy_atlas_invalid_")
-                or str(exc) == "galaxy_atlas_cursor_out_of_range"
-            ):
-                raise HTTPException(422, "invalid_galaxy_atlas_selection") from None
-            raise HTTPException(503, "galaxy_atlas_source_unavailable") from None
-        except FileNotFoundError:
-            raise HTTPException(503, "galaxy_atlas_source_unavailable") from None
-
-    @app.get("/api/v1/catalog/galaxy-atlas/markers")
-    def galaxy_atlas_markers():
-        from science.galaxy_atlas import get_galaxy_atlas_markers
-
-        try:
-            return get_galaxy_atlas_markers(ROOT)
-        except (FileNotFoundError, ValueError):
-            raise HTTPException(503, "galaxy_atlas_source_unavailable") from None
-
-    @app.get("/api/v1/catalog/galaxy-atlas/{object_id}")
-    def galaxy_atlas_object(object_id: str):
-        from science.galaxy_atlas import get_galaxy_atlas_object
-
-        try:
-            value = get_galaxy_atlas_object(ROOT, object_id)
-        except ValueError as exc:
-            if str(exc) == "galaxy_atlas_invalid_object_id":
-                raise HTTPException(422, "invalid_galaxy_atlas_selection") from None
-            raise HTTPException(503, "galaxy_atlas_source_unavailable") from None
-        except FileNotFoundError:
-            raise HTTPException(503, "galaxy_atlas_source_unavailable") from None
-        if value is None:
-            raise HTTPException(404, "object_not_found")
-        return value
 
     @app.get("/api/v1/catalog/solar-system")
     def extended_solar(parent_id: str | None = None):
@@ -402,58 +368,6 @@ def create_app(state_dir: Path | None = None):
             "source_manifest_sha256": source["source_manifest_sha256"],
         }
 
-    @app.get("/api/v1/black-holes")
-    def black_holes():
-        from science.relativity import get_black_holes
-
-        try:
-            return get_black_holes(ROOT)
-        except (ValueError, FileNotFoundError):
-            raise HTTPException(503, "black_hole_source_unavailable") from None
-
-    @app.get("/api/v1/observer-physics")
-    def observer_physics():
-        from science.relativity import get_observer_physics
-
-        try:
-            return get_observer_physics(ROOT)
-        except (ValueError, FileNotFoundError):
-            raise HTTPException(503, "observer_physics_source_unavailable") from None
-
-    @app.get("/api/v1/cosmic-history")
-    def cosmic_history():
-        from science.history import get_cosmic_history
-        from science.history_morphology import get_history_morphology
-
-        try:
-            return {
-                **get_cosmic_history(ROOT),
-                "morphology_reference": get_history_morphology(ROOT),
-            }
-        except (FileNotFoundError, ValueError):
-            raise HTTPException(503, "history_source_unavailable") from None
-
-    @app.get("/api/v1/cosmic-history/sample")
-    def cosmic_history_sample(age_gyr: float = Query(0, ge=0, le=13.8, allow_inf_nan=False)):
-        from science.history import sample_history
-
-        return sample_history(ROOT, age_gyr)
-
-    @app.get("/api/v1/cosmic-observations")
-    def cosmic_observations():
-        from science.history_observations import get_cosmic_observations
-
-        try:
-            return get_cosmic_observations(ROOT)
-        except (FileNotFoundError, ValueError):
-            raise HTTPException(503, "history_observation_unavailable") from None
-
-    @app.get("/api/v1/catalog/galaxies")
-    def galaxies():
-        from science.galaxies import get_galaxies
-
-        return get_galaxies(ROOT)
-
     @app.get("/api/v1/kuiper-belt")
     def kuiper_belt():
         from science.kuiper import get_kuiper_display
@@ -485,36 +399,6 @@ def create_app(state_dir: Path | None = None):
             }:
                 raise HTTPException(422, "unsupported_simulation_date") from None
             raise HTTPException(503, "simulation_source_unavailable") from None
-
-    @app.get("/api/v1/catalog/universe")
-    def universe_catalog(galaxy_id: str | None = None, parent_id: str | None = None):
-        from science.universe_catalog import get_universe_catalog
-
-        try:
-            return get_universe_catalog(ROOT, galaxy_id=galaxy_id, parent_id=parent_id)
-        except FileNotFoundError:
-            raise HTTPException(503, "universe_catalog_unavailable") from None
-        except ValueError as exc:
-            if str(exc) in {
-                "unknown_universe_galaxy",
-                "unknown_universe_parent",
-                "universe_parent_galaxy_mismatch",
-            }:
-                raise HTTPException(422, "unsupported_catalog_selection") from None
-            raise HTTPException(503, "universe_catalog_unavailable") from None
-
-    @app.get("/api/v1/catalog/extragalactic-planets")
-    def extragalactic_planets(galaxy_id: str | None = None):
-        from science.extragalactic_planets import get_extragalactic_planets
-
-        try:
-            return get_extragalactic_planets(ROOT, galaxy_id=galaxy_id)
-        except FileNotFoundError:
-            raise HTTPException(503, "planet_review_unavailable") from None
-        except ValueError as exc:
-            if str(exc) == "unknown_extragalactic_galaxy":
-                raise HTTPException(422, "unsupported_catalog_selection") from None
-            raise HTTPException(503, "planet_review_unavailable") from None
 
     def context_reasons(session):
         context = session.universe_context
@@ -552,13 +436,6 @@ def create_app(state_dir: Path | None = None):
             ):
                 return ["orbit_ephemeris_changed"]
         for expected, filename, reason in (
-            (context.galaxy_manifest_sha256, "galaxies.json", "galaxy_sources_changed"),
-            (
-                context.observer_physics_manifest_sha256,
-                "observer_physics.json",
-                "observer_physics_sources_changed",
-            ),
-            (context.black_holes_manifest_sha256, "black_holes.json", "black_hole_sources_changed"),
             (
                 context.mass_scenarios_manifest_sha256,
                 "mass_scenarios.json",
@@ -608,13 +485,6 @@ def create_app(state_dir: Path | None = None):
                     reader()
                 except (ValueError, FileNotFoundError, HTTPException):
                     return [reason]
-        if context.galaxy_manifest_sha256:
-            from science.galaxies import get_galaxies
-
-            try:
-                get_galaxies(ROOT)
-            except (ValueError, FileNotFoundError):
-                return ["galaxy_data_unavailable"]
         if context.small_body_appearance_manifest_sha256:
             from science.small_body_appearance import get_small_body_appearance
 
@@ -636,21 +506,6 @@ def create_app(state_dir: Path | None = None):
                     evaluate_mass_scenario(context.mass_scenario, source)
             except (ValueError, FileNotFoundError, HTTPException):
                 return ["mass_scenario_data_unavailable"]
-        if context.observer_physics_manifest_sha256 or context.black_holes_manifest_sha256:
-            from science.relativity import get_black_holes, get_observer_physics
-
-            try:
-                if context.observer_physics_manifest_sha256:
-                    get_observer_physics(ROOT)
-                if context.black_holes_manifest_sha256:
-                    catalogue = get_black_holes(ROOT)
-                    if (
-                        context.selected_black_hole_id
-                        and context.selected_black_hole_id not in catalogue["objects"]
-                    ):
-                        return ["unsupported_black_hole_selection"]
-            except (ValueError, FileNotFoundError):
-                return ["observer_physics_data_unavailable"]
         if context.simulation_context:
             from science.long_term_model import get_long_term_model
 
@@ -694,21 +549,13 @@ def create_app(state_dir: Path | None = None):
                 "next_cursor": None,
             }
         if object_id not in LEGACY:
-            if object_id in {
-                "sun",
-                "mercury",
-                "venus",
-                "earth",
-                "mars",
-                "jupiter",
-                "saturn",
-                "uranus",
-                "neptune",
-            }:
+            if any(obj["object_id"] == object_id for obj in universe()["objects"]) or any(
+                obj["object_id"] == object_id for obj in extended_catalog()["objects"]
+            ):
                 return {
                     "object_id": object_id,
                     "observations": [],
-                    "status": "not_selected_for_comparison",
+                    "status": "no_linked_observations",
                     "next_cursor": None,
                 }
             raise HTTPException(404, "object_not_found")
@@ -755,7 +602,10 @@ def create_app(state_dir: Path | None = None):
 
     @app.post("/api/v1/evidence", status_code=201)
     def save(body: EvidenceRequest, request: Request):
-        if context_reasons(body.session):
+        active, session_value, omitted = migrate_solar_session(body.session)
+        if omitted:
+            raise HTTPException(422, "removed_context_requires_import")
+        if context_reasons(active):
             raise HTTPException(422, "invalid_universe_context")
         result = get_result(request, body.result_id)
         if [f["observation_id"] for f in result["frames"]] != body.session.observation_ids:
@@ -775,6 +625,7 @@ def create_app(state_dir: Path | None = None):
             ai_assistance="Code assisted by Codex; observations are original SPHEREx data.",
         )
         value = evidence.model_dump(exclude_none=True)
+        value["session"] = session_value
         with svc.guard:
             atomic_json(svc.state / "evidence" / f"{evidence.evidence_id}.json", value)
         return value
@@ -855,11 +706,42 @@ def create_app(state_dir: Path | None = None):
         ] != body.session.observation_ids:
             raise HTTPException(409, "selection_mismatch")
         reasons.extend(service(request).verify_inputs(result))
-        reasons.extend(context_reasons(body.session))
+        appearance_path = ROOT / "data/manifests/appearance.json"
+        appearance_hash = None
+        if appearance_path.is_file():
+            try:
+                from science.appearance import get_appearance
+
+                get_appearance(ROOT)
+                appearance_hash = hashlib.sha256(appearance_path.read_bytes()).hexdigest()
+            except (ValueError, FileNotFoundError):
+                pass
+        compatible_references = []
+        if body.session.universe_context:
+            from science.display_compatibility import resolve_display_compatibility
+
+            for field, name in [("small_body_appearance_manifest_sha256", "small_body_appearance.json"), ("mass_scenarios_manifest_sha256", "mass_scenarios.json")]:
+                previous_hash = getattr(body.session.universe_context, field)
+                current_path = ROOT / "data/manifests" / name
+                current_hash = hashlib.sha256(current_path.read_bytes()).hexdigest() if current_path.is_file() else None
+                if previous_hash and current_hash and previous_hash != current_hash:
+                    verified = resolve_display_compatibility(ROOT, field, previous_hash, current_hash)
+                    if verified:
+                        compatible_references.append(verified)
+        active, session_value, omitted = migrate_solar_session(body.session, appearance_hash, compatible_references)
+        reasons.extend(context_reasons(active))
         return {
-            "status": "recalculation_required" if reasons else "restored",
+            "response_schema_version": "1.1",
+            "status": "recalculation_required"
+            if reasons
+            else "partially_restored"
+            if omitted
+            else "restored",
+            "restoration_scope": "observation_and_solar_system",
+            "migration_policy": "solar-scope-context-v1",
+            "omitted_contexts": omitted,
             "reasons": sorted(set(reasons)),
-            "session": body.session.model_dump(exclude_none=True),
+            "session": session_value,
             "comparison": None if reasons else result,
             "judgment": body.judgment,
             "evidence_id": body.evidence_id,
@@ -870,12 +752,8 @@ def create_app(state_dir: Path | None = None):
         app.mount("/assets", StaticFiles(directory=static / "assets"), name="assets")
         if (static / "textures").is_dir():
             app.mount("/textures", StaticFiles(directory=static / "textures"), name="textures")
-        if (static / "observations").is_dir():
-            app.mount(
-                "/observations",
-                StaticFiles(directory=static / "observations"),
-                name="observation-images",
-            )
+        if (static / "brand").is_dir():
+            app.mount("/brand", StaticFiles(directory=static / "brand"), name="brand")
 
         @app.get("/")
         def index():

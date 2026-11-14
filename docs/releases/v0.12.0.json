@@ -1,0 +1,283 @@
+{
+  "release": "0.12.0",
+  "verified_at_utc": "2026-11-14T19:06:36.152894+00:00",
+  "archive": "NASA_SPACE_APPS_CHALLENGE_v0.12.0_20261115_034911KST.zip",
+  "archive_bytes": 489039770,
+  "archive_sha256": "c251031cc7df5526b038425ba6d672d96cbbe01e0123b2df55c09fc5332ed067",
+  "archive_files": 1540,
+  "manifest_files_verified": 1539,
+  "base_commit": "457d8a327e5c173fa3b85a3031a32eb3be9bb4ca",
+  "working_tree_has_uncommitted_changes": true,
+  "archive_immutable_after_verification": true,
+  "runtime_manifest_sha256": "53e05dcf241974c4840536492522b49bca6fbb00eafd415b62467080d9a9849c",
+  "data": {
+    "generated_json": 39,
+    "source_records": 1252,
+    "required_sources": 1165,
+    "optional_present_in_archive": 20,
+    "optional_local_only_not_deployed": 67,
+    "tno_catalogued": 8341,
+    "tno_valid_elements": 8340,
+    "p9_literature_draws": 100000,
+    "p9_default_filtered_draws": 20406
+  },
+  "checks": {
+    "node_tests": 58,
+    "python_tests": 361,
+    "vitest": 61,
+    "ruff": "passed",
+    "typescript_vite": "passed; known large-bundle warning",
+    "final_local_chrome": {
+      "affected": 6,
+      "retained_core": 5
+    },
+    "exact_zip_windows": "passed Node24.22.3 only; actual process restart and evidence restore",
+    "exact_zip_ubuntu_wsl": "passed Ubuntu24.04.2 ext4 Node24.22.3 only; actual SIGTERM restart and evidence restore"
+  },
+  "exact_reports": {
+    "windows": "NASA_SPACE_APPS_CHALLENGE_v0.12.0_20261115_034911KST.verification.json",
+    "linux": "NASA_SPACE_APPS_CHALLENGE_v0.12.0_20261115_034911KST.linux.verification.json",
+    "linux_copy_proof": "NASA_SPACE_APPS_CHALLENGE_v0.12.0_20261115_034911KST.linux.integrity.json"
+  },
+  "ec2": {
+    "public_url": "https://nasaspaceappschallenge.marulee.dev/",
+    "ipv4": "3.37.17.247",
+    "region": "ap-northeast-2",
+    "os": "Ubuntu24.04.5LTS amd64",
+    "vcpus": 4,
+    "memory_mib": 15701,
+    "root_volume_gib": 50,
+    "node": "24.22.3",
+    "nginx": "1.24.0",
+    "runtime_entry": "/srv/planet-x/current/app.js",
+    "physical_release": "/srv/planet-x/releases/NASA_SPACE_APPS_CHALLENGE_v0.12.0_20261115_034911KST",
+    "service": "planet-x",
+    "state": "/srv/planet-x/shared/node",
+    "node_listen": "127.0.0.1:3002",
+    "nginx_public": "80/443",
+    "automatic_start": true,
+    "archive_sha_verified_before_extract": true,
+    "full_file_manifest_verified_as_service_user": true,
+    "http_real_observation_p9_smoke": {
+      "status": "passed",
+      "scope": "solar_system_1000au",
+      "surface_maps": 31,
+      "evidence_id": "ev_e764a2eb3a294ca890b39ce8be85dc5d",
+      "result_id": "cmp_d88083664b6fd27592eb68c1",
+      "pluto_evidence_id": "ev_4872494bb4c649e3af2ad8d43b0bf4f8",
+      "pluto_result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+      "p9_evidence_id": "p9ev_5453e41e76da4a9786e2aff1503d2134",
+      "p9_source_sha256": "050b68182ecbf7fd76f280d8cc43c0683d207499aba1488a68092b834420a422"
+    },
+    "actual_systemd_restart": {
+      "checked_at_utc": "2026-11-14T19:00:56.327669+00:00",
+      "status": "passed",
+      "host": "AWS EC2 Ubuntu24.04.5LTS",
+      "process_pid_before": 2871,
+      "process_pid_after": 3077,
+      "operation": "systemctl restart planet-x",
+      "health": {
+        "runtime": "node",
+        "science_mode": "verified_build_cache_and_ported_display_models",
+        "source_bundle_verified": true,
+        "status": "ready",
+        "storage_writable": true,
+        "worker_alive": true
+      },
+      "records": [
+        {
+          "id": "ev_e764a2eb3a294ca890b39ce8be85dc5d",
+          "route": "/api/v1/evidence/ev_e764a2eb3a294ca890b39ce8be85dc5d/export",
+          "file": "var/qa/dev018/ec2-restart/evidence_id-before.json",
+          "bytes": 870988,
+          "sha256": "ca26330aab98a9d26cd7b3c440445ef1068b375b75ca2ca784e3c1ec03d57746",
+          "same_export_bytes_after_restart": true,
+          "import_status": "restored"
+        },
+        {
+          "id": "ev_4872494bb4c649e3af2ad8d43b0bf4f8",
+          "route": "/api/v1/evidence/ev_4872494bb4c649e3af2ad8d43b0bf4f8/export",
+          "file": "var/qa/dev018/ec2-restart/pluto_evidence_id-before.json",
+          "bytes": 906270,
+          "sha256": "659e6ecf9de6c5572127f5b8d9c68cb2c74f98a76b17c08e35a49def46239e07",
+          "same_export_bytes_after_restart": true,
+          "import_status": "restored"
+        },
+        {
+          "id": "p9ev_5453e41e76da4a9786e2aff1503d2134",
+          "route": "/api/v1/planet-nine/evidence/p9ev_5453e41e76da4a9786e2aff1503d2134/export",
+          "file": "var/qa/dev018/ec2-restart/p9_evidence_id-before.json",
+          "bytes": 32807,
+          "sha256": "46f6398b6f28e868326d3d16f56b03bff6553b8b37311439dcc6b28c9d5f1dfb",
+          "same_export_bytes_after_restart": true,
+          "import_status": "restored"
+        }
+      ],
+      "persistent_state": "/srv/planet-x/shared/node",
+      "source_archive_sha256": "c251031cc7df5526b038425ba6d672d96cbbe01e0123b2df55c09fc5332ed067"
+    },
+    "https": {
+      "checked_at_utc": "2026-11-14T19:02:14.325690+00:00",
+      "status": "passed",
+      "base_url": "https://nasaspaceappschallenge.marulee.dev",
+      "dns_ipv4": "3.37.17.247",
+      "tls_version": "TLSv1.3",
+      "certificate_subject": [
+        [
+          [
+            "commonName",
+            "nasaspaceappschallenge.marulee.dev"
+          ]
+        ]
+      ],
+      "certificate_issuer": [
+        [
+          [
+            "countryName",
+            "US"
+          ]
+        ],
+        [
+          [
+            "organizationName",
+            "Let's Encrypt"
+          ]
+        ],
+        [
+          [
+            "commonName",
+            "YE1"
+          ]
+        ]
+      ],
+      "not_after": "Feb 12 18:02:40 2027 GMT",
+      "subject_alt_names": [
+        [
+          "DNS",
+          "nasaspaceappschallenge.marulee.dev"
+        ]
+      ],
+      "certificate_verification": "default trusted CA and hostname validation; no bypass",
+      "http_redirect": "https://nasaspaceappschallenge.marulee.dev/health/ready",
+      "checks": [
+        {
+          "path": "/",
+          "status": 200,
+          "url": "https://nasaspaceappschallenge.marulee.dev/",
+          "bytes": 424
+        },
+        {
+          "path": "/health/ready",
+          "status": 200,
+          "url": "https://nasaspaceappschallenge.marulee.dev/health/ready",
+          "bytes": 173
+        },
+        {
+          "path": "/api/v1/runtime",
+          "status": 200,
+          "url": "https://nasaspaceappschallenge.marulee.dev/api/v1/runtime",
+          "bytes": 1796
+        }
+      ]
+    },
+    "default_chrome_https": {
+      "base_url": "https://nasaspaceappschallenge.marulee.dev/",
+      "started_utc": "2026-11-14T19:02:41.831Z",
+      "environment": "public_EC2_HTTPS_final_domain_default_Chrome_TLS",
+      "flows": [
+        {
+          "id": "public_assets_settings_tno",
+          "status": "passed",
+          "logo": {
+            "complete": true,
+            "width": 1024,
+            "height": 1024,
+            "url": "https://nasaspaceappschallenge.marulee.dev/brand/planet-x-logo.png"
+          },
+          "counts": "Catalogue 8341 · Positions in range 8340 · Unavailable 1 · Beyond 1000 au 0"
+        },
+        {
+          "id": "actual_epsilon_save_export_fresh_context_restore",
+          "status": "passed",
+          "comparison_id": "cmp_d88083664b6fd27592eb68c1",
+          "evidence_id": "ev_7035e0f65d53454e9031f69fccc284bc",
+          "quality_pixels": [
+            29,
+            32
+          ],
+          "export_bytes": 871572
+        },
+        {
+          "id": "conditional_region_hypothesis_gravity_save_fresh_restore",
+          "status": "passed",
+          "row_index": 2413,
+          "evidence_id": "p9ev_d72b1d0cc45d48d1992082dd3318b474",
+          "region_context": {
+            "cell_id": 3682,
+            "max_reference_distance_au": 1000,
+            "row_index": 2413,
+            "subset": "ztf_des_ps1"
+          },
+          "force_sources": 9,
+          "export_bytes": 107339
+        }
+      ],
+      "page_errors": [],
+      "http_errors": [],
+      "request_failures": [],
+      "expected_cancellations": [
+        {
+          "url": "https://nasaspaceappschallenge.marulee.dev/api/v1/catalog/outer-tno/object?object_id=sbdb-20015760&jd_tdb=2461358.5",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://nasaspaceappschallenge.marulee.dev/api/v1/catalog/outer-tno/object?object_id=sbdb-20015760&jd_tdb=2461358.5",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://nasaspaceappschallenge.marulee.dev/api/v1/catalog/outer-tno/object?object_id=sbdb-20015760&jd_tdb=2461358.500800726",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://nasaspaceappschallenge.marulee.dev/api/v1/catalog/outer-tno/object?object_id=sbdb-20015760&jd_tdb=2461358.5",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "browser": "157.0.8103.52",
+      "security": {
+        "issuer": "YE1",
+        "protocol": "TLS 1.3",
+        "subjectName": "nasaspaceappschallenge.marulee.dev",
+        "validFrom": 1794679361,
+        "validTo": 1802455360
+      },
+      "server_address": {
+        "ipAddress": "3.37.17.247",
+        "port": 443
+      },
+      "origin": {
+        "origin": "https://nasaspaceappschallenge.marulee.dev",
+        "secure_context": true,
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36"
+      },
+      "status": "passed",
+      "completed_utc": "2026-11-14T19:02:57.511Z"
+    },
+    "certificate_renewal_dry_run": "passed 2026-11-14T19:04:41Z; certbot.timer enabled",
+    "elastic_ip_allocation": "not independently verified in AWS account",
+    "rollback_drill": "not performed; first EC2 release has no previous EC2 release. Stop/compatible shared-state backup/previous verified source instructions remain documented."
+  },
+  "scientific_limits": [
+    "Not a complete inventory of unknown bodies or all matter inside1000AU",
+    "No full mutually integrated N-body/all-physics claim",
+    "P9 rankings are conditional literature source-epoch cells, not existence or detection probabilities",
+    "MOST overlap is not detection or measured image motion",
+    "Actual image motion/precision photometry remain unverified"
+  ],
+  "handoff_notes": [
+    "This post-deployment record is outside the immutable ZIP and does not change verified bytes.",
+    "Server certificate keys, SSH private key, global MCP configuration and persistent user state are excluded from ZIP/Git.",
+    "Python is an OS/Certbot administration tool on EC2; the application and observation cache runtime are Node only.",
+    "Do not re-run the one-time HTTP bootstrap over the Certbot-modified nginx config; activate new complete releases and preserve HTTPS/shared state."
+  ]
+}

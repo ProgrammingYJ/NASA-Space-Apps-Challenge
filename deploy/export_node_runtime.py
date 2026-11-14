@@ -16,11 +16,9 @@ import os
 import sys
 import time
 import uuid
-from collections import defaultdict
 from datetime import UTC, datetime
 from importlib.metadata import version
 from pathlib import Path
-from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -29,7 +27,34 @@ from api.storage import canonical, digest
 
 SCHEMA_VERSION = "1.0"
 ALGORITHM_VERSION = "python-built-node-snapshot-v1"
-RUNTIME_INPUT_IDS = {"S01", "S02", "S10", "S12", "S14", "L051"}
+RUNTIME_INPUT_IDS = {"S01", "S02", "S10", "S12", "S14", "L051", "L046", "L047"}
+ACTIVE_MANIFESTS = (
+    "datasets.json",
+    "solar_system_ephemeris.json",
+    "pluto_ephemeris.json",
+    "solar_system_orbits.json",
+    "timeline_validation.json",
+    "appearance.json",
+    "small_body_appearance.json",
+    "planet_criteria.json",
+    "mass_scenarios.json",
+    "extended_solar.json",
+    "long_term_model.json",
+    "long_term_validation.json",
+    "object_names.json",
+    "kuiper_display.json",
+    "planet_nine_scope.json",
+    "outer_tno.json",
+    "display_dependency_compatibility.json",
+)
+CORE_OBJECTS = [
+    {"object_id": "pluto", "name": "Pluto", "status": "available"},
+    {"object_id": "epsilon-indi-b", "name": "\u03b5 Indi B", "status": "available"},
+    {"object_id": "barnards-star", "name": "Barnard's Star", "status": "unverified"},
+    {"object_id": "wise0855", "name": "WISE0855", "status": "unverified"},
+    {"object_id": "rw-aurigae", "name": "RW Aurigae", "status": "unverified"},
+    {"object_id": "r-draconis", "name": "R Draconis", "status": "unverified"},
+]
 
 
 def file_digest(path: Path) -> str:
@@ -38,12 +63,11 @@ def file_digest(path: Path) -> str:
 
 
 def _sources(root: Path) -> list[dict]:
-    """Collect a deduplicated dependency closure, preserving optional originals.
+    """Collect only the adopted Solar/P9 source closure.
 
-    A local-only paper is optional unless another original reader independently
-    requires that same file. The original six active FITS are mandatory; the
-    remaining acquisition inventory is recorded as held, not executable input.
-    Public assets may be verified against their identical dist serving copy.
+    Original acquisition manifests remain byte-identical historical inventories;
+    only the selected four observations, two calibrations and P9 population are
+    executable inputs. Excluded feature files stay outside the active closure.
     """
     records: dict[str, dict] = {}
 
@@ -94,15 +118,17 @@ def _sources(root: Path) -> list[dict]:
     def walk(value, origin: str, inherited_required: bool = True):
         if isinstance(value, dict):
             required = inherited_required
-            if origin in {"datasets.json", "drive_sources.json"} and "id" in value:
-                required = value["id"] in RUNTIME_INPUT_IDS
+            if origin == "datasets.json" and "id" in value:
+                if value["id"] not in RUNTIME_INPUT_IDS:
+                    return
+                required = True
             for key, hash_key in path_keys.items():
                 path = value.get(key)
                 if isinstance(path, str) and path.startswith(("data/", "web/")):
                     local_only = key == "upstream_original_local_only" or (
-                        origin == "galaxy_atlas.json"
+                        origin == "planet_nine_scope.json"
                         and value.get("required_on_server") is False
-                        and path.startswith("data/reference/galaxy-atlas/upstream/")
+                        and path.startswith("data/reference/planet-nine/upstream/")
                     )
                     add(
                         path,
@@ -121,18 +147,10 @@ def _sources(root: Path) -> list[dict]:
             for child in value:
                 walk(child, origin, inherited_required)
 
-    for path in sorted((root / "data/manifests").glob("*.json")):
-        if path.name == "node_runtime.json":
-            continue  # The derived export manifest must not hash itself or an older export.
-        required = path.name not in {"drive_sources.json", "solar_system_source_candidates.json"}
-        add(
-            path.relative_to(root).as_posix(),
-            required,
-            "canonical_scientific_manifest"
-            if required
-            else "held_acquisition_or_candidate_bookkeeping",
-        )
-        walk(json.loads(path.read_bytes()), path.name, required)
+    for name in ACTIVE_MANIFESTS:
+        path = root / "data/manifests" / name
+        add(path.relative_to(root).as_posix(), True, "canonical_scientific_manifest")
+        walk(json.loads(path.read_bytes()), path.name)
     # Include source sidecars for adopted files, with their same required/optional role.
     for relative, record in list(records.items()):
         path = root / relative
@@ -140,9 +158,16 @@ def _sources(root: Path) -> list[dict]:
         if sidecar.is_file():
             add(sidecar.relative_to(root).as_posix(), record["runtime_required"], "source_sidecar")
     for path in sorted((root / "web/public").rglob("*")):
-        if path.is_file():
+        if path.is_file() and path.relative_to(root / "web/public").parts[0] in {
+            "textures",
+            "brand",
+        }:
             add(path.relative_to(root).as_posix(), True, "published_static_asset_or_metadata")
+    add("data/reference/outer-tno/r029-r031-20261115/jpl-tno-identity-bulk.json", True, "selected_TNO_exact_identity_facts")
+    add("data/reference/outer-tno/r029-r031-20261115/jpl-tno-identity-bulk.source.json", True, "selected_TNO_identity_provenance")
+    add("data/reference/outer-tno/r029-r031-20261115/audit-index.json", False, "MCP_metadata_audit_not_new_observations")
     add("contracts/openapi.json", True, "Node_strict_input_validation_schema")
+    add("contracts/planet-nine.schema.json", True, "Planet_Nine_hypothesis_contract")
     for path in [
         *sorted((root / "science").glob("*.py")),
         root / "api/models.py",
@@ -258,126 +283,70 @@ def export(root: Path) -> dict:
         files.append(record)
         return record
 
-    from fastapi import Request
-
-    import api.main as api_main
-    from science.exoplanets import load_catalog, object_id, planet
-    from science.extended_solar import CATALOG_PARENTS
+    from science.appearance import get_appearance
+    from science.extended_solar import CATALOG_PARENTS, get_extended_solar
+    from science.kuiper import get_kuiper_display
+    from science.long_term_model import get_long_term_model, sample_long_term
+    from science.mass_scenarios import get_mass_scenarios
+    from science.orbits import get_orbits
+    from science.planet_criteria import get_planet_criteria
     from science.pluto import build_pluto_comparison, list_pluto_observations
+    from science.small_body_appearance import get_small_body_appearance
+    from science.solar_system import DEFAULT_EPOCH
     from science.spherex import build_comparison, list_observations
-    from science.universe_catalog import MILKY_WAY, host_id
+    from science.timeline import get_timeline, sample_timeline
 
-    api_main.ROOT = root
-    app = api_main.create_app()
-    endpoints = {route.path: route.endpoint for route in app.routes if hasattr(route, "endpoint")}
-
-    def get(key: str, path: str, **query):
-        value = endpoints[path](**query)
-        relative = "snapshots/" + key + ".json"
-        emit(relative, value)
-        snapshots[key] = relative
-        routes[key] = {"method": "GET", "path": path, "query": query}
+    def solar_scene(epoch=DEFAULT_EPOCH):
+        value = sample_timeline(root, epoch)
+        orbits = get_orbits(root, value["guide_reference_epoch"])
+        value.update(
+            source_manifest_sha256=file_digest(root / "data/manifests/solar_system_ephemeris.json"),
+            orbit_manifest_sha256=orbits["source_manifest_sha256"],
+            orbit_algorithm_version=orbits["algorithm_version"],
+            orbit_exclusions=orbits["exclusions"],
+        )
+        for body in value["objects"]:
+            if body["object_id"] in orbits["orbits"]:
+                body["orbit"] = orbits["orbits"][body["object_id"]]
         return value
 
-    fixed = {
-        "objects": "/api/v1/objects",
-        "universe": "/api/v1/universe",
-        "timeline": "/api/v1/timeline",
-        "appearance": "/api/v1/appearance",
-        "small_body_appearance": "/api/v1/small-body-appearance",
-        "planet_criteria": "/api/v1/planet-criteria",
-        "mass_scenarios": "/api/v1/mass-scenarios",
-        "black_holes": "/api/v1/black-holes",
-        "observer_physics": "/api/v1/observer-physics",
-        "cosmic_history": "/api/v1/cosmic-history",
-        "cosmic_observations": "/api/v1/cosmic-observations",
-        "long_term_model": "/api/v1/long-term-model",
-        "galaxies": "/api/v1/catalog/galaxies",
-        "kuiper_belt": "/api/v1/kuiper-belt",
-        "solar_system": "/api/v1/catalog/solar-system",
-        "exoplanets": "/api/v1/catalog/exoplanets",
-        "universe_catalog": "/api/v1/catalog/universe",
-        "exoplanet_observations": "/api/v1/catalog/exoplanet-observations",
-        "extragalactic_planets": "/api/v1/catalog/extragalactic-planets",
-        "comets": "/api/v1/catalog/comets",
-        "galaxy_atlas_markers": "/api/v1/catalog/galaxy-atlas/markers",
-        "numerical_relativity": "/api/v1/physics/numerical-relativity",
-    }
-    values = {}
-    for key, path in fixed.items():
-        values[key] = get(key, path)
-        print("snapshot", key, flush=True)
-    from science.galaxy_atlas import export_galaxy_atlas
-
-    emit("snapshots/galaxy_atlas.json", export_galaxy_atlas(root))
-    snapshots["galaxy_atlas"] = "snapshots/galaxy_atlas.json"
-    routes["galaxy_atlas"] = {"method": "GET", "path": "/api/v1/catalog/galaxy-atlas", "query": {}}
-    for parent in CATALOG_PARENTS:
-        get("solar_parent_" + parent, fixed["solar_system"], parent_id=parent)
-    universe = values["universe_catalog"]
-    for galaxy in universe["galaxy_ids"]:
-        values["universe_catalog_galaxy_" + galaxy] = get(
-            "universe_catalog_galaxy_" + galaxy, fixed["universe_catalog"], galaxy_id=galaxy
-        )
-    for parent in [
-        "solar-system",
-        *universe["galaxy_ids"],
-        *(obj["object_id"] for obj in universe["objects"] if obj["object_id"] != "solar-system"),
-    ]:
-        get("universe_catalog_parent_" + parent, fixed["universe_catalog"], parent_id=parent)
-
-    catalog = load_catalog(root)
-    grouped = defaultdict(list)
-    for row in catalog["records"]:
-        grouped[row["hostname"]].append(row)
-    details = {}
-    children = {}
-    for hostname, rows in grouped.items():
-        subset = {**catalog, "records": rows}
-        parent = host_id(hostname)
-        children[parent] = []
-        for row in rows:
-            identifier = object_id(row["pl_name"])
-            details[identifier] = planet(subset, identifier)
-            children[parent].append(
-                {
-                    "object_id": identifier,
-                    "name": row["pl_name"],
-                    "kind": "exoplanet",
-                    "parent_id": parent,
-                    "galaxy_id": MILKY_WAY,
-                    "existing_object_id": identifier,
-                    "coordinate": None,
-                    "distance_pc": None,
-                    "position_kind": "existing_catalog_reference",
-                    "source": {
-                        "url": row.get("nasa", {}).get("url") or catalog["url"],
-                        "label": "NASA Science planet catalog",
-                    },
-                    "catalog_reference": {"catalog": "existing_exoplanets", "hostname": hostname},
-                    "image": None,
-                    "appearance": None,
-                    "limitations": [
-                        "Planet selection opens the existing catalog system. No independently resolved planet sky direction or measured surface is supplied."
-                    ],
-                }
-            )
-    # The optimization changes only search scope; every host row is retained.
-    detail_samples = [next(iter(details)), list(details)[len(details) // 2], list(details)[-1]]
-    for identifier in detail_samples:
-        if details[identifier] != planet(catalog, identifier):
-            raise ValueError("export_planet_projection_parity_failed")
-    for parent in list(children)[:2] + list(children)[-1:]:
-        actual = endpoints[fixed["universe_catalog"]](parent_id=parent)
-        if actual["objects"] != children[parent]:
-            raise ValueError("export_host_children_parity_failed")
-    for key, value in [("exoplanet_details", details), ("universe_host_children", children)]:
+    def emit_snapshot(key, value, endpoint, query=None):
         relative = "snapshots/" + key + ".json"
         emit(relative, value)
         snapshots[key] = relative
-    print("exoplanet details and host children", len(details), len(children), flush=True)
+        routes[key] = {"method": "GET", "path": endpoint, "query": query or {}}
+        print("snapshot", key, flush=True)
+        return value
 
-    parity = {"universe": [], "long_term": [], "history": []}
+    getters = {
+        "objects": (lambda: {"objects": CORE_OBJECTS}, "/api/v1/objects"),
+        "universe": (solar_scene, "/api/v1/universe"),
+        "timeline": (lambda: get_timeline(root), "/api/v1/timeline"),
+        "appearance": (lambda: get_appearance(root), "/api/v1/appearance"),
+        "small_body_appearance": (
+            lambda: get_small_body_appearance(root),
+            "/api/v1/small-body-appearance",
+        ),
+        "planet_criteria": (lambda: get_planet_criteria(root), "/api/v1/planet-criteria"),
+        "mass_scenarios": (lambda: get_mass_scenarios(root), "/api/v1/mass-scenarios"),
+        "long_term_model": (lambda: get_long_term_model(root), "/api/v1/long-term-model"),
+        "kuiper_belt": (lambda: get_kuiper_display(root), "/api/v1/kuiper-belt"),
+        "solar_system": (
+            lambda: get_extended_solar(root, include_vectors=False),
+            "/api/v1/catalog/solar-system",
+        ),
+    }
+    for key, (getter, endpoint) in getters.items():
+        emit_snapshot(key, getter(), endpoint)
+    for parent in CATALOG_PARENTS:
+        emit_snapshot(
+            "solar_parent_" + parent,
+            get_extended_solar(root, parent_id=parent),
+            "/api/v1/catalog/solar-system",
+            {"parent_id": parent},
+        )
+
+    parity = {"universe": [], "long_term": []}
     for epoch in [
         "2026-11-13T00:00:00Z",
         "2026-11-13T12:00:00Z",
@@ -386,9 +355,7 @@ def export(root: Path) -> dict:
         "2026-11-15T12:00:00Z",
         "2026-11-16T00:00:00Z",
     ]:
-        parity["universe"].append(
-            {"request": {"epoch": epoch}, "response": endpoints[fixed["universe"]](epoch=epoch)}
-        )
+        parity["universe"].append({"request": {"epoch": epoch}, "response": solar_scene(epoch)})
     for query in [
         {"year": -2999},
         {"year": -1, "month": 12, "day": 31, "hour": 23.5},
@@ -398,16 +365,10 @@ def export(root: Path) -> dict:
         {"year": 2026, "month": 11, "day": 14, "hour": 12.25},
         {"year": 3000},
     ]:
-        parity["long_term"].append(
-            {"request": query, "response": endpoints["/api/v1/long-term-simulation"](**query)}
-        )
-    for age in [0, 0.00038, 0.1, 0.46, 1, 5, 13.8]:
-        parity["history"].append(
-            {
-                "request": {"age_gyr": age},
-                "response": endpoints["/api/v1/cosmic-history/sample"](age_gyr=age),
-            }
-        )
+        # Public API defaults are January 1, while the lower-level reader's
+        # defaults are November 14. Preserve the API contract in parity cases.
+        parameters = {"month": 1, "day": 1, "hour": 0, **query}
+        parity["long_term"].append({"request": query, "response": sample_long_term(root, **parameters)})
     record = emit("snapshots/python_parity_samples.json", parity)
     snapshots["python_parity_samples"] = record["path"]
 
@@ -437,33 +398,43 @@ def export(root: Path) -> dict:
         if record["sha256"] != digest(result):
             raise ValueError("export_comparison_canonical_digest_mismatch")
 
-    app.state.service = SimpleNamespace(
-        catalog=list_observations(root),
-        pluto_catalog=list_pluto_observations(root),
-        catalog_error=False,
-        pluto_catalog_error=False,
-    )
-    request = Request({"type": "http", "app": app})
-    observation_ids = [obj["object_id"] for obj in api_main.OBJECTS] + [
-        "sun",
-        "mercury",
-        "venus",
-        "earth",
-        "mars",
-        "jupiter",
-        "saturn",
-        "uranus",
-        "neptune",
-    ]
-    for object_name in observation_ids:
-        get(
-            "observations_" + object_name,
-            "/api/v1/observations",
-            request=request,
-            object_id=object_name,
+    legacy_ids = {
+        "barnards-star": range(1, 7),
+        "wise0855": range(23, 27),
+        "rw-aurigae": [*range(13, 19), *range(27, 30)],
+        "r-draconis": range(7, 13),
+    }
+    inventory = json.loads((root / "data/manifests/datasets.json").read_bytes())["files"]
+    for obj in CORE_OBJECTS:
+        identifier = obj["object_id"]
+        if identifier in {"pluto", "epsilon-indi-b"}:
+            reader = list_pluto_observations if identifier == "pluto" else list_observations
+            value = {
+                "object_id": identifier,
+                "observations": reader(root),
+                "status": "available",
+                "next_cursor": None,
+            }
+        else:
+            ids = {f"L{number:03d}" for number in legacy_ids[identifier]}
+            value = {
+                "object_id": identifier,
+                "observations": [],
+                "status": "unverified",
+                "reason": "legacy_quality_not_validated",
+                "available_sources": [
+                    {
+                        key: record.get(key)
+                        for key in ("id", "source_url", "sha256", "bytes", "planned_use")
+                    }
+                    for record in inventory
+                    if record["id"] in ids
+                ],
+                "next_cursor": None,
+            }
+        emit_snapshot(
+            "observations_" + identifier, value, "/api/v1/observations", {"object_id": identifier}
         )
-        # Request objects are execution adapters, never serialized into route metadata.
-        routes["observations_" + object_name]["query"].pop("request", None)
 
     # Rehash every original dependency after computation; never publish mixed-source output.
     for record in source_files:
@@ -484,6 +455,8 @@ def export(root: Path) -> dict:
         "routes": routes,
         "comparisons": comparisons,
         "runtime_mode": "node_only_with_disclosed_Python_build_calculation_snapshots",
+        "public_scope": "solar_system_1000au",
+        "scope_migration_policy": "solar-scope-context-v1",
         "software": {
             "python": sys.version.split()[0],
             "astropy": version("astropy"),
@@ -494,33 +467,21 @@ def export(root: Path) -> dict:
             "comparison_pairs": [["S01", "S02"], ["S12", "S14"]],
             "comparison_cutout_size": 81,
             "extended_parent_ids": CATALOG_PARENTS,
-            "galaxy_ids": universe["galaxy_ids"],
-            "universe_host_count": len(children),
-            "exoplanet_count": len(details),
-            "universe_curated_parent_ids": [
-                "solar-system",
-                *universe["galaxy_ids"],
-                *(
-                    obj["object_id"]
-                    for obj in universe["objects"]
-                    if obj["object_id"] != "solar-system"
-                ),
-            ],
         },
         "verification": {
             "source_files_before_after_match": True,
             "generated_files_sha_verified": True,
             "fresh_comparison_calculations": 4,
             "comparison_full_canonical_sha_verified": True,
-            "planet_optimized_projection_parity_samples": detail_samples,
-            "host_children_actual_getter_parity_samples": list(children)[:2] + list(children)[-1:],
+            "active_manifest_allowlist": list(ACTIVE_MANIFESTS),
+            "excluded_feature_snapshots": False,
         },
         "limitations": [
             "This is a build-time result cache. Node comparison requests verify original source and exported-file hashes, then retrieve a fixed precomputed result; they do not run Astropy/FITS analysis on demand.",
             "Only the existing S01/S02 and S12/S14 pair selections, either order, are available for comparison. No arbitrary coordinates, new exposures, alternative mask/cutout sizes or unsupported quantitative measurements are fabricated.",
             "Null fields, scientific statuses, source provenance and all original calculation limitations remain unchanged. A successful cache lookup is not a new observation, discovery, or validated motion measurement.",
             "Runtime formulas for time interpolation, long-term approximations and mass hypotheses require separate JavaScript implementation/parity validation. Exported Python samples are reference cases, not whole-domain proof.",
-            "Local-only upstream documents and held legacy acquisitions are inventoried but optional for Node hosting. Required source records must remain byte-identical; a matching declared dist asset may substitute for its public copy.",
+            "Only adopted Solar/P9 source files are in this active dependency closure. Historical acquisition metadata is preserved without requiring excluded feature files. Required source records must remain byte-identical; a matching declared dist asset may substitute for its public copy.",
         ],
     }
     (staging / "runtime_manifest.json").write_bytes(canonical(manifest))

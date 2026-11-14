@@ -1,5 +1,7 @@
 # 구현·검증·제출 근거 목록
 
+DEV-018 문서 단계: 최신1000AU회의/제공사진·로고/위키·공식논문·MCP3개원문을검토하고FSD0.20·Data_Spec·TODO에연결했다. AI는문서/코드지원을했고원관측/로고를생성·변경하지않았다. 후보확률은조건부문헌위치분포만허용하며실제존재확률/새발견을생성하지않는다. 새제품기능/브라우저/정확ZIP·MCP연결은미완료다. 아래제외기능의실사용/검증기록은당시보존이력이며현재유지범위가아니다.
+
 다음 표의 초기 상태는 계획이다. 실제 증거가 생긴 항목만 구현/검증/제출 상태를 갱신한다. 개인정보와 비밀값을 포함하지 않는다.
 
 | ID | 내용 | 구현/증거 위치 | 검증 상태 | 제출 반영 | 다음 조치 |
@@ -83,3 +85,19 @@ DEV-016 LAN: 최종 CumtP9k6 프런트를 기존 var/node/3002에 반영했다. 
 
 
 RELEASE-011 · v0.11.0 완결 ZIP 검증 확정: `NASA_SPACE_APPS_CHALLENGE_v0.11.0_20261115_001122KST.zip` / 580,411,280B / 2,320파일 / SHA256 `db7468317fa4ab1d3c0a8a616815d12ca22bb15bd1486f6848b5a8d2c1715d69`. clean source `aa3b2c44cba9125e7832f535ce8232c4b20ab8e9`에서 패키징했다. 실제 ZIP을 새 폴더에 풀어 2,319 manifest 항목·필수1,586 source·107생성JSON을 대조했고, Node22.17.0만 PATH에 둔 app.js 실행/ready·ε Indi B/Pluto 실원본/품질·근거 내보내기/가져오기·실제 프로세스 재시작 후 복원을 PASS했다. 정확 ZIP은 기존LAN을 유지하기 위해 PORT8011로 검사했고 기본3002는 현재 Node22 child회귀에서 별도로 확인했다. 새GWGC53,162·SXS13,869·혜성4/489 TDB표본 HTTP검사도 PASS했다. source297이 아니라 최종 source1885/필수1586/선택299이며 ZIP에는 선택32개가 있고267개는 보류/감사본으로 제외됐다. 현재 LAN CumtP9k6와 기존var/node는 계속 실행/보존한다. 공개호스팅/Linux/모든물리법칙·runtimefullGR/결합 계산은 완료로 올리지 않는다. 최종 공개 기록은 `docs/releases/v0.11.0.json`, 정확검증은 동명 외부 `.verification.json`이다. 이 사후문서 기록은 이미 검증한 ZIP 바이트를 수정하지 않는다.
+
+DEV-018현재활성source정본53e05dcf241974c4840536492522b49bca6fbb00eafd415b62467080d9a9849c/39JSON/source1252·필수1165,최종로컬검증docs/qa/dev018_local_verification.json. 기존2,186획득목록과새activeclosure를구분하며TNO8,341/문헌10만/MCP응답·출처는Data_Spec을따른다.
+
+
+## RELEASE-012 · 실제 EC2·HTTPS 배포 검증 완료
+
+2026-11-15 KST. 정확한 `NASA_SPACE_APPS_CHALLENGE_v0.12.0_20261115_034911KST.zip`는489,039,770B/1,540파일, SHA256 `c251031cc7df5526b038425ba6d672d96cbbe01e0123b2df55c09fc5332ed067`다. Windows와Ubuntu24.04.2WSL/ext4에각각새로풀어1,539manifest항목/필수1,165source·39JSON/원comparison4개SHA를검증했고Node24.22.3단독서버의실제재시작·εB/Pluto/P9근거복원을통과했다.
+
+사용자EC2 Ubuntu24.04.5/x86_64/4vCPU16GB/50GiB에같은ZIP을전송해SHA를확인하고전용planetx/systemd·nginx80/443→loopback3002·shared/node영속상태로배포했다. 실제systemd재시작PID2871→3077후기존근거3개export바이트SHA동일/같은IDimport복원을통과했다. 공개실관측/31지도·P9HTTP검사와정식주소 `https://nasaspaceappschallenge.marulee.dev/`의일반Chrome157(우회옵션없음)3흐름을통과했다. TLS1.3·정확호스트/기본CA검증·HTTP→HTTPS·DNS3.37.17.247,인증서2027-02-12만료·자동갱신timer/실제dry-run성공을확인했다. 초기HTTP-IP브라우저검사에서만HTTPS자동업그레이드를끈사례는정식HTTPS검증과분리한다.
+
+최종기록은`docs/releases/v0.12.0.json`,`docs/qa/dev018_ec2_https_verification.json`과ZIP옆외부Windows/Linux/EC2검증JSON이다. 이사후기록은검증된불변ZIP을고치지않는다. 이전v0.11ZIP/Git/원자료/근거를보존했다. 이번배포에Git새commit/push·심사제출은수행하지않았다. 상호N체/모든물리법칙·미발견전수·새이동검출/존재확률·원어민검수를완료로올리지않는다. 첫EC2배포라구버전으로의실제rollback드릴은수행하지않았고복구계약/안내를유지한다.
+
+
+DEV-020: 실제8341개 exactSPK 설명·선택/판정·원출처, 공식OPAL2RGB무손실/원본결측·조명·고리·LOD, 조건부P9와8행성표시필터, 실제관측/질량가정새세션복원을 연결했다. Source1272/필수1182·39JSON·기존4comparison SHA 및3운영근거원export를 보존한다. 문서/DataSpec 신규40파일전수표와 docs/qa/dev020_local_verification.json이 빌드 전 검증 정본이며, 완결ZIP/원격서비스·실제재시작/커밋은 후속 외부 docs/releases/v0.13.0.json으로 확정한다. 이전 릴리스 기록은 당시 상태다.
+
+DEV-020 사후 확정:073754 ZIP/Ubuntu Node단독실행·재시작·동일ZIP Sydney배포·정식HTTPS Chrome5흐름·운영PID변경후기존3근거의원export SHA/ID/판단복원이완료됐다. 새근거/지도원본추적/정확SHA는 docs/releases/v0.13.0.json. 이기록은불변ZIP외부에추가하며새검출·존재확률·모든물리법칙구현을뜻하지않는다.

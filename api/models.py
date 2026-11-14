@@ -61,6 +61,10 @@ class SimulationContext(StrictModel):
 
 
 class UniverseContext(StrictModel):
+    scene_filter: Literal["all", "confirmed-planets", "p9-reference", "planets-and-p9"] | None = None
+    render_preset: Literal["balanced", "detail"] | None = None
+    appearance_lighting: Literal["inspection", "solar"] | None = None
+    show_outer_tno: bool | None = None
     selected_object_id: str = Field(max_length=50)
     model_epoch: str = Field(max_length=40)
     camera: CameraState | None = None

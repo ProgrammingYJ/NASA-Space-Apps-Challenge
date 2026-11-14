@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "recorded_at_utc": "2026-11-14T18:48:37.625982+00:00",
+  "work_id": "DEV-018",
+  "release": "0.12.0",
+  "runtime_manifest_sha256": "53e05dcf241974c4840536492522b49bca6fbb00eafd415b62467080d9a9849c",
+  "browser_bundle": {
+    "main": "index-DKFDitmN.js",
+    "p9": "PlanetNineWorkbench-Aq-QfXRq.js",
+    "browser": "Chrome157.0.8103.52",
+    "backend_node": "24.22.3"
+  },
+  "tests": {
+    "node": {
+      "passed": 58,
+      "duration_seconds": 15.16,
+      "runtime": "22.17.0"
+    },
+    "python": {
+      "passed": 361,
+      "duration_seconds": 50.14,
+      "runtime": "3.12.3",
+      "warnings": "existing Starlette testclient deprecation"
+    },
+    "ruff": "passed",
+    "typescript": "passed",
+    "vite": "passed; large chunk warning retained",
+    "vitest": {
+      "passed": 61,
+      "files": 14
+    },
+    "current_browser": {
+      "affected": {
+        "passed": 6,
+        "duration_seconds": 46.59
+      },
+      "retained_core": {
+        "passed": 5,
+        "duration_seconds": 125.917
+      },
+      "cases": [
+        "Quaoar/Neptune normal empty5locales",
+        "providedlogo/credits5locales/focus/Escape",
+        "Quaoar/Weywotmeshsizeandnearsurfacegap",
+        "Uranus/Neptune originalmaps/visibleOPALgapnote/zeroWebGLerrors",
+        "TNO8341/8340/1 andsource",
+        "1000AU scope/settings/removedrequests",
+        "actualepsilonIndiB originals/quality/evidenceJSONCSV/freshrestore5locales/official4states",
+        "year2026/0/BCE/2500/invaliddatepreservation",
+        "playbackendpoints/hidden-tab",
+        "Plutoevidence/camera/orbitfreshrestore",
+        "epsilonIndiB/Plutoworkspacepreservation"
+      ]
+    },
+    "earlier_browser": {
+      "passed": 6,
+      "failed": 5,
+      "status": "isolated failures fixed and affected/current core rerun",
+      "limits": "P9 gravity/save/freshrestore, conditional region->row/path/DOI, delayed session and archive fixture wording were checked on the earlier same-feature build; do not claim all were rerun on the final bundle."
+    }
+  },
+  "audit_reports": [
+    {
+      "local_audit": "var/qa/dev018-affected-followup-results.json",
+      "bytes": 9916,
+      "sha256": "fd80a339c59f0f92f92defb2f76aaaac1778c668ad07a6b71bb366648e2001e5",
+      "stats": {
+        "startTime": "2026-11-14T18:43:04.507Z",
+        "duration": 46590.17999999999,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "local_audit": "var/qa/dev018-retained-core-browser-results.json",
+      "bytes": 7407,
+      "sha256": "a97dd16670a74dd0d34529e491be0968acd76dd63ded420f4126c5bd151498f3",
+      "stats": {
+        "startTime": "2026-11-14T18:44:54.592Z",
+        "duration": 125916.94,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "mcp": "stdio and native3servers/16tools actually called; source ledger mcp_tools.json",
+  "most_live": {
+    "known_object": "pluto",
+    "dates": [
+      "2026-09-29",
+      "2026-10-02"
+    ],
+    "status": "coverage_available",
+    "rows": 20,
+    "response_sha256": "8b67faeb41f5faa74f3bcbc8100e3691e76127ef0df5bfce6e78879e0a0fd2ab",
+    "meaning": "predicted footprint overlap only; no new detection"
+  },
+  "ec2": {
+    "ssh": "connected",
+    "os": "Ubuntu24.04.5LTSamd64",
+    "vcpus": 4,
+    "memory_mib": 15701,
+    "volume_gib": 50,
+    "app_deployment": "pending exact ZIP verification"
+  },
+  "exact_archive": "not yet created",
+  "limitations": [
+    "No full mutual N-body/all physics or undiscovered inventory",
+    "No new measured image motion/detection/probability of existence",
+    "No native-speaker review for ja/zh-Hant/fr",
+    "Windows+local isolated nginx syntax checks are not EC2 app deployment",
+    "MCP same JPL upstream comparison is not independent observational accuracy"
+  ]
+}

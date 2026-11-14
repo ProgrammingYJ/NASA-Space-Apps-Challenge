@@ -1,5 +1,7 @@
 # 과학 자료 저장 위치와 사용 상태
 
+DEV-018 문서 단계: 최신1000AU회의/제공사진·로고/위키·공식논문·MCP3개원문을검토하고FSD0.20·Data_Spec·TODO에연결했다. AI는문서/코드지원을했고원관측/로고를생성·변경하지않았다. 후보확률은조건부문헌위치분포만허용하며실제존재확률/새발견을생성하지않는다. 새제품기능/브라우저/정확ZIP·MCP연결은미완료다. 아래제외기능의실사용/검증기록은당시보존이력이며현재유지범위가아니다.
+
 - 지정 팀 Drive: https://drive.google.com/drive/folders/1J065qY_U-Eb_bmOauJH4S4CeRN7KTQPS
 - 이번 자료 폴더: https://drive.google.com/drive/folders/1QDOZERq8CvDxa4fr2EJO6II09VHGmtvq
 - 업로드 완료: **원본/참조102파일987,987,584B + 출처·체크섬·README3파일153,835B = 총105파일988,141,419B**.
@@ -199,3 +201,26 @@ DEV-015–016: comets.json/galaxy_atlas.json/numerical_relativity.json의 원본
 
 
 DEV-016 최종 전달 준비: Data_Spec 2,102,484B/3,660행/SHA70c0f51522c110ecbfd4421583d46dc0f8bf2d7aa3cbd194226691f67d8a4a29의 30정본·2,186파일 목록·기존102입력987,987,584B·Node1,885 source 전수 재해시 불일치0을 확인했다. Node107JSON76,348,584B·필수1586/623,292,613B·선택299 및 과거4개 comparison ID가 일치한다. 감사보고서는 var/qa/dev016-data-spec-verification.json이다. 본문/원본/정본은 동결했다.
+
+DEV-018현재활성source정본53e05dcf241974c4840536492522b49bca6fbb00eafd415b62467080d9a9849c/39JSON/source1252·필수1165,최종로컬검증docs/qa/dev018_local_verification.json. 기존2,186획득목록과새activeclosure를구분하며TNO8,341/문헌10만/MCP응답·출처는Data_Spec을따른다.
+
+
+## RELEASE-012 · 실제 EC2·HTTPS 배포 검증 완료
+
+2026-11-15 KST. 정확한 `NASA_SPACE_APPS_CHALLENGE_v0.12.0_20261115_034911KST.zip`는489,039,770B/1,540파일, SHA256 `c251031cc7df5526b038425ba6d672d96cbbe01e0123b2df55c09fc5332ed067`다. Windows와Ubuntu24.04.2WSL/ext4에각각새로풀어1,539manifest항목/필수1,165source·39JSON/원comparison4개SHA를검증했고Node24.22.3단독서버의실제재시작·εB/Pluto/P9근거복원을통과했다.
+
+사용자EC2 Ubuntu24.04.5/x86_64/4vCPU16GB/50GiB에같은ZIP을전송해SHA를확인하고전용planetx/systemd·nginx80/443→loopback3002·shared/node영속상태로배포했다. 실제systemd재시작PID2871→3077후기존근거3개export바이트SHA동일/같은IDimport복원을통과했다. 공개실관측/31지도·P9HTTP검사와정식주소 `https://nasaspaceappschallenge.marulee.dev/`의일반Chrome157(우회옵션없음)3흐름을통과했다. TLS1.3·정확호스트/기본CA검증·HTTP→HTTPS·DNS3.37.17.247,인증서2027-02-12만료·자동갱신timer/실제dry-run성공을확인했다. 초기HTTP-IP브라우저검사에서만HTTPS자동업그레이드를끈사례는정식HTTPS검증과분리한다.
+
+최종기록은`docs/releases/v0.12.0.json`,`docs/qa/dev018_ec2_https_verification.json`과ZIP옆외부Windows/Linux/EC2검증JSON이다. 이사후기록은검증된불변ZIP을고치지않는다. 이전v0.11ZIP/Git/원자료/근거를보존했다. 이번배포에Git새commit/push·심사제출은수행하지않았다. 상호N체/모든물리법칙·미발견전수·새이동검출/존재확률·원어민검수를완료로올리지않는다. 첫EC2배포라구버전으로의실제rollback드릴은수행하지않았고복구계약/안내를유지한다.
+
+## DEV-020 · R029/R030/R031 신규 입력과 표시변환
+
+기존41열/8,341행 JPL TNO 원본/정규화와 관측·보정을 보존했다. 새6열 identity JSON(506,627B/SHA `de0303824a588ead2ebd0a027780946e97c98cec99b7ab8ba0c0f85361608509`)과 source sidecar(1,832B/SHA `09e7c90a324bb7df4ec0d8b0e1029a56f433e3082537fc055970911811226f51`)만 신규 설명의 Node필수입력이다. 정확 SPK문자열/primary designation8,341전부와일치하며 an1,049/au7,292/A-prefix18이다. 설명은 선택객체의 원소epoch·지정명·관측호/수·condition·무차원RMS·원자료물리량/null을 조합한 `jpl-tno-factual-description-v1` 사실요약이다. 기관이작성한 장문8천개를 취득한것이 아니다. 직경13/자전149/질량·밀도0은 해당snapshot의가용성이며 별도17천체의 문헌본체/계질량을 대체하지 않는다.
+
+[후속원장v2](../data/reference/outer-tno/r029-r031-20261115/audit-index.json)(9,160B/SHA `2d973e6d99c5764f5675f05a031cdc85a4d69271124287413034e5694ff5ffa5`)은20파일819,579B를 구분하며 초기 summary의채택상태를대체한다. 이번7개순차MCP읽기에서는 Horizons의 FO563정확SPK를확인했고 PDS의다른천체C/2015G2 검색연결을거부했다. FO563정확토큰0건/Sedna target_description=none·관리변경이력은 서술로채택하지않았다. 나머지18개311,120B는 취득/참고감사로 서버필수가아니다. 신규20파일은원출처/권리/해시를유지한공개감사부록으로새ZIP에포함하는계약이며runtime필수는두identity파일만유지한다. 최종ZIP내포함검사는릴리스단계에서확정한다. 도구envelopeSHA와 직접HTTP원바이트SHA의범위를구별하며 전8천개MCP검색·공식서술·새관측은주장하지않는다.
+
+OPAL공식 Neptune2025 Cycle32/Uranus2025 Cycle33의721×361/RGB8 TIFF(합계1,577,682B)를 별도보존하고 표준라이브러리 `opal-rgb-tiff-png-lossless-v1`로 같은RGB표본/크기를 PNG2개498,510B에무손실변환했다. 모든픽셀/크기동등은 Pillow13/libtiff독립decode로대조해 변환원장에남겼다. 색변환·resize·보간·결측채움은0이며 출판팀의 대비강조·Minnaert/접합보정은 원본에이미포함돼있다. F657N/F547M/F467M=R/G/B이고 정량I/F/자연색/모형시각의새구름사진이아니다. Credit NASA/ESA/STScI; Amy Simon/OPAL team·DOI10.17909/T9G593을유지한다. 원TIF/README/취득·변환JSON10개1,586,689B를보존하고 이전단일필터/토성/명왕성원지도는수정하지않았다. Pillow13.0.0의선택개발검증잠금은 서버/표준변환의필수의존성이아니다.
+
+표시정본재연결은 `appearance.json`128,238B/SHA `d0de5f97913addcfe2d70fff2859024c75e7edb3069d5a17f4d9a7022b4467e1`, 소천체정본47,152B/SHA `a531089598a6b56322d5f407d89026618153a463b5de4c10232156af47e1b49d`, 질량정본130,355B/SHA `adca7ca7cd2425d9063a8db686389d6def187b1a5c7bb0a18b2faf42a97091d9`다. 뒤두정본은 최상위dependencies외모든과학값·생성일/배열이동등하다. [호환원장](../data/manifests/display_dependency_compatibility.json)4,320B/SHA `71dbfc9ef3f9551f583e672a8333e5911cf9071a93aea6332bc3ce3a66e8aa04`와044329ZIP의원member두불변history leaf가정확두hash쌍만증명한다. 원근거봉투·관측·판단은보존하고 활성세션의표시참조만명시이행한다. 문헌/관측/계산의source불일치를포괄허용하지않는다.
+
+[Data_Spec DEV-020절](../Data_Spec.md)에 모든신규파일의현재바이트/SHA·원URL/역할·픽셀/과학payload동등조건을기록했다. 전체새export/최종ZIP/브라우저/공개배포·재시작검사는 진행중이므로 이목록으로완료를대신하지않는다. 기능/상태계약은FSD24를따른다.

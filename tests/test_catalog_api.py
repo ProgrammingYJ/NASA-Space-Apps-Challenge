@@ -1,7 +1,6 @@
-"""Actual local history/galaxy/parent catalogs and mounted original texture API."""
+"""Actual Solar parent catalogues and mounted original texture API."""
 
 import hashlib
-import math
 from pathlib import Path
 
 import pytest
@@ -19,221 +18,18 @@ def catalog_api(tmp_path_factory):
         yield client
 
 
-def test_gwgc_catalogue_pages_markers_and_identity_preserve_native_reference(catalog_api):
-    page = catalog_api.get("/api/v1/catalog/galaxy-atlas", params={"query": "Messier 31"})
-    assert page.status_code == 200
-    assert page.json()["record_count"] == 53162
-    assert page.json()["matched_count"] == 1
-    row = page.json()["objects"][0]
-    assert row["existing_object_id"] == "galaxy-m31"
-    detail = catalog_api.get("/api/v1/catalog/galaxy-atlas/" + row["object_id"])
-    assert detail.status_code == 200
-    assert detail.json()["coordinate_reference"] == "FK5 J2000 catalogue reference"
-    markers = catalog_api.get("/api/v1/catalog/galaxy-atlas/markers").json()
-    assert markers["marker_count"] == 53162
-    assert len(markers["columns"]["object_id"]) == 53162
-    assert len(catalog_api.get("/api/v1/catalog/galaxies").json()["objects"]) == 9
-
-
-@pytest.mark.parametrize("query", [{"limit": 201}, {"cursor": "-1"}, {"cursor": "53163"}])
-def test_gwgc_api_rejects_invalid_page_selection(catalog_api, query):
-    assert catalog_api.get("/api/v1/catalog/galaxy-atlas", params=query).status_code == 422
-
-
-def test_numerical_relativity_api_exposes_native_mode_with_unchanged_source(catalog_api):
-    response = catalog_api.get("/api/v1/physics/numerical-relativity")
-    assert response.status_code == 200
-    value = response.json()
-    assert value["algorithm_version"] == "sxs-nrar-h22-native-replay-v1"
-    assert len(value["columns"]["time_over_m"]) == 13869
-    assert (
-        value["source_manifest_sha256"]
-        == hashlib.sha256(
-            (ROOT / "data/manifests/numerical_relativity.json").read_bytes()
-        ).hexdigest()
-    )
-
-
-def test_cosmic_history_catalog_has_source_hashes_and_ten_conceptual_milestones(catalog_api):
-    response = catalog_api.get("/api/v1/cosmic-history")
-    assert response.status_code == 200, response.text
-    value = response.json()
-    assert value["schema_version"] == "1.0"
-    assert value["algorithm_version"] == "cosmic-chronology-v1"
-    assert value["reference_age_gyr"] == 13.8
-    assert len(value["stages"]) == 10
-    assert len(value["sources"]) == 4
-    assert (
-        value["source_manifest_sha256"]
-        == hashlib.sha256((ROOT / "data/manifests/cosmic_history.json").read_bytes()).hexdigest()
-    )
-    assert all(
-        stage["source"]["sha256"]
-        and stage["spatial_representation"] == "conceptual_illustration_only"
-        for stage in value["stages"]
-    )
-    assert "not a measured spatial reconstruction" in " ".join(value["limitations"])
-
-
 @pytest.mark.parametrize(
-    "age,expected", [(0, "hot_big_bang"), (0.00038, "recombination"), (13.8, "present")]
+    "object_id", ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune"]
 )
-def test_cosmic_age_endpoints_and_recombination_sample(catalog_api, age, expected):
-    response = catalog_api.get("/api/v1/cosmic-history/sample", params={"age_gyr": age})
+def test_base_solar_bodies_have_normal_empty_observation_state(catalog_api, object_id):
+    response = catalog_api.get("/api/v1/observations", params={"object_id": object_id})
     assert response.status_code == 200, response.text
-    value = response.json()
-    assert value["stage_id"] == expected
-    assert value["age_gyr"] == age
-    assert value["lookback_gyr"] == pytest.approx(13.8 - age)
-    assert value["stage_anchor_age_gyr"] == age
-
-
-def test_cosmic_morphology_references_are_separate_from_unchanged_chronology(catalog_api):
-    response = catalog_api.get("/api/v1/cosmic-history")
-    assert response.status_code == 200, response.text
-    value = response.json()
-    assert value["source_manifest_sha256"] == (
-        "bf947edd0a0859466d594b4e968997a70cd51511dd78fbccf6653b042f65b03f"
-    )
-    guide = value["morphology_reference"]
-    assert guide["algorithm_version"] == "cosmic-morphology-reference-v1"
-    assert (
-        guide["source_manifest_sha256"]
-        == hashlib.sha256((ROOT / "data/manifests/cosmic_morphology.json").read_bytes()).hexdigest()
-    )
-    assert len(guide["examples"]) == 6
-    assert not guide["visual_policy"]["scene_population_is_observed"]
-    assert not guide["visual_policy"]["morphology_fractions_available"]
-    assert guide["visual_policy"]["transition_times_are_display_assumptions"]
-    assert all(example["source"]["sha256"] for example in guide["examples"])
-    assert len(value["stages"]) == 10
-
-
-def test_missing_cosmic_morphology_reference_is_unavailable_instead_of_fake_data(
-    catalog_api, monkeypatch
-):
-    import science.history_morphology
-
-    def missing_reference(*args, **kwargs):
-        raise FileNotFoundError("missing source")
-
-    monkeypatch.setattr(science.history_morphology, "get_history_morphology", missing_reference)
-    response = catalog_api.get("/api/v1/cosmic-history")
-    assert response.status_code == 503, response.text
-    assert "history_source_unavailable" in response.text
-
-
-def test_observed_history_serves_only_the_five_exact_published_image_files(catalog_api):
-    response = catalog_api.get("/api/v1/cosmic-observations")
-    assert response.status_code == 200, response.text
-    value = response.json()
-    assert value["algorithm_version"] == "cosmic-observation-viewer-v1"
-    assert (
-        value["source_manifest_sha256"]
-        == hashlib.sha256(
-            (ROOT / "data/manifests/cosmic_observations.json").read_bytes()
-        ).hexdigest()
-    )
-    assert len(value["objects"]) == 5
-    cases = {case["id"]: case for case in value["objects"]}
-    assert cases["cosmic_gems_clusters"]["approx_age_gyr"] == 0.46
-    assert cases["firefly_sparkle_assembly"]["approx_age_gyr"] == 0.6
-    assert cases["rebels25_rotating_disc"]["approx_age_gyr"] == 0.7
-    assert cases["zs7_ongoing_merger"]["approx_age_gyr"] == 0.74
-    assert cases["ceers_projected_shapes"]["approx_age_gyr"] is None
-    assert cases["ceers_projected_shapes"]["sample_age_range_gyr"] == [0.6, 6.0]
-    total = 0
-    for case in cases.values():
-        image = case["image"]
-        assert image["kind"] == "published_observation_composite"
-        assert image["credit"] and image["license"] and image["processing"]
-        served = catalog_api.get(image["url"])
-        assert served.status_code == 200, served.text[:120]
-        assert served.headers["content-type"] in {"image/jpeg", "image/png"}
-        assert len(served.content) == image["bytes"]
-        assert hashlib.sha256(served.content).hexdigest() == image["sha256"]
-        total += len(served.content)
-    assert total == 2_034_618
-    assert catalog_api.get("/observations/cosmic/absent.png").status_code == 404
-
-
-def test_missing_observed_history_source_is_503_without_synthetic_substitution(
-    catalog_api, monkeypatch
-):
-    import science.history_observations
-
-    def missing_reference(*args, **kwargs):
-        raise FileNotFoundError("missing source")
-
-    monkeypatch.setattr(science.history_observations, "get_cosmic_observations", missing_reference)
-    response = catalog_api.get("/api/v1/cosmic-observations")
-    assert response.status_code == 503, response.text
-    assert "history_observation_unavailable" in response.text
-
-
-@pytest.mark.parametrize("age", ["-1", "nan", "inf", "13.81"])
-def test_cosmic_invalid_age_is_422_not_silently_clamped_or_nonfinite(catalog_api, age):
-    response = catalog_api.get("/api/v1/cosmic-history/sample", params={"age_gyr": age})
-    assert response.status_code == 422, response.text
-
-
-def test_nine_galaxies_keep_actual_sources_native_directions_and_rounded_distance_units(
-    catalog_api,
-):
-    response = catalog_api.get("/api/v1/catalog/galaxies")
-    assert response.status_code == 200, response.text
-    value = response.json()
-    assert (
-        value["source_manifest_sha256"]
-        == hashlib.sha256((ROOT / "data/manifests/galaxies.json").read_bytes()).hexdigest()
-    )
-    assert {obj["object_id"] for obj in value["objects"]} == {
-        "galaxy-m31",
-        "galaxy-m33",
-        "galaxy-m81",
-        "galaxy-m87",
-        "galaxy-lmc",
-        "galaxy-smc",
-        "galaxy-m51",
-        "galaxy-m104",
-        "galaxy-centaurus-a",
+    assert response.json() == {
+        "object_id": object_id,
+        "observations": [],
+        "status": "no_linked_observations",
+        "next_cursor": None,
     }
-    for obj in value["objects"]:
-        assert obj["coordinate_source"]["url"].startswith("https://")
-        assert obj["coordinate_source"]["sha256"]
-        assert obj["distance_source"]["sha256"]
-        assert obj["native_coordinates"]["original_coordinate_text"]
-        assert "J2000" in obj["native_coordinates"]["coordinate_reference"]
-        assert obj["distance_mpc"] == pytest.approx(
-            obj["distance_ly"]
-            * (299_792_458 * 365.25 * 86_400)
-            / (648_000 / math.pi * 149_597_870_700)
-            / 1e6,
-            rel=1e-14,
-        )
-        assert obj["distance_uncertainty"] is None
-        assert obj["limitations"]
-    m87 = next(obj for obj in value["objects"] if obj["object_id"] == "galaxy-m87")
-    assert m87["distance_ly"] == 54e6
-    assert m87["source_difference"]["coordinate_page_distance_million_ly"] == 55
-    objects = {obj["object_id"]: obj for obj in value["objects"]}
-    # Independent source facts: NASA M31's stated inclination, the NASA M81
-    # lithograph's two main arms, APOD's LMC bar/single arm, and no spiral
-    # pattern for the CXC elliptical M87/Centaurus A descriptions.
-    assert objects["galaxy-m31"]["appearance"]["inclination_deg"] == 77
-    assert objects["galaxy-m81"]["appearance"]["arms"] == 2
-    assert objects["galaxy-lmc"]["appearance"]["arms"] == 1
-    assert objects["galaxy-m87"]["appearance"]["arms"] == 0
-    assert objects["galaxy-centaurus-a"]["appearance"]["arms"] == 0
-    assert objects["galaxy-lmc"]["distance_ly"] == 160_000
-    assert objects["galaxy-smc"]["distance_ly"] == 200_000
-    assert all(obj["appearance"]["position_angle_deg"] is None for obj in objects.values())
-    assert all(
-        obj["appearance"]["inclination_deg"] is None
-        for object_id, obj in objects.items()
-        if object_id != "galaxy-m31"
-    )
-    assert len({obj["appearance"]["renderer"] for obj in objects.values()}) == 9
 
 
 @pytest.mark.parametrize(
@@ -322,19 +118,3 @@ def test_kuiper_api_returns_verified_display_version_and_source_hash(catalog_api
     )
     assert value["source"]["sha256"]
     assert value["renderer_assumptions"]["points_are_catalog_objects"] is False
-
-
-def test_universe_hierarchy_api_links_hosts_members_and_actual_existing_planets(catalog_api):
-    value = catalog_api.get("/api/v1/catalog/universe").json()
-    assert len(value["objects"]) == 24
-    assert value["algorithm_version"] == "sourced-universe-hierarchy-v1"
-    milky = catalog_api.get("/api/v1/catalog/universe?galaxy_id=galaxy-milky-way").json()
-    assert len(milky["objects"]) == 4871
-    host = next(v for v in milky["objects"] if v["name"] == "TRAPPIST-1")
-    children = catalog_api.get(
-        "/api/v1/catalog/universe", params={"parent_id": host["object_id"]}
-    ).json()
-    assert len(children["objects"]) == 7
-    assert all(v["kind"] == "exoplanet" for v in children["objects"])
-    assert all(v["coordinate"] is None for v in children["objects"])
-    assert catalog_api.get("/api/v1/catalog/universe?galaxy_id=invalid").status_code == 422

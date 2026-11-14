@@ -4,7 +4,6 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { hash, parse, safePath } = require('./storage');
 const { SOURCE_VERIFICATION_POLICY } = require('./verification-policy');
-const { atlasSelection } = require('./galaxy-atlas');
 const root = workerData.root, bundle = path.join(root, 'data', 'node-runtime');
 let manifest, manifestHash, initialized = false, failure = null;
 const metadata = new Map(), payloads = new Map();
@@ -47,7 +46,7 @@ function verify(strong = false) {
   initialized = true;
 }
 function verifyAsset(relative, strong = false) {
-  if (typeof relative !== 'string' || !/^(?:textures|observations)\//.test(relative)) throw new Error('invalid_asset_key');
+  if (typeof relative !== 'string' || !/^(?:textures|brand)\//.test(relative)) throw new Error('invalid_asset_key');
   const target = 'web/dist/' + relative;
   const source = manifest.source_files.find(file => file.runtime_required && (file.path === 'web/public/' + relative || file.serving_copy_path === target));
   if (!source) throw new Error('asset_not_in_source_manifest');
@@ -89,13 +88,9 @@ function drain() {
       if (action === 'asset') value = verifyAsset(key);
       else if (action === 'manifest') value = manifest;
       else if (action === 'snapshot') value = snapshot(key);
-      else if (action === 'galaxy_atlas') value = atlasSelection(snapshot('galaxy_atlas'), key);
       else if (action === 'snapshots') {
         if (!Array.isArray(key) || key.some(item => typeof item !== 'string')) throw new Error('invalid_snapshot_keys');
         value = Object.fromEntries(key.map(item => [item, snapshot(item)]));
-      } else if (action === 'dictionary_entry') {
-        if (!key || typeof key.snapshot !== 'string' || typeof key.id !== 'string') throw new Error('invalid_dictionary_key');
-        const dictionary = snapshot(key.snapshot); value = Object.hasOwn(dictionary, key.id) ? dictionary[key.id] : null;
       } else if (action === 'comparison' || action === 'importComparison') {
         const entry = manifest.comparisons[key]; if (!entry) throw new Error('comparison_cache_unavailable');
         value = { ...entry, raw: load(entry.path, true), source_validation_error: sourceError };

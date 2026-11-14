@@ -3,6 +3,8 @@ import {useQuery} from '@tanstack/react-query';
 import {useTranslation} from 'react-i18next';
 import {request} from './api';
 import styles from './MassScenarioPanel.module.css';
+import {r029Copy} from './R029Copy';
+import {restoredDensityInput} from './massScenarioDefaults';
 
 interface Source {url:string;label?:string}
 export interface MassScenarioInput {target_id:string;density_kg_m3:number;analogue_id:string|null;include_source_ranges:boolean}
@@ -16,38 +18,71 @@ const ids=new Set(['sedna','eris','makemake','quaoar','orcus','gonggong']);
 /** One controller supplies compact criteria, the expanded editor and evidence input. */
 export function useMassScenarioModel({objectId,saved,onApplied}:{objectId:string;saved?:AppliedMassScenario|null;onApplied?:(value:AppliedMassScenario)=>void}){
   const supported=ids.has(objectId);
-  const source=useQuery({queryKey:['mass-scenarios'],queryFn:({signal})=>request<Catalogue>('/mass-scenarios',{signal}),enabled:supported,retry:false,staleTime:Infinity});
-  const [input,setInput]=useState<MassScenarioInput|null>(null);const [lastValid,setLastValid]=useState<MassScenarioResult>();
-  const lastInit=useRef(''),lastReported=useRef(''),callback=useRef(onApplied);callback.current=onApplied;
-  useEffect(()=>{if(!source.data?.targets[objectId])return;const signature=objectId+source.data.source_manifest_sha256;if(lastInit.current===signature)return;lastInit.current=signature;
-    const old=saved?.input.target_id===objectId&&saved.source_manifest_sha256===source.data.source_manifest_sha256?saved.input:null;
-    const chosen=old??{target_id:objectId,density_kg_m3:source.data.analogues.tethys.density_kg_m3,analogue_id:'tethys',include_source_ranges:true};setInput({...chosen,analogue_id:chosen.analogue_id??null});
+  const [requested,setRequested]=useState(false);
+  const hasSaved=saved?.input.target_id===objectId;
+  const active=supported&&(requested||hasSaved);
+  const source=useQuery({queryKey:['mass-scenarios'],queryFn:({signal})=>request<Catalogue>('/mass-scenarios',{signal}),enabled:active,retry:false,staleTime:Infinity});
+  const [input,setInput]=useState<MassScenarioInput|null>(null);
+  const [lastValid,setLastValid]=useState<MassScenarioResult>();
+  const [restored,setRestored]=useState(false);
+  const lastInit=useRef(''),lastSaved=useRef(''),lastReported=useRef(''),callback=useRef(onApplied);callback.current=onApplied;
+  useEffect(()=>{
+    if(!source.data?.targets[objectId])return;
+    const signature=objectId+source.data.source_manifest_sha256;
+    const incoming=saved?JSON.stringify([saved.input,saved.source_manifest_sha256]):'';
+    const first=lastInit.current!==signature;
+    if(!first&&lastSaved.current===incoming)return;
+    lastInit.current=signature;lastSaved.current=incoming;
+    const old=restoredDensityInput(objectId,source.data,saved);
+    if(old&&incoming!==lastReported.current){setInput(old);setRestored(true);}
+    else if(first){setInput(null);setLastValid(undefined);setRestored(false);}
   },[source.data,objectId,saved]);
-  const result=useQuery({queryKey:['mass-scenario-result',source.data?.source_manifest_sha256,input],queryFn:({signal})=>request<MassScenarioResult>('/mass-scenarios/calculate',{method:'POST',signal,body:JSON.stringify(input)}),enabled:supported&&input?.target_id===objectId&&source.data!==undefined,retry:false,staleTime:Infinity});
+  const result=useQuery({queryKey:['mass-scenario-result',source.data?.source_manifest_sha256,input],queryFn:({signal})=>request<MassScenarioResult>('/mass-scenarios/calculate',{method:'POST',signal,body:JSON.stringify(input)}),enabled:active&&input?.target_id===objectId&&source.data!==undefined,retry:false,staleTime:Infinity});
   const current=result.data?.source_manifest_sha256===source.data?.source_manifest_sha256&&result.data?.inputs.target_id===objectId?result.data:undefined;
   const value=current??(lastValid?.source_manifest_sha256===source.data?.source_manifest_sha256&&lastValid?.inputs.target_id===objectId?lastValid:undefined);
   useEffect(()=>{if(!current)return;setLastValid(current);const signature=JSON.stringify([current.inputs,current.source_manifest_sha256]);if(lastReported.current===signature)return;lastReported.current=signature;callback.current?.({input:current.inputs,source_manifest_sha256:current.source_manifest_sha256});},[current]);
-  return {objectId,supported,source,result,input,setInput,value};
+  return {objectId,supported,source,result,input,setInput:(value:MassScenarioInput|null)=>{setRestored(false);setInput(value);},value,active,restored,request:()=>setRequested(true)};
 }
 export type MassScenarioModel=ReturnType<typeof useMassScenarioModel>;
 
 export default function MassScenarioPanel({objectId,labels={},model}:{objectId:string;labels?:Record<string,string>;model:MassScenarioModel}){
-  const {t,i18n}=useTranslation();const {supported,source,result,input,setInput,value}=model;
-  const [draft,setDraft]=useState(String(input?.density_kg_m3??''));const [invalid,setInvalid]=useState(false);const [onlyMeeting,setOnlyMeeting]=useState(false);
-  useEffect(()=>{if(input)setDraft(String(input.density_kg_m3));},[input?.density_kg_m3]);
+  const {t,i18n}=useTranslation(),copy=r029Copy(i18n.language);
+  const {supported,source,result,input,setInput,value}=model;
+  const [draft,setDraft]=useState(String(input?.density_kg_m3??''));
+  const [invalid,setInvalid]=useState(false),[onlyMeeting,setOnlyMeeting]=useState(false);
+  const [expanded,setExpanded]=useState(false),[includeRanges,setIncludeRanges]=useState(true);
+  useEffect(()=>{if(input){setDraft(String(input.density_kg_m3));setIncludeRanges(input.include_source_ranges);}},[input?.density_kg_m3,input?.include_source_ranges]);
+  useEffect(()=>{if(model.restored)setExpanded(true);},[model.restored]);
   if(!supported)return null;
-  const data=source.data,target=data?.targets[objectId];const number=(value:number)=>value.toLocaleString(i18n.language,{maximumSignificantDigits:6});
-  function apply(){const density=Number(draft);if(!draft.trim()||!Number.isFinite(density)||density<100||density>10000){setInvalid(true);return;}setInvalid(false);setInput(previous=>({target_id:objectId,density_kg_m3:density,analogue_id:previous?.analogue_id&&data?.analogues[previous.analogue_id].density_kg_m3===density?previous.analogue_id:null,include_source_ranges:previous?.include_source_ranges??true}));}
-  return <section className={styles.panel} data-testid="mass-scenario-panel" data-object-id={objectId}>
-    <h2>{t('massScenarioTitle')}</h2><p className={styles.notice}>{t('massScenarioNote')}</p><code>M = ρ · (4π/3) · R³</code>
-    {source.isPending&&<p role="status">{t('massLoading')}</p>}
+  const data=source.data,target=data?.targets[objectId];
+  const number=(value:number)=>value.toLocaleString(i18n.language,{maximumSignificantDigits:6});
+  function apply(){
+    if(!data)return;
+    const density=Number(draft);
+    if(!draft.trim()||!Number.isFinite(density)||density<data.model.density_input_min_kg_m3||density>data.model.density_input_max_kg_m3){setInvalid(true);return;}
+    setInvalid(false);
+    const analogue=input?.analogue_id&&data.analogues[input.analogue_id]?.density_kg_m3===density?input.analogue_id:null;
+    setInput({target_id:objectId,density_kg_m3:density,analogue_id:analogue,include_source_ranges:includeRanges});
+  }
+  return <details className={styles.panel} data-testid="mass-scenario-panel" data-object-id={objectId} open={expanded} onToggle={event=>{const open=event.currentTarget.open;setExpanded(open);if(open)model.request();}}>
+    <summary data-testid="mass-scenario-toggle">{copy.optionalTitle}</summary>
+    <h2>{t('massScenarioTitle')}</h2><p className={styles.notice}>{copy.optionalHelp}</p><p>{t('massScenarioNote')}</p><code>M = ρ · (4π/3) · R³</code>
+    {model.restored&&<p data-testid="mass-restored-assumption">{copy.restoredAssumption}</p>}
+    {model.active&&source.isPending&&<p role="status">{t('massLoading')}</p>}
     {(source.isError||result.isError)&&<p role="alert">{t('massError')} <button onClick={()=>{if(source.isError)void source.refetch();else void result.refetch();}}>{t('retry')}</button></p>}
-    {target&&data&&input&&<><form onSubmit={event=>{event.preventDefault();apply();}}>
-      <label>{t('massAnalogue')}<select data-testid="mass-analogue" value={input.analogue_id??''} onChange={event=>{const id=event.target.value;if(!id)return;const density=data.analogues[id].density_kg_m3;setDraft(String(density));setInvalid(false);setInput({...input,analogue_id:id,density_kg_m3:density});}}><option value="">{t('massCustom')}</option>{Object.entries(data.analogues).map(([id,analogue])=><option key={id} value={id}>{labels[analogue.object_id]??analogue.name} · {number(analogue.density_kg_m3)} kg/m³</option>)}</select></label>
-      <label>{t('massDensity')}<input data-testid="mass-density" type="number" min="100" max="10000" step="any" value={draft} aria-invalid={invalid} onChange={event=>setDraft(event.target.value)} onBlur={apply}/></label><button type="submit">{t('massApply')}</button>
-      <label className={styles.checkbox}><input data-testid="mass-include-ranges" type="checkbox" checked={input.include_source_ranges} onChange={event=>{const checked=event.target.checked;setInput(previous=>previous?{...previous,include_source_ranges:checked}:previous);}}/>{t('massRanges')}</label>
+    {target&&data&&<><form onSubmit={event=>{event.preventDefault();apply();}}>
+      <label>{copy.exampleLabel}<select data-testid="mass-analogue" value={input?.analogue_id??''} onChange={event=>{
+        const id=event.target.value;
+        if(!id){if(input)setInput({...input,analogue_id:null});return;}
+        const density=data.analogues[id].density_kg_m3;
+        setDraft(String(density));setInvalid(false);setInput({target_id:objectId,analogue_id:id,density_kg_m3:density,include_source_ranges:includeRanges});
+      }}><option value="">{copy.chooseExample}</option>{Object.entries(data.analogues).map(([id,analogue])=><option key={id} value={id}>{labels[analogue.object_id]??analogue.name} · {number(analogue.density_kg_m3)} kg/m³</option>)}</select></label>
+      <label>{t('massDensity')}<input data-testid="mass-density" type="number" min={data.model.density_input_min_kg_m3} max={data.model.density_input_max_kg_m3} step="any" placeholder={copy.densityPlaceholder} value={draft} aria-invalid={invalid} onChange={event=>setDraft(event.target.value)} onBlur={()=>{if(draft.trim()||input)apply();}}/></label><button type="submit">{t('massApply')}</button>
+      <label className={styles.checkbox}><input data-testid="mass-include-ranges" type="checkbox" checked={includeRanges} onChange={event=>{const checked=event.target.checked;setIncludeRanges(checked);if(input)setInput({...input,include_source_ranges:checked});}}/>{t('massRanges')}</label>
       {invalid&&<p role="alert">{t('massInvalid')}</p>}
-    </form><p>{t('massRadius')}: {number(target.radius_km)} km <a href={target.radius_source.url} target="_blank" rel="noreferrer">{t('source')} ↗</a>{target.radius_low_km===null&&<> · {t('massBoundUnavailable')}</>}</p>
+    </form><p data-testid="mass-analogue-explanation">{copy.exampleHelp} <a href="https://science.nasa.gov/saturn/moons/tethys/" target="_blank" rel="noreferrer">NASA · {labels['moon-603']??'Tethys'} ↗</a></p>
+    <p>{t('massRadius')}: {number(target.radius_km)} km <a href={target.radius_source.url} target="_blank" rel="noreferrer">{t('source')} ↗</a>{target.radius_low_km===null&&<> · {t('massBoundUnavailable')}</>}</p>
+    {!input&&<p data-testid="mass-no-assumption" className={styles.notice}>{copy.noAssumption}</p>}
     {result.isFetching&&<p role="status">{t('massLoading')}</p>}
     {value&&<div className={styles.result} data-testid="mass-scenario-result" data-status="hypothesis" data-source-sha256={value.source_manifest_sha256}>
       <strong>{t('massEstimate')}: <output data-testid="mass-estimate-earth">{number(value.mass_earth)} M⊕</output> · {number(value.mass_kg)} kg</strong>
@@ -58,7 +93,7 @@ export default function MassScenarioPanel({objectId,labels={},model}:{objectId:s
     <p className={styles.notice}>{t('massModelWarning')}</p><p>{t('massSurveyScope')}</p><label className={styles.checkbox}><input data-testid="mass-candidate-filter" type="checkbox" checked={onlyMeeting} onChange={event=>setOnlyMeeting(event.target.checked)}/>{t('massCandidateFilter')}</label>
     <p>{t('massConditionalCount',{count:data.summary.conditional_target_count_meets_model_range})}</p>
     <div data-testid="mass-conditional-targets">{Object.entries(data.targets).filter(([id])=>!onlyMeeting||data.summary.source_analogue_parameter_corner_envelopes[id].can_meet_model_within_source_parameter_corners).map(([id,item])=><span key={id} data-target-id={id}>{labels[id]??item.name} </span>)}{onlyMeeting&&data.summary.conditional_target_count_meets_model_range===0&&<p>{t('massEmpty')}</p>}</div>
-    <details><summary>{t('massSourceAssumptions')}</summary><p lang="en">{target.radius_definition}</p><p lang="en">{target.volume_assumption}</p>{input.analogue_id&&<a href={data.analogues[input.analogue_id].source.url} target="_blank" rel="noreferrer">{t('source')} · NASA/JPL ↗</a>}{data.limitations.map((note,index)=><p key={index} lang="en">{note}</p>)}</details>
+    <details><summary>{t('massSourceAssumptions')}</summary><p lang="en">{target.radius_definition}</p><p lang="en">{target.volume_assumption}</p>{input?.analogue_id&&<a href={data.analogues[input.analogue_id].source.url} target="_blank" rel="noreferrer">{t('source')} · NASA/JPL ↗</a>}{data.limitations.map((note,index)=><p key={index} lang="en">{note}</p>)}</details>
     </>}
-  </section>;
+  </details>;
 }

@@ -5,9 +5,16 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { Sources } = require('./sources');
 const { parse, canonical, hash, safePath, atomic, atomicRaw, lock } = require('./storage');
-const { validator, sessionRules, omitNullFields } = require('./schema');
+const { validator, sessionRules, omitNullFields, migrateSolarSession } = require('./schema');
 const { massScenario, longTerm, timelineScene, calendarMs, finite } = require('./science');
 const { SOURCE_VERIFICATION_POLICY } = require('./verification-policy');
+const { loadPresets, normalizeOrbit, skyPath } = require('./planet-nine');
+const { gravityField, integrateParticle } = require('./solar-gravity');
+const { coverageService } = require('./p9-coverage');
+const { evidenceStore } = require('./p9-evidence');
+const { createRegionCatalog } = require('./p9-regions');
+const { createOuterCatalog } = require('./outer-tno');
+const { resolveDisplayCompatibility } = require('./visual-compatibility');
 const LIMIT = 8_000_000;
 const uuid = () => crypto.randomUUID().replaceAll('-', '');
 const now = () => new Date().toISOString();
@@ -31,10 +38,12 @@ function queryNumber(url, key, fallback, integer = false) {
 async function start(options = {}) {
   const root = path.resolve(options.root || path.join(__dirname, '..'));
   const state = path.resolve(options.stateDir || process.env.APP_STATE_DIR || path.join(root, 'var', 'node'));
-  const port = options.port ?? Number(process.env.PORT || process.env.APP_PORT || 3002), host = options.host || '0.0.0.0';
+  const port = options.port ?? Number(process.env.PORT || process.env.APP_PORT || 3002), host = options.host || process.env.APP_HOST || '0.0.0.0';
   if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('invalid_port');
   const unlock = lock(state), sources = new Sources(root);
   const validate = validator(parse(fs.readFileSync(path.join(root, 'contracts/openapi.json'), 'utf8')));
+  const p9Document = parse(fs.readFileSync(path.join(root, 'contracts/planet-nine.schema.json'), 'utf8'));
+  const validateP9 = validator({ ...p9Document, components: { schemas: p9Document.$defs } });
   const jobs = new Map(); let active = null, closing = false, manifest;
   const savedJobs = path.join(state, 'jobs'); fs.mkdirSync(savedJobs, { recursive: true });
   const persist = job => { job.updated_at = now(); atomic(path.join(savedJobs, job.job_id + '.json'), job); };
@@ -55,7 +64,31 @@ async function start(options = {}) {
   const snapshot = async (key, code = 'source_unavailable', strong = false) => {
     try { return await sources.call('snapshot', key, strong); } catch { fail(503, code); }
   };
+  const p9Coverage = coverageService({ stateDir: state, normalizeOrbit, fetcher: options.mostFetcher });
+  let regionCatalog;
+  const p9Regions = () => { try { return regionCatalog || (regionCatalog = createRegionCatalog(root)); } catch { fail(503, 'hypothesis_source_unavailable'); } };
+  let outerCatalog;
+  const tnoCatalog = () => { try { return outerCatalog || (outerCatalog = createOuterCatalog(root)); } catch { fail(503, 'outer_tno_source_unavailable'); } };
+  const p9Presets = () => { try { return loadPresets(root); } catch { fail(503, 'hypothesis_source_unavailable'); } };
+  const p9Prediction = async input => skyPath(input, await snapshot('long_term_model', 'simulation_source_unavailable'));
+  let gravityActive = false;
+  const p9Gravity = async (kind, input, shouldCancel) => {
+    if (kind === 'field') return gravityField(input, await snapshot('long_term_model', 'simulation_source_unavailable'));
+    if (gravityActive) fail(503, 'gravity_busy');
+    gravityActive = true;
+    try { return await integrateParticle(input, await snapshot('long_term_model', 'simulation_source_unavailable'), { shouldCancel }); }
+    finally { gravityActive = false; }
+  };
+  const validateRegion = async context => {
+    await getManifest(); const catalog = p9Regions(), row = catalog.row(context.row_index);
+    if (row.cell_id !== context.cell_id) return false;
+    const input = { subset: context.subset, max_reference_distance_au: context.max_reference_distance_au, offset: 0, limit: 100 };
+    do { const page = catalog.members(context.cell_id, input); if (page.rows.includes(context.row_index)) return true; input.offset = page.next_offset; } while (input.offset !== null);
+    return false;
+  };
+  const p9Evidence = evidenceStore({ stateDir: state, normalizeOrbit, predict: p9Prediction, presets: p9Presets, populationRow: async index => { await getManifest(); return p9Regions().row(index); }, validateRegion, coverage: p9Coverage, gravity: p9Gravity });
   const checkSchema = (name, value) => { try { return validate(name, value); } catch { fail(422, 'invalid_request'); } };
+  const checkP9 = (name, value) => { try { return validateP9(name, value); } catch { fail(422, 'invalid_planet_nine_request'); } };
   async function comparisonFor(ids, strong = false, forImport = false) {
     try {
       const record = await sources.call(forImport ? 'importComparison' : 'comparison', ids.join(','), strong);
@@ -103,7 +136,6 @@ async function start(options = {}) {
     let m, values;
     const keys = ['timeline'];
     if (c.mass_scenario) keys.push('mass_scenarios');
-    if (c.selected_black_hole_id) keys.push('black_holes');
     if (c.simulation_context) keys.push('long_term_model');
     try { m = await manifestMetadata(); values = await sources.call('snapshots', keys); } catch { return ['universe_ephemeris_unavailable']; }
     const hashes = new Map(m.source_files.map(f => [f.path, f.sha256]));
@@ -111,10 +143,9 @@ async function start(options = {}) {
     if (!timeline || !/(Z|[+-]\d\d:\d\d)$/.test(c.model_epoch) || !finite(epoch, Date.parse(timeline.start_epoch), Date.parse(timeline.end_epoch))) return ['unsupported_model_epoch'];
     if (c.timeline_algorithm_version !== 'display-hermite-v1' && !timeline.knots.some(k => Date.parse(k.epoch) === epoch)) return ['unsupported_model_epoch'];
     if (!c.timeline_algorithm_version && c.orbit_manifest_sha256 && epoch !== Date.parse(timeline.default_epoch)) return ['orbit_guide_reference_changed'];
-    const fields = [ ['source_manifest_sha256', 'solar_system_ephemeris.json', 'universe_ephemeris_changed'], ['orbit_manifest_sha256', 'solar_system_orbits.json', 'orbit_ephemeris_changed'], ['galaxy_manifest_sha256', 'galaxies.json', 'galaxy_sources_changed'], ['appearance_manifest_sha256', 'appearance.json', 'appearance_sources_changed'], ['small_body_appearance_manifest_sha256', 'small_body_appearance.json', 'small_body_appearance_sources_changed'], ['planet_criteria_manifest_sha256', 'planet_criteria.json', 'planet_criteria_sources_changed'], ['mass_scenarios_manifest_sha256', 'mass_scenarios.json', 'mass_scenario_sources_changed'], ['observer_physics_manifest_sha256', 'observer_physics.json', 'observer_physics_sources_changed'], ['black_holes_manifest_sha256', 'black_holes.json', 'black_hole_sources_changed'], ['extended_solar_manifest_sha256', 'extended_solar.json', 'extended_solar_sources_changed'] ];
+    const fields = [ ['source_manifest_sha256', 'solar_system_ephemeris.json', 'universe_ephemeris_changed'], ['orbit_manifest_sha256', 'solar_system_orbits.json', 'orbit_ephemeris_changed'], ['appearance_manifest_sha256', 'appearance.json', 'appearance_sources_changed'], ['small_body_appearance_manifest_sha256', 'small_body_appearance.json', 'small_body_appearance_sources_changed'], ['planet_criteria_manifest_sha256', 'planet_criteria.json', 'planet_criteria_sources_changed'], ['mass_scenarios_manifest_sha256', 'mass_scenarios.json', 'mass_scenario_sources_changed'], ['extended_solar_manifest_sha256', 'extended_solar.json', 'extended_solar_sources_changed'] ];
     for (const [field, name, reason] of fields) if (c[field] && hashes.get('data/manifests/' + name) !== c[field]) return [reason];
     if (c.mass_scenario) { try { massScenario(values.mass_scenarios, c.mass_scenario); } catch { return ['mass_scenario_data_unavailable']; } }
-    if (c.selected_black_hole_id && !Object.hasOwn(values.black_holes.objects, c.selected_black_hole_id)) return ['unsupported_black_hole_selection'];
     if (c.simulation_context) {
       const model = values.long_term_model;
       if (model.source_manifest_sha256 !== c.simulation_context.source_manifest_sha256) return ['simulation_model_changed'];
@@ -143,28 +174,61 @@ async function start(options = {}) {
       if (pathname.startsWith('/api/')) {
         if (!pathname.startsWith('/api/v1/')) fail(404, 'not_found');
         const routeName = pathname.slice('/api/v1/'.length), q = key => url.searchParams.get(key);
+        // Explicit tombstones preserve the scope change without retaining the
+        // removed catalog, laboratory or historical feature implementations.
+        const removedScope = /^(?:black-holes|observer-physics|cosmic-history|cosmic-observations|physics|catalog\/(?:galaxies|galaxy-atlas|exoplanets|exoplanet-observations|extragalactic-planets|universe|comets))(?:\/|$)/.test(routeName);
+        if (removedScope) fail(410, 'outside_1000au_scope');
         if (request.method === 'GET') {
-          if (routeName === 'runtime') { const m = await getManifest().catch(() => fail(503, 'source_unavailable')); return send({ schema_version: '1.0', runtime: 'node', observation_processing: 'verified_build_cache', snapshot_exported_utc: m.exported_utc, supported_observation_pairs: [['S01', 'S02'], ['S12', 'S14']], arbitrary_fits_inputs: false, source_verification_policy: SOURCE_VERIFICATION_POLICY }); }
-          const fixed = { objects: ['objects'], timeline: ['timeline'], appearance: ['appearance', 'appearance_unavailable'], 'small-body-appearance': ['small_body_appearance', 'small_body_appearance_unavailable'], 'mass-scenarios': ['mass_scenarios', 'mass_scenario_source_unavailable'], 'black-holes': ['black_holes', 'black_hole_source_unavailable'], 'observer-physics': ['observer_physics', 'observer_physics_source_unavailable'], 'cosmic-history': ['cosmic_history', 'history_source_unavailable'], 'cosmic-observations': ['cosmic_observations', 'history_observation_unavailable'], 'catalog/galaxies': ['galaxies'], 'kuiper-belt': ['kuiper_belt'], 'long-term-model': ['long_term_model', 'simulation_source_unavailable'], 'catalog/exoplanets': ['exoplanets', 'catalog_unavailable'] };
-          if (fixed[routeName]) return send(await snapshot(...fixed[routeName]));
-          if (routeName === 'catalog/comets') return send(await snapshot('comets', 'comet_source_unavailable'));
-          if (routeName === 'physics/numerical-relativity') return send(await snapshot('numerical_relativity', 'numerical_relativity_source_unavailable'));
-          if (routeName === 'catalog/galaxy-atlas/markers') return send(await snapshot('galaxy_atlas_markers', 'galaxy_atlas_source_unavailable'));
-          if (routeName === 'catalog/galaxy-atlas' || routeName.startsWith('catalog/galaxy-atlas/')) {
-            const key = routeName === 'catalog/galaxy-atlas' ? { query: q('query') ?? '', cursor: q('cursor'), limit: q('limit') === null ? 50 : Number(q('limit')) } : { id: routeName.slice('catalog/galaxy-atlas/'.length) };
-            try { const value = await sources.call('galaxy_atlas', key); if (!value) fail(404, 'object_not_found'); return send(value); }
-            catch (error) { if (error instanceof HTTPError) throw error; if (error.message === 'invalid_galaxy_atlas_selection') fail(422, error.message); fail(503, 'galaxy_atlas_source_unavailable'); }
+          if (routeName === 'planet-nine/presets') { try { return send(await p9Presets()); } catch { fail(503, 'hypothesis_source_unavailable'); } }
+          if (routeName === 'planet-nine/regions' || routeName === 'planet-nine/regions/summary' || /^planet-nine\/regions\/\d+\/members$/.test(routeName) || /^planet-nine\/population\/\d+$/.test(routeName)) {
+            const allowed = new Set(['subset', 'max_reference_distance_au', 'offset', 'limit']);
+            if ([...url.searchParams.keys()].some(key => !allowed.has(key))) fail(422, 'invalid_region_selection');
+            const input = {};
+            if (q('subset') !== null) input.subset = q('subset');
+            if (q('max_reference_distance_au') !== null) input.max_reference_distance_au = q('max_reference_distance_au') === 'null' ? null : queryNumber(url, 'max_reference_distance_au');
+            for (const key of ['offset', 'limit']) if (q(key) !== null) input[key] = queryNumber(url, key, undefined, true);
+            try {
+              await getManifest();
+              const catalog = p9Regions();
+              if (routeName === 'planet-nine/regions/summary') return send(catalog.summary(input));
+              if (routeName === 'planet-nine/regions') return send(catalog.regions(input));
+              const member = /^planet-nine\/regions\/(\d+)\/members$/.exec(routeName);
+              if (member) return send(catalog.members(Number(member[1]), input));
+              if (Object.keys(input).length) fail(422, 'invalid_region_selection');
+              return send(catalog.row(Number(routeName.split('/').at(-1))));
+            } catch (error) { if (error instanceof HTTPError) throw error; fail(error.status || 422, error.status ? error.message : 'invalid_region_selection'); }
           }
+          const p9Export = /^planet-nine\/evidence\/(p9ev_[a-f0-9]{32})\/export$/.exec(routeName);
+          if (p9Export) {
+            let raw; try { raw = p9Evidence.raw(p9Export[1]); } catch (error) { fail(error.status || 503, error.status ? error.message : 'evidence_unavailable'); }
+            response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Content-Disposition': `attachment; filename="${p9Export[1]}.json"` }); return response.end(raw);
+          }
+          if (routeName === 'runtime') { const m = await getManifest().catch(() => fail(503, 'source_unavailable')); return send({ schema_version: '1.0', runtime: 'node', public_scope: 'solar_system_1000au', feature_flags: { galaxies: false, galaxy_atlas: false, exoplanets: false, black_holes: false, cosmic_history: false, historical_comets: false, physics_lab: false, observer_experiment: false, planet_nine_hypothesis: true }, physics_capabilities: { hypothesis: 'p9-kepler-sky-v1', gravity: 'newtonian_prescribed_sun_and_eight_planets_restricted_test_particle', optional_solar_1pn: true, all_physics: false, all_bodies_known: false, study_radius_au: 1000, force_cutoff_au: null, max_integrator_steps: 4096 }, observation_processing: 'verified_build_cache', snapshot_exported_utc: m.exported_utc, supported_observation_pairs: [['S01', 'S02'], ['S12', 'S14']], arbitrary_fits_inputs: false, source_verification_policy: SOURCE_VERIFICATION_POLICY }); }
+          const fixed = { objects: ['objects'], timeline: ['timeline'], appearance: ['appearance', 'appearance_unavailable'], 'small-body-appearance': ['small_body_appearance', 'small_body_appearance_unavailable'], 'mass-scenarios': ['mass_scenarios', 'mass_scenario_source_unavailable'], 'kuiper-belt': ['kuiper_belt'], 'long-term-model': ['long_term_model', 'simulation_source_unavailable'] };
+          if (fixed[routeName]) return send(await snapshot(...fixed[routeName]));
           if (routeName === 'universe') { const scene = await snapshot('universe'), timeline = await snapshot('timeline'); try { return send(timelineScene(scene, timeline, q('epoch') ?? timeline.default_epoch)); } catch { fail(422, 'unsupported_model_epoch'); } }
           if (routeName === 'long-term-simulation') { try { return send(longTerm(await snapshot('long_term_model', 'simulation_source_unavailable'), queryNumber(url, 'year', undefined, true), queryNumber(url, 'month', 1, true), queryNumber(url, 'day', 1, true), queryNumber(url, 'hour', 0))); } catch (error) { if (error instanceof HTTPError) throw error; fail(422, 'unsupported_simulation_date'); } }
-          if (routeName === 'observations') { const id = q('object_id') || 'epsilon-indi-b'; if (['sun', 'mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'].includes(id)) return send({ object_id: id, observations: [], status: 'not_selected_for_comparison', next_cursor: null }); const m = await getManifest().catch(() => fail(503, 'source_unavailable')); if (!m.snapshots['observations_' + id]) fail(404, 'object_not_found'); return send(await snapshot('observations_' + id)); }
+          if (routeName === 'observations') {
+            const id = q('object_id') || 'epsilon-indi-b', m = await getManifest();
+            if (m.snapshots['observations_' + id]) return send(await snapshot('observations_' + id));
+            const solar = await snapshot('solar_system', 'catalog_unavailable'), base = await snapshot('universe');
+            if (!base.objects.some(object => object.object_id === id) && !solar.objects.some(object => object.object_id === id) && !tnoCatalog().catalog().objects.some(object => object.object_id === id)) fail(404, 'object_not_found');
+            return send({ object_id: id, observations: [], status: 'no_linked_observations', next_cursor: null });
+          }
           if (routeName === 'planet-criteria') { const value = await snapshot('planet_criteria', 'planet_criteria_unavailable'), id = q('object_id'); if (id !== null) { if (!Object.hasOwn(value.objects, id)) fail(422, 'unsupported_planet_criteria_object'); value.objects = { [id]: value.objects[id] }; value.object_filter = id; } return send(value); }
-          if (routeName.startsWith('catalog/exoplanets/')) { let value; try { value = await sources.call('dictionary_entry', { snapshot: 'exoplanet_details', id: routeName.slice('catalog/exoplanets/'.length) }); } catch { fail(503, 'catalog_unavailable'); } if (!value) fail(404, 'object_not_found'); return send(value); }
-          if (routeName === 'catalog/exoplanet-observations') { const value = await snapshot('exoplanet_observations', 'planet_observation_unavailable'), id = q('object_id'); if (id !== null) { if (!/^exo-[a-f0-9]{20}$/.test(id)) fail(422, 'unsupported_catalog_selection'); let selected; try { selected = await sources.call('dictionary_entry', { snapshot: 'exoplanet_details', id }); } catch { fail(503, 'planet_observation_unavailable'); } if (!selected) fail(404, 'object_not_found'); value.observations = value.observations.filter(v => v.object_id === id); value.object_filter = id; } return send(value); }
-          if (routeName === 'catalog/extragalactic-planets') { const value = await snapshot('extragalactic_planets', 'planet_review_unavailable'), id = q('galaxy_id'); if (id !== null) { const catalogue = await snapshot('universe_catalog'); if (!catalogue.galaxy_ids.includes(id)) fail(422, 'unsupported_catalog_selection'); value.reviewed_unconfirmed_evidence = value.reviewed_unconfirmed_evidence.filter(item => item.galaxy_id === id); value.galaxy_filter = id; } return send(value); }
           if (routeName === 'catalog/solar-system') { const id = q('parent_id'); if (id === null) return send(await snapshot('solar_system', 'catalog_unavailable')); const m = await getManifest(); if (!m.snapshots['solar_parent_' + id]) fail(422, 'unknown_extended_parent'); return send(await snapshot('solar_parent_' + id, 'catalog_unavailable')); }
-          if (routeName === 'catalog/universe') return send(await hierarchy(q('galaxy_id'), q('parent_id')));
-          if (routeName === 'cosmic-history/sample') { const history = await snapshot('cosmic_history'), age = queryNumber(url, 'age_gyr', 0); if (age < 0 || age > 13.8) fail(422, 'invalid_request'); const stage = [...history.stages].reverse().find(v => v.age_gyr <= age); return send({ ...stage, stage_anchor_age_gyr: stage.age_gyr, age_gyr: age, lookback_gyr: Number((13.8 - age).toFixed(12)), reference_age_gyr: 13.8, algorithm_version: history.algorithm_version, source_manifest_sha256: history.source_manifest_sha256, limitations: [...history.limitations, ...stage.limitations] }); }
+          if (['catalog/outer-tno', 'catalog/outer-tno/scene', 'catalog/outer-tno/object'].includes(routeName)) {
+            await getManifest(); const catalog = tnoCatalog();
+            try {
+              if (routeName === 'catalog/outer-tno') { if ([...url.searchParams.keys()].length) fail(422, 'invalid_outer_tno_selection'); return send(catalog.catalog()); }
+              const allowed = routeName.endsWith('/object') ? ['object_id', 'jd_tdb'] : ['jd_tdb'];
+              if ([...url.searchParams.keys()].some(key => !allowed.includes(key))) fail(422, 'invalid_outer_tno_selection');
+              const jd = queryNumber(url, 'jd_tdb', catalog.catalog().reference_jd_tdb);
+              if (routeName.endsWith('/scene')) return send(catalog.scene(jd));
+              if (!q('object_id')) fail(422, 'invalid_outer_tno_selection');
+              return send(catalog.object(q('object_id'), jd));
+            } catch (error) { if (error instanceof HTTPError) throw error; fail(error.status || 422, error.status ? error.message : 'invalid_outer_tno_selection'); }
+          }
           let match = /^jobs\/(job_[a-f0-9]{32})$/.exec(routeName); if (match) { const job = jobs.get(match[1]); if (!job) fail(404, 'job_not_found'); return send(job); }
           match = /^comparisons\/(cmp_[a-f0-9]{24})\/manifest$/.exec(routeName); if (match) return send((await getResult(match[1])).result);
           match = /^evidence\/(ev_[a-f0-9]{32})\/export$/.exec(routeName);
@@ -180,6 +244,17 @@ async function start(options = {}) {
         }
         if (request.method !== 'POST') fail(405, 'method_not_allowed');
         const body = await readBody(request);
+        if (routeName.startsWith('planet-nine/')) {
+          try {
+            if (routeName === 'planet-nine/predict') return send(await p9Prediction(checkP9('PredictionInput', body)));
+            if (routeName === 'planet-nine/gravity-field') return send(await p9Gravity('field', checkP9('GravityFieldInput', body)));
+            if (routeName === 'planet-nine/integrate') return send(await p9Gravity('integration', checkP9('IntegrationInput', body), () => response.destroyed || closing));
+            if (routeName === 'planet-nine/coverage') return send(await p9Coverage.query(checkP9('CoverageInput', body)));
+            if (routeName === 'planet-nine/evidence') return send(await p9Evidence.save(checkP9('EvidenceRequest', body)), 201);
+            if (routeName === 'planet-nine/evidence/import') return send(await p9Evidence.restore(checkP9('EvidenceEnvelope', body)));
+          } catch (error) { if (error instanceof HTTPError) throw error; fail(error.status || 500, error.status ? error.message : 'planet_nine_unavailable'); }
+          fail(404, 'not_found');
+        }
         if (routeName === 'mass-scenarios/calculate') { const input = checkSchema('MassScenarioInput', body); try { return send(massScenario(await snapshot('mass_scenarios', 'mass_scenario_source_unavailable'), input)); } catch (error) { if (error instanceof HTTPError) throw error; fail(422, 'invalid_mass_scenario'); } }
         if (routeName === 'comparison-jobs') {
           const input = checkSchema('ComparisonRequest', body); if (!pair(input.observation_ids)) fail(422, 'invalid_request');
@@ -191,6 +266,9 @@ async function start(options = {}) {
         if (match) { const job = jobs.get(match[1]); if (!job) fail(404, 'job_not_found'); if (['queued', 'running'].includes(job.state)) { job.cancel_requested = true; if (job.state === 'queued') { job.state = 'cancelled'; job.stage = 'cancelled'; } persist(job); } return send(job); }
         if (routeName === 'evidence') {
           const input = checkSchema('EvidenceRequest', body); try { sessionRules(input.session); } catch { fail(422, 'invalid_request'); }
+          const migration = migrateSolarSession(input.session);
+          if (migration.omitted_contexts.length) fail(422, 'removed_context_requires_import');
+          input.session = migration.session;
           if ((await contextReasons(input.session)).length) fail(422, 'invalid_universe_context');
           const { record, result } = await getResult(input.result_id);
           if (result.frames.map(v => v.observation_id).join(',') !== input.session.observation_ids.join(',')) fail(409, 'selection_mismatch');
@@ -207,42 +285,42 @@ async function start(options = {}) {
           if (!pair(ids) || input.comparison.result_id !== input.result_id || input.comparison.object_id !== input.session.object_id || ids.join(',') !== input.session.observation_ids.join(',')) fail(409, 'selection_mismatch');
           const { record, result } = await comparisonFor(ids, false, true);
           if (record.comparison_sha256 !== input.comparison_sha256 || canonical(result) !== canonical(input.comparison)) fail(409, 'integrity_mismatch');
-          const reasons = await contextReasons(input.session);
+          const currentMetadata = await manifestMetadata();
+          const visualFiles={appearance_manifest_sha256:'appearance.json',small_body_appearance_manifest_sha256:'small_body_appearance.json',mass_scenarios_manifest_sha256:'mass_scenarios.json'};
+          const visualHashes=Object.fromEntries(Object.entries(visualFiles).map(([field,file])=>[field,currentMetadata.source_files.find(row=>row.path==='data/manifests/'+file)?.sha256]));
+          const compatibleReferences=[];
+          for(const field of ['small_body_appearance_manifest_sha256','mass_scenarios_manifest_sha256']) {
+            const from=input.session.universe_context?.[field],to=visualHashes[field];
+            if(from&&to&&from!==to){const verified=resolveDisplayCompatibility(root,field,from,to);if(verified)compatibleReferences.push(verified);}
+          }
+          const migration = migrateSolarSession(input.session,visualHashes,compatibleReferences), reasons = await contextReasons(migration.session);
           if (record.source_validation_error) reasons.push(record.source_validation_error);
-          try { await getResult(input.result_id); } catch (error) { reasons.push(error.status === 409 ? 'result_changed' : 'result_missing'); }
-          return send({ status: reasons.length ? 'recalculation_required' : 'restored', reasons: [...new Set(reasons)].sort(), session: omitNullFields(input.session), comparison: reasons.length ? null : result, judgment: input.judgment, evidence_id: input.evidence_id });
+          const comparisonPath = path.join(state, 'comparisons', input.result_id + '.json');
+          if (fs.existsSync(comparisonPath) && hash(fs.readFileSync(comparisonPath)) !== record.comparison_sha256) reasons.push('result_changed');
+          if (!reasons.length) {
+            if (!fs.existsSync(comparisonPath)) atomicRaw(comparisonPath, record.raw);
+            const evidencePath = path.join(state, 'evidence', input.evidence_id + '.json');
+            // Keep the original envelope and comparison digest. Only the
+            // returned active session is migrated; exports retain old context.
+            const raw = '{' + Object.keys(body).sort().map(key => JSON.stringify(key) + ':' + (key === 'comparison' ? record.raw : canonical(body[key]))).join(',') + '}';
+            if (fs.existsSync(evidencePath)) { if (canonical(parse(fs.readFileSync(evidencePath, 'utf8'))) !== canonical(body)) fail(409, 'evidence_id_collision'); }
+            else atomicRaw(evidencePath, raw);
+          }
+          return send({ response_schema_version: '1.1', status: reasons.length ? 'recalculation_required' : migration.omitted_contexts.length ? 'partially_restored' : 'restored', restoration_scope: 'observation_and_solar_system', migration_policy: 'solar-scope-context-v1', omitted_contexts: migration.omitted_contexts, reasons: [...new Set(reasons)].sort(), session: omitNullFields(migration.session), comparison: reasons.length ? null : result, judgment: input.judgment, evidence_id: input.evidence_id });
         }
         fail(404, 'not_found');
       }
       if (!['GET', 'HEAD'].includes(request.method)) fail(405, 'method_not_allowed');
       let relative = pathname === '/' ? 'index.html' : decoded.slice(1);
-      if (relative !== 'index.html' && !['assets/', 'textures/', 'observations/'].some(prefix => relative.startsWith(prefix))) fail(404, 'not_found');
+      if (relative !== 'index.html' && !['assets/', 'textures/', 'brand/'].some(prefix => relative.startsWith(prefix))) fail(404, 'not_found');
       let file; try { file = safePath(path.join(root, 'web', 'dist'), relative); if (!fs.statSync(file).isFile()) throw new Error(); } catch { fail(404, 'not_found'); }
-      if (relative.startsWith('textures/') || relative.startsWith('observations/')) { try { await sources.call('asset', relative); } catch { fail(503, 'source_unavailable'); } }
+      if (relative.startsWith('textures/') || relative.startsWith('brand/')) { try { await sources.call('asset', relative); } catch { fail(503, 'source_unavailable'); } }
       response.writeHead(200, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Content-Length': fs.statSync(file).size });
       if (request.method === 'HEAD') return response.end(); fs.createReadStream(file).on('error', () => response.destroy()).pipe(response);
     } catch (error) {
       if (!response.headersSent) send({ code: error instanceof HTTPError ? error.message : 'internal_error', message_key: 'errors.' + (error instanceof HTTPError ? error.message : 'internal_error'), details: {}, request_id: requestId }, error.status || 500);
       else response.destroy();
     }
-  }
-  async function hierarchy(galaxy, parent) {
-    const base = await snapshot('universe_catalog', 'universe_catalog_unavailable');
-    if (galaxy && !base.galaxy_ids.includes(galaxy)) fail(422, 'unsupported_catalog_selection');
-    let value = galaxy ? await snapshot('universe_catalog_galaxy_' + galaxy, 'universe_catalog_unavailable') : base;
-    if (parent?.startsWith('host-')) {
-      if (galaxy && galaxy !== 'galaxy-milky-way') fail(422, 'unsupported_catalog_selection');
-      let children; try { children = await sources.call('dictionary_entry', { snapshot: 'universe_host_children', id: parent }); } catch { fail(503, 'universe_catalog_unavailable'); } if (!children) fail(422, 'unsupported_catalog_selection');
-      return { ...value, galaxy_id: galaxy, parent_id: parent, objects: children };
-    }
-    if (parent) {
-      if (parent === 'galaxy-milky-way' && !galaxy) value = await snapshot('universe_catalog_galaxy_galaxy-milky-way', 'universe_catalog_unavailable');
-      const known = new Set(['solar-system', ...base.galaxy_ids, ...base.objects.map(v => v.object_id)]); if (!known.has(parent)) fail(422, 'unsupported_catalog_selection');
-      const parentGalaxy = base.galaxy_ids.includes(parent) ? parent : parent === 'solar-system' ? 'galaxy-milky-way' : base.objects.find(v => v.object_id === parent)?.galaxy_id;
-      if (galaxy && parentGalaxy !== galaxy) fail(422, 'unsupported_catalog_selection');
-      value.objects = value.objects.filter(v => v.parent_id === parent);
-    }
-    return { ...value, galaxy_id: galaxy, parent_id: parent };
   }
   const server = http.createServer({ requestTimeout: 30000, headersTimeout: 15000, maxHeaderSize: 16384 }, route);
   server.on('clientError', (_error, socket) => socket.end('HTTP/1.1 400 Bad Request\r\nConnection: close\r\n\r\n'));

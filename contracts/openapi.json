@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Planet X · SPHEREx",
-    "version": "0.11.0"
+    "version": "0.13.0"
   },
   "paths": {
     "/health/live": {
@@ -123,252 +123,6 @@
             "content": {
               "application/json": {
                 "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/catalog/exoplanets": {
-      "get": {
-        "summary": "Exoplanets",
-        "operationId": "exoplanets_api_v1_catalog_exoplanets_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/catalog/exoplanets/{object_id}": {
-      "get": {
-        "summary": "Exoplanet",
-        "operationId": "exoplanet_api_v1_catalog_exoplanets__object_id__get",
-        "parameters": [
-          {
-            "name": "object_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Object Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/catalog/exoplanet-observations": {
-      "get": {
-        "summary": "Exoplanet Observations",
-        "operationId": "exoplanet_observations_api_v1_catalog_exoplanet_observations_get",
-        "parameters": [
-          {
-            "name": "object_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Object Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/catalog/comets": {
-      "get": {
-        "summary": "Historical Comets",
-        "operationId": "historical_comets_api_v1_catalog_comets_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/physics/numerical-relativity": {
-      "get": {
-        "summary": "Numerical Relativity",
-        "operationId": "numerical_relativity_api_v1_physics_numerical_relativity_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/catalog/galaxy-atlas": {
-      "get": {
-        "summary": "Galaxy Atlas",
-        "operationId": "galaxy_atlas_api_v1_catalog_galaxy_atlas_get",
-        "parameters": [
-          {
-            "name": "query",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "",
-              "title": "Query"
-            }
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Cursor"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 50,
-              "title": "Limit"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/catalog/galaxy-atlas/markers": {
-      "get": {
-        "summary": "Galaxy Atlas Markers",
-        "operationId": "galaxy_atlas_markers_api_v1_catalog_galaxy_atlas_markers_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/catalog/galaxy-atlas/{object_id}": {
-      "get": {
-        "summary": "Galaxy Atlas Object",
-        "operationId": "galaxy_atlas_object_api_v1_catalog_galaxy_atlas__object_id__get",
-        "parameters": [
-          {
-            "name": "object_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Object Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
               }
             }
           }
@@ -547,126 +301,6 @@
         }
       }
     },
-    "/api/v1/black-holes": {
-      "get": {
-        "summary": "Black Holes",
-        "operationId": "black_holes_api_v1_black_holes_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/observer-physics": {
-      "get": {
-        "summary": "Observer Physics",
-        "operationId": "observer_physics_api_v1_observer_physics_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/cosmic-history": {
-      "get": {
-        "summary": "Cosmic History",
-        "operationId": "cosmic_history_api_v1_cosmic_history_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/cosmic-history/sample": {
-      "get": {
-        "summary": "Cosmic History Sample",
-        "operationId": "cosmic_history_sample_api_v1_cosmic_history_sample_get",
-        "parameters": [
-          {
-            "name": "age_gyr",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "number",
-              "maximum": 13.8,
-              "minimum": 0,
-              "default": 0,
-              "title": "Age Gyr"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/cosmic-observations": {
-      "get": {
-        "summary": "Cosmic Observations",
-        "operationId": "cosmic_observations_api_v1_cosmic_observations_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/catalog/galaxies": {
-      "get": {
-        "summary": "Galaxies",
-        "operationId": "galaxies_api_v1_catalog_galaxies_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/kuiper-belt": {
       "get": {
         "summary": "Kuiper Belt",
@@ -741,110 +375,6 @@
               "type": "number",
               "default": 0,
               "title": "Hour"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/catalog/universe": {
-      "get": {
-        "summary": "Universe Catalog",
-        "operationId": "universe_catalog_api_v1_catalog_universe_get",
-        "parameters": [
-          {
-            "name": "galaxy_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Galaxy Id"
-            }
-          },
-          {
-            "name": "parent_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Parent Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/catalog/extragalactic-planets": {
-      "get": {
-        "summary": "Extragalactic Planets",
-        "operationId": "extragalactic_planets_api_v1_catalog_extragalactic_planets_get",
-        "parameters": [
-          {
-            "name": "galaxy_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Galaxy Id"
             }
           }
         ],
@@ -1617,6 +1147,64 @@
       },
       "UniverseContext": {
         "properties": {
+          "scene_filter": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "confirmed-planets",
+                  "p9-reference",
+                  "planets-and-p9"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scene Filter"
+          },
+          "render_preset": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "balanced",
+                  "detail"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Render Preset"
+          },
+          "appearance_lighting": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "inspection",
+                  "solar"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Appearance Lighting"
+          },
+          "show_outer_tno": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Show Outer Tno"
+          },
           "selected_object_id": {
             "type": "string",
             "maxLength": 50,

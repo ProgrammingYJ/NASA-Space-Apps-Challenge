@@ -1,0 +1,201 @@
+{
+  "public_url": "https://nasaspaceappschallenge.marulee.dev/",
+  "checked_at_utc": "2026-11-14T19:06:36.152894+00:00",
+  "status": "passed",
+  "browser": {
+    "base_url": "https://nasaspaceappschallenge.marulee.dev/",
+    "started_utc": "2026-11-14T19:02:41.831Z",
+    "environment": "public_EC2_HTTPS_final_domain_default_Chrome_TLS",
+    "flows": [
+      {
+        "id": "public_assets_settings_tno",
+        "status": "passed",
+        "logo": {
+          "complete": true,
+          "width": 1024,
+          "height": 1024,
+          "url": "https://nasaspaceappschallenge.marulee.dev/brand/planet-x-logo.png"
+        },
+        "counts": "Catalogue 8341 · Positions in range 8340 · Unavailable 1 · Beyond 1000 au 0"
+      },
+      {
+        "id": "actual_epsilon_save_export_fresh_context_restore",
+        "status": "passed",
+        "comparison_id": "cmp_d88083664b6fd27592eb68c1",
+        "evidence_id": "ev_7035e0f65d53454e9031f69fccc284bc",
+        "quality_pixels": [
+          29,
+          32
+        ],
+        "export_bytes": 871572
+      },
+      {
+        "id": "conditional_region_hypothesis_gravity_save_fresh_restore",
+        "status": "passed",
+        "row_index": 2413,
+        "evidence_id": "p9ev_d72b1d0cc45d48d1992082dd3318b474",
+        "region_context": {
+          "cell_id": 3682,
+          "max_reference_distance_au": 1000,
+          "row_index": 2413,
+          "subset": "ztf_des_ps1"
+        },
+        "force_sources": 9,
+        "export_bytes": 107339
+      }
+    ],
+    "page_errors": [],
+    "http_errors": [],
+    "request_failures": [],
+    "expected_cancellations": [
+      {
+        "url": "https://nasaspaceappschallenge.marulee.dev/api/v1/catalog/outer-tno/object?object_id=sbdb-20015760&jd_tdb=2461358.5",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://nasaspaceappschallenge.marulee.dev/api/v1/catalog/outer-tno/object?object_id=sbdb-20015760&jd_tdb=2461358.5",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://nasaspaceappschallenge.marulee.dev/api/v1/catalog/outer-tno/object?object_id=sbdb-20015760&jd_tdb=2461358.500800726",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://nasaspaceappschallenge.marulee.dev/api/v1/catalog/outer-tno/object?object_id=sbdb-20015760&jd_tdb=2461358.5",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "browser": "157.0.8103.52",
+    "security": {
+      "issuer": "YE1",
+      "protocol": "TLS 1.3",
+      "subjectName": "nasaspaceappschallenge.marulee.dev",
+      "validFrom": 1794679361,
+      "validTo": 1802455360
+    },
+    "server_address": {
+      "ipAddress": "3.37.17.247",
+      "port": 443
+    },
+    "origin": {
+      "origin": "https://nasaspaceappschallenge.marulee.dev",
+      "secure_context": true,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36"
+    },
+    "status": "passed",
+    "completed_utc": "2026-11-14T19:02:57.511Z"
+  },
+  "https": {
+    "checked_at_utc": "2026-11-14T19:02:14.325690+00:00",
+    "status": "passed",
+    "base_url": "https://nasaspaceappschallenge.marulee.dev",
+    "dns_ipv4": "3.37.17.247",
+    "tls_version": "TLSv1.3",
+    "certificate_subject": [
+      [
+        [
+          "commonName",
+          "nasaspaceappschallenge.marulee.dev"
+        ]
+      ]
+    ],
+    "certificate_issuer": [
+      [
+        [
+          "countryName",
+          "US"
+        ]
+      ],
+      [
+        [
+          "organizationName",
+          "Let's Encrypt"
+        ]
+      ],
+      [
+        [
+          "commonName",
+          "YE1"
+        ]
+      ]
+    ],
+    "not_after": "Feb 12 18:02:40 2027 GMT",
+    "subject_alt_names": [
+      [
+        "DNS",
+        "nasaspaceappschallenge.marulee.dev"
+      ]
+    ],
+    "certificate_verification": "default trusted CA and hostname validation; no bypass",
+    "http_redirect": "https://nasaspaceappschallenge.marulee.dev/health/ready",
+    "checks": [
+      {
+        "path": "/",
+        "status": 200,
+        "url": "https://nasaspaceappschallenge.marulee.dev/",
+        "bytes": 424
+      },
+      {
+        "path": "/health/ready",
+        "status": 200,
+        "url": "https://nasaspaceappschallenge.marulee.dev/health/ready",
+        "bytes": 173
+      },
+      {
+        "path": "/api/v1/runtime",
+        "status": 200,
+        "url": "https://nasaspaceappschallenge.marulee.dev/api/v1/runtime",
+        "bytes": 1796
+      }
+    ]
+  },
+  "restart": {
+    "checked_at_utc": "2026-11-14T19:00:56.327669+00:00",
+    "status": "passed",
+    "host": "AWS EC2 Ubuntu24.04.5LTS",
+    "process_pid_before": 2871,
+    "process_pid_after": 3077,
+    "operation": "systemctl restart planet-x",
+    "health": {
+      "runtime": "node",
+      "science_mode": "verified_build_cache_and_ported_display_models",
+      "source_bundle_verified": true,
+      "status": "ready",
+      "storage_writable": true,
+      "worker_alive": true
+    },
+    "records": [
+      {
+        "id": "ev_e764a2eb3a294ca890b39ce8be85dc5d",
+        "route": "/api/v1/evidence/ev_e764a2eb3a294ca890b39ce8be85dc5d/export",
+        "file": "var/qa/dev018/ec2-restart/evidence_id-before.json",
+        "bytes": 870988,
+        "sha256": "ca26330aab98a9d26cd7b3c440445ef1068b375b75ca2ca784e3c1ec03d57746",
+        "same_export_bytes_after_restart": true,
+        "import_status": "restored"
+      },
+      {
+        "id": "ev_4872494bb4c649e3af2ad8d43b0bf4f8",
+        "route": "/api/v1/evidence/ev_4872494bb4c649e3af2ad8d43b0bf4f8/export",
+        "file": "var/qa/dev018/ec2-restart/pluto_evidence_id-before.json",
+        "bytes": 906270,
+        "sha256": "659e6ecf9de6c5572127f5b8d9c68cb2c74f98a76b17c08e35a49def46239e07",
+        "same_export_bytes_after_restart": true,
+        "import_status": "restored"
+      },
+      {
+        "id": "p9ev_5453e41e76da4a9786e2aff1503d2134",
+        "route": "/api/v1/planet-nine/evidence/p9ev_5453e41e76da4a9786e2aff1503d2134/export",
+        "file": "var/qa/dev018/ec2-restart/p9_evidence_id-before.json",
+        "bytes": 32807,
+        "sha256": "46f6398b6f28e868326d3d16f56b03bff6553b8b37311439dcc6b28c9d5f1dfb",
+        "same_export_bytes_after_restart": true,
+        "import_status": "restored"
+      }
+    ],
+    "persistent_state": "/srv/planet-x/shared/node",
+    "source_archive_sha256": "c251031cc7df5526b038425ba6d672d96cbbe01e0123b2df55c09fc5332ed067"
+  },
+  "renewal": "passed",
+  "archive_sha256": "c251031cc7df5526b038425ba6d672d96cbbe01e0123b2df55c09fc5332ed067"
+}

@@ -834,8 +834,8 @@
     },
     "appearance.json": {
       "path": "data/manifests/appearance.json",
-      "bytes": 91706,
-      "sha256": "4c0f0a03eda761d8bbdcfc57db09874b4ca2ab6416fa94b189c4f7cdefa3458e"
+      "bytes": 128238,
+      "sha256": "d0de5f97913addcfe2d70fff2859024c75e7edb3069d5a17f4d9a7022b4467e1"
     }
   },
   "limitations": [

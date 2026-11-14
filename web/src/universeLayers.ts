@@ -1,48 +1,6 @@
 import * as THREE from 'three';
 import {displayPosition,type Vec3} from './sceneMath';
-import {seededRandom} from './historySceneMath';
-
-export interface GalaxyObject {
-  object_id:string;
-  name:string;
-  kind:'galaxy';
-  direction_icrs_deg:{ra:number;dec:number};
-  distance_mpc:number|null;
-  source:{url:string;label:string};
-  morphology?:'spiral'|'elliptical'|'irregular'|'interacting'|'lenticular';
-  appearance?:GalaxyAppearanceSpec;
-  image_url?:string;
-  image_source?:{url:string;label:string};
-  limitations?:string[];
-}
-export type GalaxyRenderer='inclined_spiral'|'flocculent_spiral'|'grand_design_spiral'|'elliptical_jet'|'irregular_barred'|'irregular_cloud'|'interacting_pair'|'edge_on_dust_disk'|'dust_lane_elliptical';
-export interface GalaxyAppearanceSpec {
-  renderer:GalaxyRenderer;
-  observed_features:string[];
-  source:{url:string;label:string};
-  additional_sources?:{url:string;label:string}[];
-  inclination_deg?:number|null;
-  position_angle_deg?:number|null;
-  arms?:number|null;
-  orientation_status:'source_projected_appearance'|'illustrative_assumption';
-  display_assumptions:string[];
-}
-export interface GalaxyData {objects:GalaxyObject[];source?:{url:string;label:string};limitations?:string[]}
-
-/** Same fixed J2000 obliquity as the Horizons ecliptic source frame. */
-export function icrsToEclipticUnit(raDeg:number,decDeg:number):Vec3|null {
-  if(!Number.isFinite(raDeg)||!Number.isFinite(decDeg)||raDeg<0||raDeg>=360||Math.abs(decDeg)>90)return null;
-  const ra=raDeg*Math.PI/180,dec=decDeg*Math.PI/180,e=84381.448*Math.PI/(180*3600);
-  const x=Math.cos(dec)*Math.cos(ra),y=Math.cos(dec)*Math.sin(ra),z=Math.sin(dec);
-  return [x,y*Math.cos(e)+z*Math.sin(e),-y*Math.sin(e)+z*Math.cos(e)];
-}
-
-export function galaxyPositionAu(galaxy:Pick<GalaxyObject,'direction_icrs_deg'|'distance_mpc'>):Vec3|null {
-  const direction=icrsToEclipticUnit(galaxy.direction_icrs_deg.ra,galaxy.direction_icrs_deg.dec);
-  if(!direction||galaxy.distance_mpc===null||!Number.isFinite(galaxy.distance_mpc)||galaxy.distance_mpc<=0)return null;
-  const distanceAu=galaxy.distance_mpc*1e6*(648000/Math.PI);
-  return direction.map(value=>value*distanceAu) as Vec3;
-}
+function seededRandom(seed:number){let state=seed>>>0;return()=>{state=(Math.imul(1664525,state)+1013904223)>>>0;return state/4294967296;};}
 
 export function kuiperIllustrationPoints(count=650):Vec3[] {
   const random=seededRandom(1949030);const points:Vec3[]=[];

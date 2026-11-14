@@ -1,0 +1,162 @@
+{
+  "work_ids": [
+    "DEV-019",
+    "OPS-020"
+  ],
+  "checked_at_utc": "2026-11-14T19:28:51.916487+00:00",
+  "status": "local_passed_remote_migration_pending",
+  "build": {
+    "javascript": "index-COQWB6MM.js",
+    "p9_javascript": "PlanetNineWorkbench-B20w7YEZ.js",
+    "source_manifest_sha256": "17b7e74f95bad494a40f9a4a52005d3528cbf4eb89f64c8c305636c962ff3869",
+    "comparisons_unchanged": 4,
+    "generated_json_count": 39,
+    "generated_json_bytes": 19190204,
+    "source_files": 1252,
+    "required_source_files": 1165
+  },
+  "tests": {
+    "node": {
+      "pass": 61,
+      "node_version": "22.17.0"
+    },
+    "vitest": {
+      "pass": 66
+    },
+    "python_export_contract_parity": {
+      "pass": 68
+    },
+    "strict_typecheck": "passed",
+    "vite_build": "passed_with_existing_chunk_size_warning",
+    "ruff_package_release": "passed",
+    "source_manifest_verify_only": "1252_sources_39_generated_4_canonical_comparisons_passed",
+    "production_chrome_layout": {
+      "pass": 3,
+      "locales": [
+        "ko",
+        "en",
+        "ja",
+        "zh-Hant",
+        "fr"
+      ],
+      "viewports": [
+        "1440x1000",
+        "2560x1440",
+        "1024x768",
+        "390x844"
+      ]
+    },
+    "production_chrome_selection": {
+      "new_cases_pass": 3,
+      "compatibility_cases_pass": 2
+    },
+    "observation_regression": {
+      "first_parallel_run": {
+        "startTime": "2026-11-14T19:22:24.170Z",
+        "duration": 182788.36099999998,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "isolated_core_repeat": {
+        "startTime": "2026-11-14T19:26:09.327Z",
+        "duration": 62436.952,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "explanation": "First concurrent run reached the original-data table after a15s frame expectation deadline; retained as a failure. Unmodified core case passed isolated; stale-response guard passed in the original run. No product change or inflated timeout."
+    }
+  },
+  "calendar_api": {
+    "checked_at_utc": "2026-11-14T19:23:23.806552+00:00",
+    "cases": [
+      {
+        "label": "user_screenshot_BCE",
+        "jd_tdb": 800382.3381944444,
+        "catalogue_count": 8341,
+        "plotted_count": 8305,
+        "unavailable_count": 1,
+        "outside_1000_au_count": 35,
+        "extrapolated_count": 8340
+      },
+      {
+        "label": "min_calendar",
+        "jd_tdb": 625697.5,
+        "catalogue_count": 8341,
+        "plotted_count": 8305,
+        "unavailable_count": 1,
+        "outside_1000_au_count": 35,
+        "extrapolated_count": 8340
+      },
+      {
+        "label": "year_zero",
+        "jd_tdb": 1721059.5,
+        "catalogue_count": 8341,
+        "plotted_count": 8340,
+        "unavailable_count": 1,
+        "outside_1000_au_count": 0,
+        "extrapolated_count": 8340
+      },
+      {
+        "label": "modern",
+        "jd_tdb": 2461358.500800726,
+        "catalogue_count": 8341,
+        "plotted_count": 8340,
+        "unavailable_count": 1,
+        "outside_1000_au_count": 0,
+        "extrapolated_count": 0
+      },
+      {
+        "label": "max_calendar",
+        "jd_tdb": 2816787.5,
+        "catalogue_count": 8341,
+        "plotted_count": 8340,
+        "unavailable_count": 1,
+        "outside_1000_au_count": 0,
+        "extrapolated_count": 8340
+      }
+    ]
+  },
+  "limitations": [
+    "Long-range osculating two-body positions are unvalidated extrapolations, not historical observations or precision ephemerides.",
+    "100 Julian years is a display warning threshold, not a measured validity interval.",
+    "Japanese, Traditional Chinese and French lack native-speaker review.",
+    "Full mutual N-body and every law of physics are not implemented."
+  ],
+  "evidence": [
+    {
+      "path": "var/qa/dev019-layout-production-results.json",
+      "bytes": 24450,
+      "sha256": "355047812064de71d5d99ac254b999c4997ce8336be4868343a03fe530da8715"
+    },
+    {
+      "path": "var/qa/dev019-layout-final/capture.json",
+      "bytes": 6302,
+      "sha256": "d9c8ab32c053638ac128b5fb337561c96762106893212d4f97bd85d39b06bbf7"
+    },
+    {
+      "path": "var/qa/dev019/selection-report.json",
+      "bytes": 1541,
+      "sha256": "a9db421bdbc289788a3cdd146c1c5681cab23b9670755a59ea05de8ef04a4671"
+    },
+    {
+      "path": "var/qa/dev019-api-calendar.json",
+      "bytes": 1278,
+      "sha256": "8a1dadc1a3c44a9331c8245cd218d7ee1b2cc982487a283b2f01c0b7c0fcc094"
+    },
+    {
+      "path": "var/qa/dev019-observation-browser.json",
+      "bytes": 23626,
+      "sha256": "1f38eb8fb4f0b63aaec6044901c6b6fe5dee4d8adddc8f9dac2cd1b598baceec"
+    },
+    {
+      "path": "var/qa/dev019-observation-browser-isolated.json",
+      "bytes": 5658,
+      "sha256": "9e64ad0842427c4892e563b8c51775b7d5050a28c1c3beafded3cad531932984"
+    }
+  ],
+  "remote_state": "User changed A record to16.176.170.4; new-host installation/migration in progress; old3.37.17.247 preserved."
+}

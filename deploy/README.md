@@ -1,69 +1,47 @@
-# v0.11.0 Node.js 서버 실행·복구
+# v0.12.1 Node 서버 실행·복구
 
-**시작 파일은 ZIP을 푼 프로젝트 루트의 `app.js`다. 실행 명령은 `node app.js` 또는 `npm start`다.** 서버에는 Node.js 22.17.0 이상만 필요하며 Python·pip·별도 Python API를 실행하지 않는다. Node 런타임은 내장 모듈만 사용한다. 검증한 정적 프런트와 실제 자료/파생 캐시를 ZIP에 포함하므로 서버에서 npm 패키지를 설치하거나 프런트를 다시 빌드할 필요가 없다.
+시작 파일은 ZIP 루트의 `app.js`, 명령은 `node app.js`다. 완결 ZIP에는 검증된 정적 프런트·Node 코드·계약·필수 관측/보정·자료와 출처/라이선스가 포함된다. Node 런타임은 내장 모듈만 사용한다. Python/PIP/프런트 재빌드는 서버 시작의 필수 단계가 아니다. 큰 원자료가 없는 Git clone만으로 실행을 보증하지 않는다.
 
-## 관리 패널 / MCSM
+## AWS EC2
 
-| 항목 | 값 |
-| --- | --- |
-| 작업 디렉터리 | 압축 해제 후 `app.js`, `package.json`, `node`, `web`, `data`가 함께 있는 폴더 |
-| 시작 파일 | `app.js` |
-| 시작 명령 | `node app.js` |
-| Node 버전 | 22.17.0 이상 |
-| 앱의 기본 수신 포트 | **3002** · `node app.js`만으로 `0.0.0.0:3002`에 HTTP 실행 |
-| 포트 변경 | `PORT` 우선, 미설정 시 `APP_PORT`, 둘 다 없으면 3002 |
-| 상태 경로 | `APP_STATE_DIR`, 기본 프로젝트 루트의 `var/node` |
-| 입력 자료 | 포함된 `data` 및 `web/public`·`web/dist`, 읽기 가능해야 함 |
+채택 구성과 콘솔 생성/설치/HTTPS 순서는 [EC2_SETUP.md](EC2_SETUP.md)를 따른다. 새 Ubuntu24.04 amd64에 고정 Node24.22.3/전용planetx/nginx/systemd를 준비한다. 파일은 `deploy/ec2/`에 있으며 배포 전에 정확한 ZIP SHA를 대조한다. 루프백3002의 Node 앞에 nginx80/443을 두고 근거는 `/srv/planet-x/shared/node`에 영속 보관한다. SSH22는 사용자IP만 허용한다. 앱/도구 포트를 추가로 공개하지 않는다.
 
-사용자가 확인한 MCSM 할당 포트3002를 기본값으로 반영했다. 직접 실행형 인스턴스는 시작 명령을 `node app.js`로 지정한다. 기존 패널 환경변수에 `PORT=8000` 또는 `APP_PORT=8000`이 남아 있다면 제거하거나3002로 바꿔야 기본값이 적용된다. 동일 상태 경로에 두 앱을 동시에 실행하지 않는다. `.env.example`은 공개 설정 예시이며 실제 `.env`를 ZIP에 넣지 않는다. Node는 파일을 복사했다는 이유만으로 `.env`를 읽지 않는다. 환경변수를 패널에 지정하거나 선택적으로 `node --env-file=.env app.js`를 쓸 수 있다([Node 22.17 공식 CLI](https://nodejs.org/download/release/v22.17.0/docs/api/cli.html#--env-filefile)).
+```sh
+# ZIP을 새 /srv/planet-x/releases/릴리스명 폴더에 푼 후
+sudo bash /srv/planet-x/releases/릴리스명/deploy/ec2/install-host.sh
+sudo bash /srv/planet-x/releases/릴리스명/deploy/ec2/activate-release.sh /srv/planet-x/releases/릴리스명
+curl --fail http://127.0.0.1/health/ready
+sudo journalctl -u planet-x -n 100 --no-pager
+```
 
-컨테이너 사용 시 호스트 포트와 앱 내부 포트는 별개다. 이 릴리스의 Docker/compose 기본값은 `호스트127.0.0.1:3002 → 컨테이너3002`이며 health도 내부3002를 검사한다. 기존 MCSM 매핑이 `호스트3002 → 컨테이너8000`이었다면 컨테이너 대상 포트도3002로 맞추거나, 의도적으로 내부PORT8000을 유지한 별도 구성을 사용한다. 호스트 포트를 바꾼다는 이유만으로 내부 포트까지 같은 값이라고 추정하지 않는다.
+첫 설치 때만 install-host.sh를 사용한다. 이미 HTTPS가 구성된 EC2의 수정 배포는 새 릴리스에 압축을 푼 뒤 activate-release.sh만 실행해 인증서/nginx/shared를 보존한다. 설치기는 기존 사용자 설정이 다르면 덮어쓰지 않고 중단한다. 활성화기는 경로·전용계정 읽기·전체 파일/원자료 SHA를 먼저 검사하고 이전 writer를 중지한 뒤 current symlink를 바꾼다. 실패 시 shared를 초기화하지 않고 이전 경로와 로그를 남긴다. 실제 EC2/DNS/HTTPS/재시작 성공은 해당 호스트 검사 기록으로 확정하며 로컬 Windows/WSL 검사와 구분한다.
 
-도메인 nginx upstream은 앱에 접근 가능한 **`http://주소:포트`**로 지정한다. nginx가 같은 호스트에서 위 compose 공개 포트에 접근한다면 `http://127.0.0.1:3002`이며, 다른 서버/컨테이너라면 해당 환경에서 접근 가능한 주소를 사용해야 한다. 기본 compose의127.0.0.1 바인딩은 다른 서버에 공개되지 않는다. 앱의 listening 로그는 포트 개방 확인이며 공개 도메인의502 해결·자료ready를 보증하지 않는다. 실제 MCSM 매핑/프록시 설정을 확인한 뒤 공개health와 대표 경로를 검사한다.
+## 직접 실행·LAN
 
-## 업로드 → 실행 → 확인
+기본 bind는0.0.0.0, 포트는 `PORT` 우선 → `APP_PORT` →3002다. `APP_HOST=127.0.0.1`이면 같은 호스트에서만 접근한다. 같은 Wi-Fi 서버는0.0.0.0 bind와 현재 PC의 LAN IP, 운영체제 방화벽 허용이 필요하다. 과거 확인한 LAN IP가 현재도 같다고 추정하지 않는다.
 
-1. **완결 ZIP 전체**를 서버의 새 릴리스 폴더에 풀고 `release_manifest.json`의 파일·크기·SHA를 확인한다. 이전 릴리스 폴더와 기존 `var`를 덮어쓰거나 지우지 않는다.
-2. 실행 중인 이전 앱을 중지한 뒤 패널 작업 디렉터리를 그 폴더로, 시작 명령을 `node app.js`로 지정한다. 기본 수신 포트는3002다. 기존 포트 환경변수·컨테이너 매핑·영속 상태 경로를 위 계약에 맞춘다.
-3. 실행 뒤 `/health/live`와 `/health/ready`를 확인한다. ready는 실제 상태 쓰기·worker thread·원본/캐시 무결성이 맞을 때만 성공한다. `/api/v1/runtime`은 `runtime: node`, `observation_processing: verified_build_cache`를 반환해야 한다.
-4. 실제 ε Indi B의 S01/S02 및 명왕성 S12/S14에서 원시각/품질/출처 → 판단 저장 → JSON 내보내기 → 새 세션 가져오기를 확인한다. 앱을 재시작한 뒤 같은 근거·카메라·시간·질량 가정·관측자 실험이 복원되는지 확인한다.
+상태 경로는 `APP_STATE_DIR` 또는 ZIP 루트의 `var/node`다. `.env.example`을 복사만 해서는 로드되지 않는다. 호스트 환경변수를 지정하거나 `node --env-file=.env app.js`를 사용한다. Docker/compose는 선택 경로이고 실제 컨테이너 검증 여부는 릴리스 보고서와 구분한다. 예전 MCSM 할당 포트3002는 기본 포트 이력이며 새 EC2에서 public3002 개방을 뜻하지 않는다.
 
-로그에 `Planet X Node runtime listening on port ...`가 표시된다. live만 성공하고 ready가 실패하면 자료/파생 캐시·경로/해시·상태 폴더 쓰기·중복 인스턴스를 확인한다. 데이터가 없을 때 가짜 관측이나 0값으로 대체하지 않는다.
+## 자료와 health
 
-## 실제 자료와 빌드 캐시
+현재 정본 `data/manifests/node_runtime.json`/`data/node-runtime/runtime_manifest.json`은 생성39JSON/19,190,204B, source1,252개·필수1,165개를 추적한다. 원4관측+2보정, 태양계/지도/이름/3요건, 제9행성 Caltech 표본·JPL TNO를 active closure로 사용한다. 은하·외계행성·역사·블랙홀/범용실험 자료는 새 실행 필수/번들에서 제외한다. 모든 확보 원본이 독립 관측이나 런타임 사용 자료인 것은 아니다. [Data_Spec](../Data_Spec.md)을 따른다.
 
-`data/node-runtime/runtime_manifest.json`과 동일한 정본 `data/manifests/node_runtime.json`이 생성 JSON 107개/76348584B(실제 reader snapshot103개+새 FITS 비교4개), source 1885개/필수 1586개를 추적한다. 실제 FITS/보정 S01/S02/S10/S12/S14/L051의6개와 새 GWGC/NR 원본을 포함한다. 102개 관측의 나머지96개는 확보/참고 자료이며 전부 서버에 포함됐다고 가정하지 않는다. h5py는 SXS 원 HDF5를 추출하는 선택 빌드 도구이고 서버 실행 의존성이 아니다.
+`/health/live`는 프로세스 응답, `/health/ready`는 저장 쓰기·worker 생존·필수 원본/캐시 무결성이다. `/api/v1/runtime`은 Node/검증 빌드 캐시/1000AU 범위·계산 한계를 제공한다. `node app.js --verify-sources`는 전체 SHA 감사를 강제한다. 자료 누락/해시 불일치는 가짜 데이터로 채우지 않는다.
 
-런타임 정본은 107 JSON/76348584B, source1885개·필수1586개/623292613B·선택299개를 기록한다. 완결 ZIP은 모든 필수 원본/보정/사실/시간배열/카탈로그/지도·사진/107파생 JSON을 포함한다. 전체 논문/출판사 upstream 감사본과 확보 자료96개는 런타임 필수로 만들지 않는다. 원본/파생/복제 전수 구분은 Data_Spec을 따른다.
+Node는 εB S01/S02와 명왕성 S12/S14의 양순서4개 비교를 실제 FITS에서 빌드한 정본 캐시로 제공한다. 요청 때 새 FITS 분석·실측 이동/광도 검출로 표시하지 않는다. 원 DATE-AVG/TIMESYS/FLAGS/결과 ID/SHA를 보존한다. 전체 최초 SHA 감사 후 과학 요청별 모든 필수 파일의 실경로/identity/fingerprint를 검사하고 변경 시 SHA를 재계산한다. 정적 지도는 자기 serving-copy를 검증하며 지도 성공으로 과학ready 실패를 해제하지 않는다.
 
-비교는 기존 API가 지원하는 두 관측 쌍과 양순서만 제공한다. Node 요청 시 현재 원본·보정·알고리즘과 정본 캐시의 SHA/크기를 검증하고 빌드 때 계산한 결과를 재사용한다. 이는 새 런타임 FITS 분석·검출/측광·운동 측정이 아니다. UI에서 검증된 사전 계산 결과임을5언어로 고지한다. 원 DATE-AVG/TIMESYS·native 픽셀·FLAGS·판단을 유지하고 Python의 원 JSON float·내용 SHA·result ID를 보존한다. 임의 새 좌표/ROI/새 FITS의 즉시 분석은 제공하지 않는다.
+## 저장·복원·복구
 
-가정 밀도 질량·표시 천체력 Hermite·장기 Kepler는 Node의 일반 수식으로 계산한다. 표시 Hermite의 UTC/TDB 변환은 저장 매듭 간 선형 대응이며 정밀 시간계 변환이 아니다. 기존4개 원매듭은 원 벡터 그대로다. 모델/가정·원 실측과 IAU 분류의 구분은 FSD를 따른다.
+Node 단일 writer가 파일을 원자적으로 저장한다. 동일 상태에 두 프로세스를 붙이지 않는다. 재시작 전 writer 종료를 확인하고 미완료 작업은interrupted로 둔다. 배포는 정지 상태의 shared 전체를 백업하고 릴리스별 코드/입력과 스키마 호환을 보존한다.
 
-## 상태 보관과 이전
+기존 관측 근거의 원 봉투·결과 ID·SHA를 유지한다. 제거된 선택 맥락만 제외하면 응답1.1의 `partially_restored`이며 활성 세션에 제외 목록/이유를 보여준다. 원 핵심 비교를 검증할 수 없으면 `recalculation_required`다. 새 P9 가설 근거는 별도 버전/종류/ID와 문헌/날짜/가설/coverage원문/판단으로 저장하며 실제 관측 근거와 섞지 않는다.
 
-Node의 기본 상태는 `var/node`이며 이전 Python의 `var`와 분리했다. 이전 근거 JSON은 원 비교정본·SHA가 맞으면 가져올 수 있다. Node는 비교 JSON의 원 canonical 바이트를 유지해 `1.0`/`1` 직렬화가 이전 Python의 결과 ID·내용 SHA를 깨지 않게 한다.
+검사 순서는 ready→εB/명왕성 원본/품질→판단 저장→export→새 세션 import→실제 프로세스 재시작 후 동일 ID/조건 복원이다. 새 P9 영역 선택/표본/날짜/MOST 원응답 근거도 별도로 검사한다. 공개 주소와 실제 자료·저장·복구의 성공은 별개다.
 
-기존 상태 경로를 직접 재사용할 때는 먼저 이전 API/worker를 종료하고 상태 **전체**를 백업한다. 두 런타임을 같은 상태에 동시에 붙이지 않는다. 이전 writer가 살아 있으면 잠금 오류로 거부한다. Node 하나만 상태를 쓰고 worker thread는 검증/읽기를 보고한다. 종료되지 못한 queued/running 작업은 재시작 시 interrupted로 남는다. 기본 실행에서 volume을 초기화하지 않는다.
-
-배포 실패 시 새 앱을 중지하고, 보관한 이전 릴리스와 호환 상태 전체로 복귀한 뒤 health·같은 근거의 복원을 다시 확인한다. 캐시/해시 오류를 해결하려고 원본이나 사용자 근거를 삭제하지 않는다. 모델/입력이 바뀐 파생 결과는 개발 환경에서 Python 과학 코드를 이용해 명시적으로 다시 빌드·검증해야 한다. 서버에서 자동 재다운로드·TLS 우회·원본 덮어쓰기를 하지 않는다.
-
-## 선택적 Docker / 개발·재검산
-
-Docker 환경에서는 `docker compose -f deploy/compose.yaml up --build -d`를 사용한다. 기본 Dockerfile은 Node22.17의 prebuilt 런타임이며 `data`를 읽기 전용, `var`를 쓰기 가능한 volume으로 연결한다. 해당 실제 호스트의 포트/proxy/HTTPS/RAM은 별도 확인 대상이다. 이번 로컬 Windows 검증으로 Linux 컨테이너·공개 서비스의 동작을 주장하지 않는다.
-
-기존 Python 코드와 `Dockerfile.python`, `README.python.md`, Python lockfile은 빌드/독립 재검산 또는 선택적 이전 API용으로 보존했다. Node 운영 시작 절차에 Python을 넣지 않는다. 개발 환경의 새 snapshot 생성은 `.venv/Scripts/python -m deploy.export_node_runtime`이고 `--verify-only`로 출처/산출물만 검사할 수 있다. 생성한 정본과 데이터·빌드·검증 기록을 함께 동결한 새 완결 ZIP으로 전달한다.
-
-정확한 v0.9 ZIP 식별/파일 수·실측 바이트/SHA·실제 Node 재시작 검증은 최종 ZIP 옆 동명 checksum/verification JSON과 `docs/releases/v0.9.0.json`에서 확정한다. 사후 검증문서는 이미 검증한 ZIP 바이트를 수정하지 않고 별도 기록한다. v0.8.0의 불변 ZIP과 Git 이력도 보존한다.
-
-현재 Node 검증 정책은 `sha256-stat-fingerprint-v2-scoped-assets`다. 최초 전체 SHA 감사 뒤 과학 요청마다 모든 필수 실경로·dev/ino/size/나노초mtime/ctime을 검사하고 변경 시 SHA를 다시 계산한다. 최초감사를 통과한 정적 지도 요청은 manifest identity와 요청한 등록 제공파일의 fingerprint/SHA를 검사한다. 정적지도 성공으로 과학ready 실패를 해제하지 않는다. 원 비교 JSON은 읽을 때마다 SHA를 확인하고 TTL로 검사를 생략하지 않는다. `node app.js --verify-sources`는 전체 SHA 감사를 강제한다. 불변 입력을 변경하면 새 빌드·검증·재시작을 수행한다.
+실패하면 서비스를 중지하고 검증된 이전 릴리스 current와 호환 가능한 shared 전체로 복귀한 뒤 같은 검사를 반복한다. 원본/근거를 삭제해 문제를 숨기지 않는다. 기존v0.11 불변 ZIP과 Git은 보존하며 새 전달은 항상 완결 ZIP이다. 정확한 새 ZIP의 크기/SHA·해제/실행·Windows/Ubuntu/EC2 검증 상태는 ZIP 옆 외부 verification JSON을 따른다.
 
 
-### DEV-012 최종 완결 ZIP 검증 확정 · 2026-11-14 21:40:02 KST
-
-`NASA_SPACE_APPS_CHALLENGE_v0.9.0_20261114_213804KST.zip`는 **495916482B/2223파일**, SHA256 **`fd3c694f354bac02ba9728dae521b13d7b41250870bc3b050ee8629d6b467db7`**이다. source `7b2dbf7c4e5ee6798fd9c56230a7858ae8dde3e4`의 clean tree, 최종 DLJsfpSc 프런트와 Node 전용 `app.js`/검증된103JSON으로 생성했다. 추적 manifest/source sidecar33개의 Git index와 실제 동결바이트도 전부 일치했다.
-
-정확한 ZIP을 새 `tmp/node-release-verify-r4s83m6d/extracted`에 풀어2222개 release manifest 항목의경로/바이트/SHA와필수원본·캐시를확인했다. Node22.17 절대경로와 `app.js`만서버로실행했고 PATH에서Python실행파일을찾을수없게했다. 개발검증기/HTTP클라이언트의Python과서버의Node를구분한다. 실제두관측·29/32품질·지도/사진·카탈로그·새가정을확인하고실제Node프로세스와worker thread를종료/재시작한뒤 εB/Pluto및추가근거의같은ID·판단·카메라·밀도/관측자설정·export원바이트/import복원을통과했다. 정확완료시각 `2026-11-14T12:40:02.175944+00:00`이다. 상세는 `docs/releases/v0.9.0.json`과ZIP밖동명verification/checksum JSON을따른다. 이사후문서는검증한불변ZIP에추가하지않는다. 기존v0.8 ZIP/원본/Git이력도보존했다. Linux/Docker·공개서비스·사람/원어민검수는수행하지않았다.
+DEV-019: 전체 TNO 목록/겹친 점 선택과 −2999~3000년 장기 궤도 외삽을 제공한다. runtime 계산은jpl-sbdb-tno-two-body-v2이며 원본 snapshot v1은 보존했다. ±100Julian년은 경고 전환 기준일 뿐 정확도 보장 구간이 아니다. 최종 검사/수정 배포는 v0.12.1 외부 보고서로 확인한다.
 
 
-RELEASE-011 · v0.11.0 완결 ZIP 검증 확정: `NASA_SPACE_APPS_CHALLENGE_v0.11.0_20261115_001122KST.zip` / 580,411,280B / 2,320파일 / SHA256 `db7468317fa4ab1d3c0a8a616815d12ca22bb15bd1486f6848b5a8d2c1715d69`. clean source `aa3b2c44cba9125e7832f535ce8232c4b20ab8e9`에서 패키징했다. 실제 ZIP을 새 폴더에 풀어 2,319 manifest 항목·필수1,586 source·107생성JSON을 대조했고, Node22.17.0만 PATH에 둔 app.js 실행/ready·ε Indi B/Pluto 실원본/품질·근거 내보내기/가져오기·실제 프로세스 재시작 후 복원을 PASS했다. 정확 ZIP은 기존LAN을 유지하기 위해 PORT8011로 검사했고 기본3002는 현재 Node22 child회귀에서 별도로 확인했다. 새GWGC53,162·SXS13,869·혜성4/489 TDB표본 HTTP검사도 PASS했다. source297이 아니라 최종 source1885/필수1586/선택299이며 ZIP에는 선택32개가 있고267개는 보류/감사본으로 제외됐다. 현재 LAN CumtP9k6와 기존var/node는 계속 실행/보존한다. 공개호스팅/Linux/모든물리법칙·runtimefullGR/결합 계산은 완료로 올리지 않는다. 최종 공개 기록은 `docs/releases/v0.11.0.json`, 정확검증은 동명 외부 `.verification.json`이다. 이 사후문서 기록은 이미 검증한 ZIP 바이트를 수정하지 않는다.
+OPS-020: 현재실제호스트는16.176.170.4/시드니m7i.xlarge/Ubuntu24.04.5다. 기존저장13파일의정지백업/모든SHA를대조해이전했다. nginx서버블록의gzip은JSON/JS/CSS/SVG전송만압축하며자료/계산값과압축해제SHA를보존한다. 최신배포/재시작/검사는docs/qa/ops020_migration_verification.json과정확ZIP외부보고서로확인한다. 개인키·기존shared상태백업·실제인증서개인키는ZIP에없다.

@@ -29,7 +29,7 @@ from pathlib import Path, PurePosixPath
 from urllib.error import URLError
 from urllib.request import Request, urlopen
 
-ACTIVE_INPUTS = {"S01", "S02", "S10", "S12", "S14", "L051"}
+ACTIVE_INPUTS = {"S01", "S02", "S10", "S12", "S14", "L051", "L046"}
 LOCAL_ONLY_GROUPS = {
     "extragalactic-planets",
     "exoplanet-observations",
@@ -226,8 +226,8 @@ def verify_payload(target: Path, archive_files: set[str]) -> tuple[dict, dict, d
         verify_record(target, record)
     inputs = release["input_ids"]
     require(
-        len(inputs) == 6 and {record["id"] for record in inputs} == ACTIVE_INPUTS,
-        "active_FITS_input_scope_mismatch",
+        len(inputs) == 7 and {record["id"] for record in inputs} == ACTIVE_INPUTS,
+        "active_observation_calibration_population_input_scope_mismatch",
     )
     for record in inputs:
         verify_record(target, record, "local_relative_path")
@@ -237,6 +237,39 @@ def verify_payload(target: Path, archive_files: set[str]) -> tuple[dict, dict, d
         "node_runtime_canonical_copy_mismatch",
     )
     runtime = json.loads(raw)
+    require(runtime.get("public_scope") == "solar_system_1000au", "active_export_scope_missing")
+    excluded = re.compile(
+        r"^(?:data/(?:reference/(?:catalog|history|cosmic-|universe-catalog|galaxies|extragalactic-|exoplanet-|relativity|comets|galaxy-atlas|numerical-relativity)|manifests/(?:comets|galaxy_atlas|numerical_relativity|exoplanets|extragalactic_planets|exoplanet_observations|black_holes|observer_physics|cosmic_history|cosmic_morphology|cosmic_observations|universe_catalog|galaxies)\.json)|science/(?:comets|exoplanets|exoplanet_observations|extragalactic_planets|nasa_catalog|galaxies|galaxy_atlas|history|history_morphology|history_observations|universe_catalog|relativity|numerical_relativity)\.py|node/galaxy-atlas\.js|web/(?:public|dist)/observations/)"
+    )
+    require(
+        not any(excluded.search(name) for name in archive_files),
+        "excluded_feature_implementation_packaged",
+    )
+    require(
+        not any(excluded.search(item["path"]) for item in runtime["source_files"]),
+        "excluded_feature_source_dependency",
+    )
+    removed_snapshots = {
+        "black_holes",
+        "observer_physics",
+        "cosmic_history",
+        "cosmic_observations",
+        "galaxies",
+        "exoplanets",
+        "universe_catalog",
+        "exoplanet_observations",
+        "extragalactic_planets",
+        "comets",
+        "galaxy_atlas",
+        "galaxy_atlas_markers",
+        "numerical_relativity",
+        "exoplanet_details",
+        "universe_host_children",
+    }
+    require(
+        not removed_snapshots.intersection(runtime["snapshots"]),
+        "excluded_feature_snapshot_packaged",
+    )
     require(
         runtime["schema_version"] == "1.0"
         and runtime["algorithm_version"] == "python-built-node-snapshot-v1",
@@ -331,7 +364,7 @@ def server_environment(node: Path, target: Path, port: int) -> tuple[dict, dict]
     environment = {key: value for key, value in os.environ.items() if key.upper() in allowed}
     environment.update(
         PATH=str(node.parent),
-        HOST="127.0.0.1",
+        APP_HOST="127.0.0.1",
         PORT=str(port),
         APP_STATE_DIR=str(target / "var/node"),
         NODE_ENV="production",
@@ -547,43 +580,46 @@ def main(
             and runtime_response.get("snapshot_exported_utc") == runtime["exported_utc"],
             "Node_runtime_disclosure_mismatch",
         )
-        _, atlas = call(base, "/api/v1/catalog/galaxy-atlas?query=Messier%2031")
-        _, markers = call(base, "/api/v1/catalog/galaxy-atlas/markers")
-        _, nr = call(base, "/api/v1/physics/numerical-relativity")
-        _, comets = call(base, "/api/v1/catalog/comets")
-        require(
-            atlas.get("record_count") == 53162
-            and atlas.get("matched_count") == 1
-            and atlas["objects"][0]["existing_object_id"] == "galaxy-m31"
-            and markers.get("marker_count") == len(markers["columns"]["object_id"]) == 53162,
-            "extracted_GWGC_catalogue_mismatch",
-        )
-        require(
-            nr.get("algorithm_version") == "sxs-nrar-h22-native-replay-v1"
-            and len(nr["columns"]["time_over_m"]) == 13869
-            and nr.get("live_gr_solver") is False
-            and nr.get("observed_detector_data") is False,
-            "extracted_NR_native_replay_mismatch",
-        )
-        require(
-            comets.get("algorithm_version") == "historical-comets-v1"
-            and len(comets["objects"]) == 4
-            and sum(len(obj["knots"]) for obj in comets["objects"]) == 489,
-            "extracted_historical_comets_mismatch",
-        )
-        report["dev015_016_catalogue_checks"] = {
-            "GWGC_galaxies": 53162,
-            "NR_native_h22_samples": 13869,
-            "JPL_comets": 4,
-            "JPL_TDB_knots": 489,
-        }
+        scoped = runtime_response.get("public_scope") == "solar_system_1000au"
+        require(scoped, "release_public_scope_mismatch")
+        if scoped:
+            from urllib.error import HTTPError
+
+            for route in [
+                "catalog/galaxies",
+                "catalog/galaxy-atlas",
+                "catalog/exoplanets",
+                "catalog/universe",
+                "black-holes",
+                "observer-physics",
+                "cosmic-observations",
+                "cosmic-history",
+                "catalog/comets",
+                "physics/numerical-relativity",
+            ]:
+                try:
+                    call(base, "/api/v1/" + route)
+                except HTTPError as exc:
+                    require(exc.code == 410, "removed_public_API_not_gated")
+                else:
+                    require(False, "removed_public_API_reopened")
+            _, presets = call(base, "/api/v1/planet-nine/presets")
+            require(
+                len(presets["presets"]) == 3 and presets["source"]["epoch_discrepancy"],
+                "P9_source_contract_mismatch",
+            )
+            report["solar_scope_checks"] = {
+                "radius_au": 1000,
+                "P9_source_sha256": presets["source"]["sha256"],
+                "removed_API_status": 410,
+            }
         stage = "extracted_release_HTTP_smoke"
         with (
             (temporary / "smoke.stdout.json").open("wb") as stdout,
             (temporary / "smoke.stderr.log").open("wb") as stderr,
         ):
             helper = subprocess.run(
-                [sys.executable, "-X", "utf8", "tests/release_smoke.py", base],
+                [sys.executable, "-X", "utf8", "tests/solar_scope_smoke.py", base],
                 cwd=target,
                 env={**environment, "PYTHONUTF8": "1"},
                 stdout=stdout,
@@ -627,8 +663,8 @@ def main(
                 "representation_version": "solar-display-v1",
             },
         )
-        context["mass_scenario"]["density_kg_m3"] = 2200
-        context["observer_experiment"]["radial_beta"] = -0.02
+        if "mass_scenario" in context:
+            context["mass_scenario"]["density_kg_m3"] = 2200
         rich_session["universe_context"] = context
         _, rich = call(
             base,
@@ -652,12 +688,35 @@ def main(
                 (state / "evidence" / (saved["evidence_id"] + ".json")).read_bytes() == raw,
                 "evidence_not_in_extracted_Node_state",
             )
+        p9_before_raw, p9_before = (
+            call(base, "/api/v1/planet-nine/evidence/" + smoke["p9_evidence_id"] + "/export")
+            if scoped
+            else (None, None)
+        )
         stage = "Node_process_and_worker_restart_restore"
         stop_owned(process)
         process = launch()
         ready_after = wait_ready(process)
         _, runtime_after = call(base, "/api/v1/runtime")
         require(runtime_after == runtime_response, "runtime_bundle_changed_across_Node_restart")
+        if scoped:
+            p9_after_raw, p9_after = call(
+                base, "/api/v1/planet-nine/evidence/" + smoke["p9_evidence_id"] + "/export"
+            )
+            require(
+                p9_after_raw == p9_before_raw and p9_after == p9_before,
+                "P9_evidence_changed_across_restart",
+            )
+            _, p9_restored = call(base, "/api/v1/planet-nine/evidence/import", p9_before)
+            require(
+                p9_restored["status"] == "restored" and p9_restored["evidence"] == p9_before,
+                "P9_restart_restore_mismatch",
+            )
+            report["p9_restart_restore"] = {
+                "evidence_id": smoke["p9_evidence_id"],
+                "same_export_bytes": True,
+                "gravity_recomputed": True,
+            }
         restorations = []
         for before_raw, before in evidence:
             after_raw, saved = call(base, "/api/v1/evidence/" + before["evidence_id"] + "/export")
@@ -679,7 +738,7 @@ def main(
                     "evidence_id": saved["evidence_id"],
                     "result_id": saved["result_id"],
                     "same_export_bytes_session_judgment": True,
-                    "camera_and_mass_observer_assumptions_present": bool(
+                    "camera_and_mass_assumptions_present": bool(
                         saved["session"].get("universe_context")
                     ),
                 }

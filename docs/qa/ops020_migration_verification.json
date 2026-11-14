@@ -1,0 +1,239 @@
+{
+  "work_ids": [
+    "DEV-019",
+    "OPS-020"
+  ],
+  "checked_at_utc": "2026-11-14T19:54:53.949240+00:00",
+  "status": "live_migration_verified_superseded_by_dev020_release",
+  "url": "https://nasaspaceappschallenge.marulee.dev/",
+  "new_host": {
+    "public_ip": "16.176.170.4",
+    "region": "ap-southeast-2",
+    "instance_type": "m7i.xlarge",
+    "os": "Ubuntu24.04.5LTS amd64",
+    "vcpus": 4,
+    "memory_mib": 15701,
+    "volume_gib": 50,
+    "runtime": "Node24.22.3",
+    "entrypoint": "/srv/planet-x/current/app.js",
+    "proxy": "nginx80/443 to127.0.0.1:3002",
+    "persistence": "/srv/planet-x/shared/node"
+  },
+  "old_host": {
+    "ip": "3.37.17.247",
+    "application_service": "stopped_and_disabled",
+    "original_release_and_state": "preserved",
+    "ec2_compute": "not_stopped_by_agent_billing_continues",
+    "cloud_account_or_resources_deleted": false
+  },
+  "state_migration": {
+    "stopped_writer": true,
+    "files": 13,
+    "bytes": 5461030,
+    "private_archive_sha256": "243207fea55d1ef55827cb2b8ffbdd6591076dc0db79cae6744ccc6b8047c18d",
+    "every_file_sha_verified_before_new_start": true,
+    "old_epsilon_pluto_p9_export_and_restore": [
+      {
+        "id": "ev_e764a2eb3a294ca890b39ce8be85dc5d",
+        "sha256": "ca26330aab98a9d26cd7b3c440445ef1068b375b75ca2ca784e3c1ec03d57746",
+        "bytes": 870988,
+        "restore_status": "restored",
+        "same_saved_conditions": true
+      },
+      {
+        "id": "ev_4872494bb4c649e3af2ad8d43b0bf4f8",
+        "sha256": "659e6ecf9de6c5572127f5b8d9c68cb2c74f98a76b17c08e35a49def46239e07",
+        "bytes": 906270,
+        "restore_status": "restored",
+        "same_saved_conditions": true
+      },
+      {
+        "id": "p9ev_5453e41e76da4a9786e2aff1503d2134",
+        "sha256": "46f6398b6f28e868326d3d16f56b03bff6553b8b37311439dcc6b28c9d5f1dfb",
+        "bytes": 32807,
+        "restore_status": "restored",
+        "same_saved_conditions": true
+      }
+    ],
+    "private_archive_or_key_in_release": false
+  },
+  "runtime_source_sha256": "17b7e74f95bad494a40f9a4a52005d3528cbf4eb89f64c8c305636c962ff3869",
+  "source_data_and_four_comparison_hashes_unchanged": true,
+  "restart": {
+    "before_pid": 3259,
+    "after_pid": 3847,
+    "evidence_bytes_and_conditions_unchanged": true
+  },
+  "https": {
+    "normal_CA_and_hostname": "passed",
+    "peer_ip": "16.176.170.4",
+    "tls": "TLS1.3",
+    "certificate_expires_utc": "2027-02-12T18:30:59Z",
+    "http_redirect": 301,
+    "certbot_timer": "enabled_active",
+    "real_renew_dry_run": "passed_with_no_random_sleep_on_renew",
+    "initial_dry_run": "harness timeout during documented336.7s random delay, owned process interrupted before immediate passing check"
+  },
+  "browser": {
+    "actual_core_flow_pass": 3,
+    "selection_pass": 4,
+    "layout_before_gzip": {
+      "passed": 2,
+      "failed": 1,
+      "reason": "5.13MB uncompressed TNO body incomplete before15s readiness wait; not a layout failure"
+    },
+    "layout_after_gzip": {
+      "affected_case_pass": 1,
+      "same15s_expectation": true,
+      "tnobody_completed_ms": 4268
+    },
+    "uncaught_js_webgl_http_errors": 0,
+    "same_bundle": "index-COQWB6MM.js",
+    "native_language_review": [
+      "ko/en internal",
+      "ja/zh-Hant/fr not native reviewed"
+    ]
+  },
+  "gzip": {
+    "status": "passed",
+    "checked_at_utc": "2026-11-14T19:40:36.916388+00:00",
+    "rows": [
+      {
+        "route": "/api/v1/catalog/outer-tno",
+        "responses": {
+          "identity": {
+            "wire_bytes": 5130062,
+            "decoded_bytes": 5130062,
+            "decoded_sha256": "b9f90e1e60a768c76aba543c3c291ff11f82189b4486c26b3001166f90c757f5",
+            "content_encoding": null,
+            "vary": "Accept-Encoding",
+            "seconds": 2.641
+          },
+          "gzip": {
+            "wire_bytes": 1225163,
+            "decoded_bytes": 5130062,
+            "decoded_sha256": "b9f90e1e60a768c76aba543c3c291ff11f82189b4486c26b3001166f90c757f5",
+            "content_encoding": "gzip",
+            "vary": "Accept-Encoding",
+            "seconds": 2.187
+          }
+        },
+        "wire_saving_fraction": 0.7611796894462484
+      },
+      {
+        "route": "/assets/index-COQWB6MM.js",
+        "responses": {
+          "identity": {
+            "wire_bytes": 1211238,
+            "decoded_bytes": 1211238,
+            "decoded_sha256": "b276713f2624524abad68b1d5118dfd7f49a03a4de66ed16081da2513ea5dba5",
+            "content_encoding": null,
+            "vary": "Accept-Encoding",
+            "seconds": 2.078
+          },
+          "gzip": {
+            "wire_bytes": 368944,
+            "decoded_bytes": 1211238,
+            "decoded_sha256": "b276713f2624524abad68b1d5118dfd7f49a03a4de66ed16081da2513ea5dba5",
+            "content_encoding": "gzip",
+            "vary": "Accept-Encoding",
+            "seconds": 1.532
+          }
+        },
+        "wire_saving_fraction": 0.6953992526654547
+      }
+    ],
+    "scope": "TLS default verification; decoded response bytes equal; no source/science value change",
+    "harness_note": "HTTP headers handled case-insensitively. text/javascript MIME explicitly included in nginx compression."
+  },
+  "credits": {
+    "actual_eligibility_or_balance_verified": false,
+    "agent_created_account_or_claimed_promotional_credit": false,
+    "official_faq": "https://aws.amazon.com/free/free-tier-faqs/",
+    "note": "AWS new customers100USD initial plus up to100USD activities; existing customers additional accounts do not qualify."
+  },
+  "evidence": [
+    {
+      "path": "var/qa/ops020/public-after-migration.json",
+      "bytes": 1931,
+      "sha256": "d504af26ab62b55c2142a2333e89c8978eaf2a6e21244b58019e733c2ff3c1eb"
+    },
+    {
+      "path": "var/qa/ops020/public-after-restart.json",
+      "bytes": 1931,
+      "sha256": "51a78cf3cb3640dd99275eba00b4c43d16bb668b2776e8b5f36a6cb75ed4cdcb"
+    },
+    {
+      "path": "var/qa/ops020/gzip-verification.json",
+      "bytes": 1832,
+      "sha256": "0e1c67c4cef02ae7136d8bc19712468390ff03a0dec4ab0f31f013daa7aebffd"
+    },
+    {
+      "path": "var/qa/ops020-public-https-browser-results.json",
+      "bytes": 1986,
+      "sha256": "599029d3cc35f36a9d8ff61390fb036313af7c57f0c7eb6746f74732c8ec5b4c"
+    },
+    {
+      "path": "var/qa/ops020-selection/summary.json",
+      "bytes": 2391,
+      "sha256": "107fe70575958fbf4174c4b3709bc322598f3fa514bf95f44deeeaea60f48995"
+    },
+    {
+      "path": "var/qa/ops020/layout-initial-results.json",
+      "bytes": 25058,
+      "sha256": "adc20452b63bfab0064c7aca79fbca37468427b75897a54d8030a8bfc0f1875c"
+    },
+    {
+      "path": "var/qa/ops020/layout-catalogue-gzip-results.json",
+      "bytes": 15923,
+      "sha256": "52e2c05274811137bcfa1a978a3d6128072623386a3b930f92e7cbb6b4ea3a91"
+    },
+    {
+      "path": "var/qa/ops020/cert-renew-immediate-dry-run.log",
+      "bytes": 1118,
+      "sha256": "65fd1ce57fbb42f61909d9728a25a7d4b52c66018b320da91b30b3aeb43d7e41"
+    },
+    {
+      "path": "var/qa/ops020/restart.log",
+      "bytes": 558,
+      "sha256": "bf7a72773bef0ff76454c67c7bd4ab32a80b1aa4caf2fa1616eaf28b668e790f"
+    },
+    {
+      "path": "var/qa/ops020/state-restore.log",
+      "bytes": 371,
+      "sha256": "d59afc295ae1f6092dd0bf0facee42610c7dfa1c1c5da985922a781a867aad09"
+    },
+    {
+      "path": "var/qa/ops020/public-after-final-activation.json",
+      "bytes": 1931,
+      "sha256": "fc9167b2bb83f298b777e135f870e017d4df96d26144e396a500709c2ce07927"
+    },
+    {
+      "path": "var/qa/ops020-final-browser-results.json",
+      "bytes": 1854,
+      "sha256": "1864b37e80afa450221602316b18948e5c1db7aa83470c6032a5a22913eed4ce"
+    }
+  ],
+  "final_archive_note": "044329 remains the verified active baseline before DEV020. Documentation-only045528 was interrupted before exact verification/upload completed and was never activated; its incomplete remote copy and local archive are preserved. DEV020 v0.13 supersedes that pending re-bundle. See its external release record for the final archive and activation.",
+  "deployed_before_documentation_rebundle": {
+    "archive": "NASA_SPACE_APPS_CHALLENGE_v0.12.1_20261115_044329KST.zip",
+    "sha256": "7e33f4871327a6555beb11ee42020ff841dcf2358493a308958399799a4cbcb6",
+    "pid": 4241,
+    "windows_and_linux_exact_verification": "passed",
+    "windows_initial_deadline": "initial readiness wait failed; full source audit passed; unchanged exactZIP passed isolated repeat without extending deadline"
+  },
+  "final_documentation_corrections": [
+    "FSD-0.21 current implementation and source manifest header",
+    "F01/F03/F04/F05/F06 accurate current scope and limits",
+    "DataSpec v2 extrapolation warning replaces historical100yrhardcutoff",
+    "Current input/contract byte counts and SHA freshly computed",
+    "Sydney current region versus historical Seoul choice",
+    "Current README/TODO completion status"
+  ],
+  "final_activation": {
+    "previous_pid": 3847,
+    "pid": 4241,
+    "public_after_final_activation": "passed_old3evidence_identical_and_restored",
+    "fresh_chrome_final": "passed_newIP_TLS_correct_bundle_user_BCE_date_Sedna257orbit_return_button"
+  }
+}

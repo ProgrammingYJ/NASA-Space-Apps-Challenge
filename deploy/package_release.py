@@ -18,14 +18,12 @@ from packaging.utils import canonicalize_name
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME = {"fastapi", "uvicorn", "pydantic", "astropy", "numpy", "scipy", "python-dotenv", "psutil"}
-EXCLUDED_LOCAL_AUDIT_FILES = {
-    "data/reference/extragalactic-planets/facts/status-context-2026.json",
-    "data/reference/extragalactic-planets/facts/status-context-2026.source.json",
-}
+LEGACY_DEPLOYMENT_FILES = {"deploy/verify_release.py", "deploy/README.python.md"}
 DIRECTORIES = (
     "api",
     "node",
     "data/node-runtime",
+    "data/reference/outer-tno/r029-r031-20261115",
     "science",
     "worker",
     "contracts",
@@ -35,36 +33,42 @@ DIRECTORIES = (
     "web/tests",
     "web/dist",
     "web/public",
-    "data/reference/catalog/nasa_science",
-    "data/reference/solar-extension",
-    "data/reference/appearance",
-    "data/reference/history",
-    "data/reference/cosmic-morphology",
-    "data/reference/cosmic-observations",
-    "data/reference/long-term",
-    "data/reference/universe-catalog",
-    "data/reference/object-names",
-    "data/reference/galaxies",
-    "data/reference/kuiper",
-    "data/reference/extragalactic-planets/facts",
-    "data/reference/exoplanet-observations/facts",
-    "data/reference/small-body-appearance/facts",
-    "data/reference/planet-criteria/facts",
-    "data/reference/mass-scenarios/facts",
-    "data/reference/relativity/facts",
-    "data/reference/comets",
-    "data/reference/galaxy-atlas",
-    "data/reference/numerical-relativity",
 )
+
 FILES = (
     "app.js",
     "package.json",
     "package-lock.json",
     "data/manifests/node_runtime.json",
-    "data/manifests/comets.json",
-    "data/manifests/galaxy_atlas.json",
-    "data/manifests/numerical_relativity.json",
+    "data/manifests/planet_nine_scope.json",
+    "data/manifests/outer_tno.json",
+    "data/manifests/display_dependency_compatibility.json",
+    "data/reference/outer-tno/r029-r031-20261115/audit-index.json",
+    "data/reference/outer-tno/r029-r031-20261115/reference-sources.json",
+    "data/reference/outer-tno/r029-r031-20261115/summary.json",
+    "deploy/requirements.appearance-validation.lock.txt",
+    "data/reference/outer-tno/dev019-interpretation/source.json",
+    "data/manifests/mcp_tools.json",
+    "data/reference/mcp/dev018/astronomy.json",
+    "data/reference/mcp/dev018/pipeworx.json",
+    "data/reference/mcp/dev018/pds.json",
+    "data/reference/mcp/dev018/direct-jpl-vectors.json",
+    "data/reference/mcp/dev018/direct-comparison.json",
+    "data/reference/mcp/dev018/native-pds.json",
+    "data/reference/mcp/dev018/native-astronomy.json",
+    "data/reference/mcp/dev018/native-horizons.json",
+    "tools/mcp/package.json",
+    "tools/mcp/package-lock.json",
+    "tools/mcp/requirements.windows.lock.txt",
+    "tools/mcp/smoke.py",
+    "docs/reviews/2026-11-15_mcp_review.md",
+    "docs/reviews/2026-11-15_planet-nine_sources.md",
+    "data/reference/legacy_public_originals/planet_nine_reference/overview_map.pro",
+    "data/raw/legacy_public_originals/planet_nine_reference/reference_population.csv",
+    "data/reference/legacy_public_originals/planet_nine_reference/README.TXT",
+    "docs/decisions/ADR-004.md",
     "README.md",
+    "TODO.md",
     "FSD.md",
     "Data_Spec.md",
     "AGENTS.md",
@@ -78,7 +82,6 @@ FILES = (
     "pyproject.toml",
     "requirements.lock.txt",
     "requirements.runtime.lock.txt",
-    "requirements.build-relativity.lock.txt",
     "web/package.json",
     "web/package-lock.json",
     "web/index.html",
@@ -91,23 +94,13 @@ FILES = (
     "data/manifests/solar_system_orbits.json",
     "data/manifests/timeline_validation.json",
     "data/manifests/appearance.json",
-    "data/manifests/exoplanets.json",
-    "data/manifests/extragalactic_planets.json",
-    "data/manifests/exoplanet_observations.json",
     "data/manifests/small_body_appearance.json",
     "data/manifests/planet_criteria.json",
     "data/manifests/mass_scenarios.json",
-    "data/manifests/black_holes.json",
-    "data/manifests/observer_physics.json",
     "data/manifests/extended_solar.json",
-    "data/manifests/cosmic_history.json",
-    "data/manifests/cosmic_morphology.json",
-    "data/manifests/cosmic_observations.json",
     "data/manifests/long_term_model.json",
     "data/manifests/long_term_validation.json",
-    "data/manifests/universe_catalog.json",
     "data/manifests/object_names.json",
-    "data/manifests/galaxies.json",
     "data/manifests/kuiper_display.json",
     "docs/worklog.md",
     "docs/data_inventory.md",
@@ -116,6 +109,11 @@ FILES = (
     "docs/design_references.md",
     "docs/ai_usage.md",
     "docs/ai_usage.json",
+    "docs/qa/dev018_local_verification.json",
+    "docs/qa/dev019_local_verification.json",
+    "docs/qa/ops020_migration_verification.json",
+    "docs/qa/dev020_local_verification.json",
+    "docs/qa/dev020_platform_parity.json",
     "docs/decisions/ADR-001.md",
     "docs/decisions/ADR-002.md",
     "docs/decisions/ADR-003.md",
@@ -142,7 +140,33 @@ def runtime_dependencies():
     return found
 
 
-def prepare(built_at):
+def source_revision(root, proof=None):
+    """Explicit source transfer provenance for isolated non-Git build hosts."""
+    if proof is None:
+        return {
+            "base_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip(),
+            "working_tree_has_uncommitted_changes": bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=root, text=True).strip()),
+        }
+    import re
+
+    if (
+        not isinstance(proof, dict)
+        or not re.fullmatch(r"[a-f0-9]{40}", str(proof.get("base_commit", "")))
+        or type(proof.get("working_tree_has_uncommitted_changes")) is not bool
+        or not re.fullmatch(r"[a-f0-9]{64}", str(proof.get("source_transfer_manifest_sha256", "")))
+    ):
+        raise ValueError("invalid_build_source_provenance")
+    transfer = root / "deploy/source-transfer.json"
+    if not transfer.is_file() or sha(transfer) != proof["source_transfer_manifest_sha256"]:
+        raise ValueError("build_source_transfer_integrity")
+    for record in json.loads(transfer.read_bytes())["files"]:
+        candidate = (root / record["path"]).resolve()
+        if not candidate.is_relative_to(root.resolve()) or not candidate.is_file() or candidate.stat().st_size != record["bytes"] or sha(candidate) != record["sha256"]:
+            raise ValueError("build_source_file_integrity")
+    return {key: proof[key] for key in ("base_commit", "working_tree_has_uncommitted_changes", "source_transfer_manifest_sha256")}
+
+
+def prepare(built_at, source_provenance=None):
     version = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"][
         "version"
     ]
@@ -161,22 +185,35 @@ def prepare(built_at):
             path
             for path in (ROOT / directory).rglob("*")
             if path.is_file()
-            and path.relative_to(ROOT).as_posix() not in EXCLUDED_LOCAL_AUDIT_FILES
+            and path.relative_to(ROOT).as_posix() not in LEGACY_DEPLOYMENT_FILES
+            and not path.relative_to(ROOT)
+            .as_posix()
+            .startswith(("web/public/observations/", "web/dist/observations/"))
             and "__pycache__" not in path.parts
             and "upstream" not in path.parts
             and path.suffix not in (".pyc", ".log", ".part", ".tmp")
         )
+    runtime_manifest = json.loads((ROOT / "data/node-runtime/runtime_manifest.json").read_bytes())
+    if runtime_manifest.get("public_scope") != "solar_system_1000au":
+        raise ValueError("release_requires_fresh_active_scope_export")
+    for source in runtime_manifest["source_files"]:
+        if not source["runtime_required"]:
+            continue
+        path = (ROOT / source["path"]).resolve()
+        if not path.is_relative_to(ROOT) or not path.is_file():
+            raise ValueError("release_source_missing_or_unsafe")
+        if path.stat().st_size != source["bytes"] or sha(path) != source["sha256"]:
+            raise ValueError("release_source_integrity")
+        paths.append(path)
     records = json.loads((ROOT / "data/manifests/datasets.json").read_text(encoding="utf-8"))[
         "files"
     ]
     inputs = [
-        record for record in records if record["id"] in ("S01", "S02", "S10", "S12", "S14", "L051")
+        record
+        for record in records
+        if record["id"] in ("S01", "S02", "S10", "S12", "S14", "L051", "L046")
     ]
-    for record in inputs:
-        path = ROOT / record["local_relative_path"]
-        assert path.stat().st_size == record["bytes"] and sha(path) == record["sha256"]
-        paths.append(path)
-    for path in paths:
+    for path in sorted(set(paths)):
         target = stage / path.relative_to(ROOT)
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(path, target)
@@ -238,7 +275,7 @@ def prepare(built_at):
     )
     manifest = {
         "release": version,
-        "work_id": "DEV-016",
+        "work_id": "DEV-020",
         "work_ids": [
             "DEV-009",
             "DEV-010",
@@ -248,14 +285,14 @@ def prepare(built_at):
             "OPS-014",
             "DEV-015",
             "DEV-016",
+            "DEV-017",
+            "DEV-018",
+            "DEV-019",
+            "OPS-020",
+            "DEV-020",
         ],
         "built_at": built_at,
-        "base_commit": subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
-        ).strip(),
-        "working_tree_has_uncommitted_changes": bool(
-            subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip()
-        ),
+        **source_revision(ROOT, source_provenance),
         "runtime": {
             "engine": "Node.js >=22.17.0",
             "entrypoint": "app.js",
@@ -266,42 +303,41 @@ def prepare(built_at):
         },
         "algorithm_versions": [
             "python-built-node-snapshot-v1",
+            "jpl-sbdb-tno-two-body-v2",
+            "jpl-tno-factual-description-v1",
+            "visual-dependency-payload-equivalence-v1",
+            "p9-kepler-sky-v1",
+            "solar-system-1000au-scope-v1",
+            "solar-prescribed-planets-rk4-v1",
+            "p9-coverage-1",
+            "planet-nine-evidence-1",
             "spherex-native-v1",
             "pluto-native-v1",
             "solar-display-v1",
             "osculating-kepler-guide-v1",
             "display-hermite-v1",
             "appearance-v1",
-            "nasa-science-catalog-v1",
             "extended-solar-parent-hermite-v1",
-            "cosmic-chronology-v1",
-            "cosmic-morphology-reference-v1",
-            "cosmic-observation-viewer-v1",
             "jpl-kepler-long-term-v1",
-            "sourced-universe-hierarchy-v1",
             "localized-object-names-v1",
-            "official-rounded-galaxy-context-v1",
-            "observed-morphology-guide-v1",
             "kuiper-region-v1",
-            "published-exoplanet-observations-v1",
-            "extragalactic-evidence-v2",
-            "historical-comets-v1",
-            "newtonian-softened-verlet-v1",
-            "gwgc-j2000-reference-atlas-v1",
-            "fk5-j2000-galaxy-catalogue-markers-v1",
-            "sxs-nrar-h22-native-replay-v1",
-            "schrodinger-cn-1d-v1",
-            "maxwell-yee-tmz-2d-v1",
-            "euler-rusanov-2d-v1",
             "sourced-small-body-appearance-v1",
             "iau-margot-criteria-v1",
             "spherical-density-hypothesis-v1",
-            "bounded-observer-relativity-v1",
-            "observer-coordinate-snapshot-v1",
-            "schwarzschild-equatorial-null-rk4-v1",
         ],
-        "inactive_conceptual_renderers": ["cosmic-concept-v1", "cosmic-diversity-v1"],
-        "cosmic_history_ui": "published_observation_images_only",
+        "scope_migration_policy": "solar-scope-context-v1",
+        "excluded_implementations_in_archive": False,
+        "public_scope": "solar_system_1000au",
+        "removed_features": [
+            "galaxies",
+            "galaxy_atlas",
+            "exoplanets",
+            "cosmic_history",
+            "black_holes",
+            "observer_physics",
+            "physics_lab",
+            "historical_comets",
+        ],
         "external_verification_report": name + ".verification.json",
         "archive_checksum_report": name + ".zip.sha256.json",
         "input_ids": [

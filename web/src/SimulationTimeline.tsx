@@ -5,7 +5,7 @@ import {MODEL_TIME_RATES as SIMULATION_RATES} from './modelTime';
 import styles from './SimulationTimeline.module.css';
 interface Clock {ms:number;playing:boolean;rate:number;seek:(ms:number)=>boolean;pause:()=>void;toggle:()=>void;setRate:(rate:number)=>void}
 const draftFor=(ms:number):ModelDateDraft=>{const date=modelDateParts(ms);return {year:String(date.year),month:String(date.month),day:String(date.day)};};
-export default function SimulationTimeline({model,clock,onPrecise,onHistory,error,onRetry}:{model?:LongTermModel;clock:Clock;onPrecise:()=>void;onHistory:()=>void;error:boolean;onRetry:()=>void}){
+export default function SimulationTimeline({model,clock,onPrecise,onHistory,error,onRetry}:{model?:LongTermModel;clock:Clock;onPrecise:()=>void;onHistory?:()=>void;error:boolean;onRetry:()=>void}){
   const {t}=useTranslation();const [draft,setDraft]=useState(()=>draftFor(clock.ms));const [invalid,setInvalid]=useState(false);const editing=useRef(false);
   useEffect(()=>{if(!editing.current)setDraft(draftFor(clock.ms));},[clock.ms]);
   const min=model?.coverage.min_date,max=model?.coverage.max_date;const bounds=min&&max?{start:modelDateMs(min.year,min.month,min.day),end:modelDateMs(max.year,max.month,max.day)}:null;
@@ -21,6 +21,6 @@ export default function SimulationTimeline({model,clock,onPrecise,onHistory,erro
     </form><output data-testid="simulation-clock">{modelDateParts(clock.ms).year} / {modelDateParts(clock.ms).month} / {modelDateParts(clock.ms).day} · TDB</output></div>
     <label>{t('playbackSpeed')}<select data-testid="simulation-rate" value={clock.rate} onChange={e=>clock.setRate(Number(e.target.value))}>{SIMULATION_RATES.map(rate=><option key={rate} value={rate}>{rate<=72?t('playbackRate',{hours:rate}):t('simYearsPerSecond',{years:rate/8766})}</option>)}</select></label>
     <div className={styles.range}><input data-testid="simulation-range" aria-label={t('simTitle')} type="range" min={bounds?.start??clock.ms} max={bounds?.end??clock.ms} step="86400000" value={clock.ms} disabled={!model} onChange={e=>{editing.current=false;clock.seek(Number(e.target.value));setInvalid(false);}}/><div>{min?.year??'…'} — {max?.year??'…'}</div><p>{t('simInputHelp')}</p><p>{t('simNote')} {t('simAccuracyNote')}</p>{invalid&&<p role="alert">{t('simInvalid')}</p>}{error&&<p role="alert">{t('simLoadError')} <button onClick={onRetry}>{t('retry')}</button></p>}</div>
-    <div className={styles.links}><button data-testid="simulation-exit" onClick={onPrecise}>{t('preciseTime')}</button><button onClick={onHistory}>{t('bigBangMode')}</button></div>
+    <div className={styles.links}><button data-testid="simulation-exit" onClick={onPrecise}>{t('preciseTime')}</button>{onHistory&&<button onClick={onHistory}>{t('bigBangMode')}</button>}</div>
   </section>;
 }

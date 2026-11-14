@@ -1,0 +1,208 @@
+{
+  "schema_version": "1.0",
+  "recorded_at_utc": "2026-11-14T18:19:43.833918+00:00",
+  "purpose": "optional isolated developer MCP provenance; application does not depend on MCP availability",
+  "runtime_required": false,
+  "node": {
+    "fetched_at_utc": "2026-11-14T18:14:37.091597+00:00",
+    "url": "https://nodejs.org/dist/v24.22.3/node-v24.22.3-win-x64.zip",
+    "sha256": "e612af99f626ab415ea225af6bce5c971feb448cb5cae250bb1c3fa50c5f7d9f",
+    "bytes": 37762649,
+    "sha256_manifest": "https://nodejs.org/dist/v24.22.3/SHASUMS256.txt",
+    "verification": "normal TLS and matching official SHA256; not a detached-signature check",
+    "version": "v24.22.3"
+  },
+  "pds_source": {
+    "url": "https://codeload.github.com/NASA-PDS/pds-mcp-server/zip/2dfe9866bac1ec4a9ecb3961a1e3107e6a934bbd",
+    "commit": "2dfe9866bac1ec4a9ecb3961a1e3107e6a934bbd",
+    "sha256": "e23d0acdddb179ba4ef8f0ad64cac9da003f07d9748c6109b953b3c8daf80fc1",
+    "bytes": 1041391,
+    "fetched_at_utc": "2026-11-14T18:14:56.533305+00:00"
+  },
+  "servers": [
+    {
+      "id": "pipeworx",
+      "status": "protocol_call_completed",
+      "started_at_utc": "2026-11-14T18:16:35.848499+00:00",
+      "finished_at_utc": "2026-11-14T18:16:38.455612+00:00",
+      "server_info": {
+        "name": "@pipeworx/mcp-horizons-nasa",
+        "version": "0.2.1"
+      },
+      "tool_names": [
+        "horizons_nasa_lookup",
+        "ephemeris",
+        "observers",
+        "vectors"
+      ],
+      "called_tool": "vectors",
+      "arguments": {
+        "command": "999",
+        "center": "500@10",
+        "start_time": "2026-11-14",
+        "stop_time": "2026-11-15",
+        "step_size": "1d"
+      },
+      "response_archive_relative_path": "var/qa/dev018/mcp/pipeworx.json",
+      "response_bytes": 21976,
+      "response_sha256": "2b2d29b3ecd49d148109e6ed79e578a15f996ba7098a73230c8ac81fdd4e12b6",
+      "runtime_required": false,
+      "adoption_status": "development_source_crosscheck_not_product_observation",
+      "preserved_response_relative_path": "data/reference/mcp/dev018/pipeworx.json"
+    },
+    {
+      "id": "pds",
+      "status": "protocol_call_completed",
+      "started_at_utc": "2026-11-14T18:16:35.855574+00:00",
+      "finished_at_utc": "2026-11-14T18:16:39.134930+00:00",
+      "server_info": {
+        "name": "Planetary Data System MCP Server",
+        "version": "4.2.0"
+      },
+      "tool_names": [
+        "search_investigations",
+        "search_targets",
+        "search_instrument_hosts",
+        "search_instruments",
+        "crawl_context_product",
+        "search_collections",
+        "get_product"
+      ],
+      "called_tool": "search_targets",
+      "arguments": {
+        "keywords": "Sedna",
+        "limit": 3
+      },
+      "response_archive_relative_path": "var/qa/dev018/mcp/pds.json",
+      "response_bytes": 13854,
+      "response_sha256": "c1adc7e6f9aaed167d3aa1672a843585408a1ed28e00f73dd7922ab762a3ddc3",
+      "runtime_required": false,
+      "adoption_status": "development_source_crosscheck_not_product_observation",
+      "preserved_response_relative_path": "data/reference/mcp/dev018/pds.json"
+    },
+    {
+      "id": "astronomy",
+      "status": "protocol_call_completed",
+      "started_at_utc": "2026-11-14T18:16:35.855915+00:00",
+      "finished_at_utc": "2026-11-14T18:16:37.032802+00:00",
+      "server_info": {
+        "name": "astronomy-mcp-server",
+        "title": "astronomy-mcp-server",
+        "version": "0.5.0",
+        "description": "What's in the sky, computed offline — planet and moon positions, rise/set, phases, eclipses, and seasons for any place and time via MCP. STDIO or Streamable HTTP."
+      },
+      "tool_names": [
+        "astronomy_get_sky_position",
+        "astronomy_get_rise_set",
+        "astronomy_get_moon_phase",
+        "astronomy_find_events",
+        "astronomy_list_visible"
+      ],
+      "called_tool": "astronomy_get_sky_position",
+      "arguments": {
+        "body": "pluto",
+        "time": "2026-11-14T00:00:00Z",
+        "latitude": 37.5665,
+        "longitude": 126.978
+      },
+      "response_archive_relative_path": "var/qa/dev018/mcp/astronomy.json",
+      "response_bytes": 84455,
+      "response_sha256": "bbe56cee222610669362487f2a763047aad671422ff1b15404a223a9582dc74f",
+      "runtime_required": false,
+      "adoption_status": "development_source_crosscheck_not_product_observation",
+      "preserved_response_relative_path": "data/reference/mcp/dev018/astronomy.json"
+    }
+  ],
+  "direct_jpl_comparison": {
+    "fetched_at_utc": "2026-11-14T18:17:30.892161+00:00",
+    "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27999%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&START_TIME=%272026-11-14%27&STOP_TIME=%272026-11-15%27&STEP_SIZE=%271d%27&OUT_UNITS=%27KM-S%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&VEC_CORR=%27NONE%27&VEC_TABLE=%273%27&CSV_FORMAT=%27NO%27",
+    "bytes": 6697,
+    "sha256": "213bfbf119e0bba48b77bcf1e1bfbbf74711a2728201b0c29c39d6010dd0cd45",
+    "rows": 2,
+    "center": "Sun 500@10",
+    "target": "Pluto 999",
+    "frame": "Ecliptic of J2000",
+    "time_scale": "TDB",
+    "position_unit": "km",
+    "velocity_unit": "km/s",
+    "status": "same_upstream_response_consistency",
+    "limitation": "Both paths use the same JPL Horizons source; this is not independent observational accuracy.",
+    "preserved_response_relative_path": "data/reference/mcp/dev018/direct-jpl-vectors.json",
+    "max_position_component_difference_km": 0.0,
+    "max_velocity_component_difference_km_s": 0.0
+  },
+  "codex_registration": {
+    "servers_added": [
+      "planetx_horizons",
+      "planetx_pds",
+      "planetx_astronomy"
+    ],
+    "existing_servers_preserved": [
+      "unityMCP",
+      "node_repl"
+    ],
+    "global_config_not_in_repository": true,
+    "active_conversation_native_tool_discovery": "verified: 16 native tools discovered and one read-only native call per server completed 2026-11-14T18:45:58Z"
+  },
+  "limitations": [
+    "No new Planet Nine detection or probability is produced by MCP",
+    "PDS target metadata is not a downloaded surface image or measured mass",
+    "Astronomy RA uses hours and apparent topocentric date-equator; do not subtract from J2000 degrees",
+    "Pipeworx is a third-party gateway; tool list changed lookup name to horizons_nasa_lookup at runtime",
+    "Two Horizons paths use the same upstream model, not independent observations"
+  ],
+  "native_calls": [
+    {
+      "server": "pds",
+      "tool": "mcp__planetx_pds__search_targets",
+      "arguments": {
+        "keywords": "Sedna",
+        "limit": 1
+      },
+      "is_error": false,
+      "local_relative_path": "data/reference/mcp/dev018/native-pds.json",
+      "bytes": 1427,
+      "sha256": "af9b0cdf6eb46424ba136696215eeab2a0f195cbfb924e66a72e5dd2e51ef99a",
+      "runtime_required": false,
+      "usage": "development crosscheck; not a new product observation"
+    },
+    {
+      "server": "astronomy",
+      "tool": "mcp__planetx_astronomy__astronomy_get_sky_position",
+      "arguments": {
+        "body": "pluto",
+        "time": "2026-11-14T00:00:00Z",
+        "latitude": 37.5665,
+        "longitude": 126.978
+      },
+      "is_error": false,
+      "local_relative_path": "data/reference/mcp/dev018/native-astronomy.json",
+      "bytes": 2011,
+      "sha256": "5619d1058422cdb0b855096e0d36b0dd7555e7726fe0cb27faf3ebac4d9c6bb7",
+      "runtime_required": false,
+      "usage": "development crosscheck; not a new product observation"
+    },
+    {
+      "server": "horizons",
+      "tool": "mcp__planetx_horizons__vectors",
+      "arguments": {
+        "command": "999",
+        "center": "500@10",
+        "start_time": "2026-11-14",
+        "stop_time": "2026-11-15",
+        "step_size": "1d"
+      },
+      "is_error": false,
+      "local_relative_path": "data/reference/mcp/dev018/native-horizons.json",
+      "bytes": 11153,
+      "sha256": "1d54a10eab1247057ec182fbb79c63d4c3a9c3ead8e9460a4e1f5a19fab791f7",
+      "runtime_required": false,
+      "usage": "development crosscheck; not a new product observation"
+    }
+  ],
+  "native_response_content_checks": {
+    "pds": true,
+    "astronomy": true,
+    "horizons": true
+  }
+}

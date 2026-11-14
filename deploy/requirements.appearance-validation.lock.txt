@@ -1,0 +1,3 @@
+# Optional independent developer validation of TIFF/PNG pixel equality only.
+# The standard-library conversion helper and Node server do not require Pillow.
+Pillow==13.0.0

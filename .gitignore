@@ -54,6 +54,7 @@ htmlcov/
 /tmp/
 /artifacts/
 /downloads/
+/.tools/
 *.fits
 *.fit
 *.fts
@@ -93,3 +94,7 @@ Desktop.ini
 *.swo
 ~$*
 
+
+# Generated isolated-build provenance is packaged with each release
+/deploy/source-transfer.json
+/deploy/remote-source-provenance.json

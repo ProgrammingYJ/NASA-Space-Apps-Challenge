@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "solar-system-1000au-scope-v1",
+  "recorded_at": "2026-11-14T18:19:43.833918+00:00",
+  "exploration_radius_au": 1000,
+  "physical_force_cutoff": false,
+  "planet_nine": {
+    "source_url": "https://data.caltech.edu/records/8fjad-x7y61",
+    "source_kind": "published_synthetic_orbit_population_not_detected_planets",
+    "license": "CC0-1.0",
+    "csv": {
+      "local_relative_path": "data/raw/legacy_public_originals/planet_nine_reference/reference_population.csv",
+      "sha256": "050b68182ecbf7fd76f280d8cc43c0683d207499aba1488a68092b834420a422",
+      "bytes": 13000682,
+      "required_on_server": true
+    },
+    "readme": {
+      "local_relative_path": "data/reference/legacy_public_originals/planet_nine_reference/README.TXT",
+      "sha256": "89e96e080072d71aacd9c31110813e3a6a6f2cbfbae7e8d832d2bfafded3139b",
+      "bytes": 1208,
+      "required_on_server": true
+    },
+    "presets": "first three sample rows are editable path presets only; regional ranking uses all 100000 source rows with explicit filters",
+    "argument_of_perihelion": "omega_deg=(longitude_of_perihelion_deg-Omega_deg) mod 360",
+    "epoch_jd_raw": 2458270.0,
+    "calendar_for_numeric_jd": "2018-05-31T12:00:00",
+    "raw_date_description": "1 June 2018",
+    "raw_time_scale": "not_confirmed",
+    "project_time_scale_assumption": "TDB; never a measured conversion of the original unknown time scale",
+    "reference_ra_dec_reproduction": "not_validated; source rounded elements and observer conventions limit comparison",
+    "conditional_regions": {
+      "algorithm": "p9-conditional-healpix-ring-v1",
+      "nside": 32,
+      "ordering": "RING",
+      "cells": 12288,
+      "default_survey_flags": {
+        "ZTF": 0,
+        "DES": 0,
+        "PS1": 0
+      },
+      "default_source_epoch_radius_limit_au": 1000,
+      "default_numerator_population": 20406,
+      "before_radius_filter": 21740,
+      "original_population": 100000,
+      "nonempty_cells": 2349,
+      "cell_probability": "n/N conditional on literature model, source epoch, selected survey and radius subset",
+      "surface_density": "n/(N*cell_solid_angle_sr)",
+      "existence_probability": null,
+      "individual_row_probability": null,
+      "moving_to_observation": "select underlying synthetic orbit row then propagate to requested dates before MOST"
+    }
+  },
+  "dynamics": {
+    "constants": {
+      "local_relative_path": "data/reference/planet-nine/facts/jpl_constants.json",
+      "sha256": "c47a0c2d96b1d2715a39111e1b85c8f0d5ed9f5f51395f11033fada613a94eb1",
+      "bytes": 1322,
+      "required_on_server": true
+    },
+    "original_constants_page": {
+      "local_relative_path": "data/reference/planet-nine/upstream/jpl_astro_par.html",
+      "sha256": "168f48b94ae3a65f31c96f081d08e7ca91ecc9e65678fdc57353821b492b313e",
+      "bytes": 22489,
+      "required_on_server": false
+    },
+    "positions_manifest": "data/manifests/long_term_model.json",
+    "gravity": "Newtonian Sun + eight prescribed planetary systems; optional solar 1PN test-particle correction; optional hypothetical perturber",
+    "coordinate_frame": "heliocentric mean ecliptic and equinox J2000",
+    "observer": "approximate Earth-Moon barycenter or Sun; MOST observer not independently established"
+  },
+  "most": {
+    "instructions_url": "https://irsa.ipac.caltech.edu/applications/MOST/instructions.html",
+    "api_url": "https://irsa.ipac.caltech.edu/applications/MOST/MOSTProgramInterface.html",
+    "catalog": "spherex",
+    "meaning": "coverage candidates only, not detections",
+    "response_storage": "bounded raw response body with SHA256 and complete query parameters in separate hypothesis evidence"
+  },
+  "legacy_data_policy": "preserve original raw data and old release ZIP/Git locally; remove excluded implementation/API/data from active export and new server bundle; preserve observation evidence hashes and explicitly omit retired context on partial restoration",
+  "removed_public_features": [
+    "galaxies",
+    "galaxy_atlas",
+    "exoplanets",
+    "cosmic_history",
+    "black_holes",
+    "observer_physics",
+    "physics_lab",
+    "historical_comets"
+  ],
+  "trans_neptunian_manifest": "data/manifests/outer_tno.json",
+  "mcp_provenance_manifest": "data/manifests/mcp_tools.json"
+}

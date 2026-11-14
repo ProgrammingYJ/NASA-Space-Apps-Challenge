@@ -28,41 +28,47 @@ test('real exported bundle serves UI contracts, source-verified comparison and e
       assert.equal((await request('/health/ready')).status, 200);
       await assert.rejects(start({ root, stateDir: state, port: 0, host: '127.0.0.1', noSignals: true }));
       assert.equal((await request(api + 'runtime')).value.runtime, 'node');
-      assert.equal((await request(api + 'catalog/exoplanets')).value.planet_count, 6470);
+      assert.equal((await request(api + 'runtime')).value.public_scope, 'solar_system_1000au');
+      for (const route of ['catalog/galaxies', 'catalog/galaxy-atlas', 'catalog/exoplanets', 'catalog/exoplanet-observations', 'catalog/extragalactic-planets', 'catalog/universe', 'catalog/comets', 'cosmic-history', 'cosmic-observations', 'black-holes', 'observer-physics', 'physics/numerical-relativity']) {
+        assert.equal((await request(api + route)).status, 410, route);
+        assert.equal((await request(api + route, {})).status, 410, route);
+      }
       assert.equal((await request(api + 'catalog/solar-system')).value.objects.length, 476);
-      const comets = (await request(api + 'catalog/comets')).value;
-      assert.equal(comets.algorithm_version, 'historical-comets-v1');
-      assert.equal(comets.objects.length, 4);
-      assert.equal(comets.objects.reduce((n, comet) => n + comet.knots.length, 0), 489);
-      const atlas = await request(api + 'catalog/galaxy-atlas?query=Messier%2031&limit=1');
-      assert.equal(atlas.status, 200); assert.equal(atlas.value.record_count, 53162); assert.equal(atlas.value.matched_count, 1);
-      assert.equal(atlas.value.objects[0].existing_object_id, 'galaxy-m31');
-      assert.ok((await request(api + 'catalog/galaxy-atlas?query=NGC224')).value.objects.some(row=>row.existing_object_id==='galaxy-m31'));
-      const atlasMarkers = (await request(api + 'catalog/galaxy-atlas/markers')).value;
-      assert.equal(atlasMarkers.marker_count, 53162); assert.equal(atlasMarkers.columns.object_id.length, 53162);
-      assert.equal((await request(api + 'catalog/galaxy-atlas/gwgc-pgc-2')).value.name, 'UGC12889');
-      assert.equal((await request(api + 'catalog/galaxy-atlas?query=%EC%9D%80%ED%95%98')).value.matched_count, 0);
-      assert.equal((await request(api + 'catalog/galaxy-atlas?limit=201')).status, 422);
-      const nr = (await request(api + 'physics/numerical-relativity')).value;
-      assert.equal(nr.algorithm_version, 'sxs-nrar-h22-native-replay-v1');
-      assert.equal(nr.columns.time_over_m.length, 13869);
-      assert.ok(comets.objects.every(comet => comet.time_scale === 'TDB' && comet.center === 'Sun'));
-      assert.equal(Object.keys((await request(api + 'black-holes')).value.objects).length, 11);
-      assert.equal((await request(api + 'catalog/universe?galaxy_id=galaxy-milky-way')).value.objects.length, 4871);
-      const hosts = read('universe_host_children'), host = Object.keys(hosts).find(k => hosts[k].length === 7);
-      assert.deepEqual((await request(api + 'catalog/universe?parent_id=' + host)).value.objects, hosts[host]);
-      assert.equal((await request(api + 'catalog/extragalactic-planets?galaxy_id=galaxy-m31')).value.confirmed_objects.length, 0);
+      const unlinked = await request(api + 'observations?object_id=moon-301');
+      assert.equal(unlinked.value.status, 'no_linked_observations'); assert.deepEqual(unlinked.value.observations, []);
+      assert.equal((await request(api + 'observations?object_id=unknown-body')).status, 404);
+      const regions = (await request(api + 'planet-nine/regions?limit=2')).value;
+      assert.equal(regions.selection.selected_count, 20406); assert.equal(regions.rows.length, 2);
+      assert.ok(regions.rows[0].count >= regions.rows[1].count);
+      const members = (await request(api + 'planet-nine/regions/' + regions.rows[0].cell_id + '/members?limit=1')).value;
+      const member = (await request(api + 'planet-nine/population/' + members.rows[0])).value;
+      assert.equal(member.cell_id, regions.rows[0].cell_id); assert.equal(member.source_sha256.length, 64);
+      assert.equal((await request(api + 'planet-nine/regions?limit=101')).status, 422);
+      assert.equal((await request(api + 'planet-nine/population/100000')).status, 422);
+      const outer = (await request(api + 'catalog/outer-tno')).value;
+      assert.equal(outer.objects.length, 8341);
+      const scene = (await request(api + 'catalog/outer-tno/scene')).value;
+      assert.equal(scene.catalogue_count, 8341); assert.equal(scene.unavailable_count, 1);
+      assert.equal((await request(api + 'observations?object_id=' + outer.objects[0].object_id)).value.status, 'no_linked_observations');
       assert.equal((await request(api + 'planet-criteria?object_id=sedna')).value.object_filter, 'sedna');
       assert.equal((await request(api + 'planet-criteria?object_id=__proto__')).status, 422);
-      assert.equal((await request(api + 'catalog/exoplanets/constructor')).status, 404);
-      const photos = await request(api + 'catalog/exoplanet-observations?object_id=' + read('exoplanet_observations').observations[0].object_id); assert.equal(photos.value.observations.length, 1);
+      assert.equal((await request(api + 'catalog/exoplanets/constructor')).status, 410);
       assert.equal((await request(api + 'long-term-simulation?year=0&month=2&day=29')).value.calendar_date.year, 0);
       assert.equal((await request(api + 'universe?epoch=2026-11-13T24:00:00Z')).status, 422);
       assert.equal((await request(api + 'long-term-simulation?year=2026&month=2&day=30')).status, 422);
-      assert.equal((await request(api + 'catalog/universe?galaxy_id=galaxy-m31&parent_id=' + host)).status, 422);
       assert.equal((await request(api + 'catalog/solar-system?parent_id=../x')).status, 422);
     });
-    let evidence, rawEvidence;
+    await t.test('Sun and all eight base planets retain normal empty observation state', async () => {
+      for (const id of ['sun', 'mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']) {
+        const response = await request(api + 'observations?object_id=' + id);
+        assert.equal(response.status, 200, id + ': ' + response.text);
+        assert.equal(response.value.object_id, id); assert.equal(response.value.status, 'no_linked_observations');
+        assert.deepEqual(response.value.observations, []); assert.equal(response.value.next_cursor, null);
+      }
+      const pluto = await request(api + 'observations?object_id=pluto');
+      assert.equal(pluto.status, 200); assert.equal(pluto.value.status, 'available'); assert.equal(pluto.value.observations.length, 2);
+    });
+    let evidence, rawEvidence, legacyEvidence;
     await t.test('both actual observation pairs and reversed ordering preserve source dates and result ids', async () => {
       const manifest = parse(fs.readFileSync(path.join(root, 'data/node-runtime/runtime_manifest.json'), 'utf8'));
       for (const ids of [['S01', 'S02'], ['S02', 'S01'], ['S12', 'S14'], ['S14', 'S12']]) {
@@ -74,13 +80,11 @@ test('real exported bundle serves UI contracts, source-verified comparison and e
         assert.equal(response.value.frames[0].metadata.date_avg, read('observations_' + job.object_id).observations.find(f => f.observation_id === ids[0]).date_avg);
       }
     });
-    await t.test('new mass/observer/black-hole context, judgment and exact comparison floats survive export/import', async () => {
+    await t.test('Solar mass, camera, judgment and exact comparison floats survive export/import', async () => {
       const source = read('universe'), timeline = read('timeline'), mass = read('mass_scenarios'), model = read('long_term_model');
       const comparison = JSON.parse(fs.readFileSync(path.join(root, 'data/node-runtime/comparisons/S01_S02.json'), 'utf8'));
       const context = { selected_object_id: 'epsilon-indi-b', model_epoch: timeline.default_epoch, source_manifest_sha256: source.source_manifest_sha256, orbit_manifest_sha256: source.orbit_manifest_sha256, timeline_algorithm_version: 'display-hermite-v1', playback_paused: true, camera: { position: [120, 80, 100], target: [0, 0, 0], representation_version: 'solar-display-v1' }, time_preference: 'auto', simulation_context: { algorithm_version: model.algorithm_version, source_manifest_sha256: model.source_manifest_sha256, model_calendar_ms: Date.UTC(2500, 0, 1), playback_paused: true },
-        mass_scenarios_manifest_sha256: mass.source_manifest_sha256, mass_scenario: { target_id: 'sedna', density_kg_m3: 1000, analogue_id: null, include_source_ranges: true }, observer_physics_manifest_sha256: read('observer_physics').source_manifest_sha256, black_holes_manifest_sha256: read('black_holes').source_manifest_sha256, observer_experiment: { radial_beta: .001, emitted_wavelength_nm: 600, local_observer_radius_rs: 7.5 }, selected_black_hole_id: 'bh-m87', observer_panel_open: true };
-      // Use the source-selected key rather than introducing a different identity.
-      context.selected_black_hole_id = Object.keys(read('black_holes').objects).find(id => /m87/i.test(id));
+        mass_scenarios_manifest_sha256: mass.source_manifest_sha256, mass_scenario: { target_id: 'sedna', density_kg_m3: 1000, analogue_id: null, include_source_ranges: true } };
       const saved = await request(api + 'evidence', { result_id: comparison.result_id, session: { object_id: 'epsilon-indi-b', observation_ids: ['S01', 'S02'], universe_context: context }, judgment: '원본 날짜와 판단 보존 =1+1' });
       assert.equal(saved.status, 201, saved.text); evidence = saved.value;
       const exported = await request(api + 'evidence/' + evidence.evidence_id + '/export'); rawEvidence = exported.text;
@@ -90,11 +94,17 @@ test('real exported bundle serves UI contracts, source-verified comparison and e
       const restored = await request(api + 'evidence/import', evidence); assert.equal(restored.value.status, 'restored', restored.text);
       assert.equal(restored.value.judgment, evidence.judgment); assert.equal(restored.value.session.universe_context.mass_scenario.target_id, 'sedna');
       assert.equal(restored.value.comparison.frames[0].quality.pixel_count, 29);
-      const invalidSelection = structuredClone(evidence);
-      invalidSelection.session.universe_context.selected_black_hole_id = 'constructor';
-      const selectionBlocked = await request(api + 'evidence/import', invalidSelection);
-      assert.equal(selectionBlocked.value.status, 'recalculation_required');
-      assert.ok(selectionBlocked.value.reasons.includes('unsupported_black_hole_selection'));
+      legacyEvidence = structuredClone(evidence); legacyEvidence.evidence_id = 'ev_' + require('node:crypto').randomUUID().replaceAll('-', '');
+      Object.assign(legacyEvidence.session.universe_context, { show_galaxies: true, galaxy_manifest_sha256: 'f'.repeat(64), observer_physics_manifest_sha256: 'e'.repeat(64), observer_experiment: { radial_beta: .001, emitted_wavelength_nm: 600, local_observer_radius_rs: 7.5 }, observer_panel_open: true, black_holes_manifest_sha256: 'd'.repeat(64), selected_black_hole_id: 'bh-m87' });
+      const partial = await request(api + 'evidence/import', legacyEvidence);
+      assert.equal(partial.value.status, 'partially_restored', partial.text);
+      assert.equal(partial.value.response_schema_version, '1.1'); assert.equal(partial.value.migration_policy, 'solar-scope-context-v1');
+      assert.deepEqual(partial.value.omitted_contexts.map(v => v.feature).sort(), ['black_holes', 'galaxies', 'observer_physics']);
+      assert.equal('show_galaxies' in partial.value.session.universe_context, false);
+      assert.equal('observer_experiment' in partial.value.session.universe_context, false);
+      assert.equal(partial.value.comparison.result_id, evidence.result_id);
+      const oldExport = await request(api + 'evidence/' + legacyEvidence.evidence_id + '/export');
+      assert.deepEqual(oldExport.value, legacyEvidence); assert.ok(oldExport.text.includes('"comparison":' + originalComparison));
       const tampered = structuredClone(evidence); tampered.comparison.frames[0].cutout.IMAGE[0][0] = 123456;
       assert.equal((await request(api + 'evidence/import', tampered)).status, 409);
       const changed = structuredClone(evidence); changed.session.universe_context.mass_scenarios_manifest_sha256 = 'a'.repeat(64);
@@ -115,9 +125,20 @@ test('real exported bundle serves UI contracts, source-verified comparison and e
     await t.test('same evidence/result IDs restore after a real Node server and worker restart', async () => {
       const restored = await request(api + 'evidence/import', rawEvidence); assert.equal(restored.value.status, 'restored', restored.text);
       assert.equal(restored.value.evidence_id, evidence.evidence_id); assert.equal(restored.value.comparison.result_id, evidence.result_id);
-      assert.equal(restored.value.session.universe_context.observer_experiment.local_observer_radius_rs, 7.5);
       assert.equal(restored.value.session.universe_context.camera.position[0], 120);
       const interrupted = await request(api + 'jobs/' + abandoned.job_id); assert.equal(interrupted.value.state, 'interrupted'); assert.equal(interrupted.value.stage, 'restart');
+    });
+    await runtime.close();
+    const freshState = fs.mkdtempSync(path.join(root, 'tmp', 'node-fresh-import-'));
+    runtime = await start({ root, stateDir: freshState, port: 0, host: '127.0.0.1', noSignals: true }); base = 'http://127.0.0.1:' + runtime.server.address().port;
+    await t.test('old evidence restores its core into empty state and preserves the original envelope', async () => {
+      const partial = await request(api + 'evidence/import', legacyEvidence);
+      assert.equal(partial.value.status, 'partially_restored', partial.text);
+      assert.equal(partial.value.comparison.result_id, legacyEvidence.result_id);
+      assert.deepEqual((await request(api + 'evidence/' + legacyEvidence.evidence_id + '/export')).value, legacyEvidence);
+      assert.equal((await request(api + 'comparisons/' + legacyEvidence.result_id + '/manifest')).status, 200);
+      const collision = structuredClone(legacyEvidence); collision.judgment += ' collision';
+      assert.equal((await request(api + 'evidence/import', collision)).status, 409);
     });
   } finally { await runtime.close(); }
 });

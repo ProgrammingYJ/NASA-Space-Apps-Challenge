@@ -120,8 +120,8 @@
     },
     "small_body_appearance": {
       "path": "data/manifests/small_body_appearance.json",
-      "bytes": 47999,
-      "sha256": "33b3662b6978137bf172ab65064aa73a40f119519cfaf6365e89ab0f60db18ec",
+      "bytes": 47152,
+      "sha256": "a531089598a6b56322d5f407d89026618153a463b5de4c10232156af47e1b49d",
       "use": "immutable existing adopted source and calculation dependency"
     }
   },

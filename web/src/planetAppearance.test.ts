@@ -1,6 +1,13 @@
 import {describe,it,expect} from 'vitest';
-import {displayPole,scaledRingBands,subtractRingGaps,sphereBlocksSun,ringsBlockSun,textureWindow,displayTextureDimensions,detailedAppearanceForSize} from './planetAppearance';
+import {displayPole,scaledRingBands,subtractRingGaps,sphereBlocksSun,ringsBlockSun,textureWindow,displayTextureDimensions,detailedAppearanceForSize,ringBandsForDisplay} from './planetAppearance';
 describe('sourced appearance geometry',()=>{
+  it('inherits faint system visibility without overriding a sourced band or opacity',()=>{
+    const source={visibility:'very_faint',bands_km:[{name:'Galle',inner_km:40900,outer_km:42900},{name:'Explicit',inner_km:53000,outer_km:54000,visibility:'faint',display_opacity:.08}]};
+    const bands=scaledRingBands(ringBandsForDisplay(source),24622,1);
+    expect(bands[0].opacity).toBeLessThan(.03);expect(bands[1].opacity).toBe(.08);
+    expect(source.bands_km[0]).not.toHaveProperty('visibility');
+    expect(ringBandsForDisplay(undefined)).toEqual([]);
+  });
   it('bounds overview/detail GPU samples without enlarging smaller source images or changing the immutable source crop',()=>{expect(displayTextureDimensions(5400,2700,1024)).toEqual([1024,512]);expect(displayTextureDimensions(9520,4760,4096)).toEqual([4096,2048]);expect(displayTextureDimensions(447,224,1024)).toEqual([447,224]);expect(displayTextureDimensions(1167,875,1024)).toEqual([1024,768]);expect(()=>displayTextureDimensions(0,875,1024)).toThrow('invalid_display_texture_dimensions');const entry={texture_region_px:{x:205,y:175,width:874,height:437},pixel_dimensions:[1167,875] as [number,number]};expect(textureWindow(entry).repeat).toEqual([874/1167,437/875]);expect(entry.pixel_dimensions).toEqual([1167,875]);});
   it('promotes visible unselected surfaces by angular display size and retains detail across the hysteresis band',()=>{expect(detailedAppearanceForSize(200,false,false)).toBe(true);expect(detailedAppearanceForSize(150,false,true)).toBe(true);expect(detailedAppearanceForSize(150,false,false)).toBe(false);expect(detailedAppearanceForSize(120,false,true)).toBe(false);expect(detailedAppearanceForSize(1,true,false)).toBe(true);expect(detailedAppearanceForSize(NaN,false,false)).toBe(false);});
   it('scales ring bands from physical km without filling the measured division',()=>{const bands=scaledRingBands([{inner_km:92000,outer_km:117580},{inner_km:122170,outer_km:136775}],58232,1);expect(bands).toHaveLength(2);expect(bands[0].outer).toBeLessThan(bands[1].inner);expect(bands[0].inner).toBeCloseTo(92000/58232);expect(scaledRingBands([{inner_km:1,outer_km:2}],0,1)).toEqual([]);});

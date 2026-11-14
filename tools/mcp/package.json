@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@cyanheads/astronomy-mcp-server": "0.5.0",
+    "@pipeworx/mcp-horizons-nasa": "0.2.1"
+  },
+  "name": "planet-x-developer-mcp-tools",
+  "private": true,
+  "description": "Isolated optional developer MCPs, not application runtime dependencies"
+}

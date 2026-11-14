@@ -89,7 +89,11 @@ def test_no_surface_is_invented_for_missing_maps_or_exoplanets(appearance):
         assert ident not in appearance["objects"]
     assert appearance["objects"]["uranus"]["kind"] == "representative_atmosphere"
     assert appearance["objects"]["neptune"]["kind"] == "representative_atmosphere"
-    assert "F467M" in appearance["objects"]["neptune"]["limitations"][0]
+    entry = appearance["objects"]["neptune"]
+    assert entry["color_composite"]["rgb_channels"] == ["F657N", "F547M", "F467M"]
+    assert entry["color_composite"]["contrast_enhanced"] is True
+    assert entry["derivation"]["all_pixels_and_dimensions_equal"] is True
+    assert "missing polar regions" in " ".join(entry["limitations"])
     if "ceres" not in appearance["objects"]:
         assert (
             appearance["reference_images"]["ceres_approach"]["projection"]

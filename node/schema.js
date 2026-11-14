@@ -49,4 +49,32 @@ function sessionRules(session) {
   if (c.camera) { const { position, target } = c.camera, distance = Math.hypot(...position.map((v, i) => v - target[i])); if (Math.hypot(...position) >= 10000 || distance < .05 || distance >= 10000) throw new Error('invalid_request'); }
   return session;
 }
-module.exports = { validator, sessionRules, omitNullFields };
+function migrateSolarSession(session, currentVisualHashes = {}, compatibleReferences = []) {
+  const migrated = structuredClone(session), context = migrated.universe_context;
+  const omitted_contexts = [];
+  if (!context) return { session: migrated, omitted_contexts };
+  const groups = {
+    galaxies: ['galaxy_manifest_sha256', 'show_galaxies'],
+    observer_physics: ['observer_physics_manifest_sha256', 'observer_experiment', 'observer_panel_open'],
+    black_holes: ['black_holes_manifest_sha256', 'selected_black_hole_id'],
+  };
+  for (const [feature, keys] of Object.entries(groups)) {
+    const paths = keys.filter(key => context[key] !== undefined && context[key] !== null && context[key] !== false).map(key => 'universe_context.' + key);
+    keys.forEach(key => { delete context[key]; });
+    if (paths.length) omitted_contexts.push({ feature, paths, reason: 'feature_removed_from_1000au_scope' });
+  }
+  const visualHash = currentVisualHashes.appearance_manifest_sha256;
+  if (typeof visualHash === 'string' && /^[a-f0-9]{64}$/.test(visualHash) && context.appearance_manifest_sha256 && context.appearance_manifest_sha256 !== visualHash) {
+    delete context.appearance_manifest_sha256;
+    omitted_contexts.push({feature:'appearance',paths:['universe_context.appearance_manifest_sha256'],reason:'visual_sources_updated_observation_preserved'});
+  }
+  for (const item of compatibleReferences) {
+    if (!['small_body_appearance_manifest_sha256','mass_scenarios_manifest_sha256'].includes(item.field)
+        || !/^[a-f0-9]{64}$/.test(item.from_sha256) || !/^[a-f0-9]{64}$/.test(item.to_sha256)
+        || currentVisualHashes[item.field] !== item.to_sha256 || context[item.field] !== item.from_sha256) continue;
+    context[item.field] = item.to_sha256;
+    omitted_contexts.push({feature:item.field.replace('_manifest_sha256',''),paths:['universe_context.'+item.field],reason:'display_dependency_refreshed_scientific_values_identical'});
+  }
+  return { session: migrated, omitted_contexts };
+}
+module.exports = { validator, sessionRules, omitNullFields, migrateSolarSession };

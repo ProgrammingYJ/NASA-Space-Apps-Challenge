@@ -1,0 +1,167 @@
+{
+  "release": "0.13.0",
+  "work_ids": [
+    "DEV-018",
+    "DEV-019",
+    "OPS-020",
+    "DEV-020"
+  ],
+  "status": "verified_deployed_and_restarted",
+  "recorded_at_utc": "2026-11-14T22:46:51.693533+00:00",
+  "archive": {
+    "filename": "NASA_SPACE_APPS_CHALLENGE_v0.13.0_20261115_073754KST.zip",
+    "bytes": 490829327,
+    "sha256": "68ee85ee4e6dedbe99ddeacb452b5f25751e0c262d04f6cc2621a99c80b3b044",
+    "file_count": 1616
+  },
+  "manifest_files_verified": 1615,
+  "uncompressed_manifest_bytes": 666910611,
+  "source_provenance": {
+    "base_commit": "457d8a327e5c173fa3b85a3031a32eb3be9bb4ca",
+    "working_tree_has_uncommitted_changes": true,
+    "source_transfer_manifest_sha256": "d641a6ea4553c97dc11e0216777d3ca05f81ba83a450e4b8e03e3e072be1b18d"
+  },
+  "immutable_archive_policy": "This external record was written after verification/deployment. The verified complete ZIP is unchanged; its build-time documents correctly retain pending deployment status. Post-deployment Git documentation can refer to this record.",
+  "runtime": {
+    "engine": "Node.js24.22.3",
+    "entrypoint": "node app.js",
+    "manifest_sha256": "ea500e152d49734fcb2dfd65db3f6a2abbf967d77d6a7ae79bc2e8ddcff16f46",
+    "generated_json": 39,
+    "generated_bytes": 19200366,
+    "source_files": 1272,
+    "required_source_files": 1182,
+    "Python_required_by_server": false
+  },
+  "clean_zip_verification": {
+    "platform": "Ubuntu24.04.5 amd64 on isolated EC2 build workspace",
+    "status": "passed",
+    "owned_server_pids": [
+      7243,
+      7256
+    ],
+    "node_only_closed_PATH": true,
+    "report": "NASA_SPACE_APPS_CHALLENGE_v0.13.0_20261115_073754KST.verification.json",
+    "Windows_complete_zip_rerun": "not run for0.13; Windows fresh scientific export and normal Chrome over HTTPS were verified separately"
+  },
+  "deployment": {
+    "region": "ap-southeast-2 (Sydney)",
+    "ip": "16.176.170.4",
+    "active_release": "/srv/planet-x/releases/NASA_SPACE_APPS_CHALLENGE_v0.13.0_20261115_073754KST",
+    "previous_release": "/srv/planet-x/releases/NASA_SPACE_APPS_CHALLENGE_v0.12.1_20261115_044329KST",
+    "proxy": "nginx80/443 to Node loopback3002",
+    "persistent_state": "existing shared Node state retained",
+    "consistent_stopped_writer_backup": {
+      "files": 16,
+      "bytes": 6398352,
+      "sha256": "6fcfb878ae8b34389c81989d4ef50bb9a99fbb17e59f459f03e619efd40aaece",
+      "private_payload_in_public_zip": false
+    },
+    "existing_evidence_and_comparison_files_byte_identical": 11,
+    "production_restart_pids": [
+      7419,
+      7725
+    ],
+    "nginx_configuration_check": "passed",
+    "certbot_timer": "active; existing configuration retained",
+    "actual_rollback_drill": "not run; previous immutable release and shared-state backup retained"
+  },
+  "public_service": {
+    "status": "passed",
+    "checked_utc": "2026-11-14T22:43:04.767638+00:00",
+    "base_url": "https://nasaspaceappschallenge.marulee.dev",
+    "dns_ipv4": "16.176.170.4",
+    "tls": {
+      "protocol": "TLSv1.3",
+      "peer_ip": "16.176.170.4",
+      "expires": "Feb 12 18:30:59 2027 GMT",
+      "verification": "default_CA_and_exact_hostname"
+    },
+    "html_and_javascript_match_exact_release": true,
+    "javascript": {
+      "path": "/assets/index-9501uCgY.js",
+      "transfer_encoding": "gzip",
+      "wire_bytes": 389748,
+      "decoded_bytes": 1264447,
+      "decoded_sha256": "23ac08510d9337837ad9b4f331cdc3b04c76868ec782912f5a062930ff443d4f"
+    },
+    "ready": {
+      "runtime": "node",
+      "science_mode": "verified_build_cache_and_ported_display_models",
+      "source_bundle_verified": true,
+      "status": "ready",
+      "storage_writable": true,
+      "worker_alive": true
+    },
+    "appearance_sha256": "d0de5f97913addcfe2d70fff2859024c75e7edb3069d5a17f4d9a7022b4467e1",
+    "ancient_scene": {
+      "catalogue_count": 8341,
+      "plotted_count": 8305,
+      "unavailable_count": 1,
+      "outside_1000_au_count": 35,
+      "extrapolated_count": 8340
+    },
+    "http_redirect": {
+      "status": 301,
+      "location": "https://nasaspaceappschallenge.marulee.dev/"
+    }
+  },
+  "public_chrome": {
+    "status": "passed",
+    "passed": 5,
+    "failed": 0,
+    "duration_ms": 100991.135,
+    "engine": "normal Chrome157, Playwright1.56.1, no TLS bypass",
+    "scope": [
+      "exact JPL identities/FO563 uncertainty/PD153 criteria/five locales",
+      "four display filters and conditional literature path",
+      "four sourced maps, lighting and fixed physical radii",
+      "real epsilon Indi B originals/quality/save/export/fresh restoration/official routes",
+      "P9 hypothesis/bounded gravity/save/export/fresh restoration/five locales"
+    ]
+  },
+  "prior_production_evidence_after_actual_restart": {
+    "checked_utc": "2026-11-14T22:44:11.586567+00:00",
+    "base": "https://nasaspaceappschallenge.marulee.dev",
+    "evidence": [
+      {
+        "id": "ev_e764a2eb3a294ca890b39ce8be85dc5d",
+        "status": "restored",
+        "original_export_bytes_and_sha_preserved": true,
+        "comparison_and_judgment_preserved": true,
+        "only_verified_visual_context_updated": false,
+        "bytes": 870988,
+        "sha256": "ca26330aab98a9d26cd7b3c440445ef1068b375b75ca2ca784e3c1ec03d57746"
+      },
+      {
+        "id": "ev_4872494bb4c649e3af2ad8d43b0bf4f8",
+        "status": "restored",
+        "original_export_bytes_and_sha_preserved": true,
+        "comparison_and_judgment_preserved": true,
+        "only_verified_visual_context_updated": false,
+        "bytes": 906270,
+        "sha256": "659e6ecf9de6c5572127f5b8d9c68cb2c74f98a76b17c08e35a49def46239e07"
+      },
+      {
+        "id": "p9ev_5453e41e76da4a9786e2aff1503d2134",
+        "status": "restored",
+        "original_export_bytes_and_sha_preserved": true,
+        "comparison_and_judgment_preserved": true,
+        "only_verified_visual_context_updated": false,
+        "bytes": 32807,
+        "sha256": "46f6398b6f28e868326d3d16f56b03bff6553b8b37311439dcc6b28c9d5f1dfb"
+      }
+    ],
+    "status": "passed"
+  },
+  "build_time_regressions": "docs/qa/dev020_local_verification.json",
+  "platform_parity": "docs/qa/dev020_platform_parity.json",
+  "limitations": [
+    "source map gaps, contrast-enhanced colors and acquisition dates retained; no invented fill",
+    "ranked regions are conditional2018 literature sky-position cells, not five detected planets or existence probabilities",
+    "all physics, unknown-body completeness and new measured motion are not claimed",
+    "native ja/zh-Hant/fr review unavailable",
+    "old Seoul application stopped/disabled; its EC2 compute instance was not stopped or deleted by this task"
+  ],
+  "repository": "https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge",
+  "git_delivery_order": "The Git commit containing this post-deployment record is created and pushed after the verified deployment. Its SHA is captured in the final response and separate local delivery receipt; this file does not attempt to embed its own commit hash."
+}

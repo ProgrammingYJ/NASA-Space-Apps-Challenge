@@ -1,0 +1,219 @@
+{
+  "status": "passed",
+  "scope": "independent Linux recalculation versus preserved Windows canonical cache; numeric equality within disclosed tolerance, not byte-identical results",
+  "created_utc": "2026-11-14T22:21:10.382265+00:00",
+  "comparisons": [
+    {
+      "pair": "S01_S02",
+      "windows_canonical_sha256": "88219adf492f225e5be126e8f7e5577b74475aff4067f5797d63540ba044d74c",
+      "linux_fresh_sha256": "c50eeb04b923519bd155eaf88fe6d0d8395406b560c7e723e030f99ac5cd8cd5",
+      "windows_result_id": "cmp_d88083664b6fd27592eb68c1",
+      "linux_result_id": "cmp_3ed1c28f124374fe693fe43b",
+      "differences": [
+        {
+          "path": "/frames/0/metadata/approximate_embedded_wcs_bandwidth_um",
+          "windows": 0.03579824459895685,
+          "linux": 0.03579824459895682,
+          "absolute_delta": 2.7755575615628914e-17
+        },
+        {
+          "path": "/frames/0/metadata/approximate_embedded_wcs_wavelength_um",
+          "windows": 4.8328561327340065,
+          "linux": 4.832856132734005,
+          "absolute_delta": 1.7763568394002505e-15
+        },
+        {
+          "path": "/frames/0/metadata/bandwidth_um",
+          "windows": 0.03668966207023156,
+          "linux": 0.03668966207023337,
+          "absolute_delta": 1.8110513089197866e-15
+        },
+        {
+          "path": "/frames/0/metadata/wavelength_um",
+          "windows": 4.832188669713772,
+          "linux": 4.832188669713769,
+          "absolute_delta": 2.6645352591003757e-15
+        },
+        {
+          "path": "/frames/0/metadata/wcs/round_trip_error_px",
+          "windows": 1.0934485761894445e-07,
+          "linux": 1.0934243692686251e-07,
+          "absolute_delta": 2.4206920819317633e-12
+        },
+        {
+          "path": "/frames/0/prediction/dec_deg",
+          "windows": -56.80018839311843,
+          "linux": -56.800188393118425,
+          "absolute_delta": 7.105427357601002e-15
+        },
+        {
+          "path": "/frames/0/prediction/detector_x",
+          "windows": 793.7985540771542,
+          "linux": 793.7985540771464,
+          "absolute_delta": 7.844391802791506e-12
+        },
+        {
+          "path": "/frames/0/prediction/detector_y",
+          "windows": 561.3004213583636,
+          "linux": 561.3004213583675,
+          "absolute_delta": 3.979039320256561e-12
+        },
+        {
+          "path": "/frames/0/prediction/x",
+          "windows": 793.7985540771542,
+          "linux": 793.7985540771464,
+          "absolute_delta": 7.844391802791506e-12
+        },
+        {
+          "path": "/frames/0/prediction/y",
+          "windows": 561.3004213583636,
+          "linux": 561.3004213583675,
+          "absolute_delta": 3.979039320256561e-12
+        },
+        {
+          "path": "/frames/0/quality/center/x",
+          "windows": 793.7985540771542,
+          "linux": 793.7985540771464,
+          "absolute_delta": 7.844391802791506e-12
+        },
+        {
+          "path": "/frames/0/quality/center/y",
+          "windows": 561.3004213583636,
+          "linux": 561.3004213583675,
+          "absolute_delta": 3.979039320256561e-12
+        },
+        {
+          "path": "/frames/1/metadata/wcs/round_trip_error_px",
+          "windows": 7.437414326454919e-09,
+          "linux": 7.439270070667007e-09,
+          "absolute_delta": 1.8557442120883394e-12
+        }
+      ],
+      "scientific_pixel_arrays_and_quality_counts_exact": true,
+      "max_absolute_delta": 7.844391802791506e-12
+    },
+    {
+      "pair": "S02_S01",
+      "windows_canonical_sha256": "ad3755c1803fce01a669128fd260b1679f65d84ba279612d3c1d272a085f8d94",
+      "linux_fresh_sha256": "6b16745311a69bdde87ed558e5813e28d8d7a84712e8656ec2905f75cfe0100b",
+      "windows_result_id": "cmp_15919fc7bf2adfbed9b46935",
+      "linux_result_id": "cmp_265c1693a58ab1a95d77eec6",
+      "differences": [
+        {
+          "path": "/frames/0/metadata/wcs/round_trip_error_px",
+          "windows": 7.437414326454919e-09,
+          "linux": 7.439270070667007e-09,
+          "absolute_delta": 1.8557442120883394e-12
+        },
+        {
+          "path": "/frames/1/metadata/approximate_embedded_wcs_bandwidth_um",
+          "windows": 0.03579824459895685,
+          "linux": 0.03579824459895682,
+          "absolute_delta": 2.7755575615628914e-17
+        },
+        {
+          "path": "/frames/1/metadata/approximate_embedded_wcs_wavelength_um",
+          "windows": 4.8328561327340065,
+          "linux": 4.832856132734005,
+          "absolute_delta": 1.7763568394002505e-15
+        },
+        {
+          "path": "/frames/1/metadata/bandwidth_um",
+          "windows": 0.03668966207023156,
+          "linux": 0.03668966207023337,
+          "absolute_delta": 1.8110513089197866e-15
+        },
+        {
+          "path": "/frames/1/metadata/wavelength_um",
+          "windows": 4.832188669713772,
+          "linux": 4.832188669713769,
+          "absolute_delta": 2.6645352591003757e-15
+        },
+        {
+          "path": "/frames/1/metadata/wcs/round_trip_error_px",
+          "windows": 1.0934485761894445e-07,
+          "linux": 1.0934243692686251e-07,
+          "absolute_delta": 2.4206920819317633e-12
+        },
+        {
+          "path": "/frames/1/prediction/dec_deg",
+          "windows": -56.80018839311843,
+          "linux": -56.800188393118425,
+          "absolute_delta": 7.105427357601002e-15
+        },
+        {
+          "path": "/frames/1/prediction/detector_x",
+          "windows": 793.7985540771542,
+          "linux": 793.7985540771464,
+          "absolute_delta": 7.844391802791506e-12
+        },
+        {
+          "path": "/frames/1/prediction/detector_y",
+          "windows": 561.3004213583636,
+          "linux": 561.3004213583675,
+          "absolute_delta": 3.979039320256561e-12
+        },
+        {
+          "path": "/frames/1/prediction/x",
+          "windows": 793.7985540771542,
+          "linux": 793.7985540771464,
+          "absolute_delta": 7.844391802791506e-12
+        },
+        {
+          "path": "/frames/1/prediction/y",
+          "windows": 561.3004213583636,
+          "linux": 561.3004213583675,
+          "absolute_delta": 3.979039320256561e-12
+        },
+        {
+          "path": "/frames/1/quality/center/x",
+          "windows": 793.7985540771542,
+          "linux": 793.7985540771464,
+          "absolute_delta": 7.844391802791506e-12
+        },
+        {
+          "path": "/frames/1/quality/center/y",
+          "windows": 561.3004213583636,
+          "linux": 561.3004213583675,
+          "absolute_delta": 3.979039320256561e-12
+        }
+      ],
+      "scientific_pixel_arrays_and_quality_counts_exact": true,
+      "max_absolute_delta": 7.844391802791506e-12
+    },
+    {
+      "pair": "S12_S14",
+      "windows_canonical_sha256": "9ebe635e2ddd0230b50e38cce35a468acf826654199a9403d36f4189fa1d12f8",
+      "linux_fresh_sha256": "0f88371676fa09b5bb46b347e1a094d845e516695fbd1097dce02e3be5503400",
+      "windows_result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+      "linux_result_id": "cmp_0604f9000eb90dab8a23e3ed",
+      "differences": [
+        {
+          "path": "/frames/1/metadata/wcs/round_trip_error_px",
+          "windows": 7.96637057071909e-08,
+          "linux": 7.966359521367946e-08,
+          "absolute_delta": 1.1049351144024782e-13
+        }
+      ],
+      "scientific_pixel_arrays_and_quality_counts_exact": true,
+      "max_absolute_delta": 1.1049351144024782e-13
+    },
+    {
+      "pair": "S14_S12",
+      "windows_canonical_sha256": "a71d4d7fbfb286a84ca66e85bb65af6d0090b311adc9b7042323366cb1989648",
+      "linux_fresh_sha256": "d6228c03d1a82c23de177cefa5ad19da9bceb7a61f0e6dcd008e4542e6d09bcf",
+      "windows_result_id": "cmp_e544e54be8b8ddadb2cecda8",
+      "linux_result_id": "cmp_5485534999d49a804be756fe",
+      "differences": [
+        {
+          "path": "/frames/0/metadata/wcs/round_trip_error_px",
+          "windows": 7.96637057071909e-08,
+          "linux": 7.966359521367946e-08,
+          "absolute_delta": 1.1049351144024782e-13
+        }
+      ],
+      "scientific_pixel_arrays_and_quality_counts_exact": true,
+      "max_absolute_delta": 1.1049351144024782e-13
+    }
+  ]
+}

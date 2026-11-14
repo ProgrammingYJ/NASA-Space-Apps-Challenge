@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "visual-dependency-payload-equivalence-v1",
+  "canonical_algorithm": "typed-json-ieee754be-v1",
+  "created_utc": "2026-11-14T22:08:31.160222+00:00",
+  "data_kind": "dependency_migration_provenance_not_new_observation",
+  "allowed_changed_top_level_fields": [
+    "dependencies"
+  ],
+  "migrations": [
+    {
+      "field": "small_body_appearance_manifest_sha256",
+      "original_path": "data/manifests/small_body_appearance.json",
+      "from_sha256": "33b3662b6978137bf172ab65064aa73a40f119519cfaf6365e89ab0f60db18ec",
+      "to_sha256": "a531089598a6b56322d5f407d89026618153a463b5de4c10232156af47e1b49d",
+      "from": {
+        "path": "data/reference/visual-manifest-history/33b3662b6978137bf172ab65064aa73a40f119519cfaf6365e89ab0f60db18ec.json",
+        "bytes": 47999,
+        "sha256": "33b3662b6978137bf172ab65064aa73a40f119519cfaf6365e89ab0f60db18ec"
+      },
+      "to": {
+        "path": "data/manifests/small_body_appearance.json",
+        "bytes": 47152,
+        "sha256": "a531089598a6b56322d5f407d89026618153a463b5de4c10232156af47e1b49d"
+      },
+      "payload_canonical_sha256": "ead8794096f755bb76930124aee78b82f5c57658848ad65cd61b8f0c12394c91",
+      "changed_top_level_fields": [
+        "dependencies"
+      ],
+      "source_evidence": {
+        "archive": "NASA_SPACE_APPS_CHALLENGE_v0.12.1_20261115_044329KST.zip",
+        "archive_sha256": "7e33f4871327a6555beb11ee42020ff841dcf2358493a308958399799a4cbcb6",
+        "archive_member_path": "data/manifests/small_body_appearance.json",
+        "archive_member_sha256": "33b3662b6978137bf172ab65064aa73a40f119519cfaf6365e89ab0f60db18ec",
+        "release_manifest_sha256": "2494f4a5a8c80a1e972fa0824f1492327fa2d90992a8ddb14d8b3d3e6ddbc36b",
+        "verification": "exact original member bytes/size/SHA checked against release manifest; source archive SHA is the previously verified immutable release record"
+      }
+    },
+    {
+      "field": "mass_scenarios_manifest_sha256",
+      "original_path": "data/manifests/mass_scenarios.json",
+      "from_sha256": "7668d7caf418aaae363acf41fa50e9a69795ff1e3c99a178534a83552fc82112",
+      "to_sha256": "adca7ca7cd2425d9063a8db686389d6def187b1a5c7bb0a18b2faf42a97091d9",
+      "from": {
+        "path": "data/reference/visual-manifest-history/7668d7caf418aaae363acf41fa50e9a69795ff1e3c99a178534a83552fc82112.json",
+        "bytes": 130355,
+        "sha256": "7668d7caf418aaae363acf41fa50e9a69795ff1e3c99a178534a83552fc82112"
+      },
+      "to": {
+        "path": "data/manifests/mass_scenarios.json",
+        "bytes": 130355,
+        "sha256": "adca7ca7cd2425d9063a8db686389d6def187b1a5c7bb0a18b2faf42a97091d9"
+      },
+      "payload_canonical_sha256": "bdc0d6365a76d383a83c3b2d62990e863ae0edf8ca457a63197f559b19fe18fb",
+      "changed_top_level_fields": [
+        "dependencies"
+      ],
+      "source_evidence": {
+        "archive": "NASA_SPACE_APPS_CHALLENGE_v0.12.1_20261115_044329KST.zip",
+        "archive_sha256": "7e33f4871327a6555beb11ee42020ff841dcf2358493a308958399799a4cbcb6",
+        "archive_member_path": "data/manifests/mass_scenarios.json",
+        "archive_member_sha256": "7668d7caf418aaae363acf41fa50e9a69795ff1e3c99a178534a83552fc82112",
+        "release_manifest_sha256": "2494f4a5a8c80a1e972fa0824f1492327fa2d90992a8ddb14d8b3d3e6ddbc36b",
+        "verification": "exact original member bytes/size/SHA checked against release manifest; source archive SHA is the previously verified immutable release record"
+      }
+    }
+  ],
+  "limitations": [
+    "Only the two named references may migrate to these exact adopted hashes. Unknown pairs fail normal evidence validation.",
+    "Only the top-level dependencies object changed. Profiles, targets, model, analogue/source facts, dates and all other scientific payload are equal.",
+    "Numbers in the shared digest are finite IEEE754 binary64 values encoded in big-endian hex; types, object keys sorted by UTF8 and array order are preserved. Native Python deep equality was independently required during generation.",
+    "The original evidence envelope and original comparison bytes are not rewritten. Only active-session display dependency references may be updated, with an explicit migration log."
+  ]
+}

@@ -13,40 +13,6 @@ def client(tmp_path_factory):
         yield value
 
 
-def test_review_http_keeps_uncertain_cases_out_of_confirmed_objects(client):
-    response = client.get("/api/v1/catalog/extragalactic-planets")
-    assert response.status_code == 200
-    data = response.json()
-    assert data["objects"] == data["confirmed_objects"] == []
-    assert len(data["reviewed_unconfirmed_evidence"]) == 5
-    assert all(not item["confirmed"] for item in data["reviewed_unconfirmed_evidence"])
-    assert client.get("/api/v1/catalog/extragalactic-planets?galaxy_id=unknown").status_code == 422
-
-
-def test_observation_http_differentiates_not_acquired_from_unknown_and_invalid(client):
-    response = client.get("/api/v1/catalog/exoplanet-observations")
-    assert response.status_code == 200
-    data = response.json()
-    assert len(data["observations"]) == 3
-    for photo in data["observations"]:
-        assert photo["surface_resolved"] is False
-        assert photo["credit"] and photo["license"]["name"] == "CC BY 4.0"
-        selected = client.get(
-            "/api/v1/catalog/exoplanet-observations", params={"object_id": photo["object_id"]}
-        ).json()
-        assert selected["observations"] == [photo]
-    planets = client.get("/api/v1/catalog/exoplanets").json()["objects"]
-    ids = {photo["object_id"] for photo in data["observations"]}
-    ordinary = next(planet["object_id"] for planet in planets if planet["object_id"] not in ids)
-    empty = client.get("/api/v1/catalog/exoplanet-observations", params={"object_id": ordinary})
-    assert empty.status_code == 200 and empty.json()["observations"] == []
-    assert client.get("/api/v1/catalog/exoplanet-observations?object_id=bad").status_code == 422
-    assert (
-        client.get("/api/v1/catalog/exoplanet-observations?object_id=exo-" + "0" * 20).status_code
-        == 404
-    )
-
-
 def test_small_body_profile_http_retains_actual_maps_and_unresolved_shape_limits(client):
     response = client.get("/api/v1/small-body-appearance")
     assert response.status_code == 200, response.text
@@ -93,8 +59,6 @@ def test_planet_criteria_keeps_policy_and_unknown_dynamical_quantities_separate(
 @pytest.mark.parametrize(
     "module,function,path",
     [
-        ("science.extragalactic_planets", "get_extragalactic_planets", "extragalactic-planets"),
-        ("science.exoplanet_observations", "get_exoplanet_observations", "exoplanet-observations"),
         ("science.small_body_appearance", "get_small_body_appearance", "small-body-appearance"),
         ("science.planet_criteria", "get_planet_criteria", "planet-criteria"),
     ],

@@ -1,0 +1,148 @@
+{
+  "schema_version": "outer-tno-horizons-consistency-v1",
+  "source_snapshot_sha256": "9dff47da0f1a34d2410e72f56358d4dc944775ffe905df1c3acc7be8693e4fbf",
+  "kind": "same_JPL_model_separate_SBDB_elements_and_Horizons_vectors_not_independent_physical_accuracy",
+  "checks": [
+    {
+      "object_id": "sbdb-20090377",
+      "name": "90377 Sedna (2003 VB12)",
+      "epoch_jd_tdb": 2461200.5,
+      "expected_position_au": [
+        39.00252537001261,
+        71.16484411021555,
+        -17.01933281867084
+      ],
+      "calculated_position_au": [
+        39.00252536917828,
+        71.16484410948534,
+        -17.019332819258768
+      ],
+      "residual_au": 1.2549817065253355e-09,
+      "orbit": {
+        "a_au": 543.7195289104732,
+        "e": 0.8598824585187618,
+        "i_deg": 11.92527582847476,
+        "Omega_deg": 144.5061662673739,
+        "omega_deg": 311.0987725939751,
+        "M_deg": 358.5956944005428,
+        "epoch_jd_tdb": 2461200.5
+      },
+      "source": {
+        "local_relative_path": "data/reference/outer-tno/horizons_90377.json",
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2790377%3B%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&TLIST=%272461200.5%27&TIME_TYPE=%27TDB%27&OUT_UNITS=%27AU-D%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "'90377;'",
+          "OBJ_DATA": "'NO'",
+          "MAKE_EPHEM": "'YES'",
+          "EPHEM_TYPE": "'VECTORS'",
+          "CENTER": "'500@10'",
+          "TLIST": "'2461200.5'",
+          "TIME_TYPE": "'TDB'",
+          "OUT_UNITS": "'AU-D'",
+          "REF_PLANE": "'ECLIPTIC'",
+          "REF_SYSTEM": "'ICRF'",
+          "VEC_CORR": "'NONE'",
+          "CSV_FORMAT": "'YES'"
+        },
+        "sha256": "f2be8cca20b775856a93587c4a9f9f9e3b791cc0a3a9de9b6f9f7a080c8ab3aa",
+        "bytes": 6643,
+        "retrieved_utc": "2026-11-14T18:18:32.327495+00:00"
+      }
+    },
+    {
+      "object_id": "sbdb-50666516",
+      "name": "(2012 VP113)",
+      "epoch_jd_tdb": 2461200.5,
+      "expected_position_au": [
+        45.2516051916455,
+        69.0144539098853,
+        -20.62528879669255
+      ],
+      "calculated_position_au": [
+        45.25160518970779,
+        69.01445390930196,
+        -20.625288798048995
+      ],
+      "residual_au": 2.4361778613087095e-09,
+      "orbit": {
+        "a_au": 267.5209861941053,
+        "e": 0.6985589359876868,
+        "i_deg": 24.00179208811373,
+        "Omega_deg": 90.8926204194851,
+        "omega_deg": 294.2852296107872,
+        "M_deg": 3.834281215098069,
+        "epoch_jd_tdb": 2461200.5
+      },
+      "source": {
+        "local_relative_path": "data/reference/outer-tno/horizons_2012_VP113.json",
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%272012+VP113%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&TLIST=%272461200.5%27&TIME_TYPE=%27TDB%27&OUT_UNITS=%27AU-D%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "'2012 VP113'",
+          "OBJ_DATA": "'NO'",
+          "MAKE_EPHEM": "'YES'",
+          "EPHEM_TYPE": "'VECTORS'",
+          "CENTER": "'500@10'",
+          "TLIST": "'2461200.5'",
+          "TIME_TYPE": "'TDB'",
+          "OUT_UNITS": "'AU-D'",
+          "REF_PLANE": "'ECLIPTIC'",
+          "REF_SYSTEM": "'ICRF'",
+          "VEC_CORR": "'NONE'",
+          "CSV_FORMAT": "'YES'"
+        },
+        "sha256": "07007a2c054ce33d7f781892393bf59cb2644b4e5a0e2e212f19c6441e1800ac",
+        "bytes": 6643,
+        "retrieved_utc": "2026-11-14T18:18:33.009085+00:00"
+      }
+    },
+    {
+      "object_id": "sbdb-20541132",
+      "name": "541132 Leleakuhonua (2015 TG387)",
+      "epoch_jd_tdb": 2461200.5,
+      "expected_position_au": [
+        72.12391937683064,
+        17.53310165987407,
+        14.63482943669443
+      ],
+      "calculated_position_au": [
+        72.12391937605318,
+        17.53310165910366,
+        14.634829436114188
+      ],
+      "residual_au": 1.238813056714734e-09,
+      "orbit": {
+        "a_au": 1344.905387006164,
+        "e": 0.951905319172072,
+        "i_deg": 11.67887107280718,
+        "Omega_deg": 301.1344316943008,
+        "omega_deg": 118.2293603285907,
+        "M_deg": 359.6185683300886,
+        "epoch_jd_tdb": 2461200.5
+      },
+      "source": {
+        "local_relative_path": "data/reference/outer-tno/horizons_541132.json",
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27541132%3B%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&TLIST=%272461200.5%27&TIME_TYPE=%27TDB%27&OUT_UNITS=%27AU-D%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "'541132;'",
+          "OBJ_DATA": "'NO'",
+          "MAKE_EPHEM": "'YES'",
+          "EPHEM_TYPE": "'VECTORS'",
+          "CENTER": "'500@10'",
+          "TLIST": "'2461200.5'",
+          "TIME_TYPE": "'TDB'",
+          "OUT_UNITS": "'AU-D'",
+          "REF_PLANE": "'ECLIPTIC'",
+          "REF_SYSTEM": "'ICRF'",
+          "VEC_CORR": "'NONE'",
+          "CSV_FORMAT": "'YES'"
+        },
+        "sha256": "fef0aece131bf7047d8386ce0f5cf605c44424da23184e6e8be0de29928dfcdf",
+        "bytes": 6643,
+        "retrieved_utc": "2026-11-14T18:18:33.537822+00:00"
+      }
+    }
+  ]
+}

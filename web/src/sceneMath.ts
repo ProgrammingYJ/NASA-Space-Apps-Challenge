@@ -74,6 +74,13 @@ export function focusDistance(radius: number, verticalFovDeg: number, aspect: nu
   return Math.max(radius * 3.5, radius / Math.sin(limitingHalfFov) * 1.8, minimumDistance);
 }
 
+/** Minimum centre distance keeps the near plane outside the displayed bound. */
+export function surfaceClearanceDistance(radius:number,nearPlane=.025):number {
+  const safeRadius=Number.isFinite(radius)&&radius>0?radius:0;
+  const safeNear=Number.isFinite(nearPlane)&&nearPlane>0?nearPlane:.025;
+  return Math.max(.08,safeRadius*1.5,safeRadius+safeNear*3);
+}
+
 export interface FocusTransition {
   from: CameraState;
   to: CameraState;
@@ -131,14 +138,6 @@ export function makeFocus(
     objectId,
     directionOnly,
   };
-}
-
-/** Approach a galaxy along its catalogue line of sight, starting at the current free camera. */
-export function makeGalaxyFocus(current:CameraState,objectId:string,center:Vec3,radius:number,fov:number,aspect:number,startedAt:number,reducedMotion:boolean):FocusTransition {
-  const transition=makeFocus(current,objectId,center,radius,fov,aspect,startedAt,reducedMotion);
-  transition.to.position=add(center,scale(normalized(center),-focusDistance(radius,fov,aspect)));
-  transition.sphericalCameraOffset=true;
-  return transition;
 }
 
 function sphericalDirection(a:Vec3,b:Vec3,fraction:number):Vec3 {

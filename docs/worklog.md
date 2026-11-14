@@ -1,5 +1,25 @@
 # 작업 기록
 
+DEV-018 추가지시: 정확도를우선해다량원논문·공식자료/반론·독립검산을조사하고계산채택/참고를구분한다. 근거설명/후보순위옆논문·DOI·원자료즉시이동을SRC-LINK에추가했다. 배포는사용자가직접생성할AWS EC2로변경됐고서울m7i.xlarge(4vCPU/16GiB)/Ubuntu24.04amd64/온디맨드/gp350GiB를선택해알렸다. FSD17.4·TODO·README·AGENTS/START·DataSpec에반영했다. 서버생성/접속/배포는아직미수행이다. 문서독립검토의3P1(핵심6=4노출+2보정,일부복원wire,원2018셀→실제row→날짜별MOST전환)을교정했다. Namu본문전체16,957자/각주를정상TLS조회로읽었고감사본은var/qa/dev018/references이며원문을제품에복제하지않는다.
+
+
+## DEV-018 · 2026-11-15 03:03:10 KST · PC 재시작·최신 회의/사진/링크 반영, MD 우선
+
+- 사용자최신지시에따라DEV-017구현/실행을동결하고문서수정→독립검토→변경위치보고후재개한다. 기존변경/HEAD457d8a3·v0.11불변ZIP·원관측/var근거를보존했다. PC재시작후현재프로젝트app.js프로세스는확인되지않았다.
+- 은하/지도·외계행성·역사/역사혜성·블랙홀·범용물리실험의실제코드/API/새배포제거를승인받았고숨김만전략을대체한다. Solar시간재생/관측/3요건은유지한다. 후보확률/순위는조건부문헌영역·분모/편향을명시한다.
+- 제공6이미지의요구R020/R023/R025/R026/R027/R028·궤도비교를읽고인명은공개문서에전사하지않는다. 사용자로고1024²/1024137B/SHA710deeb0e682b1eaac9638695ed2f6fb96e8ad5d4e9a8a743dae4fa0401329b8을열람했다. 제품코드/자산적용은이번단계미수행이다.
+- Wiki본문/원논문·공식자료와MCP3개고정SHA/README/소스를검토중이다. Namu는web실패후정상TLS일반HTTP200을확인했다. MCP현재도구/설정미등록·미설치이며버전/좌표/제3자중계제약은검토MD에기록했다.
+- DEV-017계산13PASS/MOSTknown·manual각20행3D3ID확인은별도var/qa보고서로보존한다. 전체Node1차는기존LAN3002점유의기본포트검사실패가있었고전체재검/브라우저/정확ZIP은미완료다. 중단된명령을통과로쓰지않는다.
+- FSD0.20의1.1/2.21/8.14/11.1~2/21,AGENTS·START우선결정,Data_Spec상태/입력/로고,T O D O색인,README·AI기록을동기화한다. 최신출처즉시이동요청도SRC-LINK로추가한다. 독립문서검토는후속확정한다.
+
+
+## DOC-017 · 2026-11-15 01:21:19 KST · 1,000 AU 방향 전환 검토의 Markdown 저장
+
+- 사용자 요청: 직전 회의 결정·기술/과학 검토 답변을 MD로 만든다. 앞선 구현 중지 지시는 유지하며 문서화만 수행한다.
+- documentation 스킬의 문서 지침을 적용해 [구현 전 검토 기록](reviews/2026-11-15_solar_system_1000au_review.md)을 신규 작성했다. 삭제/유지 범위, 현재 구현과 공백, 1,000 AU 경계, 분류/질량 모형, 동역학, 실제 SPHEREx 연결, Node 운영, 화면·근거 이행, 후속 순서와 원출처를 보존했다.
+- 문서 첫머리에 회의 결정·제안·현재 구현 상태를 구분하고, 최신 개발 명세의 정본은 FSD임을 명시했다. 코드·FSD·Data_Spec·입력 데이터·서버·기존 ZIP·Git 이력은 변경하지 않았다. 새 커밋/푸시는 수행하지 않는다.
+- 문서의 UTF-8·상대 링크3개·코드블록 구분과 변경 파일 범위를 확인했다. 독립 읽기 검토에서도 주요 내용의 누락/모순이 없음을 확인했다. 문서만의 변경이므로 빌드·수치/브라우저 테스트는 실행하지 않았다.
+
 
 ## RELEASE-011 · 2026-11-15 · v0.11.0 검증·전달
 
@@ -421,3 +441,72 @@ DEV-016 최종 전달 준비: Data_Spec 2,102,484B/3,660행/SHA70c0f51522c110ecb
 DEV-016 LAN: 최종 CumtP9k6 프런트를 기존 var/node/3002에 반영했다. 실제 Wi-Fi HTTP origin에서 양자1단계·실제NR13,869표본·은하53,162검색/포커스·ε Indi B S01/S02의 기존 cmp_d88083664b6fd27592eb68c1 표시를 확인했다. pageerror0, ready200이다. var/qa/dev016-lan-final.json/PNG가 자동검사 근거이며 다른 물리기기의 최신빌드 검사를 대신하지 않는다. IP/PID는 Git제외 var/lan-host.json에 보관한다. 이전 빌드와 var/node 근거를 보존했고 공개 MCSM/nginx 설정은 변경하지 않았다.
 
 Git 체크섬 입력 보호: runtime에서 검증하는 contracts/openapi.json, api/main.py, web/src/objectNames.ts의 실제 원바이트가 Git의 줄바꿈 필터로 바뀌지 않게 정확한 경로의 -text/-eol을 선언했다. 파일/과학값/알고리즘은 수정하지 않았다. 배포 전에 source manifest와 Git index의 바이트를 대조한다.
+
+DEV-018 문서독립검토: MCP/API검토와UI검토두역할이새FSD/TODO의범위·상태표현을대조했다. 지적된3P1과입력개수표현을교정했고MCP사실관계/실제제거예정표시의P0는없었다. 원논문12편·CaltechIDL/subset/필터수를추가출처대장에연결했다. R020원인은자료미지원대상에도AB입력을항상표시하고모든오류를network로분류하는코드에서확인했다. R023고리프레이밍은이미존재하며작은위성의near.025/minDistance.05조건의표면교차가능성을확인했다. R025셰이더/텍스처원인은실제브라우저검사전미확정이다. 새기능/원격EC2검증완료가아니다.
+
+
+## DEV-018 · 2026-11-15 03:20 KST · MCP 실연결·AWS 운영 준비
+
+- 요청 MCP3개를 기존 앱 환경과 분리 설치하고 initialize/tools/list/읽기 호출을 모두 완료했다. 결과는 data/manifests/mcp_tools.json, 원문은data/reference/mcp/dev018에 보존했다. Pipeworx 명왕성 Sun 벡터2행×6성분을 공식 JPL API와 대조해 전부 동일했으나 같은 상위 모델임을 명시한다. PDS 세드나 context1개/Astronomy 겉보기 명왕성 위치만 확인했으며 새 질량/표면/발견 결과가 아니다.
+- 기존Codex서버2개를 보존하며3개 선택 도구를 등록했다. 새 대화 도구 자동발견은 미확인이다. 공식Node24.22.3 포터블SHA확인/별도Python3.14.3venv사용, 개발 잠금파일과서버소스commit을기록했다. 키·계정·구독 생성없음.
+- AWS Ubuntu24.04/m7i.xlarge의 nginx80→loopback3002/systemd/shared 상태/고정Node 설치·ZIP검사·활성화 스크립트를 준비했다. 아직EC2생성/원격배포는없다. 실제로컬WSLUbuntu24.04.2가용을확인해Linux검사를추가할예정이다.
+- 사용자일주일비용문의에large약$22.72/xlarge약$43.53(168h+gp350GiB7일+IPv4,세금·추가송신별도), xlarge예산$50를안내했다. 사진의26.04/large와채택24.04/xlarge차이를알렸다.
+
+
+## DEV-018 · 현재 구현·통합 검사 동결
+
+- 제외 frontend87파일/Node atlas 및별도Python과학13모듈·전용회귀·공개관측복제본을실제로제거했다. 원본/이전ZIP/Git은보존했다. 활성export는39JSON/19,190,204B/source1,252개·필수1,165개이며최종SHA21ae78db310300b5a2475af6ca71322dc4989b97ba76043338620191452c7f94다. 기존4comparisonID/SHA불변.
+- 최종backend독립교차검수로다른날coverage/중력을붙이는근거저장문제를고쳐57NodePASS17.12s,전체Python352PASS57.37s,RuffPASS를확인했다. 최초통합중JSON괄호오류와자료변경중503을관찰해수정·재수출후동결했다. 중단된기존browserbatch는통과로세지않는다.
+- HEALPix전10만독립셀ID대조불일치0/표본조건분모20,406/공식JPL TNO8,341행(유효8,340)/3별도Horizonsquery같은모델정합을확인했다. 모든법칙/발견확률·정밀위치보장은아니다.
+- knownSedna의전체순간타원과원정밀본체를분리하고지원시각밖선택선/marker/follow를해제했다. TNO사람표시수록/도시/미산출/1000AU밖집계·±100Julian년운영안내5언어를추가했다. frontendstrict/Vite Co6tRmFN/D46D-g0J빌드를확인하고Node24.22.3 localhost8012에서자료ready를확인했다. 11개실제Chrome대상회귀를재개하며최종결과를후속기록한다.
+- AWS생성사진에AMI26.04와SSH0.0.0.0/0가있어24.04일반x86·SSH내IP로수정하고m7i.xlarge/50GiBgp3는유지하도록안내했다. 사용자제공PEM은파일존재/메타데이터만확인했고내용을출력/Git/ZIP에넣지않는다. 새EC2퍼블릭IP를기다리며아직SSH/원격설정변경은없다.
+
+EC2 SSH 실제접속성공: Ubuntu24.04.5LTS/x86_64/4vCPU/15701MiBRAM/루트48G표시(50GiB볼륨)를확인했다. 제공키는기존broadgroup접근때문에OpenSSH가거부해ACL을현재사용자전용으로제한하고접속했다. 키내용은출력/공개하지않고ACL이전값은ignored var감사본으로보존했다. 아직원격앱설치/데이터전송은없다.
+
+최종소스53e05dcf...에서Node58/Python361/Ruff/strict/Vitest61/Vite DKFDitmN/Aq-QfXRq를확인했다. 최종Chrome영향6/6(46.590s)+기존εB/Pluto관측·복원·시각5/5(125.917s)PASS. 이전P9/영역/중력6PASS는별도빌드검수이며최종11과동일실행으로합산하지않는다. 로컬사실정본은docs/qa/dev018_local_verification.json. 이제문서/패키지동결후완결ZIP해제/Windows·UbuntuNode단독·실제재시작을확인하고EC2에전달한다.
+
+
+## RELEASE-012 · 실제 EC2·HTTPS 배포 검증 완료
+
+2026-11-15 KST. 정확한 `NASA_SPACE_APPS_CHALLENGE_v0.12.0_20261115_034911KST.zip`는489,039,770B/1,540파일, SHA256 `c251031cc7df5526b038425ba6d672d96cbbe01e0123b2df55c09fc5332ed067`다. Windows와Ubuntu24.04.2WSL/ext4에각각새로풀어1,539manifest항목/필수1,165source·39JSON/원comparison4개SHA를검증했고Node24.22.3단독서버의실제재시작·εB/Pluto/P9근거복원을통과했다.
+
+사용자EC2 Ubuntu24.04.5/x86_64/4vCPU16GB/50GiB에같은ZIP을전송해SHA를확인하고전용planetx/systemd·nginx80/443→loopback3002·shared/node영속상태로배포했다. 실제systemd재시작PID2871→3077후기존근거3개export바이트SHA동일/같은IDimport복원을통과했다. 공개실관측/31지도·P9HTTP검사와정식주소 `https://nasaspaceappschallenge.marulee.dev/`의일반Chrome157(우회옵션없음)3흐름을통과했다. TLS1.3·정확호스트/기본CA검증·HTTP→HTTPS·DNS3.37.17.247,인증서2027-02-12만료·자동갱신timer/실제dry-run성공을확인했다. 초기HTTP-IP브라우저검사에서만HTTPS자동업그레이드를끈사례는정식HTTPS검증과분리한다.
+
+최종기록은`docs/releases/v0.12.0.json`,`docs/qa/dev018_ec2_https_verification.json`과ZIP옆외부Windows/Linux/EC2검증JSON이다. 이사후기록은검증된불변ZIP을고치지않는다. 이전v0.11ZIP/Git/원자료/근거를보존했다. 이번배포에Git새commit/push·심사제출은수행하지않았다. 상호N체/모든물리법칙·미발견전수·새이동검출/존재확률·원어민검수를완료로올리지않는다. 첫EC2배포라구버전으로의실제rollback드릴은수행하지않았고복구계약/안내를유지한다.
+
+
+## DEV-019 · 2026-11-15T04:10:47.160196+09:00 · 실사용 선택/줄바꿈/과거 TNO 버그
+
+사용자4사진의실제문제를재현·원인격리한다. debug/spaceapps-browser-qa/astrometry-motion-qa·출시지침을적용한다. 현재HEAD/Gitdirty/불변v0.12ZIP·EC2원자료/shared/HTTPS를보존했다. 임의±100년hardcutoff가고대시각전체TNO소실의원인이며장기외삽표시계약으로대체한다. hero강제290px폭·조작안내와TNOnotice의bottom겹침·P9헤더버튼텍스트/×배치를확인했다. 실제ID를하나씩고르는점/겹침목록/전목록접근도보완한다. 작업소유는선택App/Scene/Layer/API,계산Node/WebMath,레이아웃CSS/P9헤더로분리하고root가명세/통합·검사·배포를담당한다. 상세계약FSD22절.
+
+
+## 23. OPS-020 · EC2 계정/호스트 이전
+
+사용자가 새 EC2와 PEM, 도메인 A 변경 완료를 제공했다. 이전 호스트3.37.17.247(Seoul)에서 새16.176.170.4(Sydney ap-southeast-2)로 이전한다. 실제 SSH에서 Ubuntu24.04.5/x86_64/4vCPU/16GB/50GiB를 확인했으며 DNS A도 새IP다. 새 개인키는 지정 로컬 경로에서만 사용하고 Git/ZIP/로그에 내용은 넣지 않는다.
+
+DEV-019 버그수정 v0.12.1 완결 ZIP의 Windows/Linux 검증을 마친 뒤 같은ZIP을 새호스트에 설치한다. 기존 shared/node의 모든 저장/작업/근거는 writer 중지 뒤 전체 백업해 해시를 대조하고 이전한다. 최초 새호스트의 빈 상태와 별도 구분하며 원서버의 백업·기존 릴리스를 보존한다. nginx80/443→Node loopback3002·planetx/systemd·동일 도메인 HTTPS/자동갱신을 재구성하고 기존εB/Pluto/P9근거의 export SHA/ID 및 새세션복원을 확인한다. 기존 서버의 계정/결제·리소스삭제는 하지 않으며 클라우드 인스턴스 중지 여부는 운영자가 확인해야 한다. 무료크레딧 자격/실제잔액은 이 배포검증으로 확인되지 않는다.
+
+현재 상태: 새호스트 SSH/DNS/OS 확인 완료. 설치/상태 이전/HTTPS/최종검사는 진행중이다. 이전운영주소의 DNS를 이미 바꿨으므로 새호스트 준비를 우선한다.
+
+
+DEV-019 로컬 통합검사 완료: 최종빌드 index-COQWB6MM/P9B20w7YEZ, Node61/Vitest66/Python export/parity68/strict/Vite/Ruff/source무결성 검사를 통과했다. Chrome 최종레이아웃3·신규선택3·기존TNO회귀2를 통과했다. 기존εB 원본→품질→5언어→저장→새세션복원은 병렬첫실행의15초frame대기 초과를 보존했고 제품수정/시간증가 없이 단독재실행62.4초에 통과했다. 같은최초실행에서 지연응답/새세션보호는 통과했다. 출처/원comparison4개의content SHA는 동일하며 상세 정본은 docs/qa/dev019_local_verification.json이다. 현재 새 EC2 이전을 위한 완결ZIP·정확Windows/Linux 검증/HTTPS이전은 다음단계다.
+
+
+OPS-020 전송개선: Sydney 공개검사에서5,130,062B TNO목록이gzip없이전송되어15초최초대기초과1건이발생했다. HTTP200/JS오류0이었고기능4회귀는통과했다. nginx전용서버블록에JSON/JavaScript/CSS/SVG gzip을추가했고실제API는1,225,163B(76.1%감소),mainJS는368,944B(69.5%감소)를확인했다. 압축해제SHA는각identity응답과동일하다. source/관측/과학계산/bundle은변경하지않았다. 설정을포함한새타임스탬프의완결v0.12.1 ZIP을다시생성해Windows/Linux/새EC2에동일본검증·활성화한다. 기존042852 ZIP은불변이력으로보존한다.
+
+
+OPS-020 공개이전 검증완료: DNS/실제peer16.176.170.4·TLS1.3/정확호스트·HTTP301·인증서2027-02-12만료·certbot.timer와실제renew dry-run을확인했다. 초기dry-run은기본무작위336.7초대기로하네스시간을넘겨중단했고숨김지원옵션--no-random-sleep-on-renew로정상통과했다. 초기새호스트PID3259→3847실제재시작후기존εB/Pluto/P9세근거의export바이트SHA/조건/ID복원을통과했다. 공개Chrome기본TLS에서핵심3흐름·선택4회귀를통과했고1440/2560×5언어배치2개와gzip후목록반응형1개를확인했다. JS/WebGL/HTTP오류0. 자료/앱bundle은동일하고새nginx압축설정을포함한최종타임스탬프ZIP/활성화검사를별도기록한다. 이전EC2는앱만중지/자동시작해제했고컴퓨트과금자체는계속된다. 크레딧적격성/잔액은확인하지않았으며현재/과거AWS고객의추가계정은신규무료크레딧대상이아님을공식FAQ와함께안내했다.
+
+
+OPS-020 최종문서독립검토: 이전DEV018의현재헤더/계산100년차단문장/계약파일바이트표/F01·F03·F04·F05·F06상태/서울초기선택표기를현행DEV019·Sydney상태로교정했다. 데이터바이트/SHA는실제파일에서직접산출했고과거2186파일snapshot과구분했다. 코드/과학원본/관측봉투/39cache는동일하다. 문서교정이포함된마지막완결ZIP을새타임스탬프로만들며이전042852/044329ZIP은모두불변보존한다.
+
+
+## DEV-020 · 2026-11-15T06:49:29.789488+09:00 · 발열종료후재개/R029~31
+
+현재요청사진/1+2필터답변과기존코드/카탈로그를확인했다. debug/spaceapps-browser-qa/spherex-data-contract/validate-data/documentation을적용한다. FSD24와DataSpec을구현전에갱신했다. 읽기전용독립분석3개(판정/밀도,4지도,실제MCP정확매칭)로원인을분리했다. 공용Notion은정상접근도구에서접근실패라최신열람으로주장하지않고사용자제공R029~31원문을사용한다. 원044329활성본/17b7runtime과미완료045528ZIP을보존하며로컬빌드/대형QA/압축병렬실행을금한다.
+
+
+DEV-020 통합검증 · 2026-11-15T07:34:53.260066+09:00: R029~31/표시필터/선택밀도/공식RGB/고리/조명/LOD 오류와 재선택 복구를 구현했다. strict/Vite·Vitest84·Node72·관련Python63·Ruff·Chrome15고유경로(영향범위후속포함)를 통과했다. 기존3운영근거는 원export SHA/ID/조건으로 restored, 별도예전visual fixture는 과학값/질량입력보존 partially_restored다. Linux 재계산 끝자리 차이와 Windows fresh 정본4ID/SHA 재현을 분리 기록했다. 새runtime ea500e152d49734fcb2dfd65db3f6a2abbf967d77d6a7ae79bc2e8ddcff16f46 /1272source·필수1182/39JSON/19,200,366B. 열부하를 줄여 EC2의분리작업공간에서 빌드/완결ZIP/해제검증한다. 정확ZIP·공개 활성화·실제재시작/근거확인과 그 뒤 commit/push는 다음 단계다. 이전불변ZIP/원관측/현재운영shared는 보존한다.
+
+
+DEV-020 실제 배포 완료:073754 v0.13ZIP490,829,327B/1616파일/SHA68ee85ee…3b044를새Ubuntu폴더에풀어1615manifest/1182필수source/39JSON과Node단독·실제재시작복원을통과했다. 같은ZIP을Sydney에올려기존16상태파일6,398,352B의writer중지일관백업을만들고11기존근거/비교원바이트SHA를보존했다. 실제운영4241→7419활성화와7419→7725재시작·정식HTTPS Chrome5흐름·HTML/JS정확SHA·gzip·TLS1.3/정확호스트/기본CA·HTTP301·기존εB/Pluto/P9근거3개원export/ID/판단복원을모두확인했다. 미관측표면은생성하지않았다. QA용8012서버/SSH터널을종료했다. 사용자TOP5질문에는「제9행성가설→문헌모형의탐색우선영역」표1~5행이며조건부하늘영역순위임을안내했다. 사후정본docs/releases/v0.13.0.json; 불변ZIP은재작성하지않는다. 사용자명시지시에따라다음작업은현재변경의Gitcommit/push다.

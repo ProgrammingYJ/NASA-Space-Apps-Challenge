@@ -44,7 +44,9 @@
     "DEV-010",
     "DEV-011",
     "DEV-015",
-    "DEV-016"
+    "DEV-016",
+    "DEV-019",
+    "OPS-020"
   ],
   "assistance": [
     "repository_configuration",
@@ -1718,6 +1720,199 @@
       "archive": "NASA_SPACE_APPS_CHALLENGE_v0.11.0_20261115_001122KST.zip",
       "sha256": "db7468317fa4ab1d3c0a8a616815d12ca22bb15bd1486f6848b5a8d2c1715d69",
       "postdocs_leave_archive_unchanged": true
+    }
+  },
+  "dev018": {
+    "stage": "documentation_review_before_implementation",
+    "work": [
+      "review user meeting and supplied images/logo",
+      "read wiki and primary references",
+      "inspect three MCP repositories without installing",
+      "update canonical scope, conditional probability contract, direct evidence links and TODO"
+    ],
+    "observations_modified": false,
+    "logo_generated_or_modified": false,
+    "new_mcp_connected": false,
+    "browser_release_verification": "pending_after_reboot"
+  },
+  "dev018_implementation": {
+    "code_assistance": "Codex and collaborating agents",
+    "scope": "solar system 1000 AU with conditional literature P9 ranking and observed data evidence",
+    "selected_skills": [
+      "documentation",
+      "architecture",
+      "spherex-data-contract",
+      "astrometry-motion-qa",
+      "validate-data",
+      "spaceapps-browser-qa",
+      "code-review",
+      "deploy-checklist",
+      "spaceapps-evidence-release"
+    ],
+    "generated_observation_images": false,
+    "logo": "unchanged user-supplied PNG",
+    "mcp": "three isolated developer servers actually initialized and read-only calls completed; same JPL upstream consistency is not independent observational accuracy",
+    "validation": {
+      "node_tests": 58,
+      "python_tests": 361,
+      "ruff": "pass",
+      "browser": "final Chrome157 affected6 plus retained core5 passed; earlier P9 suite scopes recorded separately",
+      "exact_zip": "Windows and Ubuntu24.04.2WSL passed immutable c251031... archive; Node24.22.3 only",
+      "ec2_remote": "Ubuntu24.04.5 production app/actual systemd restart/three same-ID evidence restores/HTTPS default Chrome3flows/TLS CA hostname/renewal dry-run passed"
+    }
+  },
+  "dev019": {
+    "scope": "Individual real TNO selection, overlap catalogue, five-locale layout and explicit long-range two-body extrapolation",
+    "source_snapshot_changed": false,
+    "new_observation_or_detection_claim": false,
+    "review": "analytic/runtime contracts, independent peer review, exact production Chrome regressions; final results recorded separately"
+  },
+  "ops020": {
+    "scope": "User-provided EC2 migration, stopped-writer state preservation, TLS/nginx/systemd verification, transport gzip",
+    "aws_account_or_credit_created_by_agent": false,
+    "private_key_packaged": false,
+    "same_decoded_science_data": true
+  },
+  "dev020": {
+    "status": "implementation_and_data_provenance_recorded_final_integration_release_deployment_pending",
+    "code_assistance": "Codex and collaborating agents",
+    "selected_skills": [
+      "documentation",
+      "astrometry-motion-qa",
+      "validate-data",
+      "debug",
+      "ux-copy",
+      "spaceapps-browser-qa"
+    ],
+    "scope": "R029/R030/R031 Solar1000AU sourced factual summaries, planetary criteria, opt-in density, official RGB maps and display-reference compatibility",
+    "generative_image_video_audio_used": false,
+    "new_ai_api_or_key_used": false,
+    "original_observation_or_orbital_source_bytes_modified": false,
+    "factual_metadata": {
+      "algorithm": "jpl-tno-factual-description-v1",
+      "catalogue_rows": 8341,
+      "exact_SPK_and_designation_matches": 8341,
+      "kind_counts": {
+        "an": 1049,
+        "au": 7292
+      },
+      "A_prefix_asteroids": 18,
+      "official_prose_for_all_rows_obtained": false,
+      "runtime_required_files": [
+        {
+          "path": "data/reference/outer-tno/r029-r031-20261115/jpl-tno-identity-bulk.json",
+          "bytes": 506627,
+          "sha256": "de0303824a588ead2ebd0a027780946e97c98cec99b7ab8ba0c0f85361608509"
+        },
+        {
+          "path": "data/reference/outer-tno/r029-r031-20261115/jpl-tno-identity-bulk.source.json",
+          "bytes": 1832,
+          "sha256": "09e7c90a324bb7df4ec0d8b0e1029a56f433e3082537fc055970911811226f51"
+        }
+      ],
+      "native_MCP_read_calls": 7,
+      "PDS_false_match_rejected": "C/2015 G2 returned for 2015 FO563 keywords; exact FO563 token0 hits",
+      "PDS_Sedna_narrative_adopted": false,
+      "source_audit": {
+        "path": "data/reference/outer-tno/r029-r031-20261115/audit-index.json",
+        "bytes": 9160,
+        "sha256": "2d973e6d99c5764f5675f05a031cdc85a4d69271124287413034e5694ff5ffa5"
+      },
+      "snapshot_nulls_not_literature_census": true,
+      "normalized_RMS_unit": "dimensionless",
+      "release_audit_policy": {
+        "new_files_in_provenance_appendix": 20,
+        "runtime_required_files_count": 2,
+        "remaining_audit_files_count": 18,
+        "final_archive_inclusion_verified": false,
+        "source_links_rights_notices_preserved": true,
+        "new_quantitative_data_or_observations_claimed": false
+      }
+    },
+    "density": {
+      "default_analogue_or_density_applied": false,
+      "explicit_opt_in_only": true,
+      "existing_supported_targets": 6,
+      "generic_TNO_mass_API_expanded": false,
+      "primary_and_system_mass_preserved": true,
+      "saved_hypothesis_restoration": "preserve matching original target/source/input; not an observed mass or official reclassification"
+    },
+    "opal": {
+      "algorithm": "opal-rgb-tiff-png-lossless-v1",
+      "source_credit": "NASA/ESA/STScI; Amy Simon/OPAL team; doi:10.17909/T9G593",
+      "dimensions": [
+        721,
+        361
+      ],
+      "mode": "RGB8",
+      "channels": [
+        "F657N",
+        "F547M",
+        "F467M"
+      ],
+      "source_team_contrast_enhanced": true,
+      "local_color_transform_resize_interpolation_or_gap_fill": false,
+      "new_independent_observations": 0,
+      "independent_validation": "Pillow13.0.0/libtiff4.7.2 complete decoded RGB bytes/dimensions equality; conversion records retain pixel SHA",
+      "Pillow_dependency": "optional independent developer validation only; not conversion or Node runtime",
+      "maps": [
+        {
+          "path": "web/public/textures/neptune-rgb-2a02260a5f97.png",
+          "bytes": 318555,
+          "sha256": "2a02260a5f975535159f624810a8a1c13b50cdab4de0a54f3acd53652f4fa991"
+        },
+        {
+          "path": "web/public/textures/uranus-rgb-2f21f8ff7733.png",
+          "bytes": 179955,
+          "sha256": "2f21f8ff7733df38c0bd1b3b8c34ba39d82d8abc35a0166d9cde0413454be404"
+        }
+      ],
+      "source_TIFFs": [
+        {
+          "path": "data/reference/appearance/dev020/neptune-rgb.tif",
+          "bytes": 789926,
+          "sha256": "8c17a2872b5d55577c63abe7ba1369997ff32bb83e0f9b9c350a46db96713cb8"
+        },
+        {
+          "path": "data/reference/appearance/dev020/uranus-rgb.tif",
+          "bytes": 787756,
+          "sha256": "854ba9d0b744c2d6e6b646d315847a3528b94b4f0b8970cc4285d71228e69c7b"
+        }
+      ]
+    },
+    "display_compatibility": {
+      "manifest": {
+        "path": "data/manifests/display_dependency_compatibility.json",
+        "bytes": 4320,
+        "sha256": "71dbfc9ef3f9551f583e672a8333e5911cf9071a93aea6332bc3ce3a66e8aa04"
+      },
+      "algorithm": "visual-dependency-payload-equivalence-v1",
+      "canonical": "typed-json-ieee754be-v1",
+      "only_excluded_top_level_field": "dependencies",
+      "scientific_payload_native_deep_equal": true,
+      "registered_fields": [
+        "small_body_appearance_manifest_sha256",
+        "mass_scenarios_manifest_sha256"
+      ],
+      "source_archive": "NASA_SPACE_APPS_CHALLENGE_v0.12.1_20261115_044329KST.zip",
+      "original_member_bytes_preserved": true,
+      "original_evidence_envelope_or_scientific_values_rewritten": false,
+      "unregistered_or_scientific_source_mismatch": "strict rejection"
+    },
+    "validation_scope": "Small targeted helper checks and direct file/source hashing only in this record. Final integrated test/build/browser/exact ZIP/EC2/restart results are pending and recorded by root separately.",
+    "human_native_language_review": false,
+    "all_physics_or_new_discovery_claim": false,
+    "cross_platform_recalculation": {
+      "linux_science_status_and_quality_pixels": "same in fresh real-FITS calculation",
+      "bitwise_equal_across_platforms": false,
+      "example_last_digit_differences_px": {
+        "predicted_x_approx": 7.8e-12,
+        "WCS_roundtrip_diagnostic_approx": 2.4e-12
+      },
+      "windows_fresh_export": "exact existing four canonical comparison IDs and SHA reproduced",
+      "final_Node_cache_policy": "transfer newly reproduced Windows canonical bytes; preserve existing operating evidence IDs",
+      "linux_fresh_result_role": "separate numerical comparison, not replacement canonical evidence",
+      "science_thresholds_relaxed": false
     }
   }
 }

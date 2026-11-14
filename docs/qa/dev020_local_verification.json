@@ -1,0 +1,175 @@
+{
+  "schema_version": "dev020-verification-v1",
+  "work_id": "DEV-020",
+  "version": "0.13.0",
+  "checked_at_utc": "2026-11-14T22:33:58.798974+00:00",
+  "status": "local_and_isolated_remote_verified_release_and_public_deployment_pending",
+  "source_commit_base": "457d8a327e5c173fa3b85a3031a32eb3be9bb4ca",
+  "working_tree_has_uncommitted_changes": true,
+  "scope": [
+    "R029",
+    "R030",
+    "R031",
+    "two independent filters plus combined view",
+    "original evidence preservation"
+  ],
+  "runtime": {
+    "manifest_sha256": "ea500e152d49734fcb2dfd65db3f6a2abbf967d77d6a7ae79bc2e8ddcff16f46",
+    "generated_files": 39,
+    "generated_bytes": 19200366,
+    "source_files": 1272,
+    "required_source_files": 1182,
+    "canonical_comparisons": {
+      "S01,S02": {
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "comparison_sha256": "88219adf492f225e5be126e8f7e5577b74475aff4067f5797d63540ba044d74c",
+        "content_sha256": "d88083664b6fd27592eb68c186f96427277766299044645f50ebc93c754852d0"
+      },
+      "S02,S01": {
+        "result_id": "cmp_15919fc7bf2adfbed9b46935",
+        "comparison_sha256": "ad3755c1803fce01a669128fd260b1679f65d84ba279612d3c1d272a085f8d94",
+        "content_sha256": "15919fc7bf2adfbed9b4693567ac11ce35674ec5361a985d8e0e331a2d3353a4"
+      },
+      "S12,S14": {
+        "result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+        "comparison_sha256": "9ebe635e2ddd0230b50e38cce35a468acf826654199a9403d36f4189fa1d12f8",
+        "content_sha256": "0d749ea3f9ec3a8da925dc444b2f2b1330e59676587cca421e3a4c5c0040f72f"
+      },
+      "S14,S12": {
+        "result_id": "cmp_e544e54be8b8ddadb2cecda8",
+        "comparison_sha256": "a71d4d7fbfb286a84ca66e85bb65af6d0090b311adc9b7042323366cb1989648",
+        "content_sha256": "e544e54be8b8ddadb2cecda8473f673c9ec4d08854df4bd1d006f5933833b0da"
+      }
+    }
+  },
+  "checks": {
+    "strict_typescript_and_vite_build": "passed (final index source in attached QA log)",
+    "vitest": {
+      "passed": 84,
+      "files": 19
+    },
+    "python": {
+      "passed": 63,
+      "warnings": [
+        "Starlette TestClient httpx compatibility deprecation; pinned client remains supported"
+      ],
+      "scope": "OPAL source conversion, actual appearance manifest, restore edges, catalogue/evidence APIs, export closure, visual migration"
+    },
+    "node": {
+      "passed": 72,
+      "skipped": 0,
+      "scope": "all node suites except unchanged entrypoint.test.js which starts default3002 and would conflict with production on the same host"
+    },
+    "ruff": "api/science/worker/deploy/tests passed",
+    "browser": {
+      "engine": "Chrome157 via Playwright1.56.1 on Windows; one worker, normal TLS/network settings",
+      "base_url": "http://127.0.0.1:8012 over compressed SSH tunnel to independent Ubuntu Node24.22.3 test workspace",
+      "unique_passed_paths": 15,
+      "scope": [
+        "generic FO563 and missing-phase PD153 criteria",
+        "FO563 exact identity/provenance/nulls/uncertainty and five locales",
+        "eight-planets / P9 literature / combined / all display filters",
+        "four source maps, lighting and unchanged physical radii",
+        "one forced detail decode failure, retained overview and explicit reselection recovery",
+        "Neptune and Saturn screenshots visually inspected",
+        "1440 and2560 five-language layouts",
+        "bounded catalogue panel at1440/1024/390 widths",
+        "Sedna optional density default stays unapplied and rejects stale target response",
+        "mass hypothesis with actual epsilon Indi B saved and restored in fresh browser context",
+        "epsilon Indi B real originals/quality/save/export/fresh restore and official routes",
+        "P9 hypothesis/gravity/save/export/fresh restore/five locales",
+        "ancient TNO positions and aliases stay selectable"
+      ],
+      "records": [
+        "var/qa/dev020/browser-integration.log",
+        "var/qa/dev020/browser-maps-fixed.json",
+        "var/qa/dev020/browser-core-regressions.json",
+        "var/qa/dev020/browser-lod-past-final.json"
+      ]
+    },
+    "prior_production_exports": {
+      "checked_utc": "2026-11-14T22:25:26.451139+00:00",
+      "base": "http://127.0.0.1:8012",
+      "evidence": [
+        {
+          "id": "ev_e764a2eb3a294ca890b39ce8be85dc5d",
+          "status": "restored",
+          "original_export_bytes_and_sha_preserved": true,
+          "comparison_and_judgment_preserved": true,
+          "only_verified_visual_context_updated": true,
+          "bytes": 870988,
+          "sha256": "ca26330aab98a9d26cd7b3c440445ef1068b375b75ca2ca784e3c1ec03d57746"
+        },
+        {
+          "id": "ev_4872494bb4c649e3af2ad8d43b0bf4f8",
+          "status": "restored",
+          "original_export_bytes_and_sha_preserved": true,
+          "comparison_and_judgment_preserved": true,
+          "only_verified_visual_context_updated": true,
+          "bytes": 906270,
+          "sha256": "659e6ecf9de6c5572127f5b8d9c68cb2c74f98a76b17c08e35a49def46239e07"
+        },
+        {
+          "id": "p9ev_5453e41e76da4a9786e2aff1503d2134",
+          "status": "restored",
+          "original_export_bytes_and_sha_preserved": true,
+          "comparison_and_judgment_preserved": true,
+          "only_verified_visual_context_updated": false,
+          "bytes": 32807,
+          "sha256": "46f6398b6f28e868326d3d16f56b03bff6553b8b37311439dcc6b28c9d5f1dfb"
+        }
+      ],
+      "status": "passed"
+    },
+    "visual_only_import_http": {
+      "status": "passed",
+      "scope": "Synthetic noncanonical HTTP input: envelope values retained; repeated exported canonical bytes identical. Existing three canonical production exports independently retained exact original bytes.",
+      "evidence_id": "ev_a673686a86f94573bd67f457c45bb2df",
+      "original_envelope_values_preserved": true,
+      "repeated_export_bytes_identical": true,
+      "export_sha256": "697ff71387c10ae07e0c8cb8c50af2a295b1c6d126cf3365a579ed6c96577326",
+      "original_comparison_and_mass_assumptions_preserved": true,
+      "omitted_contexts": [
+        {
+          "feature": "appearance",
+          "paths": [
+            "universe_context.appearance_manifest_sha256"
+          ],
+          "reason": "visual_sources_updated_observation_preserved"
+        },
+        {
+          "feature": "small_body_appearance",
+          "paths": [
+            "universe_context.small_body_appearance_manifest_sha256"
+          ],
+          "reason": "display_dependency_refreshed_scientific_values_identical"
+        },
+        {
+          "feature": "mass_scenarios",
+          "paths": [
+            "universe_context.mass_scenarios_manifest_sha256"
+          ],
+          "reason": "display_dependency_refreshed_scientific_values_identical"
+        }
+      ]
+    }
+  },
+  "fixed_during_verification": [
+    "staged LOD texture adoption retained a callback guard that dropped subsequent lighting status; adopted instance now forwards status",
+    "explicit reselection resets a failed LOD attempt without an automatic retry loop"
+  ],
+  "initial_failures_preserved": [
+    "isolated Ubuntu test workspace initially lacked optional pinned httpx; installed from existing lock",
+    "old single-filter appearance assertion updated to official RGB/pixel-preservation contract",
+    "missing tmp test directory and unchanged default-port suite were corrected in test setup, production process untouched",
+    "new test selectors scoped to status text and exact overview label; failures retained in ignored QA logs"
+  ],
+  "reproducibility_limit": "Independent Linux FITS recomputation differs in floating-point last digits. All image arrays/quality counts match; max absolute delta7.844391802791506e-12 in epsilon Indi B coordinate/diagnostic fields,1.1049351144024782e-13 for Pluto. Fresh Windows export exactly reproduces existing four comparison IDs and SHA; final Node bundle uses those verified canonical bytes. This is not cross-platform bitwise equality.",
+  "limits": [
+    "source map gaps/contrast-enhanced colors and acquisition dates preserved; no invented fill or natural-color claim",
+    "density remains an explicit assumption, no new classification/existence probability",
+    "no native-language reviewer for ja/zh-Hant/fr",
+    "0.13 complete-ZIP clean extraction and public deployment/restart remain pending at this build-time record",
+    "previous immutable ZIPs including interrupted documentation-only045528 preserved; not treated as verified active release"
+  ]
+}
