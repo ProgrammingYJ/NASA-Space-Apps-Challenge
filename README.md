@@ -101,3 +101,6 @@ Implemented v0.6.0: 476 object names in five locales with original designations/
 Verified: strict TypeScript/Vite index-DSKEjKdg.js; Vitest54 passed; Ruff check/48-file format. Whole pytest:275 passed,1 failed in60.64s. Failure was a test setup calling calendar_jd(-3000), which correctly rejects unsupported input; changed setup to one day before the supported minimum JD. Rerun after that test-only correction is PENDING. New long-term28/catalog19/names4 targeted tests passed previously. DEV007 observed-only Chrome6 passed on its prior build. DEV008 new six browser scenarios were WRITTEN/DISCOVERED, NOT EXECUTED. Do not claim current whole browser verification.
 
 Resume: read AGENTS,SKILLS,FSD,START_HERE,Data_Spec and this checkpoint; preserve raw/data/var/Git. Run whole pytest and new simulation-names/universe-catalog browser scenarios, then existing cosmic/observations. Build complete v0.6 ZIP and verify fresh extraction,health,epsilon/Pluto evidence and real server restart. No public/Linux deployment or F01 remaining/F04/F05/native-language/human QA claimed.
+
+
+최종 v0.6.0 ZIP 검증 확정: 481,789,033B/1807파일, source bf1a09f. 18:25:16KST에 정확한 최종 ZIP의 새폴더 해제·health·카탈로그/장기모형·실제서버 재시작 후 εB/Pluto 근거복원을 통과했다. [검증 기록](docs/releases/v0.6.0.json)은 검증 후 추가한 문서이며 불변 ZIP에는 들어 있지 않다. 공개서버/Linux 배포는 수행하지 않았다.

@@ -1,6 +1,6 @@
 # Planet X and SPHEREx — 기능·개발 명세서
 
-문서 버전 `FSD-0.11` · 갱신일 2026-11-14 KST · 현재 릴리스 검증 중 `v0.6.0` · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
+문서 버전 `FSD-0.11` · 갱신일 2026-11-14 KST · 현재 릴리스 로컬 검증 완료 `v0.6.0` · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
 
 **이 파일은 프로젝트의 기능·화면·계산·API·데이터·실행·검사·배포 명세를 통합 관리하는 문서다.** 기능이나 계약을 바꾸는 작업에서는 관련 절과 아래 구현 현황을 함께 갱신한다. 규칙은 [AGENTS.md](./AGENTS.md), 실제 작업 증거는 [작업 기록](./docs/worklog.md), 적용 스킬은 [SKILLS.md](./SKILLS.md)에서 연결한다. 기능·개발 명세는 이 파일에서 유지한다. 사용자의 명시적 요청으로 만든 [Data_Spec.md](./Data_Spec.md)는 실제 사용/확보/이전 데이터의 전수 목록·출처·해시·가공/권리·한계를 담당하며 실행 manifest/타입과 함께 갱신한다. OpenAPI/타입/스키마·lockfile·테스트는 실행 가능한 계약으로 별도 유지하고 이 문서에서 경로/버전을 참조한다.
 
@@ -595,3 +595,10 @@ Implemented v0.6.0: 476 object names in five locales with original designations/
 Verified: strict TypeScript/Vite index-DSKEjKdg.js; Vitest54 passed; Ruff check/48-file format. Whole pytest:275 passed,1 failed in60.64s. Failure was a test setup calling calendar_jd(-3000), which correctly rejects unsupported input; changed setup to one day before the supported minimum JD. Rerun after that test-only correction is PENDING. New long-term28/catalog19/names4 targeted tests passed previously. DEV007 observed-only Chrome6 passed on its prior build. DEV008 new six browser scenarios were WRITTEN/DISCOVERED, NOT EXECUTED. Do not claim current whole browser verification.
 
 Resume: read AGENTS,SKILLS,FSD,START_HERE,Data_Spec and this checkpoint; preserve raw/data/var/Git. Run whole pytest and new simulation-names/universe-catalog browser scenarios, then existing cosmic/observations. Build complete v0.6 ZIP and verify fresh extraction,health,epsilon/Pluto evidence and real server restart. No public/Linux deployment or F01 remaining/F04/F05/native-language/human QA claimed.
+
+
+### DEV-008 최종 정본 검증 확정 · 2026-11-14 18:25:16 KST
+
+최종 D7 빌드의 NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip는481,789,033B/1807파일이며 source commit bf1a09f5ebafc5fdd74abe82231e522b3eec9b95의 깨끗한 tree에서 생성했다. SHA256은 af2759fc30eb844dc5ba440f76580beb7b4ca2e92444c39235bfafc38bda0d28이다. 정확한 최종 ZIP을 새 폴더에 해제해1806개 manifest 항목의 바이트/SHA/경로와 필수입력을 확인하고 Windows health·대표/신규API·εB/Pluto 저장/복원 및 실제 서버재시작 뒤 같은evidence/result ID 복원을 통과했다. 검사시각2026-11-14T09:25:16.188578+00:00, 검증된 기존독립runtime재사용이며 새설치/Linux/공개서버 검증은아니다.
+
+최종 정본 상세는 [배포 검증 기록](docs/releases/v0.6.0.json) 및 ZIP밖 동명checksum/verification JSON이다. 이 사후 문서확정은 이미 검증한 불변 ZIP을 재작성하지 않는다. ZIP의 source commit은 위 bf1a09f이고 이후 문서확정 commit과구별한다. 제품코드/원본/계수는 최종검사 뒤 변경하지않았다.

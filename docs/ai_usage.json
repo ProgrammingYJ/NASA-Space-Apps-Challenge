@@ -500,7 +500,7 @@
   "current_checkpoint": {
     "version": "0.6.0",
     "recorded_at_kst": "2026-11-14T18:19:13+09:00",
-    "status": "local_checks_and_prepared_archive_runtime_verified",
+    "status": "local_release_verified",
     "python_full_passed": 276,
     "python_full_seconds": 76.9,
     "later_affected_long_term_api_passed": 29,
@@ -618,5 +618,69 @@
     "server_restart_evidence_restore": "passed: same epsilon/pluto evidence and result IDs",
     "linux_container": "not_run",
     "public_service": "not_deployed"
+  },
+  "v0_6_final_archive_verification": {
+    "release": "0.6.0",
+    "release_source_commit": "bf1a09f5ebafc5fdd74abe82231e522b3eec9b95",
+    "archive": {
+      "filename": "NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip",
+      "bytes": 481789033,
+      "sha256": "af2759fc30eb844dc5ba440f76580beb7b4ca2e92444c39235bfafc38bda0d28",
+      "file_count": 1807
+    },
+    "verification": {
+      "checked_at": "2026-11-14T09:25:16.188578+00:00",
+      "status": "passed",
+      "archive": "NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip",
+      "extracted": "tmp/release-verify-zdv3hisw/extracted",
+      "manifest_files_verified": 1806,
+      "fresh_runtime_install": "reused previously verified isolated runtime",
+      "windows_runtime": {
+        "status": "passed",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "evidence_id": "ev_bfe8b26234a4451bba85f355210b700c",
+        "quality_pixels": [
+          29,
+          32
+        ],
+        "scene_object_count": 11,
+        "timeline_midpoint": "2026-11-14T12:00:00Z",
+        "timeline_validation_samples": 27,
+        "appearance_maps": 31,
+        "solar_extension_objects": 476,
+        "exoplanets": 6470,
+        "legacy_history_milestones": 10,
+        "history_morphology_examples": 6,
+        "simulation_model_bodies": 8,
+        "simulation_dates_tested": [
+          -2999,
+          0,
+          99,
+          2500,
+          3000
+        ],
+        "curated_hierarchy_objects": 24,
+        "milky_way_entries": 4871,
+        "trappist_planets": 7,
+        "observed_history_cases": 5,
+        "galaxies": 9,
+        "kuiper_range_au": [
+          30,
+          50
+        ],
+        "pluto_result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+        "pluto_evidence_id": "ev_e0003ef4c8b54dc98c35241c6b46239b"
+      },
+      "server_restart_evidence_restore": "passed: same epsilon/pluto evidence and result IDs",
+      "linux_container": "not_run",
+      "public_service": "not_deployed"
+    },
+    "post_release_record": "Created after the immutable exact archive passed verification; this small documentation record is not inside that verified archive. Runtime source is unchanged.",
+    "browser_unique_scenarios_passed": 13,
+    "final_browser_subset_passed": 4,
+    "frontend_unit_tests_passed": 55,
+    "python_full_passed_before_later_endpoint_fix": 276,
+    "later_affected_long_term_api_tests_passed": 29,
+    "linux_or_public_deployment_claimed": false
   }
 }
