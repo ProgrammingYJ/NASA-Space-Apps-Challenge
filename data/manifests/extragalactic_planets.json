@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "algorithm_version": "extragalactic-evidence-v1",
-  "created_utc": "2026-11-14T09:41:10.770863+00:00",
+  "algorithm_version": "extragalactic-evidence-v2",
+  "created_utc": "2026-11-14T13:44:58.650811+00:00",
   "coverage": "adopted_literature_cases_not_complete_census",
   "objects": [],
   "confirmed_objects": [],
@@ -631,21 +631,6 @@
       "upstream_original_local_only": "data/reference/extragalactic-planets/upstream/population-2019.txt",
       "upstream_original_requirement": "optional_not_runtime"
     },
-    "status-context-2026": {
-      "source_id": "status-context-2026",
-      "url": "https://arxiv.org/abs/2608.13895",
-      "label": "Sun et al. (2026), arXiv:2608.13895; author-reported accepted MNRAS paper",
-      "resolved_url": "https://arxiv.org/abs/2608.13895",
-      "local_relative_path": "data/reference/extragalactic-planets/facts/status-context-2026.json",
-      "bytes": 673,
-      "sha256": "52fd1a1c9898bc6392041fea75e1d6ecf82f80a6585e5e038b3db491341604e5",
-      "retrieved_utc": "2026-11-14T09:39:36.852375+00:00",
-      "upstream_sha256": "34507671b3e503e0ab9e0614a8a45f2be8a64d1f3d0cc82f8e99522a91eb67f6",
-      "upstream_bytes": 44400,
-      "redistribution": "authored_factual_extract_only",
-      "upstream_original_local_only": "data/reference/extragalactic-planets/upstream/status-context-2026.txt",
-      "upstream_original_requirement": "optional_not_runtime"
-    },
     "simbad-m51": {
       "source_id": "simbad-m51",
       "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M51+ULS-1&output.format=ASCII",
@@ -736,19 +721,31 @@
     "limitation": "Exact-name audit of the adopted confirmed archive snapshot; no galaxy-membership column and no exhaustive universe census."
   },
   "status_context_source": {
-    "source_id": "status-context-2026",
-    "url": "https://arxiv.org/abs/2608.13895",
-    "label": "Sun et al. (2026), arXiv:2608.13895; author-reported accepted MNRAS paper",
-    "resolved_url": "https://arxiv.org/abs/2608.13895",
-    "local_relative_path": "data/reference/extragalactic-planets/facts/status-context-2026.json",
-    "bytes": 673,
-    "sha256": "52fd1a1c9898bc6392041fea75e1d6ecf82f80a6585e5e038b3db491341604e5",
-    "retrieved_utc": "2026-11-14T09:39:36.852375+00:00",
-    "upstream_sha256": "34507671b3e503e0ab9e0614a8a45f2be8a64d1f3d0cc82f8e99522a91eb67f6",
-    "upstream_bytes": 44400,
+    "source_id": "m51-chandra",
+    "url": "https://chandra.harvard.edu/photo/2021/m51/",
+    "label": "NASA/CXC Chandra release, 25 October 2021",
+    "resolved_url": "https://chandra.harvard.edu/photo/2021/m51/",
+    "local_relative_path": "data/reference/extragalactic-planets/facts/m51-chandra.json",
+    "bytes": 545,
+    "sha256": "9dd0e5338ac31213ddadf90bc9f76ddc35404dc6a5540cf3219e7788e5798d94",
+    "retrieved_utc": "2026-11-14T09:39:37.493608+00:00",
+    "upstream_sha256": "914e8b7e9b529be03e365db4fb07b58ac38b76f50a44eb7363f9a1317776f591",
+    "upstream_bytes": 71266,
     "redistribution": "authored_factual_extract_only",
-    "upstream_original_local_only": "data/reference/extragalactic-planets/upstream/status-context-2026.txt",
+    "upstream_original_local_only": "data/reference/extragalactic-planets/upstream/m51-chandra.txt",
     "upstream_original_requirement": "optional_not_runtime"
   },
-  "release_rule": "Package facts/ authored factual extracts and sidecars only; upstream/ originals are not redistributed."
+  "release_rule": "Package facts/ authored factual extracts and sidecars only; upstream/ originals are not redistributed.",
+  "confirmation_scope": "adopted_collection_only_not_a_global_census",
+  "excluded_source_audit": [
+    {
+      "source_id": "status-context-2026",
+      "url": "https://arxiv.org/abs/2608.13895",
+      "status": "excluded_not_used",
+      "reason": "User requested no Chinese data; this contextual paper uses LAMOST DR9.",
+      "former_factual_extract_sha256": "52fd1a1c9898bc6392041fea75e1d6ecf82f80a6585e5e038b3db491341604e5",
+      "former_original_sha256": "34507671b3e503e0ab9e0614a8a45f2be8a64d1f3d0cc82f8e99522a91eb67f6",
+      "runtime_dependency": false
+    }
+  ]
 }

@@ -1,9 +1,11 @@
 'use strict';
 // This describes file verification, not a new astronomical algorithm/version.
 const SOURCE_VERIFICATION_POLICY = Object.freeze({
-  version: 'sha256-stat-fingerprint-v1',
+  version: 'sha256-stat-fingerprint-v2-scoped-assets',
   initial_verification: 'full_sha256_all_bundle_and_required_source_files',
-  each_transaction: 'all_required_paths_and_file_fingerprints_checked',
+  each_transaction: 'science_transactions_check_all_required_paths_and_file_fingerprints',
+  static_assets: 'after_initial_full_audit_check_manifest_identity_and_requested_registered_serving_file_fingerprint_and_sha_only',
+  asset_readiness: 'asset_success_does_not_mark_science_sources_ready',
   fingerprint: ['dev', 'ino', 'size', 'mtimeNs', 'ctimeNs'],
   unchanged_fingerprint: 'reuse_previously_verified_sha256',
   metadata_change: 'full_sha256_required_before_use',

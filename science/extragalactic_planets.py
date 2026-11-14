@@ -20,8 +20,23 @@ from science.universe_catalog import EXTERNAL_GALAXIES, MILKY_WAY, parse_simbad
 
 MANIFEST = "data/manifests/extragalactic_planets.json"
 RAW_ROOT = "data/reference/extragalactic-planets"
-ALGORITHM = "extragalactic-evidence-v1"
+ALGORITHM = "extragalactic-evidence-v2"
 COVERAGE = "adopted_literature_cases_not_complete_census"
+CONFIRMATION_SCOPE = "adopted_collection_only_not_a_global_census"
+STATUS_CONTEXT_SOURCE_KEY = "m51-chandra"
+# Historical provenance only: no local path is made a reader/runtime dependency.
+# The original and its factual extract remain unchanged in local audit storage.
+EXCLUDED_SOURCE_AUDIT = [
+    {
+        "source_id": "status-context-2026",
+        "url": "https://arxiv.org/abs/2608.13895",
+        "status": "excluded_not_used",
+        "reason": "User requested no Chinese data; this contextual paper uses LAMOST DR9.",
+        "former_factual_extract_sha256": "52fd1a1c9898bc6392041fea75e1d6ecf82f80a6585e5e038b3db491341604e5",
+        "former_original_sha256": "34507671b3e503e0ab9e0614a8a45f2be8a64d1f3d0cc82f8e99522a91eb67f6",
+        "runtime_dependency": False,
+    }
+]
 ALLOWED_HOSTS = {
     "arxiv.org",
     "www.nasa.gov",
@@ -110,16 +125,6 @@ REFERENCES = {
             "individually_identified_planets": 0,
         },
         "required_tokens": ["0.317", "0.68", "primordial black holes", "Moon"],
-    },
-    "status-context-2026": {
-        "url": "https://arxiv.org/abs/2608.13895",
-        "label": "Sun et al. (2026), arXiv:2608.13895; author-reported accepted MNRAS paper",
-        "facts": {
-            "topic": "possible accreted-origin planet-candidate hosts currently in the Milky Way",
-            "external_galaxy_planet_confirmation": False,
-            "census_limitation": "A dated research abstract is context, not an exhaustive current catalog query.",
-        },
-        "required_tokens": ["currently residing in the Milky Way", "unvalidated", "2026"],
     },
 }
 
@@ -472,7 +477,9 @@ def acquire(root: Path) -> dict:
             "candidate_alias_matches": matches,
             "limitation": "Exact-name audit of the adopted confirmed archive snapshot; no galaxy-membership column and no exhaustive universe census.",
         },
-        "status_context_source": sources["status-context-2026"],
+        "status_context_source": sources[STATUS_CONTEXT_SOURCE_KEY],
+        "confirmation_scope": CONFIRMATION_SCOPE,
+        "excluded_source_audit": EXCLUDED_SOURCE_AUDIT,
         "release_rule": "Package facts/ authored factual extracts and sidecars only; upstream/ originals are not redistributed.",
     }
     (root / MANIFEST).write_text(
@@ -615,8 +622,12 @@ def get_extragalactic_planets(root: Path, *, galaxy_id: str | None = None) -> di
     matches = [record["pl_name"] for record in records if record["pl_name"].lower() in aliases]
     if audit["rows"] != len(records) or audit["candidate_alias_matches"] != matches:
         raise ValueError("extragalactic_catalog_audit_changed")
-    if data["status_context_source"] != data["sources"]["status-context-2026"]:
+    if data["status_context_source"] != data["sources"][STATUS_CONTEXT_SOURCE_KEY]:
         raise ValueError("extragalactic_status_source_changed")
+    if data.get("confirmation_scope") != CONFIRMATION_SCOPE:
+        raise ValueError("extragalactic_confirmation_scope_changed")
+    if data.get("excluded_source_audit") != EXCLUDED_SOURCE_AUDIT:
+        raise ValueError("extragalactic_excluded_audit_changed")
     return data | {
         "reviewed_unconfirmed_evidence": [
             item

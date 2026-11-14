@@ -1,9 +1,14 @@
 {
   "name": "planet-x-spherex-node-runtime",
-  "version": "0.9.1",
+  "version": "0.11.0",
   "private": true,
   "description": "Node-only runtime for source-verified Planet X and SPHEREx exploration",
   "type": "commonjs",
-  "engines": {"node": ">=22.17.0"},
-  "scripts": {"start": "node app.js", "test": "node --test node/*.test.js"}
+  "engines": {
+    "node": ">=22.17.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "node --test node/*.test.js"
+  }
 }

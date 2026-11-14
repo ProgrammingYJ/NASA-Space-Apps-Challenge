@@ -1,5 +1,38 @@
 # 작업 기록
 
+
+## DEV-016 · 2026-11-14 23:41 KST 통합 중 · 실제 은하와 제한 물리 계산
+
+- 최종 후속: 2026-11-15 00:05:23 KST 동결 검증: 107 JSON/76348584B, source1885개·필수1586개/623292613B·선택299개. manifest480792B/SHA`aa8895a820e4356747570c381d8af1c317f90e60e7598abda89e54916c01b204`. 실제 FITS4비교의 기존 result ID/내용SHA를 보존했다. Python전체 608 passed, 1 warning in 106.21s (0:01:46); Vitest154PASS·strictTS·Ruff전체 PASS, Node전체22PASS. Production ZVxA7rKp Chrome42PASS/417.029초(새 PDE/NR·Atlas·기존관측/복원), 이후 T=-3 렌즈형 경계1곳 교정의 최종 CumtP9k6 빌드 Atlas Chrome3PASS/34.552초를 구분한다. 로컬기기/자동검사이며 사람·원어민·Linux/공개호스팅 검증으로 확대하지 않는다.
+- CDP에서 첫 rAF의 −1 step 예외를 재현해 단조 시간 예산/하한0으로 교정했다. 수치/codec는 보존하고 timing3·물리 종횡비4 검사를 추가했다. 독립 검토에서 NR의 지평선 안 거리입력 차단과 T=-3 형태 경계304개·NGC224/NGC0224 검색 동등성을 교정했다. 논문감사본2개 required 전사 오류는 실제 dependency-closure 검사로 확인해 선택으로 고쳤고ZIP에는 재배포하지 않는다.
+
+
+- 사용자 후속 요청: 은하 수 확장, 실제 GR 합병·중력파·양자·전자기·유체 계산. 전 분야 결합/임의 초기조건의 runtime 3D Einstein 해를 구현했다고 보고하지 않는다. 실제 SXS 한 계산 모드 재생과 세 독립 PDE 적분기, 기존 Newton 실험을 분리한다.
+- 실제 GWGC TSV53,312행에서 MW구상성단150제외,53,162개·FK5J2000·18필드/오차/null·9명시적 PGC교차표·GPU한점층·검색/페이지/선택이동 구현. 원본과 compact 전부 SHA 고정, 개별별/행성/사진 생성 없음. SXS:BBH:0305 Lev6 N2 CoM HDF5 76,110,573B/공식MD5+SHA 및 native h22 13,869개 전수대조. q/스핀고정, 전체질량/거리 단위환산만 제공한다.
+- 양자 CN1D·TMz Yee2D·Euler Rusanov2D를 실제 브라우저 적분기로 구현했다. 독립 고유모드/자유파/전파속도/충격파/보존/CFL13검사와 상태 codec11검사 PASS. 무차원 경계/비결합/수치오차와 유체 바닥 보정을 화면·저장에 명시한다.
+- 새 reader41PASS2.47초, catalog API29PASS4.14초(기존 Starlette 경고1), Node전체22PASS11.854초. 새 source-bound107JSON/76,348,584B와 새 FITS4비교를 빌드해 이전 result ID를 유지했다. 새 endpoint·OpenAPI를 실제 Node/API에 연결했다.
+- DEV-015 production batch28/30PASS에서 한 낡은 검사의 태양계 라벨수에 남는 은하9개가 포함됐음을 고쳤다. 별도 fresh restore는200 응답15.089초로 기존15초 기대를 넘었다. 지도 preload마다 무관한 필수파일을 검사하던 병목을 scoped asset검사로 교정하되 과학/초기감사는 그대로 유지했다. 변조/ready분리 회귀2PASS와 Node전체19PASS12.512초, 같은15초 assertion의 실제 fresh restore1PASS39.521초를 확인했다. 기존 var/node를 유지해 LAN core 화면을 RqSGaKPZ로 갱신했다.
+- 실제 적용 스킬: debug, spaceapps-browser-qa, documentation, deploy-checklist, spaceapps-evidence-release. 배포/브라우저·전수 Data_Spec·최종 ZIP/Git는 후속 확정하며 이전 ZIP은 불변 보존한다. 공용 Notion 열람 실패는 최신 팀요청 확인으로 간주하지 않는다.
+
+## DEV-015 · 2026-11-14 22:35:40 KST 착수 · 비선택 표면·천체 탐색·과거 은하·혜성·자유 실험
+
+- 사용자의 추가 요청을 같은 작업으로 이어간다: 선택 전 밋밋한 행성, 다른 은하의 별/행성 진입, 초기/안드로메다 방향 점군, 과거시각 은하 소실, 역사 혜성, 선택 블랙홀 충돌·자유 환경/가정 실험. 점군은 M31모형 자체가 아니라 그 방향에도 남는 하늘 점층이라는 사용자 정정을 반영한다. 기존 사용자/Git/관측·이전 ZIP을 보존한다.
+- debug/ux-copy/spaceapps-browser-qa 및 과학/자료·배포 지침으로 병렬 역할을 나눴다. 표면 sourceAppearance 선택 조건을 수정하고 원본 지도/반지름 불변·1024/4096px 표시LOD/이미지취득2개를 적용했다. 카탈로그 방향 점층은 기본OFF/명시적 설명 설정으로 바꿨으며 실제M31디스크는 재현해77°/중심을 확인하고 유지했다.
+- 카탈로그는 주요 진입/예제·은하별 실제 자료 개수/부재·실패 상태를 드러낸다. 확보된 외부9은하15사례/우리은하 분류4871객체/기존NASA6470행성은 서로 다른 목록이다. R136a1의 LMC소속은 ESO공식자료, M51/PA99N2는 후보임을 재확인했다. 옛 문맥 논문의 LAMOST채택을 발견해 v2활성목록에서 제외하고 원문/사실/이전ZIP은 감사용으로 보존한다.
+- 과거 날짜가 modelMode=simulation으로 바뀌면 은하도null로 넘기던 결함을 수정했다. 은하는 고정 카탈로그 참조/과거 전파 아님을5언어로 고지하고0/2000/2500년과 설정 토글·M31선택/현재복귀를 검사한다. 카이퍼대/별도우주역사의 기존 자료범위는 유지한다.
+- 혜성4개의 실제JPL벡터489표본/10원응답+10sidecar173611B를 새로 확보했다. TDB/J2000황도·태양중심·source SHA와 실제 요청target/solution/범위를 검증하고 같은해 quarter-step 표시보간을 별도 대조했다. 본체표면·꼬리·출현역사를 실측으로 꾸미지 않는다.
+- 자유실험은 boundedNewtonNbody/softening·외부일정가속도·선형감쇠·거리합체·최대12물체 초기조건/시점/환경JSON이다. 실제BH질량참고와가상배치를 분리하고 GR합병/중력파/모든법칙을 적용하지 않았다고 사용자에게 명확히 답했다. 기존 상대론·광선모형 진입을 연결한다. 과학검토의 독립SI/일정가속도/감쇠/합체4검사와 구현검사를 구분한다.
+- LAN53368/session90589를 정상 종료한 뒤 staged2정본과 새OpenAPI를 게시하고Node104JSON/66784342B를23.0초에 새로 생성·강한검증했다. source1869/필수1574, manifest476142B/SHA82ca3a7d…다. 실제FITS4계산의 기존result/contentSHA를 보존했고 Node18PASS13.241초를 확인했다. 같은var/node·3002로 session44906서버를 다시 실행해ready/혜성4/v2API200을 확인했다. 최종frontend는 통합검사 후 반영한다.
+- 검사 중간값: 과학23PASS9.52초(staged),23PASS9.00초(실제정본), Vitest76PASS1.53초(최종physics추가 전), 표면Chrome3PASS(이전 missing lazy module60초 timeout과구분), catalog/pastChrome4PASS138.480초, 물리초기Chrome2PASS54.5초. 혜성 devChrome1FAIL52.422초는15초 lazy/API대기 실패였고 최종snapshot에는로딩화면이 있었다. 최종고정 production에서 재현/교정검사를 수행한다. 전체Python/최종physics/브라우저·Data_Spec/ZIP은후속확정한다.
+- 공용Notion지정URL 재열람은 도구 접근 실패였다. 최신확인으로 주장하지 않는다. 공개MCSM/nginx 설정 변경/502복구·사람/원어민검수·Linux실행으로 확대하지 않는다.
+
+## OPS-014 · 2026-11-14 22:26:43 KST 착수 · 같은 Wi-Fi PC 서버
+
+- 사용자 요청대로 현재 Windows PC의 실제 Wi-Fi IPv4/프로필과 포트3002 사용 여부를 확인하고 v0.9.1 Node 서버를 실행했다. 상태는 기존 `var/node`이며 IP/PID/포트·확인결과는 Git제외 `var/lan-host.json`에 기록한다. 기존 다른 서버/근거/관측을 중지·덮어쓰지 않았다.
+- deploy-checklist와 spaceapps-browser-qa 지침을 적용하고 독립 읽기 검토로 상대 API/지도URL·운영 HTTP 호환을 확인했다. 신규 방화벽 규칙과 서버 실행의 복합 명령은 자동 승인 검사에서 정책상 차단돼 실행되지 않았다. 세부 사유는 제공되지 않았으며 해당 변경을 우회하지 않았다. 기존 Public Node 인바운드 Allow 규칙을 읽기로 확인한 뒤 방화벽 변경 없이 별도 서버를 실행했다.
+- 루프백 및 Wi-Fi IPv4의 `/`, `/health/live`, `/health/ready`, `/api/v1/runtime` 총8응답200이다. Chrome 실제 Wi-Fi HTTP origin에서 우주 선택→ε Indi B 실제 비교→S01/S02 원시각·29/32품질·result cmp_d88083664b6fd27592eb68c1·pageerror0을 확인했다. 근거는 `var/qa/ops014-lan-browser.json`/PNG다.
+- 사용자가 같은 Wi-Fi의 다른 기기에서 사이트가 열린다고 직접 회신했다. 서버를 종료하지 않고 테스터용으로 유지한다. 다른 물리기기 접속은 사용자 확인이며 자동 브라우저 실행과 구분한다. 공개 도메인/MCSM의502 해결로 확대하지 않는다. 앱 코드/자료/기존 완결 ZIP 변경은 없다. FSD17.3에 운영 계약·현재 상태를 반영했다.
+
 ## OPS-013 · 2026-11-14 21:57:35 KST 확인부터 · MCSM 공개 502 진단
 
 - 후속 통합검사: `npm test` Node전체18PASS/0FAIL/10.909초. 변경 배포 Python2파일 Ruff/check-format 및 git diff check PASS. 새포트 child 검사 프로세스는 전부 종료했다. 새 v0.9.1 완결ZIP은 원본/프런트/103JSON을 그대로 사용해 별도 패키징·기본3002/실제Node재시작검사 예정이며 v0.9.0 ZIP은 수정하지 않는다.
@@ -376,3 +409,10 @@ Moon의표시R0.20874/물리R1737.4km·group/mesh scale1은선택전후유지됐
 ### OPS-013 v0.9.1 기본3002 완결 ZIP 검증 확정 · 2026-11-14 22:08:22 KST
 
 `NASA_SPACE_APPS_CHALLENGE_v0.9.1_20261114_220703KST.zip`는 495928120B/2224파일, SHA256 `53a162c40395198559eb1ef2d67840e44aa568bf2a5afebffa47857706c30803`다. source `4b18d32b37c5bccb37e08ed040ffd5931f129dec`의 clean tree에서 생성했고 기존 프런트/과학103JSON 및 Data_Spec SHA를 보존했다. 정확한 ZIP을 새 폴더에 해제해 manifest2223개와 모든 필수자료를 검사했다. PORT/APP_PORT 없이 `node app.js`만으로 기본3002에서 실제 Node 서버를 실행했고 ready·실제 관측/품질·근거저장과 프로세스/worker 재시작 뒤 같은 근거/결과·export 바이트 복원을 통과했다. Python은 개발 검증/HTTP 클라이언트일 뿐 서버 의존성이 아니다. Node전체18PASS10.909초와 변경 배포도구Ruff를 확인했다. 정본은 `docs/releases/v0.9.1.json` 및 ZIP 밖 동명 checksum/verification JSON이다. 이전 ZIP/원본/사용자 상태는 변경하지 않았고 이 사후문서는 이미 검증한 불변 ZIP에 넣지 않는다. 실제 MCSM/nginx 설정 변경·Linux/Docker·공개502 복구는 수행/확인하지 않았다.
+
+
+DEV-016 최종 전달 준비: Data_Spec 2,102,484B/3,660행/SHA70c0f51522c110ecbfd4421583d46dc0f8bf2d7aa3cbd194226691f67d8a4a29의 30정본·2,186파일 목록·기존102입력987,987,584B·Node1,885 source 전수 재해시 불일치0을 확인했다. Node107JSON76,348,584B·필수1586/623,292,613B·선택299 및 과거4개 comparison ID가 일치한다. 감사보고서는 var/qa/dev016-data-spec-verification.json이다. 본문/원본/정본은 동결했다.
+
+DEV-016 LAN: 최종 CumtP9k6 프런트를 기존 var/node/3002에 반영했다. 실제 Wi-Fi HTTP origin에서 양자1단계·실제NR13,869표본·은하53,162검색/포커스·ε Indi B S01/S02의 기존 cmp_d88083664b6fd27592eb68c1 표시를 확인했다. pageerror0, ready200이다. var/qa/dev016-lan-final.json/PNG가 자동검사 근거이며 다른 물리기기의 최신빌드 검사를 대신하지 않는다. IP/PID는 Git제외 var/lan-host.json에 보관한다. 이전 빌드와 var/node 근거를 보존했고 공개 MCSM/nginx 설정은 변경하지 않았다.
+
+Git 체크섬 입력 보호: runtime에서 검증하는 contracts/openapi.json, api/main.py, web/src/objectNames.ts의 실제 원바이트가 Git의 줄바꿈 필터로 바뀌지 않게 정확한 경로의 -text/-eol을 선언했다. 파일/과학값/알고리즘은 수정하지 않았다. 배포 전에 source manifest와 Git index의 바이트를 대조한다.

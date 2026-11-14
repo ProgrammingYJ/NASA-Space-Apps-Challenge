@@ -193,3 +193,9 @@ Node14검사21.90초·Python없는PATH의독립HTTP/과학67검사19.13초와기
 최종 DEV-012 [Data_Spec.md](../Data_Spec.md)는 **2,026,860B/3422줄**, SHA256 `e441b64d2d22dfda73342cb5465825b9e74fc7ca8a21ca44b0565337cfe796c5`다. 정본27개·물리2146항목(data2092+public53+명시helper1),총1,279,102,066B이며부록A102+B2044·정본참조1932/sidecar포함1937·내장응답32·정적복제53을기록한다. 독립전체SHA/바이트/경로·참조/중복/복제검사불일치0,최초102파일987,987,584B보존불일치0이다. Node source1859중필수1564개531,456,149B와선택295개를구분하며로컬감사전용 `/upstream/` 사본필수0·보류96개선택을유지한다. 기존reader에필요한NASA/JPL전체원응답은각source의필수표시를따른다. 파일수/순서별파생수는독립관측수·물리정확도/사람검수·실제배포성공수가아니다.
 
 DEV-012 전체Python 첫 실행은483PASS/67공유fixture setup ERROR(약172초)였다. Node cold-source 준비 확인의2초 health probe가TimeoutError를냈는데검사fixture가URLError만처리해독립67경로가시작되지않았다. 제품수치/모형실패와구분하고fixture의TimeoutError처리를추가한뒤전체550PASS113.36초(기존Starlette경고1)로확인했다. 별도로완료한Python없는PATH의독립67PASS19.13초·Node14PASS와이번전체실행의범위를구분한다.
+
+
+DEV-015–016: comets.json/galaxy_atlas.json/numerical_relativity.json의 원본·변환·canonical SHA 및 Node107JSON을 Data_Spec에 연결한다. 실제4혜성의489개 TDB표본, GWGC53,162개18필드, SXS13,869개 native복소모드를 보존한다. 독립 PDE는 사용자 초기조건의 계산이며 실제 관측/행성 존재확률이 아니다. 기존 SPHEREx102개 원본과 근거를 보존하고 필수6개와 참고96개를 계속 구분한다. 최종 검사/완결 ZIP은 DEV-016 작업 기록과 릴리스 검증 정본을 따른다.
+
+
+DEV-016 최종 전달 준비: Data_Spec 2,102,484B/3,660행/SHA70c0f51522c110ecbfd4421583d46dc0f8bf2d7aa3cbd194226691f67d8a4a29의 30정본·2,186파일 목록·기존102입력987,987,584B·Node1,885 source 전수 재해시 불일치0을 확인했다. Node107JSON76,348,584B·필수1586/623,292,613B·선택299 및 과거4개 comparison ID가 일치한다. 감사보고서는 var/qa/dev016-data-spec-verification.json이다. 본문/원본/정본은 동결했다.

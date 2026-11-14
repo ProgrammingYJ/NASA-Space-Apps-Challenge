@@ -10,7 +10,7 @@ class Sources {
       if (message.heartbeat) { this.heartbeat = message.heartbeat; this.ready = message.initialized && !message.failure; return; }
       const pending = this.pending.get(message.id); if (!pending) return;
       this.pending.delete(message.id); clearTimeout(pending.timer);
-      if (message.error) { this.ready = false; pending.reject(new Error(message.error)); } else { this.ready = message.verification_ready !== false; pending.resolve(message.value); }
+      if (message.error) { this.ready = false; pending.reject(new Error(message.error)); } else { if (typeof message.verification_ready === 'boolean') this.ready = message.verification_ready; pending.resolve(message.value); }
     });
     const stopped = () => { this.alive = false; this.ready = false; for (const p of this.pending.values()) { clearTimeout(p.timer); p.reject(new Error('worker_unavailable')); } this.pending.clear(); };
     this.worker.on('exit', stopped); this.worker.on('error', stopped);

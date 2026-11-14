@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "sxs-nrar-h22-native-replay-v1",
+  "object_id": "sxs-bbh-0305-lev6-n2-com-v1",
+  "name": "SXS:BBH:0305 · Lev6 · N2 · CoM · archived v1",
+  "simulation_id": "SXS:BBH:0305",
+  "record_doi": "10.5281/zenodo.1215528",
+  "record_version": "v1 (2018-04-09)",
+  "dataset": "Extrapolated_N2.dir/Y_l2_m2.dat",
+  "quantity": "complex_h22_strain_mode_scaled_by_r_over_total_mass",
+  "spin_weight": -2,
+  "ell": 2,
+  "m": 2,
+  "extrapolation_order": 2,
+  "resolution": "Lev6",
+  "center_of_mass_corrected": true,
+  "gravitational_memory_added": false,
+  "frame": "SXS archived CoM-corrected spin-weighted spherical-harmonic mode frame; no observer projection",
+  "time_coordinate": "catalogue extrapolated proper/retarded time divided by total relaxed Christodoulou mass",
+  "unit_system": "geometrized G=c=1; total relaxed Christodoulou mass scaled out",
+  "sample_count": 13869,
+  "time_range_over_m": [
+    -107.867433368149,
+    3844.422217410785
+  ],
+  "peak_h22_sample_index": 12351,
+  "peak_h22_time_over_m": 3692.7480095302817,
+  "reference_parameters": {
+    "simulation_name": "BBH_SKS_d14.3_q1.22_sA_0_0_0.330_sB_0_0_-0.440/Lev6",
+    "mass_ratio_m1_over_m2": 1.2212026034520165,
+    "relaxed_mass1_code_units": 0.549802229834,
+    "relaxed_mass2_code_units": 0.450213771474,
+    "dimensionless_spin1": [
+      3.41456411037e-08,
+      -4.09141073094e-08,
+      0.329976580046
+    ],
+    "dimensionless_spin2": [
+      3.75379590194e-08,
+      3.17672731622e-08,
+      -0.43994832522
+    ],
+    "eccentricity": 0.0008382,
+    "relaxation_measurement_time_code_units": 540.0,
+    "number_of_orbits": 15.168887885,
+    "remnant_mass_code_units": 0.952032939704,
+    "remnant_dimensionless_spin": [
+      5.25395868351e-08,
+      -2.45673365593e-08,
+      0.692085186818
+    ]
+  },
+  "scaling": {
+    "c_m_s": 299792458.0,
+    "gm_sun_nominal_m3_s2": 1.3271244e+20,
+    "mpc_m": 3.085677581491367e+22,
+    "seconds_per_solar_mass": 4.9254909476412675e-06,
+    "metres_per_solar_mass": 1476.6250380501249,
+    "time_formula": "t_s=(t/M)*GM_sun_nominal/c^3*mass_total_msun",
+    "mode_formula": "h22=(rh22/M)*GM_sun_nominal/c^2*mass_total_msun/(distance_mpc*mpc_m)",
+    "mass_interpretation": "observer-frame nominal solar gravitational-mass parameter; no redshift mapping",
+    "constants_source": "https://www.iau.org/static/resolutions/IAU2015_English.pdf"
+  },
+  "sources": [
+    {
+      "path": "data/reference/numerical-relativity/sxs_bbh_0305_lev6_com.h5",
+      "url": "https://zenodo.org/api/records/1215528/files/SXS:BBH:0305/Lev6/rhOverM_Asymptotic_GeometricUnits_CoM.h5/content",
+      "sha256": "e6d70f7290e5ec64e937415ebc028221639ce001e1be3aeb728e3b6b6caf3ab9",
+      "bytes": 76110573,
+      "retrieved_at_utc": "2026-11-14T14:31:16.960908+00:00",
+      "required_on_server": true
+    },
+    {
+      "path": "data/reference/numerical-relativity/sxs_bbh_0305_lev6_metadata.json",
+      "url": "https://zenodo.org/api/records/1215528/files/SXS:BBH:0305/Lev6/metadata.json/content",
+      "sha256": "d3d7bcdecd94586a2393c318b7be0498be791209f10336288e95ea6e8f15c62c",
+      "bytes": 3247,
+      "retrieved_at_utc": "2026-11-14T14:26:25.171562+00:00",
+      "required_on_server": true
+    },
+    {
+      "path": "data/reference/numerical-relativity/zenodo_1215528_record.json",
+      "url": "https://zenodo.org/api/records/1215528",
+      "sha256": "ed1a63323bda026928b33b5c106681b06f8ee292447d69cd02444ac812bb4051",
+      "bytes": 26723,
+      "retrieved_at_utc": "2026-11-14T14:26:22.903123+00:00",
+      "required_on_server": true
+    }
+  ],
+  "data": {
+    "path": "data/reference/numerical-relativity/sxs_bbh_0305_lev6_h22.json",
+    "sha256": "e25c08651555c57ad8091cc0144861e870f01e5ff63994fef81ace5e06b256cc",
+    "bytes": 830185,
+    "source_sha256": "e6d70f7290e5ec64e937415ebc028221639ce001e1be3aeb728e3b6b6caf3ab9",
+    "processor": {
+      "h5py_version": "3.15.1",
+      "root_text_attributes": {}
+    },
+    "transforms": [
+      "select exact native N2 CoM h22 dataset",
+      "serialize three columns to lossless round-trip JSON numbers"
+    ],
+    "downsampling": false,
+    "phase_rotation": false,
+    "time_shift": false,
+    "normalization_change": false
+  },
+  "rights": {
+    "spdx": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "copyright": "SXS data creators listed in Zenodo record 1215528",
+    "attribution": "Kidder, L.; Pfeiffer, H.; Scheel, M.; Boyle, M.; Hemberger, D.; Lovelace, G.; Szilagyi, B. (2018). Binary black-hole simulation SXS:BBH:0305 (v1). Zenodo. https://doi.org/10.5281/zenodo.1215528. CC BY 4.0. Native h22 mode extracted by this project; no physical recalculation.",
+    "simulation_bibtex_keys": [
+      "SXSCatalog",
+      "Lovelace:2016uwp"
+    ]
+  },
+  "format_documentation_url": "https://data.black-holes.org/waveforms/documentation.html",
+  "limitations": [
+    "One archived numerical-relativity simulation, not a live Einstein-equation solver.",
+    "The mass ratio, dimensionless spins, eccentricity and initial conditions remain fixed.",
+    "This is the complex spin-weight -2 (ell,m)=(2,2) mode only; it is not full observer or detector strain.",
+    "No sky orientation, spin-weighted harmonic projection, other modes or detector response is inferred.",
+    "The adopted archived 2018 v1 CoM-corrected strain does not receive the 2024 release's added-memory processing.",
+    "No convergence or extrapolation uncertainty is estimated from this single resolution/order.",
+    "All native samples are preserved, including possible initial junk radiation and late numerical noise.",
+    "There is no cosmological redshift transformation. The user mass scale is a nominal observer-frame gravitational mass parameter.",
+    "Distance scaling is the asymptotic inverse-distance mode scaling in flat propagation, not a cosmological luminosity-distance model.",
+    "The waveform time is the catalogue's extrapolated proper/retarded time in units of total relaxed Christodoulou mass, not UTC."
+  ],
+  "live_gr_solver": false,
+  "observed_detector_data": false,
+  "arbitrary_mass_ratio_or_spin_interpolation": false
+}

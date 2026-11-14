@@ -74,3 +74,9 @@ Moon의표시R0.20874/물리R1737.4km·group/mesh scale1은선택전후유지됐
 `NASA_SPACE_APPS_CHALLENGE_v0.9.0_20261114_213804KST.zip`는 **495916482B/2223파일**, SHA256 **`fd3c694f354bac02ba9728dae521b13d7b41250870bc3b050ee8629d6b467db7`**이다. source `7b2dbf7c4e5ee6798fd9c56230a7858ae8dde3e4`의 clean tree, 최종 DLJsfpSc 프런트와 Node 전용 `app.js`/검증된103JSON으로 생성했다. 추적 manifest/source sidecar33개의 Git index와 실제 동결바이트도 전부 일치했다.
 
 정확한 ZIP을 새 `tmp/node-release-verify-r4s83m6d/extracted`에 풀어2222개 release manifest 항목의경로/바이트/SHA와필수원본·캐시를확인했다. Node22.17 절대경로와 `app.js`만서버로실행했고 PATH에서Python실행파일을찾을수없게했다. 개발검증기/HTTP클라이언트의Python과서버의Node를구분한다. 실제두관측·29/32품질·지도/사진·카탈로그·새가정을확인하고실제Node프로세스와worker thread를종료/재시작한뒤 εB/Pluto및추가근거의같은ID·판단·카메라·밀도/관측자설정·export원바이트/import복원을통과했다. 정확완료시각 `2026-11-14T12:40:02.175944+00:00`이다. 상세는 `docs/releases/v0.9.0.json`과ZIP밖동명verification/checksum JSON을따른다. 이사후문서는검증한불변ZIP에추가하지않는다. 기존v0.8 ZIP/원본/Git이력도보존했다. Linux/Docker·공개서비스·사람/원어민검수는수행하지않았다.
+
+
+DEV-015–016: comets.json/galaxy_atlas.json/numerical_relativity.json의 원본·변환·canonical SHA 및 Node107JSON을 Data_Spec에 연결한다. 실제4혜성의489개 TDB표본, GWGC53,162개18필드, SXS13,869개 native복소모드를 보존한다. 독립 PDE는 사용자 초기조건의 계산이며 실제 관측/행성 존재확률이 아니다. 기존 SPHEREx102개 원본과 근거를 보존하고 필수6개와 참고96개를 계속 구분한다. 최종 검사/완결 ZIP은 DEV-016 작업 기록과 릴리스 검증 정본을 따른다.
+
+
+DEV-016 LAN: 최종 CumtP9k6 프런트를 기존 var/node/3002에 반영했다. 실제 Wi-Fi HTTP origin에서 양자1단계·실제NR13,869표본·은하53,162검색/포커스·ε Indi B S01/S02의 기존 cmp_d88083664b6fd27592eb68c1 표시를 확인했다. pageerror0, ready200이다. var/qa/dev016-lan-final.json/PNG가 자동검사 근거이며 다른 물리기기의 최신빌드 검사를 대신하지 않는다. IP/PID는 Git제외 var/lan-host.json에 보관한다. 이전 빌드와 var/node 근거를 보존했고 공개 MCSM/nginx 설정은 변경하지 않았다.

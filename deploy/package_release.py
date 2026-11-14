@@ -18,6 +18,10 @@ from packaging.utils import canonicalize_name
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME = {"fastapi", "uvicorn", "pydantic", "astropy", "numpy", "scipy", "python-dotenv", "psutil"}
+EXCLUDED_LOCAL_AUDIT_FILES = {
+    "data/reference/extragalactic-planets/facts/status-context-2026.json",
+    "data/reference/extragalactic-planets/facts/status-context-2026.source.json",
+}
 DIRECTORIES = (
     "api",
     "node",
@@ -48,12 +52,18 @@ DIRECTORIES = (
     "data/reference/planet-criteria/facts",
     "data/reference/mass-scenarios/facts",
     "data/reference/relativity/facts",
+    "data/reference/comets",
+    "data/reference/galaxy-atlas",
+    "data/reference/numerical-relativity",
 )
 FILES = (
     "app.js",
     "package.json",
     "package-lock.json",
     "data/manifests/node_runtime.json",
+    "data/manifests/comets.json",
+    "data/manifests/galaxy_atlas.json",
+    "data/manifests/numerical_relativity.json",
     "README.md",
     "FSD.md",
     "Data_Spec.md",
@@ -68,6 +78,7 @@ FILES = (
     "pyproject.toml",
     "requirements.lock.txt",
     "requirements.runtime.lock.txt",
+    "requirements.build-relativity.lock.txt",
     "web/package.json",
     "web/package-lock.json",
     "web/index.html",
@@ -150,8 +161,10 @@ def prepare(built_at):
             path
             for path in (ROOT / directory).rglob("*")
             if path.is_file()
+            and path.relative_to(ROOT).as_posix() not in EXCLUDED_LOCAL_AUDIT_FILES
             and "__pycache__" not in path.parts
-            and path.suffix not in (".pyc", ".log")
+            and "upstream" not in path.parts
+            and path.suffix not in (".pyc", ".log", ".part", ".tmp")
         )
     records = json.loads((ROOT / "data/manifests/datasets.json").read_text(encoding="utf-8"))[
         "files"
@@ -225,8 +238,17 @@ def prepare(built_at):
     )
     manifest = {
         "release": version,
-        "work_id": "OPS-013",
-        "work_ids": ["DEV-009", "DEV-010", "DEV-011", "DEV-012", "OPS-013"],
+        "work_id": "DEV-016",
+        "work_ids": [
+            "DEV-009",
+            "DEV-010",
+            "DEV-011",
+            "DEV-012",
+            "OPS-013",
+            "OPS-014",
+            "DEV-015",
+            "DEV-016",
+        ],
         "built_at": built_at,
         "base_commit": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
@@ -262,7 +284,15 @@ def prepare(built_at):
             "observed-morphology-guide-v1",
             "kuiper-region-v1",
             "published-exoplanet-observations-v1",
-            "extragalactic-evidence-v1",
+            "extragalactic-evidence-v2",
+            "historical-comets-v1",
+            "newtonian-softened-verlet-v1",
+            "gwgc-j2000-reference-atlas-v1",
+            "fk5-j2000-galaxy-catalogue-markers-v1",
+            "sxs-nrar-h22-native-replay-v1",
+            "schrodinger-cn-1d-v1",
+            "maxwell-yee-tmz-2d-v1",
+            "euler-rusanov-2d-v1",
             "sourced-small-body-appearance-v1",
             "iau-margot-criteria-v1",
             "spherical-density-hypothesis-v1",

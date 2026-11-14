@@ -1,0 +1,1041 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "gwgc-j2000-reference-atlas-v1",
+  "created_utc": "2026-11-14T14:19:00.763128+00:00",
+  "source": {
+    "url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=VII%2F267%2Fgwgc&-out.max=unlimited&-out=PGC%2CName%2CRAJ2000%2CDEJ2000%2CTT%2CBmag%2Ce_Bmag%2Ca%2Ce_a%2Cb%2Ce_b%2Cb%2Fa%2Ce_b%2Fa%2CPA%2CBMAG%2Ce_BMAG%2CDist%2Ce_Dist",
+    "resolved_url": "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv?-source=VII%2F267%2Fgwgc&-out.max=unlimited&-out=PGC%2CName%2CRAJ2000%2CDEJ2000%2CTT%2CBmag%2Ce_Bmag%2Ca%2Ce_a%2Cb%2Ce_b%2Cb%2Fa%2Ce_b%2Fa%2CPA%2CBMAG%2Ce_BMAG%2CDist%2Ce_Dist",
+    "label": "GWGC (White, Daw & Dhillon 2011), CDS VII/267, Harvard VizieR export",
+    "local_relative_path": "data/reference/galaxy-atlas/gwgc_vizier.tsv",
+    "bytes": 8105708,
+    "sha256": "b1f88f1c34ebf90f272f550d5837563ca3417063e591487cf1800f4052cb02a2",
+    "retrieved_utc": "2026-11-14T14:13:07.000704+00:00",
+    "acquisition_client": "curl 8.22.0; normal Schannel TLS chain and hostname verification; bounded request",
+    "required_on_server": true,
+    "service_request_date_utc": "2026-11-14T14:13:05",
+    "service_version": "VizieR/7.6.1",
+    "publication_date_in_service": "2017-10-02",
+    "rights_uri": "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+  },
+  "data": {
+    "local_relative_path": "data/reference/galaxy-atlas/gwgc_galaxies.compact.json",
+    "bytes": 6319440,
+    "sha256": "7fd3d4ad97efef26c5d4010c621e517db29e079e1b15efa4f0cf73f09f53ef81",
+    "kind": "lossless_nullable_numeric_subset_excluding_Milky_Way_globular_clusters",
+    "required_on_server": true,
+    "source_sha256": "b1f88f1c34ebf90f272f550d5837563ca3417063e591487cf1800f4052cb02a2",
+    "processor_algorithm": "gwgc-j2000-reference-atlas-v1",
+    "transformations": [
+      "Validate service-declared FK5 J2000 and explicit TSV units",
+      "Exclude exactly TT=-9 Milky Way globular clusters, including clusters with PGC IDs",
+      "Trim source field padding and encode blank numeric fields as JSON null",
+      "Preserve all 18 selected source columns as compact ordered row arrays; do not generate shapes or members"
+    ]
+  },
+  "record_count": 53162,
+  "spatial_count": 53162,
+  "direction_only_count": 0,
+  "source_table_records": 53312,
+  "excluded_record_count": 150,
+  "exclusion_policy": "TT=-9 is a Milky Way globular cluster and is never counted or rendered as a galaxy",
+  "excluded_records": [
+    {
+      "source_row": 53163,
+      "name": "NGC104",
+      "pgc_string": "2802612",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53164,
+      "name": "NGC288",
+      "pgc_string": "2802614",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53165,
+      "name": "NGC362",
+      "pgc_string": "2802616",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53166,
+      "name": "NGC1261",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53167,
+      "name": "Pal1",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53168,
+      "name": "AM1",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53169,
+      "name": "Eridanus",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53170,
+      "name": "Pal2",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53171,
+      "name": "NGC1851",
+      "pgc_string": "2802628",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53172,
+      "name": "NGC1904",
+      "pgc_string": "2802630",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53173,
+      "name": "NGC2298",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53174,
+      "name": "NGC2419",
+      "pgc_string": "2802643",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53175,
+      "name": "Pyxis",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53176,
+      "name": "NGC2808",
+      "pgc_string": "2802644",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53177,
+      "name": "E3",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53178,
+      "name": "Pal3",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53179,
+      "name": "NGC3201",
+      "pgc_string": "2802645",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53180,
+      "name": "Pal4",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53181,
+      "name": "NGC4147",
+      "pgc_string": "2802646",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53182,
+      "name": "NGC4372",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53183,
+      "name": "Rup106",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53184,
+      "name": "NGC4590",
+      "pgc_string": "2802647",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53185,
+      "name": "NGC4833",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53186,
+      "name": "NGC5024",
+      "pgc_string": "2802648",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53187,
+      "name": "NGC5053",
+      "pgc_string": "2802649",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53188,
+      "name": "NGC5139",
+      "pgc_string": "2802650",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53189,
+      "name": "NGC5272",
+      "pgc_string": "2802651",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53190,
+      "name": "NGC5286",
+      "pgc_string": "2802652",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53191,
+      "name": "AM4",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53192,
+      "name": "NGC5466",
+      "pgc_string": "2802653",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53193,
+      "name": "NGC5634",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53194,
+      "name": "NGC5694",
+      "pgc_string": "2802654",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53195,
+      "name": "IC4499",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53196,
+      "name": "NGC5824",
+      "pgc_string": "2802655",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53197,
+      "name": "Pal5",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53198,
+      "name": "NGC5897",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53199,
+      "name": "NGC5904",
+      "pgc_string": "2802656",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53200,
+      "name": "NGC5927",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53201,
+      "name": "NGC5946",
+      "pgc_string": "2802657",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53202,
+      "name": "BH176",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53203,
+      "name": "NGC5986",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53204,
+      "name": "Lynga7",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53205,
+      "name": "Pal14",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53206,
+      "name": "NGC6093",
+      "pgc_string": "2802658",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53207,
+      "name": "NGC6121",
+      "pgc_string": "2802659",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53208,
+      "name": "NGC6101",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53209,
+      "name": "NGC6144",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53210,
+      "name": "NGC6139",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53211,
+      "name": "Terzan3",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53212,
+      "name": "NGC6171",
+      "pgc_string": "2802660",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53213,
+      "name": "1636-283",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53214,
+      "name": "NGC6205",
+      "pgc_string": "2802661",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53215,
+      "name": "NGC6229",
+      "pgc_string": "2802663",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53216,
+      "name": "NGC6218",
+      "pgc_string": "2802662",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53217,
+      "name": "NGC6235",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53218,
+      "name": "NGC6254",
+      "pgc_string": "2802664",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53219,
+      "name": "NGC6256",
+      "pgc_string": "2802665",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53220,
+      "name": "Pal15",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53221,
+      "name": "NGC6266",
+      "pgc_string": "2802666",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53222,
+      "name": "NGC6273",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53223,
+      "name": "NGC6284",
+      "pgc_string": "2802667",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53224,
+      "name": "NGC6287",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53225,
+      "name": "NGC6293",
+      "pgc_string": "2802668",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53226,
+      "name": "NGC6304",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53227,
+      "name": "NGC6316",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53228,
+      "name": "NGC6341",
+      "pgc_string": "2802670",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53229,
+      "name": "NGC6325",
+      "pgc_string": "2802669",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53230,
+      "name": "NGC6333",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53231,
+      "name": "NGC6342",
+      "pgc_string": "2802671",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53232,
+      "name": "NGC6356",
+      "pgc_string": "2802672",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53233,
+      "name": "NGC6355",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53234,
+      "name": "NGC6352",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53235,
+      "name": "IC1257",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53236,
+      "name": "Terzan2",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53237,
+      "name": "NGC6366",
+      "pgc_string": "2802674",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53238,
+      "name": "Terzan4",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53239,
+      "name": "HP1",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53240,
+      "name": "NGC6362",
+      "pgc_string": "2802673",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53241,
+      "name": "Liller1",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53242,
+      "name": "NGC6380",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53243,
+      "name": "Terzan1",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53244,
+      "name": "Ton2",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53245,
+      "name": "NGC6388",
+      "pgc_string": "2802675",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53246,
+      "name": "NGC6402",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53247,
+      "name": "NGC6401",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53248,
+      "name": "NGC6397",
+      "pgc_string": "2802676",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53249,
+      "name": "Pal6",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53250,
+      "name": "NGC6426",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53251,
+      "name": "Djorg1",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53252,
+      "name": "Terzan5",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53253,
+      "name": "NGC6440",
+      "pgc_string": "2802677",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53254,
+      "name": "NGC6441",
+      "pgc_string": "2802678",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53255,
+      "name": "Terzan6",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53256,
+      "name": "NGC6453",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53257,
+      "name": "UKS1",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53258,
+      "name": "NGC6496",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53259,
+      "name": "Terzan9",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53260,
+      "name": "Djorg2",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53261,
+      "name": "NGC6517",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53262,
+      "name": "Terzan10",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53263,
+      "name": "NGC6522",
+      "pgc_string": "2802679",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53264,
+      "name": "NGC6535",
+      "pgc_string": "2802681",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53265,
+      "name": "NGC6528",
+      "pgc_string": "2802680",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53266,
+      "name": "NGC6539",
+      "pgc_string": "2802682",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53267,
+      "name": "NGC6540",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53268,
+      "name": "NGC6544",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53269,
+      "name": "NGC6541",
+      "pgc_string": "2802683",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53270,
+      "name": "2MS-GC01",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53271,
+      "name": "ESO-SC06",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53272,
+      "name": "NGC6553",
+      "pgc_string": "2802684",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53273,
+      "name": "2MS-GC02",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53274,
+      "name": "NGC6558",
+      "pgc_string": "2802685",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53275,
+      "name": "IC1276",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53276,
+      "name": "Terzan12",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53277,
+      "name": "NGC6569",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53278,
+      "name": "NGC6584",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53279,
+      "name": "NGC6624",
+      "pgc_string": "2802686",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53280,
+      "name": "NGC6626",
+      "pgc_string": "2802687",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53281,
+      "name": "NGC6638",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53282,
+      "name": "NGC6637",
+      "pgc_string": "2802688",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53283,
+      "name": "NGC6642",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53284,
+      "name": "NGC6652",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53285,
+      "name": "NGC6656",
+      "pgc_string": "2802689",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53286,
+      "name": "Pal8",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53287,
+      "name": "NGC6681",
+      "pgc_string": "2802690",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53288,
+      "name": "NGC6712",
+      "pgc_string": "2802691",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53289,
+      "name": "NGC6715",
+      "pgc_string": "2802337",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53290,
+      "name": "NGC6717",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53291,
+      "name": "NGC6723",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53292,
+      "name": "NGC6749",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53293,
+      "name": "NGC6752",
+      "pgc_string": "2802692",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53294,
+      "name": "NGC6760",
+      "pgc_string": "2802693",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53295,
+      "name": "NGC6779",
+      "pgc_string": "2802694",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53296,
+      "name": "Terzan7",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53297,
+      "name": "Pal10",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53298,
+      "name": "Arp2",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53299,
+      "name": "NGC6809",
+      "pgc_string": "2802695",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53300,
+      "name": "Terzan8",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53301,
+      "name": "Pal11",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53302,
+      "name": "NGC6838",
+      "pgc_string": "2802696",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53303,
+      "name": "NGC6864",
+      "pgc_string": "2802697",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53304,
+      "name": "NGC6934",
+      "pgc_string": "2802698",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53305,
+      "name": "NGC6981",
+      "pgc_string": "2802699",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53306,
+      "name": "NGC7006",
+      "pgc_string": "2802700",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53307,
+      "name": "NGC7078",
+      "pgc_string": "2802701",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53308,
+      "name": "NGC7089",
+      "pgc_string": "2802702",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53309,
+      "name": "NGC7099",
+      "pgc_string": "2802703",
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53310,
+      "name": "Pal12",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53311,
+      "name": "Pal13",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    },
+    {
+      "source_row": 53312,
+      "name": "NGC7492",
+      "pgc_string": null,
+      "reason": "TT_minus9_Milky_Way_globular_cluster"
+    }
+  ],
+  "paper": {
+    "url": "https://arxiv.org/abs/1103.0695",
+    "doi": "10.1088/0264-9381/28/8/085016",
+    "bibcode": "2011CQGra..28h5016W",
+    "authors": [
+      "D. J. White",
+      "E. J. Daw",
+      "V. S. Dhillon"
+    ],
+    "paper_reported_galaxies": 53255,
+    "paper_reported_Milky_Way_globular_clusters": 150,
+    "count_note": "The article's stated galaxy count differs from this adopted CDS table. The stored table has 53,312 rows; excluding its 150 TT=-9 clusters leaves 53,162 galaxies. No reason for the release-count difference is inferred."
+  },
+  "coordinate_reference": "FK5 J2000 as declared by VizieR #Coosys; no ICRS realization or epoch propagation validated",
+  "coordinate_units": {
+    "ra_deg": "deg",
+    "dec_deg": "deg"
+  },
+  "native_export_units": {
+    "PGC": "",
+    "Name": "",
+    "RAJ2000": "deg",
+    "DEJ2000": "deg",
+    "TT": "",
+    "Bmag": "mag",
+    "e_Bmag": "mag",
+    "a": "arcmin",
+    "e_a": "arcmin",
+    "b": "arcmin",
+    "e_b": "arcmin",
+    "b/a": "",
+    "e_b/a": "",
+    "PA": "deg",
+    "BMAG": "mag",
+    "e_BMAG": "mag",
+    "Dist": "Mpc",
+    "e_Dist": "Mpc"
+  },
+  "right_ascension_policy": "Consume the TSV units row. The adopted RAJ2000 output is already degrees, despite inherited prose saying decimal hours. It is not multiplied by 15. A separately supplied hour-unit table is converted once.",
+  "distance_kind": "heterogeneous_compiled_catalogue_estimate_not_current_3D_reconstruction",
+  "distance_unit": "Mpc",
+  "distance_error_policy": "Preserve the reported e_Dist. Methods and errors are heterogeneous, with some errors estimated in the source paper; no full covariance or universal confidence interval is provided. A rounded zero error is not exact physical knowledge.",
+  "coverage": {
+    "kind": "nearby_compiled_galaxy_catalogue_not_complete_universe",
+    "nominal_paper_horizon_mpc": 100,
+    "actual_distance_range_mpc": [
+      0.01,
+      124.07
+    ],
+    "records_above_nominal_100_mpc": 9,
+    "missing_morphology_records": 27547,
+    "selected_date_propagation": false
+  },
+  "morphology_policy": "Preserve nullable numerical TT codes. Do not infer resolved spiral arms, colour, texture, physical pose or a detailed shape from missing morphology.",
+  "photometry_policy": "Bmag/BMAG and their catalogue errors are B-band quantities, not bolometric brightness or SPHEREx flux. No photometric marker brightness calibration is made here.",
+  "angular_size_policy": "a/b are published angular diameters in arcmin, not physical radius. PA is degrees from north through east; no 3D inclination is reconstructed.",
+  "origin_policy": {
+    "compiler": "White, Daw & Dhillon, University of Sheffield, UK",
+    "distributor": "CDS, Strasbourg, France",
+    "download_mirror": "Harvard/CfA, USA",
+    "listed_parent_catalogues": [
+      "Tully Nearby/Tully3000",
+      "Catalog of Neighboring Galaxies",
+      "V8k",
+      "HyperLEDA"
+    ],
+    "Chinese_catalogues_directly_selected": [],
+    "LAMOST_used": false,
+    "limit": "This records the selected catalogues/providers, not a nationality audit of every historical literature measurement."
+  },
+  "rights": {
+    "status": "CDS_public_scientific_catalogue_provider_terms_and_attribution",
+    "url": "https://cds.unistra.fr/vizier-org/licences_vizier.html",
+    "spdx": null,
+    "attribution": "White, Daw & Dhillon (2011), Classical and Quantum Gravity 28, 085016; CDS VizieR VII/267",
+    "limit": "The service supplies this rights URI. Its full policy page was inaccessible to the browsing tool; no blanket CC-BY, public-domain or unrestricted commercial-redistribution licence is asserted. The paper HTML is retained only for local audit, not server delivery."
+  },
+  "limitations": [
+    "A finite nearby catalogue is not the complete Universe or an unbiased census; the source paper discusses incompleteness and the Galactic plane/selection effects.",
+    "These are fixed FK5/J2000 directions and heterogeneous distance estimates. No galaxy velocities, past/future positions or 3D depth evolution are inferred.",
+    "An atlas point identifies a catalogue galaxy. It is not a resolved image, measured surface, star field, individual member star or planetary system.",
+    "53,162 actual catalogue galaxies are kept. The 150 TT=-9 Milky Way globular clusters are excluded, including clusters that happen to have PGC identifiers.",
+    "The nine existing detailed galaxy models retain their own separate cited positions, distances and illustrative morphology. Cross-links do not overwrite or validate those models."
+  ],
+  "supporting_sources": [
+    {
+      "url": "https://arxiv.org/html/1103.0695v1",
+      "resolved_url": "https://arxiv.org/html/1103.0695v1",
+      "label": "White, Daw & Dhillon (2011), author paper HTML, local audit only",
+      "local_relative_path": "data/reference/galaxy-atlas/upstream/white2011.html",
+      "bytes": 123457,
+      "sha256": "3f9b3db17d3a95d408189e4a2e0c46f52e01180c476e7461cc59298aac4c9659",
+      "retrieved_utc": "2026-11-14T14:14:00.256845+00:00",
+      "acquisition_client": "curl 8.22.0; normal Schannel TLS chain and hostname verification; bounded request",
+      "required_on_server": false,
+      "rights": "arXiv perpetual non-exclusive upload licence; no blanket redistribution licence inferred"
+    }
+  ]
+}

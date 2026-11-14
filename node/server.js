@@ -147,6 +147,14 @@ async function start(options = {}) {
           if (routeName === 'runtime') { const m = await getManifest().catch(() => fail(503, 'source_unavailable')); return send({ schema_version: '1.0', runtime: 'node', observation_processing: 'verified_build_cache', snapshot_exported_utc: m.exported_utc, supported_observation_pairs: [['S01', 'S02'], ['S12', 'S14']], arbitrary_fits_inputs: false, source_verification_policy: SOURCE_VERIFICATION_POLICY }); }
           const fixed = { objects: ['objects'], timeline: ['timeline'], appearance: ['appearance', 'appearance_unavailable'], 'small-body-appearance': ['small_body_appearance', 'small_body_appearance_unavailable'], 'mass-scenarios': ['mass_scenarios', 'mass_scenario_source_unavailable'], 'black-holes': ['black_holes', 'black_hole_source_unavailable'], 'observer-physics': ['observer_physics', 'observer_physics_source_unavailable'], 'cosmic-history': ['cosmic_history', 'history_source_unavailable'], 'cosmic-observations': ['cosmic_observations', 'history_observation_unavailable'], 'catalog/galaxies': ['galaxies'], 'kuiper-belt': ['kuiper_belt'], 'long-term-model': ['long_term_model', 'simulation_source_unavailable'], 'catalog/exoplanets': ['exoplanets', 'catalog_unavailable'] };
           if (fixed[routeName]) return send(await snapshot(...fixed[routeName]));
+          if (routeName === 'catalog/comets') return send(await snapshot('comets', 'comet_source_unavailable'));
+          if (routeName === 'physics/numerical-relativity') return send(await snapshot('numerical_relativity', 'numerical_relativity_source_unavailable'));
+          if (routeName === 'catalog/galaxy-atlas/markers') return send(await snapshot('galaxy_atlas_markers', 'galaxy_atlas_source_unavailable'));
+          if (routeName === 'catalog/galaxy-atlas' || routeName.startsWith('catalog/galaxy-atlas/')) {
+            const key = routeName === 'catalog/galaxy-atlas' ? { query: q('query') ?? '', cursor: q('cursor'), limit: q('limit') === null ? 50 : Number(q('limit')) } : { id: routeName.slice('catalog/galaxy-atlas/'.length) };
+            try { const value = await sources.call('galaxy_atlas', key); if (!value) fail(404, 'object_not_found'); return send(value); }
+            catch (error) { if (error instanceof HTTPError) throw error; if (error.message === 'invalid_galaxy_atlas_selection') fail(422, error.message); fail(503, 'galaxy_atlas_source_unavailable'); }
+          }
           if (routeName === 'universe') { const scene = await snapshot('universe'), timeline = await snapshot('timeline'); try { return send(timelineScene(scene, timeline, q('epoch') ?? timeline.default_epoch)); } catch { fail(422, 'unsupported_model_epoch'); } }
           if (routeName === 'long-term-simulation') { try { return send(longTerm(await snapshot('long_term_model', 'simulation_source_unavailable'), queryNumber(url, 'year', undefined, true), queryNumber(url, 'month', 1, true), queryNumber(url, 'day', 1, true), queryNumber(url, 'hour', 0))); } catch (error) { if (error instanceof HTTPError) throw error; fail(422, 'unsupported_simulation_date'); } }
           if (routeName === 'observations') { const id = q('object_id') || 'epsilon-indi-b'; if (['sun', 'mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'].includes(id)) return send({ object_id: id, observations: [], status: 'not_selected_for_comparison', next_cursor: null }); const m = await getManifest().catch(() => fail(503, 'source_unavailable')); if (!m.snapshots['observations_' + id]) fail(404, 'object_not_found'); return send(await snapshot('observations_' + id)); }
@@ -210,7 +218,7 @@ async function start(options = {}) {
       let relative = pathname === '/' ? 'index.html' : decoded.slice(1);
       if (relative !== 'index.html' && !['assets/', 'textures/', 'observations/'].some(prefix => relative.startsWith(prefix))) fail(404, 'not_found');
       let file; try { file = safePath(path.join(root, 'web', 'dist'), relative); if (!fs.statSync(file).isFile()) throw new Error(); } catch { fail(404, 'not_found'); }
-      if (relative.startsWith('textures/') || relative.startsWith('observations/')) { try { await sources.call('verify'); } catch { fail(503, 'source_unavailable'); } }
+      if (relative.startsWith('textures/') || relative.startsWith('observations/')) { try { await sources.call('asset', relative); } catch { fail(503, 'source_unavailable'); } }
       response.writeHead(200, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Content-Length': fs.statSync(file).size });
       if (request.method === 'HEAD') return response.end(); fs.createReadStream(file).on('error', () => response.destroy()).pipe(response);
     } catch (error) {

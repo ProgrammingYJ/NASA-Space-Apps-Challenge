@@ -1,4 +1,4 @@
-# v0.9.1 Node.js 서버 실행·복구
+# v0.11.0 Node.js 서버 실행·복구
 
 **시작 파일은 ZIP을 푼 프로젝트 루트의 `app.js`다. 실행 명령은 `node app.js` 또는 `npm start`다.** 서버에는 Node.js 22.17.0 이상만 필요하며 Python·pip·별도 Python API를 실행하지 않는다. Node 런타임은 내장 모듈만 사용한다. 검증한 정적 프런트와 실제 자료/파생 캐시를 ZIP에 포함하므로 서버에서 npm 패키지를 설치하거나 프런트를 다시 빌드할 필요가 없다.
 
@@ -32,9 +32,9 @@
 
 ## 실제 자료와 빌드 캐시
 
-`data/node-runtime/runtime_manifest.json`과 동일한 정본 `data/manifests/node_runtime.json`은 각각473765B, SHA256 `9dfe12f530da0e6993ced98cc1a94932eb8aef161b6ca68e1a5cb081df44a2af`다. 실제 reader 출력99개와 실제 FITS에서 새로 계산한 정/역순 비교4개, 총103JSON/66642151B를 추적한다. 기존 관측102개 중 Node 런타임에 필요한 실제 FITS/보정은 S01/S02/S10/S12/S14/L051의6개다. 나머지96개는 확보/참고 자료이며 전부 서버에 포함됐다고 가정하지 않는다.
+`data/node-runtime/runtime_manifest.json`과 동일한 정본 `data/manifests/node_runtime.json`이 생성 JSON 107개/76348584B(실제 reader snapshot103개+새 FITS 비교4개), source 1885개/필수 1586개를 추적한다. 실제 FITS/보정 S01/S02/S10/S12/S14/L051의6개와 새 GWGC/NR 원본을 포함한다. 102개 관측의 나머지96개는 확보/참고 자료이며 전부 서버에 포함됐다고 가정하지 않는다. h5py는 SXS 원 HDF5를 추출하는 선택 빌드 도구이고 서버 실행 의존성이 아니다.
 
-런타임 manifest의 `source_files`는1859개 참조 중1564개/531456149B를 필수로 표시하며 나머지295개는 로컬 감사/빌드 참고 등 선택 자료다. 완결 ZIP에는 모든 필수 원본·보정·source facts·시간 배열·카탈로그·원지도/사진과103개 파생 JSON을 넣는다. 전체 논문/출판사 upstream 사본과 보존 자료96개는 이 계약의 필수 파일로 만들지 않는다. 원본과 파생/복제의 전수 구분은 `Data_Spec.md`를 따른다.
+런타임 정본은 107 JSON/76348584B, source1885개·필수1586개/623292613B·선택299개를 기록한다. 완결 ZIP은 모든 필수 원본/보정/사실/시간배열/카탈로그/지도·사진/107파생 JSON을 포함한다. 전체 논문/출판사 upstream 감사본과 확보 자료96개는 런타임 필수로 만들지 않는다. 원본/파생/복제 전수 구분은 Data_Spec을 따른다.
 
 비교는 기존 API가 지원하는 두 관측 쌍과 양순서만 제공한다. Node 요청 시 현재 원본·보정·알고리즘과 정본 캐시의 SHA/크기를 검증하고 빌드 때 계산한 결과를 재사용한다. 이는 새 런타임 FITS 분석·검출/측광·운동 측정이 아니다. UI에서 검증된 사전 계산 결과임을5언어로 고지한다. 원 DATE-AVG/TIMESYS·native 픽셀·FLAGS·판단을 유지하고 Python의 원 JSON float·내용 SHA·result ID를 보존한다. 임의 새 좌표/ROI/새 FITS의 즉시 분석은 제공하지 않는다.
 
@@ -56,7 +56,7 @@ Docker 환경에서는 `docker compose -f deploy/compose.yaml up --build -d`를 
 
 정확한 v0.9 ZIP 식별/파일 수·실측 바이트/SHA·실제 Node 재시작 검증은 최종 ZIP 옆 동명 checksum/verification JSON과 `docs/releases/v0.9.0.json`에서 확정한다. 사후 검증문서는 이미 검증한 ZIP 바이트를 수정하지 않고 별도 기록한다. v0.8.0의 불변 ZIP과 Git 이력도 보존한다.
 
-현재 Node 검증 정책은 `sha256-stat-fingerprint-v1`이다. 최초 전체 SHA 검증 뒤 매 요청 묶음에서 모든 필수 실경로·파일 ID(dev/ino)·크기·나노초 mtime/ctime을 검사하고, 변경 시 원바이트 SHA를 다시 계산한다. 변경 없는 불변 입력은 검증된 digest를 재사용하며 시간 TTL로 검사를 생략하지 않는다. 원 비교 JSON의 SHA는 읽을 때마다 확인한다. `node app.js --verify-sources`로 명시적 전체 SHA 감사를 실행할 수 있다. 원본/캐시는 읽기전용으로 운영하고 바꾸려면 새 빌드·새 배포 검증을 수행한다.
+현재 Node 검증 정책은 `sha256-stat-fingerprint-v2-scoped-assets`다. 최초 전체 SHA 감사 뒤 과학 요청마다 모든 필수 실경로·dev/ino/size/나노초mtime/ctime을 검사하고 변경 시 SHA를 다시 계산한다. 최초감사를 통과한 정적 지도 요청은 manifest identity와 요청한 등록 제공파일의 fingerprint/SHA를 검사한다. 정적지도 성공으로 과학ready 실패를 해제하지 않는다. 원 비교 JSON은 읽을 때마다 SHA를 확인하고 TTL로 검사를 생략하지 않는다. `node app.js --verify-sources`는 전체 SHA 감사를 강제한다. 불변 입력을 변경하면 새 빌드·검증·재시작을 수행한다.
 
 
 ### DEV-012 최종 완결 ZIP 검증 확정 · 2026-11-14 21:40:02 KST

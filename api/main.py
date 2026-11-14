@@ -45,7 +45,7 @@ def create_app(state_dir: Path | None = None):
         yield
         app.state.service.close()
 
-    app = FastAPI(title="Planet X · SPHEREx", version="0.9.0", lifespan=lifespan)
+    app = FastAPI(title="Planet X · SPHEREx", version="0.11.0", lifespan=lifespan)
 
     @app.middleware("http")
     async def bounds(request, call_next):
@@ -242,6 +242,65 @@ def create_app(state_dir: Path | None = None):
             ).hexdigest(),
             "display_algorithm_version": "extended-solar-parent-hermite-v1",
         }
+
+    @app.get("/api/v1/catalog/comets")
+    def historical_comets():
+        from science.comets import get_comets
+
+        try:
+            return get_comets(ROOT)
+        except (FileNotFoundError, ValueError):
+            raise HTTPException(503, "comet_source_unavailable") from None
+
+    @app.get("/api/v1/physics/numerical-relativity")
+    def numerical_relativity():
+        from science.numerical_relativity import get_numerical_relativity
+
+        try:
+            return get_numerical_relativity(ROOT)
+        except (FileNotFoundError, ValueError):
+            raise HTTPException(503, "numerical_relativity_source_unavailable") from None
+
+    @app.get("/api/v1/catalog/galaxy-atlas")
+    def galaxy_atlas(query: str = "", cursor: str | None = None, limit: int = 50):
+        from science.galaxy_atlas import get_galaxy_atlas
+
+        try:
+            return get_galaxy_atlas(ROOT, query=query, cursor=cursor, limit=limit)
+        except ValueError as exc:
+            if (
+                str(exc).startswith("galaxy_atlas_invalid_")
+                or str(exc) == "galaxy_atlas_cursor_out_of_range"
+            ):
+                raise HTTPException(422, "invalid_galaxy_atlas_selection") from None
+            raise HTTPException(503, "galaxy_atlas_source_unavailable") from None
+        except FileNotFoundError:
+            raise HTTPException(503, "galaxy_atlas_source_unavailable") from None
+
+    @app.get("/api/v1/catalog/galaxy-atlas/markers")
+    def galaxy_atlas_markers():
+        from science.galaxy_atlas import get_galaxy_atlas_markers
+
+        try:
+            return get_galaxy_atlas_markers(ROOT)
+        except (FileNotFoundError, ValueError):
+            raise HTTPException(503, "galaxy_atlas_source_unavailable") from None
+
+    @app.get("/api/v1/catalog/galaxy-atlas/{object_id}")
+    def galaxy_atlas_object(object_id: str):
+        from science.galaxy_atlas import get_galaxy_atlas_object
+
+        try:
+            value = get_galaxy_atlas_object(ROOT, object_id)
+        except ValueError as exc:
+            if str(exc) == "galaxy_atlas_invalid_object_id":
+                raise HTTPException(422, "invalid_galaxy_atlas_selection") from None
+            raise HTTPException(503, "galaxy_atlas_source_unavailable") from None
+        except FileNotFoundError:
+            raise HTTPException(503, "galaxy_atlas_source_unavailable") from None
+        if value is None:
+            raise HTTPException(404, "object_not_found")
+        return value
 
     @app.get("/api/v1/catalog/solar-system")
     def extended_solar(parent_id: str | None = None):

@@ -19,6 +19,41 @@ def catalog_api(tmp_path_factory):
         yield client
 
 
+def test_gwgc_catalogue_pages_markers_and_identity_preserve_native_reference(catalog_api):
+    page = catalog_api.get("/api/v1/catalog/galaxy-atlas", params={"query": "Messier 31"})
+    assert page.status_code == 200
+    assert page.json()["record_count"] == 53162
+    assert page.json()["matched_count"] == 1
+    row = page.json()["objects"][0]
+    assert row["existing_object_id"] == "galaxy-m31"
+    detail = catalog_api.get("/api/v1/catalog/galaxy-atlas/" + row["object_id"])
+    assert detail.status_code == 200
+    assert detail.json()["coordinate_reference"] == "FK5 J2000 catalogue reference"
+    markers = catalog_api.get("/api/v1/catalog/galaxy-atlas/markers").json()
+    assert markers["marker_count"] == 53162
+    assert len(markers["columns"]["object_id"]) == 53162
+    assert len(catalog_api.get("/api/v1/catalog/galaxies").json()["objects"]) == 9
+
+
+@pytest.mark.parametrize("query", [{"limit": 201}, {"cursor": "-1"}, {"cursor": "53163"}])
+def test_gwgc_api_rejects_invalid_page_selection(catalog_api, query):
+    assert catalog_api.get("/api/v1/catalog/galaxy-atlas", params=query).status_code == 422
+
+
+def test_numerical_relativity_api_exposes_native_mode_with_unchanged_source(catalog_api):
+    response = catalog_api.get("/api/v1/physics/numerical-relativity")
+    assert response.status_code == 200
+    value = response.json()
+    assert value["algorithm_version"] == "sxs-nrar-h22-native-replay-v1"
+    assert len(value["columns"]["time_over_m"]) == 13869
+    assert (
+        value["source_manifest_sha256"]
+        == hashlib.sha256(
+            (ROOT / "data/manifests/numerical_relativity.json").read_bytes()
+        ).hexdigest()
+    )
+
+
 def test_cosmic_history_catalog_has_source_hashes_and_ten_conceptual_milestones(catalog_api):
     response = catalog_api.get("/api/v1/cosmic-history")
     assert response.status_code == 200, response.text

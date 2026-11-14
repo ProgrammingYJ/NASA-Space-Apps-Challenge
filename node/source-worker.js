@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { hash, parse, safePath } = require('./storage');
 const { SOURCE_VERIFICATION_POLICY } = require('./verification-policy');
+const { atlasSelection } = require('./galaxy-atlas');
 const root = workerData.root, bundle = path.join(root, 'data', 'node-runtime');
 let manifest, manifestHash, initialized = false, failure = null;
 const metadata = new Map(), payloads = new Map();
@@ -23,13 +24,16 @@ function validate(file, base, strong = false) {
   }
   return absolute;
 }
-function verify(strong = false) {
-  stats.validation_passes++;
+function verifyManifestIdentity() {
   const rawManifest = fs.readFileSync(path.join(bundle, 'runtime_manifest.json'));
   const currentHash = hash(rawManifest);
   if (!manifest) { manifest = parse(rawManifest.toString('utf8')); manifestHash = currentHash; }
   else if (manifestHash !== currentHash) throw new Error('runtime_manifest_changed_restart_required');
   if (manifest.schema_version !== '1.0' || manifest.algorithm_version !== 'python-built-node-snapshot-v1') throw new Error('unsupported_runtime_manifest');
+}
+function verify(strong = false) {
+  stats.validation_passes++;
+  verifyManifestIdentity();
   try { for (const file of manifest.files) validate(file, bundle, strong); }
   catch (error) { error.validationScope = 'bundle'; throw error; }
   try {
@@ -41,6 +45,14 @@ function verify(strong = false) {
     }
   } catch (error) { error.validationScope = 'source'; throw error; }
   initialized = true;
+}
+function verifyAsset(relative, strong = false) {
+  if (typeof relative !== 'string' || !/^(?:textures|observations)\//.test(relative)) throw new Error('invalid_asset_key');
+  const target = 'web/dist/' + relative;
+  const source = manifest.source_files.find(file => file.runtime_required && (file.path === 'web/public/' + relative || file.serving_copy_path === target));
+  if (!source) throw new Error('asset_not_in_source_manifest');
+  validate({ ...source, path: target }, root, strong);
+  return { ready: true, verification_scope: 'requested_manifest_asset_only' };
 }
 function load(relative, raw = false) {
   const file = manifest.files.find(f => f.path === relative);
@@ -63,7 +75,8 @@ function drain() {
   // Each batch was already queued together; no clock/TTL can skip a later
   // transaction's path, symlink-boundary and nanosecond fingerprint checks.
   let verificationError = null;
-  try { verify(batch.some(message => message.strong === true)); failure = null; }
+  const fullValidation = !initialized || batch.some(message => message.action !== 'asset' || message.strong === true);
+  try { if (fullValidation) { verify(batch.some(message => message.strong === true)); failure = null; } else verifyManifestIdentity(); }
   catch (error) { verificationError = error; failure = error.message; }
   for (const { id, action, key } of batch) {
     try {
@@ -73,8 +86,10 @@ function drain() {
         sourceError = verificationError.code === 'ENOENT' ? 'source_missing' : 'source_integrity';
       }
       let value;
-      if (action === 'manifest') value = manifest;
+      if (action === 'asset') value = verifyAsset(key);
+      else if (action === 'manifest') value = manifest;
       else if (action === 'snapshot') value = snapshot(key);
+      else if (action === 'galaxy_atlas') value = atlasSelection(snapshot('galaxy_atlas'), key);
       else if (action === 'snapshots') {
         if (!Array.isArray(key) || key.some(item => typeof item !== 'string')) throw new Error('invalid_snapshot_keys');
         value = Object.fromEntries(key.map(item => [item, snapshot(item)]));
@@ -88,7 +103,7 @@ function drain() {
       else if (action === 'diagnostics') value = { ...stats, verification_policy: SOURCE_VERIFICATION_POLICY };
       else throw new Error('unknown_worker_action');
       stats.completed_transactions++;
-      parentPort.postMessage({ id, value, verification_ready: !verificationError });
+      parentPort.postMessage({ id, value, ...(fullValidation ? { verification_ready: !verificationError } : {}) });
     } catch (error) { failure = error.message; parentPort.postMessage({ id, error: error.message }); }
   }
 }

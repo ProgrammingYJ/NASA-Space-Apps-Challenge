@@ -1,0 +1,37 @@
+SXS:BBH:0305 archived numerical-relativity waveform (build-time extraction)
+
+Native input and catalogue metadata:
+Kidder, Larry; Pfeiffer, Harald; Scheel, Mark; Boyle, Michael; Hemberger, Dan;
+Lovelace, Geoffrey; Szilagyi, Bela. (2018). Binary black-hole simulation
+SXS:BBH:0305 (v1). Zenodo. https://doi.org/10.5281/zenodo.1215528
+License: Creative Commons Attribution 4.0 International (CC BY 4.0).
+https://creativecommons.org/licenses/by/4.0/
+The original record's JSON explicitly declares cc-by-4.0. This project preserves
+the original bytes and extracts the native Extrapolated_N2.dir/Y_l2_m2.dat
+three-column mode into JSON. It applies no decimation, phase rotation, time
+shift, amplitude normalization change, waveform fitting or physical rerun.
+
+Please cite the simulation publications named by the original metadata:
+SXSCatalog; Lovelace:2016uwp.
+Lovelace et al. (2016), Modeling the source of GW150914 with targeted
+numerical-relativity simulations, https://arxiv.org/abs/1607.05377
+Catalogue format: https://data.black-holes.org/waveforms/documentation.html
+
+This is one fixed archived simulation mode, not observed detector data, a
+live solution of Einstein's equations, or a full orientation-projected strain.
+Its fixed mass ratio and dimensionless spins cannot be changed by unit scaling.
+The newer compressed 2024 archive and its added-memory processing are not
+silently substituted for this adopted 2018 NRAR file.
+
+Unit conversion uses exact nominal GM_sun=1.3271244e20 m^3 s^-2 from IAU 2015
+Resolution B3, SI c=299792458 m/s, IAU au=149597870700 m and
+parsec=(648000/pi) au. These nominal conversion constants do not claim exact
+knowledge of the Sun's physical mass. No redshift or cosmological distance
+conversion is applied. The mode's absolute retarded time is not a UTC date.
+
+Optional build dependency: h5py 3.15.1 (BSD 3-clause), https://www.h5py.org/.
+Installed only in the Python build environment; the Node server needs JSON
+and source manifests, not h5py or Python. The exact tested wheel URL and SHA
+are recorded in data/reference/numerical-relativity/h5py-build-provenance.json.
+The package's own full h5py/HDF5/LZF licences are retained in the installed
+wheel. Do not include that native package in a Node server runtime bundle.

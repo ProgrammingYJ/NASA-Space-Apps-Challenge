@@ -99,12 +99,12 @@ test('a late external review cannot replace Milky Way planets and a failed revie
   } finally {release();}
 });
 
-test('the sky uses actual unique catalogue host directions and follows the camera without changing clickable objects',async({page})=>{
+test('the opt-in sky uses actual unique catalogue host directions and follows the camera without changing clickable objects',async({page})=>{
   const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));await page.goto('/');
   const index=await json<PlanetIndex>(page.request,'/api/v1/catalog/exoplanets');
   const hosts=new Set(index.objects.filter(row=>row.hostname.trim()&&typeof row.ra_deg==='number'&&typeof row.dec_deg==='number'&&Number.isFinite(row.ra_deg)&&Number.isFinite(row.dec_deg)&&row.ra_deg>=0&&row.ra_deg<360&&Math.abs(row.dec_deg)<=90).map(row=>row.hostname.trim()));
   expect(hosts.size).toBeGreaterThan(0);expect(hosts.size).toBeLessThanOrEqual(4862);
-  const scene=page.getByTestId('universe-scene');await expect(scene).toHaveAttribute('data-sky-star-count',String(hosts.size));await expect(scene).toHaveAttribute('data-sky-representation','catalog_host_directions');
+  const scene=page.getByTestId('universe-scene');await expect(scene).toHaveAttribute('data-sky-star-count','0');await page.getByTestId('settings-toggle').click();await page.getByTestId('catalog-star-toggle').check();await page.getByTestId('settings-toggle').click();await expect(scene).toHaveAttribute('data-sky-star-count',String(hosts.size));await expect(scene).toHaveAttribute('data-sky-representation','catalog_host_directions');
   await expect(scene).toHaveAttribute('data-sky-source-url',index.url);await expect(scene).toHaveAttribute('data-sky-source-sha256',index.raw_sha256);await expect(scene).toHaveAttribute('data-sky-frame-status','catalogue_ra_dec_frame_epoch_not_validated');
   await expect(page.getByTestId('catalog-sky-note')).toBeVisible();const caption=(await page.getByTestId('catalog-sky-note').boundingBox())!,timebar=(await page.getByTestId('unified-timeline').boundingBox())!;expect(caption.y+caption.height).toBeLessThanOrEqual(timebar.y);
   const before=(await scene.getAttribute('data-camera-position'))!;await page.getByTestId('universe-canvas').focus();await page.keyboard.down('KeyD');
@@ -117,7 +117,7 @@ test('the sky uses actual unique catalogue host directions and follows the camer
 
 test('unavailable catalogue data leave the sky empty rather than restoring generated background stars',async({page})=>{
   await page.route('**/api/v1/catalog/exoplanets',route=>route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({code:'source_unavailable',message_key:'source_unavailable',details:{},request_id:'qa-sky-source-failure'})}));
-  const response=page.waitForResponse(response=>response.url().endsWith('/api/v1/catalog/exoplanets')&&response.status()===503);await page.goto('/');await response;
+  const response=page.waitForResponse(response=>response.url().endsWith('/api/v1/catalog/exoplanets')&&response.status()===503);await page.goto('/');await page.getByTestId('settings-toggle').click();await page.getByTestId('catalog-star-toggle').check();await page.getByTestId('settings-toggle').click();await response;
   const scene=page.getByTestId('universe-scene');await expect(scene).toHaveAttribute('data-sky-star-count','0');await expect(scene).toHaveAttribute('data-sky-state','empty');await expect(scene).toHaveAttribute('data-sky-source-url','');
   await expect(scene).toHaveAttribute('data-sky-representation','catalog_host_directions');await noFictionalRuntime(page);
 });

@@ -16,7 +16,7 @@ test('one automatic calendar supports every 2026 date, zero and signed years whi
     const year=Number(/^(-?\d+)-/.exec(text)![1]);await expect.poll(async()=>new Date((await scene(page).getAttribute('data-model-epoch'))!).getUTCFullYear()).toBe(year);
     await expect(page.getByTestId('selected-object-name')).toHaveText(words('en').body_earth);
     await expect(scene(page)).toHaveAttribute('data-camera-mode','focused');for(const [i,value] of (await cameraOffset()).entries())expect(value).toBeCloseTo(offset[i],3);
-    if(expected==='simulation'){await expect(scene(page).locator('[data-testid^="object-label-"]')).toHaveCount(9);await expect(page.getByTestId('position-reference')).toContainText(words('en').simEmB);}
+    if(expected==='simulation'){await expect(scene(page).locator('[data-testid^="object-label-"]:not([data-position-kind="catalog_direction_distance_estimate"])')).toHaveCount(9);await expect(page.getByTestId('position-reference')).toContainText(words('en').simEmB);}
   }
   await date(page,'3000-01-02T00:00');await expect(page.getByTestId('unified-timeline').getByRole('alert')).toContainText(words('en').autoTimeInvalid);await expect(scene(page)).toHaveAttribute('data-model-epoch',/2026-11-16T00:00:00/);
   await date(page,'2026-02-29T00:00','blur');await expect(page.locator('#model-epoch')).toHaveAttribute('aria-invalid','true');await expect(scene(page)).toHaveAttribute('data-model-epoch',/2026-11-16T00:00:00/);

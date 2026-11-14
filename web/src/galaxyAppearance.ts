@@ -46,11 +46,20 @@ function glowMap():THREE.CanvasTexture {
   gradient.addColorStop(0,'rgba(255,255,255,1)');gradient.addColorStop(.12,'rgba(255,255,255,.74)');gradient.addColorStop(.36,'rgba(255,255,255,.3)');gradient.addColorStop(.7,'rgba(255,255,255,.045)');gradient.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=gradient;ctx.fillRect(0,0,128,128);return new THREE.CanvasTexture(canvas);
 }
 
+/** A thin 3D annulus in its parent's XY disk plane; no foreground screen overlay.
+ * Radii, thickness, grain and opacity remain qualitative display assumptions. */
+export function createEmbeddedGalaxyDust(objectId:string,innerRadius:number,outerRadius:number,halfThickness:number):THREE.Mesh {
+  const middle=(innerRadius+outerRadius)/2,width=(outerRadius-innerRadius)/2;
+  const geometry=new THREE.TorusGeometry(middle,width,16,192);geometry.scale(1,1,halfThickness/width);
+  const material=new THREE.ShaderMaterial({transparent:true,depthWrite:false,side:THREE.DoubleSide,uniforms:{innerRadius:{value:innerRadius},outerRadius:{value:outerRadius}},vertexShader:'varying vec3 dustPoint;void main(){dustPoint=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',fragmentShader:/* glsl */`varying vec3 dustPoint;uniform float innerRadius;uniform float outerRadius;void main(){float r=length(dustPoint.xy);float fade=smoothstep(innerRadius,innerRadius+.28,r)*(1.0-smoothstep(outerRadius-.48,outerRadius,r));float angle=atan(dustPoint.y,dustPoint.x);float grain=.88+.12*sin(angle*31.0+r*23.0)*sin(r*41.0);float lane=exp(-pow((r-mix(innerRadius,outerRadius,.72))/max(.08,(outerRadius-innerRadius)*.18),2.0));gl_FragColor=vec4(.035,.022,.016,fade*grain*lane*.42);}`});
+  const dust=new THREE.Mesh(geometry,material);dust.name=`embedded-dust-${objectId}`;dust.renderOrder=3;dust.userData.objectId=objectId;dust.userData.representation='qualitative_thin_annular_dust_volume';return dust;
+}
+
 export function createGalaxyAppearance(galaxy:GalaxyInput):THREE.Group {
   const profile=galaxyDisplayProfile(galaxy),group=new THREE.Group();group.name=`source-informed-${galaxy.object_id}`;group.userData.galaxyProfile=profile;
   const basis=galaxySourceBasis(galaxy.direction_icrs_deg.ra,galaxy.direction_icrs_deg.dec);if(basis)group.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(new THREE.Vector3().fromArray(basis.right),new THREE.Vector3().fromArray(basis.up),new THREE.Vector3().fromArray(basis.towardViewer)));
-  const projected=new THREE.Group();projected.rotation.z=(profile.positionAngleAssumed?0:profile.positionAngleDeg+90)*Math.PI/180;group.add(projected);
-  const disk=new THREE.Group();disk.rotation.x=profile.inclinationDeg*Math.PI/180;projected.add(disk);
+  const projected=new THREE.Group();projected.name='galaxy-projected-frame';projected.rotation.z=(profile.positionAngleAssumed?0:profile.positionAngleDeg+90)*Math.PI/180;group.add(projected);
+  const disk=new THREE.Group();disk.name='galaxy-stellar-disk';disk.rotation.x=profile.inclinationDeg*Math.PI/180;projected.add(disk);
   let seed=3721;for(const c of galaxy.object_id)seed=(seed*33+c.charCodeAt(0))>>>0;const random=seededRandom(seed),map=glowMap();
   const gaussian=()=>Math.sqrt(-2*Math.log(Math.max(1e-8,random())))*Math.cos(random()*2*Math.PI);
   const cloud=(parent:THREE.Group,positions:number[],colors:number[],size:number,opacity:number)=>{
@@ -65,10 +74,6 @@ export function createGalaxyAppearance(galaxy:GalaxyInput):THREE.Group {
     for(let i=0;i<count;i++){const r=Math.min(1,Math.abs(gaussian())*.38),u=random()*2-1,a=random()*Math.PI*2,q=Math.sqrt(1-u*u);positions.push(center[0]+r*q*Math.cos(a)*radii[0],center[1]+r*q*Math.sin(a)*radii[1],center[2]+r*u*radii[2]);const c=new THREE.Color().setHSL(.105,.2,.5+random()*.35);colors.push(c.r,c.g,c.b);}
     cloud(parent,positions,colors,.13,opacity);halo(parent,radii[0]*2.3,radii[1]*2.3,.65,'#e9c99e',center);
   };
-  const dustStripe=(parent:THREE.Group,angle:number,width:number,height:number)=>{
-    const material=new THREE.ShaderMaterial({transparent:true,depthWrite:false,side:THREE.DoubleSide,vertexShader:'varying vec2 coord;void main(){coord=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',fragmentShader:/* glsl */`varying vec2 coord;void main(){float x=coord.x*2.0-1.0;float y=abs(coord.y*2.0-1.0+.12*sin(x*15.0));float edge=(1.0-smoothstep(.5,1.0,y))*(1.0-smoothstep(.75,1.0,abs(x)));float ragged=.8+.2*sin(x*45.0)*sin(y*23.0);gl_FragColor=vec4(.035,.018,.012,edge*ragged*.96);}`});
-    const stripe=new THREE.Mesh(new THREE.PlaneGeometry(width,height),material);stripe.position.z=1.35;stripe.rotation.z=angle;stripe.renderOrder=3;stripe.userData.objectId=galaxy.object_id;parent.add(stripe);
-  };
   const diffuseDisk=(parent:THREE.Group,flocculent:boolean)=>{
     const material=new THREE.ShaderMaterial({transparent:true,depthWrite:false,side:THREE.DoubleSide,uniforms:{arms:{value:Math.max(1,profile.modeledArms)},patchy:{value:flocculent?1:0}},vertexShader:'varying vec2 coord;void main(){coord=uv*2.0-1.0;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',fragmentShader:/* glsl */`varying vec2 coord;uniform float arms;uniform float patchy;void main(){float r=length(coord);float a=atan(coord.y,coord.x);float spiral=pow(.5+.5*cos(a*arms-log(max(.055,r))*5.5),5.0);float noise=.5+.5*sin(coord.x*31.0+sin(coord.y*19.0))*sin(coord.y*29.0);float body=exp(-r*3.4)*(1.0-smoothstep(.8,1.0,r));float light=body*(.4+.75*mix(spiral,noise,patchy));vec3 color=mix(vec3(.95,.72,.43),vec3(.38,.58,.95),smoothstep(.08,.55,r));gl_FragColor=vec4(color,light*.75);}`});
     const plane=new THREE.Mesh(new THREE.PlaneGeometry(13,13),material);plane.userData.objectId=galaxy.object_id;parent.add(plane);
@@ -77,7 +82,7 @@ export function createGalaxyAppearance(galaxy:GalaxyInput):THREE.Group {
   const isIrregular=profile.asymmetric;
   if(isElliptical){
     ellipsoid(projected,[0,0,0],[6.1,5,3.4],6500,.22);
-    if(profile.renderer==='dust_lane_elliptical')dustStripe(projected,-.36,13,1.8);
+    if(profile.renderer==='dust_lane_elliptical'){const dustDisk=new THREE.Group();dustDisk.name='galaxy-embedded-dust-disk';dustDisk.rotation.set(73*Math.PI/180,0,-.36);dustDisk.add(createEmbeddedGalaxyDust(galaxy.object_id,.45,6.1,.38));projected.add(dustDisk);}
     if(profile.renderer==='elliptical_jet'){
       const knots:number[]=[],colors:number[]=[];for(let i=0;i<120;i++){const u=random(),r=(.02+.035*u)*gaussian();knots.push(.45+u*1.15,.1+u*.25+r,.5+r);colors.push(.35,.7,1);}
       cloud(projected,knots,colors,.12,.65);const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(.4,.1,.5),new THREE.Vector3(1.6,.35,.5)]),new THREE.LineBasicMaterial({color:'#85cfff',transparent:true,opacity:.25}));projected.add(line);
@@ -101,7 +106,7 @@ export function createGalaxyAppearance(galaxy:GalaxyInput):THREE.Group {
     if(profile.renderer==='inclined_spiral'){
       for(const r of [3.2,4.4]){const torus=new THREE.Mesh(new THREE.TorusGeometry(r,.045,8,160),new THREE.MeshBasicMaterial({color:'#1d1612',transparent:true,opacity:.32,depthWrite:false}));torus.position.z=.12;torus.renderOrder=2;disk.add(torus);}
     }
-    if(edgeOn)dustStripe(projected,0,13,.8);
+    if(edgeOn)disk.add(createEmbeddedGalaxyDust(galaxy.object_id,2.1,6.25,.085));
     if(profile.renderer==='interacting_pair'){
       ellipsoid(disk,[5.6,3.6,.5],[1.55,1.35,.8],1500,.5);
       const bridge:number[]=[],colors:number[]=[];for(let i=0;i<700;i++){const u=random();bridge.push(3+u*2.7,1.4+u*2.4+.55*Math.sin(u*Math.PI)+gaussian()*.12,.2+gaussian()*.08);colors.push(.7,.74,.9);}cloud(disk,bridge,colors,.12,.48);

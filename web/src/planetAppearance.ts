@@ -55,8 +55,32 @@ export interface AppearanceStatus {
   source:AppearanceSource|null;
   credit:string;
   limitations:string[];
+  display_texture_dimensions?:[number,number];
 }
 export interface ScaledBand {inner:number;outer:number;color:string;opacity:number;name:string}
+
+export const OVERVIEW_TEXTURE_SIZE=1024;
+export const DETAIL_TEXTURE_SIZE=4096;
+/** GPU display samples only; the immutable source image and its crop stay unchanged. */
+export function displayTextureDimensions(width:number,height:number,maxDimension:number):[number,number]{
+  if(![width,height,maxDimension].every(value=>Number.isFinite(value)&&value>0))throw new Error('invalid_display_texture_dimensions');
+  const ratio=Math.min(1,maxDimension/Math.max(width,height));
+  return [Math.max(1,Math.round(width*ratio)),Math.max(1,Math.round(height*ratio))];
+}
+/** Hysteresis prevents replacing a texture on every small camera movement. */
+export function detailedAppearanceForSize(diameterPixels:number,selected:boolean,wasDetailed:boolean):boolean{
+  return selected||Number.isFinite(diameterPixels)&&diameterPixels>=(wasDetailed?128:180);
+}
+
+type TextureRequest={run:()=>Promise<THREE.Texture>;resolve:(value:THREE.Texture)=>void;reject:(reason:unknown)=>void};
+const textureRequests:TextureRequest[]=[];
+let activeTextureRequests=0;
+function pumpTextureRequests(){
+  while(activeTextureRequests<2&&textureRequests.length){const request=textureRequests.shift()!;activeTextureRequests++;void request.run().then(request.resolve,request.reject).finally(()=>{activeTextureRequests--;pumpTextureRequests();});}
+}
+function loadPublishedTexture(url:string,priority:boolean,disposed:()=>boolean):Promise<THREE.Texture>{
+  return new Promise((resolve,reject)=>{const request={run:()=>disposed()?Promise.reject(new Error('appearance_disposed')):new THREE.TextureLoader().loadAsync(url),resolve,reject};if(priority)textureRequests.unshift(request);else textureRequests.push(request);pumpTextureRequests();});
+}
 
 export function subtractRingGaps(bands:RingBand[],gaps:RingBand[]):RingBand[]{
   let result=bands.map(band=>({...band}));
@@ -194,7 +218,7 @@ export interface BodyAppearance {
   dispose:()=>void;
 }
 
-export function createBodyAppearance(options:{objectId:string;displayRadius:number;physicalRadiusKm:number;fallbackColor:string;appearance?:AppearanceEntry;rings?:RingEntry;anisotropy?:number;onStatus?:(status:AppearanceStatus)=>void}):BodyAppearance{
+export function createBodyAppearance(options:{objectId:string;displayRadius:number;physicalRadiusKm:number;fallbackColor:string;appearance?:AppearanceEntry;rings?:RingEntry;anisotropy?:number;textureMaxDimension?:number;texturePriority?:boolean;onStatus?:(status:AppearanceStatus)=>void}):BodyAppearance{
   const {objectId,displayRadius,physicalRadiusKm,appearance,rings}=options;
   let mappingValid=true;try{textureWindow(appearance??{});}catch{mappingValid=false;}
   const bands=scaledRingBands(subtractRingGaps(rings?.bands_km??[],rings?.gaps_km??[]),physicalRadiusKm,displayRadius);
@@ -219,7 +243,7 @@ export function createBodyAppearance(options:{objectId:string;displayRadius:numb
   let disposed=false;let texture:THREE.Texture|null=null;
   const emit=()=>{options.onStatus?.({...status,limitations:[...status.limitations]});return status;};
   const ready=appearance?.texture_url&&mappingValid?(async()=>{
-    try{const url=new URL(appearance.texture_url!,window.location.href);if(url.origin!==window.location.origin||(!url.pathname.startsWith('/textures/')&&!url.pathname.startsWith('/api/v1/appearance/')))throw new Error('appearance_url_not_allowed');const loaded=await new THREE.TextureLoader().loadAsync(url.href);if(disposed){loaded.dispose();return status;}if(appearance.pixel_dimensions&&(loaded.image.width!==appearance.pixel_dimensions[0]||loaded.image.height!==appearance.pixel_dimensions[1])){loaded.dispose();throw new Error('texture_dimensions_mismatch');}texture=loaded;texture.colorSpace=THREE.SRGBColorSpace;texture.wrapS=THREE.RepeatWrapping;texture.wrapT=THREE.ClampToEdgeWrapping;texture.anisotropy=Math.max(1,Math.min(8,options.anisotropy??1));material.map=texture;material.color.set('#ffffff');material.needsUpdate=true;status.state='ready';return emit();}
+    try{const url=new URL(appearance.texture_url!,window.location.href);if(url.origin!==window.location.origin||(!url.pathname.startsWith('/textures/')&&!url.pathname.startsWith('/api/v1/appearance/')))throw new Error('appearance_url_not_allowed');const loaded=await loadPublishedTexture(url.href,Boolean(options.texturePriority),()=>disposed);if(disposed){loaded.dispose();return status;}if(appearance.pixel_dimensions&&(loaded.image.width!==appearance.pixel_dimensions[0]||loaded.image.height!==appearance.pixel_dimensions[1])){loaded.dispose();throw new Error('texture_dimensions_mismatch');}const dimensions=displayTextureDimensions(loaded.image.width,loaded.image.height,options.textureMaxDimension??DETAIL_TEXTURE_SIZE);if(dimensions[0]!==loaded.image.width||dimensions[1]!==loaded.image.height){const canvas=document.createElement('canvas');canvas.width=dimensions[0];canvas.height=dimensions[1];const context=canvas.getContext('2d');if(!context){loaded.dispose();throw new Error('display_texture_resampling_unavailable');}context.drawImage(loaded.image,0,0,...dimensions);loaded.dispose();texture=new THREE.CanvasTexture(canvas);status.limitations.push('source_map_resampled_for_display_only');}else texture=loaded;status.display_texture_dimensions=dimensions;texture.colorSpace=THREE.SRGBColorSpace;texture.wrapS=THREE.RepeatWrapping;texture.wrapT=THREE.ClampToEdgeWrapping;texture.anisotropy=Math.max(1,Math.min(8,options.anisotropy??1));material.map=texture;material.color.set('#ffffff');material.needsUpdate=true;status.state='ready';return emit();}
     catch{if(!disposed){status.state='failed';status.kind='illustration';status.source=null;status.credit='';surfaceData.procedural.value=['jupiter','saturn','uranus','neptune','venus'].includes(objectId)?1:0;status.limitations.push('texture_unavailable_using_unresolved_fallback');return emit();}return status;}
   })():Promise.resolve(emit());
   const surfaceWorld=new THREE.Quaternion(),ringWorld=new THREE.Quaternion();

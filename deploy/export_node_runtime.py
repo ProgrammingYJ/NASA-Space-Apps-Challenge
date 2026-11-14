@@ -99,7 +99,11 @@ def _sources(root: Path) -> list[dict]:
             for key, hash_key in path_keys.items():
                 path = value.get(key)
                 if isinstance(path, str) and path.startswith(("data/", "web/")):
-                    local_only = key == "upstream_original_local_only"
+                    local_only = key == "upstream_original_local_only" or (
+                        origin == "galaxy_atlas.json"
+                        and value.get("required_on_server") is False
+                        and path.startswith("data/reference/galaxy-atlas/upstream/")
+                    )
                     add(
                         path,
                         required and not local_only,
@@ -295,11 +299,19 @@ def export(root: Path) -> dict:
         "universe_catalog": "/api/v1/catalog/universe",
         "exoplanet_observations": "/api/v1/catalog/exoplanet-observations",
         "extragalactic_planets": "/api/v1/catalog/extragalactic-planets",
+        "comets": "/api/v1/catalog/comets",
+        "galaxy_atlas_markers": "/api/v1/catalog/galaxy-atlas/markers",
+        "numerical_relativity": "/api/v1/physics/numerical-relativity",
     }
     values = {}
     for key, path in fixed.items():
         values[key] = get(key, path)
         print("snapshot", key, flush=True)
+    from science.galaxy_atlas import export_galaxy_atlas
+
+    emit("snapshots/galaxy_atlas.json", export_galaxy_atlas(root))
+    snapshots["galaxy_atlas"] = "snapshots/galaxy_atlas.json"
+    routes["galaxy_atlas"] = {"method": "GET", "path": "/api/v1/catalog/galaxy-atlas", "query": {}}
     for parent in CATALOG_PARENTS:
         get("solar_parent_" + parent, fixed["solar_system"], parent_id=parent)
     universe = values["universe_catalog"]

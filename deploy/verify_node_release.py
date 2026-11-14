@@ -37,6 +37,7 @@ LOCAL_ONLY_GROUPS = {
     "planet-criteria",
     "mass-scenarios",
     "relativity",
+    "galaxy-atlas",
 }
 SHA256 = re.compile(r"[a-f0-9]{64}\Z")
 EXCLUDED_PARTS = {
@@ -546,6 +547,36 @@ def main(
             and runtime_response.get("snapshot_exported_utc") == runtime["exported_utc"],
             "Node_runtime_disclosure_mismatch",
         )
+        _, atlas = call(base, "/api/v1/catalog/galaxy-atlas?query=Messier%2031")
+        _, markers = call(base, "/api/v1/catalog/galaxy-atlas/markers")
+        _, nr = call(base, "/api/v1/physics/numerical-relativity")
+        _, comets = call(base, "/api/v1/catalog/comets")
+        require(
+            atlas.get("record_count") == 53162
+            and atlas.get("matched_count") == 1
+            and atlas["objects"][0]["existing_object_id"] == "galaxy-m31"
+            and markers.get("marker_count") == len(markers["columns"]["object_id"]) == 53162,
+            "extracted_GWGC_catalogue_mismatch",
+        )
+        require(
+            nr.get("algorithm_version") == "sxs-nrar-h22-native-replay-v1"
+            and len(nr["columns"]["time_over_m"]) == 13869
+            and nr.get("live_gr_solver") is False
+            and nr.get("observed_detector_data") is False,
+            "extracted_NR_native_replay_mismatch",
+        )
+        require(
+            comets.get("algorithm_version") == "historical-comets-v1"
+            and len(comets["objects"]) == 4
+            and sum(len(obj["knots"]) for obj in comets["objects"]) == 489,
+            "extracted_historical_comets_mismatch",
+        )
+        report["dev015_016_catalogue_checks"] = {
+            "GWGC_galaxies": 53162,
+            "NR_native_h22_samples": 13869,
+            "JPL_comets": 4,
+            "JPL_TDB_knots": 489,
+        }
         stage = "extracted_release_HTTP_smoke"
         with (
             (temporary / "smoke.stdout.json").open("wb") as stdout,

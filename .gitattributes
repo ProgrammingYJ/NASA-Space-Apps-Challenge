@@ -5,6 +5,9 @@
 *.tsx text eol=lf
 *.json text eol=lf
 /data/manifests/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/contracts/openapi.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/api/main.py -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/web/src/objectNames.ts -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /web/public/**/*.source.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 *.toml text eol=lf
 *.yml text eol=lf

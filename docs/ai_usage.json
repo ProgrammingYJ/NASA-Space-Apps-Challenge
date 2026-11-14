@@ -42,7 +42,9 @@
     "DEV-008",
     "DEV-009",
     "DEV-010",
-    "DEV-011"
+    "DEV-011",
+    "DEV-015",
+    "DEV-016"
   ],
   "assistance": [
     "repository_configuration",
@@ -1692,5 +1694,23 @@
       "Windows actual Node process/thread restart verified; Linux container/public deployment/native-language or teammate study not performed."
     ],
     "post_verification_document_outside_immutable_archive": true
+  },
+  "dev015_016": {
+    "release": "0.11.0",
+    "work": [
+      "sourced overview texture loading and visibility",
+      "catalogue discovery and past-date galaxy references",
+      "historical JPL comet windows",
+      "independent Newton/CN/Yee/Euler experiments and state restoration",
+      "GWGC catalogue conversion and bounded GPU layer",
+      "archived SXS native h22 extraction/replay and nominal unit scaling",
+      "source verification and fresh evidence restoration performance",
+      "automated scientific/browser/release QA and docs"
+    ],
+    "generative_image_or_audio_used": false,
+    "observation_originals_modified": false,
+    "live_full_GR_or_all_physics_claimed": false,
+    "human_native_language_review": false,
+    "final_verification": "2026-11-15 00:05:23 KST 동결 검증: 107 JSON/76348584B, source1885개·필수1586개/623292613B·선택299개. manifest480792B/SHA`aa8895a820e4356747570c381d8af1c317f90e60e7598abda89e54916c01b204`. 실제 FITS4비교의 기존 result ID/내용SHA를 보존했다. Python전체 608 passed, 1 warning in 106.21s (0:01:46); Vitest154PASS·strictTS·Ruff전체 PASS, Node전체22PASS. Production ZVxA7rKp Chrome42PASS/417.029초(새 PDE/NR·Atlas·기존관측/복원), 이후 T=-3 렌즈형 경계1곳 교정의 최종 CumtP9k6 빌드 Atlas Chrome3PASS/34.552초를 구분한다. 로컬기기/자동검사이며 사람·원어민·Linux/공개호스팅 검증으로 확대하지 않는다."
   }
 }

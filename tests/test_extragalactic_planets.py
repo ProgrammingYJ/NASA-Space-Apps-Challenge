@@ -38,6 +38,31 @@ def test_review_is_not_promoted_to_confirmed_objects_or_counted_as_a_census():
     assert result["catalog_audit"]["rows"] == 6470
     assert result["catalog_audit"]["candidate_alias_matches"] == []
     assert result["coverage"] == "adopted_literature_cases_not_complete_census"
+    assert result["confirmation_scope"] == "adopted_collection_only_not_a_global_census"
+    assert len(result["sources"]) == 11
+    assert result["status_context_source"] == result["sources"]["m51-chandra"]
+    assert "status-context-2026" not in result["sources"]
+
+
+def test_excluded_lamost_context_is_audit_only_and_not_a_runtime_input(inputs):
+    root, manifest = inputs
+    excluded = manifest["excluded_source_audit"][0]
+    assert excluded["source_id"] == "status-context-2026"
+    assert excluded["status"] == "excluded_not_used"
+    assert excluded["runtime_dependency"] is False
+    assert "LAMOST" in excluded["reason"]
+    assert not (
+        root / "data/reference/extragalactic-planets/facts/status-context-2026.json"
+    ).exists()
+    assert get_extragalactic_planets(root)["confirmed_objects"] == []
+
+
+def test_global_confirmation_claim_cannot_replace_the_adopted_collection_scope(inputs):
+    root, manifest = inputs
+    manifest["confirmation_scope"] = "no_confirmed_planets_in_the_universe"
+    rewrite(root, manifest)
+    with pytest.raises(ValueError, match="extragalactic_confirmation_scope_changed"):
+        get_extragalactic_planets(root)
 
 
 def test_conditional_lens_mass_is_not_turned_into_a_measured_planet_or_orbital_period():

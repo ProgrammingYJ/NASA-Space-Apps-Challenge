@@ -1,0 +1,45 @@
+import {useEffect,useState} from 'react';
+import {request} from './api';
+import {galaxyAtlasCopy} from './galaxyAtlasCopy';
+import {GALAXY_MARKER_COLOURS,type GalaxyAtlasPage,type GalaxyAtlasRow,type GalaxyMarkerClass} from './galaxyAtlasMath';
+import styles from './GalaxyAtlasExplorer.module.css';
+
+export interface GalaxyAtlasExplorerProps {
+  visible:boolean;locale:string;onClose:()=>void;onSelect:(row:GalaxyAtlasRow)=>void;
+  selectedObjectId?:string|null;layerEnabled?:boolean;onToggleLayer?:(enabled:boolean)=>void;
+  markerState?:'idle'|'loading'|'ready'|'failed';renderedCount?:number;markerInvalidCount?:number;onRetryMarkers?:()=>void;
+}
+export default function GalaxyAtlasExplorer({visible,locale,onClose,onSelect,selectedObjectId,layerEnabled=true,onToggleLayer,markerState='idle',renderedCount,markerInvalidCount=0,onRetryMarkers}:GalaxyAtlasExplorerProps){
+  const copy=galaxyAtlasCopy(locale),[draft,setDraft]=useState(''),[query,setQuery]=useState(''),[cursor,setCursor]=useState<string|null>(null),[history,setHistory]=useState<(string|null)[]>([]),[page,setPage]=useState<GalaxyAtlasPage|null>(null),[picked,setPicked]=useState<GalaxyAtlasRow|null>(null),[loading,setLoading]=useState(false),[failed,setFailed]=useState(false),[attempt,setAttempt]=useState(0),[compact,setCompact]=useState(false);
+  useEffect(()=>{const timer=setTimeout(()=>{setQuery(draft.trim());setCursor(null);setHistory([]);},300);return()=>clearTimeout(timer);},[draft]);
+  useEffect(()=>{if(!visible)return;const controller=new AbortController();setLoading(true);setFailed(false);const params=new URLSearchParams({limit:'40'});if(query)params.set('query',query);if(cursor)params.set('cursor',cursor);void request<GalaxyAtlasPage>('/catalog/galaxy-atlas?'+params.toString(),{signal:controller.signal}).then(value=>{if(controller.signal.aborted)return;setPage(value);setLoading(false);}).catch(()=>{if(controller.signal.aborted)return;setFailed(true);setLoading(false);});return()=>controller.abort();},[visible,query,cursor,attempt]);
+  useEffect(()=>{if(!visible||!selectedObjectId||selectedObjectId===picked?.object_id)return;const found=page?.objects.find(row=>row.object_id===selectedObjectId);if(found){setPicked(found);return;}const controller=new AbortController();void request<GalaxyAtlasRow>('/catalog/galaxy-atlas/'+encodeURIComponent(selectedObjectId),{signal:controller.signal}).then(value=>{if(!controller.signal.aborted)setPicked(value);}).catch(()=>{});return()=>controller.abort();},[visible,selectedObjectId,page,picked?.object_id]);
+  useEffect(()=>{if(visible&&picked&&window.matchMedia('(max-width:760px)').matches)setCompact(true);},[visible,picked?.object_id]);
+  const number=(value:number)=>value.toLocaleString(locale,{maximumSignificantDigits:6});
+  function choose(row:GalaxyAtlasRow){setPicked(row);onSelect(row);}
+  if(!visible)return null;
+  const activeId=selectedObjectId===undefined?picked?.object_id:selectedObjectId;
+  const selected=activeId&&picked?.object_id===activeId?picked:null;
+  return <>
+    <aside className={`${styles.panel} ${compact?styles.compact:''}`} data-testid="galaxy-atlas-explorer" data-compact={String(compact)} data-record-count={page?.record_count??0} data-spatial-count={page?.spatial_count??0} onKeyDown={event=>{if(event.key==='Escape')onClose();}}>
+      <header className={styles.head}><div className={styles.heading}><h1>{copy.title}</h1><button data-testid="galaxy-atlas-fold" onClick={()=>setCompact(value=>!value)} aria-label={compact?copy.expand:copy.collapse} aria-expanded={!compact}>{compact?'+':'−'}</button><button data-testid="galaxy-atlas-close" onClick={onClose} aria-label={copy.close}>×</button></div><p className={styles.note}>{copy.intro}</p><p className={styles.note}>{copy.compressionNote}</p>
+        {page&&<div className={styles.stats}><span>{copy.total}<strong>{number(page.record_count)}</strong></span><span>{copy.spatial}<strong>{number(page.spatial_count)}</strong></span>{page.direction_only_count>0&&<span>{copy.unknownDistance}<strong>{number(page.direction_only_count)}</strong></span>}</div>}
+        <label className={styles.search}>{copy.search}<input data-testid="galaxy-atlas-search" type="search" maxLength={150} value={draft} placeholder={copy.searchHint} onChange={event=>{setDraft(event.target.value);setCompact(false);}}/></label>
+        <label className={styles.toggle}><input type="checkbox" data-testid="galaxy-atlas-layer-toggle" checked={layerEnabled} onChange={event=>onToggleLayer?.(event.target.checked)}/>{copy.drawLayer}</label>
+        {markerState==='loading'&&<p className={styles.status} role="status">{copy.loadingMarkers}</p>}{markerState==='failed'&&<p className={styles.status} role="alert">{copy.markerError} {onRetryMarkers&&<button onClick={onRetryMarkers}>{copy.retry}</button>}</p>}{markerState==='ready'&&renderedCount!==undefined&&<p className={styles.note}>{copy.rendered}: {number(renderedCount)}</p>}
+      </header>
+      <div className={styles.body}>
+        {loading&&<p role="status" className={styles.status}>{page?copy.prior:copy.loading}</p>}{failed&&<p role="alert" className={styles.status}>{copy.error} <button onClick={()=>setAttempt(value=>value+1)}>{copy.retry}</button></p>}
+        {page&&<><div role="listbox" className={styles.rows} aria-label={copy.choose}>{page.objects.map(row=><button key={row.object_id} role="option" data-testid={'galaxy-atlas-row-'+row.object_id} aria-selected={activeId===row.object_id} onClick={()=>choose(row)}><strong>{row.name}</strong><small>{row.pgc_string?'PGC '+row.pgc_string:row.object_id} · {row.distance_mpc===null?copy.unknownDistance:number(row.distance_mpc)+' Mpc'}</small></button>)}</div>{!loading&&page.objects.length===0&&<p className={styles.status}>{copy.empty}</p>}<div className={styles.pages}><button disabled={!history.length||loading} onClick={()=>{setCursor(history.at(-1)??null);setHistory(value=>value.slice(0,-1));}}>{copy.previous}</button><span>{copy.page} {history.length+1}</span><button disabled={!page.next_cursor||loading} onClick={()=>{setHistory(value=>[...value,cursor]);setCursor(page.next_cursor);}}>{copy.next}</button></div><p className={styles.note}>{copy.results}: {page.objects.length}{page.matched_count!==undefined?' / '+number(page.matched_count):''}</p></>}
+        <details className={styles.quality}><summary>{copy.quality}</summary><p>{copy.markerNote}</p><p>{copy.coverageNote}</p><p>{copy.coordinateNote}</p><p>{copy.unknownNote}</p>{markerInvalidCount>0&&<p role="alert">{copy.invalid} ({number(markerInvalidCount)})</p>}
+          <p>{copy.colourLegend}</p><div className={styles.legend}>{(Object.keys(GALAXY_MARKER_COLOURS) as GalaxyMarkerClass[]).map(kind=><span key={kind}><i style={{background:`rgb(${GALAXY_MARKER_COLOURS[kind].map(value=>Math.round(value*255)).join(',')})`}}/>{copy[kind]}</span>)}</div>
+          {page&&<><p>{page.coordinate_reference}</p><p>{copy.distance}: {page.coverage.actual_distance_range_mpc.map(number).join(' – ')} Mpc</p><p>{copy.unknown}: {number(page.coverage.missing_morphology_records)}</p><a href={page.source.url} target="_blank" rel="noreferrer">{page.source.label} ↗</a><p>{page.source_manifest_sha256}</p>{page.paper?.count_note&&<p lang="en">{page.paper.count_note}</p>}{page.limitations.map(note=><p key={note} lang="en">{note}</p>)}</>}
+        </details>
+      </div>
+    </aside>
+    {selected&&<aside className={styles.detail} data-testid="galaxy-atlas-detail" data-object-id={selected.object_id}><small>{copy.selected}</small><h2>{selected.name}</h2>{selected.existing_object_id&&<p className={styles.badge}>{copy.landmark}</p>}<button data-testid="galaxy-atlas-focus" onClick={()=>onSelect(selected)}>{copy.go}</button><dl>
+      <div><dt>PGC</dt><dd>{selected.pgc_string??selected.object_id}</dd></div><div><dt>{copy.position}</dt><dd>RA {number(selected.ra_deg)}° · Dec {number(selected.dec_deg)}°</dd></div><div><dt>{copy.distance}</dt><dd>{selected.distance_mpc===null?copy.unavailable:number(selected.distance_mpc)+' Mpc'}</dd></div><div><dt>{copy.distanceError}</dt><dd>{selected.distance_error_mpc==null?copy.unavailable:'± '+number(selected.distance_error_mpc)+' Mpc'}</dd></div><div><dt>{copy.morphology}</dt><dd>{selected.morphology_code==null?copy.unavailable:String(selected.morphology_code)}</dd></div><div><dt>{copy.angularSize}</dt><dd>{selected.major_arcmin==null||selected.minor_arcmin==null?copy.unavailable:number(selected.major_arcmin)+'′ × '+number(selected.minor_arcmin)+'′'}</dd></div><div><dt>{copy.positionAngle}</dt><dd>{selected.position_angle_deg==null?copy.unavailable:number(selected.position_angle_deg)+'°'}</dd></div>
+      {selected.aliases?.length?<div><dt>{copy.aliases}</dt><dd>{selected.aliases.join(' · ')}</dd></div>:null}
+    </dl><p className={styles.note}>{copy.markerNote}</p><p className={styles.note}>{copy.coordinateNote}</p>{selected.distance_mpc===null&&<p className={styles.note}>{copy.unknownNote}</p>}{page&&<a href={page.paper?.url??page.source.url} target="_blank" rel="noreferrer">{copy.openSource} ↗</a>}</aside>}
+  </>;
+}
