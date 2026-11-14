@@ -1,0 +1,976 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "jpl-horizons-solar-system-20261113-16",
+  "created_utc": "2026-11-14T02:08:25.009554+00:00",
+  "coordinate_frame": "Ecliptic of J2000.0",
+  "center": {
+    "horizons_id": "10",
+    "name": "Sun",
+    "site": "BODY CENTER",
+    "command": "500@10"
+  },
+  "time_scale": "UTC",
+  "horizons_time_type": "UT (UTC after 1962)",
+  "vector_corrections": "NONE (geometric)",
+  "position_unit": "au",
+  "velocity_unit": "au/day",
+  "sample_epochs_utc": [
+    "2026-11-13T00:00:00Z",
+    "2026-11-14T00:00:00Z",
+    "2026-11-15T00:00:00Z",
+    "2026-11-16T00:00:00Z"
+  ],
+  "default_epoch_utc": "2026-11-14T00:00:00Z",
+  "interpolation": "none; exact queried samples only",
+  "physical_parameters_source": {
+    "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+    "retrieved_utc": "2026-11-14T02:08:20.356887+00:00",
+    "response_sha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+    "response_bytes": 58244,
+    "raw_response_html": "<!DOCTYPE html>\n\n<html class=\"no-js\" lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n  <link rel=\"icon\" href=\"data:;base64,iVBORw0KGgo=\" /><!-- prevent favicon.ico noise -->\n  <link rel=\"stylesheet\" href=\"/css/font-awesome.min.css\" />\n  <!--<link rel=\"stylesheet\" href=\"/css/dataTables.fontAwesome.css\" />-->\n  <link rel=\"stylesheet\" href=\"/css/dataTables.bootstrap.min.css\" />\n  <link rel=\"stylesheet\" href=\"/css/responsive.bootstrap.min.css\" />\n\n\n  <link rel=\"stylesheet\" href=\"/css/styles.css\" />\n  <title>Planetary Physical Parameters</title>\n</head>\n\n  <body>\n<a class=\"sr-only sr-only-focusable\" href=\"#main_content\">Skip Navigation</a>\n\n\n\n\n<div id=\"banner\" class=\"top-banner\">\n  <img class=\"img-responsive banner\" src=\"/images/ssd_banner.png\" alt=\"banner\" />\n  <img class=\"img-responsive banner-small\" src=\"/images/ssd_banner_small.png\" alt=\"banner\" />\n  <img src=\"/images/logo_nasa_trio.png\" alt=\"Trio-Logo\" class=\"overlay-trilogo\" />\n  <a id=\"link_nasa\" class=\"hide-ext-link\" href=\"https://www.nasa.gov/\" title=\"NASA\"\n    ><span class=\"sr-only\">NASA</span></a>\n  <a id=\"link_jpl\" class=\"hide-ext-link\" href=\"https://www.jpl.nasa.gov/\" title=\"JPL\"\n    ><span class=\"sr-only\">JPL</span></a>\n  <a id=\"link_caltech\" class=\"hide-ext-link\" href=\"https://www.caltech.edu/\" title=\"Caltech\"\n    ><span class=\"sr-only\">Caltech</span></a>\n  <img src=\"/images/ssd_title_overlay.png\" alt=\"SSD Solar System Dynamics\" class=\"overlay-ssd-title\" />\n</div>\n\n<!-- Beginning of navigation bar -->\n\n\n<div id=\"topnav\">\n\n<nav class=\"navbar navbar-default navbar-inverse\">\n  <div class=\"container-fluid\">\n\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"/\">\n        <span class=\"home-menu\">Home</span>\n        \n        <img class=\"home-menu-mobile\" src=\"/images/ssd_title_overlay.png\" alt=\"SSD Solar System Dynamics Home\" />\n      </a>\n    </div>\n\n    <div id=\"navbar\" class=\"navbar-collapse collapse\">\n      <ul class=\"nav navbar-nav navbar-right\">\n      \n      <!--DEBUG: join=About<br/>  rec=About-->\n        \n        <li class=\"dropdown\">\n        <a href=\"#\" class=\"dropdown-toggle\"\n          data-toggle=\"dropdown\">About<br/>&nbsp;<span class=\"caret\"></span></a>\n          \n          <ul class=\"dropdown-menu dropdown-menu-left\">\n          \n          \n            \n            <li><a href=\"/about/\" class=\"\">What does SSD do?</a></li>\n            \n          \n            \n            <li><a href=\"/faq.html\" class=\"\">FAQ</a></li>\n            \n          \n            \n            <li><a href=\"/sitemap.html\" class=\"\">Sitemap</a></li>\n            \n          \n            \n            <li><a href=\"/contact/\" class=\"\">Contact Us</a></li>\n            \n          \n          </ul>\n        </li>\n        \n      \n      <!--DEBUG: join=Orbits &amp;<br/>Ephemerides  rec=Orbits &amp;Ephemerides-->\n        \n        <li class=\"dropdown\">\n        <a href=\"#\" class=\"dropdown-toggle\"\n          data-toggle=\"dropdown\">Orbits &amp;<br/>Ephemerides&nbsp;<span class=\"caret\"></span></a>\n          \n          <ul class=\"dropdown-menu dropdown-menu-left\">\n          \n          \n            \n            <li><a href=\"/orbits.html\" class=\"landing-page-item\">Introduction</a></li>\n            \n          \n            \n          \n            \n            <li><a href=\"/horizons/\" class=\"\">Horizons System</a></li>\n            \n          \n            \n            <li><a href=\"/planets/orbits.html\" class=\"\">Planets</a></li>\n            \n          \n            \n            <li><a href=\"/sats/orbits.html\" class=\"\">Planetary Satellites</a></li>\n            \n          \n            \n            <li><a href=\"/sb/orbits.html\" class=\"\">Small Bodies</a></li>\n            \n          \n            \n            <li><a href=\"/tools/orbit_viewer.html\" class=\"\">Orbit Viewer</a></li>\n            \n          \n            \n            <li><a href=\"/ephem.html\" class=\"\">Download Ephemerides</a></li>\n            \n          \n          </ul>\n        </li>\n        \n      \n      <!--DEBUG: join=Planets<br/>  rec=Planets-->\n        \n        <li class=\"dropdown\">\n        <a href=\"#\" class=\"dropdown-toggle\"\n          data-toggle=\"dropdown\">Planets<br/>&nbsp;<span class=\"caret\"></span></a>\n          \n          <ul class=\"dropdown-menu dropdown-menu-left\">\n          \n          \n            \n            <li><a href=\"/planets/\" class=\"landing-page-item\">Introduction</a></li>\n            \n          \n            \n            <li><a href=\"/planets/orbits.html\" class=\"\">Orbits &amp; Ephemerides</a></li>\n            \n          \n            \n            <li><a href=\"/planets/phys_par.html\" class=\"\">Physical Parameters</a></li>\n            \n          \n            \n            <li><a href=\"/tools/gravity.html\" class=\"\">Gravity Fields</a></li>\n            \n          \n            \n            <li><a href=\"/planets/obs_data.html\" class=\"\">Observational Data</a></li>\n            \n          \n            \n            <li><a href=\"/planets/discovery.html\" class=\"\">Discovery Circumstances</a></li>\n            \n          \n            \n          \n            \n          \n            \n          \n          </ul>\n        </li>\n        \n      \n      <!--DEBUG: join=Planetary<br/>Satellites  rec=PlanetarySatellites-->\n        \n        <li class=\"dropdown\">\n        <a href=\"#\" class=\"dropdown-toggle\"\n          data-toggle=\"dropdown\">Planetary<br/>Satellites&nbsp;<span class=\"caret\"></span></a>\n          \n          <ul class=\"dropdown-menu dropdown-menu-left\">\n          \n          \n            \n            <li><a href=\"/sats/\" class=\"landing-page-item\">Introduction</a></li>\n            \n          \n            \n            <li><a href=\"/sats/orbits.html\" class=\"\">Orbits &amp; Ephemerides</a></li>\n            \n          \n            \n          \n            \n            <li><a href=\"/sats/phys_par/\" class=\"\">Physical Parameters</a></li>\n            \n          \n            \n            <li><a href=\"/sats/obs_data.html\" class=\"\">Observational Data</a></li>\n            \n          \n            \n            <li><a href=\"/sats/discovery.html\" class=\"\">Discovery Circumstances</a></li>\n            \n          \n          </ul>\n        </li>\n        \n      \n      <!--DEBUG: join=Small Bodies<br/>  rec=Small Bodies-->\n        \n        <li class=\"dropdown\">\n        <a href=\"#\" class=\"dropdown-toggle\"\n          data-toggle=\"dropdown\">Small Bodies<br/>&nbsp;<span class=\"caret\"></span></a>\n          \n          <ul class=\"dropdown-menu dropdown-menu-left\">\n          \n          \n            \n            <li><a href=\"/sb/\" class=\"landing-page-item\">Introduction</a></li>\n            \n          \n            \n            <li><a href=\"/sb/orbits.html\" class=\"\">Orbits &amp; Ephemerides</a></li>\n            \n          \n            \n          \n            \n            <li><a href=\"/tools/sbdb_lookup.html\" class=\"\">Database Lookup</a></li>\n            \n          \n            \n            <li><a href=\"/tools/sbdb_query.html\" class=\"\">Database Query</a></li>\n            \n          \n            \n            <li><a href=\"/tools/mdesign.html\" class=\"\">Mission Design</a></li>\n            \n          \n            \n            <li><a href=\"/tools/sb_ident.html\" class=\"\">Identification</a></li>\n            \n          \n            \n            <li><a href=\"/tools/sbwobs.html\" class=\"\">What&apos;s Observable?</a></li>\n            \n          \n            \n            <li><a href=\"/sb/meteor_streams.html\" class=\"\">Meteor Streams</a></li>\n            \n          \n            \n            <li><a href=\"/sb/targets.html\" class=\"\">Mission Targets</a></li>\n            \n          \n            \n            <li><a href=\"/sb/sats.html\" class=\"\">Satellites</a></li>\n            \n          \n            \n            <li><a href=\"/sb/radar.html\" class=\"\">Radar Astrometry</a></li>\n            \n          \n            \n            <li><a href=\"/diagrams/\" class=\"\">Diagrams and Charts</a></li>\n            \n          \n            \n            <li><a href=\"/tools/gravity.html\" class=\"\">Gravity Fields</a></li>\n            \n          \n            \n            <li><a href=\"/sb/great_comets.html\" class=\"\">Great Comets</a></li>\n            \n          \n            \n            <li><a href=\"/sb/neos.html\" class=\"\">Near-Earth Objects</a></li>\n            \n          \n            \n          \n            \n          \n          </ul>\n        </li>\n        \n      \n      <!--DEBUG: join=Tools<br/>  rec=Tools-->\n        \n        <li class=\"dropdown\">\n        <a href=\"#\" class=\"dropdown-toggle\"\n          data-toggle=\"dropdown\">Tools<br/>&nbsp;<span class=\"caret\"></span></a>\n          \n          <ul class=\"dropdown-menu\">\n          \n          \n            \n            <li><a href=\"/tools/\" class=\"landing-page-item\">Description of Tools</a></li>\n            \n          \n            \n            <li><a href=\"/horizons/\" class=\"\">Horizons System</a></li>\n            \n          \n            \n            <li><a href=\"/ephem.html\" class=\"\">Download Ephemerides</a></li>\n            \n          \n            \n            <li><a href=\"/tools/sbdb_lookup.html\" class=\"\">Small-Body Database Lookup</a></li>\n            \n          \n            \n            <li><a href=\"/tools/sbdb_query.html\" class=\"\">Small-Body Database Query</a></li>\n            \n          \n            \n            <li><a href=\"/tools/mdesign.html\" class=\"\">Small-Body Mission Design</a></li>\n            \n          \n            \n            <li><a href=\"/tools/sb_ident.html\" class=\"\">Small-Body Identification</a></li>\n            \n          \n            \n            <li><a href=\"/tools/sbwobs.html\" class=\"\">Small-Body Observability</a></li>\n            \n          \n            \n            <li><a href=\"/tools/orbit_viewer.html\" class=\"\">Orbit Viewer</a></li>\n            \n          \n            \n            <li><a href=\"/tools/gravity.html\" class=\"\">Gravity Field Visualization</a></li>\n            \n          \n            \n            <li><a href=\"/tools/jdc/\" class=\"\">JD Date/Time Converter</a></li>\n            \n          \n            \n            <li><a href=\"/api.html\" class=\"\">APIs</a></li>\n            \n          \n          </ul>\n        </li>\n        \n      \n      <!--DEBUG: join=Extras<br/>  rec=Extras-->\n        \n        <li class=\"dropdown\">\n        <a href=\"#\" class=\"dropdown-toggle\"\n          data-toggle=\"dropdown\">Extras<br/>&nbsp;<span class=\"caret\"></span></a>\n          \n          <ul class=\"dropdown-menu\">\n          \n          \n            \n            <li><a href=\"/extras.html\" class=\"landing-page-item\">Description of Extras</a></li>\n            \n          \n            \n            <li><a href=\"/astro_par.html\" class=\"\">Astrodynamic Parameters</a></li>\n            \n          \n            \n            <li><a href=\"/diagrams/\" class=\"\">Diagrams and Charts</a></li>\n            \n          \n            \n            <li><a href=\"/obs_data.html\" class=\"\">Observational Data</a></li>\n            \n          \n            \n            <li><a href=\"/tools/periodic_orbits.html\" class=\"\">Three-Body Periodic Orbits</a></li>\n            \n          \n            \n            <li><a href=\"/tools/orbit_diagram.html\" class=\"\">Custom Orbit Visualization</a></li>\n            \n          \n            \n            <li><a href=\"/api.html\" class=\"\">APIs</a></li>\n            \n          \n            \n            <li><a href=\"/doc/\" class=\"\">Technical Documents</a></li>\n            \n          \n            \n            <li><a href=\"/discovery.html\" class=\"\">Discovery Circumstances</a></li>\n            \n          \n            \n            <li><a href=\"/announcements/\" class=\"\">Announcements</a></li>\n            \n          \n            \n            <li><a href=\"/email_list.html\" class=\"\">Email Lists</a></li>\n            \n          \n            \n            <li><a href=\"/glossary/\" class=\"\">Glossary</a></li>\n            \n          \n            \n            <li><a href=\"/links.html\" class=\"\">Related Sites</a></li>\n            \n          \n            \n            <li><a href=\"/faq.html\" class=\"\">FAQ</a></li>\n            \n          \n            \n            <li><a href=\"/sitemap.html\" class=\"\">Sitemap</a></li>\n            \n          \n            \n            <li><a href=\"/contact/\" class=\"\">Contact Us</a></li>\n            \n          \n          </ul>\n        </li>\n        \n      \n      </ul>\n    </div>\n\n  </div>\n\n</nav>\n<!-- End of navigation bar -->\n\n<!-- Breadcrumbs -->\n\n<ol id=\"breadcrumb\" class=\"breadcrumb\">\n  <li><a href=\"/\">Home</a></li>\n  \n  <li><a href=\"/planets/\">Planets</a></li>\n  \n  \n  <li class=\"active\">Planetary Physical Parameters</li>\n  \n</ol>\n\n<!-- End of Breadcrumbs -->\n\n\n\n\n<div class=\"fixed-content-margin\"></div>\n\n</div>\n\n\n<!-- page content: begin -->\n<div id=\"main_content\" tabindex=\"-1\" class=\"container-fluid hide-tabindex\"> <!-- begin main container -->\n\n  <!-- check for JavaScript -->\n  <noscript>\n    <div class=\"alert alert-danger\">\n<h4>Please enable JavaScript for this website.</h4>\n\n<p>\nThis website makes extensive use of JavaScript.\nThe top menus will not function without it\nand most tools will also not work.\n</p>\n\n<p>\nIf you do not know how to enable JavaScript in your web browser,\nyou should be able find instructions by searching the web for\n\"enable javascript in my browser\" (or similar).\n</p>\n\n    </div>\n  </noscript>\n\n  \n\n<h1 class=\"no-top-margin\">Planetary Physical Parameters</h1>\n\n\n\n\n\n<p>The following tables contain selected physical characteristics of the planets\nand dwarf planets, respectively.\nTable <a href=\"#legend\">column headings</a> are described below.</p>\n\n\n\n<table class=\"planet-phys-par\">\n  <thead>\n    <tr>\n      <th>&nbsp;<br>Planet</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Equatorial<br>Radius</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Mean<br>Radius</th>\n\n  \n      <th class=\"text-nowrap text-center\" >&nbsp;<br>Mass</th>\n\n  \n  \n      <th class=\"text-nowrap text-center\" >Bulk<br>Density</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Sidereal<br>Rotation Period</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Sidereal<br>Orbital Period</th>\n\n  \n      <th class=\"text-nowrap text-center\" >&nbsp;<br>V(1,0)</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Geometric<br>Albedo</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Equatorial<br>Gravity</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Escape<br>Velocity</th>\n\n    </tr>\n    <tr>\n      <td>&nbsp;</td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (km)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (km)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (&times;10<sup>24</sup> kg)\n      </td>\n\n  \n  \n      <td class=\"text-nowrap text-center\" >\n        (g cm<sup>-3</sup>)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (d)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (y)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (mag)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        &nbsp;\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (m s<sup>-2</sup>)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (km s<sup>-1</sup>)\n      </td>\n\n    </tr>\n  </thead>\n  <tbody>\n\n    <tr>\n      <td><b>Mercury</b></td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        2440.53\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;0.04\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        2439.4\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;0.1\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.330103\n        \n        [<a href=\"#refs\">F</a>]\n        \n        <br>\n        \n        &plusmn;0.000021\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        5.4289\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &plusmn;0.0007\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        58.6462\n        \n        [<a href=\"#refs\">C</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.2408467\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -0.60\n        \n        [<a href=\"#refs\">E</a>]\n        \n        <br>\n        \n        &plusmn;0.10\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.106\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        3.70\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        4.25\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    </tr>\n\n    <tr>\n      <td><b>Venus</b></td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        6051.8\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;1.0\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        6051.8\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;1.0\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        4.86731\n        \n        [<a href=\"#refs\">G</a>]\n        \n        <br>\n        \n        &plusmn;0.00023\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        5.243\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &plusmn;0.003\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -243.018\n        \n        [<a href=\"#refs\">C</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.61519726\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -4.47\n        \n        [<a href=\"#refs\">E</a>]\n        \n        <br>\n        \n        &plusmn;0.07\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.65\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        8.87\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        10.36\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    </tr>\n\n    <tr>\n      <td><b>Earth</b></td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        6378.1366\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;0.0001\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        6371.0084\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;0.0001\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        5.97217\n        \n        [<a href=\"#refs\">H</a>]\n        \n        <br>\n        \n        &plusmn;0.00028\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        5.5134\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &plusmn;0.0003\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.99726968\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1.0000174\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -3.86\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.367\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        9.80\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        11.19\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    </tr>\n\n    <tr>\n      <td><b>Mars</b></td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        3396.19\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;0.1\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        3389.50\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;0.2\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.641691\n        \n        [<a href=\"#refs\">I</a>]\n        \n        <br>\n        \n        &plusmn;0.000030\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        3.9340\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &plusmn;0.0007\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1.02595676\n        \n        [<a href=\"#refs\">C</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1.8808476\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -1.52\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.150\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        3.71\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        5.03\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    </tr>\n\n    <tr>\n      <td><b>Jupiter</b></td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        71492\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;4\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        69911\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;6\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1898.125\n        \n        [<a href=\"#refs\">J</a>]\n        \n        <br>\n        \n        &plusmn;0.088\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1.3262\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &plusmn;0.0003\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.41354\n        \n        [<a href=\"#refs\">C</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        11.862615\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -9.40\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.52\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        24.79\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        60.20\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    </tr>\n\n    <tr>\n      <td><b>Saturn</b></td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        60268\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;4\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        58232\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;6\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        568.317\n        \n        [<a href=\"#refs\">K</a>]\n        \n        <br>\n        \n        &plusmn;0.026\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.6871\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &plusmn;0.0002\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.44401\n        \n        [<a href=\"#refs\">C</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        29.447498\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -8.88\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.47\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        10.44\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        36.09\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    </tr>\n\n    <tr>\n      <td><b>Uranus</b></td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        25559\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;4\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        25362\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;7\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        86.8099\n        \n        [<a href=\"#refs\">L</a>]\n        \n        <br>\n        \n        &plusmn;0.0040\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1.270\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &plusmn;0.001\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -0.71833\n        \n        [<a href=\"#refs\">C</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        84.016846\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -7.19\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.51\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        8.87\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        21.38\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    </tr>\n\n    <tr>\n      <td><b>Neptune</b></td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        24764\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;15\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        24622\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;19\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        102.4092\n        \n        [<a href=\"#refs\">M</a>]\n        \n        <br>\n        \n        &plusmn;0.0048\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1.638\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &plusmn;0.004\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.67125\n        \n        [<a href=\"#refs\">C</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        164.79132\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -6.87\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.41\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        11.15\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        23.56\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    </tr>\n\n  <tbody>\n</table>\n\n<table class=\"planet-phys-par space-above\">\n  <thead>\n    <tr>\n      <th>Dwarf<br>Planet</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Equatorial<br>Radius</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Mean<br>Radius</th>\n\n  \n  \n      <th class=\"text-nowrap text-center\" >&nbsp;<br>Mass</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Bulk<br>Density</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Sidereal<br>Rotation Period</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Sidereal<br>Orbital Period</th>\n\n  \n      <th class=\"text-nowrap text-center\" >&nbsp;<br>V(1,0)</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Geometric<br>Albedo</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Equatorial<br>Gravity</th>\n\n  \n      <th class=\"text-nowrap text-center\" >Escape<br>Velocity</th>\n\n    </tr>\n    <tr>\n      <td>&nbsp;</td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (km)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (km)\n      </td>\n\n  \n  \n      <td class=\"text-nowrap text-center\" >\n        (&times;10<sup>18</sup> kg)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (g cm<sup>-3</sup>)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (d)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (y)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (mag)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        &nbsp;\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (m s<sup>-2</sup>)\n      </td>\n\n  \n      <td class=\"text-nowrap text-center\" >\n        (km s<sup>-1</sup>)\n      </td>\n\n    </tr>\n  </thead>\n  <tbody>\n\n    <tr>\n      <td><b>Ceres</b></td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        482.1\n        \n        [<a href=\"#refs\">O</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        469.7\n        \n        [<a href=\"#refs\">O</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        938.416\n        \n        [<a href=\"#refs\">O</a>]\n        \n        <br>\n        \n        &plusmn;0.013\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        2.162\n        \n        [<a href=\"#refs\">O</a>]\n        \n        <br>\n        \n        &plusmn;0.008\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.37809042\n        \n        [<a href=\"#refs\">Q</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        4.61\n        \n        [<a href=\"#refs\">Q</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        3.34\n        \n        [<a href=\"#refs\">R</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.090\n        \n        [<a href=\"#refs\">P</a>]\n        \n        <br>\n        \n        &plusmn;0.003\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.27\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.51\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    </tr>\n\n    <tr>\n      <td><b>Pluto</b></td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1188.3\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;1.6\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1188.3\n        \n        [<a href=\"#refs\">D</a>]\n        \n        <br>\n        \n        &plusmn;1.6\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        13024.6\n        \n        [<a href=\"#refs\">N</a>]\n        \n        <br>\n        \n        &plusmn;6.0\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1.853\n        \n        [<a href=\"#refs\">N</a>]\n        \n        <br>\n        \n        &plusmn;0.004\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -6.3872\n        \n        [<a href=\"#refs\">C</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        247.92065\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -1.0\n        \n        [<a href=\"#refs\">Q</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.3\n        \n        [<a href=\"#refs\">B</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.62\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1.21\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    </tr>\n\n    <tr>\n      <td><b>Eris</b></td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1200\n        \n        [<a href=\"#refs\">S</a>]\n        \n        <br>\n        \n        &plusmn;50\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1200\n        \n        [<a href=\"#refs\">S</a>]\n        \n        <br>\n        \n        &plusmn;50\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        16600\n        \n        [<a href=\"#refs\">S</a>]\n        \n        <br>\n        \n        &plusmn;200\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        2.3\n        \n        [<a href=\"#refs\">S</a>]\n        \n        <br>\n        \n        &plusmn;0.3\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1.079\n        \n        [<a href=\"#refs\">Y</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        557.56\n        \n        [<a href=\"#refs\">Q</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -1.1\n        \n        [<a href=\"#refs\">Q</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.84\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.77\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        1.36\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    </tr>\n\n    <tr>\n      <td><b>Makemake</b></td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        717\n        \n        [<a href=\"#refs\">T</a>]\n        \n        <br>\n        \n        &plusmn;7\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        714\n        \n        [<a href=\"#refs\">T</a>]\n        \n        <br>\n        \n        &plusmn;7\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        3100\n        \n        [<a href=\"#refs\">U</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        2.1\n        \n        [<a href=\"#refs\">U</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.937\n        \n        [<a href=\"#refs\">Q</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        307.54\n        \n        [<a href=\"#refs\">Q</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        -0.2\n        \n        [<a href=\"#refs\">Q</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.81\n        \n        [<a href=\"#refs\">T</a>]\n        \n        <br>\n        \n        &plusmn;0.02\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.40\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.76\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    </tr>\n\n    <tr>\n      <td><b>Haumea</b></td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        870\n        \n        [<a href=\"#refs\">W</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        715\n        \n        [<a href=\"#refs\">W</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        4006\n        \n        [<a href=\"#refs\">V</a>]\n        \n        <br>\n        \n        &plusmn;40\n          \n        &nbsp;&nbsp;&nbsp;\n          \n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        2.6\n        \n        [<a href=\"#refs\">W</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.1631\n        \n        [<a href=\"#refs\">X</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        284.81\n        \n        [<a href=\"#refs\">Q</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.2\n        \n        [<a href=\"#refs\">Q</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.72\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.35\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    \n      <td class=\"text-nowrap text-right value-sigma-cell\">\n        0.78\n        \n        [<a href=\"#refs\">*</a>]\n        \n        <br>\n        \n        &nbsp;\n        \n      </td>\n  \n    </tr>\n\n  <tbody>\n</table>\n\n\n<a id=\"legend\" class=\"anchor\"></a>\n<div class=\"panel panel-default space-above\">\n  <div class=\"panel-heading\">\n    <h3 class=\"panel-title\">Table Column Descriptions</h3>\n  </div>\n  <div class=\"panel-body horiz-scroll\">\n    <table class=\"legend table-hover table-striped\">\n      <tbody>\n\n        <tr>\n          <th>Equatorial Radius</th>\n          <td>Radius of the planet at the equator.</td>\n        </tr>\n\n        <tr>\n          <th>Mean Radius</th>\n          <td>Radius of a sphere with the equivalent volume of the planet.</td>\n        </tr>\n\n        <tr>\n          <th>Mass</th>\n          <td>Total mass of the planet.</td>\n        </tr>\n\n        <tr>\n          <th>Bulk Density</th>\n          <td>Density computed using the total volume and mass of the planet.</td>\n        </tr>\n\n        <tr>\n          <th>Sidereal Rotation Period</th>\n          <td>Time required for a full rotation of the planet relate to fixed stars.</td>\n        </tr>\n\n        <tr>\n          <th>Sidereal Orbital Period</th>\n          <td>Time required for the planet to make one complete orbit around the sun relative to fixed stars.</td>\n        </tr>\n\n        <tr>\n          <th>V(1,0)</th>\n          <td>The visual magitude of the planet as seen at a distance of 1&nbsp;au from both the Sun and observer.</td>\n        </tr>\n\n        <tr>\n          <th>Geometric Albedo</th>\n          <td>See <a href=\"/glossary/albedo.html\">glossary definition of albedo</a>.</td>\n        </tr>\n\n        <tr>\n          <th>Equatorial Gravity</th>\n          <td>The gravitational acceleration on the planet's surface at the equator.</td>\n        </tr>\n\n        <tr>\n          <th>Escape Velocity</th>\n          <td>The minimum velocity required for an object to escape the gravitational influence of the planet.</td>\n        </tr>\n\n      </tbody>\n    </table>\n  </div>\n</div>\n\n<a id=\"refs\" class=\"anchor\"></a>\n<h3>References</h3>\n\n<p><span class=\"planet-phys-par-ref\">[*]</span>\n  <i>Value and uncertainty derived from other referenced values and uncertainties in this table</i>. Bulk Density computed based on the volume of a sphere with the published mean radius.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[B]</span>\n  <i>Explanatory Supplement to the Astronomical Almanac</i>. 1992. K. P. Seidelmann, Ed., p.706 (Table 15.8) and p.316 (Table 5.8.1), University Science Books, Mill Valley, California.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[C]</span>\n  Seidelmann, P.K. et al. 2007. \"Report of the IAU/IAG Working Group on cartographic coordinates and rotational elements:&nbsp;2006\" <i>Celestial Mech. Dyn. Astr.</i> <b>98</b>:155-180.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[D]</span>\n  Archinal, B.A. et al. 2018. \"Report of the IAU/IAG Working Group on cartographic coordinates and rotational elements:&nbsp;2015\" <i>Celestial Mech. Dyn. Astr.</i> <b>130</b>:22.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[E]</span>\n  Hilton, J.L. 2005. \"Improving the Visual Magnitudes of the Planets in <i>The Astronomical Almanac.</i> I. Mercury and Venus\" <i>Astron. J</i> <b>129</b>:2902-2906.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[F]</span>\n  Anderson, J.D., et al. 1987. \"The mass, gravity field, and ephemeris of Mercury\" <i>Icarus</i> <b>71</b>:337-349.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[G]</span>\n  Konopliv, A.S., et al. 1999. \"Venus gravity: 180th degree and order model\" <i>Icarus</i> <b>139</b>:3-18.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[H]</span>\n  Folkner, W.M. and Williams, J.G. 2008. \"Mass parameters and uncertainties in planetary ephemeris DE421.\" Interoffice Memo. 343R-08-004 (internal document), Jet Propulsion Laboratory, Pasadena, CA.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[I]</span>\n  Jacobson, R.A. 2008. \"Ephemerides of the Martian Satellites - MAR080\" Interoffice Memo. 343R-08-006 (internal document), Jet Propulsion Laboratory, Pasadena, CA.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[J]</span>\n  Jacobson, R.A. 2013. \"Jovian Satellite ephemeris - JUP310\" private communication.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[K]</span>\n  Jacobson, R.A., et al. 2006. \"The gravity field of the Saturnian system from satellite observations and spacecraft tracking data\" <i>AJ</i> <b>132</b>(6):2520-2526.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[L]</span>\n  Jacobson, R.A. 2014. \"The Orbits of the Uranian Satellites and Rings, the Gravity Field of the Uranian System, and the Orientation of the Pole of Uranus\" <i>AJ</i> <b>148</b>:76-88.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[M]</span>\n  Jacobson, R.A. 2009. \"The orbits of the Neptunian satellites and the orientation of the pole of Neptune\" <i>AJ</i> <b>137</b>:4322.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[N]</span>\n  Brozovic, M. et al. 2024. \"Post-new-horizons Orbits and Masses for the Satellites of Pluto\" <i>AJ</i> <b>167</b>:256\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[O]</span>\n  R.S. Park, et al. (2016) \"A partially differentiated interior for (1) Ceres deduced from its gravity field and shape\" <i>Nature</i> <b>537</b>:515-517\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[P]</span>\n  Li et al. (2006) <i>Icarus</i> <b>182</b>:143-160\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[Q]</span>\n  JPL Small-Body Database. 2019.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[R]</span>\n  IRAS-A-FPA-3-RDR-IMPS-V6.0\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[S]</span>\n  Brown, Michael E.; Schaller, Emily L. (2007) <i>Science</i> <b>316</b>:1585.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[T]</span>\n  Brown, Michael E. (2013) <i>ApJ</i> <b>767</b>:L7.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[U]</span>\n  Parker, Alex et al. (2018) DPS meeting# 50 id. 509.02.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[V]</span>\n  Ragozzine, D.; Brown, M. E. (2009) <i>AJ</i> <b>137</b>:4766-4776.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[W]</span>\n  Lockwood, Alexandra C.; Brown, Michael E.; Stansberry, John. (2014) <i>Earth, Moon, Planets</i> <b>111</b>:127-137.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[X]</span>\n  Ortiz, J.L.; Santos-Sanz, P.; Sicardy, B.; Benedetti-Rossi, G.; et al. (2017) <i>Nature</i> <b>550</b>:219-223.\n</p>\n\n<p><span class=\"planet-phys-par-ref\">[Y]</span>\n  Roe, H. G.; Pike, R.E.; Brown, M.E. (2008) <i>Icarus</i> <b>198</b>:459-464.\n</p>\n\n\n<h3>Change Log</h3>\n\n<h5>2019-Dec-12</h5>\n<p class=\"indent\">A second table for dwarf planets was added.\nMass values were updated from current estimates of GM (referenced above).\nThe value of G (Newtonian gravitational constant) was taken from the current best estimate\n(CODATA 2018) available from the\n<a href=\"http://physics.nist.gov/cgi-bin/cuu/Value?bg\" target=\"_blank\">NIST website</a>,\n<span class=\"text-nowrap\">G=6.67430 (&plusmn;0.00015) &times; 10<sup>-11</sup> kg<sup>-1</sup> m<sup>3</sup> s<sup>-2</sup></span>.\n</p>\n\n<h5>2018-Mar-28</h5>\n<p class=\"indent\">Mass values were updated from current estimates of GM (referenced above).\nThe value of G (Newtonian gravitational constant) was taken from the current best estimate\n(CODATA 2014) available from the\n<a href=\"http://physics.nist.gov/cgi-bin/cuu/Value?bg\" target=\"_blank\">NIST website</a>,\n<span class=\"text-nowrap\">G=6.67408 (&plusmn;0.00031) &times; 10<sup>-11</sup> kg<sup>-1</sup> m<sup>3</sup> s<sup>-2</sup></span>.\nBulk density values (and uncertainties) were computed based on updated mass values\nand computed volumes (based on a sphere of the published mean radius).\nEquatorial surface gravity values were computed from updated mass and equatorial radius values.\nEscape velocities were also updated based on computed values using updated masses and mean radii.\n</p>\n\n<h5>2008-Nov-05</h5>\n<p class=\"indent\">Mass values were updated from current estimates of GM (referenced above).\nThe value of G (Newtonian gravitational constant) was taken from the\ncurrent best estimate (CODATA 2006) available from the\n<a href=\"http://physics.nist.gov/cuu/Constants/index.html\" target=\"_blank\">NIST website</a>,\n<span class=\"text-nowrap\">G=6.67428 (&plusmn;0.00067) &times; 10<sup>-11</sup> kg<sup>-1</sup> m<sup>3</sup> s<sup>-2</sup></span>.\nMean radius values were added.\nBulk density values (and uncertainties) were computed based on updated mass values\nand computed volumes (based on a sphere of the published mean radius).\nEquatorial surface gravity values were computed from updated mass and equatorial radius values.\nEscape velocities were also updated based on computed values using updated masses and mean radii.\n</p>\n\n<h5>2008-Oct-24</h5>\n<p class=\"indent\">Sidereal rotation periods were updated using improved values from the\n\"Report of the IAU/IAG Working Group on cartographic coordinates and rotational elements: 2006\"\npublished in 2007.\nRotation rates were significantly improved for Saturn, Uranus, and Neptune.\nVisual magnitude parameter V(1,0) values were improved for Mercury and Venus\nusing reference [E] listed above.\n</p>\n\n<h5>2006-Mar-14</h5>\n<p class=\"indent\">A previous reference\n(\"Astrometric and Geodetic Properties of Earth and the Solar System\"\nin Global Earth Physics, A&nbsp;Handbook of Physical Constants, AGU Reference Shelf 1,\n1995, American Geophysical Union, Tables 6,7,10.) had a few erroneous values.\nThose values have been replaced using data from the current reference list.\n</p>\n\n<h5>2002-Nov-22</h5>\n<p class=\"indent\">Pluto's mass and density were updated using a more current reference.\nIt should be noted that Pluto's radius ranges from about 1150 to 1206 km\nin the literature.\n</p>\n\n<h5>2001-May-22</h5>\n<p class=\"indent\">Sidereal orbit period data were corrected.  Previous values were\ntaken from p.704 in reference [B] where they were incorrectly labeled\nas Sidereal instead of Tropical.  The corrected values are derived from\nthe mean longitude rates shown in Table 5.8.1 in reference [B].\n</p>\n\n\n\n<!-- end of page content -->\n\n\n\n\n\n<div id=\"footer\" class=\"container-fluid footer\">\n  <div class=\"row\">\n    <div class=\"col-sm-5 col-xs-12\">\n      <img class=\"ssd-logo\" src=\"/images/ssd_logo.png\" alt=\"SSD Logo\" />\n    </div>\n    <div class=\"col-sm-3 col-xs-12\">\n      <div class=\"link-inv\">\n        <a href=\"/sitemap.html\"><i class=\"fa-fw fa fa-list-alt\"></i> Site Map</a>\n      </div>\n      <div class=\"link-inv\">\n        <a href=\"https://www.jpl.nasa.gov/caltechjpl-privacy-policies-and-important-notices\"><i class=\"fa-fw fa fa-user-secret\"></i> Privacy</a>\n      </div>\n      <div class=\"link-inv\">\n        <a href=\"https://www.jpl.nasa.gov/jpl-image-use-policy\"><i class=\"fa-fw fa fa-picture-o\"></i> Image Policy</a>\n      </div>\n    </div>\n    <div class=\"col-sm-4 col-xs-12\">\n      <div class=\" link-inv\">\n        <a href=\"/contact/\"><i class=\"fa-fw fa fa-envelope\"></i> Contact Us</a>\n      </div>\n      <div class=\"text-smaller\">\n        <span class=\"footer-label text-nowrap\">Site Manager:</span>\n        <span class=\"text-nowrap\">Ryan Park</span>\n      </div>\n      <div class=\"text-smaller2\">\n        <span class=\"footer-label text-nowrap\">Site Design:</span>\n        <span class=\"text-nowrap\">Alan B. Chamberlin</span>\n        \n      </div>\n      <div class=\"text-smaller2\">\n        <span class=\"footer-label text-nowrap\">URS Clearance:</span>\n        <span class=\"text-nowrap\">CL#21-4165</span>\n      </div>\n    </div>\n  </div>\n  <!-- Full-width sponsor row at the bottom -->\n  <div class=\"row\" style=\"margin-top:10px;\">\n    <div class=\"col-xs-12 text-center link-inv\" style=\"font-size:16px;\">\n      The JPL Solar System Dynamics group’s ephemeris development, maintenance, and improvement tasks are primarily supported by\n      NASA’s <a href=\"https://ammos.nasa.gov/\">Advanced Multi-Mission Operations System</a>,\n      which is funded by\n      <a href=\"https://science.nasa.gov/solar-system\">NASA’s Science Mission Directorate </a>.\n    </div>\n  </div>\n  \n    \n  <script id=\"_fed_an_ua_tag\" type=\"text/javascript\" src=\"https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NASA&subagency=JPL&sdor=false\"></script>\n    \n  \n</div>\n\n\n\n</div> <!-- end of main container -->\n\n\n\n<script src=\"/js/jquery-3.6.0.min.js\"></script>\n<script src=\"/js/sprintf.min.js\"></script>\n<script src=\"/js/bootstrap.js\"></script>\n\n<script src=\"/js/jquery.dataTables.min.js\"></script>\n<script src=\"/js/dataTables.bootstrap.min.js\"></script>\n<script src=\"/js/dataTables.responsive.min.js\"></script>\n<script src=\"/js/dataTables.conditionalPaging.js\"></script>\n<script src=\"/js/dataTables.select.min.js\"></script>\n<script src=\"/tools/common/js/vendor/dataTables.select.min.js\"></script>\n\n<script src=\"/js/responsive.bootstrap.min.js\"></script>\n\n\n<script src=\"/js/angular.min.js\"></script>\n<script src=\"/js/angular-sanitize.min.js\"></script>\n\n\n\n\n\n\n\n\n<script>\n$(function() {\n  $(\"a[class='anchor-modal']\").click( function(e) {\n    e.preventDefault();\n    var href = $(this).attr('href');\n    $(href).modal('toggle');\n  });\n});\n</script>\n\n<script src=\"/js/script.js\"></script>\n\n\n\n\n  </body>\n</html>\n"
+  },
+  "bodies": [
+    {
+      "object_id": "mercury",
+      "horizons_id": "199",
+      "name": "Mercury",
+      "body_class": "planet",
+      "radius": {
+        "value_km": 2439.4,
+        "uncertainty_km": 0.1,
+        "reference_key": " D ",
+        "definition": "Mean Radius (volume-equivalent), km",
+        "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html"
+      },
+      "samples": [
+        {
+          "epoch_utc": "2026-11-13T00:00:00Z",
+          "jd_utc": 2461357.5,
+          "position_au": [
+            -0.02154028842744354,
+            0.3077861069263794,
+            0.02712917118150294
+          ],
+          "velocity_au_day": [
+            -0.03370999929429373,
+            -0.0009429280868212631,
+            0.003014693942969661
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-14T00:00:00Z",
+          "jd_utc": 2461358.5,
+          "position_au": [
+            -0.05508831461399648,
+            0.3053223226669788,
+            0.03000471863990073
+          ],
+          "velocity_au_day": [
+            -0.03333207007005647,
+            -0.003970986677543593,
+            0.002732565698325866
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-15T00:00:00Z",
+          "jd_utc": 2461359.5,
+          "position_au": [
+            -0.08809989091012561,
+            0.2998786420370378,
+            0.03258753495670434
+          ],
+          "velocity_au_day": [
+            -0.03264076404860954,
+            -0.006895714382721779,
+            0.002430140354083193
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-16T00:00:00Z",
+          "jd_utc": 2461360.5,
+          "position_au": [
+            -0.1202737248798696,
+            0.2915783802559942,
+            0.03486006457042957
+          ],
+          "velocity_au_day": [
+            -0.03166127903017986,
+            -0.00967821471836126,
+            0.002112907746124834
+          ]
+        }
+      ],
+      "ephemeris_source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27199%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&START_TIME=%272026-11-13+00%3A00%3A00%27&STOP_TIME=%272026-11-16+00%3A00%3A00%27&STEP_SIZE=%271+d%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&VEC_TABLE=%272%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&VEC_LABELS=%27YES%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "'199'",
+          "OBJ_DATA": "'YES'",
+          "MAKE_EPHEM": "'YES'",
+          "EPHEM_TYPE": "'VECTORS'",
+          "CENTER": "'500@10'",
+          "START_TIME": "'2026-11-13 00:00:00'",
+          "STOP_TIME": "'2026-11-16 00:00:00'",
+          "STEP_SIZE": "'1 d'",
+          "REF_PLANE": "'ECLIPTIC'",
+          "REF_SYSTEM": "'ICRF'",
+          "OUT_UNITS": "'AU-D'",
+          "VEC_TABLE": "'2'",
+          "VEC_CORR": "'NONE'",
+          "CSV_FORMAT": "'YES'",
+          "VEC_LABELS": "'YES'",
+          "TIME_TYPE": "'UT'",
+          "TIME_DIGITS": "'FRACSEC'"
+        },
+        "retrieved_utc": "2026-11-14T02:08:20.888479+00:00",
+        "response_sha256": "c82ac1cb360b25679e9dc96da57bfc91e29c0556d1943e0e39c17b2fd9d37521",
+        "response_bytes": 8362,
+        "raw_response_json": "{\"result\":\"*******************************************************************************\\n Revised: April 12, 2021             Mercury                            199 / 1\\n\\n PHYSICAL DATA (updated 2024-Mar-04):\\n  Vol. Mean Radius (km) =  2439.4+-0.1    Density (g cm^-3)     = 5.427\\n  Mass x10^23 (kg)      =     3.302       Volume (x10^10 km^3)  = 6.085  \\n  Sidereal rot. period  =    58.6463 d    Sid. rot. rate (rad/s)= 0.00000124001\\n  Mean solar day        =   175.9421 d    Core radius (km)      = ~1600 \\n  Geometric Albedo      =     0.106       Surface emissivity    = 0.77+-0.06\\n  GM (km^3/s^2)         = 22031.86855     Equatorial radius, Re = 2440.53 km\\n  GM 1-sigma (km^3/s^2) =                 Mass ratio (Sun/plnt) = 6023682\\n  Mom. of Inertia       =     0.33        Equ. gravity  m/s^2   = 3.701     \\n  Atmos. pressure (bar) = < 5x10^-15      Max. angular diam.    = 11.0\\\"   \\n  Mean Temperature (K)  = 440             Visual mag. V(1,0)    = -0.42 \\n  Obliquity to orbit[1] =  2.11' +/- 0.1' Hill's sphere rad. Rp = 94.4 \\n  Sidereal orb. per.    =  0.2408467 y    Mean Orbit vel.  km/s = 47.362 \\n  Sidereal orb. per.    = 87.969257  d    Escape vel. km/s      =  4.435\\n                                 Perihelion  Aphelion    Mean\\n  Solar Constant (W/m^2)         14462       6278        9126\\n  Maximum Planetary IR (W/m^2)   12700       5500        8000\\n  Minimum Planetary IR (W/m^2)   6           6           6\\n*******************************************************************************\\n\\nCalling TDBMUT with LBND,LMJD= 0.847800000000000E+09  0.613570000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847886400000000E+09  0.613580000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847972800000000E+09  0.613590000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.848059200000000E+09  0.613600000000000E+05\\n\\n*******************************************************************************\\nEphemeris / API_USER Fri Nov 13 18:08:20 2026 Pasadena, USA      / Horizons\\n*******************************************************************************\\nTarget body name: Mercury (199)                   {source: DE441}\\nCenter body name: Sun (10)                        {source: DE441}\\nCenter-site name: BODY CENTER\\n*******************************************************************************\\nStart time      : A.D. 2026-Nov-13 00:00:00.0000 UT \\nStop  time      : A.D. 2026-Nov-16 00:00:00.0000 UT \\nStep-size       : 1440 minutes\\n*******************************************************************************\\nCenter geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}\\nCenter cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}\\nCenter radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}\\nOutput units    : AU-D\\nCalendar mode   : Mixed Julian/Gregorian\\nOutput type     : GEOMETRIC cartesian states\\nOutput format   : 2 (position and velocity)\\nEOP file        : eop.261113.p270209\\nEOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-NOV-13. PREDICTS-> 2027-FEB-08\\nReference frame : Ecliptic of J2000.0\\n*******************************************************************************\\n            JDUT ,            Calendar Date (UT ),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,\\n**************************************************************************************************************************************************************************************************\\n$$SOE\\n2461357.500000000, A.D. 2026-Nov-13 00:00:00.0000, -2.154028842744354E-02,  3.077861069263794E-01,  2.712917118150294E-02, -3.370999929429373E-02, -9.429280868212631E-04,  3.014693942969661E-03,\\n2461358.500000000, A.D. 2026-Nov-14 00:00:00.0000, -5.508831461399648E-02,  3.053223226669788E-01,  3.000471863990073E-02, -3.333207007005647E-02, -3.970986677543593E-03,  2.732565698325866E-03,\\n2461359.500000000, A.D. 2026-Nov-15 00:00:00.0000, -8.809989091012561E-02,  2.998786420370378E-01,  3.258753495670434E-02, -3.264076404860954E-02, -6.895714382721779E-03,  2.430140354083193E-03,\\n2461360.500000000, A.D. 2026-Nov-16 00:00:00.0000, -1.202737248798696E-01,  2.915783802559942E-01,  3.486006457042957E-02, -3.166127903017986E-02, -9.678214718361260E-03,  2.112907746124834E-03,\\n$$EOE\\n**************************************************************************************************************************************************************************************************\\n \\nTIME\\n\\n Times PRIOR to 1962 are UT1, a mean-solar time closely related to the\\nprior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current\\ncivil or \\\"wall-clock\\\" atomic time-scale. UTC is kept within 0.9 seconds\\nof UT1 using integer leap-seconds for 1972 and later years.\\n\\n  Conversion from the internal Barycentric Dynamical Time (TDB) of solar\\nsystem dynamics to the discontinuous civil UT time-scale has not been\\ndetermined for UTC times after the next July or January 1st. Therefore,\\nthe last known leap-second is used as a constant over future intervals,\\na condition noted here as \\\"UT~\\\".\\n\\n  Future but as yet undetermined leap-seconds can be expected to change\\ntime-tags in the \\\"UT~\\\" interval and, in general, the UT scale may not be\\nsuitable for purposes that assume time-tag continuity in the ephemeris.\\nOutput in continuous TDB and TT timescales may instead be requested,\\nthough these are not linked to Earth's rotation.\\n\\n  Time-tags refer to the UT time-scale conversion from TDB on Earth\\nregardless of observer location within the solar system, although clock\\nrates may differ due to the local gravity field and no analog to \\\"UT\\\"\\nmay be defined for that location.\\n \\nCALENDAR SYSTEM\\n\\n  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15\\n(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)\\nare in the Julian calendar system, which is automatically extended for dates\\nprior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for\\nmatching historical dates. The Gregorian calendar more accurately corresponds\\nto the Earth's orbital motion and seasons. A \\\"Gregorian-only\\\" calendar mode is\\navailable if such physical events are the primary interest.\\n\\nREFERENCE FRAME AND COORDINATES\\n\\n  Ecliptic at the standard reference epoch\\n\\n    Reference epoch: J2000.0\\n    X-Y plane: adopted Earth orbital plane at the reference epoch\\n               Note: IAU76 obliquity of 84381.448 arcseconds wrt ICRF X-Y plane\\n    X-axis   : ICRF\\n    Z-axis   : perpendicular to the X-Y plane in the directional (+ or -) sense\\n               of Earth's north pole at the reference epoch.\\n\\n  Symbol meaning [1 au= 149597870.700 km, 1 day= 86400.0 s]:\\n\\n    JDUT     Julian Day Number, Universal Time\\n      X      X-component of position vector (au)\\n      Y      Y-component of position vector (au)\\n      Z      Z-component of position vector (au)\\n      VX     X-component of velocity vector (au/day)                           \\n      VY     Y-component of velocity vector (au/day)                           \\n      VZ     Z-component of velocity vector (au/day)                           \\n\\nABERRATIONS AND CORRECTIONS\\n\\n Geometric state vectors have NO corrections or aberrations applied.\\n\\nComputations by ...\\n\\n    Solar System Dynamics Group, Horizons On-Line Ephemeris System\\n    4800 Oak Grove Drive, Jet Propulsion Laboratory\\n    Pasadena, CA  91109   USA\\n\\n    General site: https://ssd.jpl.nasa.gov/\\n    Mailing list: https://ssd.jpl.nasa.gov/email_list.html\\n    System news : https://ssd.jpl.nasa.gov/horizons/news.html\\n    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html\\n    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x\\n                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html\\n                  command-line   telnet ssd.jpl.nasa.gov 6775\\n                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt\\n                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS\\n    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov\\n*******************************************************************************\\n\",\"signature\":{\"version\":\"1.2\",\"source\":\"NASA/JPL Horizons API\"}}\n",
+        "signature": {
+          "version": "1.2",
+          "source": "NASA/JPL Horizons API"
+        },
+        "target_source": "DE441",
+        "center_source": "DE441"
+      }
+    },
+    {
+      "object_id": "venus",
+      "horizons_id": "299",
+      "name": "Venus",
+      "body_class": "planet",
+      "radius": {
+        "value_km": 6051.8,
+        "uncertainty_km": 1.0,
+        "reference_key": " D ",
+        "definition": "Mean Radius (volume-equivalent), km",
+        "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html"
+      },
+      "samples": [
+        {
+          "epoch_utc": "2026-11-13T00:00:00Z",
+          "jd_utc": 2461357.5,
+          "position_au": [
+            0.3366662876513117,
+            0.6381540794729984,
+            -0.01065556110173164
+          ],
+          "velocity_au_day": [
+            -0.01795409099682467,
+            0.009346944706020288,
+            0.00116439819472006
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-14T00:00:00Z",
+          "jd_utc": 2461358.5,
+          "position_au": [
+            0.3185819693685842,
+            0.6472484769702954,
+            -0.009487119221263687
+          ],
+          "velocity_au_day": [
+            -0.01821219390387517,
+            0.008840611647889036,
+            0.001172332843465233
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-15T00:00:00Z",
+          "jd_utc": 2461359.5,
+          "position_au": [
+            0.3002466392322312,
+            0.6558328915176632,
+            -0.008311202033010227
+          ],
+          "velocity_au_day": [
+            -0.01845607898970839,
+            0.008327045047610481,
+            0.001179347660383468
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-16T00:00:00Z",
+          "jd_utc": 2461360.5,
+          "position_au": [
+            0.2816746203565894,
+            0.6639002893928578,
+            -0.007128732696710579
+          ],
+          "velocity_au_day": [
+            -0.0186855375247071,
+            0.007806645630706113,
+            0.001185436111703905
+          ]
+        }
+      ],
+      "ephemeris_source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27299%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&START_TIME=%272026-11-13+00%3A00%3A00%27&STOP_TIME=%272026-11-16+00%3A00%3A00%27&STEP_SIZE=%271+d%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&VEC_TABLE=%272%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&VEC_LABELS=%27YES%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "'299'",
+          "OBJ_DATA": "'YES'",
+          "MAKE_EPHEM": "'YES'",
+          "EPHEM_TYPE": "'VECTORS'",
+          "CENTER": "'500@10'",
+          "START_TIME": "'2026-11-13 00:00:00'",
+          "STOP_TIME": "'2026-11-16 00:00:00'",
+          "STEP_SIZE": "'1 d'",
+          "REF_PLANE": "'ECLIPTIC'",
+          "REF_SYSTEM": "'ICRF'",
+          "OUT_UNITS": "'AU-D'",
+          "VEC_TABLE": "'2'",
+          "VEC_CORR": "'NONE'",
+          "CSV_FORMAT": "'YES'",
+          "VEC_LABELS": "'YES'",
+          "TIME_TYPE": "'UT'",
+          "TIME_DIGITS": "'FRACSEC'"
+        },
+        "retrieved_utc": "2026-11-14T02:08:21.394485+00:00",
+        "response_sha256": "975a17a2d698898784ff4a5a7ea2e08fff2943aaef30a719b7ebee4fd9da7182",
+        "response_bytes": 8351,
+        "raw_response_json": "{\"signature\":{\"version\":\"1.2\",\"source\":\"NASA/JPL Horizons API\"},\"result\":\"*******************************************************************************\\n Revised: April 12, 2021                Venus                           299 / 2\\n \\n PHYSICAL DATA (updated 2020-Oct-19):\\n  Vol. Mean Radius (km) =  6051.84+-0.01 Density (g/cm^3)      =  5.204\\n  Mass x10^23 (kg)      =    48.685      Volume (x10^10 km^3)  = 92.843\\n  Sidereal rot. period  =   243.018484 d Sid. Rot. Rate (rad/s)= -0.00000029924\\n  Mean solar day        =   116.7490 d   Equ. gravity  m/s^2   =  8.870\\n  Mom. of Inertia       =     0.33       Core radius (km)      = ~3200\\n  Geometric Albedo      =     0.65       Potential Love # k2   = ~0.25\\n  GM (km^3/s^2)         = 324858.592     Equatorial Radius, Re = 6051.893 km\\n  GM 1-sigma (km^3/s^2) =    +-0.006     Mass ratio (Sun/Venus)= 408523.72\\n  Atmos. pressure (bar) =  90            Max. angular diam.    =   60.2\\\"\\n  Mean Temperature (K)  = 735            Visual mag. V(1,0)    =   -4.40\\n  Obliquity to orbit    = 177.3 deg      Hill's sphere rad.,Rp =  167.1\\n  Sidereal orb. per., y =   0.61519726   Orbit speed, km/s     =   35.021\\n  Sidereal orb. per., d = 224.70079922   Escape speed, km/s    =   10.361\\n                                 Perihelion  Aphelion    Mean\\n  Solar Constant (W/m^2)         2759         2614       2650\\n  Maximum Planetary IR (W/m^2)    153         153         153\\n  Minimum Planetary IR (W/m^2)    153         153         153\\n*******************************************************************************\\n\\nCalling TDBMUT with LBND,LMJD= 0.847800000000000E+09  0.613570000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847886400000000E+09  0.613580000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847972800000000E+09  0.613590000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.848059200000000E+09  0.613600000000000E+05\\n\\n*******************************************************************************\\nEphemeris / API_USER Fri Nov 13 18:08:21 2026 Pasadena, USA      / Horizons\\n*******************************************************************************\\nTarget body name: Venus (299)                     {source: DE441}\\nCenter body name: Sun (10)                        {source: DE441}\\nCenter-site name: BODY CENTER\\n*******************************************************************************\\nStart time      : A.D. 2026-Nov-13 00:00:00.0000 UT \\nStop  time      : A.D. 2026-Nov-16 00:00:00.0000 UT \\nStep-size       : 1440 minutes\\n*******************************************************************************\\nCenter geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}\\nCenter cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}\\nCenter radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}\\nOutput units    : AU-D\\nCalendar mode   : Mixed Julian/Gregorian\\nOutput type     : GEOMETRIC cartesian states\\nOutput format   : 2 (position and velocity)\\nEOP file        : eop.261113.p270209\\nEOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-NOV-13. PREDICTS-> 2027-FEB-08\\nReference frame : Ecliptic of J2000.0\\n*******************************************************************************\\n            JDUT ,            Calendar Date (UT ),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,\\n**************************************************************************************************************************************************************************************************\\n$$SOE\\n2461357.500000000, A.D. 2026-Nov-13 00:00:00.0000,  3.366662876513117E-01,  6.381540794729984E-01, -1.065556110173164E-02, -1.795409099682467E-02,  9.346944706020288E-03,  1.164398194720060E-03,\\n2461358.500000000, A.D. 2026-Nov-14 00:00:00.0000,  3.185819693685842E-01,  6.472484769702954E-01, -9.487119221263687E-03, -1.821219390387517E-02,  8.840611647889036E-03,  1.172332843465233E-03,\\n2461359.500000000, A.D. 2026-Nov-15 00:00:00.0000,  3.002466392322312E-01,  6.558328915176632E-01, -8.311202033010227E-03, -1.845607898970839E-02,  8.327045047610481E-03,  1.179347660383468E-03,\\n2461360.500000000, A.D. 2026-Nov-16 00:00:00.0000,  2.816746203565894E-01,  6.639002893928578E-01, -7.128732696710579E-03, -1.868553752470710E-02,  7.806645630706113E-03,  1.185436111703905E-03,\\n$$EOE\\n**************************************************************************************************************************************************************************************************\\n \\nTIME\\n\\n Times PRIOR to 1962 are UT1, a mean-solar time closely related to the\\nprior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current\\ncivil or \\\"wall-clock\\\" atomic time-scale. UTC is kept within 0.9 seconds\\nof UT1 using integer leap-seconds for 1972 and later years.\\n\\n  Conversion from the internal Barycentric Dynamical Time (TDB) of solar\\nsystem dynamics to the discontinuous civil UT time-scale has not been\\ndetermined for UTC times after the next July or January 1st. Therefore,\\nthe last known leap-second is used as a constant over future intervals,\\na condition noted here as \\\"UT~\\\".\\n\\n  Future but as yet undetermined leap-seconds can be expected to change\\ntime-tags in the \\\"UT~\\\" interval and, in general, the UT scale may not be\\nsuitable for purposes that assume time-tag continuity in the ephemeris.\\nOutput in continuous TDB and TT timescales may instead be requested,\\nthough these are not linked to Earth's rotation.\\n\\n  Time-tags refer to the UT time-scale conversion from TDB on Earth\\nregardless of observer location within the solar system, although clock\\nrates may differ due to the local gravity field and no analog to \\\"UT\\\"\\nmay be defined for that location.\\n \\nCALENDAR SYSTEM\\n\\n  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15\\n(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)\\nare in the Julian calendar system, which is automatically extended for dates\\nprior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for\\nmatching historical dates. The Gregorian calendar more accurately corresponds\\nto the Earth's orbital motion and seasons. A \\\"Gregorian-only\\\" calendar mode is\\navailable if such physical events are the primary interest.\\n\\nREFERENCE FRAME AND COORDINATES\\n\\n  Ecliptic at the standard reference epoch\\n\\n    Reference epoch: J2000.0\\n    X-Y plane: adopted Earth orbital plane at the reference epoch\\n               Note: IAU76 obliquity of 84381.448 arcseconds wrt ICRF X-Y plane\\n    X-axis   : ICRF\\n    Z-axis   : perpendicular to the X-Y plane in the directional (+ or -) sense\\n               of Earth's north pole at the reference epoch.\\n\\n  Symbol meaning [1 au= 149597870.700 km, 1 day= 86400.0 s]:\\n\\n    JDUT     Julian Day Number, Universal Time\\n      X      X-component of position vector (au)\\n      Y      Y-component of position vector (au)\\n      Z      Z-component of position vector (au)\\n      VX     X-component of velocity vector (au/day)                           \\n      VY     Y-component of velocity vector (au/day)                           \\n      VZ     Z-component of velocity vector (au/day)                           \\n\\nABERRATIONS AND CORRECTIONS\\n\\n Geometric state vectors have NO corrections or aberrations applied.\\n\\nComputations by ...\\n\\n    Solar System Dynamics Group, Horizons On-Line Ephemeris System\\n    4800 Oak Grove Drive, Jet Propulsion Laboratory\\n    Pasadena, CA  91109   USA\\n\\n    General site: https://ssd.jpl.nasa.gov/\\n    Mailing list: https://ssd.jpl.nasa.gov/email_list.html\\n    System news : https://ssd.jpl.nasa.gov/horizons/news.html\\n    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html\\n    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x\\n                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html\\n                  command-line   telnet ssd.jpl.nasa.gov 6775\\n                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt\\n                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS\\n    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov\\n*******************************************************************************\\n\"}\n",
+        "signature": {
+          "version": "1.2",
+          "source": "NASA/JPL Horizons API"
+        },
+        "target_source": "DE441",
+        "center_source": "DE441"
+      }
+    },
+    {
+      "object_id": "earth",
+      "horizons_id": "399",
+      "name": "Earth",
+      "body_class": "planet",
+      "radius": {
+        "value_km": 6371.0084,
+        "uncertainty_km": 0.0001,
+        "reference_key": " D ",
+        "definition": "Mean Radius (volume-equivalent), km",
+        "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html"
+      },
+      "samples": [
+        {
+          "epoch_utc": "2026-11-13T00:00:00Z",
+          "jd_utc": 2461357.5,
+          "position_au": [
+            0.6329625539192477,
+            0.7609268789756506,
+            -4.85550646530024e-05
+          ],
+          "velocity_au_day": [
+            -0.01351268155923895,
+            0.01093753833778515,
+            -9.621611995498326e-07
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-14T00:00:00Z",
+          "jd_utc": 2461358.5,
+          "position_au": [
+            0.6193540204005308,
+            0.7717469853460295,
+            -4.955942943716287e-05
+          ],
+          "velocity_au_day": [
+            -0.01370366481173362,
+            0.01070210306802581,
+            -1.043489724390388e-06
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-15T00:00:00Z",
+          "jd_utc": 2461359.5,
+          "position_au": [
+            0.6055566746478663,
+            0.782329963015014,
+            -5.063531110769662e-05
+          ],
+          "velocity_au_day": [
+            -0.01389029723093629,
+            0.01046330146610526,
+            -1.104635721426845e-06
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-16T00:00:00Z",
+          "jd_utc": 2461360.5,
+          "position_au": [
+            0.5915748927059984,
+            0.792672507163249,
+            -5.176092600754306e-05
+          ],
+          "velocity_au_day": [
+            -0.01407252956396149,
+            0.0102212565212175,
+            -1.142470114354265e-06
+          ]
+        }
+      ],
+      "ephemeris_source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27399%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&START_TIME=%272026-11-13+00%3A00%3A00%27&STOP_TIME=%272026-11-16+00%3A00%3A00%27&STEP_SIZE=%271+d%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&VEC_TABLE=%272%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&VEC_LABELS=%27YES%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "'399'",
+          "OBJ_DATA": "'YES'",
+          "MAKE_EPHEM": "'YES'",
+          "EPHEM_TYPE": "'VECTORS'",
+          "CENTER": "'500@10'",
+          "START_TIME": "'2026-11-13 00:00:00'",
+          "STOP_TIME": "'2026-11-16 00:00:00'",
+          "STEP_SIZE": "'1 d'",
+          "REF_PLANE": "'ECLIPTIC'",
+          "REF_SYSTEM": "'ICRF'",
+          "OUT_UNITS": "'AU-D'",
+          "VEC_TABLE": "'2'",
+          "VEC_CORR": "'NONE'",
+          "CSV_FORMAT": "'YES'",
+          "VEC_LABELS": "'YES'",
+          "TIME_TYPE": "'UT'",
+          "TIME_DIGITS": "'FRACSEC'"
+        },
+        "retrieved_utc": "2026-11-14T02:08:21.906928+00:00",
+        "response_sha256": "c00f1742f4e1baaed2268a15fce87884fdb10ccff211a4a758ee2a466cb43f25",
+        "response_bytes": 8923,
+        "raw_response_json": "{\"signature\":{\"version\":\"1.2\",\"source\":\"NASA/JPL Horizons API\"},\"result\":\"*******************************************************************************\\n Revised: April 12, 2021                 Earth                              399\\n \\n GEOPHYSICAL PROPERTIES (revised May 9, 2022):\\n  Vol. Mean Radius (km)    = 6371.01+-0.02   Mass x10^24 (kg)= 5.97219+-0.0006\\n  Equ. radius, km          = 6378.137        Mass layers:\\n  Polar axis, km           = 6356.752          Atmos         = 5.1   x 10^18 kg\\n  Flattening               = 1/298.257223563   oceans        = 1.4   x 10^21 kg\\n  Density, g/cm^3          = 5.51              crust         = 2.6   x 10^22 kg\\n  J2 (IERS 2010)           = 0.00108262545     mantle        = 4.043 x 10^24 kg\\n  g_p, m/s^2  (polar)      = 9.8321863685      outer core    = 1.835 x 10^24 kg\\n  g_e, m/s^2  (equatorial) = 9.7803267715      inner core    = 9.675 x 10^22 kg\\n  g_o, m/s^2               = 9.82022         Fluid core rad  = 3480 km\\n  GM, km^3/s^2             = 398600.435436   Inner core rad  = 1215 km\\n  GM 1-sigma, km^3/s^2     =      0.0014     Escape velocity = 11.186 km/s\\n  Rot. Rate (rad/s)        = 0.00007292115   Surface area:\\n  Mean sidereal day, hr    = 23.9344695944     land          = 1.48 x 10^8 km\\n  Mean solar day 2000.0, s = 86400.002         sea           = 3.62 x 10^8 km\\n  Mean solar day 1820.0, s = 86400.0         Love no., k2    = 0.299\\n  Moment of inertia        = 0.3308          Atm. pressure   = 1.0 bar\\n  Mean surface temp (Ts), K= 287.6           Volume, km^3    = 1.08321 x 10^12\\n  Mean effect. temp (Te), K= 255             Magnetic moment = 0.61 gauss Rp^3\\n  Geometric albedo         = 0.367           Vis. mag. V(1,0)= -3.86\\n  Solar Constant (W/m^2)   = 1367.6 (mean), 1414 (perihelion), 1322 (aphelion)\\n HELIOCENTRIC ORBIT CHARACTERISTICS:\\n  Obliquity to orbit, deg  = 23.4392911  Sidereal orb period  = 1.0000174 y\\n  Orbital speed, km/s      = 29.79       Sidereal orb period  = 365.25636 d\\n  Mean daily motion, deg/d = 0.9856474   Hill's sphere radius = 234.9       \\n*******************************************************************************\\n\\nCalling TDBMUT with LBND,LMJD= 0.847800000000000E+09  0.613570000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847886400000000E+09  0.613580000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847972800000000E+09  0.613590000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.848059200000000E+09  0.613600000000000E+05\\n\\n*******************************************************************************\\nEphemeris / API_USER Fri Nov 13 18:08:21 2026 Pasadena, USA      / Horizons\\n*******************************************************************************\\nTarget body name: Earth (399)                     {source: DE441}\\nCenter body name: Sun (10)                        {source: DE441}\\nCenter-site name: BODY CENTER\\n*******************************************************************************\\nStart time      : A.D. 2026-Nov-13 00:00:00.0000 UT \\nStop  time      : A.D. 2026-Nov-16 00:00:00.0000 UT \\nStep-size       : 1440 minutes\\n*******************************************************************************\\nCenter geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}\\nCenter cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}\\nCenter radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}\\nOutput units    : AU-D\\nCalendar mode   : Mixed Julian/Gregorian\\nOutput type     : GEOMETRIC cartesian states\\nOutput format   : 2 (position and velocity)\\nEOP file        : eop.261113.p270209\\nEOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-NOV-13. PREDICTS-> 2027-FEB-08\\nReference frame : Ecliptic of J2000.0\\n*******************************************************************************\\n            JDUT ,            Calendar Date (UT ),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,\\n**************************************************************************************************************************************************************************************************\\n$$SOE\\n2461357.500000000, A.D. 2026-Nov-13 00:00:00.0000,  6.329625539192477E-01,  7.609268789756506E-01, -4.855506465300240E-05, -1.351268155923895E-02,  1.093753833778515E-02, -9.621611995498326E-07,\\n2461358.500000000, A.D. 2026-Nov-14 00:00:00.0000,  6.193540204005308E-01,  7.717469853460295E-01, -4.955942943716287E-05, -1.370366481173362E-02,  1.070210306802581E-02, -1.043489724390388E-06,\\n2461359.500000000, A.D. 2026-Nov-15 00:00:00.0000,  6.055566746478663E-01,  7.823299630150140E-01, -5.063531110769662E-05, -1.389029723093629E-02,  1.046330146610526E-02, -1.104635721426845E-06,\\n2461360.500000000, A.D. 2026-Nov-16 00:00:00.0000,  5.915748927059984E-01,  7.926725071632490E-01, -5.176092600754306E-05, -1.407252956396149E-02,  1.022125652121750E-02, -1.142470114354265E-06,\\n$$EOE\\n**************************************************************************************************************************************************************************************************\\n \\nTIME\\n\\n Times PRIOR to 1962 are UT1, a mean-solar time closely related to the\\nprior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current\\ncivil or \\\"wall-clock\\\" atomic time-scale. UTC is kept within 0.9 seconds\\nof UT1 using integer leap-seconds for 1972 and later years.\\n\\n  Conversion from the internal Barycentric Dynamical Time (TDB) of solar\\nsystem dynamics to the discontinuous civil UT time-scale has not been\\ndetermined for UTC times after the next July or January 1st. Therefore,\\nthe last known leap-second is used as a constant over future intervals,\\na condition noted here as \\\"UT~\\\".\\n\\n  Future but as yet undetermined leap-seconds can be expected to change\\ntime-tags in the \\\"UT~\\\" interval and, in general, the UT scale may not be\\nsuitable for purposes that assume time-tag continuity in the ephemeris.\\nOutput in continuous TDB and TT timescales may instead be requested,\\nthough these are not linked to Earth's rotation.\\n\\n  Time-tags refer to the UT time-scale conversion from TDB on Earth\\nregardless of observer location within the solar system, although clock\\nrates may differ due to the local gravity field and no analog to \\\"UT\\\"\\nmay be defined for that location.\\n \\nCALENDAR SYSTEM\\n\\n  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15\\n(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)\\nare in the Julian calendar system, which is automatically extended for dates\\nprior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for\\nmatching historical dates. The Gregorian calendar more accurately corresponds\\nto the Earth's orbital motion and seasons. A \\\"Gregorian-only\\\" calendar mode is\\navailable if such physical events are the primary interest.\\n\\nREFERENCE FRAME AND COORDINATES\\n\\n  Ecliptic at the standard reference epoch\\n\\n    Reference epoch: J2000.0\\n    X-Y plane: adopted Earth orbital plane at the reference epoch\\n               Note: IAU76 obliquity of 84381.448 arcseconds wrt ICRF X-Y plane\\n    X-axis   : ICRF\\n    Z-axis   : perpendicular to the X-Y plane in the directional (+ or -) sense\\n               of Earth's north pole at the reference epoch.\\n\\n  Symbol meaning [1 au= 149597870.700 km, 1 day= 86400.0 s]:\\n\\n    JDUT     Julian Day Number, Universal Time\\n      X      X-component of position vector (au)\\n      Y      Y-component of position vector (au)\\n      Z      Z-component of position vector (au)\\n      VX     X-component of velocity vector (au/day)                           \\n      VY     Y-component of velocity vector (au/day)                           \\n      VZ     Z-component of velocity vector (au/day)                           \\n\\nABERRATIONS AND CORRECTIONS\\n\\n Geometric state vectors have NO corrections or aberrations applied.\\n\\nComputations by ...\\n\\n    Solar System Dynamics Group, Horizons On-Line Ephemeris System\\n    4800 Oak Grove Drive, Jet Propulsion Laboratory\\n    Pasadena, CA  91109   USA\\n\\n    General site: https://ssd.jpl.nasa.gov/\\n    Mailing list: https://ssd.jpl.nasa.gov/email_list.html\\n    System news : https://ssd.jpl.nasa.gov/horizons/news.html\\n    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html\\n    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x\\n                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html\\n                  command-line   telnet ssd.jpl.nasa.gov 6775\\n                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt\\n                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS\\n    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov\\n*******************************************************************************\\n\"}\n",
+        "signature": {
+          "version": "1.2",
+          "source": "NASA/JPL Horizons API"
+        },
+        "target_source": "DE441",
+        "center_source": "DE441"
+      }
+    },
+    {
+      "object_id": "mars",
+      "horizons_id": "499",
+      "name": "Mars",
+      "body_class": "planet",
+      "radius": {
+        "value_km": 3389.5,
+        "uncertainty_km": 0.2,
+        "reference_key": " D ",
+        "definition": "Mean Radius (volume-equivalent), km",
+        "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html"
+      },
+      "samples": [
+        {
+          "epoch_utc": "2026-11-13T00:00:00Z",
+          "jd_utc": 2461357.5,
+          "position_au": [
+            -0.4453211029343366,
+            1.543290071161532,
+            0.04326091851211903
+          ],
+          "velocity_au_day": [
+            -0.01291538043015352,
+            -0.002690838933677075,
+            0.0002602897525129074
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-14T00:00:00Z",
+          "jd_utc": 2461358.5,
+          "position_au": [
+            -0.4582204625605671,
+            1.540544260290957,
+            0.04351966328367104
+          ],
+          "velocity_au_day": [
+            -0.01288319562637542,
+            -0.002800716036767526,
+            0.0002571976889243002
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-15T00:00:00Z",
+          "jd_utc": 2461359.5,
+          "position_au": [
+            -0.4710872085957731,
+            1.537688773430219,
+            0.04377530968678651
+          ],
+          "velocity_au_day": [
+            -0.0128501541138916,
+            -0.002910190087595533,
+            0.0002540930559068591
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-16T00:00:00Z",
+          "jd_utc": 2461360.5,
+          "position_au": [
+            -0.4839204869188602,
+            1.534724016201594,
+            0.04402784527371063
+          ],
+          "velocity_au_day": [
+            -0.01281626105072112,
+            -0.003019255949598507,
+            0.0002509760886024298
+          ]
+        }
+      ],
+      "ephemeris_source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27499%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&START_TIME=%272026-11-13+00%3A00%3A00%27&STOP_TIME=%272026-11-16+00%3A00%3A00%27&STEP_SIZE=%271+d%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&VEC_TABLE=%272%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&VEC_LABELS=%27YES%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "'499'",
+          "OBJ_DATA": "'YES'",
+          "MAKE_EPHEM": "'YES'",
+          "EPHEM_TYPE": "'VECTORS'",
+          "CENTER": "'500@10'",
+          "START_TIME": "'2026-11-13 00:00:00'",
+          "STOP_TIME": "'2026-11-16 00:00:00'",
+          "STEP_SIZE": "'1 d'",
+          "REF_PLANE": "'ECLIPTIC'",
+          "REF_SYSTEM": "'ICRF'",
+          "OUT_UNITS": "'AU-D'",
+          "VEC_TABLE": "'2'",
+          "VEC_CORR": "'NONE'",
+          "CSV_FORMAT": "'YES'",
+          "VEC_LABELS": "'YES'",
+          "TIME_TYPE": "'UT'",
+          "TIME_DIGITS": "'FRACSEC'"
+        },
+        "retrieved_utc": "2026-11-14T02:08:22.425506+00:00",
+        "response_sha256": "2d06b6d20d065119b3787f456d29a7f3a0423b2758c99ec55ee522fb61957693",
+        "response_bytes": 8461,
+        "raw_response_json": "{\"signature\":{\"version\":\"1.2\",\"source\":\"NASA/JPL Horizons API\"},\"result\":\"*******************************************************************************\\n Revised: June 02, 2025                 Mars                            499 / 4\\n \\n PHYSICAL DATA (updated 2025-Jun-02):\\n  Vol. mean radius (km) = 3389.92+-0.04   Density (g/cm^3)      =  3.933(5+-4)\\n  Mass x10^23 (kg)      =    6.4171       Flattening, f         =  1/169.779\\n  Volume (x10^10 km^3)  =   16.318        Equatorial radius (km)=  3396.19\\n  Sidereal rot. period  =   24.622962 hr  Sid. rot. rate, rad/s =  0.0000708822 \\n  Mean solar day (sol)  =   88775.24415 s Polar gravity m/s^2   =  3.758\\n  Core radius (km)      = ~1700           Equ. gravity  m/s^2   =  3.71\\n  Geometric Albedo      =    0.150                                              \\n\\n  GM (km^3/s^2)         = 42828.375662    Mass ratio (Sun/Mars) = 3098703.59\\n  GM 1-sigma (km^3/s^2) = +- 0.00028      Mass of atmosphere, kg= ~ 2.5 x 10^16\\n  Mean temperature (K)  =  210            Atmos. pressure (bar) =    0.0056 \\n  Obliquity to orbit    =   25.19 deg     Max. angular diam.    =  17.9\\\"\\n  Mean sidereal orb per =    1.88081578 y Visual mag. V(1,0)    =  -1.52\\n  Mean sidereal orb per =  686.98 d       Orbital speed,  km/s  =  24.13\\n  Hill's sphere rad. Rp =  319.8          Escape speed, km/s    =   5.027\\n                                 Perihelion  Aphelion    Mean\\n  Solar Constant (W/m^2)         717         493         589\\n  Maximum Planetary IR (W/m^2)   470         315         390\\n  Minimum Planetary IR (W/m^2)    30          30          30\\n*******************************************************************************\\n\\nCalling TDBMUT with LBND,LMJD= 0.847800000000000E+09  0.613570000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847886400000000E+09  0.613580000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847972800000000E+09  0.613590000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.848059200000000E+09  0.613600000000000E+05\\n\\n*******************************************************************************\\nEphemeris / API_USER Fri Nov 13 18:08:22 2026 Pasadena, USA      / Horizons\\n*******************************************************************************\\nTarget body name: Mars (499)                      {source: mar099}\\nCenter body name: Sun (10)                        {source: DE441}\\nCenter-site name: BODY CENTER\\n*******************************************************************************\\nStart time      : A.D. 2026-Nov-13 00:00:00.0000 UT \\nStop  time      : A.D. 2026-Nov-16 00:00:00.0000 UT \\nStep-size       : 1440 minutes\\n*******************************************************************************\\nCenter geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}\\nCenter cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}\\nCenter radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}\\nOutput units    : AU-D\\nCalendar mode   : Mixed Julian/Gregorian\\nOutput type     : GEOMETRIC cartesian states\\nOutput format   : 2 (position and velocity)\\nEOP file        : eop.261113.p270209\\nEOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-NOV-13. PREDICTS-> 2027-FEB-08\\nReference frame : Ecliptic of J2000.0\\n*******************************************************************************\\n            JDUT ,            Calendar Date (UT ),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,\\n**************************************************************************************************************************************************************************************************\\n$$SOE\\n2461357.500000000, A.D. 2026-Nov-13 00:00:00.0000, -4.453211029343366E-01,  1.543290071161532E+00,  4.326091851211903E-02, -1.291538043015352E-02, -2.690838933677075E-03,  2.602897525129074E-04,\\n2461358.500000000, A.D. 2026-Nov-14 00:00:00.0000, -4.582204625605671E-01,  1.540544260290957E+00,  4.351966328367104E-02, -1.288319562637542E-02, -2.800716036767526E-03,  2.571976889243002E-04,\\n2461359.500000000, A.D. 2026-Nov-15 00:00:00.0000, -4.710872085957731E-01,  1.537688773430219E+00,  4.377530968678651E-02, -1.285015411389160E-02, -2.910190087595533E-03,  2.540930559068591E-04,\\n2461360.500000000, A.D. 2026-Nov-16 00:00:00.0000, -4.839204869188602E-01,  1.534724016201594E+00,  4.402784527371063E-02, -1.281626105072112E-02, -3.019255949598507E-03,  2.509760886024298E-04,\\n$$EOE\\n**************************************************************************************************************************************************************************************************\\n \\nTIME\\n\\n Times PRIOR to 1962 are UT1, a mean-solar time closely related to the\\nprior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current\\ncivil or \\\"wall-clock\\\" atomic time-scale. UTC is kept within 0.9 seconds\\nof UT1 using integer leap-seconds for 1972 and later years.\\n\\n  Conversion from the internal Barycentric Dynamical Time (TDB) of solar\\nsystem dynamics to the discontinuous civil UT time-scale has not been\\ndetermined for UTC times after the next July or January 1st. Therefore,\\nthe last known leap-second is used as a constant over future intervals,\\na condition noted here as \\\"UT~\\\".\\n\\n  Future but as yet undetermined leap-seconds can be expected to change\\ntime-tags in the \\\"UT~\\\" interval and, in general, the UT scale may not be\\nsuitable for purposes that assume time-tag continuity in the ephemeris.\\nOutput in continuous TDB and TT timescales may instead be requested,\\nthough these are not linked to Earth's rotation.\\n\\n  Time-tags refer to the UT time-scale conversion from TDB on Earth\\nregardless of observer location within the solar system, although clock\\nrates may differ due to the local gravity field and no analog to \\\"UT\\\"\\nmay be defined for that location.\\n \\nCALENDAR SYSTEM\\n\\n  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15\\n(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)\\nare in the Julian calendar system, which is automatically extended for dates\\nprior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for\\nmatching historical dates. The Gregorian calendar more accurately corresponds\\nto the Earth's orbital motion and seasons. A \\\"Gregorian-only\\\" calendar mode is\\navailable if such physical events are the primary interest.\\n\\nREFERENCE FRAME AND COORDINATES\\n\\n  Ecliptic at the standard reference epoch\\n\\n    Reference epoch: J2000.0\\n    X-Y plane: adopted Earth orbital plane at the reference epoch\\n               Note: IAU76 obliquity of 84381.448 arcseconds wrt ICRF X-Y plane\\n    X-axis   : ICRF\\n    Z-axis   : perpendicular to the X-Y plane in the directional (+ or -) sense\\n               of Earth's north pole at the reference epoch.\\n\\n  Symbol meaning [1 au= 149597870.700 km, 1 day= 86400.0 s]:\\n\\n    JDUT     Julian Day Number, Universal Time\\n      X      X-component of position vector (au)\\n      Y      Y-component of position vector (au)\\n      Z      Z-component of position vector (au)\\n      VX     X-component of velocity vector (au/day)                           \\n      VY     Y-component of velocity vector (au/day)                           \\n      VZ     Z-component of velocity vector (au/day)                           \\n\\nABERRATIONS AND CORRECTIONS\\n\\n Geometric state vectors have NO corrections or aberrations applied.\\n\\nComputations by ...\\n\\n    Solar System Dynamics Group, Horizons On-Line Ephemeris System\\n    4800 Oak Grove Drive, Jet Propulsion Laboratory\\n    Pasadena, CA  91109   USA\\n\\n    General site: https://ssd.jpl.nasa.gov/\\n    Mailing list: https://ssd.jpl.nasa.gov/email_list.html\\n    System news : https://ssd.jpl.nasa.gov/horizons/news.html\\n    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html\\n    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x\\n                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html\\n                  command-line   telnet ssd.jpl.nasa.gov 6775\\n                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt\\n                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS\\n    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov\\n*******************************************************************************\\n\"}\n",
+        "signature": {
+          "version": "1.2",
+          "source": "NASA/JPL Horizons API"
+        },
+        "target_source": "mar099",
+        "center_source": "DE441"
+      }
+    },
+    {
+      "object_id": "jupiter",
+      "horizons_id": "599",
+      "name": "Jupiter",
+      "body_class": "planet",
+      "radius": {
+        "value_km": 69911.0,
+        "uncertainty_km": 6.0,
+        "reference_key": " D ",
+        "definition": "Mean Radius (volume-equivalent), km",
+        "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html"
+      },
+      "samples": [
+        {
+          "epoch_utc": "2026-11-13T00:00:00Z",
+          "jd_utc": 2461357.5,
+          "position_au": [
+            -3.732316174166115,
+            3.791441856013131,
+            0.0677559563495123
+          ],
+          "velocity_au_day": [
+            -0.005469740322080416,
+            -0.004946197375968233,
+            0.0001429354627971002
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-14T00:00:00Z",
+          "jd_utc": 2461358.5,
+          "position_au": [
+            -3.737782147454097,
+            3.786491462427989,
+            0.06789881105383222
+          ],
+          "velocity_au_day": [
+            -0.005461567789328163,
+            -0.004954182559862377,
+            0.000142797597526845
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-15T00:00:00Z",
+          "jd_utc": 2461359.5,
+          "position_au": [
+            -3.743240117578106,
+            3.781534494606773,
+            0.06804157470670331
+          ],
+          "velocity_au_day": [
+            -0.00545498052310568,
+            -0.004960271704827739,
+            0.0001427012498255991
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-16T00:00:00Z",
+          "jd_utc": 2461360.5,
+          "position_au": [
+            -3.748691444627322,
+            3.776570234995232,
+            0.06818419737373185
+          ],
+          "velocity_au_day": [
+            -0.005447500152692051,
+            -0.004967724381114802,
+            0.0001425657326120168
+          ]
+        }
+      ],
+      "ephemeris_source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27599%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&START_TIME=%272026-11-13+00%3A00%3A00%27&STOP_TIME=%272026-11-16+00%3A00%3A00%27&STEP_SIZE=%271+d%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&VEC_TABLE=%272%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&VEC_LABELS=%27YES%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "'599'",
+          "OBJ_DATA": "'YES'",
+          "MAKE_EPHEM": "'YES'",
+          "EPHEM_TYPE": "'VECTORS'",
+          "CENTER": "'500@10'",
+          "START_TIME": "'2026-11-13 00:00:00'",
+          "STOP_TIME": "'2026-11-16 00:00:00'",
+          "STEP_SIZE": "'1 d'",
+          "REF_PLANE": "'ECLIPTIC'",
+          "REF_SYSTEM": "'ICRF'",
+          "OUT_UNITS": "'AU-D'",
+          "VEC_TABLE": "'2'",
+          "VEC_CORR": "'NONE'",
+          "CSV_FORMAT": "'YES'",
+          "VEC_LABELS": "'YES'",
+          "TIME_TYPE": "'UT'",
+          "TIME_DIGITS": "'FRACSEC'"
+        },
+        "retrieved_utc": "2026-11-14T02:08:22.947383+00:00",
+        "response_sha256": "6d95721e0a4f007c516815f34c0a8794f62b73f3407da185ffa37efce857d2fa",
+        "response_bytes": 8424,
+        "raw_response_json": "{\"signature\":{\"version\":\"1.2\",\"source\":\"NASA/JPL Horizons API\"},\"result\":\"*******************************************************************************\\n Revised: April 12, 2021               Jupiter                              599\\n \\n PHYSICAL DATA (revised 2025-Jan-30):\\n  Mass x 10^26 (kg)     = 18.9819           Density (g/cm^3)  = 1.3262 +- .0003\\n  Equat. radius (1 bar) = 71492+-4 km       Polar radius (km)     = 66854+-10\\n  Vol. Mean Radius (km) = 69911+-6          Flattening            = 0.06487\\n  Geometric Albedo      = 0.52              Rocky core mass (Mc/M)= 0.0261\\n  Sid. rot. period (III)= 9h 55m 29.711 s   Sid. rot. rate (rad/s)= 0.00017585\\n  Mean solar day, hrs   = ~9.9259         \\n  GM (km^3/s^2)         = 126686531.900     GM 1-sigma (km^3/s^2) =  +- 1.2732\\n  Equ. grav, ge (m/s^2) = 24.79             Pol. grav, gp (m/s^2) =  28.34\\n  Vis. magnitude V(1,0) = -9.40\\n  Vis. mag. (opposition)= -2.70             Obliquity to orbit    =  3.13 deg\\n  Sidereal orbit period = 11.861982204 y    Sidereal orbit period = 4332.589 d\\n  Mean daily motion     = 0.0831294 deg/d   Mean orbit speed, km/s= 13.0697\\n  Atmos. temp. (1 bar)  = 165+-5 K          Escape speed, km/s    =  59.5           \\n  A_roche(ice)/Rp       =  2.76             Hill's sphere rad. Rp = 740\\n                                 Perihelion   Aphelion     Mean\\n  Solar Constant (W/m^2)         56           46           51\\n  Maximum Planetary IR (W/m^2)   13.7         13.4         13.6\\n  Minimum Planetary IR (W/m^2)   13.7         13.4         13.6\\n*******************************************************************************\\n\\nCalling TDBMUT with LBND,LMJD= 0.847800000000000E+09  0.613570000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847886400000000E+09  0.613580000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847972800000000E+09  0.613590000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.848059200000000E+09  0.613600000000000E+05\\n\\n*******************************************************************************\\nEphemeris / API_USER Fri Nov 13 18:08:22 2026 Pasadena, USA      / Horizons\\n*******************************************************************************\\nTarget body name: Jupiter (599)                   {source: jup365_merged}\\nCenter body name: Sun (10)                        {source: jup365_merged}\\nCenter-site name: BODY CENTER\\n*******************************************************************************\\nStart time      : A.D. 2026-Nov-13 00:00:00.0000 UT \\nStop  time      : A.D. 2026-Nov-16 00:00:00.0000 UT \\nStep-size       : 1440 minutes\\n*******************************************************************************\\nCenter geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}\\nCenter cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}\\nCenter radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}\\nOutput units    : AU-D\\nCalendar mode   : Mixed Julian/Gregorian\\nOutput type     : GEOMETRIC cartesian states\\nOutput format   : 2 (position and velocity)\\nEOP file        : eop.261113.p270209\\nEOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-NOV-13. PREDICTS-> 2027-FEB-08\\nReference frame : Ecliptic of J2000.0\\n*******************************************************************************\\n            JDUT ,            Calendar Date (UT ),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,\\n**************************************************************************************************************************************************************************************************\\n$$SOE\\n2461357.500000000, A.D. 2026-Nov-13 00:00:00.0000, -3.732316174166115E+00,  3.791441856013131E+00,  6.775595634951230E-02, -5.469740322080416E-03, -4.946197375968233E-03,  1.429354627971002E-04,\\n2461358.500000000, A.D. 2026-Nov-14 00:00:00.0000, -3.737782147454097E+00,  3.786491462427989E+00,  6.789881105383222E-02, -5.461567789328163E-03, -4.954182559862377E-03,  1.427975975268450E-04,\\n2461359.500000000, A.D. 2026-Nov-15 00:00:00.0000, -3.743240117578106E+00,  3.781534494606773E+00,  6.804157470670331E-02, -5.454980523105680E-03, -4.960271704827739E-03,  1.427012498255991E-04,\\n2461360.500000000, A.D. 2026-Nov-16 00:00:00.0000, -3.748691444627322E+00,  3.776570234995232E+00,  6.818419737373185E-02, -5.447500152692051E-03, -4.967724381114802E-03,  1.425657326120168E-04,\\n$$EOE\\n**************************************************************************************************************************************************************************************************\\n \\nTIME\\n\\n Times PRIOR to 1962 are UT1, a mean-solar time closely related to the\\nprior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current\\ncivil or \\\"wall-clock\\\" atomic time-scale. UTC is kept within 0.9 seconds\\nof UT1 using integer leap-seconds for 1972 and later years.\\n\\n  Conversion from the internal Barycentric Dynamical Time (TDB) of solar\\nsystem dynamics to the discontinuous civil UT time-scale has not been\\ndetermined for UTC times after the next July or January 1st. Therefore,\\nthe last known leap-second is used as a constant over future intervals,\\na condition noted here as \\\"UT~\\\".\\n\\n  Future but as yet undetermined leap-seconds can be expected to change\\ntime-tags in the \\\"UT~\\\" interval and, in general, the UT scale may not be\\nsuitable for purposes that assume time-tag continuity in the ephemeris.\\nOutput in continuous TDB and TT timescales may instead be requested,\\nthough these are not linked to Earth's rotation.\\n\\n  Time-tags refer to the UT time-scale conversion from TDB on Earth\\nregardless of observer location within the solar system, although clock\\nrates may differ due to the local gravity field and no analog to \\\"UT\\\"\\nmay be defined for that location.\\n \\nCALENDAR SYSTEM\\n\\n  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15\\n(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)\\nare in the Julian calendar system, which is automatically extended for dates\\nprior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for\\nmatching historical dates. The Gregorian calendar more accurately corresponds\\nto the Earth's orbital motion and seasons. A \\\"Gregorian-only\\\" calendar mode is\\navailable if such physical events are the primary interest.\\n\\nREFERENCE FRAME AND COORDINATES\\n\\n  Ecliptic at the standard reference epoch\\n\\n    Reference epoch: J2000.0\\n    X-Y plane: adopted Earth orbital plane at the reference epoch\\n               Note: IAU76 obliquity of 84381.448 arcseconds wrt ICRF X-Y plane\\n    X-axis   : ICRF\\n    Z-axis   : perpendicular to the X-Y plane in the directional (+ or -) sense\\n               of Earth's north pole at the reference epoch.\\n\\n  Symbol meaning [1 au= 149597870.700 km, 1 day= 86400.0 s]:\\n\\n    JDUT     Julian Day Number, Universal Time\\n      X      X-component of position vector (au)\\n      Y      Y-component of position vector (au)\\n      Z      Z-component of position vector (au)\\n      VX     X-component of velocity vector (au/day)                           \\n      VY     Y-component of velocity vector (au/day)                           \\n      VZ     Z-component of velocity vector (au/day)                           \\n\\nABERRATIONS AND CORRECTIONS\\n\\n Geometric state vectors have NO corrections or aberrations applied.\\n\\nComputations by ...\\n\\n    Solar System Dynamics Group, Horizons On-Line Ephemeris System\\n    4800 Oak Grove Drive, Jet Propulsion Laboratory\\n    Pasadena, CA  91109   USA\\n\\n    General site: https://ssd.jpl.nasa.gov/\\n    Mailing list: https://ssd.jpl.nasa.gov/email_list.html\\n    System news : https://ssd.jpl.nasa.gov/horizons/news.html\\n    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html\\n    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x\\n                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html\\n                  command-line   telnet ssd.jpl.nasa.gov 6775\\n                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt\\n                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS\\n    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov\\n*******************************************************************************\\n\"}\n",
+        "signature": {
+          "version": "1.2",
+          "source": "NASA/JPL Horizons API"
+        },
+        "target_source": "jup365_merged",
+        "center_source": "jup365_merged"
+      }
+    },
+    {
+      "object_id": "saturn",
+      "horizons_id": "699",
+      "name": "Saturn",
+      "body_class": "planet",
+      "radius": {
+        "value_km": 58232.0,
+        "uncertainty_km": 6.0,
+        "reference_key": " D ",
+        "definition": "Mean Radius (volume-equivalent), km",
+        "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html"
+      },
+      "samples": [
+        {
+          "epoch_utc": "2026-11-13T00:00:00Z",
+          "jd_utc": 2461357.5,
+          "position_au": [
+            9.197874992873194,
+            2.001132302014783,
+            -0.4009837721406336
+          ],
+          "velocity_au_day": [
+            -0.001495856919523666,
+            0.005436909279744802,
+            -3.510947975806921e-05
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-14T00:00:00Z",
+          "jd_utc": 2461358.5,
+          "position_au": [
+            9.196377539142114,
+            2.00656871294892,
+            -0.4010187414187007
+          ],
+          "velocity_au_day": [
+            -0.00149903361795128,
+            0.005435919100823038,
+            -3.483440450774271e-05
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-15T00:00:00Z",
+          "jd_utc": 2461359.5,
+          "position_au": [
+            9.194876959268326,
+            2.012004145440319,
+            -0.4010534475484059
+          ],
+          "velocity_au_day": [
+            -0.001502101712349718,
+            0.005434947334946647,
+            -3.458103323122327e-05
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-16T00:00:00Z",
+          "jd_utc": 2461360.5,
+          "position_au": [
+            9.193373391597234,
+            2.01743865012862,
+            -0.4010879311502242
+          ],
+          "velocity_au_day": [
+            -0.001505031983914384,
+            0.005434098498709289,
+            -3.440566376061672e-05
+          ]
+        }
+      ],
+      "ephemeris_source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27699%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&START_TIME=%272026-11-13+00%3A00%3A00%27&STOP_TIME=%272026-11-16+00%3A00%3A00%27&STEP_SIZE=%271+d%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&VEC_TABLE=%272%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&VEC_LABELS=%27YES%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "'699'",
+          "OBJ_DATA": "'YES'",
+          "MAKE_EPHEM": "'YES'",
+          "EPHEM_TYPE": "'VECTORS'",
+          "CENTER": "'500@10'",
+          "START_TIME": "'2026-11-13 00:00:00'",
+          "STOP_TIME": "'2026-11-16 00:00:00'",
+          "STEP_SIZE": "'1 d'",
+          "REF_PLANE": "'ECLIPTIC'",
+          "REF_SYSTEM": "'ICRF'",
+          "OUT_UNITS": "'AU-D'",
+          "VEC_TABLE": "'2'",
+          "VEC_CORR": "'NONE'",
+          "CSV_FORMAT": "'YES'",
+          "VEC_LABELS": "'YES'",
+          "TIME_TYPE": "'UT'",
+          "TIME_DIGITS": "'FRACSEC'"
+        },
+        "retrieved_utc": "2026-11-14T02:08:23.464969+00:00",
+        "response_sha256": "cada950dd25bf61b645af1ef070a90986b3cc2f593a1930d80de8484d224b993",
+        "response_bytes": 8388,
+        "raw_response_json": "{\"signature\":{\"source\":\"NASA/JPL Horizons API\",\"version\":\"1.2\"},\"result\":\"*******************************************************************************\\n Revised: January 26, 2022             Saturn                               699\\n \\n PHYSICAL DATA:\\n  Mass x10^26 (kg)      = 5.6834          Density (g/cm^3)       =  0.687+-.001\\n  Equat. radius (1 bar) = 60268+-4 km     Polar radius (km)      = 54364+-10\\n  Vol. Mean Radius (km) = 58232+-6        Flattening             =  0.09796\\n  Geometric Albedo      = 0.47            Rocky core mass (Mc/M) =  0.1027\\n  Sid. rot. period (III)= 10h 39m 22.4s   Sid. rot. rate (rad/s) =  0.000163785 \\n  Mean solar day, hrs   =~10.656         \\n  GM (km^3/s^2)         = 37931206.234    GM 1-sigma (km^3/s^2)  = +- 98\\n  Equ. grav, ge (m/s^2) = 10.44           Pol. grav, gp (m/s^2)  = 12.14+-0.01\\n  Vis. magnitude V(1,0) = -8.88          \\n  Vis. mag. (opposition)= +0.67           Obliquity to orbit     = 26.73 deg\\n  Sidereal orbit period = 29.447498 yr    Sidereal orbit period  = 10755.698 d\\n  Mean daily motion     = 0.0334979 deg/d Mean orbit velocity    =  9.68 km/s\\n  Atmos. temp. (1 bar)  = 134+-4 K        Escape speed, km/s    =  35.5          \\n  Aroche(ice)/Rp        =  2.71           Hill's sphere rad. Rp  = 1100\\n                                 Perihelion  Aphelion    Mean\\n  Solar Constant (W/m^2)         16.8        13.6        15.1\\n  Maximum Planetary IR (W/m^2)    4.7         4.5         4.6\\n  Minimum Planetary IR (W/m^2)    4.7         4.5         4.6\\n*******************************************************************************\\n\\nCalling TDBMUT with LBND,LMJD= 0.847800000000000E+09  0.613570000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847886400000000E+09  0.613580000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847972800000000E+09  0.613590000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.848059200000000E+09  0.613600000000000E+05\\n\\n*******************************************************************************\\nEphemeris / API_USER Fri Nov 13 18:08:23 2026 Pasadena, USA      / Horizons\\n*******************************************************************************\\nTarget body name: Saturn (699)                    {source: sat441l}\\nCenter body name: Sun (10)                        {source: DE441}\\nCenter-site name: BODY CENTER\\n*******************************************************************************\\nStart time      : A.D. 2026-Nov-13 00:00:00.0000 UT \\nStop  time      : A.D. 2026-Nov-16 00:00:00.0000 UT \\nStep-size       : 1440 minutes\\n*******************************************************************************\\nCenter geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}\\nCenter cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}\\nCenter radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}\\nOutput units    : AU-D\\nCalendar mode   : Mixed Julian/Gregorian\\nOutput type     : GEOMETRIC cartesian states\\nOutput format   : 2 (position and velocity)\\nEOP file        : eop.261113.p270209\\nEOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-NOV-13. PREDICTS-> 2027-FEB-08\\nReference frame : Ecliptic of J2000.0\\n*******************************************************************************\\n            JDUT ,            Calendar Date (UT ),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,\\n**************************************************************************************************************************************************************************************************\\n$$SOE\\n2461357.500000000, A.D. 2026-Nov-13 00:00:00.0000,  9.197874992873194E+00,  2.001132302014783E+00, -4.009837721406336E-01, -1.495856919523666E-03,  5.436909279744802E-03, -3.510947975806921E-05,\\n2461358.500000000, A.D. 2026-Nov-14 00:00:00.0000,  9.196377539142114E+00,  2.006568712948920E+00, -4.010187414187007E-01, -1.499033617951280E-03,  5.435919100823038E-03, -3.483440450774271E-05,\\n2461359.500000000, A.D. 2026-Nov-15 00:00:00.0000,  9.194876959268326E+00,  2.012004145440319E+00, -4.010534475484059E-01, -1.502101712349718E-03,  5.434947334946647E-03, -3.458103323122327E-05,\\n2461360.500000000, A.D. 2026-Nov-16 00:00:00.0000,  9.193373391597234E+00,  2.017438650128620E+00, -4.010879311502242E-01, -1.505031983914384E-03,  5.434098498709289E-03, -3.440566376061672E-05,\\n$$EOE\\n**************************************************************************************************************************************************************************************************\\n \\nTIME\\n\\n Times PRIOR to 1962 are UT1, a mean-solar time closely related to the\\nprior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current\\ncivil or \\\"wall-clock\\\" atomic time-scale. UTC is kept within 0.9 seconds\\nof UT1 using integer leap-seconds for 1972 and later years.\\n\\n  Conversion from the internal Barycentric Dynamical Time (TDB) of solar\\nsystem dynamics to the discontinuous civil UT time-scale has not been\\ndetermined for UTC times after the next July or January 1st. Therefore,\\nthe last known leap-second is used as a constant over future intervals,\\na condition noted here as \\\"UT~\\\".\\n\\n  Future but as yet undetermined leap-seconds can be expected to change\\ntime-tags in the \\\"UT~\\\" interval and, in general, the UT scale may not be\\nsuitable for purposes that assume time-tag continuity in the ephemeris.\\nOutput in continuous TDB and TT timescales may instead be requested,\\nthough these are not linked to Earth's rotation.\\n\\n  Time-tags refer to the UT time-scale conversion from TDB on Earth\\nregardless of observer location within the solar system, although clock\\nrates may differ due to the local gravity field and no analog to \\\"UT\\\"\\nmay be defined for that location.\\n \\nCALENDAR SYSTEM\\n\\n  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15\\n(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)\\nare in the Julian calendar system, which is automatically extended for dates\\nprior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for\\nmatching historical dates. The Gregorian calendar more accurately corresponds\\nto the Earth's orbital motion and seasons. A \\\"Gregorian-only\\\" calendar mode is\\navailable if such physical events are the primary interest.\\n\\nREFERENCE FRAME AND COORDINATES\\n\\n  Ecliptic at the standard reference epoch\\n\\n    Reference epoch: J2000.0\\n    X-Y plane: adopted Earth orbital plane at the reference epoch\\n               Note: IAU76 obliquity of 84381.448 arcseconds wrt ICRF X-Y plane\\n    X-axis   : ICRF\\n    Z-axis   : perpendicular to the X-Y plane in the directional (+ or -) sense\\n               of Earth's north pole at the reference epoch.\\n\\n  Symbol meaning [1 au= 149597870.700 km, 1 day= 86400.0 s]:\\n\\n    JDUT     Julian Day Number, Universal Time\\n      X      X-component of position vector (au)\\n      Y      Y-component of position vector (au)\\n      Z      Z-component of position vector (au)\\n      VX     X-component of velocity vector (au/day)                           \\n      VY     Y-component of velocity vector (au/day)                           \\n      VZ     Z-component of velocity vector (au/day)                           \\n\\nABERRATIONS AND CORRECTIONS\\n\\n Geometric state vectors have NO corrections or aberrations applied.\\n\\nComputations by ...\\n\\n    Solar System Dynamics Group, Horizons On-Line Ephemeris System\\n    4800 Oak Grove Drive, Jet Propulsion Laboratory\\n    Pasadena, CA  91109   USA\\n\\n    General site: https://ssd.jpl.nasa.gov/\\n    Mailing list: https://ssd.jpl.nasa.gov/email_list.html\\n    System news : https://ssd.jpl.nasa.gov/horizons/news.html\\n    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html\\n    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x\\n                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html\\n                  command-line   telnet ssd.jpl.nasa.gov 6775\\n                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt\\n                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS\\n    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov\\n*******************************************************************************\\n\"}\n",
+        "signature": {
+          "source": "NASA/JPL Horizons API",
+          "version": "1.2"
+        },
+        "target_source": "sat441l",
+        "center_source": "DE441"
+      }
+    },
+    {
+      "object_id": "uranus",
+      "horizons_id": "799",
+      "name": "Uranus",
+      "body_class": "planet",
+      "radius": {
+        "value_km": 25362.0,
+        "uncertainty_km": 7.0,
+        "reference_key": " D ",
+        "definition": "Mean Radius (volume-equivalent), km",
+        "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html"
+      },
+      "samples": [
+        {
+          "epoch_utc": "2026-11-13T00:00:00Z",
+          "jd_utc": 2461357.5,
+          "position_au": [
+            8.778677000211825,
+            17.3375957091445,
+            -0.04943433728389863
+          ],
+          "velocity_au_day": [
+            -0.003543552794929066,
+            0.001590715665491834,
+            5.181421354018903e-05
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-14T00:00:00Z",
+          "jd_utc": 2461358.5,
+          "position_au": [
+            8.77513322102939,
+            17.33918607448641,
+            -0.04938257066730874
+          ],
+          "velocity_au_day": [
+            -0.003544008933748658,
+            0.001590019917644082,
+            5.175165338563004e-05
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-15T00:00:00Z",
+          "jd_utc": 2461359.5,
+          "position_au": [
+            8.771589014233687,
+            17.34077574586258,
+            -0.04933080963021454
+          ],
+          "velocity_au_day": [
+            -0.003544393396196384,
+            0.001589318319999146,
+            5.175653472923429e-05
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-16T00:00:00Z",
+          "jd_utc": 2461360.5,
+          "position_au": [
+            8.76804439311056,
+            17.34236471712823,
+            -0.0492790768877085
+          ],
+          "velocity_au_day": [
+            -0.003544878640153382,
+            0.001588635740124751,
+            5.174199316168537e-05
+          ]
+        }
+      ],
+      "ephemeris_source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27799%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&START_TIME=%272026-11-13+00%3A00%3A00%27&STOP_TIME=%272026-11-16+00%3A00%3A00%27&STEP_SIZE=%271+d%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&VEC_TABLE=%272%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&VEC_LABELS=%27YES%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "'799'",
+          "OBJ_DATA": "'YES'",
+          "MAKE_EPHEM": "'YES'",
+          "EPHEM_TYPE": "'VECTORS'",
+          "CENTER": "'500@10'",
+          "START_TIME": "'2026-11-13 00:00:00'",
+          "STOP_TIME": "'2026-11-16 00:00:00'",
+          "STEP_SIZE": "'1 d'",
+          "REF_PLANE": "'ECLIPTIC'",
+          "REF_SYSTEM": "'ICRF'",
+          "OUT_UNITS": "'AU-D'",
+          "VEC_TABLE": "'2'",
+          "VEC_CORR": "'NONE'",
+          "CSV_FORMAT": "'YES'",
+          "VEC_LABELS": "'YES'",
+          "TIME_TYPE": "'UT'",
+          "TIME_DIGITS": "'FRACSEC'"
+        },
+        "retrieved_utc": "2026-11-14T02:08:23.978493+00:00",
+        "response_sha256": "ae00d7e70ecf3f60edb9eb97b8bcfe5312125c60b5c257221592c4cd6dfbd04a",
+        "response_bytes": 8388,
+        "raw_response_json": "{\"signature\":{\"version\":\"1.2\",\"source\":\"NASA/JPL Horizons API\"},\"result\":\"*******************************************************************************\\n Revised: September 25, 2025           Uranus                               799\\n \\n PHYSICAL DATA:\\n  Mass x10^24 (kg)      = 86.813          Density (g/cm^3)       =  1.271\\n  Equat. radius (1 bar) = 25559+-4 km     Polar radius (km)      = 24973+-20\\n  Vol. Mean Radius (km) = 25362+-12       Flattening             =  0.02293\\n  Geometric Albedo      = 0.51\\n  Sid. rot. period (III)= 17.24+-0.01 h   Sid. rot. rate (rad/s) = -0.000101237\\n  Mean solar day, h     =~17.24           Rocky core mass (Mc/M) =  0.0012        \\n  GM (km^3/s^2)         = 5793950.6103    GM 1-sigma (km^3/s^2)  = +-4.3 \\n  Equ. grav, ge (m/s^2) =  8.87           Pol. grav, gp (m/s^2)  =   9.19+-0.02\\n  Visual magnitude V(1,0)= -7.11\\n  Vis. mag. (opposition)=  +5.52          Obliquity to orbit     = 97.77 deg\\n  Sidereal orbit period = 84.0120465 y    Sidereal orbit period  = 30685.4 d\\n  Mean daily motion     = 0.01176904 dg/d Mean orbit velocity    =  6.8 km/s\\n  Atmos. temp. (1 bar)  =  76+-2 K        Escape speed, km/s     =  21.3           \\n  Aroche(ice)/Rp        =  2.20           Hill's sphere rad., Rp = 2700\\n                                 Perihelion   Aphelion    Mean\\n  Solar Constant (W/m^2)         4.09         3.39        3.71\\n  Maximum Planetary IR (W/m^2)   0.72         0.55        0.63\\n  Minimum Planetary IR (W/m^2)   0.72         0.55        0.63\\n*******************************************************************************\\n\\nCalling TDBMUT with LBND,LMJD= 0.847800000000000E+09  0.613570000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847886400000000E+09  0.613580000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847972800000000E+09  0.613590000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.848059200000000E+09  0.613600000000000E+05\\n\\n*******************************************************************************\\nEphemeris / API_USER Fri Nov 13 18:08:23 2026 Pasadena, USA      / Horizons\\n*******************************************************************************\\nTarget body name: Uranus (799)                    {source: ura184_merged}\\nCenter body name: Sun (10)                        {source: ura184_merged}\\nCenter-site name: BODY CENTER\\n*******************************************************************************\\nStart time      : A.D. 2026-Nov-13 00:00:00.0000 UT \\nStop  time      : A.D. 2026-Nov-16 00:00:00.0000 UT \\nStep-size       : 1440 minutes\\n*******************************************************************************\\nCenter geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}\\nCenter cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}\\nCenter radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}\\nOutput units    : AU-D\\nCalendar mode   : Mixed Julian/Gregorian\\nOutput type     : GEOMETRIC cartesian states\\nOutput format   : 2 (position and velocity)\\nEOP file        : eop.261113.p270209\\nEOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-NOV-13. PREDICTS-> 2027-FEB-08\\nReference frame : Ecliptic of J2000.0\\n*******************************************************************************\\n            JDUT ,            Calendar Date (UT ),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,\\n**************************************************************************************************************************************************************************************************\\n$$SOE\\n2461357.500000000, A.D. 2026-Nov-13 00:00:00.0000,  8.778677000211825E+00,  1.733759570914450E+01, -4.943433728389863E-02, -3.543552794929066E-03,  1.590715665491834E-03,  5.181421354018903E-05,\\n2461358.500000000, A.D. 2026-Nov-14 00:00:00.0000,  8.775133221029391E+00,  1.733918607448641E+01, -4.938257066730874E-02, -3.544008933748658E-03,  1.590019917644082E-03,  5.175165338563004E-05,\\n2461359.500000000, A.D. 2026-Nov-15 00:00:00.0000,  8.771589014233687E+00,  1.734077574586258E+01, -4.933080963021454E-02, -3.544393396196384E-03,  1.589318319999146E-03,  5.175653472923429E-05,\\n2461360.500000000, A.D. 2026-Nov-16 00:00:00.0000,  8.768044393110561E+00,  1.734236471712823E+01, -4.927907688770850E-02, -3.544878640153382E-03,  1.588635740124751E-03,  5.174199316168537E-05,\\n$$EOE\\n**************************************************************************************************************************************************************************************************\\n \\nTIME\\n\\n Times PRIOR to 1962 are UT1, a mean-solar time closely related to the\\nprior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current\\ncivil or \\\"wall-clock\\\" atomic time-scale. UTC is kept within 0.9 seconds\\nof UT1 using integer leap-seconds for 1972 and later years.\\n\\n  Conversion from the internal Barycentric Dynamical Time (TDB) of solar\\nsystem dynamics to the discontinuous civil UT time-scale has not been\\ndetermined for UTC times after the next July or January 1st. Therefore,\\nthe last known leap-second is used as a constant over future intervals,\\na condition noted here as \\\"UT~\\\".\\n\\n  Future but as yet undetermined leap-seconds can be expected to change\\ntime-tags in the \\\"UT~\\\" interval and, in general, the UT scale may not be\\nsuitable for purposes that assume time-tag continuity in the ephemeris.\\nOutput in continuous TDB and TT timescales may instead be requested,\\nthough these are not linked to Earth's rotation.\\n\\n  Time-tags refer to the UT time-scale conversion from TDB on Earth\\nregardless of observer location within the solar system, although clock\\nrates may differ due to the local gravity field and no analog to \\\"UT\\\"\\nmay be defined for that location.\\n \\nCALENDAR SYSTEM\\n\\n  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15\\n(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)\\nare in the Julian calendar system, which is automatically extended for dates\\nprior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for\\nmatching historical dates. The Gregorian calendar more accurately corresponds\\nto the Earth's orbital motion and seasons. A \\\"Gregorian-only\\\" calendar mode is\\navailable if such physical events are the primary interest.\\n\\nREFERENCE FRAME AND COORDINATES\\n\\n  Ecliptic at the standard reference epoch\\n\\n    Reference epoch: J2000.0\\n    X-Y plane: adopted Earth orbital plane at the reference epoch\\n               Note: IAU76 obliquity of 84381.448 arcseconds wrt ICRF X-Y plane\\n    X-axis   : ICRF\\n    Z-axis   : perpendicular to the X-Y plane in the directional (+ or -) sense\\n               of Earth's north pole at the reference epoch.\\n\\n  Symbol meaning [1 au= 149597870.700 km, 1 day= 86400.0 s]:\\n\\n    JDUT     Julian Day Number, Universal Time\\n      X      X-component of position vector (au)\\n      Y      Y-component of position vector (au)\\n      Z      Z-component of position vector (au)\\n      VX     X-component of velocity vector (au/day)                           \\n      VY     Y-component of velocity vector (au/day)                           \\n      VZ     Z-component of velocity vector (au/day)                           \\n\\nABERRATIONS AND CORRECTIONS\\n\\n Geometric state vectors have NO corrections or aberrations applied.\\n\\nComputations by ...\\n\\n    Solar System Dynamics Group, Horizons On-Line Ephemeris System\\n    4800 Oak Grove Drive, Jet Propulsion Laboratory\\n    Pasadena, CA  91109   USA\\n\\n    General site: https://ssd.jpl.nasa.gov/\\n    Mailing list: https://ssd.jpl.nasa.gov/email_list.html\\n    System news : https://ssd.jpl.nasa.gov/horizons/news.html\\n    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html\\n    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x\\n                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html\\n                  command-line   telnet ssd.jpl.nasa.gov 6775\\n                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt\\n                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS\\n    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov\\n*******************************************************************************\\n\"}\n",
+        "signature": {
+          "version": "1.2",
+          "source": "NASA/JPL Horizons API"
+        },
+        "target_source": "ura184_merged",
+        "center_source": "ura184_merged"
+      }
+    },
+    {
+      "object_id": "neptune",
+      "horizons_id": "899",
+      "name": "Neptune",
+      "body_class": "planet",
+      "radius": {
+        "value_km": 24622.0,
+        "uncertainty_km": 19.0,
+        "reference_key": " D ",
+        "definition": "Mean Radius (volume-equivalent), km",
+        "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html"
+      },
+      "samples": [
+        {
+          "epoch_utc": "2026-11-13T00:00:00Z",
+          "jd_utc": 2461357.5,
+          "position_au": [
+            29.82990455096323,
+            1.515665708436399,
+            -0.7186357976324625
+          ],
+          "velocity_au_day": [
+            -0.0001849063238404258,
+            0.003150842385261048,
+            -6.102812764497774e-05
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-14T00:00:00Z",
+          "jd_utc": 2461358.5,
+          "position_au": [
+            29.82971931167029,
+            1.518816329288449,
+            -0.7186968677793115
+          ],
+          "velocity_au_day": [
+            -0.0001856194748789219,
+            0.003150439646797649,
+            -6.103603415846615e-05
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-15T00:00:00Z",
+          "jd_utc": 2461359.5,
+          "position_au": [
+            29.82953330925988,
+            1.521966728607146,
+            -0.7187577401711956
+          ],
+          "velocity_au_day": [
+            -0.0001863484689105354,
+            0.003150439200672648,
+            -6.066843733598747e-05
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-16T00:00:00Z",
+          "jd_utc": 2461360.5,
+          "position_au": [
+            29.82934675740849,
+            1.52511733707939,
+            -0.7188182055599882
+          ],
+          "velocity_au_day": [
+            -0.0001866748789617723,
+            0.003150814224329321,
+            -6.02988845527176e-05
+          ]
+        }
+      ],
+      "ephemeris_source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27899%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&START_TIME=%272026-11-13+00%3A00%3A00%27&STOP_TIME=%272026-11-16+00%3A00%3A00%27&STEP_SIZE=%271+d%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&VEC_TABLE=%272%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&VEC_LABELS=%27YES%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "'899'",
+          "OBJ_DATA": "'YES'",
+          "MAKE_EPHEM": "'YES'",
+          "EPHEM_TYPE": "'VECTORS'",
+          "CENTER": "'500@10'",
+          "START_TIME": "'2026-11-13 00:00:00'",
+          "STOP_TIME": "'2026-11-16 00:00:00'",
+          "STEP_SIZE": "'1 d'",
+          "REF_PLANE": "'ECLIPTIC'",
+          "REF_SYSTEM": "'ICRF'",
+          "OUT_UNITS": "'AU-D'",
+          "VEC_TABLE": "'2'",
+          "VEC_CORR": "'NONE'",
+          "CSV_FORMAT": "'YES'",
+          "VEC_LABELS": "'YES'",
+          "TIME_TYPE": "'UT'",
+          "TIME_DIGITS": "'FRACSEC'"
+        },
+        "retrieved_utc": "2026-11-14T02:08:24.504432+00:00",
+        "response_sha256": "c500ff21befd0414e87363d9747efc50d0d0580aae505279a549e21dbaf25440",
+        "response_bytes": 8386,
+        "raw_response_json": "{\"signature\":{\"source\":\"NASA/JPL Horizons API\",\"version\":\"1.2\"},\"result\":\"*******************************************************************************\\n Revised: July 08, 2026               Neptune                               899\\n \\n PHYSICAL DATA:\\n  Mass x10^24 (kg)      = 102.409         Density (g/cm^3)       =  1.638\\n  Equat. radius (1 bar) = 24766+-15 km    Volume, 10^10 km^3     = 6254     \\n  Vol. mean radius (km) = 24624+-21       Polar radius (km)      = 24342+-30\\n  Geometric Albedo      = 0.41            Flattening             =  0.0171\\n  Sid. rot. period (III)= 16.11+-0.01 hr  Sid. rot. rate (rad/s) =  0.000108338 \\n  Mean solar day, h     =~16.11 h         \\n  GM (km^3/s^2)         = 6835099.97      GM 1-sigma (km^3/s^2)  = +-10 \\n  Equ. grav, ge (m/s^2) = 11.15           Pol. grav, gp (m/s^2)  = 11.41+-0.03\\n  Visual magnitude V(1,0)= -6.87\\n  Vis. mag. (opposition)=  +7.84          Obliquity to orbit     = 28.32 deg\\n  Sidereal orbit period = 164.788501027 y Sidereal orbit period  = 60189 d\\n  Mean daily motion     = 0.006020076dg/d Mean orbit velocity    =  5.43 km/s \\n  Atmos. temp. (1 bar)  =  72+-2 K        Escape speed (1 bar)  =  23.5 km/s     \\n  Aroche(ice)/Rp        =  2.98           Hill's sphere rad., Rp = 4700\\n                                 Perihelion  Aphelion    Mean\\n  Solar Constant (W/m^2)         1.54        1.49        1.51\\n  Maximum Planetary IR (W/m^2)   0.52        0.52        0.52\\n  Minimum Planetary IR (W/m^2)   0.52        0.52        0.52\\n*******************************************************************************\\n\\nCalling TDBMUT with LBND,LMJD= 0.847800000000000E+09  0.613570000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847886400000000E+09  0.613580000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847972800000000E+09  0.613590000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.848059200000000E+09  0.613600000000000E+05\\n\\n*******************************************************************************\\nEphemeris / API_USER Fri Nov 13 18:08:24 2026 Pasadena, USA      / Horizons\\n*******************************************************************************\\nTarget body name: Neptune (899)                   {source: nep098_merged}\\nCenter body name: Sun (10)                        {source: nep098_merged}\\nCenter-site name: BODY CENTER\\n*******************************************************************************\\nStart time      : A.D. 2026-Nov-13 00:00:00.0000 UT \\nStop  time      : A.D. 2026-Nov-16 00:00:00.0000 UT \\nStep-size       : 1440 minutes\\n*******************************************************************************\\nCenter geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}\\nCenter cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}\\nCenter radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}\\nOutput units    : AU-D\\nCalendar mode   : Mixed Julian/Gregorian\\nOutput type     : GEOMETRIC cartesian states\\nOutput format   : 2 (position and velocity)\\nEOP file        : eop.261113.p270209\\nEOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-NOV-13. PREDICTS-> 2027-FEB-08\\nReference frame : Ecliptic of J2000.0\\n*******************************************************************************\\n            JDUT ,            Calendar Date (UT ),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,\\n**************************************************************************************************************************************************************************************************\\n$$SOE\\n2461357.500000000, A.D. 2026-Nov-13 00:00:00.0000,  2.982990455096323E+01,  1.515665708436399E+00, -7.186357976324625E-01, -1.849063238404258E-04,  3.150842385261048E-03, -6.102812764497774E-05,\\n2461358.500000000, A.D. 2026-Nov-14 00:00:00.0000,  2.982971931167029E+01,  1.518816329288449E+00, -7.186968677793115E-01, -1.856194748789219E-04,  3.150439646797649E-03, -6.103603415846615E-05,\\n2461359.500000000, A.D. 2026-Nov-15 00:00:00.0000,  2.982953330925988E+01,  1.521966728607146E+00, -7.187577401711956E-01, -1.863484689105354E-04,  3.150439200672648E-03, -6.066843733598747E-05,\\n2461360.500000000, A.D. 2026-Nov-16 00:00:00.0000,  2.982934675740849E+01,  1.525117337079390E+00, -7.188182055599882E-01, -1.866748789617723E-04,  3.150814224329321E-03, -6.029888455271760E-05,\\n$$EOE\\n**************************************************************************************************************************************************************************************************\\n \\nTIME\\n\\n Times PRIOR to 1962 are UT1, a mean-solar time closely related to the\\nprior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current\\ncivil or \\\"wall-clock\\\" atomic time-scale. UTC is kept within 0.9 seconds\\nof UT1 using integer leap-seconds for 1972 and later years.\\n\\n  Conversion from the internal Barycentric Dynamical Time (TDB) of solar\\nsystem dynamics to the discontinuous civil UT time-scale has not been\\ndetermined for UTC times after the next July or January 1st. Therefore,\\nthe last known leap-second is used as a constant over future intervals,\\na condition noted here as \\\"UT~\\\".\\n\\n  Future but as yet undetermined leap-seconds can be expected to change\\ntime-tags in the \\\"UT~\\\" interval and, in general, the UT scale may not be\\nsuitable for purposes that assume time-tag continuity in the ephemeris.\\nOutput in continuous TDB and TT timescales may instead be requested,\\nthough these are not linked to Earth's rotation.\\n\\n  Time-tags refer to the UT time-scale conversion from TDB on Earth\\nregardless of observer location within the solar system, although clock\\nrates may differ due to the local gravity field and no analog to \\\"UT\\\"\\nmay be defined for that location.\\n \\nCALENDAR SYSTEM\\n\\n  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15\\n(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)\\nare in the Julian calendar system, which is automatically extended for dates\\nprior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for\\nmatching historical dates. The Gregorian calendar more accurately corresponds\\nto the Earth's orbital motion and seasons. A \\\"Gregorian-only\\\" calendar mode is\\navailable if such physical events are the primary interest.\\n\\nREFERENCE FRAME AND COORDINATES\\n\\n  Ecliptic at the standard reference epoch\\n\\n    Reference epoch: J2000.0\\n    X-Y plane: adopted Earth orbital plane at the reference epoch\\n               Note: IAU76 obliquity of 84381.448 arcseconds wrt ICRF X-Y plane\\n    X-axis   : ICRF\\n    Z-axis   : perpendicular to the X-Y plane in the directional (+ or -) sense\\n               of Earth's north pole at the reference epoch.\\n\\n  Symbol meaning [1 au= 149597870.700 km, 1 day= 86400.0 s]:\\n\\n    JDUT     Julian Day Number, Universal Time\\n      X      X-component of position vector (au)\\n      Y      Y-component of position vector (au)\\n      Z      Z-component of position vector (au)\\n      VX     X-component of velocity vector (au/day)                           \\n      VY     Y-component of velocity vector (au/day)                           \\n      VZ     Z-component of velocity vector (au/day)                           \\n\\nABERRATIONS AND CORRECTIONS\\n\\n Geometric state vectors have NO corrections or aberrations applied.\\n\\nComputations by ...\\n\\n    Solar System Dynamics Group, Horizons On-Line Ephemeris System\\n    4800 Oak Grove Drive, Jet Propulsion Laboratory\\n    Pasadena, CA  91109   USA\\n\\n    General site: https://ssd.jpl.nasa.gov/\\n    Mailing list: https://ssd.jpl.nasa.gov/email_list.html\\n    System news : https://ssd.jpl.nasa.gov/horizons/news.html\\n    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html\\n    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x\\n                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html\\n                  command-line   telnet ssd.jpl.nasa.gov 6775\\n                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt\\n                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS\\n    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov\\n*******************************************************************************\\n\"}\n",
+        "signature": {
+          "source": "NASA/JPL Horizons API",
+          "version": "1.2"
+        },
+        "target_source": "nep098_merged",
+        "center_source": "nep098_merged"
+      }
+    },
+    {
+      "object_id": "pluto",
+      "horizons_id": "999",
+      "name": "Pluto",
+      "body_class": "dwarf_planet",
+      "radius": {
+        "value_km": 1188.3,
+        "uncertainty_km": 1.6,
+        "reference_key": " D ",
+        "definition": "Mean Radius (volume-equivalent), km",
+        "source_url": "https://ssd.jpl.nasa.gov/planets/phys_par.html"
+      },
+      "samples": [
+        {
+          "epoch_utc": "2026-11-13T00:00:00Z",
+          "jd_utc": 2461357.5,
+          "position_au": [
+            20.07935736880975,
+            -29.32423910906861,
+            -2.669546090570488
+          ],
+          "velocity_au_day": [
+            0.00266847022983314,
+            0.001057039382706043,
+            -0.0008964833487323341
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-14T00:00:00Z",
+          "jd_utc": 2461358.5,
+          "position_au": [
+            20.08202290528485,
+            -29.32318133817766,
+            -2.670436533673872
+          ],
+          "velocity_au_day": [
+            0.002664058510650815,
+            0.001060156475689065,
+            -0.0008842884903225814
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-15T00:00:00Z",
+          "jd_utc": 2461359.5,
+          "position_au": [
+            20.08468865067698,
+            -29.32211639993974,
+            -2.671316342769771
+          ],
+          "velocity_au_day": [
+            0.00266883409790342,
+            0.001070229174594597,
+            -0.0008769571644033242
+          ]
+        },
+        {
+          "epoch_utc": "2026-11-16T00:00:00Z",
+          "jd_utc": 2461360.5,
+          "position_au": [
+            20.08736223187115,
+            -29.3210415246677,
+            -2.672194373264603
+          ],
+          "velocity_au_day": [
+            0.002678423738433651,
+            0.001078429985776738,
+            -0.0008810202979653098
+          ]
+        }
+      ],
+      "ephemeris_source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27999%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&START_TIME=%272026-11-13+00%3A00%3A00%27&STOP_TIME=%272026-11-16+00%3A00%3A00%27&STEP_SIZE=%271+d%27&REF_PLANE=%27ECLIPTIC%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27AU-D%27&VEC_TABLE=%272%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&VEC_LABELS=%27YES%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "'999'",
+          "OBJ_DATA": "'YES'",
+          "MAKE_EPHEM": "'YES'",
+          "EPHEM_TYPE": "'VECTORS'",
+          "CENTER": "'500@10'",
+          "START_TIME": "'2026-11-13 00:00:00'",
+          "STOP_TIME": "'2026-11-16 00:00:00'",
+          "STEP_SIZE": "'1 d'",
+          "REF_PLANE": "'ECLIPTIC'",
+          "REF_SYSTEM": "'ICRF'",
+          "OUT_UNITS": "'AU-D'",
+          "VEC_TABLE": "'2'",
+          "VEC_CORR": "'NONE'",
+          "CSV_FORMAT": "'YES'",
+          "VEC_LABELS": "'YES'",
+          "TIME_TYPE": "'UT'",
+          "TIME_DIGITS": "'FRACSEC'"
+        },
+        "retrieved_utc": "2026-11-14T02:08:25.009554+00:00",
+        "response_sha256": "e4b894b70d497f985e01b4a5ddb95252caca6f45169231b3b7ab666753f91a84",
+        "response_bytes": 8231,
+        "raw_response_json": "{\"result\":\"*******************************************************************************\\n Revised: Apr 03, 2024              134340 Pluto                            999\\n \\n Pre-computed solution PLU060/DE440. Fit to post New Horizons encounter and\\n Gaia data through 2023. For discussion, see ...\\n\\n M. Brozovic, R. A. Jacobson (2024) \\\"Post-New Horizons orbits and masses\\n for the satellites of Pluto\\\". AJ (in press)\\n\\n PHYSICAL DATA (updated 2021-Jun-07; Mc= Charon mass, radius is IAU 2015):\\n  Mass x10^22 (kg)      = 1.307+-0.018    Volume, 10^10 km^3    = 0.697\\n  GM (planet) km^3/s^2  = 869.326         Density (R=1195 km)   = 1.86 g/cm^3\\n  GM 1-sigma, km^3/s^2  = 0.4             Surface gravity       = 0.611 m/s^2 \\n  Vol. mean radius (km) = 1188.3+-1.6     Mass ratio (Mc/Mp)    = 0.122\\n  Sidereal rot. period  = 153.29335198 h  Sid. rot. rat, rad/s  = 0.0000113856\\n  Mean solar day, h     = 153.2820        Mean orbit velocity   = 4.67 km/s\\n  Sidereal orbit period = 249.58932 yr    Escape speed, km/s    = 1.21            \\n                                 Perihelion  Aphelion    Mean\\n  Solar Constant (W/m^2)         1.56        0.56        0.88\\n  Maximum Planetary IR (W/m^2)   0.8         0.3         0.5\\n  Minimum Planetary IR (W/m^2)   0.8         0.3         0.5\\n*******************************************************************************\\n\\nCalling TDBMUT with LBND,LMJD= 0.847800000000000E+09  0.613570000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847886400000000E+09  0.613580000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.847972800000000E+09  0.613590000000000E+05\\nCalling TDBMUT with LBND,LMJD= 0.848059200000000E+09  0.613600000000000E+05\\n\\n*******************************************************************************\\nEphemeris / API_USER Fri Nov 13 18:08:24 2026 Pasadena, USA      / Horizons\\n*******************************************************************************\\nTarget body name: Pluto (999)                     {source: plu060_merged}\\nCenter body name: Sun (10)                        {source: plu060_merged}\\nCenter-site name: BODY CENTER\\n*******************************************************************************\\nStart time      : A.D. 2026-Nov-13 00:00:00.0000 UT \\nStop  time      : A.D. 2026-Nov-16 00:00:00.0000 UT \\nStep-size       : 1440 minutes\\n*******************************************************************************\\nCenter geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}\\nCenter cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}\\nCenter radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}\\nOutput units    : AU-D\\nCalendar mode   : Mixed Julian/Gregorian\\nOutput type     : GEOMETRIC cartesian states\\nOutput format   : 2 (position and velocity)\\nEOP file        : eop.261113.p270209\\nEOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-NOV-13. PREDICTS-> 2027-FEB-08\\nReference frame : Ecliptic of J2000.0\\n*******************************************************************************\\n            JDUT ,            Calendar Date (UT ),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,\\n**************************************************************************************************************************************************************************************************\\n$$SOE\\n2461357.500000000, A.D. 2026-Nov-13 00:00:00.0000,  2.007935736880975E+01, -2.932423910906861E+01, -2.669546090570488E+00,  2.668470229833140E-03,  1.057039382706043E-03, -8.964833487323341E-04,\\n2461358.500000000, A.D. 2026-Nov-14 00:00:00.0000,  2.008202290528485E+01, -2.932318133817766E+01, -2.670436533673872E+00,  2.664058510650815E-03,  1.060156475689065E-03, -8.842884903225814E-04,\\n2461359.500000000, A.D. 2026-Nov-15 00:00:00.0000,  2.008468865067698E+01, -2.932211639993974E+01, -2.671316342769771E+00,  2.668834097903420E-03,  1.070229174594597E-03, -8.769571644033242E-04,\\n2461360.500000000, A.D. 2026-Nov-16 00:00:00.0000,  2.008736223187115E+01, -2.932104152466770E+01, -2.672194373264603E+00,  2.678423738433651E-03,  1.078429985776738E-03, -8.810202979653098E-04,\\n$$EOE\\n**************************************************************************************************************************************************************************************************\\n \\nTIME\\n\\n Times PRIOR to 1962 are UT1, a mean-solar time closely related to the\\nprior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current\\ncivil or \\\"wall-clock\\\" atomic time-scale. UTC is kept within 0.9 seconds\\nof UT1 using integer leap-seconds for 1972 and later years.\\n\\n  Conversion from the internal Barycentric Dynamical Time (TDB) of solar\\nsystem dynamics to the discontinuous civil UT time-scale has not been\\ndetermined for UTC times after the next July or January 1st. Therefore,\\nthe last known leap-second is used as a constant over future intervals,\\na condition noted here as \\\"UT~\\\".\\n\\n  Future but as yet undetermined leap-seconds can be expected to change\\ntime-tags in the \\\"UT~\\\" interval and, in general, the UT scale may not be\\nsuitable for purposes that assume time-tag continuity in the ephemeris.\\nOutput in continuous TDB and TT timescales may instead be requested,\\nthough these are not linked to Earth's rotation.\\n\\n  Time-tags refer to the UT time-scale conversion from TDB on Earth\\nregardless of observer location within the solar system, although clock\\nrates may differ due to the local gravity field and no analog to \\\"UT\\\"\\nmay be defined for that location.\\n \\nCALENDAR SYSTEM\\n\\n  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15\\n(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)\\nare in the Julian calendar system, which is automatically extended for dates\\nprior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for\\nmatching historical dates. The Gregorian calendar more accurately corresponds\\nto the Earth's orbital motion and seasons. A \\\"Gregorian-only\\\" calendar mode is\\navailable if such physical events are the primary interest.\\n\\nREFERENCE FRAME AND COORDINATES\\n\\n  Ecliptic at the standard reference epoch\\n\\n    Reference epoch: J2000.0\\n    X-Y plane: adopted Earth orbital plane at the reference epoch\\n               Note: IAU76 obliquity of 84381.448 arcseconds wrt ICRF X-Y plane\\n    X-axis   : ICRF\\n    Z-axis   : perpendicular to the X-Y plane in the directional (+ or -) sense\\n               of Earth's north pole at the reference epoch.\\n\\n  Symbol meaning [1 au= 149597870.700 km, 1 day= 86400.0 s]:\\n\\n    JDUT     Julian Day Number, Universal Time\\n      X      X-component of position vector (au)\\n      Y      Y-component of position vector (au)\\n      Z      Z-component of position vector (au)\\n      VX     X-component of velocity vector (au/day)                           \\n      VY     Y-component of velocity vector (au/day)                           \\n      VZ     Z-component of velocity vector (au/day)                           \\n\\nABERRATIONS AND CORRECTIONS\\n\\n Geometric state vectors have NO corrections or aberrations applied.\\n\\nComputations by ...\\n\\n    Solar System Dynamics Group, Horizons On-Line Ephemeris System\\n    4800 Oak Grove Drive, Jet Propulsion Laboratory\\n    Pasadena, CA  91109   USA\\n\\n    General site: https://ssd.jpl.nasa.gov/\\n    Mailing list: https://ssd.jpl.nasa.gov/email_list.html\\n    System news : https://ssd.jpl.nasa.gov/horizons/news.html\\n    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html\\n    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x\\n                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html\\n                  command-line   telnet ssd.jpl.nasa.gov 6775\\n                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt\\n                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS\\n    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov\\n*******************************************************************************\\n\",\"signature\":{\"source\":\"NASA/JPL Horizons API\",\"version\":\"1.2\"}}\n",
+        "signature": {
+          "source": "NASA/JPL Horizons API",
+          "version": "1.2"
+        },
+        "target_source": "plu060_merged",
+        "center_source": "plu060_merged"
+      }
+    }
+  ],
+  "scope": "Scene ephemeris snapshots; separate from 102 SPHEREx/input inventory files and observer-specific exposure predictions.",
+  "license_note": "JPL SSD public numerical output with source attribution; no NASA/JPL logo or endorsement implied.",
+  "sources": {
+    "api_documentation": "https://ssd-api.jpl.nasa.gov/doc/horizons.html",
+    "manual": "https://ssd.jpl.nasa.gov/horizons/manual.html"
+  }
+}

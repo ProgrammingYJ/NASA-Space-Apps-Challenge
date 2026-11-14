@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "date_kst": "2026-11-14",
+  "tool": "Codex",
+  "exact_model_identifier": null,
+  "model_identifier_status": "not_reported",
+  "work_ids": [
+    "SETUP-001",
+    "SETUP-002",
+    "SETUP-003",
+    "SETUP-004",
+    "SETUP-005",
+    "SETUP-006",
+    "SETUP-007",
+    "SETUP-008",
+    "SETUP-009",
+    "DEV-001",
+    "DEV-002"
+  ],
+  "assistance": [
+    "repository_configuration",
+    "technical_documentation",
+    "public_source_inventory",
+    "official_rule_review",
+    "authorized_repository_invitations",
+    "authorized_public_data_upload",
+    "pinned_skill_installation_and_project_skill_authoring",
+    "functional_development_specification",
+    "initial_implementation_prompt",
+    "solar_system_source_candidate_inventory",
+    "reference_site_interaction_and_ux_specification",
+    "application_implementation",
+    "native_fits_processing",
+    "evidence_save_restore",
+    "five_locale_ui",
+    "automated_browser_and_runtime_validation",
+    "server_bundle_preparation",
+    "universe_first_threejs_interface",
+    "official_jpl_ephemeris_acquisition_and_validation",
+    "pluto_originals_and_observer_prediction",
+    "object_workspaces_and_camera_context_restore",
+    "source_backed_osculating_orbit_guides"
+  ],
+  "application_code_generated_in_this_setup": true,
+  "science_detection_or_fit_performed": false,
+  "image_video_voice_generation": false,
+  "original_observations_are_AI_generated": false,
+  "human_review_status": "pending_user_review",
+  "validation_record": "docs/worklog.md",
+  "automated_validation_record": "docs/worklog.md",
+  "skill_structure_checks_passed": 14,
+  "skill_ui_discovery_verified": false,
+  "notion_requeried_in_skills_spec_work": false,
+  "notion_read_in_reference_design_work": {
+    "verified_at_kst": "2026-11-14T10:43:56+09:00",
+    "scope": "home, device/browser QA folder, screen/buttons/data/charts/3D check page",
+    "page_modified": false,
+    "app_test_pass_claimed": false
+  },
+  "first_observation_slice": {
+    "inputs": [
+      "S01",
+      "S02",
+      "S10"
+    ],
+    "algorithm_version": "spherex-native-v1",
+    "human_review_status": "pending",
+    "linux_container_verified": false,
+    "public_service_deployed": false
+  },
+  "universe_slice": {
+    "version": "0.2.0",
+    "source": "JPL Horizons geometric heliocentric ephemerides and IRSA SPHEREx L2",
+    "scene_objects": 11,
+    "supported_model_epochs_utc": [
+      "2026-11-13T00:00:00Z",
+      "2026-11-14T00:00:00Z",
+      "2026-11-15T00:00:00Z",
+      "2026-11-16T00:00:00Z"
+    ],
+    "raw_observation_inputs": [
+      "S01",
+      "S02",
+      "S10",
+      "S12",
+      "S14",
+      "L051"
+    ],
+    "scene_appearance": "Illustrative code-rendered geometry, artistic colors/fill and decorative starfield; not measured images",
+    "science_motion_or_flux_validated": false,
+    "public_service_deployed": false,
+    "orbit_guides": {
+      "count": 9,
+      "kind": "instantaneous_osculating_kepler_guide",
+      "algorithm": "osculating-kepler-guide-v1",
+      "points_per_guide": 257,
+      "not_full_period_integrated_trajectories": true,
+      "source_manifest": "data/manifests/solar_system_orbits.json"
+    }
+  }
+}

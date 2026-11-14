@@ -1,0 +1,984 @@
+{
+  "schema_version": 1,
+  "recorded_at_kst": "2026-11-14T10:35:25+09:00",
+  "installation_scope": "repository_local",
+  "installation_root": ".agents/skills",
+  "count": 14,
+  "external_count": 10,
+  "project_authored_count": 4,
+  "external_installation_method": "Official system skill-installer/scripts/install-skill-from-github.py --method download --ref <fixed commit> --dest .agents/skills",
+  "structure_validation": {
+    "validator": "system skill-creator/scripts/quick_validate.py",
+    "passed": 14,
+    "external_checks_recorded_at_kst": "2026-11-14T10:26:59.062032+09:00",
+    "project_checks_recorded_at_kst": "2026-11-14T10:35:25+09:00"
+  },
+  "validation_limits": [
+    "SKILL frontmatter, installed file hashes/size and relative Markdown references only.",
+    "No installed skill scripts were executed. No app libraries installed by this step.",
+    "UI automatic discovery on a subsequent turn/session has not been observed.",
+    "Structure validation is not scientific correctness or application/browser/runtime validation."
+  ],
+  "skills": [
+    {
+      "name": "documentation",
+      "source_repo": "anthropics/knowledge-work-plugins",
+      "source_url": "https://github.com/anthropics/knowledge-work-plugins/tree/e91a134584eb798bac7fb0379358006a2b63b965/engineering/skills/documentation",
+      "source_commit": "e91a134584eb798bac7fb0379358006a2b63b965",
+      "source_path": "engineering/skills/documentation",
+      "repository_license_spdx_from_github": "Apache-2.0",
+      "original_skill_license_declaration": null,
+      "original_skill_sha256": "1d469418f786a05be83d2a05f04d68788aeed584d13863a650f5ad73c6c4cf50",
+      "installed_skill_sha256": "1d469418f786a05be83d2a05f04d68788aeed584d13863a650f5ad73c6c4cf50",
+      "whole_skill_subtree_verified_before_modification": true,
+      "original_subtree_file_count": 1,
+      "normalized_metadata": {},
+      "modifications": [],
+      "validation_original": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "bytes": 11607,
+          "upstream_path": "LICENSE",
+          "upstream_sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "modified": false
+        },
+        {
+          "path": "NOTICE.md",
+          "sha256": "8c8dfc0a3099c76f55bd19bbb9685f20574034412b968ae7ba5c7a59231036cd",
+          "bytes": 1049,
+          "generated_local_notice": true
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "1d469418f786a05be83d2a05f04d68788aeed584d13863a650f5ad73c6c4cf50",
+          "bytes": 1507,
+          "upstream_path": "engineering/skills/documentation/SKILL.md",
+          "upstream_sha256": "1d469418f786a05be83d2a05f04d68788aeed584d13863a650f5ad73c6c4cf50",
+          "modified": false
+        }
+      ],
+      "origin_type": "external_pinned_source",
+      "installed_path": ".agents/skills/documentation"
+    },
+    {
+      "name": "architecture",
+      "source_repo": "anthropics/knowledge-work-plugins",
+      "source_url": "https://github.com/anthropics/knowledge-work-plugins/tree/e91a134584eb798bac7fb0379358006a2b63b965/engineering/skills/architecture",
+      "source_commit": "e91a134584eb798bac7fb0379358006a2b63b965",
+      "source_path": "engineering/skills/architecture",
+      "repository_license_spdx_from_github": "Apache-2.0",
+      "original_skill_license_declaration": null,
+      "original_skill_sha256": "de7db3170a3ae1a894c70ef6cb555fe15618ed9b9674d20895eda3d2a0a5f9a2",
+      "installed_skill_sha256": "184f66d655ddf67166bb7a40dcf4e530a05fcf7e561d3371eac3d53f52fe0c03",
+      "whole_skill_subtree_verified_before_modification": true,
+      "original_subtree_file_count": 1,
+      "normalized_metadata": {
+        "argument-hint": {
+          "original_value": "<decision or system to design>",
+          "installed_location": "metadata.argument-hint",
+          "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+        }
+      },
+      "modifications": [
+        {
+          "path": "SKILL.md",
+          "change": "Move unsupported top-level metadata fields under metadata, preserving values.",
+          "fields": {
+            "argument-hint": {
+              "original_value": "<decision or system to design>",
+              "installed_location": "metadata.argument-hint",
+              "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+            }
+          }
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Repair flat-install connector link from ../../CONNECTORS.md to references/CONNECTORS.md; copy plugin connector reference unchanged."
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Add a prominent local-modification notice and link to provenance; user authorization and AGENTS.md take precedence."
+        }
+      ],
+      "validation_original": {
+        "exit_code": 1,
+        "stdout": "Unexpected key(s) in SKILL.md frontmatter: argument-hint. Allowed properties are: allowed-tools, description, license, metadata, name",
+        "stderr": ""
+      },
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "bytes": 11607,
+          "upstream_path": "LICENSE",
+          "upstream_sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "modified": false
+        },
+        {
+          "path": "NOTICE.md",
+          "sha256": "8b09e6ef242a394da474308bcaf0e9ebe60cc02e92ed6591cff44d20d27c53fb",
+          "bytes": 1422,
+          "generated_local_notice": true
+        },
+        {
+          "path": "references/CONNECTORS.md",
+          "sha256": "00f8a815f649a0e54bc738057f050259c2b6e08534f3c2171f657b70bed6a131",
+          "bytes": 1187,
+          "upstream_path": "engineering/CONNECTORS.md",
+          "upstream_sha256": "00f8a815f649a0e54bc738057f050259c2b6e08534f3c2171f657b70bed6a131",
+          "modified": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "184f66d655ddf67166bb7a40dcf4e530a05fcf7e561d3371eac3d53f52fe0c03",
+          "bytes": 2609,
+          "upstream_path": "engineering/skills/architecture/SKILL.md",
+          "upstream_sha256": "de7db3170a3ae1a894c70ef6cb555fe15618ed9b9674d20895eda3d2a0a5f9a2",
+          "modified": true
+        }
+      ],
+      "origin_type": "external_pinned_source",
+      "installed_path": ".agents/skills/architecture"
+    },
+    {
+      "name": "testing-strategy",
+      "source_repo": "anthropics/knowledge-work-plugins",
+      "source_url": "https://github.com/anthropics/knowledge-work-plugins/tree/e91a134584eb798bac7fb0379358006a2b63b965/engineering/skills/testing-strategy",
+      "source_commit": "e91a134584eb798bac7fb0379358006a2b63b965",
+      "source_path": "engineering/skills/testing-strategy",
+      "repository_license_spdx_from_github": "Apache-2.0",
+      "original_skill_license_declaration": null,
+      "original_skill_sha256": "5c5e95830754bbdd838213fa05fc8f07523f591fd558fd3c86031ffd479f7a9e",
+      "installed_skill_sha256": "5c5e95830754bbdd838213fa05fc8f07523f591fd558fd3c86031ffd479f7a9e",
+      "whole_skill_subtree_verified_before_modification": true,
+      "original_subtree_file_count": 1,
+      "normalized_metadata": {},
+      "modifications": [],
+      "validation_original": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "bytes": 11607,
+          "upstream_path": "LICENSE",
+          "upstream_sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "modified": false
+        },
+        {
+          "path": "NOTICE.md",
+          "sha256": "a72fb41b20ae3adcc168cead07d26bfeefe54d52d0fbd6d82b2ff27c3cf707ae",
+          "bytes": 1058,
+          "generated_local_notice": true
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "5c5e95830754bbdd838213fa05fc8f07523f591fd558fd3c86031ffd479f7a9e",
+          "bytes": 1279,
+          "upstream_path": "engineering/skills/testing-strategy/SKILL.md",
+          "upstream_sha256": "5c5e95830754bbdd838213fa05fc8f07523f591fd558fd3c86031ffd479f7a9e",
+          "modified": false
+        }
+      ],
+      "origin_type": "external_pinned_source",
+      "installed_path": ".agents/skills/testing-strategy"
+    },
+    {
+      "name": "code-review",
+      "source_repo": "anthropics/knowledge-work-plugins",
+      "source_url": "https://github.com/anthropics/knowledge-work-plugins/tree/e91a134584eb798bac7fb0379358006a2b63b965/engineering/skills/code-review",
+      "source_commit": "e91a134584eb798bac7fb0379358006a2b63b965",
+      "source_path": "engineering/skills/code-review",
+      "repository_license_spdx_from_github": "Apache-2.0",
+      "original_skill_license_declaration": null,
+      "original_skill_sha256": "6303932f1b301c614a6f5a0099cd87a19e1cd1b7cbfa1a1e11e996edbca6426b",
+      "installed_skill_sha256": "74ee162bf849afa3fea1001ed4949c7164eb52955621d3b69e3bae69c1c1fa07",
+      "whole_skill_subtree_verified_before_modification": true,
+      "original_subtree_file_count": 1,
+      "normalized_metadata": {
+        "argument-hint": {
+          "original_value": "<PR URL, diff, or file path>",
+          "installed_location": "metadata.argument-hint",
+          "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+        }
+      },
+      "modifications": [
+        {
+          "path": "SKILL.md",
+          "change": "Move unsupported top-level metadata fields under metadata, preserving values.",
+          "fields": {
+            "argument-hint": {
+              "original_value": "<PR URL, diff, or file path>",
+              "installed_location": "metadata.argument-hint",
+              "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+            }
+          }
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Repair flat-install connector link from ../../CONNECTORS.md to references/CONNECTORS.md; copy plugin connector reference unchanged."
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Add a prominent local-modification notice and link to provenance; user authorization and AGENTS.md take precedence."
+        }
+      ],
+      "validation_original": {
+        "exit_code": 1,
+        "stdout": "Unexpected key(s) in SKILL.md frontmatter: argument-hint. Allowed properties are: allowed-tools, description, license, metadata, name",
+        "stderr": ""
+      },
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "bytes": 11607,
+          "upstream_path": "LICENSE",
+          "upstream_sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "modified": false
+        },
+        {
+          "path": "NOTICE.md",
+          "sha256": "0a2b439c3f3870176651081d91c9afefabf1776c5d6e3cf181a7772d867f65ca",
+          "bytes": 1419,
+          "generated_local_notice": true
+        },
+        {
+          "path": "references/CONNECTORS.md",
+          "sha256": "00f8a815f649a0e54bc738057f050259c2b6e08534f3c2171f657b70bed6a131",
+          "bytes": 1187,
+          "upstream_path": "engineering/CONNECTORS.md",
+          "upstream_sha256": "00f8a815f649a0e54bc738057f050259c2b6e08534f3c2171f657b70bed6a131",
+          "modified": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "74ee162bf849afa3fea1001ed4949c7164eb52955621d3b69e3bae69c1c1fa07",
+          "bytes": 4484,
+          "upstream_path": "engineering/skills/code-review/SKILL.md",
+          "upstream_sha256": "6303932f1b301c614a6f5a0099cd87a19e1cd1b7cbfa1a1e11e996edbca6426b",
+          "modified": true
+        }
+      ],
+      "origin_type": "external_pinned_source",
+      "installed_path": ".agents/skills/code-review"
+    },
+    {
+      "name": "debug",
+      "source_repo": "anthropics/knowledge-work-plugins",
+      "source_url": "https://github.com/anthropics/knowledge-work-plugins/tree/e91a134584eb798bac7fb0379358006a2b63b965/engineering/skills/debug",
+      "source_commit": "e91a134584eb798bac7fb0379358006a2b63b965",
+      "source_path": "engineering/skills/debug",
+      "repository_license_spdx_from_github": "Apache-2.0",
+      "original_skill_license_declaration": null,
+      "original_skill_sha256": "e50bb92cbcb2715139f3a3cb9ff282a8f0f9ae794f8f35d81338654e2601d32a",
+      "installed_skill_sha256": "6db240fe22f85f4f01b1612ae6cad2027426ec90b25d73c5808cb8fe7b29b1fc",
+      "whole_skill_subtree_verified_before_modification": true,
+      "original_subtree_file_count": 1,
+      "normalized_metadata": {
+        "argument-hint": {
+          "original_value": "<error message or problem description>",
+          "installed_location": "metadata.argument-hint",
+          "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+        }
+      },
+      "modifications": [
+        {
+          "path": "SKILL.md",
+          "change": "Move unsupported top-level metadata fields under metadata, preserving values.",
+          "fields": {
+            "argument-hint": {
+              "original_value": "<error message or problem description>",
+              "installed_location": "metadata.argument-hint",
+              "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+            }
+          }
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Repair flat-install connector link from ../../CONNECTORS.md to references/CONNECTORS.md; copy plugin connector reference unchanged."
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Add a prominent local-modification notice and link to provenance; user authorization and AGENTS.md take precedence."
+        }
+      ],
+      "validation_original": {
+        "exit_code": 1,
+        "stdout": "Unexpected key(s) in SKILL.md frontmatter: argument-hint. Allowed properties are: allowed-tools, description, license, metadata, name",
+        "stderr": ""
+      },
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "bytes": 11607,
+          "upstream_path": "LICENSE",
+          "upstream_sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "modified": false
+        },
+        {
+          "path": "NOTICE.md",
+          "sha256": "7558d814f4c58fc2a483ce193478db1c432431fb68f49d1b10cc7f40229bb9df",
+          "bytes": 1401,
+          "generated_local_notice": true
+        },
+        {
+          "path": "references/CONNECTORS.md",
+          "sha256": "00f8a815f649a0e54bc738057f050259c2b6e08534f3c2171f657b70bed6a131",
+          "bytes": 1187,
+          "upstream_path": "engineering/CONNECTORS.md",
+          "upstream_sha256": "00f8a815f649a0e54bc738057f050259c2b6e08534f3c2171f657b70bed6a131",
+          "modified": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "6db240fe22f85f4f01b1612ae6cad2027426ec90b25d73c5808cb8fe7b29b1fc",
+          "bytes": 4273,
+          "upstream_path": "engineering/skills/debug/SKILL.md",
+          "upstream_sha256": "e50bb92cbcb2715139f3a3cb9ff282a8f0f9ae794f8f35d81338654e2601d32a",
+          "modified": true
+        }
+      ],
+      "origin_type": "external_pinned_source",
+      "installed_path": ".agents/skills/debug"
+    },
+    {
+      "name": "deploy-checklist",
+      "source_repo": "anthropics/knowledge-work-plugins",
+      "source_url": "https://github.com/anthropics/knowledge-work-plugins/tree/e91a134584eb798bac7fb0379358006a2b63b965/engineering/skills/deploy-checklist",
+      "source_commit": "e91a134584eb798bac7fb0379358006a2b63b965",
+      "source_path": "engineering/skills/deploy-checklist",
+      "repository_license_spdx_from_github": "Apache-2.0",
+      "original_skill_license_declaration": null,
+      "original_skill_sha256": "85ca53dc471970e3e12c36ec814ebf5f6cb9419016c55adb05ff34789bae3be9",
+      "installed_skill_sha256": "3515103f72a255dba4f69813fdfff43a156ece8cb975e572bf43ff307d1a38c2",
+      "whole_skill_subtree_verified_before_modification": true,
+      "original_subtree_file_count": 1,
+      "normalized_metadata": {
+        "argument-hint": {
+          "original_value": "[service or release name]",
+          "installed_location": "metadata.argument-hint",
+          "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+        }
+      },
+      "modifications": [
+        {
+          "path": "SKILL.md",
+          "change": "Move unsupported top-level metadata fields under metadata, preserving values.",
+          "fields": {
+            "argument-hint": {
+              "original_value": "[service or release name]",
+              "installed_location": "metadata.argument-hint",
+              "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+            }
+          }
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Repair flat-install connector link from ../../CONNECTORS.md to references/CONNECTORS.md; copy plugin connector reference unchanged."
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Add a prominent local-modification notice and link to provenance; user authorization and AGENTS.md take precedence."
+        }
+      ],
+      "validation_original": {
+        "exit_code": 1,
+        "stdout": "Unexpected key(s) in SKILL.md frontmatter: argument-hint. Allowed properties are: allowed-tools, description, license, metadata, name",
+        "stderr": ""
+      },
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "bytes": 11607,
+          "upstream_path": "LICENSE",
+          "upstream_sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "modified": false
+        },
+        {
+          "path": "NOTICE.md",
+          "sha256": "a99935110fd0bbe59843105edc5ea39648c69e6ad3a8235f9bb6e2ff0119e2b2",
+          "bytes": 1434,
+          "generated_local_notice": true
+        },
+        {
+          "path": "references/CONNECTORS.md",
+          "sha256": "00f8a815f649a0e54bc738057f050259c2b6e08534f3c2171f657b70bed6a131",
+          "bytes": 1187,
+          "upstream_path": "engineering/CONNECTORS.md",
+          "upstream_sha256": "00f8a815f649a0e54bc738057f050259c2b6e08534f3c2171f657b70bed6a131",
+          "modified": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "3515103f72a255dba4f69813fdfff43a156ece8cb975e572bf43ff307d1a38c2",
+          "bytes": 2588,
+          "upstream_path": "engineering/skills/deploy-checklist/SKILL.md",
+          "upstream_sha256": "85ca53dc471970e3e12c36ec814ebf5f6cb9419016c55adb05ff34789bae3be9",
+          "modified": true
+        }
+      ],
+      "origin_type": "external_pinned_source",
+      "installed_path": ".agents/skills/deploy-checklist"
+    },
+    {
+      "name": "validate-data",
+      "source_repo": "anthropics/knowledge-work-plugins",
+      "source_url": "https://github.com/anthropics/knowledge-work-plugins/tree/e91a134584eb798bac7fb0379358006a2b63b965/data/skills/validate-data",
+      "source_commit": "e91a134584eb798bac7fb0379358006a2b63b965",
+      "source_path": "data/skills/validate-data",
+      "repository_license_spdx_from_github": "Apache-2.0",
+      "original_skill_license_declaration": null,
+      "original_skill_sha256": "1e424822043480375b80aef9416227b1c8083af749ca536568716265f79ca54b",
+      "installed_skill_sha256": "73cb5ca773d47d0aa249bff17f031395c0bbe9cc11f20c8ebb6764c7b09ac56b",
+      "whole_skill_subtree_verified_before_modification": true,
+      "original_subtree_file_count": 1,
+      "normalized_metadata": {
+        "argument-hint": {
+          "original_value": "<analysis to review>",
+          "installed_location": "metadata.argument-hint",
+          "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+        }
+      },
+      "modifications": [
+        {
+          "path": "SKILL.md",
+          "change": "Move unsupported top-level metadata fields under metadata, preserving values.",
+          "fields": {
+            "argument-hint": {
+              "original_value": "<analysis to review>",
+              "installed_location": "metadata.argument-hint",
+              "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+            }
+          }
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Repair flat-install connector link from ../../CONNECTORS.md to references/CONNECTORS.md; copy plugin connector reference unchanged."
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Add a prominent local-modification notice and link to provenance; user authorization and AGENTS.md take precedence."
+        }
+      ],
+      "validation_original": {
+        "exit_code": 1,
+        "stdout": "Unexpected key(s) in SKILL.md frontmatter: argument-hint. Allowed properties are: allowed-tools, description, license, metadata, name",
+        "stderr": ""
+      },
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "bytes": 11607,
+          "upstream_path": "LICENSE",
+          "upstream_sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "modified": false
+        },
+        {
+          "path": "LICENSE.plugin",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358,
+          "upstream_path": "data/LICENSE",
+          "upstream_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "modified": false
+        },
+        {
+          "path": "NOTICE.md",
+          "sha256": "842fa38c31abac49903daf1ea80c763e7124d77f4311f0ce348048eafa0c868a",
+          "bytes": 1489,
+          "generated_local_notice": true
+        },
+        {
+          "path": "references/CONNECTORS.md",
+          "sha256": "79de0e9613ef7870e773b6dcdcb7d50f4bff2c0574c14ab5e0aeb29014dcec7b",
+          "bytes": 1061,
+          "upstream_path": "data/CONNECTORS.md",
+          "upstream_sha256": "79de0e9613ef7870e773b6dcdcb7d50f4bff2c0574c14ab5e0aeb29014dcec7b",
+          "modified": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "73cb5ca773d47d0aa249bff17f031395c0bbe9cc11f20c8ebb6764c7b09ac56b",
+          "bytes": 15115,
+          "upstream_path": "data/skills/validate-data/SKILL.md",
+          "upstream_sha256": "1e424822043480375b80aef9416227b1c8083af749ca536568716265f79ca54b",
+          "modified": true
+        }
+      ],
+      "origin_type": "external_pinned_source",
+      "installed_path": ".agents/skills/validate-data"
+    },
+    {
+      "name": "accessibility-review",
+      "source_repo": "anthropics/knowledge-work-plugins",
+      "source_url": "https://github.com/anthropics/knowledge-work-plugins/tree/e91a134584eb798bac7fb0379358006a2b63b965/design/skills/accessibility-review",
+      "source_commit": "e91a134584eb798bac7fb0379358006a2b63b965",
+      "source_path": "design/skills/accessibility-review",
+      "repository_license_spdx_from_github": "Apache-2.0",
+      "original_skill_license_declaration": null,
+      "original_skill_sha256": "ef42982af0d51238dda2ab16d08626712891bdd41864876c32d1e7b13fb3124f",
+      "installed_skill_sha256": "4ce5b0b726be500a7a6f36ffc93c104ebb913e613f6d6c16e12383cda4e7b418",
+      "whole_skill_subtree_verified_before_modification": true,
+      "original_subtree_file_count": 1,
+      "normalized_metadata": {
+        "argument-hint": {
+          "original_value": "<Figma URL, URL, or description>",
+          "installed_location": "metadata.argument-hint",
+          "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+        }
+      },
+      "modifications": [
+        {
+          "path": "SKILL.md",
+          "change": "Move unsupported top-level metadata fields under metadata, preserving values.",
+          "fields": {
+            "argument-hint": {
+              "original_value": "<Figma URL, URL, or description>",
+              "installed_location": "metadata.argument-hint",
+              "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+            }
+          }
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Repair flat-install connector link from ../../CONNECTORS.md to references/CONNECTORS.md; copy plugin connector reference unchanged."
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Correct SC 2.5.5 to explicit optional Level AAA; retain 44x44 threshold and link the exceptions.",
+          "source": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html",
+          "verified_utc": "2026-11-14T01:26:59.062032+00:00"
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Add a prominent local-modification notice and link to provenance; user authorization and AGENTS.md take precedence."
+        }
+      ],
+      "validation_original": {
+        "exit_code": 1,
+        "stdout": "Unexpected key(s) in SKILL.md frontmatter: argument-hint. Allowed properties are: allowed-tools, description, license, metadata, name",
+        "stderr": ""
+      },
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "bytes": 11607,
+          "upstream_path": "LICENSE",
+          "upstream_sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "modified": false
+        },
+        {
+          "path": "NOTICE.md",
+          "sha256": "990360817fc15412f96360638e904bd48aa3ee79b2997bd633f70b845528ac0d",
+          "bytes": 1760,
+          "generated_local_notice": true
+        },
+        {
+          "path": "references/CONNECTORS.md",
+          "sha256": "242e232bb37b2bd5778d2e88db7edb53a6100819a8f037d786a3e1a55b4d141f",
+          "bytes": 1139,
+          "upstream_path": "design/CONNECTORS.md",
+          "upstream_sha256": "242e232bb37b2bd5778d2e88db7edb53a6100819a8f037d786a3e1a55b4d141f",
+          "modified": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "4ce5b0b726be500a7a6f36ffc93c104ebb913e613f6d6c16e12383cda4e7b418",
+          "bytes": 4639,
+          "upstream_path": "design/skills/accessibility-review/SKILL.md",
+          "upstream_sha256": "ef42982af0d51238dda2ab16d08626712891bdd41864876c32d1e7b13fb3124f",
+          "modified": true
+        }
+      ],
+      "origin_type": "external_pinned_source",
+      "installed_path": ".agents/skills/accessibility-review"
+    },
+    {
+      "name": "ux-copy",
+      "source_repo": "anthropics/knowledge-work-plugins",
+      "source_url": "https://github.com/anthropics/knowledge-work-plugins/tree/e91a134584eb798bac7fb0379358006a2b63b965/design/skills/ux-copy",
+      "source_commit": "e91a134584eb798bac7fb0379358006a2b63b965",
+      "source_path": "design/skills/ux-copy",
+      "repository_license_spdx_from_github": "Apache-2.0",
+      "original_skill_license_declaration": null,
+      "original_skill_sha256": "d46a00a62ec637e9ca9d5f7823ea3e0a4ec26dffc53bb5035f59b48ebfcdcde7",
+      "installed_skill_sha256": "5d2c1ac29c3652a579ab8efbd5cd48aa83346c2c98cab7048275ae7f14012a74",
+      "whole_skill_subtree_verified_before_modification": true,
+      "original_subtree_file_count": 1,
+      "normalized_metadata": {
+        "argument-hint": {
+          "original_value": "<context or copy to review>",
+          "installed_location": "metadata.argument-hint",
+          "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+        }
+      },
+      "modifications": [
+        {
+          "path": "SKILL.md",
+          "change": "Move unsupported top-level metadata fields under metadata, preserving values.",
+          "fields": {
+            "argument-hint": {
+              "original_value": "<context or copy to review>",
+              "installed_location": "metadata.argument-hint",
+              "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+            }
+          }
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Repair flat-install connector link from ../../CONNECTORS.md to references/CONNECTORS.md; copy plugin connector reference unchanged."
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Add a prominent local-modification notice and link to provenance; user authorization and AGENTS.md take precedence."
+        }
+      ],
+      "validation_original": {
+        "exit_code": 1,
+        "stdout": "Unexpected key(s) in SKILL.md frontmatter: argument-hint. Allowed properties are: allowed-tools, description, license, metadata, name",
+        "stderr": ""
+      },
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "bytes": 11607,
+          "upstream_path": "LICENSE",
+          "upstream_sha256": "a6946284993aeec75c7d75906064b66210c46051e562077efb30eb6dcfe72e26",
+          "modified": false
+        },
+        {
+          "path": "NOTICE.md",
+          "sha256": "a04dd2c5222699168531dc05d8b3a71d93d8baec5a8fb12b386a592c5d540b5b",
+          "bytes": 1397,
+          "generated_local_notice": true
+        },
+        {
+          "path": "references/CONNECTORS.md",
+          "sha256": "242e232bb37b2bd5778d2e88db7edb53a6100819a8f037d786a3e1a55b4d141f",
+          "bytes": 1139,
+          "upstream_path": "design/CONNECTORS.md",
+          "upstream_sha256": "242e232bb37b2bd5778d2e88db7edb53a6100819a8f037d786a3e1a55b4d141f",
+          "modified": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "5d2c1ac29c3652a579ab8efbd5cd48aa83346c2c98cab7048275ae7f14012a74",
+          "bytes": 3635,
+          "upstream_path": "design/skills/ux-copy/SKILL.md",
+          "upstream_sha256": "d46a00a62ec637e9ca9d5f7823ea3e0a4ec26dffc53bb5035f59b48ebfcdcde7",
+          "modified": true
+        }
+      ],
+      "origin_type": "external_pinned_source",
+      "installed_path": ".agents/skills/ux-copy"
+    },
+    {
+      "name": "astropy",
+      "source_repo": "K-Dense-AI/scientific-agent-skills",
+      "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/tree/2d2065fb4520fa3f3f2bcf61cff26ec8b7eba4b5/skills/astropy",
+      "source_commit": "2d2065fb4520fa3f3f2bcf61cff26ec8b7eba4b5",
+      "source_path": "skills/astropy",
+      "repository_license_spdx_from_github": "MIT",
+      "original_skill_license_declaration": "BSD-3-Clause license",
+      "original_skill_sha256": "2f9d43ae65766a9715112e3b56cb83fb9c12e4e8b6356c0c4c22131c6cfa536f",
+      "installed_skill_sha256": "79e5294033338a3376e43b731d04d55c4ed08abde3040655b2b56ab100517390",
+      "whole_skill_subtree_verified_before_modification": true,
+      "original_subtree_file_count": 9,
+      "normalized_metadata": {
+        "compatibility": {
+          "original_value": "Requires Python 3.11+, Astropy 8.0.1 and NumPy 2+; SciPy for cosmology, matching and fitting (uv for installation). Some features (object name resolution, site lookups, remote FITS reads, IERS updates) need network access.",
+          "installed_location": "metadata.compatibility",
+          "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+        }
+      },
+      "modifications": [
+        {
+          "path": "SKILL.md",
+          "change": "Move unsupported top-level metadata fields under metadata, preserving values.",
+          "fields": {
+            "compatibility": {
+              "original_value": "Requires Python 3.11+, Astropy 8.0.1 and NumPy 2+; SciPy for cosmology, matching and fitting (uv for installation). Some features (object name resolution, site lookups, remote FITS reads, IERS updates) need network access.",
+              "installed_location": "metadata.compatibility",
+              "reason": "The bundled Codex quick_validate.py does not allow this top-level field; the original value is preserved as metadata."
+            }
+          }
+        },
+        {
+          "path": "SKILL.md",
+          "change": "Add a prominent local-modification notice and link to provenance; user authorization and AGENTS.md take precedence."
+        }
+      ],
+      "validation_original": {
+        "exit_code": 1,
+        "stdout": "Unexpected key(s) in SKILL.md frontmatter: compatibility. Allowed properties are: allowed-tools, description, license, metadata, name",
+        "stderr": ""
+      },
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "LICENSE.upstream-repository.md",
+          "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+          "bytes": 1068,
+          "upstream_path": "LICENSE.md",
+          "upstream_sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+          "modified": false
+        },
+        {
+          "path": "NOTICE.md",
+          "sha256": "35814d0e7411688fa282142ba55cbc3357d38f49c8ca5f14fa3191870743e351",
+          "bytes": 2088,
+          "generated_local_notice": true
+        },
+        {
+          "path": "references/coordinates.md",
+          "sha256": "2773d6f4086c287436a4b5a4100fd74a951a1688b09cd307bd2afc2945cc27fb",
+          "bytes": 9079,
+          "upstream_path": "skills/astropy/references/coordinates.md",
+          "upstream_sha256": "2773d6f4086c287436a4b5a4100fd74a951a1688b09cd307bd2afc2945cc27fb",
+          "modified": false
+        },
+        {
+          "path": "references/cosmology.md",
+          "sha256": "71b7e19b9861147480f5a62a34e692d4caf90cfd0ab4bd1fcca765a9cbb6001f",
+          "bytes": 8508,
+          "upstream_path": "skills/astropy/references/cosmology.md",
+          "upstream_sha256": "71b7e19b9861147480f5a62a34e692d4caf90cfd0ab4bd1fcca765a9cbb6001f",
+          "modified": false
+        },
+        {
+          "path": "references/fits.md",
+          "sha256": "27ee0335641eadc71a62551d7d58d0cb2b5b651b4b4dbbfca42a40f78be4e836",
+          "bytes": 10814,
+          "upstream_path": "skills/astropy/references/fits.md",
+          "upstream_sha256": "27ee0335641eadc71a62551d7d58d0cb2b5b651b4b4dbbfca42a40f78be4e836",
+          "modified": false
+        },
+        {
+          "path": "references/review.md",
+          "sha256": "d508fe2c8f2969a3aecfd615088b06159b2f653c4b378f1e7bfc83d76db75986",
+          "bytes": 8199,
+          "upstream_path": "skills/astropy/references/review.md",
+          "upstream_sha256": "d508fe2c8f2969a3aecfd615088b06159b2f653c4b378f1e7bfc83d76db75986",
+          "modified": false
+        },
+        {
+          "path": "references/tables.md",
+          "sha256": "b2cc2a568ca4b0d514346d1db5b2e8d704fbd181cb56dc1b1edae86fb9c06dae",
+          "bytes": 10839,
+          "upstream_path": "skills/astropy/references/tables.md",
+          "upstream_sha256": "b2cc2a568ca4b0d514346d1db5b2e8d704fbd181cb56dc1b1edae86fb9c06dae",
+          "modified": false
+        },
+        {
+          "path": "references/time.md",
+          "sha256": "4741498365348fd65fda0ff8ddcb57572cd3e5e7d5ff96f965f6567667b8b987",
+          "bytes": 11061,
+          "upstream_path": "skills/astropy/references/time.md",
+          "upstream_sha256": "4741498365348fd65fda0ff8ddcb57572cd3e5e7d5ff96f965f6567667b8b987",
+          "modified": false
+        },
+        {
+          "path": "references/units.md",
+          "sha256": "1df6212fab813f85dd6788551f474a68103ee694051d89194cfe8a09e90a88b0",
+          "bytes": 4550,
+          "upstream_path": "skills/astropy/references/units.md",
+          "upstream_sha256": "1df6212fab813f85dd6788551f474a68103ee694051d89194cfe8a09e90a88b0",
+          "modified": false
+        },
+        {
+          "path": "references/upstream-tests/test_workflows.py",
+          "sha256": "30d2f0c6428886a0e065b66f8fa984cc547fc7d084412b1f691de21682efe570",
+          "bytes": 12827,
+          "upstream_path": "tests/astropy/test_workflows.py",
+          "upstream_sha256": "30d2f0c6428886a0e065b66f8fa984cc547fc7d084412b1f691de21682efe570",
+          "modified": false
+        },
+        {
+          "path": "references/wcs_and_other_modules.md",
+          "sha256": "5201dfc5450a4648a3c550cf58444f209bcff9b082ece4354e3dbf9becb13cc8",
+          "bytes": 11001,
+          "upstream_path": "skills/astropy/references/wcs_and_other_modules.md",
+          "upstream_sha256": "5201dfc5450a4648a3c550cf58444f209bcff9b082ece4354e3dbf9becb13cc8",
+          "modified": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "79e5294033338a3376e43b731d04d55c4ed08abde3040655b2b56ab100517390",
+          "bytes": 17229,
+          "upstream_path": "skills/astropy/SKILL.md",
+          "upstream_sha256": "2f9d43ae65766a9715112e3b56cb83fb9c12e4e8b6356c0c4c22131c6cfa536f",
+          "modified": true
+        }
+      ],
+      "origin_type": "external_pinned_source",
+      "installed_path": ".agents/skills/astropy"
+    },
+    {
+      "name": "spherex-data-contract",
+      "origin_type": "project_authored_during_event",
+      "installed_path": ".agents/skills/spherex-data-contract",
+      "authored_date_kst": "2026-11-14",
+      "basis": [
+        "AGENTS.md",
+        "FSD.md",
+        "project actual data/rules contracts"
+      ],
+      "external_source_repo": null,
+      "license_note": "Project-authored instructions; project-wide code license has not been selected by this setup.",
+      "installed_skill_sha256": "ff3732e0d91864e2fb03fd147493427820e85a2dde4b189378c0624a132683e3",
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "ff3732e0d91864e2fb03fd147493427820e85a2dde4b189378c0624a132683e3",
+          "bytes": 2456
+        }
+      ]
+    },
+    {
+      "name": "astrometry-motion-qa",
+      "origin_type": "project_authored_during_event",
+      "installed_path": ".agents/skills/astrometry-motion-qa",
+      "authored_date_kst": "2026-11-14",
+      "basis": [
+        "AGENTS.md",
+        "FSD.md",
+        "project actual data/rules contracts"
+      ],
+      "external_source_repo": null,
+      "license_note": "Project-authored instructions; project-wide code license has not been selected by this setup.",
+      "installed_skill_sha256": "f8d228ebc027c06175b0c27f5b8b14195a7a72a3d20e0537003b4cb30ffbf8bf",
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "f8d228ebc027c06175b0c27f5b8b14195a7a72a3d20e0537003b4cb30ffbf8bf",
+          "bytes": 2871
+        }
+      ]
+    },
+    {
+      "name": "spaceapps-browser-qa",
+      "origin_type": "project_authored_during_event",
+      "installed_path": ".agents/skills/spaceapps-browser-qa",
+      "authored_date_kst": "2026-11-14",
+      "basis": [
+        "AGENTS.md",
+        "FSD.md",
+        "project actual data/rules contracts"
+      ],
+      "external_source_repo": null,
+      "license_note": "Project-authored instructions; project-wide code license has not been selected by this setup.",
+      "installed_skill_sha256": "c1dfdf09a9515b70b6daccf0f273eb40476a310589b84b926bfa5aea1cc7cc04",
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "c1dfdf09a9515b70b6daccf0f273eb40476a310589b84b926bfa5aea1cc7cc04",
+          "bytes": 3042
+        }
+      ]
+    },
+    {
+      "name": "spaceapps-evidence-release",
+      "origin_type": "project_authored_during_event",
+      "installed_path": ".agents/skills/spaceapps-evidence-release",
+      "authored_date_kst": "2026-11-14",
+      "basis": [
+        "AGENTS.md",
+        "FSD.md",
+        "project actual data/rules contracts"
+      ],
+      "external_source_repo": null,
+      "license_note": "Project-authored instructions; project-wide code license has not been selected by this setup.",
+      "installed_skill_sha256": "712baf95aa3f027eb193e403798478fc4996c12e646dab54230b34633c541197",
+      "validation_installed": {
+        "exit_code": 0,
+        "stdout": "Skill is valid!",
+        "stderr": ""
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "712baf95aa3f027eb193e403798478fc4996c12e646dab54230b34633c541197",
+          "bytes": 2857
+        }
+      ]
+    }
+  ]
+}

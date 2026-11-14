@@ -1,0 +1,779 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Planet X · SPHEREx",
+    "version": "0.2.0"
+  },
+  "paths": {
+    "/health/live": {
+      "get": {
+        "summary": "Live",
+        "operationId": "live_health_live_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "summary": "Ready",
+        "operationId": "ready_health_ready_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/objects": {
+      "get": {
+        "summary": "Objects",
+        "operationId": "objects_api_v1_objects_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/universe": {
+      "get": {
+        "summary": "Universe",
+        "operationId": "universe_api_v1_universe_get",
+        "parameters": [
+          {
+            "name": "epoch",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Epoch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/observations": {
+      "get": {
+        "summary": "Observations",
+        "operationId": "observations_api_v1_observations_get",
+        "parameters": [
+          {
+            "name": "object_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "epsilon-indi-b",
+              "title": "Object Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/comparison-jobs": {
+      "post": {
+        "summary": "Comparison",
+        "operationId": "comparison_api_v1_comparison_jobs_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComparisonRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/{job_id}": {
+      "get": {
+        "summary": "Job",
+        "operationId": "job_api_v1_jobs__job_id__get",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/{job_id}/cancel": {
+      "post": {
+        "summary": "Cancel",
+        "operationId": "cancel_api_v1_jobs__job_id__cancel_post",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/comparisons/{result_id}/manifest": {
+      "get": {
+        "summary": "Manifest",
+        "operationId": "manifest_api_v1_comparisons__result_id__manifest_get",
+        "parameters": [
+          {
+            "name": "result_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Result Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/evidence": {
+      "post": {
+        "summary": "Save",
+        "operationId": "save_api_v1_evidence_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvidenceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/evidence/{evidence_id}/export": {
+      "get": {
+        "summary": "Export",
+        "operationId": "export_api_v1_evidence__evidence_id__export_get",
+        "parameters": [
+          {
+            "name": "evidence_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Evidence Id"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "title": "Format"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/evidence/import": {
+      "post": {
+        "summary": "Restore",
+        "operationId": "restore_api_v1_evidence_import_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Evidence"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Index",
+        "operationId": "index__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CameraState": {
+        "properties": {
+          "position": {
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Position"
+          },
+          "target": {
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Target"
+          },
+          "representation_version": {
+            "type": "string",
+            "const": "solar-display-v1",
+            "title": "Representation Version",
+            "default": "solar-display-v1"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "position",
+          "target"
+        ],
+        "title": "CameraState"
+      },
+      "ComparisonRequest": {
+        "properties": {
+          "observation_ids": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "S01",
+                "S02",
+                "S12",
+                "S14"
+              ]
+            },
+            "type": "array",
+            "maxItems": 2,
+            "minItems": 2,
+            "title": "Observation Ids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "observation_ids"
+        ],
+        "title": "ComparisonRequest"
+      },
+      "Evidence": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version"
+          },
+          "evidence_id": {
+            "type": "string",
+            "pattern": "^ev_[a-f0-9]{32}$",
+            "title": "Evidence Id"
+          },
+          "created_at": {
+            "type": "string",
+            "maxLength": 64,
+            "title": "Created At"
+          },
+          "result_id": {
+            "type": "string",
+            "pattern": "^cmp_[a-f0-9]{24}$",
+            "title": "Result Id"
+          },
+          "session": {
+            "$ref": "#/components/schemas/Session"
+          },
+          "judgment": {
+            "type": "string",
+            "maxLength": 8000,
+            "title": "Judgment"
+          },
+          "comparison": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Comparison"
+          },
+          "comparison_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Comparison Sha256"
+          },
+          "ai_assistance": {
+            "type": "string",
+            "title": "Ai Assistance"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "schema_version",
+          "evidence_id",
+          "created_at",
+          "result_id",
+          "session",
+          "judgment",
+          "comparison",
+          "comparison_sha256",
+          "ai_assistance"
+        ],
+        "title": "Evidence"
+      },
+      "EvidenceRequest": {
+        "properties": {
+          "result_id": {
+            "type": "string",
+            "pattern": "^cmp_[a-f0-9]{24}$",
+            "title": "Result Id"
+          },
+          "session": {
+            "$ref": "#/components/schemas/Session"
+          },
+          "judgment": {
+            "type": "string",
+            "maxLength": 8000,
+            "title": "Judgment"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "result_id",
+          "session",
+          "judgment"
+        ],
+        "title": "EvidenceRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Session": {
+        "properties": {
+          "object_id": {
+            "type": "string",
+            "enum": [
+              "epsilon-indi-b",
+              "pluto"
+            ],
+            "title": "Object Id",
+            "default": "epsilon-indi-b"
+          },
+          "observation_ids": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "S01",
+                "S02",
+                "S12",
+                "S14"
+              ]
+            },
+            "type": "array",
+            "maxItems": 2,
+            "minItems": 2,
+            "title": "Observation Ids"
+          },
+          "active_frame": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B"
+            ],
+            "title": "Active Frame",
+            "default": "A"
+          },
+          "view_mode": {
+            "type": "string",
+            "enum": [
+              "split",
+              "blink"
+            ],
+            "title": "View Mode",
+            "default": "split"
+          },
+          "contrast": {
+            "type": "number",
+            "maximum": 10.0,
+            "minimum": 0.1,
+            "title": "Contrast",
+            "default": 1
+          },
+          "locale": {
+            "type": "string",
+            "enum": [
+              "ko",
+              "en",
+              "ja",
+              "zh-Hant",
+              "fr"
+            ],
+            "title": "Locale",
+            "default": "ko"
+          },
+          "universe_context": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UniverseContext"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "observation_ids"
+        ],
+        "title": "Session"
+      },
+      "UniverseContext": {
+        "properties": {
+          "selected_object_id": {
+            "type": "string",
+            "maxLength": 50,
+            "title": "Selected Object Id"
+          },
+          "model_epoch": {
+            "type": "string",
+            "maxLength": 40,
+            "title": "Model Epoch"
+          },
+          "camera": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CameraState"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "panel_open": {
+            "type": "boolean",
+            "title": "Panel Open",
+            "default": true
+          },
+          "source_manifest_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Source Manifest Sha256"
+          },
+          "orbit_manifest_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Orbit Manifest Sha256"
+          },
+          "show_orbits": {
+            "type": "boolean",
+            "title": "Show Orbits",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "selected_object_id",
+          "model_epoch",
+          "source_manifest_sha256"
+        ],
+        "title": "UniverseContext"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
