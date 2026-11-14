@@ -1,6 +1,6 @@
 """Prepare a private source overlay for an isolated build, without copying live state.
 
-The final user handoff is still the complete verified release ZIP. This TAR is
+The current delivery is a verified release directory (no new ZIP). This TAR is
 only an internal build input over the already verified immutable base release.
 """
 from __future__ import annotations

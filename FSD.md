@@ -1,9 +1,11 @@
 # Planet X and SPHEREx — 기능·개발 명세서
 
-**현재 구현 DEV-020 / v0.13.0:** R029~31의 TNO 전수 설명·판정 대화상자·밀도 선택 기능, 공식 RGB 지도/고리/조명/LOD 복구, 8행성·P9문헌/조합 표시 필터를 구현했다. TypeScript/Vite·Vitest84·Node72·관련Python63·Ruff와 Chrome15개 고유 경로(영향 범위 후속 포함)를 확인했다. runtime SHA ea500e152d49734fcb2dfd65db3f6a2abbf967d77d6a7ae79bc2e8ddcff16f46,39JSON/19,200,366B/source1272·필수1182다. 기존4comparison ID/SHA와 3운영 근거 원봉투를 보존한다. 현재 Sydney 운영은 검증된0.13ZIP으로 갱신됐고 실제 재시작·HTTPS Chrome5흐름·기존근거복원이 완료됐다. 정확기록은 docs/releases/v0.13.0.json이다. 상세계약24절,검증정본 docs/qa/dev020_local_verification.json. 아래 이전 릴리스는 당시 이력이다.
+**현재 구현 DEV-021 / v0.14.0:** TOP5 문헌 표본 중앙창·가정질량M⊕/kg·명시ρR 계산CTA, 지연P9결과 카메라초기화 방지, 장기달력 위성453개(토성291)와 위성계 카메라, 공개RGB 주의/원본전환을 구현했다. strict/Vite·Vitest101·Node75 및후속9·Python377 및후속6·Ruff, 새 Chrome8경로의 로컬/공개HTTPS 검증을 통과했다. runtime SHA c97016538256bf24f064556c3ebb41ff0268b3a4afe49364751a8c56e6455d63,39JSON/19,203,311B/source1272·필수1182다. 새ZIP 없이 디렉터리 clean-copy/Node-only PATH/실제재시작을 검증하고 같은manifest의082938 디렉터리를AWS에직접반영했다. 원관측/기존근거/이전불변ZIP을보존하며상세25절·docs/qa/dev021_local_verification.json·사후 docs/releases/v0.14.0.json을따른다.
+
+**보존 이력 DEV-020 / v0.13.0:** R029~31의 TNO 전수 설명·판정 대화상자·밀도 선택 기능, 공식 RGB 지도/고리/조명/LOD 복구, 8행성·P9문헌/조합 표시 필터를 구현했다. TypeScript/Vite·Vitest84·Node72·관련Python63·Ruff와 Chrome15개 고유 경로(영향 범위 후속 포함)를 확인했다. runtime SHA ea500e152d49734fcb2dfd65db3f6a2abbf967d77d6a7ae79bc2e8ddcff16f46,39JSON/19,200,366B/source1272·필수1182다. 기존4comparison ID/SHA와 3운영 근거 원봉투를 보존한다. 현재 Sydney 운영은 검증된0.13ZIP으로 갱신됐고 실제 재시작·HTTPS Chrome5흐름·기존근거복원이 완료됐다. 정확기록은 docs/releases/v0.13.0.json이다. 상세계약24절,검증정본 docs/qa/dev020_local_verification.json. 아래 이전 릴리스는 당시 이력이다.
 
 
-문서 버전 `FSD-0.22` · 2026-11-15 KST · DEV-020/R029~31·OPS-020 EC2이전. 현재범위/기능/자료계약은1.1/2.21/8.14/11.1~2/17.4/21과후속22~24를연결하며충돌시최신24를우선한다. 제외기능의과거완료이력은현재유지범위가아니다.
+문서 버전 `FSD-0.23` · 2026-11-15 KST · DEV-021·OPS-020 EC2이전. 현재범위/기능/자료계약은1.1/2.21/8.14/11.1~2/17.4/21과후속22~25를연결하며충돌시최신25를우선한다. 제외기능의과거완료이력은현재유지범위가아니다.
 
 **이 파일은 프로젝트의 기능·화면·계산·API·데이터·실행·검사·배포 명세를 통합 관리하는 문서다.** 기능이나 계약을 바꾸는 작업에서는 관련 절과 아래 구현 현황을 함께 갱신한다. 규칙은 [AGENTS.md](./AGENTS.md), 실제 작업 증거는 [작업 기록](./docs/worklog.md), 적용 스킬은 [SKILLS.md](./SKILLS.md)에서 연결한다. 기능·개발 명세는 이 파일에서 유지한다. 사용자의 명시적 요청으로 만든 [Data_Spec.md](./Data_Spec.md)는 실제 사용/확보/이전 데이터의 전수 목록·출처·해시·가공/권리·한계를 담당하며 실행 manifest/타입과 함께 갱신한다. OpenAPI/타입/스키마·lockfile·테스트는 실행 가능한 계약으로 별도 유지하고 이 문서에서 경로/버전을 참조한다.
 
@@ -1152,3 +1154,50 @@ Chrome에서 FO563/PD153 판정·모든8341 exactID/출처·5언어·표시 필�
 빌드/압축/새 ZIP Linux 해제·Node만 있는 PATH/실제 프로세스 재시작 검증은 열 부하를 줄이기 위해 분리된 EC2 빌드 공간에서 수행한다. 소스 transfer manifest의 경로/바이트/SHA와 실제 Git base+dirty 상태를 검증하며 .git/키/영속 상태를 전송하지 않는다. 최종 ZIP은 별도 외부 검증 결과와 함께 확정하고, 같은 ZIP을 배포한 뒤에 사용자 최신 지시대로 Git commit/push한다. 배포 확인 뒤 기록은 이미 검증한 불변 ZIP을 재작성하지 않는다.
 
 DEV-020 배포 사후확정: 정확073754ZIP490,829,327B/1616파일/SHA68ee85ee4e6dedbe99ddeacb452b5f25751e0c262d04f6cc2621a99c80b3b044의 새Ubuntu폴더 해제·Node만있는PATH·실제PID7243→7256 복원 검증을 통과했다. 같은ZIP을Sydney에배포해16파일일관백업/기존11근거·비교SHA를보존했고정식HTTPS기본Chrome5흐름·실제운영PID7419→7725재시작·기존3근거exportSHA/ID/복원을통과했다. 이미검증한ZIP은수정하지않으며상세사후정본 docs/releases/v0.13.0.json을따른다.
+
+## 25. DEV-021 · 표본·질량·장면 축척·RGB 표시 주의·위성 근사
+
+사용자 실화면은 영역 표본 버튼 무반응, 질량을M⊕로명시계산,2035-03-19T12:22:00전체장면수축을보고했다. 최신추가지시로앞으로ZIP은생성하지않는다. 기존Git/원관측/배포ZIP/영속근거를보존하고새검증빌드를AWS에직접반영후commit/push한다.
+
+- 기본 문헌순위는TOP5를먼저보이며단위입체각밀도를‘하늘위치확률밀도(sr⁻¹)’로명시한다. 이는부피밀도ρ(kg/m³)가아니므로M=ρV의입력으로쓰지않는다. 문헌조건/분모/2018epoch·원표본10만과존재확률미산출은유지한다.
+- ‘이영역의표본보기’는즉시중앙대화상자를열어선택영역·로딩/오류/재시도·실제같은CSV행의표본ID/문헌가정질량M⊕·가정반지름R⊕·a/e를보인다. 목록은스크린안에서스크롤하며Escape/닫기/포커스복귀를지원한다. 한표본을선택하면입력적용확인을표시하고현재가정질량M⊕및kg가시화,경로계산행동을설명한다. 늦은요청/필터변경/닫기를취소하고timeout·재시도를구별한다.
+- 기존members API의정수rows는보존하며같은CSV의검증된mass=M⊕,rad=assumedR⊕요약samples를추가한다. 새관측/천체나질량추정을생성하지않는다. 현재편집값은사용자가정으로표시한다. 문헌질량·반지름으로역산한ρ를독립측정이나질량의새증거로주장하지않는다.
+- native6미측정본체질량은채택한반지름과명시적ρ/비교위성입력이있을때기존구형식M/M⊕=ρ·(4π/3)·(Rkm×1000)³/(5.97217×10²⁴)로계산한다. 현재질량≈M⊕·kg·단위/입력/출처를보이며간편CTA로편집기에바로접근한다. 실측본체질량/계질량/가정을구별하고자동Tethys·미확보밀도대입은하지않는다.
+- 2035시각전후같은장면의물리/표시반지름·위치연속성·카메라eye/target·canvas비율·follow/mode·모형자료변경을분리계측한다. P9경로데이터갱신과사용자명시적전체보기카메라행동은분리하고뒤늦은요청이카메라축척/모형시각을초기화하지않게한다. 특정날짜를원인으로단정하지않는다.
+- 검사: 실제2542×1167표본클릭후첫표본의viewport가시성/ESC/빠른재선택/지연·실패,5언어/좁은배치,문헌질량·물질밀도구분/계산식·원source보존,2035초/분/재생과지연P9결과의카메라/mesh불변,εB/Pluto/P9근거·재시작. 직접배포정본은새릴리스manifest/전항목SHA/Node단독실행/기존근거와연결하며ZIP해제완료로표현하지않는다.
+
+상태:읽기조사상기존API는1위cell3682의65표본과첫row2413의6.14M⊕를정상반환했다. 기존목록이표아래·이중스크롤뒤에렌더되어버튼근처피드백이없고,820px패널내2열이표를과도하게좁혔다. 2035날짜±1초/분/일의8행성반지름은동일하고위치가연속적이다. 당시선택/속도는미확인으로원인을확정하지않았다. 구현/실제브라우저/직접배포는후속기록으로확정한다.
+
+### 25.1 OPAL 표시 주의와 원본 접근
+
+사용자 추가 화면의 Neptune/Uranus 검은 채움과 강한 RGB 접합은 새 지형으로 보이지 않도록 구별한다. `appearanceCoverage.ts`의 `rgb-zero-channel-buffer6-display-caution-v2`는 브라우저가 디코드한 원 크기 RGB8에서 하나 이상의 채널이 정확히0인 표본을 이진 seed로 분류한다. 세 채널0인 검은 표본도 포함한다. 화면 검토에서 남은 청·녹 접합 fringe를 구별하려 seed 주위 **원본 raster6픽셀의 사각 buffer(Chebyshev 거리)**를 별도 표시 배열에 확장한다. 가로 경도는 주기 wrap, 세로 경계는 clamp이고 2회 sliding maximum으로 처리한다. 원 seed/개수와 expanded개수·반경을 별도로 유지하며 화면 픽셀·물리 거리·PSF로 해석하지 않는다. 원 PNG를 덮어쓰거나 색·극·구름을 복원하지 않는다. 이 보수적 표시 규칙은 **과학 quality/FLAGS 또는 미관측 판정 마스크가 아니며 0채널과 buffer의 인접 표본도 유효 자료일 수 있다.** 다른 접합·대비 흔적은 남을 수 있어 완전한 외관 복원으로 주장하지 않는다.
+
+`planetAppearance.ts`는 공개 RGB 합성에만 이 텍스처와 명시된 지도 latitude 범위 밖을 화면 고정 회색 사선으로 표시한다. nearest/no-mipmap·명시적 위아래 행 정렬을 사용하며 관측 지형 무늬를 생성하지 않는다. `marked`가 새 세션 기본이고 `original`은 이 보조만 끈다. 두 모드의 같은 구체 투영·표시 조명은 유지되며 원출처 링크도 제공한다. `coverage_overlay=not_applicable/loading/ready/unavailable`를 구별하고 생성 실패는 원 지도 유지 안내를 보인다. 조명·보조 전환은 uniform 갱신이며 renderer DPR/크기 재설정과 분리한다. 5언어로 0채널의 유효 가능성·미관측 판정 아님·원본 접근을 설명한다.
+
+근거의 선택은 `UniverseContext.appearance_coverage=marked|original`로 저장·복원한다. **이 필드가 없는 구판 근거는 `original`로 복원**해 과거 표시 선택을 새 보조로 조용히 바꾸지 않는다. 새 세션 기본값과 구판 복원 fallback을 혼동하지 않는다. Python 모델·TypeScript·OpenAPI/Node validator를 함께 갱신하며 관측 comparison/원봉투·ID·판단은 변경하지 않는다.
+
+같은 원 PNG를 이용한 소형 분류에서 Neptune은260281표본 중47441(세 채널0=32388, 일부 채널0=15053), Uranus는260281중106823(104869/1954)이 표시 대상이었다. 입력 RGBA와 원 PNG SHA 불변을 확인했다. 이 개수는 미관측률·불량률·새 독립관측 수가 아니다. 정확한 원 TIFF/PNG/처리는 Data_Spec DEV-020.2·DEV-021을 따른다.
+
+위 개수는 buffer 전 seed다. 상태의 `coverage_marked_pixels`는 이 원개수를 보존하고 `coverage_buffered_pixels`, `coverage_buffer_radius_source_px=6`를 추가해 확대된 표시 영역을 구분한다. 소형 Node 실행에서60개 크기/반경 입력을 독립 brute-force wrap/clamp와 대조해 일치·seed불변을 확인했으며 실제 확장 개수는 Neptune54715/Uranus116545였다. 이는 Vitest/중앙 GPU·사람 화면 검토의 통과를 대신하지 않는다. 해당 후속 검증은 pending이며 source/원본 모드는 동일하다.
+
+### 25.2 근사 달력의 위성 유지와 정확도 경계
+
+`longTermMath.ts`/`moonKepler.ts`의 `parent-relative-osculating-kepler-v1`은 새 관측을 받지 않고 저장된 JPL 부모 중심 geometric r/v의 첫 TDB epoch에서 묶인 접촉 타원을 구한다. AU·AU/day·J2000 ecliptic/ICRF·VEC_CORR=NONE·정확한 부모 CENTER 및 source SHA를 확인하며 Laplace/적도 평균요소를 다른 기준계에 그대로 대입하지 않는다. 채택한 system GM으로 ε=v²/2−μ/r, a=−μ/(2ε), e와 평면·위상을 구하고 μ 단위를 km³/s²→AU³/day²로 변환해 선택 TDB 달력의 Kepler 위상을 전파한다. 원시각 r/v·source response SHA·GM/단위·상태·제외 이유를 별도로 표시한다.
+
+기존 목록468위성 중 현재 입력으로 전파 가능한 대상은 **453개**다. 태양계8행성의 처방된 부모 경로 중 위성이 있는6계의 합계는 Earth1/Mars2/Jupiter115/Saturn291/Uranus28/Neptune16이다. 수성·금성은 목록 위성이 없다. 미지원15개는 Saturn2/Uranus1의 원벡터 미지원과 장기 근사 부모가 없는 TNO계12개(Pluto5/Haumea2/Eris1/Makemake1/Quaoar1/Orcus1/Gonggong1)다. 후자는 해당 목록의 원벡터 확보 여부와 별개로 `missing_parent`이며 임의 부모 궤도·위치로 채우지 않는다. 기준계/중심 부적합·원상태 누락/비결합 타원·위상 실패도 각각 이유를 남긴다. 453은 관측 완전성 또는 임의 장기 정확도 보장이 아니다.
+
+GM은 기존 JPL DE440 **planetary-system GM의 채택 근사**이며 선택 위성의 질량 측정이나 반지름 유도 질량이 아니다. 부모8행성은 JPL 장기 근사식으로 처방하고 위성은 독립 질량 없는 2체로 다룬다. 상호 섭동·행성 J2·조석·공명·궤도 진화·장기 공분산은 계산하지 않는다. Earth 표시는 기존 EMB를 유지하며 geocentric Moon 벡터를 μEarth/(μEarth+μMoon) 배로 만들어 EMB 상대 offset으로 더한다. 정밀 지구 중심 복원을 주장하지 않는다. `long_term_accuracy_verified=false`, 전파 위치 불확실성/새 분류는 null이다. 지원 달력에 숫자가 유한해도 그 전 기간의 물리적 정확도를 뜻하지 않는다.
+
+App은 기존 카탈로그 SHA가 같은6부모 벡터를 순차 수화하고 loading/ready/partial·실패 부모와 재시도를 구별한다. source 자료·반지름·물리 profile은 보존하며 source epoch의 정지 위치를 미래 위치로 재사용하지 않는다. 부모 선택·개별 위성 선택·별도 ‘위성계 보기’와 공전/자전 재생을 유지한다. 근사 저장에는 기존 extended source SHA와 `moon_simulation_algorithm_version`을 함께 넣는다. 목록·위상·새 세션 복원·renderer 부하에 대한 중앙 검사는 아직 pending이다.
+
+### 25.3 장면 변경·검사·직접 배포의 현재 경계
+
+App의 P9 경로 callback은 경로 자료만 갱신하며 자동 선택 해제·전체보기 sequence 증가를 하지 않는다. 사용자가 명시한 전체보기와 경로 계산/늦은 응답을 분리한다. 2035 사례는 선택/속도와 당시 카메라가 미확정이므로 특정 날짜 또는 중력 현상을 원인으로 쓰지 않는다. mesh 반지름·카메라 eye/target·canvas aspect·mode/follow를 따로 기록한다.
+
+작성한 회귀는 `dev021-appearance.spec.ts`의 두 RGB/5언어·원 PNG/API SHA·원본↔주의 표시·반지름/scale·GLSL/pageerror와 스크린샷, `dev021-moons.spec.ts`의453/468·Saturn291·과거/미래 위상·원 source/반지름·EMB 보정, P9 dialog/질량·지연 경로 및 기존 εB/Pluto/P9 저장·복원이다. 스크린샷에서 사선을 관측 대기 구조로 오해하지 않는지 사람 검토를 따로 남긴다. 파일 작성·소형 입력 대조와 통합 PASS·공개 브라우저·배포 완료를 구분한다. **본 절 갱신 시점의 새 중앙 빌드/전체 회귀·사람 검토·AWS 직접 배포·재시작은 pending**이며 후속 실제 로그로 확정한다. 사용자의 최신 지시대로 새 ZIP은 생성하지 않고 기존 불변 ZIP/Git/영속 근거를 보존한다.
+
+
+DEV-021 중앙 검사 확정(2026-11-15 08:30 KST): 보완 빌드의 strict TypeScript/Vite·Vitest101(20파일), 기존 Node75 및 source-meta 후속9, Python377/3subtests 및 후속6/3subtests·Ruff를 통과했다. 새 Chrome8경로는 실제 TOP5→65표본 중앙창/즉시로딩·5언어·ESC·실패재시도·6.14M⊕/kg 적용, Sedna 명시ρ 계산, 2035 지연P9응답 카메라불변, 두RGB 원본/주의모드·5언어·원PNG/반지름불변, 1371/2035/3000년453위성/Saturn291·Titan선택·EMB를 통과했다. 두 RGB 스크린샷을 직접 열람해 회색사선과 대기무늬 구별·원본접근을 확인했다. 앞선 첫 브라우저 실패는 `docs/qa/dev021_local_verification.json`에 원인과 함께 보존한다. 새 Node Solar snapshot에는 Python API와 같은 source_manifest_sha256/표시버전을 첨부하며 원자료 해시를 바꾸지 않는다. runtime 정본은 `c97016538256bf24f064556c3ebb41ff0268b3a4afe49364751a8c56e6455d63`이며 네 실제 comparison ID/정본SHA는 이전과 같다. 직접 디렉터리의 clean-copy/Node-only/재시작과 공개 AWS 배포 확인은 후속 외부 릴리스 기록으로 확정한다.
+
+
+DEV-021 사후 배포 확정(2026-11-15 08:35 KST): 정확082938 디렉터리의 file1626/전체667,431,826B, release_manifest SHA374cbe532a29d8ba2083ef9d91de4a19d55068e2be1e982f06620826f4f7286b를 새Ubuntu clean-copy에서 Node-only PATH·실제PID9669→9682·εB/Pluto/P9 저장/복원으로 검증했다. runtime필수1182와배포선택23을검증했고선택67은미배포로명시했다. 같은 디렉터리를Sydney에활성화해기존핵심14파일 원바이트와21파일 일관백업을보존했다. 정식HTTPS Chrome 새8경로와기존실관측/새세션복원2경로를통과했고운영PID9844→10096 실제재시작후기존3근거의정본exportSHA/ID/비교/판단이모두같았다. 새ZIP은만들지않았다. 사후기록은검증디렉터리를재작성하지않고 docs/releases/v0.14.0.json에분리한다. Gitcommit/push는검증후마지막단계다.

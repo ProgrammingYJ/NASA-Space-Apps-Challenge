@@ -1,3 +1,5 @@
+> DEV-021 전달 변경: 사용자의 최신 지시에 따라 새 ZIP은 생성하지 않습니다. `deploy.package_release --delivery-format directory`로 파일별 해시가 있는 릴리스 디렉터리를 준비하고 `deploy.verify_node_release --directory <경로>`로 새 폴더·Node 재시작·근거 복원을 검증합니다. 기존 ZIP/해시는 이전 릴리스 감사 자료로 보존합니다.
+
 # Planet X and SPHEREx · Solar System 1000 AU
 
 NASA Space Apps Seoul 2026. 태양계 외곽의 알려진 천체·문헌 제9행성 가설·실제 SPHEREx 관측을 연결하고 근거를 저장·복원하는 웹사이트다. 최신 개발 명세는 [FSD](FSD.md), 자료·출처·해시·한계는 [Data_Spec](Data_Spec.md), 진행 상태는 [TODO](TODO.md)와 [작업 기록](docs/worklog.md)을 따른다.

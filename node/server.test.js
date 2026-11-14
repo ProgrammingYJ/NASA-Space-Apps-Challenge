@@ -3,6 +3,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const { createHash } = require('node:crypto');
 const { start } = require('./server');
 const { parse, hash, atomic } = require('./storage');
 const root = path.join(__dirname, '..');
@@ -57,6 +58,16 @@ test('real exported bundle serves UI contracts, source-verified comparison and e
       assert.equal((await request(api + 'universe?epoch=2026-11-13T24:00:00Z')).status, 422);
       assert.equal((await request(api + 'long-term-simulation?year=2026&month=2&day=30')).status, 422);
       assert.equal((await request(api + 'catalog/solar-system?parent_id=../x')).status, 422);
+    });
+    await t.test('exported Solar catalogues retain the independently hashed source and display algorithm metadata', async () => {
+      const sourceBytes = fs.readFileSync(path.join(root, 'data/manifests/extended_solar.json'));
+      const sourceSha256 = createHash('sha256').update(sourceBytes).digest('hex');
+      for (const suffix of ['', '?parent_id=earth', '?parent_id=sedna']) {
+        const response = await request(api + 'catalog/solar-system' + suffix);
+        assert.equal(response.status, 200, suffix + ': ' + response.text);
+        assert.equal(response.value.source_manifest_sha256, sourceSha256, suffix + ': source manifest SHA');
+        assert.equal(response.value.display_algorithm_version, 'extended-solar-parent-hermite-v1', suffix + ': display algorithm');
+      }
     });
     await t.test('Sun and all eight base planets retain normal empty observation state', async () => {
       for (const id of ['sun', 'mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']) {

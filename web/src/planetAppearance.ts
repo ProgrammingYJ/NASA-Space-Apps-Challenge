@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {displayDirection,type Vec3} from './sceneMath';
 import {smallBodyAxes,smallBodyRingRadii,type SmallBodyProfile} from './smallBodyAppearance';
+import {coverageDisplayMask,bufferedCoverageDisplayMask,coverageTextureRows,COVERAGE_DISPLAY_POLICY,MAX_COVERAGE_PIXELS} from './appearanceCoverage';
 
 export type AppearanceKind='observed_mosaic'|'radar_mosaic'|'representative_atmosphere'|'illustration'|'literature_constrained';
 export interface AppearanceSource {url:string;label:string}
@@ -51,6 +52,7 @@ export interface RingEntry {
 }
 export interface AppearanceManifest {objects:Record<string,AppearanceEntry>;rings:Record<string,RingEntry>;source_manifest_sha256:string}
 export type AppearanceLightingMode='inspection'|'solar';
+export type AppearanceCoverageMode='marked'|'original';
 export interface AppearanceStatus {
   object_id:string;
   state:'loading'|'ready'|'fallback'|'failed';
@@ -61,6 +63,13 @@ export interface AppearanceStatus {
   limitations:string[];
   display_texture_dimensions?:[number,number];
   lighting_mode?:AppearanceLightingMode;
+  coverage_mode?:AppearanceCoverageMode;
+  coverage_overlay?:'not_applicable'|'loading'|'ready'|'unavailable';
+  coverage_display_policy?:string;
+  coverage_marked_pixels?:number;
+  coverage_source_pixels?:number;
+  coverage_buffered_pixels?:number;
+  coverage_buffer_radius_source_px?:number;
   lod_state?:'loading'|'ready'|'retained_after_error';
 }
 export interface ScaledBand {inner:number;outer:number;color:string;opacity:number;name:string}
@@ -119,6 +128,26 @@ function displayLighting(mode:AppearanceLightingMode):[number,number]{
   if(mode==='inspection')return [.42,.92];
   if(mode==='solar')return [.035,1.55];
   throw new Error('invalid_appearance_lighting_mode');
+}
+
+function markedCoverage(mode:AppearanceCoverageMode):number{
+  if(mode==='marked')return 1;
+  if(mode==='original')return 0;
+  throw new Error('invalid_appearance_coverage_mode');
+}
+
+function makeCoverageDisplayTexture(image:HTMLImageElement){
+  const width=image.naturalWidth||image.width,height=image.naturalHeight||image.height;
+  if(!Number.isSafeInteger(width)||!Number.isSafeInteger(height)||width<=0||height<=0||width*height>MAX_COVERAGE_PIXELS)throw new Error('invalid_coverage_display_raster');
+  const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+  const context=canvas.getContext('2d',{willReadFrequently:true});if(!context)throw new Error('coverage_display_unavailable');
+  context.imageSmoothingEnabled=false;context.drawImage(image,0,0);
+  const classified=coverageDisplayMask(context.getImageData(0,0,width,height).data,width,height);
+  const buffered=bufferedCoverageDisplayMask(classified.mask,width,height);
+  const texture=new THREE.DataTexture(coverageTextureRows(buffered.mask,width,height),width,height,THREE.RedFormat,THREE.UnsignedByteType);
+  // Same top-origin decoded raster as the published map; no image is modified.
+  texture.flipY=false;texture.unpackAlignment=1;texture.minFilter=THREE.NearestFilter;texture.magFilter=THREE.NearestFilter;texture.generateMipmaps=false;texture.wrapS=THREE.RepeatWrapping;texture.wrapT=THREE.ClampToEdgeWrapping;texture.needsUpdate=true;
+  return {texture,classified,buffered};
 }
 
 export function textureWindow(entry:Pick<AppearanceEntry,'texture_region_px'|'pixel_dimensions'|'lat_bounds_deg'>):{offset:[number,number];repeat:[number,number];latitude:[number,number]}{
@@ -187,11 +216,12 @@ float appRingShadow(vec3 point) {
 }
 `;
 
-function makeSurfaceMaterial(color:string,radius:number,bands:ScaledBand[],entry?:AppearanceEntry,objectId='unknown',lightingMode:AppearanceLightingMode='inspection'){
+function makeSurfaceMaterial(color:string,radius:number,bands:ScaledBand[],entry?:AppearanceEntry,objectId='unknown',lightingMode:AppearanceLightingMode='inspection',coverageMode:AppearanceCoverageMode='marked'){
   const material=new THREE.MeshStandardMaterial({color,roughness:1,metalness:0});
   const sun={value:new THREE.Vector3(0,1,0)};
   const ringNormal={value:new THREE.Vector3(0,1,0)};
   const lighting={value:new THREE.Vector2(...displayLighting(lightingMode))};
+  const coverageModeUniform={value:markedCoverage(coverageMode)},coverageEnabled={value:0},coverageMask={value:null as THREE.DataTexture|null};
   const procedural={value:entry?.texture_url?0:['jupiter','saturn','uranus','neptune','venus'].includes(objectId)?1:0};
   let seed=[...objectId].reduce((value,char)=>((value*31+char.charCodeAt(0))>>>0),7919);
   const window=textureWindow(entry??{});
@@ -199,12 +229,14 @@ function makeSurfaceMaterial(color:string,radius:number,bands:ScaledBand[],entry
   bands.forEach((band,index)=>{bandInner[index]=band.inner;bandOuter[index]=band.outer;bandOpacity[index]=band.opacity;});
   material.onBeforeCompile=shader=>{
     shader.uniforms.appDisplayLighting=lighting;
+    shader.uniforms.appCoverageMode=coverageModeUniform;shader.uniforms.appCoverageEnabled=coverageEnabled;shader.uniforms.appCoverageMask=coverageMask;
     shader.uniforms.appSunDirection=sun;shader.uniforms.appRingNormal=ringNormal;shader.uniforms.appBodyRadius={value:radius};shader.uniforms.appBandCount={value:bands.length};shader.uniforms.appBandInner={value:bandInner};shader.uniforms.appBandOuter={value:bandOuter};shader.uniforms.appBandOpacity={value:bandOpacity};shader.uniforms.appTextureOffset={value:new THREE.Vector2().fromArray(window.offset)};shader.uniforms.appTextureRepeat={value:new THREE.Vector2().fromArray(window.repeat)};shader.uniforms.appLatitudes={value:new THREE.Vector2().fromArray(window.latitude)};shader.uniforms.appTextureFlipX={value:entry?.texture_flip_x?1:0};
     shader.uniforms.appProcedural=procedural;shader.uniforms.appSeed={value:seed%997};shader.uniforms.appGasGiant={value:['jupiter','saturn','uranus','neptune','venus'].includes(objectId)?1:0};
     shader.vertexShader='varying vec3 appLocalPosition; varying vec3 appLocalNormal; varying vec2 appRawUv;\n'+shader.vertexShader;
     shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nappLocalPosition=transformed;appLocalNormal=normal;appRawUv=uv;');
-    shader.fragmentShader=shadowUniforms+'\nuniform vec2 appDisplayLighting;varying vec2 appRawUv;uniform vec2 appTextureOffset;uniform vec2 appTextureRepeat;uniform vec2 appLatitudes;uniform float appTextureFlipX;uniform float appProcedural;uniform float appSeed;uniform float appGasGiant;\n'+shader.fragmentShader;
+    shader.fragmentShader=shadowUniforms+'\nuniform vec2 appDisplayLighting;uniform float appCoverageMode;uniform float appCoverageEnabled;uniform sampler2D appCoverageMask;varying vec2 appRawUv;uniform vec2 appTextureOffset;uniform vec2 appTextureRepeat;uniform vec2 appLatitudes;uniform float appTextureFlipX;uniform float appProcedural;uniform float appSeed;uniform float appGasGiant;\n'+shader.fragmentShader;
     shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',/* glsl */`
+      float appCoverageWarning=0.0;
       #ifdef USE_MAP
         float appLatitude=appRawUv.y*180.0-90.0;
         float appImageV=(appLatitude-appLatitudes.x)/(appLatitudes.y-appLatitudes.x);
@@ -212,6 +244,10 @@ function makeSurfaceMaterial(color:string,radius:number,bands:ScaledBand[],entry
         vec2 appImageUv=vec2(mix(appRawUv.x,1.0-appRawUv.x,appTextureFlipX),clamp(appImageV,0.0,1.0))*appTextureRepeat+appTextureOffset;
         vec4 appSample=texture2D(map,appImageUv);
         diffuseColor*=mix(vec4(0.035,0.045,0.06,1.0),appSample,appCovered);
+        if(appCoverageEnabled>0.5&&appCoverageMode>0.5){
+          // Screen-space UI hatching, not generated atmospheric geography.
+          appCoverageWarning=max(1.0-appCovered,step(0.5,texture2D(appCoverageMask,appImageUv).r));
+        }
       #else
         if(appProcedural>0.5){
           vec3 appPoint=normalize(appLocalPosition);
@@ -220,11 +256,15 @@ function makeSurfaceMaterial(color:string,radius:number,bands:ScaledBand[],entry
         }
       #endif
     `);
-    shader.fragmentShader=shader.fragmentShader.replace('vec3 totalDiffuse = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse;','vec3 totalDiffuse = diffuseColor.rgb * (appDisplayLighting.x + appDisplayLighting.y * max(dot(normalize(appLocalNormal),appSunDirection),0.0) * appRingShadow(appLocalPosition));');
+    shader.fragmentShader=shader.fragmentShader.replace('vec3 totalDiffuse = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse;',/* glsl */`vec3 totalDiffuse = diffuseColor.rgb * (appDisplayLighting.x + appDisplayLighting.y * max(dot(normalize(appLocalNormal),appSunDirection),0.0) * appRingShadow(appLocalPosition));
+      if(appCoverageWarning>0.5){
+        float appStripe=step(6.5,mod(gl_FragCoord.x+gl_FragCoord.y,8.0));
+        totalDiffuse=mix(vec3(0.055,0.065,0.075),vec3(0.19,0.21,0.23),appStripe);
+      }`);
     shader.fragmentShader=shader.fragmentShader.replace('vec3 totalSpecular = reflectedLight.directSpecular + reflectedLight.indirectSpecular;','vec3 totalSpecular = vec3(0.0);');
   };
-  material.customProgramCacheKey=()=>`sourced-planet-display-v2`;
-  return {material,sun,ringNormal,procedural,lighting};
+  material.customProgramCacheKey=()=>`sourced-planet-display-v4`;
+  return {material,sun,ringNormal,procedural,lighting,coverageModeUniform,coverageEnabled,coverageMask};
 }
 
 function makeRingMaterial(color:string,opacity:number,radius:number){
@@ -250,17 +290,19 @@ export interface BodyAppearance {
   status:AppearanceStatus;
   ready:Promise<AppearanceStatus>;
   setLightingMode:(mode:AppearanceLightingMode)=>void;
+  setCoverageMode:(mode:AppearanceCoverageMode)=>void;
   update:(epochMs:number,sunDirectionWorld:THREE.Vector3)=>void;
   dispose:()=>void;
 }
 
-export function createBodyAppearance(options:{objectId:string;displayRadius:number;physicalRadiusKm:number;fallbackColor:string;appearance?:AppearanceEntry;rings?:RingEntry;anisotropy?:number;textureMaxDimension?:number;texturePriority?:boolean;lightingMode?:AppearanceLightingMode;onStatus?:(status:AppearanceStatus)=>void}):BodyAppearance{
+export function createBodyAppearance(options:{objectId:string;displayRadius:number;physicalRadiusKm:number;fallbackColor:string;appearance?:AppearanceEntry;rings?:RingEntry;anisotropy?:number;textureMaxDimension?:number;texturePriority?:boolean;lightingMode?:AppearanceLightingMode;coverageMode?:AppearanceCoverageMode;onStatus?:(status:AppearanceStatus)=>void}):BodyAppearance{
   const {objectId,displayRadius,physicalRadiusKm,appearance,rings}=options;
   let mappingValid=true;try{textureWindow(appearance??{});}catch{mappingValid=false;}
   const bands=scaledRingBands(ringBandsForDisplay(rings),physicalRadiusKm,displayRadius);
   const group=new THREE.Group();const surfaceGroup=new THREE.Group();const ringGroup=new THREE.Group();group.add(surfaceGroup,ringGroup);
   const lightingMode=options.lightingMode??'inspection';
-  const surfaceData=makeSurfaceMaterial(appearance?.physical_profile?.color_hex??options.fallbackColor,displayRadius,bands,mappingValid?appearance:undefined,objectId,lightingMode);
+  const coverageMode=options.coverageMode??'marked';
+  const surfaceData=makeSurfaceMaterial(appearance?.physical_profile?.color_hex??options.fallbackColor,displayRadius,bands,mappingValid?appearance:undefined,objectId,lightingMode,coverageMode);
   const material:THREE.MeshStandardMaterial|THREE.MeshBasicMaterial=objectId==='sun'?new THREE.MeshBasicMaterial({color:options.fallbackColor}):surfaceData.material;
   if(objectId==='sun')surfaceData.material.dispose();
   const surface=new THREE.Mesh(new THREE.SphereGeometry(displayRadius,64,48),material);surface.userData.objectId=objectId;surface.castShadow=true;surface.receiveShadow=true;surfaceGroup.add(surface);
@@ -278,15 +320,39 @@ export function createBodyAppearance(options:{objectId:string;displayRadius:numb
   const hasPole=Boolean(appearance?.body_orientation?.pole_ecliptic||appearance?.body_orientation?.pole_icrs_deg);
   const status:AppearanceStatus={object_id:objectId,state:!mappingValid?'failed':appearance?.texture_url?'loading':appearance?.physical_profile?'ready':'fallback',kind:appearance?.kind??'illustration',orientation_assumed:appearance?.body_orientation?.kind?.includes('assumed')||appearance?.body_orientation?.rotation_phase_verified!==true||!hasPole||!appearance?.body_orientation?.source,source:appearance?.source??null,credit:appearance?.credit??'',limitations:[...RENDER_LIMITATIONS,...(appearance?.limitations??[]),...(rings?.limitations??[]),...(!appearance?.texture_url?[['sun','jupiter','saturn','uranus','neptune','venus'].includes(objectId)?'procedural_atmosphere_is_illustration_not_observed_surface':'unresolved_solid_body_has_no_invented_surface_geography']:[]),...(!mappingValid?['invalid_texture_window_using_illustrative_color']:[]),...(!hasPole?['spin_axis_assumed_for_display']:[]),...(usesNarrowGuide?['narrow_rings_use_one_pixel_display_guides']:[]),...(appearance?.kind==='radar_mosaic'?['radar_texture_is_not_optical_albedo']:[]),...(atmosphere?['atmosphere_is_a_visual_scattering_approximation']:[])]};
   status.lighting_mode=lightingMode;
-  let disposed=false;let texture:THREE.Texture|null=null;const loadController=new AbortController();
+  status.coverage_mode=coverageMode;
+  const coverageApplicable=appearance?.map_color_type==='published_rgb_composite'&&Boolean(appearance.texture_url)&&mappingValid;
+  status.coverage_overlay=coverageApplicable?'loading':'not_applicable';
+  if(coverageApplicable){status.coverage_display_policy=COVERAGE_DISPLAY_POLICY;status.limitations.push('rgb_zero_channel_overlay_is_display_caution_not_scientific_quality_or_missing_data_mask','zero_rgb_channels_can_also_be_valid_observation_samples','original_published_map_remains_available');}
+  let disposed=false;let texture:THREE.Texture|null=null;let coverageTexture:THREE.DataTexture|null=null;const loadController=new AbortController();
   const emit=()=>{options.onStatus?.({...status,limitations:[...status.limitations]});return status;};
   const ready=appearance?.texture_url&&mappingValid?(async()=>{
-    try{const url=new URL(appearance.texture_url!,window.location.href);if(url.origin!==window.location.origin||(!url.pathname.startsWith('/textures/')&&!url.pathname.startsWith('/api/v1/appearance/')))throw new Error('appearance_url_not_allowed');const loaded=await loadPublishedTexture(url.href,Boolean(options.texturePriority),()=>disposed,loadController.signal);if(disposed){loaded.dispose();return status;}if(appearance.pixel_dimensions&&(loaded.image.width!==appearance.pixel_dimensions[0]||loaded.image.height!==appearance.pixel_dimensions[1])){loaded.dispose();throw new Error('texture_dimensions_mismatch');}const dimensions=displayTextureDimensions(loaded.image.width,loaded.image.height,options.textureMaxDimension??DETAIL_TEXTURE_SIZE);if(dimensions[0]!==loaded.image.width||dimensions[1]!==loaded.image.height){const canvas=document.createElement('canvas');canvas.width=dimensions[0];canvas.height=dimensions[1];const context=canvas.getContext('2d');if(!context){loaded.dispose();throw new Error('display_texture_resampling_unavailable');}context.drawImage(loaded.image,0,0,...dimensions);loaded.dispose();texture=new THREE.CanvasTexture(canvas);status.limitations.push('source_map_resampled_for_display_only');}else texture=loaded;status.display_texture_dimensions=dimensions;texture.colorSpace=THREE.SRGBColorSpace;texture.wrapS=THREE.RepeatWrapping;texture.wrapT=THREE.ClampToEdgeWrapping;texture.anisotropy=Math.max(1,Math.min(8,options.anisotropy??1));material.map=texture;material.color.set('#ffffff');material.needsUpdate=true;status.state='ready';return emit();}
+    try{
+      const url=new URL(appearance.texture_url!,window.location.href);
+      if(url.origin!==window.location.origin||(!url.pathname.startsWith('/textures/')&&!url.pathname.startsWith('/api/v1/appearance/')))throw new Error('appearance_url_not_allowed');
+      const loaded=await loadPublishedTexture(url.href,Boolean(options.texturePriority),()=>disposed,loadController.signal);
+      if(disposed){loaded.dispose();return status;}
+      if(appearance.pixel_dimensions&&(loaded.image.width!==appearance.pixel_dimensions[0]||loaded.image.height!==appearance.pixel_dimensions[1])){loaded.dispose();throw new Error('texture_dimensions_mismatch');}
+      if(coverageApplicable){
+        try{
+          const overlay=makeCoverageDisplayTexture(loaded.image);
+          coverageTexture=overlay.texture;surfaceData.coverageMask.value=coverageTexture;surfaceData.coverageEnabled.value=1;
+          status.coverage_overlay='ready';status.coverage_marked_pixels=overlay.classified.marked_pixels;status.coverage_source_pixels=overlay.classified.source_pixels;status.coverage_buffered_pixels=overlay.buffered.buffered_marked_pixels;status.coverage_buffer_radius_source_px=overlay.buffered.radius_source_px;
+        }catch{status.coverage_overlay='unavailable';status.limitations.push('coverage_display_overlay_unavailable_original_map_preserved');}
+      }
+      const dimensions=displayTextureDimensions(loaded.image.width,loaded.image.height,options.textureMaxDimension??DETAIL_TEXTURE_SIZE);
+      if(dimensions[0]!==loaded.image.width||dimensions[1]!==loaded.image.height){
+        const canvas=document.createElement('canvas');canvas.width=dimensions[0];canvas.height=dimensions[1];const context=canvas.getContext('2d');
+        if(!context){loaded.dispose();throw new Error('display_texture_resampling_unavailable');}
+        context.drawImage(loaded.image,0,0,...dimensions);loaded.dispose();texture=new THREE.CanvasTexture(canvas);status.limitations.push('source_map_resampled_for_display_only');
+      }else texture=loaded;
+      status.display_texture_dimensions=dimensions;texture.colorSpace=THREE.SRGBColorSpace;texture.wrapS=THREE.RepeatWrapping;texture.wrapT=THREE.ClampToEdgeWrapping;texture.anisotropy=Math.max(1,Math.min(8,options.anisotropy??1));material.map=texture;material.color.set('#ffffff');material.needsUpdate=true;status.state='ready';return emit();
+    }
     catch{if(!disposed){status.state='failed';status.kind='illustration';status.source=null;status.credit='';surfaceData.procedural.value=['jupiter','saturn','uranus','neptune','venus'].includes(objectId)?1:0;status.limitations.push('texture_unavailable_using_unresolved_fallback');return emit();}return status;}
   })():Promise.resolve(emit());
   const surfaceWorld=new THREE.Quaternion(),ringWorld=new THREE.Quaternion();
-  return {group,surface,status,ready,setLightingMode:mode=>{if(disposed||mode===status.lighting_mode)return;surfaceData.lighting.value.fromArray(displayLighting(mode));status.lighting_mode=mode;emit();},update:(epochMs,sunDirectionWorld)=>{
+  return {group,surface,status,ready,setLightingMode:mode=>{if(disposed||mode===status.lighting_mode)return;surfaceData.lighting.value.fromArray(displayLighting(mode));status.lighting_mode=mode;emit();},setCoverageMode:mode=>{if(disposed||mode===status.coverage_mode)return;surfaceData.coverageModeUniform.value=markedCoverage(mode);status.coverage_mode=mode;emit();},update:(epochMs,sunDirectionWorld)=>{
     surfaceGroup.quaternion.copy(orientationQuaternion(appearance?.body_orientation,epochMs,true));ringGroup.quaternion.copy(orientationQuaternion(rings??appearance?.body_orientation,epochMs,false));group.updateWorldMatrix(true,true);
     surfaceGroup.getWorldQuaternion(surfaceWorld);ringGroup.getWorldQuaternion(ringWorld);surfaceWorld.invert();surfaceData.sun.value.copy(sunDirectionWorld).applyQuaternion(surfaceWorld).normalize();surfaceData.ringNormal.value.set(0,1,0).applyQuaternion(ringWorld).applyQuaternion(surfaceWorld).normalize();if(atmosphere)atmosphere.sun.value.copy(surfaceData.sun.value);for(const data of ringMaterials)data.sun.value.copy(sunDirectionWorld).applyQuaternion(ringWorld.clone().invert()).normalize();
-  },dispose:()=>{disposed=true;loadController.abort();texture?.dispose();group.traverse(child=>{if(child instanceof THREE.Mesh||child instanceof THREE.Line){child.geometry.dispose();const materials=Array.isArray(child.material)?child.material:[child.material];materials.forEach(value=>value.dispose());}});group.clear();}};
+  },dispose:()=>{disposed=true;loadController.abort();texture?.dispose();coverageTexture?.dispose();group.traverse(child=>{if(child instanceof THREE.Mesh||child instanceof THREE.Line){child.geometry.dispose();const materials=Array.isArray(child.material)?child.material:[child.material];materials.forEach(value=>value.dispose());}});group.clear();}};
 }

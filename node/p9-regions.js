@@ -49,8 +49,8 @@ function settings(input = {}, extras = []) {
   if (!Object.hasOwn(SUBSETS, subset) || !(distance === null || finite(distance, 1, 100000))) throw failure('invalid_region_selection');
   return { subset, max_reference_distance_au: distance };
 }
-function page(input, size) {
-  const offset = input.offset === undefined ? 0 : input.offset, limit = input.limit === undefined ? 20 : input.limit;
+function page(input, size, defaultLimit = 20) {
+  const offset = input.offset === undefined ? 0 : input.offset, limit = input.limit === undefined ? defaultLimit : input.limit;
   if (!Number.isSafeInteger(offset) || offset < 0 || offset > 100000 || !Number.isSafeInteger(limit) || limit < 1 || limit > 100) throw failure('invalid_region_page');
   return { offset, limit, next_offset: offset + limit < size ? offset + limit : null };
 }
@@ -113,8 +113,17 @@ function createRegionCatalog(root) {
   function regions(input = {}) { const value = selected(settings(input, ['offset', 'limit'])), paging = page(input, value.ranking.length); return { ...value.result, ...paging, rows: value.ranking.slice(paging.offset, paging.offset + paging.limit) }; }
   function members(cell, input = {}) {
     if (!Number.isSafeInteger(cell) || cell < 0 || cell >= NPIX) throw failure('invalid_healpix_pixel');
-    const value = selected(settings(input, ['offset', 'limit'])), ids = value.members.get(cell) ?? [], paging = page(input, ids.length);
-    return { ...value.result, cell_id: cell, member_count: ids.length, ...paging, rows: ids.slice(paging.offset, paging.offset + paging.limit) };
+    const value = selected(settings(input, ['offset', 'limit'])), ids = value.members.get(cell) ?? [], paging = page(input, ids.length, 100);
+    const pageIds = ids.slice(paging.offset, paging.offset + paging.limit);
+    // Direct columns from the same immutable synthetic CSV rows. The source calls
+    // mass "Earth masses" and rad "assumed radius (Earth radii)"; neither is an
+    // observed body's measurement or the angular probability density in sr^-1.
+    const samples = pageIds.map(index => {
+      const values = rows[index].values;
+      return { id: 'caltech-row-' + index, row_index: index, kind: 'synthetic_literature_sample',
+        mass_earth: values[1], assumed_radius_earth: values[11], semimajor_axis_au: values[2], eccentricity: values[3] };
+    });
+    return { ...value.result, cell_id: cell, member_count: ids.length, ...paging, rows: pageIds, samples };
   }
   function row(index) {
     if (!Number.isSafeInteger(index) || index < 0 || index >= rows.length) throw failure('invalid_population_row');

@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Planet X · SPHEREx",
-    "version": "0.13.0"
+    "version": "0.14.0"
   },
   "paths": {
     "/health/live": {
@@ -1193,6 +1193,33 @@
               }
             ],
             "title": "Appearance Lighting"
+          },
+          "appearance_coverage": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "marked",
+                  "original"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Appearance Coverage"
+          },
+          "moon_simulation_algorithm_version": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "parent-relative-osculating-kepler-v1"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Moon Simulation Algorithm Version"
           },
           "show_outer_tno": {
             "anyOf": [

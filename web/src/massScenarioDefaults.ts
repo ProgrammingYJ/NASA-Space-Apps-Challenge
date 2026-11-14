@@ -11,6 +11,15 @@ export interface DensityScenarioSource {
   analogues: Record<string, {density_kg_m3: number}>;
 }
 
+const densityTargets = new Set(['sedna', 'eris', 'makemake', 'quaoar', 'orcus', 'gonggong']);
+export const supportsDensityScenario = (objectId: string): boolean => densityTargets.has(objectId);
+
+/** Keep a sourced primary mass ahead of a density hypothesis. A system mass
+ * does not qualify as a primary mass; an unloaded record does not qualify as
+ * a known missing mass. Generic catalogue bodies have no implicit inputs. */
+export const canOpenDensityCalculator = (objectId: string, primaryMassEarth: number | null | undefined): boolean =>
+  supportsDensityScenario(objectId) && primaryMassEarth === null;
+
 /** No new assumption is selected by default. An exact, valid saved assumption
  * is restored without replacing it with another moon or a new density. */
 export function restoredDensityInput(

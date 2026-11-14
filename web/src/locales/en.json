@@ -305,7 +305,7 @@
   "simDay": "Day",
   "simApply": "Go",
   "simYearsPerSecond": "{{years}} yr/s",
-  "simNote": "JPL long fit · TDB calendar labels · year 0 = 1 BCE. Eight planetary systems only; Earth means the Earth–Moon barycenter. Observation dates stay unchanged.",
+  "simNote": "JPL long fit · TDB calendar labels · year 0 = 1 BCE. Eight planetary systems and available moon approximations; Earth means the Earth–Moon barycenter. Observation dates stay unchanged.",
   "simInvalid": "Enter a valid date within the supported range.",
   "simLoadError": "The simulation coefficient sources could not be verified.",
   "simEmB": "Earth–Moon barycenter",

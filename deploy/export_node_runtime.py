@@ -318,6 +318,14 @@ def export(root: Path) -> dict:
         print("snapshot", key, flush=True)
         return value
 
+    def extended_snapshot(parent_id=None):
+        value = get_extended_solar(root, parent_id=parent_id, include_vectors=parent_id is not None)
+        return {
+            **value,
+            "source_manifest_sha256": file_digest(root / "data/manifests/extended_solar.json"),
+            "display_algorithm_version": "extended-solar-parent-hermite-v1",
+        }
+
     getters = {
         "objects": (lambda: {"objects": CORE_OBJECTS}, "/api/v1/objects"),
         "universe": (solar_scene, "/api/v1/universe"),
@@ -332,7 +340,7 @@ def export(root: Path) -> dict:
         "long_term_model": (lambda: get_long_term_model(root), "/api/v1/long-term-model"),
         "kuiper_belt": (lambda: get_kuiper_display(root), "/api/v1/kuiper-belt"),
         "solar_system": (
-            lambda: get_extended_solar(root, include_vectors=False),
+            lambda: extended_snapshot(),
             "/api/v1/catalog/solar-system",
         ),
     }
@@ -341,7 +349,7 @@ def export(root: Path) -> dict:
     for parent in CATALOG_PARENTS:
         emit_snapshot(
             "solar_parent_" + parent,
-            get_extended_solar(root, parent_id=parent),
+            extended_snapshot(parent),
             "/api/v1/catalog/solar-system",
             {"parent_id": parent},
         )

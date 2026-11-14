@@ -64,6 +64,8 @@ class UniverseContext(StrictModel):
     scene_filter: Literal["all", "confirmed-planets", "p9-reference", "planets-and-p9"] | None = None
     render_preset: Literal["balanced", "detail"] | None = None
     appearance_lighting: Literal["inspection", "solar"] | None = None
+    appearance_coverage: Literal["marked", "original"] | None = None
+    moon_simulation_algorithm_version: Literal["parent-relative-osculating-kepler-v1"] | None = None
     show_outer_tno: bool | None = None
     selected_object_id: str = Field(max_length=50)
     model_epoch: str = Field(max_length=40)

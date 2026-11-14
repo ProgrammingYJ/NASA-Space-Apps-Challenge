@@ -32,7 +32,9 @@ test('region filters and TNO response contracts agree with actual dated sources'
   const catalog = createRegionCatalog(root), query = validate('RegionQuery', {});
   assert.deepEqual(query, { subset: 'ztf_des_ps1', max_reference_distance_au: 1000, offset: 0, limit: 20 });
   const page = catalog.regions(query); validate('RegionPage', page);
-  const members = catalog.members(page.rows[0].cell_id, query); validate('RegionPage', members);
+  const memberQuery = validate('RegionMembersQuery', {});
+  assert.deepEqual(memberQuery, { subset: 'ztf_des_ps1', max_reference_distance_au: 1000, offset: 0, limit: 100 });
+  const members = catalog.members(page.rows[0].cell_id, memberQuery); validate('RegionPage', members); validate('RegionMembersPage', members);
   const row = catalog.row(members.rows[0]); validate('PopulationRow', row);
   assert.equal(row.cell_id, page.rows[0].cell_id);
   assert.throws(() => validate('RegionQuery', { subset: 'unverified', max_reference_distance_au: 1000 }));
@@ -40,4 +42,28 @@ test('region filters and TNO response contracts agree with actual dated sources'
   assert.throws(() => validate('RegionQuery', { max_reference_distance_au: 999 }));
   const outer = createOuterCatalog(root), objects = outer.catalog();
   validate('OuterCatalogue', objects); validate('OuterScene', outer.scene(objects.reference_jd_tdb));
+});
+test('member sample summaries require typed source values and preserve the legacy integer ID contract', () => {
+  const catalog = createRegionCatalog(root), cell = catalog.regions({ limit: 1 }).rows[0].cell_id;
+  const members = catalog.members(cell), sample = members.samples[0];
+  assert.deepEqual(validate('PopulationSampleSummary', sample), sample);
+  assert.equal(sample.row_index, members.rows[0]); assert.equal(members.limit, 100);
+  const page = validate('RegionMembersPage', members);
+  assert.deepEqual(page.rows, members.rows); assert.deepEqual(page.samples, members.samples);
+  for (const patch of [
+    { kind: 'observed_planet' }, { mass_earth: '6.14' }, { mass_earth: -1 }, { mass_earth: Infinity },
+    { assumed_radius_earth: 0 }, { assumed_radius_earth: null }, { semimajor_axis_au: 0 },
+    { eccentricity: 1 }, { row_index: '2413' }, { row_index: 100000 },
+    { physical_density_kg_m3: 1000 }, { existence_probability: .5 },
+  ]) assert.throws(() => validate('PopulationSampleSummary', { ...sample, ...patch }));
+  const missingField = { ...sample }; delete missingField.mass_earth;
+  assert.throws(() => validate('PopulationSampleSummary', missingField));
+  const missingSamples = { ...members }; delete missingSamples.samples;
+  assert.throws(() => validate('RegionMembersPage', missingSamples));
+  assert.throws(() => validate('RegionMembersPage', { ...members, rows: [String(members.rows[0])] }));
+  assert.throws(() => validate('RegionMembersPage', { ...members, samples: [{ ...sample, eccentricity: '0.139' }] }));
+  assert.throws(() => validate('RegionMembersQuery', { limit: 101 }));
+  assert.throws(() => validate('RegionMembersQuery', { limit: null }));
+  const empty = catalog.members(cell, { offset: members.member_count });
+  validate('RegionMembersPage', empty); assert.deepEqual(empty.rows, []); assert.deepEqual(empty.samples, []);
 });

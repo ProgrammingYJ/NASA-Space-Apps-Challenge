@@ -857,7 +857,7 @@
           "default": 20
         }
       },
-      "description": "GET /planet-nine/regions or /planet-nine/regions/{cell_id}/members. Filters apply to raw 2018 author RA/Dec and heliocentric R, not a newly propagated population."
+      "description": "GET /planet-nine/regions. Filters apply to raw 2018 author RA/Dec and heliocentric R, not a newly propagated population."
     },
     "RegionPage": {
       "type": "object",
@@ -888,6 +888,14 @@
         "rows": {
           "type": "array",
           "maxItems": 100
+        },
+        "samples": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/PopulationSampleSummary"
+          },
+          "description": "Same page length and order as rows, joined by row_index; all values are copied from the original synthetic population."
         }
       }
     },
@@ -1646,6 +1654,149 @@
         }
       },
       "description": "Selected-object factual summary only. The supplementary6-field JPL query is joined by exact decimal-string SPK-ID and primary designation. It does not alter the orbital/physical snapshot, add8,341 prose records to the scene list, infer IAU planetary status, or claim MCP administrative descriptions are encyclopaedic text. Normalized RMS has no angular unit; first/last used observations are not asserted discovery dates."
+    },
+    "RegionMembersQuery": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "subset": {
+          "enum": [
+            "all",
+            "ztf",
+            "ztf_des",
+            "ztf_des_ps1"
+          ],
+          "default": "ztf_des_ps1"
+        },
+        "max_reference_distance_au": {
+          "enum": [
+            null,
+            1000
+          ],
+          "default": 1000
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000,
+          "default": 0
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 100
+        }
+      },
+      "description": "GET /planet-nine/regions/{cell_id}/members. Returns at most 100 original integer row IDs and same-row synthetic literature summaries; default limit is 100."
+    },
+    "PopulationSampleSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "row_index",
+        "kind",
+        "mass_earth",
+        "assumed_radius_earth",
+        "semimajor_axis_au",
+        "eccentricity"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^caltech-row-[0-9]{1,5}$"
+        },
+        "row_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99999
+        },
+        "kind": {
+          "const": "synthetic_literature_sample"
+        },
+        "mass_earth": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Source CSV mass column in Earth masses (M_earth): a synthetic literature-model sample parameter, not a measured body mass."
+        },
+        "assumed_radius_earth": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Source CSV rad column: assumed radius in Earth radii (R_earth), not a resolved or measured physical radius."
+        },
+        "semimajor_axis_au": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Same source row a column in au at the original reference epoch."
+        },
+        "eccentricity": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 1,
+          "description": "Same source row e column; dimensionless."
+        }
+      },
+      "description": "A direct summary of the same immutable CSV row named by the matching integer rows item. Parent source SHA and selection denominator apply. No density or existence probability is inferred."
+    },
+    "RegionMembersPage": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "algorithm_version",
+        "source",
+        "selection",
+        "nside",
+        "ordering",
+        "rows",
+        "next_offset",
+        "existence_probability",
+        "cell_id",
+        "member_count",
+        "samples"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "nside": {
+          "const": 32
+        },
+        "ordering": {
+          "const": "RING"
+        },
+        "existence_probability": {
+          "type": "null"
+        },
+        "rows": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 99999
+          }
+        },
+        "samples": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/PopulationSampleSummary"
+          },
+          "description": "Same page length and order as rows, joined by row_index; all values are copied from the original synthetic population."
+        },
+        "cell_id": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12287
+        },
+        "member_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000
+        }
+      },
+      "description": "Region members preserve legacy integer rows and add required strict synthetic sample summaries. Source metadata, conditional denominator and ranking are unchanged."
     }
   }
 }

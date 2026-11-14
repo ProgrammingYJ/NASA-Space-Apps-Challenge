@@ -8,6 +8,7 @@ import type {OuterTnoObject} from './OuterTnoPanel';
 import {outerObjectMatches,resolvePlanetCriteriaObject} from './PlanetCriteriaAdapter';
 import type {PlanetCriterion,PlanetCriterionObject,PlanetCriteriaCatalogue} from './PlanetCriteriaAdapter';
 import {r029Copy} from './R029Copy';
+import {canOpenDensityCalculator} from './massScenarioDefaults';
 export type {PlanetCriterionObject,PlanetCriteriaCatalogue} from './PlanetCriteriaAdapter';
 
 const supported=new Set(['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune','pluto','ceres','haumea','makemake','eris','sedna','quaoar','orcus','gonggong']);
@@ -36,15 +37,16 @@ function OrbitDiagram({object}:{object:PlanetCriterionObject}){
 export default function PlanetCriteriaPanel({objectId,name,catalogue,loading,error,onRetry,labels,massScenario,onMassScenarioChange,outerObject}:{objectId:string;name:string;catalogue?:PlanetCriteriaCatalogue;loading:boolean;error:boolean;onRetry:()=>void;labels?:Record<string,string>;massScenario?:AppliedMassScenario|null;onMassScenarioChange?:(value:AppliedMassScenario)=>void;outerObject?:OuterTnoObject}){
   const {t,i18n}=useTranslation(),copy=r029Copy(i18n.language);
   const [expanded,setExpanded]=useState(false),dialog=useRef<HTMLDivElement>(null);
+  const [massEditorRequest,setMassEditorRequest]=useState(0),opener=useRef<HTMLElement|null>(null);
   const object=resolvePlanetCriteriaObject(catalogue,objectId,outerObject);
   const applicable=hasPlanetCriteria(objectId)||outerObjectMatches(objectId,outerObject);
   const generic=object?.is_generic_tno===true;
   const modelObjectId=object?.object_id??objectId;
   const massModel=useMassScenarioModel({objectId:modelObjectId,saved:massScenario,onApplied:onMassScenarioChange});
-  useEffect(()=>{setExpanded(false);},[objectId]);
+  useEffect(()=>{setExpanded(false);setMassEditorRequest(0);},[objectId]);
   useEffect(()=>{
     if(!expanded)return;
-    const previous=document.querySelector<HTMLElement>('[data-testid="open-planet-criteria"]');
+    const previous=opener.current??document.querySelector<HTMLElement>('[data-testid="open-planet-criteria"]');
     const key=(event:KeyboardEvent)=>{
       if(event.key==='Escape'){event.preventDefault();setExpanded(false);}
       if(event.key==='Tab'){
@@ -62,6 +64,13 @@ export default function PlanetCriteriaPanel({objectId,name,catalogue,loading,err
   const assumed=object?.mass.earth_masses===null&&massModel.value&&Number.isFinite(massModel.value.mass_earth)?massModel.value:undefined;
   const massLine=object?assumed?t('criteriaMinimumMassHypothesis',{minimum:number(object.clearing.minimum_mass_earth),current:number(assumed.mass_earth)}):t('criteriaMinimumMass',{minimum:number(object.clearing.minimum_mass_earth),current:object.mass.earth_masses===null?t('criteriaMassUnknown'):`${number(object.mass.earth_masses)} M⊕`}):'';
   const massNote=assumed?t('criteriaMassAssumption',{density:number(assumed.density_kg_m3)}):null;
+  const canCalculate=canOpenDensityCalculator(modelObjectId,object?.mass.earth_masses);
+  function openCriteria(launcher:HTMLElement,focusDensity=false){
+    opener.current=launcher;
+    setMassEditorRequest(value=>focusDensity?value+1:0);
+    if(focusDensity)massModel.request();
+    setExpanded(true);
+  }
   function reason(row:PlanetCriterion){
     if(!generic)return t(`criteriaReason_${row.reason_key}`);
     return row.reason_key==='r029_solar_orbit'?copy.solarOrbit:row.reason_key==='r029_solar_unknown'?copy.solarUnknown:row.reason_key==='r029_shape_unknown'?copy.shapeUnknown:copy.dominanceUnknown;
@@ -75,9 +84,10 @@ export default function PlanetCriteriaPanel({objectId,name,catalogue,loading,err
     <h2>{t('criteriaTitle')}</h2>
     {!applicable?<p data-testid="criteria-not-applicable">{t('criteriaNotApplicable')}</p>:error?<p role="alert">{t('criteriaError')} <button onClick={onRetry}>{t('retry')}</button></p>:loading||!object?<p role="status">{t('loading')}</p>:<>
       {rows(false)}
+      {canCalculate&&<button className={styles.massAction} data-testid="open-mass-calculator" aria-haspopup="dialog" onClick={event=>openCriteria(event.currentTarget,true)}>{copy.calculateCurrentMass} ↗</button>}
       {object.mass.earth_masses===null&&massModel.active&&(massModel.source.isError||massModel.result.isError)&&<p role="alert" data-testid="criteria-mass-error">{t('massError')} <button onClick={()=>{if(massModel.source.isError)void massModel.source.refetch();else void massModel.result.refetch();}}>{t('retry')}</button></p>}
       {!assumed&&massModel.active&&(massModel.source.isFetching||massModel.result.isFetching)&&<p role="status">{t('massLoading')}</p>}
-      <button data-testid="open-planet-criteria" onClick={()=>setExpanded(true)}>{t('criteriaExpand')} ↗</button>
+      <button data-testid="open-planet-criteria" aria-haspopup="dialog" onClick={event=>openCriteria(event.currentTarget)}>{t('criteriaExpand')} ↗</button>
     </>}
     {expanded&&object&&catalogue&&createPortal(<div className={styles.backdrop}><div ref={dialog} className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby="planet-criteria-title" data-testid="planet-criteria-dialog" data-object-id={objectId} data-generic-tno={generic}>
       <header><div><small>{generic?copy.catalogueClass:t('criteriaClassLabel')} · <span data-testid="criteria-official-class">{generic?copy.smallBody:t(`criteriaClass_${object.official_classification}`)}</span></small><h1 id="planet-criteria-title">{name} · {t('criteriaTitle')}</h1></div><button autoFocus onClick={()=>setExpanded(false)}>{t('close')} ×</button></header>
@@ -85,7 +95,7 @@ export default function PlanetCriteriaPanel({objectId,name,catalogue,loading,err
         {modelObjectId==='pluto'&&<p data-testid="pluto-classification-lesson" className={styles.notice}>{t('criteriaPlutoLesson')} <a href="https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx" target="_blank" rel="noreferrer">IAU 2006 ↗</a></p>}
         {rows(true)}
         {generic&&<section className={styles.calculation} data-testid="criteria-mass-availability"><h2>{t('outerTnoMass')}</h2><p>{outerObject?.physical.diameter_km==null?copy.massSizeMissing:copy.massDensityMissing}</p><p>{copy.sourceModelNote}</p><a href={object.orbit.source.url} target="_blank" rel="noreferrer">JPL SBDB ↗</a></section>}
-        <MassScenarioPanel key={modelObjectId} objectId={modelObjectId} labels={labels} model={massModel}/>
+        <MassScenarioPanel key={modelObjectId} objectId={modelObjectId} labels={labels} model={massModel} openRequest={massEditorRequest}/>
         <p className={styles.notice}>{t('criteriaDefinitionNote')}</p>
         <section className={styles.calculation} data-testid="criteria-clearing-model"><h2>{t('criteriaModelLabel')}</h2><p className={styles.mass}>{massLine}</p>{massNote&&<p className={styles.notice}>{massNote}</p>}<code>m_clear ≈ {catalogue.model.coefficient_earth_mass} (a / au)<sup>9/8</sup> M⊕</code><p>{t('criteriaModelNote')}</p><p className={styles.notice}>{t('criteriaEccentricNote',{eccentricity:number(object.orbit.eccentricity)})}</p>
           <dl><div><dt>{t('criteriaSemimajor')}</dt><dd data-testid="criteria-semimajor">{number(object.orbit.semimajor_axis_au)} au</dd></div><div><dt>{t('criteriaPi')}</dt><dd data-testid="criteria-pi">{object.clearing.pi===null?t('criteriaMassUnknown'):number(object.clearing.pi)} · {t(`criteria_${object.clearing.model_classification==='unknown'?'model_unknown':object.clearing.model_classification}`)}</dd></div><div><dt>{t('criteriaElementsEpoch')}</dt><dd>JD {object.orbit.epoch_tdb_jd===null?t('unknown'):String(object.orbit.epoch_tdb_jd)} TDB <a href={object.orbit.source.url} target="_blank" rel="noreferrer">{t('source')} ↗</a></dd></div></dl>

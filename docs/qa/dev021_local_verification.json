@@ -1,0 +1,111 @@
+{
+  "work_id": "DEV-021",
+  "release": "0.14.0",
+  "validated_at_kst": "2026-11-15T08:30:00+09:00",
+  "state": "local_and_isolated_build_verified_public_deployment_pending",
+  "runtime": {
+    "manifest_sha256": "c97016538256bf24f064556c3ebb41ff0268b3a4afe49364751a8c56e6455d63",
+    "generated_files": 39,
+    "generated_bytes": 19203311,
+    "source_files": 1272,
+    "required_source_files": 1182,
+    "comparisons": {
+      "S01,S02": {
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "content_sha256": "d88083664b6fd27592eb68c186f96427277766299044645f50ebc93c754852d0",
+        "comparison_sha256": "88219adf492f225e5be126e8f7e5577b74475aff4067f5797d63540ba044d74c"
+      },
+      "S02,S01": {
+        "result_id": "cmp_15919fc7bf2adfbed9b46935",
+        "content_sha256": "15919fc7bf2adfbed9b4693567ac11ce35674ec5361a985d8e0e331a2d3353a4",
+        "comparison_sha256": "ad3755c1803fce01a669128fd260b1679f65d84ba279612d3c1d272a085f8d94"
+      },
+      "S12,S14": {
+        "result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+        "content_sha256": "0d749ea3f9ec3a8da925dc444b2f2b1330e59676587cca421e3a4c5c0040f72f",
+        "comparison_sha256": "9ebe635e2ddd0230b50e38cce35a468acf826654199a9403d36f4189fa1d12f8"
+      },
+      "S14,S12": {
+        "result_id": "cmp_e544e54be8b8ddadb2cecda8",
+        "content_sha256": "e544e54be8b8ddadb2cecda8473f673c9ec4d08854df4bd1d006f5933833b0da",
+        "comparison_sha256": "a71d4d7fbfb286a84ca66e85bb65af6d0090b311adc9b7042323366cb1989648"
+      }
+    }
+  },
+  "checks": {
+    "typescript_strict_and_vite": "pass",
+    "vitest": {
+      "pass": 101,
+      "files": 20
+    },
+    "node_base": {
+      "pass": 75
+    },
+    "node_export_metadata_followup": {
+      "pass": 9
+    },
+    "pytest_base": {
+      "pass": 377,
+      "subtests_pass": 3,
+      "warnings": 1
+    },
+    "pytest_followup": {
+      "pass": 6,
+      "subtests_pass": 3
+    },
+    "ruff": "pass",
+    "chrome_changed_workflows": {
+      "pass": 8,
+      "failed": 0,
+      "elapsed_minutes": 1.6,
+      "viewport": [
+        1440,
+        1000
+      ],
+      "tls_bypass": false
+    }
+  },
+  "earlier_failures": {
+    "first_chrome_pass": 1,
+    "first_chrome_fail": 7,
+    "causes": [
+      "Node export omitted Solar source metadata; undefined optional catalogue escaped equality-only guard, causing page error.",
+      "QA used member_count65 as a HEALPix cell ID; actual top cell3682."
+    ],
+    "resolution": "explicit absent-record guard and exporter metadata parity; actual source fixture corrected; eight new workflows all passed on rebuilt bundle"
+  },
+  "moon_model": {
+    "source_count": 468,
+    "supported_count": 453,
+    "saturn_supported": 291,
+    "unsupported_count": 15,
+    "algorithm": "parent-relative-osculating-kepler-v1",
+    "long_term_accuracy_verified": false,
+    "source_manifest_sha256": "34afdc84d913e7e2089b06d9e0518acff011713df3ac7185b7372ba0ef6ef7a5"
+  },
+  "appearance": {
+    "policy": "rgb-zero-channel-buffer6-display-caution-v2",
+    "original_png_unchanged": true,
+    "visual_review_completed": true,
+    "visual_review": "Neptune grey hatching distinguishes the RGB fill/seam zone; Uranus main mapped face and moon system render without black neon hole on this view. Surrounding valid data may be masked; original mode remains available. No missing terrain reconstruction claimed."
+  },
+  "delivery": {
+    "format": "directory",
+    "new_zip_created": false,
+    "public_deployment": "pending"
+  },
+  "evidence_paths": [
+    "var/qa/dev021/reproduction.json",
+    "var/qa/dev021/rebuild2.log",
+    "var/qa/dev021/browser2.log",
+    "var/qa/dev021/checks.log",
+    "var/qa/dev021/followup-checks.log"
+  ],
+  "limitations": [
+    "two-body moon extrapolation lacks J2/tides/resonances/mutual perturbations and long-term validation",
+    "Pluto/TNO moon parent-center/GM integration remains unavailable outside the precise ephemeris interval",
+    "sr^-1 sky density is not kg/m^3; P9 source mass is a synthetic literature assumption",
+    "one Starlette/httpx deprecation warning and existing Vite chunk-size advisory",
+    "Japanese/Traditional Chinese/French native-speaker review not performed"
+  ]
+}

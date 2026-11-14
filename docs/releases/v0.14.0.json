@@ -1,0 +1,181 @@
+{
+  "release": "0.14.0",
+  "work_id": "DEV-021",
+  "status": "deployed_and_verified",
+  "recorded_at_kst": "2026-11-15T08:35:46.181901+09:00",
+  "service_url": "https://nasaspaceappschallenge.marulee.dev/",
+  "hosting": {
+    "public_ipv4": "16.176.170.4",
+    "region": "ap-southeast-2",
+    "os": "Ubuntu 24.04.5 LTS amd64",
+    "node": "24.22.3",
+    "entrypoint": "app.js",
+    "internal_port": 3002,
+    "https_proxy": "nginx",
+    "persistent_state": "/srv/planet-x/shared/node"
+  },
+  "delivery": {
+    "delivery_format": "directory",
+    "directory": "NASA_SPACE_APPS_CHALLENGE_v0.14.0_20261115_082938KST",
+    "directory_manifest_sha256": "374cbe532a29d8ba2083ef9d91de4a19d55068e2be1e982f06620826f4f7286b",
+    "file_count": 1626,
+    "payload_bytes": 667123233,
+    "directory_bytes": 667431826,
+    "release_path": "/srv/planet-x/releases/NASA_SPACE_APPS_CHALLENGE_v0.14.0_20261115_082938KST",
+    "new_release_zip_created": false,
+    "verified_before_activation": true,
+    "immutable_after_verification": true,
+    "post_deployment_documents_outside_verified_directory": true
+  },
+  "clean_verification": {
+    "status": "passed",
+    "directory_policy": "path/case/symlink/special-file/private-path/environment/key-header/local-only exclusions passed",
+    "manifest_files_verified": 1625,
+    "node_only_path": "/usr/local/lib/planet-x-node-v24.22.3/bin",
+    "python_resolvable": {
+      "python": null,
+      "python3": null,
+      "python.exe": null,
+      "python3.exe": null,
+      "py": null,
+      "py.exe": null,
+      "uvicorn": null
+    },
+    "owned_process_ids": [
+      9669,
+      9682
+    ],
+    "runtime_integrity": {
+      "required_sources_verified": 1182,
+      "optional_sources_present_verified": 23,
+      "optional_sources_not_deployed": 67,
+      "runtime_manifest_sha256": "c97016538256bf24f064556c3ebb41ff0268b3a4afe49364751a8c56e6455d63"
+    },
+    "observation_restart": [
+      {
+        "evidence_id": "ev_9e9f4a8c79724c87874c6814cad88946",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_assumptions_present": true
+      },
+      {
+        "evidence_id": "ev_f0965ee7a165442a92b4f35305067426",
+        "result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_assumptions_present": true
+      },
+      {
+        "evidence_id": "ev_75ccb4a68b824e47b339ce792501a069",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_assumptions_present": true
+      }
+    ],
+    "planet_nine_restart": {
+      "evidence_id": "p9ev_5bd066a92d4340ae8e8f23f6c896dd3d",
+      "same_export_bytes": true,
+      "gravity_recomputed": true
+    }
+  },
+  "production": {
+    "activated_pid": 9844,
+    "restart_pid": 10096,
+    "previous_pid": 7725,
+    "previous_release": "NASA_SPACE_APPS_CHALLENGE_v0.13.0_20261115_073754KST",
+    "consistent_stopped_writer_backup_files": 21,
+    "preexisting_evidence_comparison_files_byte_preserved": 14,
+    "backup_sha256": "a18dc12268820bc1e8283e503e5c20aaae220f0bba2b7707ee1d555f600c40c2",
+    "normal_https_ready": "pass",
+    "nginx_config": "pass",
+    "legacy_evidence_after_actual_restart": {
+      "checked_utc": "2026-11-14T23:33:39.728185+00:00",
+      "base": "https://nasaspaceappschallenge.marulee.dev",
+      "evidence": [
+        {
+          "id": "ev_e764a2eb3a294ca890b39ce8be85dc5d",
+          "status": "restored",
+          "original_export_bytes_and_sha_preserved": true,
+          "comparison_and_judgment_preserved": true,
+          "only_verified_visual_context_updated": false,
+          "bytes": 870988,
+          "sha256": "ca26330aab98a9d26cd7b3c440445ef1068b375b75ca2ca784e3c1ec03d57746"
+        },
+        {
+          "id": "ev_4872494bb4c649e3af2ad8d43b0bf4f8",
+          "status": "restored",
+          "original_export_bytes_and_sha_preserved": true,
+          "comparison_and_judgment_preserved": true,
+          "only_verified_visual_context_updated": false,
+          "bytes": 906270,
+          "sha256": "659e6ecf9de6c5572127f5b8d9c68cb2c74f98a76b17c08e35a49def46239e07"
+        },
+        {
+          "id": "p9ev_5453e41e76da4a9786e2aff1503d2134",
+          "status": "restored",
+          "original_export_bytes_and_sha_preserved": true,
+          "comparison_and_judgment_preserved": true,
+          "only_verified_visual_context_updated": false,
+          "bytes": 32807,
+          "sha256": "46f6398b6f28e868326d3d16f56b03bff6553b8b37311439dcc6b28c9d5f1dfb"
+        }
+      ],
+      "status": "passed"
+    }
+  },
+  "browsers": {
+    "channel": "Chrome",
+    "normal_tls_verification": true,
+    "changed_workflows_local_pass": 8,
+    "changed_workflows_public_https_pass": 8,
+    "public_observation_and_saved_mass_fresh_session_pass": 2,
+    "five_locales": [
+      "ko",
+      "en",
+      "ja",
+      "zh-Hant",
+      "fr"
+    ],
+    "main_viewport": [
+      1440,
+      1000
+    ],
+    "additional_dialog_viewport": [
+      2542,
+      1167
+    ],
+    "appearance_images_visually_reviewed": true,
+    "saturn_system_playback_frame_and_titan_visually_reviewed": true
+  },
+  "implementation": [
+    "P9 ranked regions TOP5 and native modal with actual member summaries and bounded pagination/retry/focus",
+    "source synthetic mass in Earth masses and kg; sky sr^-1 density kept distinct from bulk kg/m^3 density",
+    "Sedna and native6 explicit density/radius mass calculation shortcut; no automatic density",
+    "late P9 path response preserves camera/model clock/physical sizes",
+    "453 saved-JPL-state moon approximations including291 Saturn moons across supported model calendar",
+    "conservative RGB seam caution overlay with original image access; raw PNGs unchanged",
+    "Node export Solar catalogue source metadata parity and missing optional-data guard"
+  ],
+  "limits": [
+    "Moon motion is an unvalidated two-body extrapolation without mutual perturbations/J2/tides/resonances, not a precision long-term ephemeris",
+    "15 catalogue moons remain unsupported in the long-term mode because source vectors or supported parent-centre/GM models are missing; original catalogue is retained",
+    "P9 regions and masses are conditional literature-model samples, not observed planets or existence probabilities",
+    "RGB overlay may cover valid surrounding data and is not a science quality/missing-data mask",
+    "Vite chunk-size advisory and one Starlette/httpx deprecation warning remain; no native-speaker review of ja/zh-Hant/fr"
+  ],
+  "evidence_records": [
+    "docs/qa/dev021_local_verification.json",
+    "var/qa/dev021/directory.verification.json",
+    "var/qa/dev021/deploy-directory.log",
+    "var/qa/dev021/public-browser.log",
+    "var/qa/dev021/public-core-browser.log",
+    "var/qa/dev021/restart.log",
+    "var/qa/dev021/legacy-after-restart.json",
+    "var/qa/dev021/visual-review.json"
+  ],
+  "git": {
+    "remote": "https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge",
+    "branch": "main",
+    "source_base_commit": "4cb94454de41de492c2bafd02989fb80519baac2",
+    "commit_and_push_status": "next_step_after_verified_deployment"
+  }
+}

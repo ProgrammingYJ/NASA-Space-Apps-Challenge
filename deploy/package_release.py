@@ -114,6 +114,7 @@ FILES = (
     "docs/qa/ops020_migration_verification.json",
     "docs/qa/dev020_local_verification.json",
     "docs/qa/dev020_platform_parity.json",
+    "docs/qa/dev021_local_verification.json",
     "docs/decisions/ADR-001.md",
     "docs/decisions/ADR-002.md",
     "docs/decisions/ADR-003.md",
@@ -166,7 +167,9 @@ def source_revision(root, proof=None):
     return {key: proof[key] for key in ("base_commit", "working_tree_has_uncommitted_changes", "source_transfer_manifest_sha256")}
 
 
-def prepare(built_at, source_provenance=None):
+def prepare(built_at, source_provenance=None, delivery_format="directory"):
+    if delivery_format not in {"directory", "zip"}:
+        raise ValueError("unsupported_delivery_format")
     version = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"][
         "version"
     ]
@@ -270,12 +273,14 @@ def prepare(built_at, source_provenance=None):
                 "files": copied,
             }
         )
+    (stage / "licenses").mkdir(parents=True, exist_ok=True)
     (stage / "licenses/index.json").write_text(
         json.dumps(license_index, indent=2) + "\n", encoding="utf-8"
     )
     manifest = {
+        "delivery_format": delivery_format,
         "release": version,
-        "work_id": "DEV-020",
+        "work_id": "DEV-021",
         "work_ids": [
             "DEV-009",
             "DEV-010",
@@ -290,6 +295,7 @@ def prepare(built_at, source_provenance=None):
             "DEV-019",
             "OPS-020",
             "DEV-020",
+            "DEV-021",
         ],
         "built_at": built_at,
         **source_revision(ROOT, source_provenance),
@@ -305,6 +311,8 @@ def prepare(built_at, source_provenance=None):
             "python-built-node-snapshot-v1",
             "jpl-sbdb-tno-two-body-v2",
             "jpl-tno-factual-description-v1",
+            "parent-relative-osculating-kepler-v1",
+            "rgb-zero-channel-display-caution-v1",
             "visual-dependency-payload-equivalence-v1",
             "p9-kepler-sky-v1",
             "solar-system-1000au-scope-v1",
@@ -339,7 +347,6 @@ def prepare(built_at, source_provenance=None):
             "historical_comets",
         ],
         "external_verification_report": name + ".verification.json",
-        "archive_checksum_report": name + ".zip.sha256.json",
         "input_ids": [
             {key: record[key] for key in ("id", "local_relative_path", "sha256", "bytes")}
             for record in inputs
@@ -354,12 +361,30 @@ def prepare(built_at, source_provenance=None):
         },
         "files": [],
     }
-    finalize(stage, manifest)
+    if delivery_format == "directory":
+        manifest["external_verification_report"] = name + ".directory.verification.json"
+        manifest["directory_checksum_report"] = name + ".directory.sha256.json"
+        manifest["checks"]["clean_directory_smoke"] = (
+            "not run by preparation; fresh-copy Node-only result is in external_verification_report"
+        )
+        del manifest["checks"]["extracted_windows_smoke"]
+        manifest["checks"]["linux_container"] = "not run by preparation"
+    else:
+        manifest["archive_checksum_report"] = name + ".zip.sha256.json"
+    finalize(stage, manifest, delivery_format=delivery_format)
     return stage
 
 
-def finalize(stage, manifest=None):
+def finalize(stage, manifest=None, delivery_format=None):
     manifest = manifest or json.loads((stage / "release_manifest.json").read_text(encoding="utf-8"))
+    delivery_format = delivery_format or manifest.get("delivery_format", "zip")
+    if delivery_format not in {"directory", "zip"}:
+        raise ValueError("unsupported_delivery_format")
+    manifest["delivery_format"] = delivery_format
+    if delivery_format == "directory":
+        manifest.pop("archive_checksum_report", None)
+        manifest["directory_checksum_report"] = stage.name + ".directory.sha256.json"
+        manifest["external_verification_report"] = stage.name + ".directory.verification.json"
     manifest["files"] = [
         {
             "path": path.relative_to(stage).as_posix(),
@@ -372,6 +397,20 @@ def finalize(stage, manifest=None):
     (stage / "release_manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
+    if delivery_format == "directory":
+        summary = {
+            "delivery_format": "directory",
+            "directory": stage.name,
+            "directory_manifest_sha256": sha(stage / "release_manifest.json"),
+            "file_count": len(manifest["files"]) + 1,
+            "payload_bytes": sum(record["bytes"] for record in manifest["files"]),
+            "directory_bytes": sum(record["bytes"] for record in manifest["files"])
+            + (stage / "release_manifest.json").stat().st_size,
+        }
+        (stage.parent / (stage.name + ".directory.sha256.json")).write_text(
+            json.dumps(summary, indent=2) + "\n", encoding="utf-8"
+        )
+        return summary
     archive = stage.parent / (stage.name + ".zip")
     with zipfile.ZipFile(
         archive, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=3
@@ -395,10 +434,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--built-at")
     parser.add_argument("--finalize", type=Path)
+    parser.add_argument("--delivery-format", choices=("directory", "zip"))
+    parser.add_argument("--source-provenance", type=Path)
     arguments = parser.parse_args()
     if arguments.finalize:
-        print(json.dumps(finalize(arguments.finalize)))
+        print(json.dumps(finalize(arguments.finalize, delivery_format=arguments.delivery_format)))
     elif arguments.built_at:
-        print(prepare(arguments.built_at))
+        proof = json.loads(arguments.source_provenance.read_bytes()) if arguments.source_provenance else None
+        print(prepare(arguments.built_at, proof, delivery_format=arguments.delivery_format or "directory"))
     else:
         parser.error("--built-at or --finalize is required")

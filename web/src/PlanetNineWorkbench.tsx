@@ -1,5 +1,6 @@
 import {useEffect,useMemo,useRef,useState} from 'react';
 import type {ChangeEvent} from 'react';
+import {planetNineInteractionCopy,assumedMassKg} from './PlanetNineInteractionCopy';
 import {planetNineClient} from './PlanetNineClient';
 import {planetNineBodyName,planetNineCopy,planetNineCoverageLimitsCopy,planetNineDiagnosticsCopy,planetNineGravitySaveCopy,planetNineGravitySourceCopy} from './PlanetNineCopy';
 import {planetNineArchiveLink,planetNineCalendarJD,planetNineRows,planetNineSkyPlot} from './PlanetNineMath';
@@ -12,10 +13,11 @@ type Busy='prediction'|'coverage'|'save'|'import'|'gravity'|null;
 const elementFields:[keyof PlanetNineOrbit,string,number,number,number][]=[['a_au','a (au)',.05,2000,.01],['e','e',0,.99,.001],['i_deg','i (°)',0,180,.01],['omega_deg','ω (°)',-1e9,1e9,.01],['Omega_deg','Ω (°)',-1e9,1e9,.01],['M_deg','M (°)',-1e9,1e9,.01],['epoch_jd_tdb','epoch (JD · TDB)',625697.5,2816787.5,.5]];
 const stringValue=(value:unknown)=>typeof value==='string'||typeof value==='number'?String(value):'—';
 function saveJSON(value:unknown,name:string){const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'}));const anchor=document.createElement('a');anchor.href=url;anchor.download=name;anchor.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-function numeric(value:number){return Number.isFinite(value)?value:'';}
+// Formatting only: the original numeric orbit remains unchanged until an edit.
+function numeric(value:number){return Number.isFinite(value)?Number(value.toPrecision(12)):'';}
 
 export default function PlanetNineWorkbench({visible=true,language,resetKey,onHypothesisPath,onClose}:PlanetNineWorkbenchProps){
-  const c=planetNineCopy(language),dc=planetNineDiagnosticsCopy(language),gc=planetNineGravitySourceCopy(language),format=(value:number,digits=6)=>value.toLocaleString(language,{maximumSignificantDigits:digits});
+  const ic=planetNineInteractionCopy(language),c=planetNineCopy(language),dc=planetNineDiagnosticsCopy(language),gc=planetNineGravitySourceCopy(language),format=(value:number,digits=6)=>value.toLocaleString(language,{maximumSignificantDigits:digits});
   const [presets,setPresets]=useState<PlanetNinePresets|null>(null),[presetId,setPresetId]=useState(''),[orbit,setOrbit]=useState<PlanetNineOrbit|null>(null);
   const [startDate,setStartDate]=useState('2026-09-29'),[endDate,setEndDate]=useState('2026-10-02'),[observer,setObserver]=useState<PlanetNineObserver>('earth_moon_barycenter');
   const [prediction,setPrediction]=useState<PlanetNinePrediction|null>(null),[coverage,setCoverage]=useState<PlanetNineCoverage|null>(null),[judgment,setJudgment]=useState(''),[evidenceId,setEvidenceId]=useState('');
@@ -69,6 +71,7 @@ export default function PlanetNineWorkbench({visible=true,language,resetKey,onHy
       <section className={styles.controls}>
         <fieldset disabled={pending}><legend>{c.elements}</legend><label>{c.preset}<select data-testid="p9-preset" value={presetId} onChange={event=>{const row=presets?.presets.find(p=>p.id===event.target.value);if(!row)return;clearResults();setOrbit({...row.orbit});setPresetId(row.id);setSavedSource(null);setRegionContext(null);}}>{!presetId&&<option value="">{c.custom}</option>}{presetId&&!sourcePreset&&<option value={presetId}>{c.sample} {savedSource?.row_index}</option>}{presets?.presets.map(row=><option value={row.id} key={row.id}>{c.sample} {row.row_index}</option>)}</select></label>
           <div className={styles.fields}>{elementFields.map(([key,label,min,max,stepValue])=><label key={key}>{label}<input data-testid={`p9-${key}`} type="number" min={min} max={max} step={stepValue} value={numeric(orbit[key])} onChange={event=>changeOrbit(key,event.target.valueAsNumber)}/></label>)}<label>{c.mass}<input data-testid="p9-mass_earth" type="number" min="0" max="100" step=".01" value={numeric(orbit.mass_earth)} onChange={event=>changeOrbit('mass_earth',event.target.valueAsNumber)}/></label></div>
+          <section className={styles.notice} data-testid="p9-current-mass"><strong>{ic.currentMass}: {format(orbit.mass_earth,8)} M⊕</strong><p data-testid="p9-current-mass-kg">≈ {assumedMassKg(orbit.mass_earth)?.toExponential(6)??'—'} kg</p><p>{sourcePreset||savedSource?ic.sourceMass:ic.editedMass} · {ic.massNote}</p><p>{ic.conversion}</p></section>
           <p className={styles.metric}>{c.period}: {Number.isFinite(orbit.a_au)&&orbit.a_au>0?format(prediction?prediction.period_days/365.25:Math.sqrt(orbit.a_au**3)): '—'} {c.years}{!prediction&&' ≈'}</p>
           <div className={styles.fields}><label>{c.start}<input data-testid="p9-start-date" type="date" value={startDate} onChange={event=>{clearResults();setStartDate(event.target.value);}}/></label><label>{c.end}<input data-testid="p9-end-date" type="date" value={endDate} onChange={event=>{clearResults();setEndDate(event.target.value);}}/></label></div>
           <label>{c.observer}<select data-testid="p9-observer" value={observer} onChange={event=>{clearResults();setObserver(event.target.value as PlanetNineObserver);}}><option value="earth_moon_barycenter">{c.emb}</option><option value="sun">{c.sun}</option></select></label><p>{c.datesNote}</p>
@@ -76,7 +79,7 @@ export default function PlanetNineWorkbench({visible=true,language,resetKey,onHy
         </fieldset>
         <details className={styles.source}><summary>{c.source}</summary><p>{c.sourceNote}</p><p>{c.anglesNote}</p><p>{c.epochNote}</p><p>{c.reference}</p>{presets&&<><a href={presets.source.url} target="_blank" rel="noreferrer">Caltech · Planet Nine v3 ↗</a><code>SHA256 {presets.source.sha256}</code></>}<a href="https://ssd.jpl.nasa.gov/planets/approx_pos.html" target="_blank" rel="noreferrer">JPL ↗</a></details>
       </section>
-      <main className={styles.results}><PlanetNineRegions language={language} context={regionContext} disabled={pending} onSelectionBusy={setRowSelecting} onSelect={(row,context)=>{clearResults();setOrbit(row.orbit);setPresetId(row.id);setSavedSource({preset_id:row.id,row_index:row.row_index,source_sha256:row.source_sha256});setRegionContext(context);}}/>
+      <main className={styles.results}><PlanetNineRegions active={visible} language={language} context={regionContext} disabled={pending} onSelectionBusy={setRowSelecting} onSelect={(row,context)=>{clearResults();setOrbit(row.orbit);setPresetId(row.id);setSavedSource({preset_id:row.id,row_index:row.row_index,source_sha256:row.source_sha256});setRegionContext(context);}}/>
         <section className={styles.card}><div className={styles.sectionHead}><h2>{c.prediction}</h2><span className={styles.badge}>{c.twoBody}</span></div>
           {!prediction||!plot?<p>{c.noPrediction}</p>:<><svg className={styles.sky} viewBox="0 0 640 320" role="img" aria-label={c.prediction} data-testid="p9-sky-path">
             <rect x="56" y="32" width="520" height="232" fill="#06111d" stroke="#405b73"/>{[0,1,2,3,4].map(i=><g key={i}><line x1={56+i*130} x2={56+i*130} y1="32" y2="264" stroke="#243b50"/><line x1="56" x2="576" y1={32+i*58} y2={32+i*58} stroke="#243b50"/></g>)}

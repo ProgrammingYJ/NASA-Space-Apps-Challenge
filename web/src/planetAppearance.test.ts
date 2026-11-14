@@ -1,6 +1,37 @@
 import {describe,it,expect} from 'vitest';
-import {displayPole,scaledRingBands,subtractRingGaps,sphereBlocksSun,ringsBlockSun,textureWindow,displayTextureDimensions,detailedAppearanceForSize,ringBandsForDisplay} from './planetAppearance';
+import {displayPole,scaledRingBands,subtractRingGaps,sphereBlocksSun,ringsBlockSun,textureWindow,displayTextureDimensions,detailedAppearanceForSize,ringBandsForDisplay,createBodyAppearance} from './planetAppearance';
+import {coverageDisplayMask,bufferedCoverageDisplayMask,coverageTextureRows} from './appearanceCoverage';
 describe('sourced appearance geometry',()=>{
+  it('buffers only the separate caution mask with periodic longitude and clamped latitude, preserving the seed',()=>{
+    const seed=new Uint8Array(25);seed[0]=255;const before=Array.from(seed),result=bufferedCoverageDisplayMask(seed,5,5,1);
+    expect(Array.from(result.mask)).toEqual([255,255,0,0,255,255,255,0,0,255,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+    expect(result.buffered_marked_pixels).toBe(6);expect(result.radius_source_px).toBe(1);expect(Array.from(seed)).toEqual(before);
+    expect(Array.from(bufferedCoverageDisplayMask(seed,5,5,0).mask)).toEqual(before);
+    const tiny=bufferedCoverageDisplayMask(new Uint8Array([255,0]),1,2);expect(tiny.buffered_marked_pixels).toBe(2);
+    expect(()=>bufferedCoverageDisplayMask(seed,5,5,-1)).toThrow('invalid_coverage_display_buffer');
+  });
+  it('marks exact RGB zero channels only as display caution while retaining original samples and valid dark/color pixels',()=>{
+    const source=new Uint8ClampedArray([1,2,3,255,0,0,0,255,255,0,255,255,255,1,255,255]);
+    const before=Array.from(source),result=coverageDisplayMask(source,2,2);
+    expect(Array.from(result.mask)).toEqual([0,255,255,0]);expect(result.marked_pixels).toBe(2);
+    expect(result.all_rgb_zero_pixels).toBe(1);expect(result.partial_rgb_zero_pixels).toBe(1);expect(result.source_pixels).toBe(4);
+    expect(Array.from(source)).toEqual(before);
+  });
+  it('aligns top-origin decoded caution pixels with the published map on WebGL without changing the source mask',()=>{
+    const top=new Uint8Array([0,255,255,0]),bottom=coverageTextureRows(top,2,2);
+    expect(Array.from(bottom)).toEqual([255,0,0,255]);expect(Array.from(top)).toEqual([0,255,255,0]);
+    expect(()=>coverageDisplayMask(new Uint8Array(4),2,2)).toThrow('invalid_coverage_display_raster');
+    expect(()=>coverageTextureRows(top,0,2)).toThrow('invalid_coverage_display_raster');
+  });
+  it('switches only caution display mode while retaining mesh dimensions and the original-map option',()=>{
+    const appearance=createBodyAppearance({objectId:'neptune',displayRadius:1,physicalRadiusKm:24622,fallbackColor:'#4e72b9'});
+    const geometry=appearance.surface.geometry,positions=Array.from(geometry.getAttribute('position').array),scale=appearance.surface.scale.toArray();
+    expect(appearance.status.coverage_mode).toBe('marked');expect(appearance.status.coverage_overlay).toBe('not_applicable');
+    appearance.setCoverageMode('original');expect(appearance.status.coverage_mode).toBe('original');
+    appearance.setCoverageMode('marked');expect(appearance.status.coverage_mode).toBe('marked');
+    expect(appearance.surface.geometry).toBe(geometry);expect(Array.from(geometry.getAttribute('position').array)).toEqual(positions);expect(appearance.surface.scale.toArray()).toEqual(scale);
+    appearance.dispose();
+  });
   it('inherits faint system visibility without overriding a sourced band or opacity',()=>{
     const source={visibility:'very_faint',bands_km:[{name:'Galle',inner_km:40900,outer_km:42900},{name:'Explicit',inner_km:53000,outer_km:54000,visibility:'faint',display_opacity:.08}]};
     const bands=scaledRingBands(ringBandsForDisplay(source),24622,1);

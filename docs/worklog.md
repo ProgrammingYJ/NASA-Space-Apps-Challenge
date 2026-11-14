@@ -510,3 +510,25 @@ DEV-020 통합검증 · 2026-11-15T07:34:53.260066+09:00: R029~31/표시필터/�
 
 
 DEV-020 실제 배포 완료:073754 v0.13ZIP490,829,327B/1616파일/SHA68ee85ee…3b044를새Ubuntu폴더에풀어1615manifest/1182필수source/39JSON과Node단독·실제재시작복원을통과했다. 같은ZIP을Sydney에올려기존16상태파일6,398,352B의writer중지일관백업을만들고11기존근거/비교원바이트SHA를보존했다. 실제운영4241→7419활성화와7419→7725재시작·정식HTTPS Chrome5흐름·HTML/JS정확SHA·gzip·TLS1.3/정확호스트/기본CA·HTTP301·기존εB/Pluto/P9근거3개원export/ID/판단복원을모두확인했다. 미관측표면은생성하지않았다. QA용8012서버/SSH터널을종료했다. 사용자TOP5질문에는「제9행성가설→문헌모형의탐색우선영역」표1~5행이며조건부하늘영역순위임을안내했다. 사후정본docs/releases/v0.13.0.json; 불변ZIP은재작성하지않는다. 사용자명시지시에따라다음작업은현재변경의Gitcommit/push다.
+
+
+DEV-021 시작 · 2026-11-15T07:59:47.477185+09:00: 사용자실화면의표본보기/질량해석/2035전체장면수축을debug·validate-data·browser-QA로분리조사한다. 공개API의65표본/6.14M⊕는정상,기존아래쪽결과·좁은2열·무피드백을확인했다. sr⁻¹는물질밀도가아니다. 최신사용자가새ZIP생성생략을명시했으므로직접AWS반영후검증/commit/push로변경했고AGENTS10.1/FSD25/TODO를먼저갱신했다. 기존원자료/전체ZIP/운영근거/사용자중복review파일은보존한다.
+
+
+### DEV-021 통합 검사 중 — 2026-11-15 08:25 KST
+
+- `debug`, `astrometry-motion-qa`, `spaceapps-browser-qa`, `deploy-checklist`, `documentation` 및 독립 `code-review` 절차를 적용했다. 실제 NASA/JPL r/v·GM과 단위·프레이밍·비동기 경로를 대조했다.
+- P9 표본 무반응은 목록이 화면 아래 패널에서 잘리는 현상으로 재현했다(intersectionRatio0). 네이티브 중앙 dialog·즉시 로딩/재시도·포커스 복귀·100개 페이지·실제 행 질량 요약으로 수정했다. 카메라 수축은 2035 날짜 식 불연속이 아니라 늦은 P9 응답이 overview를 호출하는 경로를 실제 재현했다. 응답과 카메라 제어를 분리했다.
+- 새 위성 hydration 검사는 Node exporter가 Python API의 `source_manifest_sha256`/표시 버전 필드를 빠뜨린 문제와 초기 undefined 자료 접근을 검출했다. `extended_snapshot`의 동일 메타데이터 첨부, 자료 존재 guard, source SHA 일치 병합으로 보완했다. 미지원 천체를 가짜 위치로 채우지 않는다.
+- 초기 원격 타입/빌드·프런트100검사, Node75검사, Python377검사/3subtests·Ruff는 통과했다. 첫 새 Chrome 검사에서는 Neptune1개만 통과했고 나머지는 위 초기 로딩 오류와 검사 fixture의 셀ID/표본수 혼동으로 실패했다. 이를 통과로 기록하지 않는다. 보완 후 새 빌드/브라우저 및 직접 배포·재시작·Git push가 남아 있다.
+- 공개 서버는 아직 v0.13.0이다. 사용자에게 수정본 미배포 상태를 명시했다. 최초 입력/원본 SHA/기존 관측 근거 및 이전 불변 ZIP을 보존한다. 새 ZIP을 만들지 않는다.
+
+
+### DEV-021 RELEASE-014 — 2026-11-15 08:35 KST
+
+- 새 브라우저8경로는 보완 빌드와 정식 HTTPS에서 각각 전부 통과했다. Sedna 질량가정+원εB품질/시각 새 세션복원, 실제εB 원본→품질→저장/복원·5언어 두 기존 경로도 공개서버에서 통과했다. 2542×1167 중앙 표본창과 토성2035위성계/타이탄 이미지를 직접 열람했다. 위성계 전체 guide 경계 기반 camera framing은 재생 중에도 반경/포커스를 유지했다.
+- Node exporter의 source 메타 누락과 optional catalogue undefined 접근은 실제 브라우저 실패에서 수정했다. Node 원manifest 독립SHA 회귀를 추가하고 다시 통과했다. 과거 첫 실패와 QA 셀ID fixture 오류를 docs/qa 기록에 남겼다.
+- 정확082938 디렉터리를 file1626/667431826B/manifest374cbe...로 clean-copy하고 Node-only PATH 실제PID9669→9682·원관측/가설 저장·재시작 복원을 검증했다. 이후 같은manifest를 EC2에복사·전항목SHA확인·활성화했고영속데이터14핵심파일SHA를보존했다. 일관백업21파일은서버의비공개운영경로에저장했다. 새ZIP을생성하지않았다.
+- 실제운영PID9844→10096 재시작·HTTPS ready·nginx정상·기존3근거export원바이트/ID/비교/판단동일을확인했다. full source inventory1272 중필수1182·선택23은배포검증,선택67은미배포로정확히기록한다. 사후정본 docs/releases/v0.14.0.json이며검증디렉터리 자체는동결한다.
+- 지구는기존EMB기준,453위성은J2/조석/상호섭동/장기정확도미검증2체외삽이다. 미지원15는구체이유로남고원목록은보존한다. RGB회색사선은유효이웃도포함할수있는표시보조이며새관측/지형/과학품질마스크가아니다. 단위sr^-1와kg/m^3를구분하며P9질량은문헌가정이다.
+- 마지막 조치: 최신 origin/main과 HEAD가동일함을fetch로확인했다. 현재변경을commit/push하고원격해시를대조한다. 사용자기존 untracked 복사본MD는보존하며커밋대상에서제외한다.

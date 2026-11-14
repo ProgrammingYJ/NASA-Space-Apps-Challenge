@@ -1,8 +1,8 @@
 # Data_Spec — 데이터 원천·입력·가공·사용 상태 전수 기록
 
-## DEV-020 / OPS-020 우선 적용 데이터 상태 · 실제 활성 export/출처 기록
+## DEV-021 / OPS-020 우선 적용 데이터 상태 · 실제 활성 export/출처 기록
 
-아래 기존2,186파일 전수표는 v0.11.0 시점의 보존 snapshot이다. 그 표의 ‘현재 실사용’은 당시 상태이며, **현재 채택/제거·새 입력의 의미는 이 절이 우선**한다. 자료 원본을 임의 수정하지 않았다. 공개 기능은 FSD1.1의 태양계/관측/P9로 축소했고 은하/역사/외계행성/블랙홀/범용실험/역사혜성 구현과 공개 복제 자산을 실제 제거했다. 불변 원자료/이전 ZIP·Git은 보존한다. 현재 active closure는 data/manifests/node_runtime.json의 source1,272개(필수1,182/선택90)·생성39JSON/19,200,366B이며 전 항목의 경로/바이트/SHA/역할을 그 기계 판독 전수표로 추적한다. 현재 정본 SHA는ea500e152d49734fcb2dfd65db3f6a2abbf967d77d6a7ae79bc2e8ddcff16f46다. 새 ZIP 해제·원격 배포의 완료 여부는 별도 검사 기록을 따른다.
+아래 기존2,186파일 전수표는 v0.11.0 시점의 보존 snapshot이다. 그 표의 ‘현재 실사용’은 당시 상태이며, **현재 채택/제거·새 입력의 의미는 이 절이 우선**한다. 자료 원본을 임의 수정하지 않았다. 공개 기능은 FSD1.1의 태양계/관측/P9로 축소했고 은하/역사/외계행성/블랙홀/범용실험/역사혜성 구현과 공개 복제 자산을 실제 제거했다. 불변 원자료/이전 ZIP·Git은 보존한다. 현재 active closure는 data/manifests/node_runtime.json의 source1,272개(필수1,182/선택90)·생성39JSON/19,203,311B이며 전 항목의 경로/바이트/SHA/역할을 그 기계 판독 전수표로 추적한다. 현재 정본 SHA는c97016538256bf24f064556c3ebb41ff0268b3a4afe49364751a8c56e6455d63다. 새ZIP 없이 디렉터리를 검증·배포했으며 후속 DEV-021 절과 docs/releases/v0.14.0.json을 따른다.
 
 ### 실제 채택·확보와 출처
 
@@ -3834,3 +3834,50 @@ Neptune 관측범위는2025-08-24 03:18~08-25 09:45 UT, Uranus는2025-10-23 07:1
 DEV-020 통합 확정: 활성 source1272/필수1182/선택90·39JSON/19,200,366B를 실제 정본으로 검증했다. Windows fresh4comparison ID/전체SHA는 기존과 동일하다. Linux 독립 재계산의 최대 끝자리 차이는 εB7.844391802791506e-12,Pluto1.1049351144024782e-13이며 픽셀배열/품질개수는 정확히 같다. `docs/qa/dev020_local_verification.json`과 외부 릴리스 기록에서 검증 범위/정확ZIP을 구분한다.
 
 DEV-020 실제 배포 확정: 동일 SHA의073754 완결ZIP에 신규TNO 감사20파일을모두포함했고,12개OPAL원본/sidecar/무손실PNG·기존필수1182source를확인했다. 새Ubuntu해제/Node재시작·Sydney실제배포/HTTPS·기존근거SHA보존검증은 docs/releases/v0.13.0.json이다. 이사후기록으로 이미 검증한 불변ZIP은수정하지않는다.
+
+### DEV-021.1 기존 OPAL 제품의 런타임 표시 주의
+
+DEV-021은 위 DEV-020.2의 동일 제품에 표시 규칙만 추가한다. 새 source·독립관측·보정·자연색·정량 quality mask·결측 복원은0이다. 원본의 출판팀 대비 강조·Minnaert/접합 처리·원시각·권리 조건은 그대로다. 새 원본을 받거나 TIFF/PNG/manifest를 변경하지 않았다.
+
+| 기존 입력 | 바이트 / SHA256 | DEV-021 사용 |
+| --- | --- | --- |
+| `data/reference/appearance/dev020/neptune-rgb.tif` | 789926 / `8c17a2872b5d55577c63abe7ba1369997ff32bb83e0f9b9c350a46db96713cb8` | 보존 원본·형식변환 근거; source URL/권리는 DEV-020.2/sidecar |
+| `web/public/textures/neptune-rgb-2a02260a5f97.png` | 318555 / `2a02260a5f975535159f624810a8a1c13b50cdab4de0a54f3acd53652f4fa991` | 같은721×361 RGB8를 원본 모드와 표시 보조 모드에서 사용 |
+| `data/reference/appearance/dev020/uranus-rgb.tif` | 787756 / `854ba9d0b744c2d6e6b646d315847a3528b94b4f0b8970cc4285d71228e69c7b` | 보존 원본·형식변환 근거; source URL/권리는 DEV-020.2/sidecar |
+| `web/public/textures/uranus-rgb-2f21f8ff7733.png` | 179955 / `2f21f8ff7733df38c0bd1b3b8c34ba39d82d8abc35a0166d9cde0413454be404` | 같은721×361 RGB8를 원본 모드와 표시 보조 모드에서 사용 |
+
+`web/src/appearanceCoverage.ts`의 `rgb-zero-channel-buffer6-display-caution-v2`는 브라우저 디코드 후 원 크기 RGB 채널 하나 이상이 **정확히0**인 표본을 별도 메모리 이진 seed로 분류한다. 남은 청·녹 접합 fringe를 구별하려 seed 둘레 원본 raster6픽셀의 사각 buffer(Chebyshev 거리)를 별도 표시 배열에 확장하며 가로 wrap·세로 clamp·2회 sliding maximum을 쓴다. 원 seed를 수정하지 않고 R8/nearest/no-mipmap·원 지도와 맞춘 행 방향의 텍스처를 만든다. `planetAppearance.ts`는 확장된 영역과 명시된 지도 latitude 범위 밖을 화면 고정 회색 사선으로 구별한다. 6은 화면 픽셀·물리거리·검증된 PSF/결측 경계가 아니다. 이는 원source의 검정을 archive NoData로 선언하는 처리가 아니다. **0채널과 인접 buffer도 유효 표본일 수 있으며 science FLAGS/품질·미관측 판단/측광·검출·후보확률에 이 보조를 쓰지 않는다.** 원 RGB를 대체하는 새 구름이나 극지 지형을 채우지 않고 다른 색 접합을 모두 제거했다고 주장하지 않는다. `original`은 사선만 끄며 같은 구체 투영·표시 조명과 공개 원출처 접근을 유지한다.
+
+소형 원 PNG 분류 대조에서는 Neptune47441/260281(전체RGB0 32388·일부채널0 15053), Uranus106823/260281(104869·1954)을 얻었고 입력 RGBA와 원 PNG SHA를 보존했다. 이것은 표시 분류 개수이며 미관측률/불량률/독립 검증관측이 아니다. `coverage_overlay=loading/ready/unavailable/not_applicable`와 생성 실패시 원 지도 유지 안내를 구별한다. 새 세션은 marked이며 근거의 `appearance_coverage` 선택을 저장·복원한다. 필드가 없는 구판 근거는 original로 복원하며 원봉투·comparison·판단을 재작성하지 않는다. source hash의 마이그레이션은 DEV-020.3의 정확한 등록쌍 규칙을 유지한다.
+
+위 개수는 v2에서도 보존하는 seed 개수다. `coverage_marked_pixels`와 별도로 `coverage_buffered_pixels` 및 `coverage_buffer_radius_source_px=6`을 상태에 기록한다. 소형 Node의60개 크기/반경 입력에서 독립 brute-force 대조·seed불변을 확인했고, 실제 PNG의 확장 개수는 Neptune54715/Uranus116545였다. 두 원 PNG SHA와 seed 개수는 위와 같다. 이 소형 원리 대조와 Vitest/실제 GPU·두 RGB 화면 사람 확인은 서로 다른 검증이며 중앙 실행/시각 확정은 pending이다.
+
+### DEV-021.2 저장된 r/v와 GM을 사용한 위성 위상 근사
+
+`parent-relative-osculating-kepler-v1`은 기존 JPL parent-relative geometric 벡터의 첫 TDB epoch r/v와 기존 DE440 system GM 전사를 사용한다. 새 천체력 요청·관측·위성 질량 측정·질량 가정에 의한 빈 자리 채움은 없다. 개별 위성 벡터의 경로·원응답 SHA·관측이 아닌 예측 상태·부모 CENTER·AU/AU-day·J2000 ecliptic/ICRF·VEC_CORR=NONE은 기존 `extended_solar.json`과 전수 원본 목록을 따른다. 새 근사 기준 상태의 source epoch/response SHA와 GM 출처를 표시하여 선택 미래 날짜의 새 관측으로 오해하지 않게 한다.
+
+| 기존 입력·역할 | 바이트 | 전체 파일 SHA256 |
+| --- | ---: | --- |
+| `data/manifests/extended_solar.json` ·468위성 목록·개별 원벡터/반지름/미지원·원파일 경로/해시 | 1186595 | `34afdc84d913e7e2089b06d9e0518acff011713df3ac7185b7372ba0ef6ef7a5` |
+| `data/reference/planet-nine/upstream/jpl_astro_par.html` · [NASA/JPL 천문 상수 원문](https://ssd.jpl.nasa.gov/astro_par.html)·DE440 GM/단위 | 22489 | `168f48b94ae3a65f31c96f081d08e7ca91ecc9e65678fdc57353821b492b313e` |
+| `data/reference/planet-nine/facts/jpl_constants.json` · 기존 source 전사·원 HTML SHA와 system GM | 1322 | `c47a0c2d96b1d2715a39111e1b85c8f0d5ed9f5f51395f11033fada613a94eb1` |
+
+HTML 원SHA와 전사JSON 전체SHA를 구별한다. GM은 km³/s², AU=149597870.7km, day=86400s로 변환한다. 소스의 Earth GM398600.435507과 Moon GM4902.800118을 합한 EMB system GM403503.23562500003을 채택하고, Mars42828.375816/Jupiter126712764.1/Saturn37940584.8418/Uranus5794556.4/Neptune6836527.10058을 사용한다. 이들은 개별 위성의 중심 단독질량을 새로 측정한 값이 아니다.
+
+8행성 부모 경로는 기존 JPL 장기 근사식으로 처방한다. 그중 위성이 있는6계에서 원상태로 묶인 타원을 구할 수 있는453개(Earth1/Mars2/Jupiter115/Saturn291/Uranus28/Neptune16)를 독립 질량 없는 2체로 전파한다. source 목록은468개로 유지한다. 미지원15개는 Saturn2/Uranus1의 원벡터 미지원과, 이 장기 부모 모형에 없는 Pluto5/Haumea2/Eris1/Makemake1/Quaoar1/Orcus1/Gonggong1의12개다. 후자는 확보된 원벡터가 있어도 `missing_parent`로 남으며 다른 행성/정지 source 위치를 대신 쓰지 않는다. 잘못된 중심·기준계/결합되지 않은 상태/목표 위상 실패도 이유를 보존한다.
+
+Earth의 부모는 기존 fitted EMB다. geocentric Moon r/v로 얻은 상대 궤도 위치를 μEarth/(μEarth+μMoon) 배로 바꾸어 EMB에 더한다. 정밀 지구 중심 재구성은 아니다. 상호섭동·J2·조석·공명·장기 진화·공분산을 계산하지 않으며 `long_term_accuracy_verified=false`, 전파 위치 불확실성/null, 새 분류/null을 유지한다. 수천 년 달력에서 수치가 유한하다는 것과 그 기간의 관측 정확도는 다르다. 원 반지름/미측정 여부/외관 출처를 보존하고, 화면 위성계 확대는 카메라 조작으로 구별한다. 저장은 기존 extended source SHA 및 `moon_simulation_algorithm_version`으로 추적한다.
+
+### DEV-021.3 문헌 표본·질량·검증 경계
+
+P9 영역 목록은 같은 Caltech Version3 synthetic CSV10만행의 row ID·mass(M⊕)·assumed radius(R⊕)·a/e를 중앙 dialog에 노출한다. 기존 members의 정수 rows도 유지한다. 문헌 표본은 실재 확인 천체 목록이 아니며 하늘 위치 밀도(sr⁻¹)는 부피밀도ρ(kg/m³)가 아니다. 표본 선택은 문헌 가정 입력을 채택하는 행위다. 편집 후에는 사용자 가정으로 구분하고 현재 M⊕ 및 `Mkg=M⊕×5.97217×10²⁴` 환산을 보인다. 원문 질량/반지름으로 역산한ρ를 새 독립 질량 증거로 쓰지 않는다.
+
+기존6개 미측정 본체의 간편 질량 계산도 원 반지름과 명시적ρ/선택 비교위성을 쓰는 구형 가정 `M=ρ(4π/3)(Rkm×1000)³`이며 M⊕·kg·입력/출처를 같이 보인다. 자동 Tethys 대입·generic TNO의 미확보 직경/밀도 채움·공식3요건/실측질량 변경은 하지 않는다. P9 경로 callback은 경로만 갱신해 뒤늦은 결과가 카메라 전체보기/모형시각을 초기화하지 않게 분리한다. 2035-03-19 전후 반지름·위치 연속성 소형 검산만으로 당시 전체장면 수축의 원인을 확정하지 않는다.
+
+**중앙 통합 빌드/회귀·실제 Chrome의 두 RGB 이미지/5언어와453위성·사람의 해칭 구별 검토·AWS 직접배포/재시작은 이 추가 기록 시점 pending이다.** `dev021-appearance.spec.ts`는 API/원 PNG SHA·모드·반지름/scale·GLSL/pageerror·두 PNG 및 명시적 사람 검토 대기를 기록하도록 작성했다. `dev021-moons.spec.ts`는 목록/위상/원 source·반지름/EMB·과거미래를 대조하도록 작성했다. 후속 실제 로그·릴리스가 통과 상태를 확정하며 이 데이터 재사용 목록을 실행 성공 증거로 대신하지 않는다. 사용자 최신 지시로 새 ZIP은 생성하지 않는다. 기존 검증 ZIP·Git 이력·운영 근거 원바이트는 보존한다.
+
+
+DEV-021 중앙 검사 확정(2026-11-15 08:30 KST): 보완 빌드의 strict TypeScript/Vite·Vitest101(20파일), 기존 Node75 및 source-meta 후속9, Python377/3subtests 및 후속6/3subtests·Ruff를 통과했다. 새 Chrome8경로는 실제 TOP5→65표본 중앙창/즉시로딩·5언어·ESC·실패재시도·6.14M⊕/kg 적용, Sedna 명시ρ 계산, 2035 지연P9응답 카메라불변, 두RGB 원본/주의모드·5언어·원PNG/반지름불변, 1371/2035/3000년453위성/Saturn291·Titan선택·EMB를 통과했다. 두 RGB 스크린샷을 직접 열람해 회색사선과 대기무늬 구별·원본접근을 확인했다. 앞선 첫 브라우저 실패는 `docs/qa/dev021_local_verification.json`에 원인과 함께 보존한다. 새 Node Solar snapshot에는 Python API와 같은 source_manifest_sha256/표시버전을 첨부하며 원자료 해시를 바꾸지 않는다. runtime 정본은 `c97016538256bf24f064556c3ebb41ff0268b3a4afe49364751a8c56e6455d63`이며 네 실제 comparison ID/정본SHA는 이전과 같다. 직접 디렉터리의 clean-copy/Node-only/재시작과 공개 AWS 배포 확인은 후속 외부 릴리스 기록으로 확정한다.
+
+
+DEV-021 사후 배포 확정(2026-11-15 08:35 KST): 정확082938 디렉터리의 file1626/전체667,431,826B, release_manifest SHA374cbe532a29d8ba2083ef9d91de4a19d55068e2be1e982f06620826f4f7286b를 새Ubuntu clean-copy에서 Node-only PATH·실제PID9669→9682·εB/Pluto/P9 저장/복원으로 검증했다. runtime필수1182와배포선택23을검증했고선택67은미배포로명시했다. 같은 디렉터리를Sydney에활성화해기존핵심14파일 원바이트와21파일 일관백업을보존했다. 정식HTTPS Chrome 새8경로와기존실관측/새세션복원2경로를통과했고운영PID9844→10096 실제재시작후기존3근거의정본exportSHA/ID/비교/판단이모두같았다. 새ZIP은만들지않았다. 사후기록은검증디렉터리를재작성하지않고 docs/releases/v0.14.0.json에분리한다. Gitcommit/push는검증후마지막단계다.

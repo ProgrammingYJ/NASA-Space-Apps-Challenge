@@ -1,10 +1,11 @@
-"""Verify an exact ZIP and its Node-only server from a fresh extraction.
+"""Verify a complete directory from a fresh copy, or a legacy ZIP extraction.
 
 Python is the development verifier/client, not a hosting dependency. The server
 command is exclusively an absolute Node executable plus app.js, with PATH set
 to the Node executable's directory. No Python environment is installed and no
-scientific reader is imported by this verifier. Extracted files and logs are
+scientific reader is imported by this verifier. Copied/extracted files and logs are
 preserved on success and failure; only processes created here are stopped.
+Directory mode never creates or extracts a ZIP and preserves its input folder.
 """
 
 from __future__ import annotations
@@ -207,6 +208,67 @@ def extract_checked(archive: Path, target: Path) -> set[str]:
                     "private_key_material_in_archive",
                 )
     return file_names
+
+
+def copy_directory_checked(source: Path, target: Path) -> set[str]:
+    """Copy a bounded, portable delivery into an existing empty verification root.
+
+    The same path/private-file policy and subsequent payload checks as ZIP mode
+    apply. Neither an input directory nor a live state directory is modified.
+    """
+    require(
+        source.is_dir() and not source.is_symlink()
+        and not getattr(source.lstat(), "st_file_attributes", 0) & 0x400,
+        "invalid_delivery_directory",
+    )
+    source = source.resolve()
+    target = target.resolve()
+    require(
+        target.is_dir() and not any(target.iterdir())
+        and not target.is_relative_to(source) and not source.is_relative_to(target),
+        "directory_copy_requires_separate_empty_target",
+    )
+    entries = sorted(source.rglob("*"))
+    require(len(entries) <= 100000, "directory_resource_bound_exceeded")
+    prefixes, records, total_bytes = {}, [], 0
+    for entry in entries:
+        info = entry.lstat()
+        require(
+            not entry.is_symlink()
+            and not getattr(info, "st_file_attributes", 0) & 0x400
+            and (stat.S_ISREG(info.st_mode) or stat.S_ISDIR(info.st_mode)),
+            "directory_symlink_or_special_file",
+        )
+        name = entry.relative_to(source).as_posix()
+        relative = relative_path(name)
+        archive_policy(relative)
+        for depth in range(1, len(relative.parts) + 1):
+            prefix = "/".join(relative.parts[:depth])
+            folded = prefix.casefold()
+            require(prefixes.get(folded, prefix) == prefix, "directory_case_collision")
+            prefixes[folded] = prefix
+        if stat.S_ISREG(info.st_mode):
+            total_bytes += info.st_size
+            require(total_bytes <= 8 * 1024**3, "directory_resource_bound_exceeded")
+            records.append((entry, name, info.st_size))
+    names = set()
+    for entry, name, size in records:
+        destination = within(target, name)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        with entry.open("rb") as stream, destination.open("xb") as output:
+            shutil.copyfileobj(stream, output, length=1024 * 1024)
+        if destination.suffix.casefold() in {
+            ".json", ".txt", ".md", ".yaml", ".yml", ".toml", ".py", ".js", ".sh", ".ps1"
+        } and size <= 2_000_000:
+            require(
+                not re.search(
+                    rb"(?m)^-----BEGIN (?:[A-Z0-9 ]+ )?PRIVATE KEY-----\r?$",
+                    destination.read_bytes(),
+                ),
+                "private_key_material_in_directory",
+            )
+        names.add(name)
+    return names
 
 
 def verify_payload(target: Path, archive_files: set[str]) -> tuple[dict, dict, dict]:
@@ -427,62 +489,105 @@ def stop_owned(process: subprocess.Popen | None):
 
 
 def main(
-    archive: Path,
+    archive: Path | None = None,
     port: int = 8011,
     node_executable: Path | None = None,
     use_default_port: bool = False,
+    *,
+    directory: Path | None = None,
 ) -> dict:
     repository = Path(__file__).resolve().parents[1]
     (repository / "tmp").mkdir(exist_ok=True)
     temporary = Path(
         tempfile.mkdtemp(prefix="node-release-verify-", dir=repository / "tmp")
     ).resolve()
-    target = temporary / "extracted"
+    directory_mode = directory is not None
+    target = temporary / ("clean_copy" if directory_mode else "extracted")
     target.mkdir()
-    archive = archive.resolve()
-    report_path = archive.with_suffix(".verification.json")
+    delivery = directory if directory_mode else archive
+    delivery = delivery.resolve() if delivery is not None else temporary / "missing-input"
+    report_path = (
+        delivery.parent / (delivery.name + ".directory.verification.json")
+        if directory_mode else delivery.with_suffix(".verification.json")
+    )
     report = {
         "checked_at": datetime.now(UTC).isoformat(),
         "status": "failed",
-        "archive": archive.name,
-        "extracted": str(target),
+        "delivery_format": "directory" if directory_mode else "zip",
         "logs": str(temporary),
         "development_verifier": {
             "runtime": "Python standard library",
             "executable": sys.executable,
-            "role": "ZIP/hash orchestration and HTTP test client only; not the server",
+            "role": "Directory-copy/hash orchestration and HTTP test client only; not the server"
+            if directory_mode else "ZIP/hash orchestration and HTTP test client only; not the server",
         },
         "server_python_required": False,
         "linux_container": "not_run",
         "public_service": "not_deployed",
     }
+    if directory_mode:
+        report.update(
+            input_directory=str(delivery), clean_copy=str(target),
+            input_semantics="complete directory copied to a new empty folder; no ZIP creation or extraction",
+        )
+    else:
+        report.update(archive=delivery.name, extracted=str(target))
     process = None
     logs = []
-    stage = "archive_validation"
+    stage = "directory_validation" if directory_mode else "archive_validation"
     try:
         require(
-            archive.is_file() and archive.suffix.lower() == ".zip" and 1 <= port <= 65535,
+            (archive is None) != (directory is None) and 1 <= port <= 65535,
             "invalid_verification_arguments",
         )
-        report["archive_bytes"] = archive.stat().st_size
-        report["archive_sha256"] = sha(archive)
-        checksum_path = archive.with_suffix(".zip.sha256.json")
-        if checksum_path.is_file():
-            supplied = json.loads(checksum_path.read_bytes())
+        if directory_mode:
             require(
-                supplied["filename"] == archive.name
-                and supplied["bytes"] == report["archive_bytes"]
-                and supplied["sha256"] == report["archive_sha256"],
-                "supplied_archive_checksum_mismatch",
+                directory.is_dir() and not directory.is_symlink()
+                and not getattr(directory.lstat(), "st_file_attributes", 0) & 0x400,
+                "invalid_delivery_directory",
             )
-        archive_files = extract_checked(archive, target)
-        release, runtime, integrity = verify_payload(target, archive_files)
+            report["directory_manifest_sha256"] = sha(delivery / "release_manifest.json")
+            delivered_files = copy_directory_checked(delivery, target)
+            require(
+                sha(target / "release_manifest.json") == report["directory_manifest_sha256"]
+                == sha(delivery / "release_manifest.json"),
+                "delivery_directory_manifest_changed_during_copy",
+            )
+            report["directory_bytes"] = sum(within(target, name).stat().st_size for name in delivered_files)
+            checksum_path = delivery.parent / (delivery.name + ".directory.sha256.json")
+            if checksum_path.is_file():
+                supplied = json.loads(checksum_path.read_bytes())
+                require(
+                    supplied.get("directory") == delivery.name
+                    and supplied.get("directory_manifest_sha256") == report["directory_manifest_sha256"]
+                    and supplied.get("file_count") == len(delivered_files)
+                    and supplied.get("directory_bytes") == report["directory_bytes"],
+                    "supplied_directory_checksum_mismatch",
+                )
+        else:
+            require(delivery.is_file() and delivery.suffix.lower() == ".zip", "invalid_verification_arguments")
+            report["archive_bytes"] = delivery.stat().st_size
+            report["archive_sha256"] = sha(delivery)
+            checksum_path = delivery.with_suffix(".zip.sha256.json")
+            if checksum_path.is_file():
+                supplied = json.loads(checksum_path.read_bytes())
+                require(
+                    supplied["filename"] == delivery.name
+                    and supplied["bytes"] == report["archive_bytes"]
+                    and supplied["sha256"] == report["archive_sha256"],
+                    "supplied_archive_checksum_mismatch",
+                )
+            delivered_files = extract_checked(delivery, target)
+        stage = "clean_directory_payload_validation" if directory_mode else "archive_payload_validation"
+        release, runtime, integrity = verify_payload(target, delivered_files)
         report.update(
             release=release["release"],
             release_base_commit=release.get("base_commit"),
             manifest_files_verified=len(release["files"]),
             runtime_integrity=integrity,
-            archive_policy="path/case/symlink/special-file/private-path/environment/key-header/local-only exclusions passed",
+        )
+        report["directory_policy" if directory_mode else "archive_policy"] = (
+            "path/case/symlink/special-file/private-path/environment/key-header/local-only exclusions passed"
         )
         stage = "Node_runtime_validation"
         selected = node_executable or (Path(shutil.which("node")) if shutil.which("node") else None)
@@ -613,7 +718,7 @@ def main(
                 "P9_source_sha256": presets["source"]["sha256"],
                 "removed_API_status": 410,
             }
-        stage = "extracted_release_HTTP_smoke"
+        stage = "clean_directory_release_HTTP_smoke" if directory_mode else "extracted_release_HTTP_smoke"
         with (
             (temporary / "smoke.stdout.json").open("wb") as stdout,
             (temporary / "smoke.stderr.log").open("wb") as stderr,
@@ -823,12 +928,16 @@ def main(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("archive", type=Path)
+    parser.add_argument("archive", type=Path, nargs="?")
+    parser.add_argument("--directory", type=Path)
     parser.add_argument("--port", type=int, default=8011)
     parser.add_argument("--use-default-port", action="store_true")
     parser.add_argument("--node", "--node-executable", dest="node_executable", type=Path)
     arguments = parser.parse_args()
+    if (arguments.archive is None) == (arguments.directory is None):
+        parser.error("provide either a legacy ZIP positional argument or --directory, not both")
     result = main(
-        arguments.archive, arguments.port, arguments.node_executable, arguments.use_default_port
+        arguments.archive, arguments.port, arguments.node_executable, arguments.use_default_port,
+        directory=arguments.directory,
     )
     raise SystemExit(0 if result["status"] == "passed" else 1)

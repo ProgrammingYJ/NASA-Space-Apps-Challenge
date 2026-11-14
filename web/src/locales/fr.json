@@ -305,7 +305,7 @@
   "simDay": "Jour",
   "simApply": "Aller",
   "simYearsPerSecond": "{{years}} ans/s",
-  "simNote": "Ajustement JPL à long terme · calendrier TDB · an 0 = 1 av. J.-C. Huit systèmes planétaires ; la Terre désigne le barycentre Terre–Lune. Les dates des observations restent inchangées.",
+  "simNote": "Ajustement JPL à long terme · calendrier TDB · an 0 = 1 av. J.-C. Huit systèmes planétaires et approximations des lunes disponibles ; la Terre désigne le barycentre Terre–Lune. Les dates des observations restent inchangées.",
   "simInvalid": "Saisissez une date valide dans la plage disponible.",
   "simLoadError": "Les sources des coefficients n’ont pas pu être vérifiées.",
   "simEmB": "Barycentre Terre–Lune",

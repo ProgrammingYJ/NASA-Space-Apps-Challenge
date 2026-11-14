@@ -44,6 +44,35 @@ test('a ranked region resolves actual row indices and source elements without fa
   }
   assert.ok(catalog.row(99999).orbit.a_au > 0);
 });
+test('member summaries preserve integer IDs, source units and the same immutable CSV rows', () => {
+  const region = catalog.regions({ limit: 1 }).rows[0], result = catalog.members(region.cell_id);
+  assert.equal(region.cell_id, 3682); assert.equal(result.limit, 100); assert.equal(result.member_count, 65);
+  assert.equal(result.next_offset, null); assert.equal(result.rows.length, 65); assert.equal(result.samples.length, result.rows.length);
+  // Independently transcribed original CSV row 2413, not a value calculated by
+  // this summary implementation. These are literature-model sample parameters.
+  assert.deepEqual(result.samples[0], { id: 'caltech-row-2413', row_index: 2413, kind: 'synthetic_literature_sample',
+    mass_earth: 6.14, assumed_radius_earth: 2.05, semimajor_axis_au: 390.78, eccentricity: .139 });
+  for (const [position, index] of result.rows.entries()) {
+    assert.ok(Number.isInteger(index));
+    const sample = result.samples[position], full = catalog.row(index), columns = full.source_columns;
+    assert.equal(sample.id, full.id); assert.equal(sample.row_index, index); assert.equal(sample.kind, full.kind);
+    assert.equal(sample.mass_earth, columns.mass); assert.equal(sample.mass_earth, full.orbit.mass_earth);
+    assert.equal(sample.assumed_radius_earth, columns.rad); assert.equal(sample.semimajor_axis_au, columns.a); assert.equal(sample.eccentricity, columns.e);
+  }
+  assert.deepEqual(result.source, catalog.summary().source); assert.deepEqual(result.selection, catalog.summary().selection);
+  assert.equal(result.existence_probability, null); assert.equal(result.individual_candidate_authenticity_probability, null);
+  assert.equal(catalog.regions().limit, 20); assert.equal('samples' in catalog.regions(), false);
+});
+test('member summary pagination stays aligned and never invents samples for an empty page', () => {
+  const cell = catalog.regions({ limit: 1 }).rows[0].cell_id, full = catalog.members(cell);
+  const partial = catalog.members(cell, { offset: 2, limit: 3 });
+  assert.equal(partial.limit, 3); assert.equal(partial.next_offset, 5);
+  assert.deepEqual(partial.rows, full.rows.slice(2, 5)); assert.deepEqual(partial.samples, full.samples.slice(2, 5));
+  assert.equal(partial.member_count, full.member_count); assert.deepEqual(partial.source, full.source); assert.deepEqual(partial.selection, full.selection);
+  const empty = catalog.members(cell, { offset: 65 });
+  assert.equal(empty.limit, 100); assert.equal(empty.next_offset, null); assert.deepEqual(empty.rows, []); assert.deepEqual(empty.samples, []);
+  for (const input of [{ limit: 101 }, { limit: null }, { offset: -1 }]) assert.throws(() => catalog.members(cell, input));
+});
 test('malformed pages, filters and coordinates fail closed', () => {
   for (const input of [{ limit: 101 }, { offset: -1 }, { limit: null }, { subset: 'latest' }, { max_reference_distance_au: NaN }, { unknown: true }]) assert.throws(() => catalog.regions(input));
   for (const index of [-1, 100000, 1.2, '3']) assert.throws(() => catalog.row(index));
