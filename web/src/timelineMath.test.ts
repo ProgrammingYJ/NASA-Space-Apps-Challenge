@@ -20,6 +20,7 @@ describe('bounded model playback and actual source interpolation',()=>{
     expect(advancePlayback(0,100,1,bounds).epoch).toBe(360000);
     expect(advancePlayback(0,100,6,bounds).epoch).toBe(2160000);
     expect(advancePlayback(0,100,24,bounds).epoch).toBe(8640000);
+    expect(advancePlayback(0,100,72,bounds).epoch).toBe(25920000);
     expect(advancePlayback(bounds.end-1,100,24,bounds)).toEqual({epoch:bounds.end,ended:true});
     expect(advancePlayback(0,60000,6,bounds)).toEqual(advancePlayback(0,100,6,bounds));
     expect(advancePlayback(0,-1,6,bounds).epoch).toBe(0);

@@ -10,7 +10,7 @@ from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
@@ -45,7 +45,7 @@ def create_app(state_dir: Path | None = None):
         yield
         app.state.service.close()
 
-    app = FastAPI(title="Planet X · SPHEREx", version="0.4.0", lifespan=lifespan)
+    app = FastAPI(title="Planet X · SPHEREx", version="0.5.0", lifespan=lifespan)
 
     @app.middleware("http")
     async def bounds(request, call_next):
@@ -196,29 +196,44 @@ def create_app(state_dir: Path | None = None):
         from science.extended_solar import get_extended_solar
 
         try:
-            value = get_extended_solar(ROOT)
+            value = get_extended_solar(ROOT, include_vectors=False)
         except FileNotFoundError:
             raise HTTPException(503, "catalog_unavailable") from None
         value["source_manifest_sha256"] = hashlib.sha256(
             (ROOT / "data/manifests/extended_solar.json").read_bytes()
         ).hexdigest()
+        value["display_algorithm_version"] = "extended-solar-parent-hermite-v1"
         return value
+
+    @lru_cache(maxsize=16)
+    def extended_parent_catalog(parent_id: str):
+        from science.extended_solar import get_extended_solar
+
+        value = get_extended_solar(ROOT, parent_id=parent_id)
+        return {
+            **value,
+            "source_manifest_sha256": hashlib.sha256(
+                (ROOT / "data/manifests/extended_solar.json").read_bytes()
+            ).hexdigest(),
+            "display_algorithm_version": "extended-solar-parent-hermite-v1",
+        }
 
     @app.get("/api/v1/catalog/solar-system")
     def extended_solar(parent_id: str | None = None):
-        from science.extended_solar import PARENTS
+        from science.extended_solar import CATALOG_PARENTS
 
-        if parent_id is not None and parent_id not in PARENTS:
+        if parent_id is not None and parent_id not in CATALOG_PARENTS:
             raise HTTPException(422, "unknown_extended_parent")
-        value = extended_catalog()
-        objects = value["objects"]
         if parent_id is not None:
-            objects = [obj for obj in objects if obj["parent_id"] == parent_id]
-        else:
-            objects = [
-                {key: item for key, item in obj.items() if key != "knots"} for obj in objects
-            ]
-        return {**value, "objects": objects}
+            return extended_parent_catalog(parent_id)
+        value = extended_catalog()
+        return {
+            **value,
+            "objects": [
+                {key: item for key, item in obj.items() if key != "knots"}
+                for obj in value["objects"]
+            ],
+        }
 
     @lru_cache(maxsize=1)
     def appearance_catalog():
@@ -232,6 +247,30 @@ def create_app(state_dir: Path | None = None):
     @app.get("/api/v1/appearance")
     def appearance():
         return appearance_catalog()
+
+    @app.get("/api/v1/cosmic-history")
+    def cosmic_history():
+        from science.history import get_cosmic_history
+
+        return get_cosmic_history(ROOT)
+
+    @app.get("/api/v1/cosmic-history/sample")
+    def cosmic_history_sample(age_gyr: float = Query(0, ge=0, le=13.8, allow_inf_nan=False)):
+        from science.history import sample_history
+
+        return sample_history(ROOT, age_gyr)
+
+    @app.get("/api/v1/catalog/galaxies")
+    def galaxies():
+        from science.galaxies import get_galaxies
+
+        return get_galaxies(ROOT)
+
+    @app.get("/api/v1/kuiper-belt")
+    def kuiper_belt():
+        from science.kuiper import get_kuiper_display
+
+        return get_kuiper_display(ROOT)
 
     def context_reasons(session):
         context = session.universe_context
@@ -252,6 +291,8 @@ def create_app(state_dir: Path | None = None):
                     return ["orbit_guide_reference_changed"]
         except ValueError:
             return ["unsupported_model_epoch"]
+        except FileNotFoundError:
+            return ["universe_ephemeris_unavailable"]
         source = ROOT / "data/manifests/solar_system_ephemeris.json"
         if (
             context.source_manifest_sha256
@@ -267,6 +308,7 @@ def create_app(state_dir: Path | None = None):
             ):
                 return ["orbit_ephemeris_changed"]
         for expected, filename, reason in (
+            (context.galaxy_manifest_sha256, "galaxies.json", "galaxy_sources_changed"),
             (context.appearance_manifest_sha256, "appearance.json", "appearance_sources_changed"),
             (
                 context.extended_solar_manifest_sha256,
@@ -279,6 +321,35 @@ def create_app(state_dir: Path | None = None):
                 not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected
             ):
                 return [reason]
+        # Verify the actual bytes without rebuilding the display's numerical
+        # arrays or evicting its immutable cache on each save/import.
+        from science.appearance import get_appearance
+        from science.extended_solar import get_extended_solar
+
+        for expected, reader, reason in (
+            (
+                context.appearance_manifest_sha256,
+                lambda: get_appearance(ROOT),
+                "appearance_data_unavailable",
+            ),
+            (
+                context.extended_solar_manifest_sha256,
+                lambda: get_extended_solar(ROOT, include_vectors=False),
+                "extended_solar_data_unavailable",
+            ),
+        ):
+            if expected:
+                try:
+                    reader()
+                except (ValueError, FileNotFoundError, HTTPException):
+                    return [reason]
+        if context.galaxy_manifest_sha256:
+            from science.galaxies import get_galaxies
+
+            try:
+                get_galaxies(ROOT)
+            except (ValueError, FileNotFoundError):
+                return ["galaxy_data_unavailable"]
         return []
 
     @app.get("/api/v1/observations")

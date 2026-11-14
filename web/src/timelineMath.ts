@@ -2,7 +2,7 @@ import type {UniverseData} from './UniverseScene';
 import type {Vec3} from './sceneMath';
 
 export const TIMELINE_ALGORITHM='display-hermite-v1' as const;
-export const PLAYBACK_RATES=[1,6,24] as const;
+export const PLAYBACK_RATES=[1,6,24,72] as const;
 export type PlaybackRate=typeof PLAYBACK_RATES[number];
 export interface TimelineKnot {epoch:string;tdb_jd:number;states:Record<string,{position_au:Vec3;velocity_au_day:Vec3}>;directions:Record<string,{direction_ecliptic:Vec3;direction_icrs_deg:{ra:number;dec:number}}>}
 export interface TimelineData {schema_version:string;algorithm_version:typeof TIMELINE_ALGORITHM;start_epoch:string;end_epoch:string;default_epoch:string;guide_reference_epoch:string;source_manifest_sha256:string;timeline_validation_sha256:string|null;knots:TimelineKnot[];limitations:string[]}

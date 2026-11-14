@@ -1,0 +1,341 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "cosmic-chronology-v1",
+  "created_utc": "2026-11-14T05:06:08.452321+00:00",
+  "reference_age_gyr": 13.8,
+  "reference_age_is_approximate": true,
+  "reference_age_source": {
+    "url": "https://science.nasa.gov/mission/webb/early-universe/",
+    "resolved_url": "https://science.nasa.gov/mission/webb/early-universe/",
+    "label": "NASA Webb: Early Universe",
+    "local_relative_path": "data/reference/history/nasa_early_universe.html",
+    "sha256": "b1ff0500e8ea4542ce24b8fff1929cf0adbefc66077564f4562a84d7b971f3b0",
+    "bytes": 429404,
+    "retrieved_utc": "2026-11-14T05:06:05.786210+00:00"
+  },
+  "age_range_gyr": [
+    0,
+    13.8
+  ],
+  "age_unit": "Gyr_since_hot_Big_Bang",
+  "selection_rule": "latest_display_milestone_at_or_before_age_not_a_sharp_physical_era_boundary",
+  "stages": [
+    {
+      "stage_id": "hot_big_bang",
+      "label_key": "history.stage.hot_big_bang",
+      "age_gyr": 0.0,
+      "lookback_gyr": 13.8,
+      "age_range_gyr": null,
+      "range_kind": null,
+      "timing_status": "reference_origin_not_observed_instant",
+      "source_id": "nasa_early_universe",
+      "limitations": [
+        "The zero of this chronology is the hot Big Bang, not a claim about before inflation or a resolved view of time zero."
+      ],
+      "spatial_representation": "conceptual_illustration_only",
+      "source": {
+        "url": "https://science.nasa.gov/mission/webb/early-universe/",
+        "resolved_url": "https://science.nasa.gov/mission/webb/early-universe/",
+        "label": "NASA Webb: Early Universe",
+        "local_relative_path": "data/reference/history/nasa_early_universe.html",
+        "sha256": "b1ff0500e8ea4542ce24b8fff1929cf0adbefc66077564f4562a84d7b971f3b0",
+        "bytes": 429404,
+        "retrieved_utc": "2026-11-14T05:06:05.786210+00:00"
+      }
+    },
+    {
+      "stage_id": "recombination",
+      "label_key": "history.stage.recombination",
+      "age_gyr": 0.00038,
+      "lookback_gyr": 13.79962,
+      "age_range_gyr": null,
+      "range_kind": null,
+      "timing_status": "approximate_milestone",
+      "source_id": "esa_cosmic_eras",
+      "limitations": [
+        "About 380,000 years; transparency/CMB milestone, not a sharply measured universal transition time."
+      ],
+      "spatial_representation": "conceptual_illustration_only",
+      "source": {
+        "url": "https://www.esa.int/articles/about-us/directorates/science/cosmic-eras",
+        "resolved_url": "https://www.esa.int/articles/about-us/directorates/science/cosmic-eras",
+        "label": "ESA: Cosmic eras (2024-12-24)",
+        "local_relative_path": "data/reference/history/esa_cosmic_eras.html",
+        "sha256": "96ec80fb1ecb93a522b8b04193ef339025370c6d87e32cca771c3bd08ccf1c6d",
+        "bytes": 205095,
+        "retrieved_utc": "2026-11-14T05:06:06.869167+00:00"
+      }
+    },
+    {
+      "stage_id": "dark_ages",
+      "label_key": "history.stage.dark_ages",
+      "age_gyr": 0.01,
+      "lookback_gyr": 13.79,
+      "age_range_gyr": [
+        0.00038,
+        0.2
+      ],
+      "range_kind": "broad_sourced_era_or_bracket_not_confidence_interval",
+      "timing_status": "editorial_anchor_within_sourced_era",
+      "source_id": "esa_cosmic_eras",
+      "limitations": [
+        "10 million years is a display anchor inside the broad dark era, not its onset or duration measurement."
+      ],
+      "spatial_representation": "conceptual_illustration_only",
+      "source": {
+        "url": "https://www.esa.int/articles/about-us/directorates/science/cosmic-eras",
+        "resolved_url": "https://www.esa.int/articles/about-us/directorates/science/cosmic-eras",
+        "label": "ESA: Cosmic eras (2024-12-24)",
+        "local_relative_path": "data/reference/history/esa_cosmic_eras.html",
+        "sha256": "96ec80fb1ecb93a522b8b04193ef339025370c6d87e32cca771c3bd08ccf1c6d",
+        "bytes": 205095,
+        "retrieved_utc": "2026-11-14T05:06:06.869167+00:00"
+      }
+    },
+    {
+      "stage_id": "first_stars",
+      "label_key": "history.stage.first_stars",
+      "age_gyr": 0.1,
+      "lookback_gyr": 13.7,
+      "age_range_gyr": [
+        0.1,
+        0.3
+      ],
+      "range_kind": "broad_sourced_era_or_bracket_not_confidence_interval",
+      "timing_status": "theoretical_earliest_approximation_exact_time_unknown",
+      "source_id": "nasa_first_stars",
+      "limitations": [
+        "100 million years is a theoretical early estimate. The 0.1–0.3 Gyr bracket combines this with NASA's observed-galaxy-before-300-Myr context; it is not a fitted uncertainty or a universal onset."
+      ],
+      "spatial_representation": "conceptual_illustration_only",
+      "source": {
+        "url": "https://science.nasa.gov/mission/webb/science-overview/science-explainers/what-were-the-first-stars-like/",
+        "resolved_url": "https://science.nasa.gov/mission/webb/science-overview/science-explainers/what-were-the-first-stars-like/",
+        "label": "NASA Webb: What Were the First Stars Like?",
+        "local_relative_path": "data/reference/history/nasa_first_stars.html",
+        "sha256": "1f54b49d9bc4fe09b7a9e789fcdffb59e999c32c7bffb1a1e4fb8f8bbc3a27b3",
+        "bytes": 327235,
+        "retrieved_utc": "2026-11-14T05:06:08.029017+00:00"
+      },
+      "additional_sources": [
+        {
+          "url": "https://science.nasa.gov/mission/webb/early-universe/",
+          "resolved_url": "https://science.nasa.gov/mission/webb/early-universe/",
+          "label": "NASA Webb: Early Universe",
+          "local_relative_path": "data/reference/history/nasa_early_universe.html",
+          "sha256": "b1ff0500e8ea4542ce24b8fff1929cf0adbefc66077564f4562a84d7b971f3b0",
+          "bytes": 429404,
+          "retrieved_utc": "2026-11-14T05:06:05.786210+00:00"
+        }
+      ]
+    },
+    {
+      "stage_id": "early_galaxies",
+      "label_key": "history.stage.early_galaxies",
+      "age_gyr": 0.28,
+      "lookback_gyr": 13.52,
+      "age_range_gyr": null,
+      "range_kind": null,
+      "timing_status": "observed_early_galaxy_example_not_first_formation_time",
+      "source_id": "nasa_early_universe",
+      "limitations": [
+        "NASA describes MoM-z14 at about 280 million years; this example does not date the first galaxy's birth or assert a current earliest-record holder."
+      ],
+      "spatial_representation": "conceptual_illustration_only",
+      "source": {
+        "url": "https://science.nasa.gov/mission/webb/early-universe/",
+        "resolved_url": "https://science.nasa.gov/mission/webb/early-universe/",
+        "label": "NASA Webb: Early Universe",
+        "local_relative_path": "data/reference/history/nasa_early_universe.html",
+        "sha256": "b1ff0500e8ea4542ce24b8fff1929cf0adbefc66077564f4562a84d7b971f3b0",
+        "bytes": 429404,
+        "retrieved_utc": "2026-11-14T05:06:05.786210+00:00"
+      }
+    },
+    {
+      "stage_id": "reionization",
+      "label_key": "history.stage.reionization",
+      "age_gyr": 0.5,
+      "lookback_gyr": 13.3,
+      "age_range_gyr": [
+        0.2,
+        1.0
+      ],
+      "range_kind": "broad_sourced_era_or_bracket_not_confidence_interval",
+      "timing_status": "editorial_anchor_within_sourced_era",
+      "source_id": "esa_cosmic_eras",
+      "limitations": [
+        "0.5 Gyr is a representative display anchor within the roughly 0.2–1 Gyr extended process; not a completion date."
+      ],
+      "spatial_representation": "conceptual_illustration_only",
+      "source": {
+        "url": "https://www.esa.int/articles/about-us/directorates/science/cosmic-eras",
+        "resolved_url": "https://www.esa.int/articles/about-us/directorates/science/cosmic-eras",
+        "label": "ESA: Cosmic eras (2024-12-24)",
+        "local_relative_path": "data/reference/history/esa_cosmic_eras.html",
+        "sha256": "96ec80fb1ecb93a522b8b04193ef339025370c6d87e32cca771c3bd08ccf1c6d",
+        "bytes": 205095,
+        "retrieved_utc": "2026-11-14T05:06:06.869167+00:00"
+      }
+    },
+    {
+      "stage_id": "galaxy_growth",
+      "label_key": "history.stage.galaxy_growth",
+      "age_gyr": 1.0,
+      "lookback_gyr": 12.8,
+      "age_range_gyr": null,
+      "range_kind": null,
+      "timing_status": "editorial_post_reionization_anchor",
+      "source_id": "esa_cosmic_eras",
+      "limitations": [
+        "A broad post-reionization galaxy-growth context, not a separate instantaneous event."
+      ],
+      "spatial_representation": "conceptual_illustration_only",
+      "source": {
+        "url": "https://www.esa.int/articles/about-us/directorates/science/cosmic-eras",
+        "resolved_url": "https://www.esa.int/articles/about-us/directorates/science/cosmic-eras",
+        "label": "ESA: Cosmic eras (2024-12-24)",
+        "local_relative_path": "data/reference/history/esa_cosmic_eras.html",
+        "sha256": "96ec80fb1ecb93a522b8b04193ef339025370c6d87e32cca771c3bd08ccf1c6d",
+        "bytes": 205095,
+        "retrieved_utc": "2026-11-14T05:06:06.869167+00:00"
+      }
+    },
+    {
+      "stage_id": "cosmic_noon",
+      "label_key": "history.stage.cosmic_noon",
+      "age_gyr": 2.5,
+      "lookback_gyr": 11.3,
+      "age_range_gyr": [
+        2.0,
+        3.0
+      ],
+      "range_kind": "broad_sourced_era_or_bracket_not_confidence_interval",
+      "timing_status": "editorial_anchor_within_sourced_era",
+      "source_id": "esa_cosmic_eras",
+      "limitations": [
+        "2.5 Gyr represents the broad star-formation peak era; different populations need not peak simultaneously."
+      ],
+      "spatial_representation": "conceptual_illustration_only",
+      "source": {
+        "url": "https://www.esa.int/articles/about-us/directorates/science/cosmic-eras",
+        "resolved_url": "https://www.esa.int/articles/about-us/directorates/science/cosmic-eras",
+        "label": "ESA: Cosmic eras (2024-12-24)",
+        "local_relative_path": "data/reference/history/esa_cosmic_eras.html",
+        "sha256": "96ec80fb1ecb93a522b8b04193ef339025370c6d87e32cca771c3bd08ccf1c6d",
+        "bytes": 205095,
+        "retrieved_utc": "2026-11-14T05:06:06.869167+00:00"
+      }
+    },
+    {
+      "stage_id": "solar_system",
+      "label_key": "history.stage.solar_system",
+      "age_gyr": 9.2,
+      "lookback_gyr": 4.6,
+      "age_range_gyr": null,
+      "range_kind": null,
+      "timing_status": "derived_from_two_rounded_approximate_ages",
+      "source_id": "nasa_solar_system",
+      "limitations": [
+        "Approximate cosmic age 13.8 minus approximate Solar System age 4.6 gives 9.2 Gyr; not an absolute formation timestamp or ancient planetary ephemeris."
+      ],
+      "spatial_representation": "conceptual_illustration_only",
+      "source": {
+        "url": "https://science.nasa.gov/solar-system/solar-system-facts/",
+        "resolved_url": "https://science.nasa.gov/solar-system/solar-system-facts/",
+        "label": "NASA: Solar System Facts",
+        "local_relative_path": "data/reference/history/nasa_solar_system.html",
+        "sha256": "e80760afe55daf4b28182636f328300707ce81c643dec4b97ab8daf60b71a488",
+        "bytes": 307336,
+        "retrieved_utc": "2026-11-14T05:06:08.428688+00:00"
+      }
+    },
+    {
+      "stage_id": "present",
+      "label_key": "history.stage.present",
+      "age_gyr": 13.8,
+      "lookback_gyr": 0.0,
+      "age_range_gyr": null,
+      "range_kind": null,
+      "timing_status": "rounded_approximate_reference_age",
+      "source_id": "nasa_early_universe",
+      "limitations": [
+        "13.8 Gyr is the adopted rounded present-age reference; no new cosmological-parameter fit is performed."
+      ],
+      "spatial_representation": "conceptual_illustration_only",
+      "source": {
+        "url": "https://science.nasa.gov/mission/webb/early-universe/",
+        "resolved_url": "https://science.nasa.gov/mission/webb/early-universe/",
+        "label": "NASA Webb: Early Universe",
+        "local_relative_path": "data/reference/history/nasa_early_universe.html",
+        "sha256": "b1ff0500e8ea4542ce24b8fff1929cf0adbefc66077564f4562a84d7b971f3b0",
+        "bytes": 429404,
+        "retrieved_utc": "2026-11-14T05:06:05.786210+00:00"
+      }
+    }
+  ],
+  "sources": {
+    "nasa_early_universe": {
+      "url": "https://science.nasa.gov/mission/webb/early-universe/",
+      "resolved_url": "https://science.nasa.gov/mission/webb/early-universe/",
+      "label": "NASA Webb: Early Universe",
+      "local_relative_path": "data/reference/history/nasa_early_universe.html",
+      "sha256": "b1ff0500e8ea4542ce24b8fff1929cf0adbefc66077564f4562a84d7b971f3b0",
+      "bytes": 429404,
+      "retrieved_utc": "2026-11-14T05:06:05.786210+00:00"
+    },
+    "esa_cosmic_eras": {
+      "url": "https://www.esa.int/articles/about-us/directorates/science/cosmic-eras",
+      "resolved_url": "https://www.esa.int/articles/about-us/directorates/science/cosmic-eras",
+      "label": "ESA: Cosmic eras (2024-12-24)",
+      "local_relative_path": "data/reference/history/esa_cosmic_eras.html",
+      "sha256": "96ec80fb1ecb93a522b8b04193ef339025370c6d87e32cca771c3bd08ccf1c6d",
+      "bytes": 205095,
+      "retrieved_utc": "2026-11-14T05:06:06.869167+00:00"
+    },
+    "nasa_first_stars": {
+      "url": "https://science.nasa.gov/mission/webb/science-overview/science-explainers/what-were-the-first-stars-like/",
+      "resolved_url": "https://science.nasa.gov/mission/webb/science-overview/science-explainers/what-were-the-first-stars-like/",
+      "label": "NASA Webb: What Were the First Stars Like?",
+      "local_relative_path": "data/reference/history/nasa_first_stars.html",
+      "sha256": "1f54b49d9bc4fe09b7a9e789fcdffb59e999c32c7bffb1a1e4fb8f8bbc3a27b3",
+      "bytes": 327235,
+      "retrieved_utc": "2026-11-14T05:06:08.029017+00:00"
+    },
+    "nasa_solar_system": {
+      "url": "https://science.nasa.gov/solar-system/solar-system-facts/",
+      "resolved_url": "https://science.nasa.gov/solar-system/solar-system-facts/",
+      "label": "NASA: Solar System Facts",
+      "local_relative_path": "data/reference/history/nasa_solar_system.html",
+      "sha256": "e80760afe55daf4b28182636f328300707ce81c643dec4b97ab8daf60b71a488",
+      "bytes": 307336,
+      "retrieved_utc": "2026-11-14T05:06:08.428688+00:00"
+    }
+  },
+  "limitations": [
+    "A conceptual chronology, not a measured spatial reconstruction, N-body simulation or map of ancient star/galaxy positions.",
+    "Gyr means one billion years since the hot Big Bang; lookback is 13.8 minus age using an approximate present-age reference.",
+    "Milestone anchors and broad era spans are approximate educational values, not confidence intervals, sharp global boundaries or probability estimates.",
+    "Display-anchor selection identifies the most recent illustrative milestone; it does not assert that an era began or ended everywhere at that instant.",
+    "Current catalog positions, the bounded 2026 solar ephemeris and original SPHEREx/TESS images are separate and must remain unchanged.",
+    "No resolved first-star surface, original cosmic image, physical scene scale, individual trajectory or existence probability is synthesized by this dataset."
+  ],
+  "source_conflicts": [
+    {
+      "source_ids": [
+        "esa_cosmic_eras",
+        "nasa_early_universe"
+      ],
+      "issue": "ESA's introduction uses the older rounded 13.7 Gyr, while NASA states approximately 13.8 Gyr.",
+      "adopted": "13.8 Gyr rounded NASA reference; source text is preserved unchanged."
+    },
+    {
+      "source_ids": [
+        "nasa_early_universe",
+        "esa_cosmic_eras"
+      ],
+      "issue": "NASA's single educational page mentions both 380,000 years and a 240,000–300,000-year recombination range in separate sections.",
+      "adopted": "Approximate 380,000-year transparency/CMB milestone from ESA; no source claim is silently edited into agreement."
+    }
+  ]
+}

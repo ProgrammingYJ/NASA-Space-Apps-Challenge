@@ -214,6 +214,23 @@ def test_orbit_guide_source_change_never_claims_restoration(universe_api):
     assert "orbit_ephemeris_changed" in value["reasons"]
 
 
+def test_missing_solar_ephemeris_requires_recalculation_instead_of_server_error(
+    universe_api, monkeypatch
+):
+    import science.solar_system
+
+    client, _, _, _, saved = universe_api
+
+    def missing_original(*args, **kwargs):
+        raise FileNotFoundError("missing immutable source")
+
+    monkeypatch.setattr(science.solar_system, "get_universe", missing_original)
+    response = client.post("/api/v1/evidence/import", json=saved)
+    assert response.status_code == 200, response.text
+    assert response.json()["status"] == "recalculation_required"
+    assert response.json()["reasons"] == ["universe_ephemeris_unavailable"]
+
+
 def test_actual_pluto_ephemeris_snapshot_change_is_detected(universe_api, tmp_path):
     client, _, _, _, saved = universe_api
     # Change only a copied snapshot. No project original or actual observation is modified.

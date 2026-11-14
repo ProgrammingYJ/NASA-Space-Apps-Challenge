@@ -142,7 +142,8 @@ def test_wrong_parent_or_target_cannot_be_accepted(actual):
         )
 
 
-def test_runtime_hash_check_rejects_corrupted_original(actual, tmp_path):
+@pytest.mark.parametrize("include_vectors", [True, False])
+def test_runtime_hash_check_rejects_corrupted_original(actual, tmp_path, include_vectors):
     moon = copy.deepcopy(next(obj for obj in actual["objects"] if obj["object_id"] == "moon-301"))
     manifest = {**actual, "objects": [moon], "sources": {}}
     manifest.pop("midpoint_validation", None)
@@ -153,7 +154,17 @@ def test_runtime_hash_check_rejects_corrupted_original(actual, tmp_path):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(manifest), encoding="utf-8")
     with pytest.raises(ValueError, match="extended_source_integrity"):
-        extension.get_extended_solar(tmp_path)
+        extension.get_extended_solar(tmp_path, include_vectors=include_vectors)
+
+
+def test_source_verification_does_not_rebuild_ephemeris_arrays(monkeypatch):
+    def unexpected_parse(*args, **kwargs):
+        raise AssertionError("source verification must not interpolate or parse vectors")
+
+    monkeypatch.setattr(extension, "_parse_vectors", unexpected_parse)
+    metadata = extension.get_extended_solar(ROOT, include_vectors=False)
+    assert len(metadata["objects"]) == 476
+    assert all(not obj.get("knots") for obj in metadata["objects"])
 
 
 def test_source_identity_failures_remain_unavailable_instead_of_other_bodies(actual):

@@ -24,6 +24,19 @@ ALGORITHM_VERSION = "appearance-v1"
 PCK_PATH = "data/reference/appearance/pck00011.tpc"
 PCK_URL = "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc"
 RING_EPOCH = "2026-11-14T00:00:00Z"
+MAJOR_BODY_IDS = {
+    "sun": 10,
+    "mercury": 199,
+    "venus": 299,
+    "earth": 399,
+    "mars": 499,
+    "jupiter": 599,
+    "saturn": 699,
+    "uranus": 799,
+    "neptune": 899,
+    "pluto": 999,
+    "ceres": 2000001,
+}
 MAX_TEXTURE_BYTES = 40_000_000
 OFFICIAL_HOSTS = {
     "assets.science.nasa.gov",
@@ -42,7 +55,9 @@ OFFICIAL_HOSTS = {
 }
 
 
-def ring_poles(root: Path, epoch: str = RING_EPOCH) -> dict:
+def body_poles(
+    root: Path, epoch: str = RING_EPOCH, *, targets: dict[str, int] | None = None
+) -> dict:
     """IAU north poles in ICRF from the unmodified NAIF PCK, not a camera axis."""
     raw = (Path(root) / PCK_PATH).read_bytes()
     text = raw.decode("ascii")
@@ -55,14 +70,21 @@ def ring_poles(root: Path, epoch: str = RING_EPOCH) -> dict:
     jd = float(Time(epoch, scale="utc").tdb.jd)
     centuries = (jd - 2451545.0) / 36525.0
     result = {}
-    for name, ident in (("jupiter", 599), ("saturn", 699), ("uranus", 799), ("neptune", 899)):
+    for name, ident in (targets if targets is not None else MAJOR_BODY_IDS).items():
         ra = numbers(f"BODY{ident}_POLE_RA")
         dec = numbers(f"BODY{ident}_POLE_DEC")
         angles = numbers(f"BODY{ident // 100}_NUT_PREC_ANGLES")
-        if len(ra) != 3 or len(dec) != 3 or len(angles) % 2:
+        phase_degree = re.search(
+            r"\bBODY" + str(ident // 100) + r"_MAX_PHASE_DEGREE\s*=\s*(\d+)", active
+        )
+        order = int(phase_degree.group(1)) + 1 if phase_degree else 2
+        if len(ra) != 3 or len(dec) != 3 or not 1 <= order <= 3 or len(angles) % order:
             raise ValueError("invalid_ring_pole_constants")
         angle_rad = [
-            math.radians(a + b * centuries) for a, b in zip(angles[::2], angles[1::2], strict=True)
+            math.radians(
+                sum(value * centuries**power for power, value in enumerate(angles[i : i + order]))
+            )
+            for i in range(0, len(angles), order)
         ]
         sine = numbers(f"BODY{ident}_NUT_PREC_RA")
         cosine = numbers(f"BODY{ident}_NUT_PREC_DEC")
@@ -72,12 +94,15 @@ def ring_poles(root: Path, epoch: str = RING_EPOCH) -> dict:
         declination = sum(value * centuries**power for power, value in enumerate(dec))
         right_ascension += sum(value * math.sin(angle_rad[i]) for i, value in enumerate(sine))
         declination += sum(value * math.cos(angle_rad[i]) for i, value in enumerate(cosine))
+        meridian = numbers(f"BODY{ident}_PM")
         result[name] = {
             "pole_icrs_deg": {"ra": right_ascension % 360, "dec": declination},
             "epoch": epoch,
             "epoch_tdb_jd": jd,
             "frame": "ICRF/J2000",
-            "model": "NAIF pck00011 IAU pole polynomial and periodic terms; rings assumed equatorial",
+            "model": "NAIF pck00011 IAU pole polynomial and periodic terms",
+            "rotation_rate_deg_per_day": meridian[1] if len(meridian) >= 2 else None,
+            "rotation_rate_definition": "Linear prime-meridian coefficient; not instantaneous libration-corrected spin",
             "source": {
                 "url": PCK_URL,
                 "label": "NASA/JPL NAIF pck00011.tpc (2022-12-27)",
@@ -89,9 +114,22 @@ def ring_poles(root: Path, epoch: str = RING_EPOCH) -> dict:
                 "Planet pole from the published IAU orientation model at the declared reference event, not a measured camera attitude.",
                 "Individual eccentric, warped or inclined ring structures and their precession are not modeled.",
                 "Texture longitude and spin phase remain illustrative; no texture-attitude registration is claimed.",
+                "Displayed spin uses the published linear mean coefficient, without periodic prime-meridian/libration terms.",
             ],
         }
+        if name == "earth":
+            result[name]["limitations"].append(
+                "The simplified IAU_EARTH model is a display orientation, not precise ITRF/Earth-orientation-parameter astrometry."
+            )
     return result
+
+
+def ring_poles(root: Path, epoch: str = RING_EPOCH) -> dict:
+    return body_poles(
+        root,
+        epoch,
+        targets={name: MAJOR_BODY_IDS[name] for name in ("jupiter", "saturn", "uranus", "neptune")},
+    )
 
 
 def image_dimensions(raw: bytes) -> tuple[int, int]:
@@ -159,7 +197,8 @@ def acquire_texture(root: Path, object_id: str, file_url: str, record: dict) -> 
         file_url, headers={"User-Agent": "PlanetX-SpaceApps-2026/appearance-source-verification"}
     )
     with urlopen(request, timeout=45) as response:
-        if urlparse(response.url).hostname not in OFFICIAL_HOSTS:
+        redirected = urlparse(response.url)
+        if redirected.scheme != "https" or redirected.hostname not in OFFICIAL_HOSTS:
             raise ValueError("unapproved_appearance_redirect")
         raw = response.read(MAX_TEXTURE_BYTES + 1)
     if len(raw) > MAX_TEXTURE_BYTES:

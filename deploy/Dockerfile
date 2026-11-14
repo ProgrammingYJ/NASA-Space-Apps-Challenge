@@ -16,6 +16,7 @@ COPY worker/ worker/
 COPY THIRD_PARTY_NOTICES.md ./
 COPY data/manifests/ data/manifests/
 COPY --from=frontend /build/web/dist web/dist
+COPY --from=frontend /build/web/public web/public
 EXPOSE 8000
 # Exactly one API writer. It launches one science process via IPC.
 CMD ["python", "-m", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

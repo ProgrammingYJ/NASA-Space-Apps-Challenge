@@ -22,6 +22,14 @@ async function choose(page:Page,id:string){
 async function advance(page:Page,before:number,hours=1){
   await expect.poll(()=>modelTime(page)).toBeGreaterThan(before+hours*3600*1000);
 }
+async function settleManualCamera(page:Page){
+  let previous='',unchanged=0;const started=Date.now();
+  await expect.poll(async()=>{
+    const current=`${await scene(page).getAttribute('data-camera-position')}|${await scene(page).getAttribute('data-camera-target')}`;
+    unchanged=current===previous?unchanged+1:0;previous=current;
+    return Date.now()-started>=700?unchanged:0;
+  },{timeout:8000,intervals:[100]}).toBeGreaterThanOrEqual(3);
+}
 
 test('continuous playback moves sourced planets, preserves follow offset, and respects the manual camera',async({page})=>{
   await start(page);await choose(page,'mercury');
@@ -38,8 +46,9 @@ test('continuous playback moves sourced planets, preserves follow offset, and re
   const x=bounds.x+bounds.width*.5,y=bounds.y+bounds.height*.6;
   await page.mouse.move(x,y);await page.mouse.down();await page.mouse.move(x+110,y+40,{steps:8});await page.mouse.up();
   await expect(scene(page)).toHaveAttribute('data-camera-mode','manual');await expect(scene(page)).toHaveAttribute('data-follow-object','');
-  // Allow OrbitControls damping from the deliberate gesture to settle first.
-  await page.waitForTimeout(650);const manual=await camera(page);const manualTarget=await camera(page,'target');
+  // Damping advances by rendered frames; a fixed wall-clock sleep does not
+  // establish that it has settled during concurrent GPU/CPU test load.
+  await settleManualCamera(page);const manual=await camera(page);const manualTarget=await camera(page,'target');
   const manualTime=await modelTime(page);await play(page).click();await advance(page,manualTime,3);await play(page).click();
   await expect(scene(page)).toHaveAttribute('data-camera-mode','manual');
   for(let axis=0;axis<3;axis++){expect((await camera(page))[axis]).toBeCloseTo(manual[axis],3);expect((await camera(page,'target'))[axis]).toBeCloseTo(manualTarget[axis],3);}

@@ -6,6 +6,7 @@ export interface ExtendedKnot {epoch:string;tdb_jd:number;position_au:Vec3;veloc
 export interface ExtendedObject {object_id:string;name:string;kind:'moon'|'dwarf_planet'|'dwarf_candidate';parent_id:string;status:string;radius_km:number|null;radius_source?:{value_km:number;uncertainty_km:number|null;source_url:string;definition:string}|null;period_days?:number|null;reason?:string;catalog_source_url?:string;source?:{url:string;sha256:string};knots?:ExtendedKnot[];cadence_minutes?:number}
 export interface ExtendedCatalog {objects:ExtendedObject[];summary:Record<string,unknown>;source_manifest_sha256:string;start_epoch:string;end_epoch:string;limitations:string[]}
 export interface PreparedObject {record:ExtendedObject;trace:OrbitGuide}
+export const EXTENDED_ALGORITHM='extended-solar-parent-hermite-v1';
 
 export function prepareExtended(data:ExtendedCatalog|undefined):PreparedObject[]{
   return (data?.objects??[]).filter(obj=>obj.status==='available'&&(obj.knots?.length??0)>=2).map(record=>({record,trace:{kind:'sampled_ephemeris_trace',epoch:record.knots![0].epoch,points_au:record.knots!.map(k=>k.position_au),closed:false,center:record.parent_id,coordinate_frame:'Ecliptic of J2000.0',units:'au',source:{url:record.source?.url??'https://ssd.jpl.nasa.gov/horizons/',label:'JPL geometric ephemeris samples · 72-hour interval',sha256:record.source?.sha256},limitations:['Sampled predicted interval, not a complete orbit or observed trajectory.']}}));
@@ -24,7 +25,8 @@ export function composeExtended<T extends UniverseData>(base:T,prepared:Prepared
     const relative=extendedPosition(record,epoch);const parent=objects.find(obj=>obj.object_id===record.parent_id);
     if(record.parent_id!=='sun'&&!parent?.position_au)continue;
     const source={url:record.source?.url??record.catalog_source_url??'https://ssd.jpl.nasa.gov/sats/',label:'JPL Horizons · parent-relative geometric ephemeris'};
-    const body:UniverseBody={object_id:record.object_id,name:record.name,kind:record.kind,parent_id:record.parent_id,position_au:record.parent_id==='sun'?relative:add(parent!.position_au!,relative),parent_relative_position_au:record.kind==='moon'?relative:undefined,radius_km:record.radius_km??undefined,position_kind:'interpolated_ephemeris',source,orbit:trace};
+    const step=Date.parse(record.knots![1].epoch)-Date.parse(record.knots![0].epoch);const exact=Number.isInteger((epoch-Date.parse(record.knots![0].epoch))/step);
+    const body:UniverseBody={object_id:record.object_id,name:record.name,kind:record.kind,parent_id:record.parent_id,position_au:record.parent_id==='sun'?relative:add(parent!.position_au!,relative),parent_relative_position_au:record.kind==='moon'?relative:undefined,radius_km:record.radius_km??undefined,position_kind:exact?'geometric_ephemeris_sample':'interpolated_ephemeris',source,orbit:trace};
     // Radius units/uncertainties retain their original source contract.
     if(record.radius_source)body.radius_source={...record.radius_source,url:record.radius_source.source_url};
     objects.push(body);

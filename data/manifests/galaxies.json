@@ -1,0 +1,1287 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "official-rounded-galaxy-context-v1",
+  "created_utc": "2026-11-14T05:09:37.438308+00:00",
+  "objects": [
+    {
+      "object_id": "galaxy-m31",
+      "name": "Messier 31 (Andromeda)",
+      "kind": "galaxy",
+      "direction_icrs_deg": {
+        "ra": 10.683333333333332,
+        "dec": 41.26916666666666
+      },
+      "direction_kind": "approximate_display_copy_of_rounded_J2000_fast_fact_direction",
+      "native_coordinates": {
+        "ra_sexagesimal": "0h 42m 44s",
+        "dec_sexagesimal": "+41d 16m 09s",
+        "original_coordinate_text": "Coordinates (J2000) RA 0h 42m 44s | Dec +41\u00b0 16\u00b4 09\"",
+        "coordinate_reference": "J2000 equatorial; exact realization unspecified"
+      },
+      "distance_ly": 2500000.0,
+      "distance_mpc": 0.7665034844638764,
+      "distance_kind": "rounded_public_distance_estimate_from_Earth",
+      "distance_original_text": "Distance Estimate About 2.5 million light-years",
+      "distance_uncertainty": null,
+      "source": {
+        "url": "https://chandra.harvard.edu/photo/2025/m31/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2025/m31/",
+        "label": "NASA Chandra/CXC: M31 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m31_coordinates.html",
+        "sha256": "48dfc5286f1bba07c8952f6fabd1462515b34bdb96ceb8ca00638317069cb8da",
+        "bytes": 78218,
+        "retrieved_utc": "2026-11-14T05:09:31.007636+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "coordinate_source": {
+        "url": "https://chandra.harvard.edu/photo/2025/m31/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2025/m31/",
+        "label": "NASA Chandra/CXC: M31 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m31_coordinates.html",
+        "sha256": "48dfc5286f1bba07c8952f6fabd1462515b34bdb96ceb8ca00638317069cb8da",
+        "bytes": 78218,
+        "retrieved_utc": "2026-11-14T05:09:31.007636+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "distance_source": {
+        "url": "https://chandra.harvard.edu/photo/2025/m31/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2025/m31/",
+        "label": "NASA Chandra/CXC: M31 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m31_coordinates.html",
+        "sha256": "48dfc5286f1bba07c8952f6fabd1462515b34bdb96ceb8ca00638317069cb8da",
+        "bytes": 78218,
+        "retrieved_utc": "2026-11-14T05:09:31.007636+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "morphology": "spiral",
+      "morphology_source": {
+        "url": "https://chandra.harvard.edu/photo/2025/m31/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2025/m31/",
+        "label": "NASA Chandra/CXC: M31 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m31_coordinates.html",
+        "sha256": "48dfc5286f1bba07c8952f6fabd1462515b34bdb96ceb8ca00638317069cb8da",
+        "bytes": 78218,
+        "retrieved_utc": "2026-11-14T05:09:31.007636+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "limitations": [
+        "A small illustrative galaxy context catalog, not a complete galaxy census or a precision astrometric catalog.",
+        "Most source coordinates are rounded J2000 equatorial fast-fact directions with unspecified frame realization, copied numerically as approximate ICRS without frame-bias conversion. LMC separately retains its explicitly ICRS epoch-J2000 SIMBAD reference; no direction is propagated to 2026.",
+        "Distances are rounded public estimates from Earth; the original distance convention, uncertainty and covariance are not established here. Unit conversion adds no accuracy.",
+        "No proper-motion propagation, individual stellar positions, full 3D galaxy orientation/size, current simultaneous physical pose or billions-of-years trajectory is reconstructed.",
+        "Source-reported projected features and any stated inclination are separate from illustrative colors, point counts, missing angles, display sizes and unresolved geometry; no source observation image is copied into the renderer.",
+        "This static nearby-galaxy context is separate from the conceptual cosmic chronology and the bounded 2026 solar ephemeris. SPHEREx observations remain unchanged."
+      ],
+      "appearance": {
+        "renderer": "inclined_spiral",
+        "source": {
+          "url": "https://science.nasa.gov/missions/hubble/nasas-hubble-traces-hidden-history-of-andromeda-galaxy/",
+          "resolved_url": "https://science.nasa.gov/missions/hubble/nasas-hubble-traces-hidden-history-of-andromeda-galaxy/",
+          "label": "NASA Hubble: Andromeda's observed 77-degree inclination and dust lanes",
+          "local_relative_path": "data/reference/galaxies/m31_shape.html",
+          "sha256": "c147e3eb27e3a96ba1502fce4d377dfdf0f5904ec136b49f4182bf34e46c887a",
+          "bytes": 337918,
+          "retrieved_utc": "2026-11-14T05:30:23.085639+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "additional_sources": [],
+        "observed_features": [
+          "Strongly inclined stellar disk",
+          "Central bulge and dark dust lanes"
+        ],
+        "inclination_deg": 77,
+        "position_angle_deg": null,
+        "arms": null,
+        "barred": null,
+        "inclination_source": {
+          "url": "https://science.nasa.gov/missions/hubble/nasas-hubble-traces-hidden-history-of-andromeda-galaxy/",
+          "resolved_url": "https://science.nasa.gov/missions/hubble/nasas-hubble-traces-hidden-history-of-andromeda-galaxy/",
+          "label": "NASA Hubble: Andromeda's observed 77-degree inclination and dust lanes",
+          "local_relative_path": "data/reference/galaxies/m31_shape.html",
+          "sha256": "c147e3eb27e3a96ba1502fce4d377dfdf0f5904ec136b49f4182bf34e46c887a",
+          "bytes": 337918,
+          "retrieved_utc": "2026-11-14T05:30:23.085639+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "arm_count_source": null,
+        "orientation_status": "source_projected_appearance",
+        "orientation_scope": "Only explicitly sourced projected inclination is measured; unprovided sky position angle, pole and 3D orientation remain assumptions.",
+        "display_assumptions": [
+          "Renderer geometry, point counts, colors, scales, thickness, arm pitch/width and star positions are explanatory choices, not a photometric or resolved stellar reconstruction.",
+          "Missing inclination/position-angle values remain null; an illustrative default is not a catalog measurement.",
+          "No physical motion, spin period, ancient pose or dynamical evolution is inferred from these shape guides."
+        ]
+      },
+      "image_source": {
+        "url": "https://chandra.harvard.edu/photo/2025/m31/",
+        "label": "Official observed-image reference page; linked, not copied into the renderer"
+      }
+    },
+    {
+      "object_id": "galaxy-m33",
+      "name": "Messier 33 (Triangulum)",
+      "kind": "galaxy",
+      "direction_icrs_deg": {
+        "ra": 23.458333333333332,
+        "dec": 30.660277777777775
+      },
+      "direction_kind": "approximate_display_copy_of_rounded_J2000_fast_fact_direction",
+      "native_coordinates": {
+        "ra_sexagesimal": "01h 33m 50s",
+        "dec_sexagesimal": "+30d 39m 37s",
+        "original_coordinate_text": "Coordinates (J2000): RA: 01h 33m 50s | Dec: +30\u00b0 39' 37\"",
+        "coordinate_reference": "J2000 equatorial; exact realization unspecified"
+      },
+      "distance_ly": 3000000.0,
+      "distance_mpc": 0.9198041813566517,
+      "distance_kind": "rounded_public_distance_estimate_from_Earth",
+      "distance_original_text": "Distance About 3 million light-years",
+      "distance_uncertainty": null,
+      "source": {
+        "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "label": "NASA Chandra/CXC: M33 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+        "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+        "bytes": 154191,
+        "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "coordinate_source": {
+        "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "label": "NASA Chandra/CXC: M33 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+        "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+        "bytes": 154191,
+        "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "distance_source": {
+        "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-33/",
+        "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-33/",
+        "label": "NASA Hubble Messier catalog: M33",
+        "local_relative_path": "data/reference/galaxies/m33_nasa.html",
+        "sha256": "d80ff63bc44adf1ef79188630c7f09bf003fccdd4fab1c6f1964ecc2f5d782cf",
+        "bytes": 315660,
+        "retrieved_utc": "2026-11-14T05:09:32.907951+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "morphology": "spiral",
+      "morphology_source": {
+        "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-33/",
+        "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-33/",
+        "label": "NASA Hubble Messier catalog: M33",
+        "local_relative_path": "data/reference/galaxies/m33_nasa.html",
+        "sha256": "d80ff63bc44adf1ef79188630c7f09bf003fccdd4fab1c6f1964ecc2f5d782cf",
+        "bytes": 315660,
+        "retrieved_utc": "2026-11-14T05:09:32.907951+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "limitations": [
+        "A small illustrative galaxy context catalog, not a complete galaxy census or a precision astrometric catalog.",
+        "Most source coordinates are rounded J2000 equatorial fast-fact directions with unspecified frame realization, copied numerically as approximate ICRS without frame-bias conversion. LMC separately retains its explicitly ICRS epoch-J2000 SIMBAD reference; no direction is propagated to 2026.",
+        "Distances are rounded public estimates from Earth; the original distance convention, uncertainty and covariance are not established here. Unit conversion adds no accuracy.",
+        "No proper-motion propagation, individual stellar positions, full 3D galaxy orientation/size, current simultaneous physical pose or billions-of-years trajectory is reconstructed.",
+        "Source-reported projected features and any stated inclination are separate from illustrative colors, point counts, missing angles, display sizes and unresolved geometry; no source observation image is copied into the renderer.",
+        "This static nearby-galaxy context is separate from the conceptual cosmic chronology and the bounded 2026 solar ephemeris. SPHEREx observations remain unchanged."
+      ],
+      "appearance": {
+        "renderer": "flocculent_spiral",
+        "source": {
+          "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+          "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+          "label": "NASA Chandra/CXC: M33 Fast Facts",
+          "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+          "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+          "bytes": 154191,
+          "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "additional_sources": [
+          {
+            "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+            "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+            "label": "NASA Chandra/CXC: M33 Fast Facts",
+            "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+            "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+            "bytes": 154191,
+            "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+            "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+          }
+        ],
+        "observed_features": [
+          "Many wispy faint spiral arms",
+          "Patchy bright star-forming regions"
+        ],
+        "inclination_deg": null,
+        "position_angle_deg": null,
+        "arms": null,
+        "barred": null,
+        "inclination_source": null,
+        "arm_count_source": null,
+        "orientation_status": "illustrative_assumption",
+        "orientation_scope": "Only explicitly sourced projected inclination is measured; unprovided sky position angle, pole and 3D orientation remain assumptions.",
+        "display_assumptions": [
+          "Renderer geometry, point counts, colors, scales, thickness, arm pitch/width and star positions are explanatory choices, not a photometric or resolved stellar reconstruction.",
+          "Missing inclination/position-angle values remain null; an illustrative default is not a catalog measurement.",
+          "No physical motion, spin period, ancient pose or dynamical evolution is inferred from these shape guides."
+        ],
+        "classification_note": "flocculent_spiral is a renderer style chosen for the source-described many wispy arms; it is not an asserted NASA numerical or morphological classification."
+      },
+      "image_source": {
+        "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "label": "Official observed-image reference page; linked, not copied into the renderer"
+      }
+    },
+    {
+      "object_id": "galaxy-m81",
+      "name": "Messier 81",
+      "kind": "galaxy",
+      "direction_icrs_deg": {
+        "ra": 148.8875,
+        "dec": 69.06527777777778
+      },
+      "direction_kind": "approximate_display_copy_of_rounded_J2000_fast_fact_direction",
+      "native_coordinates": {
+        "ra_sexagesimal": "09h 55m 33s",
+        "dec_sexagesimal": "+69d 03m 55s",
+        "original_coordinate_text": "Coordinates (J2000) RA 09h 55m 33s | Dec +69\u00b0 03\u00b4 55\"",
+        "coordinate_reference": "J2000 equatorial; exact realization unspecified"
+      },
+      "distance_ly": 11600000.0,
+      "distance_mpc": 3.5565761679123864,
+      "distance_kind": "rounded_public_distance_estimate_from_Earth",
+      "distance_original_text": "Distance 11.6 million light-years",
+      "distance_uncertainty": null,
+      "source": {
+        "url": "https://www.chandra.cfa.harvard.edu/photo/2008/m81/",
+        "resolved_url": "https://www.chandra.cfa.harvard.edu/photo/2008/m81/",
+        "label": "NASA Chandra/CXC: M81 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m81_coordinates.html",
+        "sha256": "1b6c15a4f8370937bfbcf2f4e8b85cae3d6ad701b6e19079d45b8c6005bd671e",
+        "bytes": 60745,
+        "retrieved_utc": "2026-11-14T05:09:34.238863+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "coordinate_source": {
+        "url": "https://www.chandra.cfa.harvard.edu/photo/2008/m81/",
+        "resolved_url": "https://www.chandra.cfa.harvard.edu/photo/2008/m81/",
+        "label": "NASA Chandra/CXC: M81 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m81_coordinates.html",
+        "sha256": "1b6c15a4f8370937bfbcf2f4e8b85cae3d6ad701b6e19079d45b8c6005bd671e",
+        "bytes": 60745,
+        "retrieved_utc": "2026-11-14T05:09:34.238863+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "distance_source": {
+        "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-81/",
+        "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-81/",
+        "label": "NASA Hubble Messier catalog: M81",
+        "local_relative_path": "data/reference/galaxies/m81_nasa.html",
+        "sha256": "0e74ee43c3814bc1880c14f5be150222b269e2ced559a165694003265a8c34e1",
+        "bytes": 310795,
+        "retrieved_utc": "2026-11-14T05:09:35.567868+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "morphology": "spiral",
+      "morphology_source": {
+        "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-81/",
+        "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-81/",
+        "label": "NASA Hubble Messier catalog: M81",
+        "local_relative_path": "data/reference/galaxies/m81_nasa.html",
+        "sha256": "0e74ee43c3814bc1880c14f5be150222b269e2ced559a165694003265a8c34e1",
+        "bytes": 310795,
+        "retrieved_utc": "2026-11-14T05:09:35.567868+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "limitations": [
+        "A small illustrative galaxy context catalog, not a complete galaxy census or a precision astrometric catalog.",
+        "Most source coordinates are rounded J2000 equatorial fast-fact directions with unspecified frame realization, copied numerically as approximate ICRS without frame-bias conversion. LMC separately retains its explicitly ICRS epoch-J2000 SIMBAD reference; no direction is propagated to 2026.",
+        "Distances are rounded public estimates from Earth; the original distance convention, uncertainty and covariance are not established here. Unit conversion adds no accuracy.",
+        "No proper-motion propagation, individual stellar positions, full 3D galaxy orientation/size, current simultaneous physical pose or billions-of-years trajectory is reconstructed.",
+        "Source-reported projected features and any stated inclination are separate from illustrative colors, point counts, missing angles, display sizes and unresolved geometry; no source observation image is copied into the renderer.",
+        "This static nearby-galaxy context is separate from the conceptual cosmic chronology and the bounded 2026 solar ephemeris. SPHEREx observations remain unchanged."
+      ],
+      "appearance": {
+        "renderer": "grand_design_spiral",
+        "source": {
+          "url": "https://science.nasa.gov/wp-content/uploads/2023/04/hubble-litho-galaxy-ngc-3982.pdf",
+          "resolved_url": "https://science.nasa.gov/wp-content/uploads/2023/04/hubble-litho-galaxy-ngc-3982.pdf",
+          "label": "NASA Hubble lithograph: Cosmic Pinwheels (two long M81 arms)",
+          "local_relative_path": "data/reference/galaxies/m81_arms.pdf",
+          "sha256": "4679e15289698034ab75389499eebce8533c76ba1d8aac003d9a4177fb907edd",
+          "bytes": 2623269,
+          "retrieved_utc": "2026-11-14T05:30:43.033221+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "additional_sources": [],
+        "observed_features": [
+          "Two long well-defined spiral arms",
+          "Bright central stellar bulge"
+        ],
+        "inclination_deg": null,
+        "position_angle_deg": null,
+        "arms": 2,
+        "barred": null,
+        "inclination_source": null,
+        "arm_count_source": {
+          "url": "https://science.nasa.gov/wp-content/uploads/2023/04/hubble-litho-galaxy-ngc-3982.pdf",
+          "resolved_url": "https://science.nasa.gov/wp-content/uploads/2023/04/hubble-litho-galaxy-ngc-3982.pdf",
+          "label": "NASA Hubble lithograph: Cosmic Pinwheels (two long M81 arms)",
+          "local_relative_path": "data/reference/galaxies/m81_arms.pdf",
+          "sha256": "4679e15289698034ab75389499eebce8533c76ba1d8aac003d9a4177fb907edd",
+          "bytes": 2623269,
+          "retrieved_utc": "2026-11-14T05:30:43.033221+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "orientation_status": "illustrative_assumption",
+        "orientation_scope": "Only explicitly sourced projected inclination is measured; unprovided sky position angle, pole and 3D orientation remain assumptions.",
+        "display_assumptions": [
+          "Renderer geometry, point counts, colors, scales, thickness, arm pitch/width and star positions are explanatory choices, not a photometric or resolved stellar reconstruction.",
+          "Missing inclination/position-angle values remain null; an illustrative default is not a catalog measurement.",
+          "No physical motion, spin period, ancient pose or dynamical evolution is inferred from these shape guides."
+        ]
+      },
+      "image_source": {
+        "url": "https://www.chandra.cfa.harvard.edu/photo/2008/m81/",
+        "label": "Official observed-image reference page; linked, not copied into the renderer"
+      }
+    },
+    {
+      "object_id": "galaxy-m87",
+      "name": "Messier 87",
+      "kind": "galaxy",
+      "direction_icrs_deg": {
+        "ra": 187.70416666666662,
+        "dec": 12.39111111111111
+      },
+      "direction_kind": "approximate_display_copy_of_rounded_J2000_fast_fact_direction",
+      "native_coordinates": {
+        "ra_sexagesimal": "12h 30m 49s",
+        "dec_sexagesimal": "+12d 23m 28s",
+        "original_coordinate_text": "Coordinates (J2000) RA 12h 30m 49s | Dec +12\u00b0 23\u00b4 28\"",
+        "coordinate_reference": "J2000 equatorial; exact realization unspecified"
+      },
+      "distance_ly": 54000000.0,
+      "distance_mpc": 16.55647526441973,
+      "distance_kind": "rounded_public_distance_estimate_from_Earth",
+      "distance_original_text": "Distance 54 million light-years",
+      "distance_uncertainty": null,
+      "source": {
+        "url": "https://chandra.harvard.edu/photo/2026/m87/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2026/m87/",
+        "label": "NASA Chandra/CXC: M87 Jet Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m87_coordinates.html",
+        "sha256": "7e54ccd82d64f05406d3ff4074358b2aaa98b73bb478ce0e6f216d4ba08f8073",
+        "bytes": 71523,
+        "retrieved_utc": "2026-11-14T05:09:37.064855+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "coordinate_source": {
+        "url": "https://chandra.harvard.edu/photo/2026/m87/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2026/m87/",
+        "label": "NASA Chandra/CXC: M87 Jet Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m87_coordinates.html",
+        "sha256": "7e54ccd82d64f05406d3ff4074358b2aaa98b73bb478ce0e6f216d4ba08f8073",
+        "bytes": 71523,
+        "retrieved_utc": "2026-11-14T05:09:37.064855+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "distance_source": {
+        "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-87/",
+        "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-87/",
+        "label": "NASA Hubble Messier catalog: M87",
+        "local_relative_path": "data/reference/galaxies/m87_nasa.html",
+        "sha256": "87fe1addbc8af10f05b7950b7c81273d19902cfa1f7a575a5b8372219abcc963",
+        "bytes": 310013,
+        "retrieved_utc": "2026-11-14T05:09:37.432805+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "morphology": "elliptical",
+      "morphology_source": {
+        "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-87/",
+        "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-87/",
+        "label": "NASA Hubble Messier catalog: M87",
+        "local_relative_path": "data/reference/galaxies/m87_nasa.html",
+        "sha256": "87fe1addbc8af10f05b7950b7c81273d19902cfa1f7a575a5b8372219abcc963",
+        "bytes": 310013,
+        "retrieved_utc": "2026-11-14T05:09:37.432805+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "limitations": [
+        "A small illustrative galaxy context catalog, not a complete galaxy census or a precision astrometric catalog.",
+        "Most source coordinates are rounded J2000 equatorial fast-fact directions with unspecified frame realization, copied numerically as approximate ICRS without frame-bias conversion. LMC separately retains its explicitly ICRS epoch-J2000 SIMBAD reference; no direction is propagated to 2026.",
+        "Distances are rounded public estimates from Earth; the original distance convention, uncertainty and covariance are not established here. Unit conversion adds no accuracy.",
+        "No proper-motion propagation, individual stellar positions, full 3D galaxy orientation/size, current simultaneous physical pose or billions-of-years trajectory is reconstructed.",
+        "Source-reported projected features and any stated inclination are separate from illustrative colors, point counts, missing angles, display sizes and unresolved geometry; no source observation image is copied into the renderer.",
+        "This static nearby-galaxy context is separate from the conceptual cosmic chronology and the bounded 2026 solar ephemeris. SPHEREx observations remain unchanged."
+      ],
+      "source_difference": {
+        "coordinate_page_distance_million_ly": 55.0,
+        "adopted_nasa_distance_million_ly": 54.0,
+        "reason": "Different rounded public estimates are retained separately; no averaging or precision claim.",
+        "other_source": {
+          "url": "https://chandra.harvard.edu/photo/2026/m87/",
+          "resolved_url": "https://chandra.harvard.edu/photo/2026/m87/",
+          "label": "NASA Chandra/CXC: M87 Jet Fast Facts",
+          "local_relative_path": "data/reference/galaxies/m87_coordinates.html",
+          "sha256": "7e54ccd82d64f05406d3ff4074358b2aaa98b73bb478ce0e6f216d4ba08f8073",
+          "bytes": 71523,
+          "retrieved_utc": "2026-11-14T05:09:37.064855+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        }
+      },
+      "appearance": {
+        "renderer": "elliptical_jet",
+        "source": {
+          "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-87/",
+          "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-87/",
+          "label": "NASA Hubble Messier catalog: M87",
+          "local_relative_path": "data/reference/galaxies/m87_nasa.html",
+          "sha256": "87fe1addbc8af10f05b7950b7c81273d19902cfa1f7a575a5b8372219abcc963",
+          "bytes": 310013,
+          "retrieved_utc": "2026-11-14T05:09:37.432805+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "additional_sources": [],
+        "observed_features": [
+          "Smooth giant elliptical stellar envelope",
+          "Central energetic jet; not a spiral disk"
+        ],
+        "inclination_deg": null,
+        "position_angle_deg": null,
+        "arms": 0,
+        "barred": null,
+        "inclination_source": null,
+        "arm_count_source": {
+          "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-87/",
+          "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-87/",
+          "label": "NASA Hubble Messier catalog: M87",
+          "local_relative_path": "data/reference/galaxies/m87_nasa.html",
+          "sha256": "87fe1addbc8af10f05b7950b7c81273d19902cfa1f7a575a5b8372219abcc963",
+          "bytes": 310013,
+          "retrieved_utc": "2026-11-14T05:09:37.432805+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "orientation_status": "illustrative_assumption",
+        "orientation_scope": "Only explicitly sourced projected inclination is measured; unprovided sky position angle, pole and 3D orientation remain assumptions.",
+        "display_assumptions": [
+          "Renderer geometry, point counts, colors, scales, thickness, arm pitch/width and star positions are explanatory choices, not a photometric or resolved stellar reconstruction.",
+          "Missing inclination/position-angle values remain null; an illustrative default is not a catalog measurement.",
+          "No physical motion, spin period, ancient pose or dynamical evolution is inferred from these shape guides."
+        ]
+      },
+      "image_source": {
+        "url": "https://chandra.harvard.edu/photo/2026/m87/",
+        "label": "Official observed-image reference page; linked, not copied into the renderer"
+      }
+    },
+    {
+      "object_id": "galaxy-lmc",
+      "name": "Large Magellanic Cloud",
+      "kind": "galaxy",
+      "direction_icrs_deg": {
+        "ra": 80.89416666666666,
+        "dec": -69.75611111111111
+      },
+      "direction_kind": "catalog_ICRS_epJ2000_not_propagated",
+      "native_coordinates": {
+        "ra_sexagesimal": "05h 23m 34.6s",
+        "dec_sexagesimal": "-69d 45m 22s",
+        "original_coordinate_text": "ICRS coord. (ep=J2000) : 05 23 34.6 -69 45 22",
+        "coordinate_reference": "ICRS epoch J2000 from SIMBAD; optical quality D; bibcode 2003A&A...412...45P"
+      },
+      "distance_ly": 160000.0,
+      "distance_mpc": 0.04905622300568809,
+      "distance_kind": "rounded_public_distance_estimate_from_Earth",
+      "distance_original_text": "NASA approximate distance 160,000 light years",
+      "distance_uncertainty": null,
+      "source": {
+        "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=LMC",
+        "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=LMC",
+        "label": "SIMBAD Harvard: LMC ICRS catalog direction",
+        "local_relative_path": "data/reference/galaxies/lmc_coordinates.html",
+        "sha256": "5f18afafb8aa4eb8d0010974be8b677203ac8e260f5a9ab58f43e0366d396e99",
+        "bytes": 42804,
+        "retrieved_utc": "2026-11-14T05:32:23.734769+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "coordinate_source": {
+        "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=LMC",
+        "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=LMC",
+        "label": "SIMBAD Harvard: LMC ICRS catalog direction",
+        "local_relative_path": "data/reference/galaxies/lmc_coordinates.html",
+        "sha256": "5f18afafb8aa4eb8d0010974be8b677203ac8e260f5a9ab58f43e0366d396e99",
+        "bytes": 42804,
+        "retrieved_utc": "2026-11-14T05:32:23.734769+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "distance_source": {
+        "url": "https://science.nasa.gov/image-article/apod-2024-october-2-the-large-magellanic-cloud-galaxy/",
+        "resolved_url": "https://science.nasa.gov/image-article/apod-2024-october-2-the-large-magellanic-cloud-galaxy/",
+        "label": "NASA: Large Magellanic Cloud",
+        "local_relative_path": "data/reference/galaxies/lmc_nasa.html",
+        "sha256": "078821d1d94fe6eae01ce22181592c8b6278b942ad33fa600dc2460d2285407d",
+        "bytes": 272357,
+        "retrieved_utc": "2026-11-14T05:32:24.074793+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "morphology": "irregular",
+      "morphology_source": {
+        "url": "https://science.nasa.gov/image-article/apod-2024-october-2-the-large-magellanic-cloud-galaxy/",
+        "resolved_url": "https://science.nasa.gov/image-article/apod-2024-october-2-the-large-magellanic-cloud-galaxy/",
+        "label": "NASA: Large Magellanic Cloud",
+        "local_relative_path": "data/reference/galaxies/lmc_nasa.html",
+        "sha256": "078821d1d94fe6eae01ce22181592c8b6278b942ad33fa600dc2460d2285407d",
+        "bytes": 272357,
+        "retrieved_utc": "2026-11-14T05:32:24.074793+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "limitations": [
+        "A small illustrative galaxy context catalog, not a complete galaxy census or a precision astrometric catalog.",
+        "Most source coordinates are rounded J2000 equatorial fast-fact directions with unspecified frame realization, copied numerically as approximate ICRS without frame-bias conversion. LMC separately retains its explicitly ICRS epoch-J2000 SIMBAD reference; no direction is propagated to 2026.",
+        "Distances are rounded public estimates from Earth; the original distance convention, uncertainty and covariance are not established here. Unit conversion adds no accuracy.",
+        "No proper-motion propagation, individual stellar positions, full 3D galaxy orientation/size, current simultaneous physical pose or billions-of-years trajectory is reconstructed.",
+        "Source-reported projected features and any stated inclination are separate from illustrative colors, point counts, missing angles, display sizes and unresolved geometry; no source observation image is copied into the renderer.",
+        "This static nearby-galaxy context is separate from the conceptual cosmic chronology and the bounded 2026 solar ephemeris. SPHEREx observations remain unchanged."
+      ],
+      "appearance": {
+        "renderer": "irregular_barred",
+        "source": {
+          "url": "https://science.nasa.gov/image-article/apod-2024-october-2-the-large-magellanic-cloud-galaxy/",
+          "resolved_url": "https://science.nasa.gov/image-article/apod-2024-october-2-the-large-magellanic-cloud-galaxy/",
+          "label": "NASA: Large Magellanic Cloud",
+          "local_relative_path": "data/reference/galaxies/lmc_nasa.html",
+          "sha256": "078821d1d94fe6eae01ce22181592c8b6278b942ad33fa600dc2460d2285407d",
+          "bytes": 272357,
+          "retrieved_utc": "2026-11-14T05:32:24.074793+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "additional_sources": [],
+        "observed_features": [
+          "Prominent central bar",
+          "One asymmetric spiral arm",
+          "Clumpy star-forming regions"
+        ],
+        "inclination_deg": null,
+        "position_angle_deg": null,
+        "arms": 1,
+        "barred": true,
+        "inclination_source": null,
+        "arm_count_source": {
+          "url": "https://science.nasa.gov/image-article/apod-2024-october-2-the-large-magellanic-cloud-galaxy/",
+          "resolved_url": "https://science.nasa.gov/image-article/apod-2024-october-2-the-large-magellanic-cloud-galaxy/",
+          "label": "NASA: Large Magellanic Cloud",
+          "local_relative_path": "data/reference/galaxies/lmc_nasa.html",
+          "sha256": "078821d1d94fe6eae01ce22181592c8b6278b942ad33fa600dc2460d2285407d",
+          "bytes": 272357,
+          "retrieved_utc": "2026-11-14T05:32:24.074793+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "orientation_status": "illustrative_assumption",
+        "orientation_scope": "Only explicitly sourced projected inclination is measured; unprovided sky position angle, pole and 3D orientation remain assumptions.",
+        "display_assumptions": [
+          "Renderer geometry, point counts, colors, scales, thickness, arm pitch/width and star positions are explanatory choices, not a photometric or resolved stellar reconstruction.",
+          "Missing inclination/position-angle values remain null; an illustrative default is not a catalog measurement.",
+          "No physical motion, spin period, ancient pose or dynamical evolution is inferred from these shape guides."
+        ],
+        "classification_note": "Magellanic barred/asymmetric morphology; the irregular_barred renderer is descriptive, not an assertion that the galaxy has no spiral arm."
+      },
+      "image_source": {
+        "url": "https://science.nasa.gov/image-article/apod-2024-october-2-the-large-magellanic-cloud-galaxy/",
+        "label": "Official observed-image reference page; linked, not copied into the renderer"
+      }
+    },
+    {
+      "object_id": "galaxy-smc",
+      "name": "Small Magellanic Cloud",
+      "kind": "galaxy",
+      "direction_icrs_deg": {
+        "ra": 13.186666666666666,
+        "dec": -72.8286111111111
+      },
+      "direction_kind": "approximate_display_copy_of_rounded_J2000_fast_fact_direction",
+      "native_coordinates": {
+        "ra_sexagesimal": "00h 52m 44.8s",
+        "dec_sexagesimal": "-72d 49m 43s",
+        "original_coordinate_text": "Coordinates (J2000): RA: 00h 52m 44.8s | Dec: -72\u00b0 49' 43\"",
+        "coordinate_reference": "J2000 equatorial; exact realization unspecified"
+      },
+      "distance_ly": 200000.0,
+      "distance_mpc": 0.06132027875711011,
+      "distance_kind": "rounded_public_distance_estimate_from_Earth",
+      "distance_original_text": "Distance Estimate: About 200,000 light-years",
+      "distance_uncertainty": null,
+      "source": {
+        "url": "https://chandra.harvard.edu/photo/2026/swift/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2026/swift/",
+        "label": "Small Magellanic Cloud (SMC)",
+        "local_relative_path": "data/reference/galaxies/smc_coordinates.html",
+        "sha256": "92a0b2c7dc3c1f445dd5a1820e586498a2621c2dca72f36307bb49ba8eec3cb2",
+        "bytes": 86343,
+        "retrieved_utc": "2026-11-14T05:30:45.489200+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "coordinate_source": {
+        "url": "https://chandra.harvard.edu/photo/2026/swift/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2026/swift/",
+        "label": "Small Magellanic Cloud (SMC)",
+        "local_relative_path": "data/reference/galaxies/smc_coordinates.html",
+        "sha256": "92a0b2c7dc3c1f445dd5a1820e586498a2621c2dca72f36307bb49ba8eec3cb2",
+        "bytes": 86343,
+        "retrieved_utc": "2026-11-14T05:30:45.489200+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "distance_source": {
+        "url": "https://chandra.harvard.edu/photo/2026/swift/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2026/swift/",
+        "label": "Small Magellanic Cloud (SMC)",
+        "local_relative_path": "data/reference/galaxies/smc_coordinates.html",
+        "sha256": "92a0b2c7dc3c1f445dd5a1820e586498a2621c2dca72f36307bb49ba8eec3cb2",
+        "bytes": 86343,
+        "retrieved_utc": "2026-11-14T05:30:45.489200+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "morphology": "irregular",
+      "morphology_source": {
+        "url": "https://chandra.harvard.edu/photo/2026/swift/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2026/swift/",
+        "label": "Small Magellanic Cloud (SMC)",
+        "local_relative_path": "data/reference/galaxies/smc_coordinates.html",
+        "sha256": "92a0b2c7dc3c1f445dd5a1820e586498a2621c2dca72f36307bb49ba8eec3cb2",
+        "bytes": 86343,
+        "retrieved_utc": "2026-11-14T05:30:45.489200+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "limitations": [
+        "A small illustrative galaxy context catalog, not a complete galaxy census or a precision astrometric catalog.",
+        "Most source coordinates are rounded J2000 equatorial fast-fact directions with unspecified frame realization, copied numerically as approximate ICRS without frame-bias conversion. LMC separately retains its explicitly ICRS epoch-J2000 SIMBAD reference; no direction is propagated to 2026.",
+        "Distances are rounded public estimates from Earth; the original distance convention, uncertainty and covariance are not established here. Unit conversion adds no accuracy.",
+        "No proper-motion propagation, individual stellar positions, full 3D galaxy orientation/size, current simultaneous physical pose or billions-of-years trajectory is reconstructed.",
+        "Source-reported projected features and any stated inclination are separate from illustrative colors, point counts, missing angles, display sizes and unresolved geometry; no source observation image is copied into the renderer.",
+        "This static nearby-galaxy context is separate from the conceptual cosmic chronology and the bounded 2026 solar ephemeris. SPHEREx observations remain unchanged."
+      ],
+      "appearance": {
+        "renderer": "irregular_cloud",
+        "source": {
+          "url": "https://science.nasa.gov/photojournal/wises-view-of-a-wispy-cloud/",
+          "resolved_url": "https://science.nasa.gov/photojournal/wises-view-of-a-wispy-cloud/",
+          "label": "NASA WISE: Small Magellanic Cloud irregular morphology",
+          "local_relative_path": "data/reference/galaxies/smc_shape.html",
+          "sha256": "f5542de6ecfcd5e7eadfd288da01fa0f52f28ff7c8a8735de291947fac447f87",
+          "bytes": 266818,
+          "retrieved_utc": "2026-11-14T05:30:44.211324+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "additional_sources": [],
+        "observed_features": [
+          "Irregular asymmetric stellar and dust distribution",
+          "Clumpy star-forming regions rather than ordered spiral arms"
+        ],
+        "inclination_deg": null,
+        "position_angle_deg": null,
+        "arms": null,
+        "barred": null,
+        "inclination_source": null,
+        "arm_count_source": null,
+        "orientation_status": "illustrative_assumption",
+        "orientation_scope": "Only explicitly sourced projected inclination is measured; unprovided sky position angle, pole and 3D orientation remain assumptions.",
+        "display_assumptions": [
+          "Renderer geometry, point counts, colors, scales, thickness, arm pitch/width and star positions are explanatory choices, not a photometric or resolved stellar reconstruction.",
+          "Missing inclination/position-angle values remain null; an illustrative default is not a catalog measurement.",
+          "No physical motion, spin period, ancient pose or dynamical evolution is inferred from these shape guides."
+        ]
+      },
+      "image_source": {
+        "url": "https://chandra.harvard.edu/photo/2026/swift/",
+        "label": "Official observed-image reference page; linked, not copied into the renderer"
+      }
+    },
+    {
+      "object_id": "galaxy-m51",
+      "name": "Messier 51 (Whirlpool)",
+      "kind": "galaxy",
+      "direction_icrs_deg": {
+        "ra": 202.46791666666664,
+        "dec": 47.19833333333333
+      },
+      "direction_kind": "approximate_display_copy_of_rounded_J2000_fast_fact_direction",
+      "native_coordinates": {
+        "ra_sexagesimal": "13h 29m 52.3s",
+        "dec_sexagesimal": "+47d 11m 54s",
+        "original_coordinate_text": "Coordinates (J2000) RA 13h 29m 52.3s | Dec +47\u00b0 11' 54\"",
+        "coordinate_reference": "J2000 equatorial; exact realization unspecified"
+      },
+      "distance_ly": 31000000.0,
+      "distance_mpc": 9.504643207352068,
+      "distance_kind": "rounded_public_distance_estimate_from_Earth",
+      "distance_original_text": "Distance 31 million light-years",
+      "distance_uncertainty": null,
+      "source": {
+        "url": "https://chandra.harvard.edu/photo/2002/0158/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2002/0158/",
+        "label": "Whirlpool Galaxy",
+        "local_relative_path": "data/reference/galaxies/m51_coordinates.html",
+        "sha256": "a01b5f1ebcb228a8b01b5b6ba39f85ba43458f1332c2b6f6014372d0ce69793e",
+        "bytes": 36401,
+        "retrieved_utc": "2026-11-14T05:30:46.605126+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "coordinate_source": {
+        "url": "https://chandra.harvard.edu/photo/2002/0158/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2002/0158/",
+        "label": "Whirlpool Galaxy",
+        "local_relative_path": "data/reference/galaxies/m51_coordinates.html",
+        "sha256": "a01b5f1ebcb228a8b01b5b6ba39f85ba43458f1332c2b6f6014372d0ce69793e",
+        "bytes": 36401,
+        "retrieved_utc": "2026-11-14T05:30:46.605126+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "distance_source": {
+        "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-51/",
+        "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-51/",
+        "label": "NASA: Messier 51 (Whirlpool)",
+        "local_relative_path": "data/reference/galaxies/m51_nasa.html",
+        "sha256": "0d65c728e0f288edffb6dfea9ae1e35ebfc31113418d709dd3819463e7e0ccdc",
+        "bytes": 342371,
+        "retrieved_utc": "2026-11-14T05:32:25.156424+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "morphology": "interacting",
+      "morphology_source": {
+        "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-51/",
+        "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-51/",
+        "label": "NASA: Messier 51 (Whirlpool)",
+        "local_relative_path": "data/reference/galaxies/m51_nasa.html",
+        "sha256": "0d65c728e0f288edffb6dfea9ae1e35ebfc31113418d709dd3819463e7e0ccdc",
+        "bytes": 342371,
+        "retrieved_utc": "2026-11-14T05:32:25.156424+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "limitations": [
+        "A small illustrative galaxy context catalog, not a complete galaxy census or a precision astrometric catalog.",
+        "Most source coordinates are rounded J2000 equatorial fast-fact directions with unspecified frame realization, copied numerically as approximate ICRS without frame-bias conversion. LMC separately retains its explicitly ICRS epoch-J2000 SIMBAD reference; no direction is propagated to 2026.",
+        "Distances are rounded public estimates from Earth; the original distance convention, uncertainty and covariance are not established here. Unit conversion adds no accuracy.",
+        "No proper-motion propagation, individual stellar positions, full 3D galaxy orientation/size, current simultaneous physical pose or billions-of-years trajectory is reconstructed.",
+        "Source-reported projected features and any stated inclination are separate from illustrative colors, point counts, missing angles, display sizes and unresolved geometry; no source observation image is copied into the renderer.",
+        "This static nearby-galaxy context is separate from the conceptual cosmic chronology and the bounded 2026 solar ephemeris. SPHEREx observations remain unchanged."
+      ],
+      "source_difference": {
+        "coordinate_page_distance_million_ly": 30.0,
+        "adopted_nasa_distance_million_ly": 31.0,
+        "reason": "Different rounded source estimates retained separately, without averaging.",
+        "other_source": {
+          "url": "https://chandra.harvard.edu/photo/2002/0158/",
+          "resolved_url": "https://chandra.harvard.edu/photo/2002/0158/",
+          "label": "Whirlpool Galaxy",
+          "local_relative_path": "data/reference/galaxies/m51_coordinates.html",
+          "sha256": "a01b5f1ebcb228a8b01b5b6ba39f85ba43458f1332c2b6f6014372d0ce69793e",
+          "bytes": 36401,
+          "retrieved_utc": "2026-11-14T05:30:46.605126+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        }
+      },
+      "appearance": {
+        "renderer": "interacting_pair",
+        "source": {
+          "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-51/",
+          "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-51/",
+          "label": "NASA: Messier 51 (Whirlpool)",
+          "local_relative_path": "data/reference/galaxies/m51_nasa.html",
+          "sha256": "0d65c728e0f288edffb6dfea9ae1e35ebfc31113418d709dd3819463e7e0ccdc",
+          "bytes": 342371,
+          "retrieved_utc": "2026-11-14T05:32:25.156424+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "additional_sources": [
+          {
+            "url": "https://chandra.harvard.edu/photo/2002/0158/",
+            "resolved_url": "https://chandra.harvard.edu/photo/2002/0158/",
+            "label": "Whirlpool Galaxy",
+            "local_relative_path": "data/reference/galaxies/m51_coordinates.html",
+            "sha256": "a01b5f1ebcb228a8b01b5b6ba39f85ba43458f1332c2b6f6014372d0ce69793e",
+            "bytes": 36401,
+            "retrieved_utc": "2026-11-14T05:30:46.605126+00:00",
+            "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+          }
+        ],
+        "observed_features": [
+          "Spiral disk interacting with smaller NGC 5195",
+          "Bridge-like connection and tidally affected spiral structure"
+        ],
+        "inclination_deg": null,
+        "position_angle_deg": null,
+        "arms": null,
+        "barred": null,
+        "inclination_source": null,
+        "arm_count_source": null,
+        "orientation_status": "illustrative_assumption",
+        "orientation_scope": "Only explicitly sourced projected inclination is measured; unprovided sky position angle, pole and 3D orientation remain assumptions.",
+        "display_assumptions": [
+          "Renderer geometry, point counts, colors, scales, thickness, arm pitch/width and star positions are explanatory choices, not a photometric or resolved stellar reconstruction.",
+          "Missing inclination/position-angle values remain null; an illustrative default is not a catalog measurement.",
+          "No physical motion, spin period, ancient pose or dynamical evolution is inferred from these shape guides."
+        ],
+        "companion": {
+          "name": "NGC 5195",
+          "source": {
+            "url": "https://chandra.harvard.edu/photo/2002/0158/",
+            "resolved_url": "https://chandra.harvard.edu/photo/2002/0158/",
+            "label": "Whirlpool Galaxy",
+            "local_relative_path": "data/reference/galaxies/m51_coordinates.html",
+            "sha256": "a01b5f1ebcb228a8b01b5b6ba39f85ba43458f1332c2b6f6014372d0ce69793e",
+            "bytes": 36401,
+            "retrieved_utc": "2026-11-14T05:30:46.605126+00:00",
+            "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+          },
+          "projected_separation_arcmin": null,
+          "position_angle_deg": null,
+          "display_offset_is_assumed": true
+        }
+      },
+      "image_source": {
+        "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-51/",
+        "label": "Official observed-image reference page; linked, not copied into the renderer"
+      }
+    },
+    {
+      "object_id": "galaxy-m104",
+      "name": "Messier 104 (Sombrero)",
+      "kind": "galaxy",
+      "direction_icrs_deg": {
+        "ra": 189.9975,
+        "dec": -11.623055555555556
+      },
+      "direction_kind": "approximate_display_copy_of_rounded_J2000_fast_fact_direction",
+      "native_coordinates": {
+        "ra_sexagesimal": "12h 39m 59.4s",
+        "dec_sexagesimal": "-11d 37m 23s",
+        "original_coordinate_text": "Coordinates (J2000): RA: 12h 39m 59.4s | Dec: -11\u00b0 37\u2032 23\"",
+        "coordinate_reference": "J2000 equatorial; exact realization unspecified"
+      },
+      "distance_ly": 28000000.0,
+      "distance_mpc": 8.584839025995416,
+      "distance_kind": "rounded_public_distance_estimate_from_Earth",
+      "distance_original_text": "Distance 28 million light-years",
+      "distance_uncertainty": null,
+      "source": {
+        "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "label": "NASA Chandra/CXC: M33 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+        "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+        "bytes": 154191,
+        "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "coordinate_source": {
+        "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "label": "NASA Chandra/CXC: M33 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+        "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+        "bytes": 154191,
+        "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "distance_source": {
+        "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-104/",
+        "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-104/",
+        "label": "NASA: Messier 104 (Sombrero)",
+        "local_relative_path": "data/reference/galaxies/m104_nasa.html",
+        "sha256": "3a2f7154ad676635064e498682be201af5a2513817040d5130c10a2ac3ab1058",
+        "bytes": 310787,
+        "retrieved_utc": "2026-11-14T05:32:26.236941+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "morphology": "spiral",
+      "morphology_source": {
+        "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-104/",
+        "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-104/",
+        "label": "NASA: Messier 104 (Sombrero)",
+        "local_relative_path": "data/reference/galaxies/m104_nasa.html",
+        "sha256": "3a2f7154ad676635064e498682be201af5a2513817040d5130c10a2ac3ab1058",
+        "bytes": 310787,
+        "retrieved_utc": "2026-11-14T05:32:26.236941+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "limitations": [
+        "A small illustrative galaxy context catalog, not a complete galaxy census or a precision astrometric catalog.",
+        "Most source coordinates are rounded J2000 equatorial fast-fact directions with unspecified frame realization, copied numerically as approximate ICRS without frame-bias conversion. LMC separately retains its explicitly ICRS epoch-J2000 SIMBAD reference; no direction is propagated to 2026.",
+        "Distances are rounded public estimates from Earth; the original distance convention, uncertainty and covariance are not established here. Unit conversion adds no accuracy.",
+        "No proper-motion propagation, individual stellar positions, full 3D galaxy orientation/size, current simultaneous physical pose or billions-of-years trajectory is reconstructed.",
+        "Source-reported projected features and any stated inclination are separate from illustrative colors, point counts, missing angles, display sizes and unresolved geometry; no source observation image is copied into the renderer.",
+        "This static nearby-galaxy context is separate from the conceptual cosmic chronology and the bounded 2026 solar ephemeris. SPHEREx observations remain unchanged."
+      ],
+      "source_difference": {
+        "coordinate_page_distance_million_ly": 31.0,
+        "adopted_nasa_distance_million_ly": 28.0,
+        "reason": "Different rounded source estimates retained separately, without averaging.",
+        "other_source": {
+          "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+          "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+          "label": "NASA Chandra/CXC: M33 Fast Facts",
+          "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+          "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+          "bytes": 154191,
+          "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        }
+      },
+      "appearance": {
+        "renderer": "edge_on_dust_disk",
+        "source": {
+          "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-104/",
+          "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-104/",
+          "label": "NASA: Messier 104 (Sombrero)",
+          "local_relative_path": "data/reference/galaxies/m104_nasa.html",
+          "sha256": "3a2f7154ad676635064e498682be201af5a2513817040d5130c10a2ac3ab1058",
+          "bytes": 310787,
+          "retrieved_utc": "2026-11-14T05:32:26.236941+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "additional_sources": [],
+        "observed_features": [
+          "Nearly edge-on disk",
+          "Large bright spheroidal bulge",
+          "Dark equatorial dust lane"
+        ],
+        "inclination_deg": null,
+        "position_angle_deg": null,
+        "arms": null,
+        "barred": null,
+        "inclination_source": null,
+        "arm_count_source": null,
+        "orientation_status": "illustrative_assumption",
+        "orientation_scope": "Only explicitly sourced projected inclination is measured; unprovided sky position angle, pole and 3D orientation remain assumptions.",
+        "display_assumptions": [
+          "Renderer geometry, point counts, colors, scales, thickness, arm pitch/width and star positions are explanatory choices, not a photometric or resolved stellar reconstruction.",
+          "Missing inclination/position-angle values remain null; an illustrative default is not a catalog measurement.",
+          "No physical motion, spin period, ancient pose or dynamical evolution is inferred from these shape guides."
+        ]
+      },
+      "image_source": {
+        "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-104/",
+        "label": "Official observed-image reference page; linked, not copied into the renderer"
+      }
+    },
+    {
+      "object_id": "galaxy-centaurus-a",
+      "name": "Centaurus A",
+      "kind": "galaxy",
+      "direction_icrs_deg": {
+        "ra": 201.3650833333333,
+        "dec": -43.01911111111111
+      },
+      "direction_kind": "approximate_display_copy_of_rounded_J2000_fast_fact_direction",
+      "native_coordinates": {
+        "ra_sexagesimal": "13h 25m 27.62s",
+        "dec_sexagesimal": "-43d 01m 08.80s",
+        "original_coordinate_text": "Coordinates (J2000): RA: 13h 25m 27.62s | Dec: -43\u00b0 01\u2032 08.80\"",
+        "coordinate_reference": "J2000 equatorial; exact realization unspecified"
+      },
+      "distance_ly": 12000000.0,
+      "distance_mpc": 3.6792167254266066,
+      "distance_kind": "rounded_public_distance_estimate_from_Earth",
+      "distance_original_text": "Distance Estimate: About 12 million light-years",
+      "distance_uncertainty": null,
+      "source": {
+        "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "label": "NASA Chandra/CXC: M33 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+        "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+        "bytes": 154191,
+        "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "coordinate_source": {
+        "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "label": "NASA Chandra/CXC: M33 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+        "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+        "bytes": 154191,
+        "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "distance_source": {
+        "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "label": "NASA Chandra/CXC: M33 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+        "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+        "bytes": 154191,
+        "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "morphology": "elliptical",
+      "morphology_source": {
+        "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "label": "NASA Chandra/CXC: M33 Fast Facts",
+        "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+        "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+        "bytes": 154191,
+        "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+        "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+      },
+      "limitations": [
+        "A small illustrative galaxy context catalog, not a complete galaxy census or a precision astrometric catalog.",
+        "Most source coordinates are rounded J2000 equatorial fast-fact directions with unspecified frame realization, copied numerically as approximate ICRS without frame-bias conversion. LMC separately retains its explicitly ICRS epoch-J2000 SIMBAD reference; no direction is propagated to 2026.",
+        "Distances are rounded public estimates from Earth; the original distance convention, uncertainty and covariance are not established here. Unit conversion adds no accuracy.",
+        "No proper-motion propagation, individual stellar positions, full 3D galaxy orientation/size, current simultaneous physical pose or billions-of-years trajectory is reconstructed.",
+        "Source-reported projected features and any stated inclination are separate from illustrative colors, point counts, missing angles, display sizes and unresolved geometry; no source observation image is copied into the renderer.",
+        "This static nearby-galaxy context is separate from the conceptual cosmic chronology and the bounded 2026 solar ephemeris. SPHEREx observations remain unchanged."
+      ],
+      "appearance": {
+        "renderer": "dust_lane_elliptical",
+        "source": {
+          "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+          "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+          "label": "NASA Chandra/CXC: M33 Fast Facts",
+          "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+          "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+          "bytes": 154191,
+          "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "additional_sources": [
+          {
+            "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+            "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+            "label": "NASA Chandra/CXC: M33 Fast Facts",
+            "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+            "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+            "bytes": 154191,
+            "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+            "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+          }
+        ],
+        "observed_features": [
+          "Giant elliptical host crossed by a thick dust lane",
+          "Energetic central jet"
+        ],
+        "inclination_deg": null,
+        "position_angle_deg": null,
+        "arms": 0,
+        "barred": null,
+        "inclination_source": null,
+        "arm_count_source": {
+          "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+          "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+          "label": "NASA Chandra/CXC: M33 Fast Facts",
+          "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+          "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+          "bytes": 154191,
+          "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+          "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+        },
+        "orientation_status": "illustrative_assumption",
+        "orientation_scope": "Only explicitly sourced projected inclination is measured; unprovided sky position angle, pole and 3D orientation remain assumptions.",
+        "display_assumptions": [
+          "Renderer geometry, point counts, colors, scales, thickness, arm pitch/width and star positions are explanatory choices, not a photometric or resolved stellar reconstruction.",
+          "Missing inclination/position-angle values remain null; an illustrative default is not a catalog measurement.",
+          "No physical motion, spin period, ancient pose or dynamical evolution is inferred from these shape guides."
+        ]
+      },
+      "image_source": {
+        "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+        "label": "Official observed-image reference page; linked, not copied into the renderer"
+      }
+    }
+  ],
+  "sources": {
+    "m31_coordinates": {
+      "url": "https://chandra.harvard.edu/photo/2025/m31/",
+      "resolved_url": "https://chandra.harvard.edu/photo/2025/m31/",
+      "label": "NASA Chandra/CXC: M31 Fast Facts",
+      "local_relative_path": "data/reference/galaxies/m31_coordinates.html",
+      "sha256": "48dfc5286f1bba07c8952f6fabd1462515b34bdb96ceb8ca00638317069cb8da",
+      "bytes": 78218,
+      "retrieved_utc": "2026-11-14T05:09:31.007636+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "m33_coordinates": {
+      "url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+      "resolved_url": "https://chandra.cfa.harvard.edu/photo/2026/galaxies/index.html",
+      "label": "NASA Chandra/CXC: M33 Fast Facts",
+      "local_relative_path": "data/reference/galaxies/m33_coordinates.html",
+      "sha256": "0a5e9a2a2094b9b060c217881ea0edf82802c781073b37020e47d166c2668390",
+      "bytes": 154191,
+      "retrieved_utc": "2026-11-14T05:09:32.562140+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "m33_nasa": {
+      "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-33/",
+      "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-33/",
+      "label": "NASA Hubble Messier catalog: M33",
+      "local_relative_path": "data/reference/galaxies/m33_nasa.html",
+      "sha256": "d80ff63bc44adf1ef79188630c7f09bf003fccdd4fab1c6f1964ecc2f5d782cf",
+      "bytes": 315660,
+      "retrieved_utc": "2026-11-14T05:09:32.907951+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "m81_coordinates": {
+      "url": "https://www.chandra.cfa.harvard.edu/photo/2008/m81/",
+      "resolved_url": "https://www.chandra.cfa.harvard.edu/photo/2008/m81/",
+      "label": "NASA Chandra/CXC: M81 Fast Facts",
+      "local_relative_path": "data/reference/galaxies/m81_coordinates.html",
+      "sha256": "1b6c15a4f8370937bfbcf2f4e8b85cae3d6ad701b6e19079d45b8c6005bd671e",
+      "bytes": 60745,
+      "retrieved_utc": "2026-11-14T05:09:34.238863+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "m81_nasa": {
+      "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-81/",
+      "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-81/",
+      "label": "NASA Hubble Messier catalog: M81",
+      "local_relative_path": "data/reference/galaxies/m81_nasa.html",
+      "sha256": "0e74ee43c3814bc1880c14f5be150222b269e2ced559a165694003265a8c34e1",
+      "bytes": 310795,
+      "retrieved_utc": "2026-11-14T05:09:35.567868+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "m87_coordinates": {
+      "url": "https://chandra.harvard.edu/photo/2026/m87/",
+      "resolved_url": "https://chandra.harvard.edu/photo/2026/m87/",
+      "label": "NASA Chandra/CXC: M87 Jet Fast Facts",
+      "local_relative_path": "data/reference/galaxies/m87_coordinates.html",
+      "sha256": "7e54ccd82d64f05406d3ff4074358b2aaa98b73bb478ce0e6f216d4ba08f8073",
+      "bytes": 71523,
+      "retrieved_utc": "2026-11-14T05:09:37.064855+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "m87_nasa": {
+      "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-87/",
+      "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-87/",
+      "label": "NASA Hubble Messier catalog: M87",
+      "local_relative_path": "data/reference/galaxies/m87_nasa.html",
+      "sha256": "87fe1addbc8af10f05b7950b7c81273d19902cfa1f7a575a5b8372219abcc963",
+      "bytes": 310013,
+      "retrieved_utc": "2026-11-14T05:09:37.432805+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "m31_shape": {
+      "url": "https://science.nasa.gov/missions/hubble/nasas-hubble-traces-hidden-history-of-andromeda-galaxy/",
+      "resolved_url": "https://science.nasa.gov/missions/hubble/nasas-hubble-traces-hidden-history-of-andromeda-galaxy/",
+      "label": "NASA Hubble: Andromeda's observed 77-degree inclination and dust lanes",
+      "local_relative_path": "data/reference/galaxies/m31_shape.html",
+      "sha256": "c147e3eb27e3a96ba1502fce4d377dfdf0f5904ec136b49f4182bf34e46c887a",
+      "bytes": 337918,
+      "retrieved_utc": "2026-11-14T05:30:23.085639+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "m81_shape": {
+      "url": "https://science.nasa.gov/missions/hubble/hubble-photographs-grand-design-spiral-galaxy-m81/",
+      "resolved_url": "https://science.nasa.gov/missions/hubble/hubble-photographs-grand-design-spiral-galaxy-m81/",
+      "label": "NASA Hubble: grand-design spiral M81",
+      "local_relative_path": "data/reference/galaxies/m81_shape.html",
+      "sha256": "83fb860c74592f61a795f4b1d3db1d318c54a9539e4281689d12278cf8d4669b",
+      "bytes": 327493,
+      "retrieved_utc": "2026-11-14T05:30:24.248812+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "m81_arms": {
+      "url": "https://science.nasa.gov/wp-content/uploads/2023/04/hubble-litho-galaxy-ngc-3982.pdf",
+      "resolved_url": "https://science.nasa.gov/wp-content/uploads/2023/04/hubble-litho-galaxy-ngc-3982.pdf",
+      "label": "NASA Hubble lithograph: Cosmic Pinwheels (two long M81 arms)",
+      "local_relative_path": "data/reference/galaxies/m81_arms.pdf",
+      "sha256": "4679e15289698034ab75389499eebce8533c76ba1d8aac003d9a4177fb907edd",
+      "bytes": 2623269,
+      "retrieved_utc": "2026-11-14T05:30:43.033221+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "smc_shape": {
+      "url": "https://science.nasa.gov/photojournal/wises-view-of-a-wispy-cloud/",
+      "resolved_url": "https://science.nasa.gov/photojournal/wises-view-of-a-wispy-cloud/",
+      "label": "NASA WISE: Small Magellanic Cloud irregular morphology",
+      "local_relative_path": "data/reference/galaxies/smc_shape.html",
+      "sha256": "f5542de6ecfcd5e7eadfd288da01fa0f52f28ff7c8a8735de291947fac447f87",
+      "bytes": 266818,
+      "retrieved_utc": "2026-11-14T05:30:44.211324+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "lmc_coordinates": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=LMC",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=LMC",
+      "label": "SIMBAD Harvard: LMC ICRS catalog direction",
+      "local_relative_path": "data/reference/galaxies/lmc_coordinates.html",
+      "sha256": "5f18afafb8aa4eb8d0010974be8b677203ac8e260f5a9ab58f43e0366d396e99",
+      "bytes": 42804,
+      "retrieved_utc": "2026-11-14T05:32:23.734769+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "lmc_nasa": {
+      "url": "https://science.nasa.gov/image-article/apod-2024-october-2-the-large-magellanic-cloud-galaxy/",
+      "resolved_url": "https://science.nasa.gov/image-article/apod-2024-october-2-the-large-magellanic-cloud-galaxy/",
+      "label": "NASA: Large Magellanic Cloud",
+      "local_relative_path": "data/reference/galaxies/lmc_nasa.html",
+      "sha256": "078821d1d94fe6eae01ce22181592c8b6278b942ad33fa600dc2460d2285407d",
+      "bytes": 272357,
+      "retrieved_utc": "2026-11-14T05:32:24.074793+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "smc_coordinates": {
+      "url": "https://chandra.harvard.edu/photo/2026/swift/",
+      "resolved_url": "https://chandra.harvard.edu/photo/2026/swift/",
+      "label": "Small Magellanic Cloud (SMC)",
+      "local_relative_path": "data/reference/galaxies/smc_coordinates.html",
+      "sha256": "92a0b2c7dc3c1f445dd5a1820e586498a2621c2dca72f36307bb49ba8eec3cb2",
+      "bytes": 86343,
+      "retrieved_utc": "2026-11-14T05:30:45.489200+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "m51_coordinates": {
+      "url": "https://chandra.harvard.edu/photo/2002/0158/",
+      "resolved_url": "https://chandra.harvard.edu/photo/2002/0158/",
+      "label": "Whirlpool Galaxy",
+      "local_relative_path": "data/reference/galaxies/m51_coordinates.html",
+      "sha256": "a01b5f1ebcb228a8b01b5b6ba39f85ba43458f1332c2b6f6014372d0ce69793e",
+      "bytes": 36401,
+      "retrieved_utc": "2026-11-14T05:30:46.605126+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "m51_nasa": {
+      "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-51/",
+      "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-51/",
+      "label": "NASA: Messier 51 (Whirlpool)",
+      "local_relative_path": "data/reference/galaxies/m51_nasa.html",
+      "sha256": "0d65c728e0f288edffb6dfea9ae1e35ebfc31113418d709dd3819463e7e0ccdc",
+      "bytes": 342371,
+      "retrieved_utc": "2026-11-14T05:32:25.156424+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    },
+    "m104_nasa": {
+      "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-104/",
+      "resolved_url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-104/",
+      "label": "NASA: Messier 104 (Sombrero)",
+      "local_relative_path": "data/reference/galaxies/m104_nasa.html",
+      "sha256": "3a2f7154ad676635064e498682be201af5a2513817040d5130c10a2ac3ab1058",
+      "bytes": 310787,
+      "retrieved_utc": "2026-11-14T05:32:26.236941+00:00",
+      "acquisition_client": "Python urllib; default TLS chain/hostname validation"
+    }
+  },
+  "limitations": [
+    "A small illustrative galaxy context catalog, not a complete galaxy census or a precision astrometric catalog.",
+    "Most source coordinates are rounded J2000 equatorial fast-fact directions with unspecified frame realization, copied numerically as approximate ICRS without frame-bias conversion. LMC separately retains its explicitly ICRS epoch-J2000 SIMBAD reference; no direction is propagated to 2026.",
+    "Distances are rounded public estimates from Earth; the original distance convention, uncertainty and covariance are not established here. Unit conversion adds no accuracy.",
+    "No proper-motion propagation, individual stellar positions, full 3D galaxy orientation/size, current simultaneous physical pose or billions-of-years trajectory is reconstructed.",
+    "Source-reported projected features and any stated inclination are separate from illustrative colors, point counts, missing angles, display sizes and unresolved geometry; no source observation image is copied into the renderer.",
+    "This static nearby-galaxy context is separate from the conceptual cosmic chronology and the bounded 2026 solar ephemeris. SPHEREx observations remain unchanged.",
+    "Projected observed features guide nine distinct illustrative geometries. Missing inclinations/sky position angles remain null; qualitative edge-on/bar/dust-lane descriptions are not fabricated numeric measurements."
+  ],
+  "coordinate_policy": "Native rounded J2000 equatorial values treated as approximate ICRS for display; no frame-bias or epoch propagation",
+  "distance_unit_conversion": "Astropy units: source rounded million light-years to light-years and Mpc; no cosmological-distance reinterpretation",
+  "images_downloaded": false,
+  "superseded_catalog": {
+    "local_relative_path": "data/reference/galaxies/catalog_before_morphology_v1.json",
+    "sha256": "7fd74f67e48a1d5c7ecd4566e69a4ecc808853b00d553d0cb7a32eb084b54e7f",
+    "bytes": 24160,
+    "reason": "Original four-object derived catalog retained; its source response bytes and four directions/distances are unchanged."
+  },
+  "morphology_algorithm_version": "observed-morphology-guide-v1",
+  "updated_utc": "2026-11-14T05:32:26.245302+00:00"
+}

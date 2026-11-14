@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Planet X · SPHEREx",
-    "version": "0.4.0"
+    "version": "0.5.0"
   },
   "paths": {
     "/health/live": {
@@ -214,6 +214,94 @@
       "get": {
         "summary": "Appearance",
         "operationId": "appearance_api_v1_appearance_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cosmic-history": {
+      "get": {
+        "summary": "Cosmic History",
+        "operationId": "cosmic_history_api_v1_cosmic_history_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cosmic-history/sample": {
+      "get": {
+        "summary": "Cosmic History Sample",
+        "operationId": "cosmic_history_sample_api_v1_cosmic_history_sample_get",
+        "parameters": [
+          {
+            "name": "age_gyr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "maximum": 13.8,
+              "minimum": 0,
+              "default": 0,
+              "title": "Age Gyr"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/catalog/galaxies": {
+      "get": {
+        "summary": "Galaxies",
+        "operationId": "galaxies_api_v1_catalog_galaxies_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/kuiper-belt": {
+      "get": {
+        "summary": "Kuiper Belt",
+        "operationId": "kuiper_belt_api_v1_kuiper_belt_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -870,7 +958,8 @@
             "enum": [
               1,
               6,
-              24
+              24,
+              72
             ],
             "title": "Playback Rate Hours Per Second",
             "default": 6
@@ -916,6 +1005,40 @@
               }
             ],
             "title": "Extended Solar Manifest Sha256"
+          },
+          "galaxy_manifest_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Galaxy Manifest Sha256"
+          },
+          "show_kuiper_belt": {
+            "type": "boolean",
+            "title": "Show Kuiper Belt",
+            "default": false
+          },
+          "show_galaxies": {
+            "type": "boolean",
+            "title": "Show Galaxies",
+            "default": false
+          },
+          "kuiper_display_version": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "kuiper-region-v1"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Kuiper Display Version"
           }
         },
         "additionalProperties": false,

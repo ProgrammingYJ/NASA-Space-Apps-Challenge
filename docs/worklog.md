@@ -141,9 +141,63 @@
 
 ## DEV-004 · 2026-11-14 · 표면·고리·위성·외계행성 및 GitHub 체크포인트
 
+### 13:59 KST 현재 확정 상태 — 아래 착수/중간 기록을 보완
+
+- Git 요청 완료: `5d3a450dfd3fb82946387e03e31b2c01e56a8bb4`, 메시지 `MVP입니다`, commit2026-11-14 13:51:47KST. 지정 origin/main에 일반 push하고 원격 SHA를 대조했다. 체크포인트 뒤 지도 metadata/API/UI·문서 수정이 이어지므로 이후 최종 commit이라고 하지 않는다. force/history rewrite·공개 앱 배포·비밀값/관측원본 Git추가는 하지 않았다.
+- 확장 자료 최종:476개 유일ID(위성468+추가왜행성/후보8),471위치지원(위성463+8),5미지원 Daphnis/S/2009 S1/S/2025 U1/MK 2/Xiangliu. manifest1,186,595B/SHA `34afdc84d913e7e2089b06d9e0518acff011713df3ac7185b7372ba0ef6ef7a5`,509참조원본19,411,029B/52,527매듭. 위성종류/부모·mean-table중복/누락/별칭과 별도NASA/논문7위성 출처를 보존했다. TNO5위성+4PRIMARY를 같은 솔루션의 실제 중심으로 맞추고 이전 barycenter원본은 superseded source로 보존했다.
+- 과학 확인: 확장 pytest20PASS(3.98초)·Ruff,별도 읽기검수에서476ID유일·471전부 실제 raw target/parent/UTC양끝·반지름양수/미상null·5미지원knots[]·모든SHA/bytes/rootbounds PASS. 별도 Sun-centered KM-S5조회와 PRIMARY+상대벡터 합성의 최대 표본차이0.0000989372km는 내부 일관성이지 실제2026정확도/전구간오차보증이 아니다. 역사적 관측기간·2025예측불확실성·Weywot 외삽 경고를 원문/solution_notes에 남겼다.
+- 외관 최종 metadata:31지도102,820,603B/고리4계,manifestSHA `4c0f0a03eda761d8bbdcfc57db09874b4ca2ab6416fa94b189c4f7cdefa3458e`. 채택원본무가공·촬영기간/credit·미관측영역·지도창UV 보존. 31지도에14Nov기준 PCK극방향·자전율을 연결하되 texture경도/위상정합은 미검증이다. Earth IAU모형은 정밀EOP가 아니다. Ceres는 USGS공식1200×380rectangular HAMO clear-filter preview를 채택하고,취득한 DLR3798×1881 타원전구preview는3D텍스처로 쓰지 않는다. Enceladus8230px파일/7981px지도창·Charon9520px원본 등의 예외를 실제 크기대로 기록했다. 외관 pytest11PASS(9.53초)·Ruff.
+- 렌더러 계약:선택천체+부모행성 최대2지도만고해상도,나머지설명용LOD·위성선택전점/간략도형,선택후상세크기확대. 토성프레이밍은prominent/faint고리까지이며 very_faintE/G전체반지름으로과도하게벌리지 않는다. 물리반지름/낮은opacity는보존하고 좁은고리1px중심선은표시보조임을고지한다. 외계행성전환때태양계visibility:hidden/RAF정지로원카메라/WebGL을보존한다.
+- 외계행성:NASA공개6470개/4862모항성계/115원본페이지13,740,795B,manifestSHA `5b803ea060a52b50ca9afa61ec1a49ee889a7617864c5ba51469e828757f4c06`. TAP PS기본해취득과구분하고원문acf.display_name·추정질량/반지름·누락·행별source를보존한다. 방향층은미검증거리/epoch를3D거리로만들지않는다. 모식도 방향/위상·24h자전은가정이며 보고된주기표시재생은현재위치추론이아니다. 분류별GLSL지형/구름은설명용코드렌더링이고 실제해상표면/새관측/존재확률은아니다.
+- 현재 통합확인:외계행성원본/API6PASS,프런트27단위/strict/Vite PASS. 개별Chrome외계행성1경로16.5초PASS(전체목록·TRAPPIST-1 7행성·설명용표면/주기재생·태양계복귀);수치표시의소수3자리잘림을고쳐6.101013d/.02925au등원값을보존했다. Earth/Saturn/Moon301/Uranus지도ready·GLSL/JS오류0을실제브라우저에서확인했다. parent_id허용목록의 TNO부모 누락은문서/API대조에서발견해통합담당에게전달했다. 31지도bytes/SHA·468위성/미지원5·6TNO부모·6470외계행성의API회귀와 전체Chrome/Python·v0.4완결ZIP/해제실행은진행중이며 최종수는후속확정한다.
+- Notion 실제조회:13:57:21KST에 관련 이슈보고페이지 `https://app.notion.com/p/417d0a43a5058140b867fcf93b1f81f3`만 background로 읽었다. 기존 미시작/P1·환경/재현/기대/실제·증거규칙에서 새변경을관찰하지못했다. 이는진행중늦은조회이며 착수gate시점조회가아니다. DEV-003의13:13/13:26을재사용하지않고 홈/전체QA·정확한편집시각을확인했다고하지않는다. 포커스/창이동/쓰기없음. 완료조회는실제완료후별도확정한다.
+- 문서 통합:FSD0.7/v0.4.0의2.7/8.2/API/QA11–13/현황·README·자료/근거·AI MD/JSON·외부고지를같이갱신했다. 과거v0.1/v0.2ZIP과DEV-003검사이력은보존한다. 공개서버/Linux·사람/원어민검수·F01잔여/F04/F05·최종v0.4ZIP을완료로올리지않는다.
+
+### 착수·중간 진행 기록
+
 - 사용자요청: 공개자료/논문으로 행성표면·고리/위성·추가행성구현, 범위답변은태양계왜행성/위성과태양계밖외계행성 **둘다포함**. 원본/Git와기존실노출/근거를보존하고FSD0.7/v0.4.0에확장계약을반영한다. 원래미완료범위를조용히완료로변경하지않는다.
 - 공개NASA6470행성/4862모항성계/115페이지13740795B취득. 원페이지source목록정본SHA `4b8361bb95ce146780faf6aeed6fd9d73b2344ae77fd5366a4499f8038a03b85`. 원본data/reference/catalog/nasa_science,Gitmanifest3955802B. TAP와별도공식호스트timeout후공식NASA REST로대체했으며PS일관문헌해취득주장없음. 제목공백4개/Debug오류제목4개를원문display_name으로대조해6470개정체성을보존했다.
 - 확장태양계: 위성468+추가왜행성/후보8=476등록,463위성+8=471위치지원. Daphnis/S2009S1/S2025U1/MK2/Xiangliu5개는원응답과사유를보존하고위치미생성. 원참조509개19411029B/52527시간표본,manifest1186595B SHA `34afdc84d913e7e2089b06d9e0518acff011713df3ac7185b7372ba0ef6ef7a5`. TNO위성/PRIMARY의별도KM-S5조회합성차이max0.0000989372km는내부정합이며실제불확도상한아님. 실제reader/과학20PASS/Ruff.
 - 외관31지도/4고리원본102820603B준비. 관측/레이더/대표대기와미해상설명용외관을구분하고선택시고해상도로드한다. 실제지도원본무가공·SHA/출처/날짜/미관측영역·지도창UV를보존한다. 새5언어문구의Windows pipe인코딩손상을발견해UTF8파일입력으로교정하고??/대체문자없음을확인했다.
 - 현재검사: 외계행성실제원본/이름/누락/추정/경로탈출/API6PASS,확장과학20PASS,프런트수학27PASS·TSstrict/Vite. GPU사전검사에서ringshader중복include와/textures route누락을발견해교정한다. 새표면/위성/외계행성종합Chrome·완결ZIP·Linux/공개배포는체크포인트에서완료로주장하지않는다.
 - 사용자추가Git요청: GitHub에안보인다고질문하며 `git commit -m "MVP입니다"`를지정했다. 실제조회로54756ca는로컬,origin/main은68c6cae임을확인했다. 지정메시지로체크포인트commit하고지정origin/main일반push후SHA를대조한다. .env/원본FITS·내부문서·개인정보·var/tmp/artifacts는staging에서제외하고force/historyrewrite는하지않는다. 결과는후속기록한다. push후확장통합검사를계속한다.
+
+### DEV-004 완료 후속 확인
+
+- 실제 Chrome 지도3경로PASS(1.8분),외계행성1경로PASS(16.5초). 모든31지도HTTP102,820,603B/SHA일치,Earth/Saturn/Uranus/Neptune/Titan/Charon/Ceres/Pluto GPUready·GLSL/JS오류0·5언어 조건/상태·Daphnis미지원·Pluto원본근거→변경SHA재계산/새context정지복원을 확인했다. 증거는 `var/qa/appearance-earth.png`, `appearance-saturn.png`, `appearance-moon-606.png`, `appearance-ceres.png`, `appearance-pluto-evidence-restored.png`다. v0.4별도완결ZIP전달이아니며 후속v0.5패키지에 통합한다.
+- Notion완료조회14:08:05KST:현재관련 이슈 `https://app.notion.com/p/417d0a43a5058140b867fcf93b1f81f3`만background읽기. 미시작/P1·환경재현기대실제증거규칙이13:57:21중간조회와동일했다. 홈/QA·정확한편집시각미확인,포커스/창이동/쓰기없음.
+
+## DEV-005 · 2026-11-14 · 카이퍼대·72h/s·은하와 별도 우주 역사
+
+- 사용자범위:카이퍼대설정on/off·72시간/초·은하몇개선택자동이동과 매우과거 모형을 요청했다. 확인답변은 **수십억년전우주역사까지**다. 기존정밀2026태양계72시간/실노출을 보존하고별도cosmicHistory모드로 구현한다. BCSolar는현재공식JPL근사표가Pluto제거/8개·Earth-Moonbarycenter범위인것을확인한뒤 사용자billions우선으로 보류했다. 고대/수십억년JPL위치를만들지않았다.
+- 적용스킬:기존 documentation·Astropy·astrometry-motion-qa·validate-data·browser QA/코드검토/릴리스 절차를 실제관련파일범위에 적용했다. source reader/API/화면·독립원문/5언어검토를 분리했고 새자격증명·AI API·이미지생성서비스·관측원본수정은없다.
+- 역사원본:science/history.py/cosmic-chronology-v1,공식NASA/ESA4HTML1,269,070B를 `data/reference/history/`에원바이트/sourceJSON보존. cosmic_history.json15,783B,SHA `bf947edd0a0859466d594b4e968997a70cd51511dd78fbccf6653b042f65b03f`. hotBigBang0/recombination.00038/darkages.01/firststars.1/earlygalaxies.28/reionization.5/galaxygrowth1/cosmicnoon2.5/SolarSystem9.2/present13.8Gyr의10지점이다. 일부는넓은시대내표시anchor이고최근표시지점은물리적전역경계아니다. firststars정확시점미상·280Myr관측예시/최초형성시각아님·13.8−4.6=9.2파생근사를 명시했다. NASA동일페이지240–300k/380k와ESA13.7/NASA13.8차이는원문변경없이채택근거/source_conflicts로보존했다.
+- 은하원본:science/galaxies.py/official-rounded-galaxy-context-v1,Chandra4+NASAHubble3HTML1,301,145B를 `data/reference/galaxies/`에저장했다. galaxies.json24,160B,SHA `7fd74f67e48a1d5c7ecd4566e69a4ecc808853b00d553d0cb7a32eb084b54e7f`. M31/M33/M81/M87의둥근J2000sexagesimal을보존하고근사2.5/3/11.6/54Mly를ly/Mpc로단위변환했다. frame realization/공분산/고유운동미검증·ICRSframe-bias변환미적용과M87CXC55/NASA54차이를명시했다. 2400점형태/기울기/회전/크기는설명용이며실제별수·현재물리pose/고대좌표아니다. 관측합성사진은새다운로드/복제하지않고공식출처링크만연결했다.
+- 카이퍼원본:science/kuiper.py/kuiper-region-v1, NASA1HTML291,005B SHA `1f814d9a2e0cd139422a62c4a161ccc5bc53385f0212f02b9c7d4ff753e3b318`를 `data/reference/kuiper/`에보존했다. kuiper_display.json2,071B,SHA `8ea4e597e3c18a363625b493fbdae05ed40ebe359666c5d3f7e7afdfd6675957`. main30–50AU와scattered disk약1000AU를구분한다. seeded650점/seed1949030/수직±.6AU·불투명도는실측객체/밀도/두께/확률아닌표시가정이다. 실제천체/관측과분리한다. 새12HTML2,861,220B를새관측12회/기존Drive업로드로세지않는다.
+- 화면/계약:정밀속도1/6/24/72h/s(기본6),원래3일범위/끝/수동/숨김/저장정지를유지한다. 역사시간은BigBang후Gyr와근사lookback13.8−age,속도1/10/100/1000Myr/s(기본100),지점/범위/수치·Play/Pause·끝/숨김정지다. cosmic-concept-v1의plasma/CMB·seeded별/은하/filament·태양계는개념적장면이며sourceanchor전firststars.1/Solar9.2표현을등장시키지않는다. 실제팽창/밀도/복사전달함수·현재카탈로그좌표역산이아니다.
+- 보존/복원:정밀/외계행성/역사의hiddenhost+RAFpause로원카메라/WebGL보존,외계행성/역사는firstopenlazyload. 역사에서관측/근거nav는정밀모드로복귀해workspace/DATE-AVG/원본을유지한다. Gyr를기존Evidence의ISO model_epoch로저장하지않고역사자체근거저장구현주장없다. 설정show_kuiper_belt/show_galaxies의새기본은true,legacycontext필드없으면false다. optionalkuiper_display_version/galaxy_manifest_sha256와72속도를실행스키마/TS/OpenAPI에추가했다. import는manifest일치만보지않고offline reader로지도/벡터/은하실파일을재검증해변조/누락을재계산필요로표시한다.
+- API/검사:GET `/cosmic-history`, `/cosmic-history/sample?age_gyr=`, `/catalog/galaxies`, `/kuiper-belt`추가. age유한0~13.8만허용한다. history12PASS1.23초,galaxy8PASS2.37초,catalog API18PASS5.40초+추가KuiperHTTP1PASS1.53초/Ruff. 이19검사는10stage/SHA·0/.00038/13.8·-1/nan/inf/13.81→422·4은하ly/Mpc·TNO6부모200/미지원빈배열·mountedJPEG/PNG원SHA/unknown404·카이퍼가정분리를확인했다. 독립검토도NASA/ESA원문·sexagesimal단순산술1e-12deg이내·근사거리/단위·카이퍼표시한계와원본SHA를대조해블로킹결함없음을보고했다.
+- 현재통합체크포인트:Python176PASS34.15초/기존Starlette경고1,TSstrict/Vite·Vitest36PASS. 그뒤작은기본값/실파일checker수정이있어최종전체회귀는후속확정한다. 새0.5빌드index-CDpOhZCN/history-nohVHtsp,8000실제5신규Chrome와GPU검사중이다. 이진행상태를완료통과수로더하지않는다. 최종v0.5ZIP·해제/실행/파일SHA·최종Gitcommit/push는아직준비단계이고Linux/공개서버배포는없다.
+- Notion:DEV-00514:17:17KST에관련이슈페이지 `https://app.notion.com/p/417d0a43a5058140b867fcf93b1f81f3`를늦은진행중background읽기로확인했다. 기존본문동일,정시착수조회·홈/QA전체·최신편집시각확인으로확대하지않는다. 포커스/창이동/쓰기없음,완료조회는실제완료시후속기록한다. DEV-004완료14:08:05와구분한다.
+- 문서:FSD0.8/v0.5.0의2.8/8.3/API/QA14–15/현황,README·자료/근거·AI MD/JSON·외부고지를함께갱신했다. 과거기록/원본/Git은보존하며 F01잔여/F04/F05·사람/원어민검수·Linux/공개서버·최종ZIP의미완료표시는유지한다.
+
+## DEV-006 · 2026-11-14 · 은하별 관측 형태 고증·9개 확장
+
+- 사용자 추가 지시: 은하가 모두 같은 모양이며 고증이 부족하다고 지적하고 실제 다른 은하를 요청했다. DEV-005의 최초4개를 보존하며 LMC/SMC/M51/M104/Centaurus A를 추가했다. 릴리스는 v0.5.0에 묶고 통합 명세를 FSD0.9로 올린다.
+- 자료 동결: `science/galaxies.py`의 현재 `galaxies.json`80,168B/SHA256 `1363cee1eb52a93d4e6505d437dd3d2291f16592e166fc33bbaef7864ba0890f`. 공식17원문(HTML16+NASA교육PDF1)5,947,706B를 원바이트/취득시각·SHA·source.json으로 보존했다. 기존7원문 대비10개4,646,561B를 추가했으며 새 SPHEREx방문/관측 횟수로 세지 않는다. 이전4개 manifest는 `data/reference/galaxies/catalog_before_morphology_v1.json`24,160B/SHA `7fd74f67e48a1d5c7ecd4566e69a4ecc808853b00d553d0cb7a32eb084b54e7f`로 보존하고 원 방향·거리·coordinate_source 불변을 검사했다.
+- 좌표/거리: 추가4개는 CXC의 둥근 J2000 Fast Facts, LMC는 정상 TLS로 취득한 Harvard SIMBAD 명시적ICRS(epJ2000)·원식별 bibcode다. CDS/TAP 연결 문제를 우회해 허위 좌표를 만들거나 TLS검증을 끄지 않았다. LMC/SMC/M51/M104/Centaurus A 채택거리는0.16/0.2/31/28/12Mly다. M51 CXC30/NASA31·M104 CXC31/NASA28 등 출처차이를 보존하고 단위변환이 원정확도를 높이지 않음을 명시했다. 고유운동/고대좌표 전파는 하지 않는다.
+- 형태 계약: `observed-morphology-guide-v1`에9개 renderer·observed_features·개별source/additional_sources·image_source 공식참고페이지·표시가정을 반환한다. M31경사77°는NASA본문, M81두팔은NASA lithograph, LMC중심막대/한팔은NASA APOD본문 근거다. M87/Centaurus A의arms0은타원형분류표현이다. M33 flocculent는희미하고조각난팔을표현하는렌더스타일이며NASA공식분류아님을따로기록했다. M51동반NGC5195는출처로확인하되화면분리/방향은미상값과표시가정으로분리한다. 다른수치경사와모든위치각은null이다.
+- 표시/권리: 관측사진을 해상3D물리복원으로 주장하지 않는다. 점수/색/크기·먼지/제트폭·회전위상/미확인방향은설명용코드표현이다. 새 관측사진파일을 앱 자산으로복제하지 않고 원페이지링크만 제공한다. LMC APOD Ireneusz Nowak사진의별도credit/권리를고지했다. 원거리/방향은선택자동포커스로바꾸지않으며관측workspace/근거를보존한다.
+- 과학 검사: `tests/test_galaxies.py`14PASS(2.73초),Ruff/diffcheck통과. 원문17개SHA/bytes·추가5개sexagesimal독립산술/근사거리·9표시형태·M31각도/팔근거·미상각도·동반표시가정·PDFmagic·기존4개불변을확인했다. 별도검토에자료동결/hash를전달했고실제Chrome9형태대조/5언어·최종전체Python/프런트/브라우저수치는후속확정한다. 동시프런트build중정적파일삭제와겹친이전전체실행의setup18실패는완료검사로세지않고build완료후분리재실행한다. 이후catalog19개와최적화대상55개검사는통과한중간결과다.
+- 운영/문서: Dockerfile은외관reader가검증하는 `web/public` 원본COPY를추가했으나Linux엔진연결이없어컨테이너실행미검증이다. 사용자MVP체크포인트 `5d3a450dfd3fb82946387e03e31b2c01e56a8bb4`의13:51:47KST commit/일반push/원격SHA확인사실을보존한다. 이후최종commit/push·완결v0.5ZIP/해제실행·공개서버배포는실제결과로후속기록한다. FSD2.9/8.4/API/QA16/현황,README·고지·자료/근거·AI MD/JSON을같이갱신했다. F01잔여/F04/F05·사람/원어민검수·Linux/공개서버미완료는그대로다.
+
+### DEV-005/006 최종 통합·릴리스 검사 · 2026-11-14T14:51:14+09:00
+
+- Python185 PASS(325.37초, 기존 Starlette 경고1)·Vitest40 PASS·TypeScript strict/Vite·Ruff 통과. Python3.12.3/Node22.17.0, Windows 실행 결과이며 다른 OS/사람 검수로 확대하지 않는다.
+- 실제 Chrome21개 고유 경로 검사를 완료했다. 최초 전체 실행은19PASS/2실패(9.0분)였고, 동시부하의 Titan cold-parent 대기와 OrbitControls 감쇠 대기를 실제 완료/연속 안정 조건으로 고친 뒤 최종 CJgIAKg2 빌드·재시작한 cold API에서 관련4개를 모두 재검사해 통과했다. 수치 허용오차는 완화하지 않았다. 최초 실패 trace/context는 `var/qa/dev006-initial-browser-failures/`에 보존했다. 9종 공식사진 대조·최종M31/M87 GPU/빠른 재선택/수동취소/역사 왕복 카메라 보존도 통과, JS/GLSL 오류0이다.
+- 최종 변경: M31 먼지띠 대비/두께와 M87 제트 표시 길이/밝기를 낮춰 관측 특징과 비교했다. 공유 gallery의 M104/CenA 링크는 NASA Chandra/CXC로 중립 표시하며 실제 source 원문/방향/거리/SHA는 보존했다. 5언어261키·UTF8/JSON 검사 통과.
+- 복원 알림은 저장 locale로 즉시 번역한다. 가져오기 시작에 두 시간 재생을 정지하고 새 세션은 열린 검색목록도 닫는다. Solar 원본 누락은500 대신 재계산 필요다. 실제 file SHA 검증은 유지하되 벡터 재생성 없이 검사(로컬 약0.314s+지도0.127s), 확장 index metadata/부모별 cache로 시작 계산을 줄였다. 관련 회귀 포함 Python185 통과다.
+- 완결 배포본은 `artifacts/NASA_SPACE_APPS_CHALLENGE_v0.5.0_20261114_144922KST.zip`다. 포함 파일/바이트/SHA 및 Windows 새 폴더 해제·health·31지도 원바이트·476확장객체/6470외계행성/9은하/역사10지점·εB/Pluto 근거와 실제 서버 재시작 후 동일 evidence/result ID 복원을 확인했다. 검증된 동일 독립 런타임을 재사용했으며 새 설치로 주장하지 않는다. 최종 ZIP의 정확한 SHA/바이트/해제 경로·실행 시각은 동명 `.zip.sha256.json`·`.verification.json`을 기준으로 한다. 문서 확정 후 최종 ZIP도 같은 검사로 재확인한다. Linux 컨테이너/공개 서버 배포는 수행하지 않았다. 첫 해제 검증: `2026-11-14T05:50:41.905350+00:00`, manifest에 기록된 파일 1599개와 release_manifest1개. Dockerfile은 reader 검증용 public도 포함하며 release algorithm 목록의 observed-morphology-guide-v1 누락을 독립 검토로 보완했다.
+- Notion 완료/배포전 조회 시도: 14:48:40 KST. native inventory에 기존 ‘이슈 보고 전달’ 창이 없어 포커스/창/탭 이동 없이 재열람하지 못했다. 이번 내용 재확인은 미완료/접근불가이며 최신 내용 확인 완료로 쓰지 않는다. 마지막 실제 확인은14:17:17KST의 관련 이슈 한 페이지였고 당시 기존 미시작/P1·환경/재현/기대/실제/증거 규칙과 동일했다. 홈/전체QA·현재 편집시각은 미확인이고 포커스/창이동/쓰기는 없었다.
+- Git: 사용자 요청 MVP는5d3a450(13:51:47KST) origin/main 일반push/원격SHA 대조 완료. 이 통합의 최종 source commit/push는 release_manifest.base_commit과 실제 원격 SHA로 확정한다. .env/관측원본/팀내부/var/tmp/artifacts는 Git에서 제외하고 이전 코드·작업·근거와 Git 이력은 보존한다.
+- Linux/공개서버·실제 제출·F01잔여/F04/F05·사람/원어민 검수는 완료로 올리지 않는다.

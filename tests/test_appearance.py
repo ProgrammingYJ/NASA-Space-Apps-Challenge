@@ -16,6 +16,7 @@ from science.appearance import (
     OFFICIAL_HOSTS,
     PCK_PATH,
     RING_EPOCH,
+    body_poles,
     get_appearance,
     image_dimensions,
     ring_poles,
@@ -134,6 +135,46 @@ def test_iau_pole_polynomial_and_neptune_periodic_term_have_tdb_units(appearance
         ra, dec = (math.radians(pole["pole_icrs_deg"][key]) for key in ("ra", "dec"))
         vector = [math.cos(dec) * math.cos(ra), math.cos(dec) * math.sin(ra), math.sin(dec)]
         assert math.hypot(*vector) == pytest.approx(1, abs=1e-15)
+
+
+def test_major_and_moon_poles_include_earth_tilt_without_claiming_spin_registration(appearance):
+    poles = body_poles(ROOT)
+    centuries = (Time(RING_EPOCH, scale="utc").tdb.jd - 2451545.0) / 36525.0
+    assert poles["earth"]["pole_icrs_deg"] == pytest.approx(
+        {"ra": (-0.641 * centuries) % 360, "dec": 90 - 0.557 * centuries}, abs=1e-12
+    )
+    earth = appearance["objects"]["earth"]["body_orientation"]
+    ra, dec = (math.radians(earth["pole_icrs_deg"][key]) for key in ("ra", "dec"))
+    obliquity = math.radians(84381.448 / 3600)
+    ecliptic_z = -math.sin(obliquity) * math.cos(dec) * math.sin(ra) + math.cos(
+        obliquity
+    ) * math.sin(dec)
+    assert 23 < math.degrees(math.acos(ecliptic_z)) < 24
+    assert earth["rotation_rate_deg_per_day"] == 360.9856235
+    assert poles["venus"]["rotation_rate_deg_per_day"] < 0
+    assert poles["uranus"]["rotation_rate_deg_per_day"] < 0
+    for record in appearance["objects"].values():
+        orientation = record["body_orientation"]
+        assert orientation["pole_icrs_deg"]
+        assert orientation["source"]["local_path"] == PCK_PATH
+        assert orientation["rotation_phase_verified"] is False
+        assert "prime_meridian_deg" not in orientation
+    # Mars' current kernel has quadratic phase-angle polynomials. Its pole must
+    # be evaluated by that scheme, rather than pairing the values as linear terms.
+    assert 317 < poles["mars"]["pole_icrs_deg"]["ra"] < 318
+    assert 52 < poles["mars"]["pole_icrs_deg"]["dec"] < 54
+
+
+def test_ceres_rectangular_source_is_separate_from_the_unmapped_oval_preview(appearance):
+    ceres = appearance["objects"]["ceres"]
+    assert ceres["kind"] == "observed_mosaic"
+    assert ceres["projection"] == "equidistant_cylindrical"
+    assert ceres["pixel_dimensions"] == [1200, 380]
+    assert "usgs.gov/media/images" in ceres["source"]["url"]
+    assert any(
+        "DAWN-A-FC2-5-CERESMOSAIC" in source["url"] for source in ceres["additional_sources"]
+    )
+    assert appearance["reference_images"]["ceres_dlr_oval_preview"]["adopted_for_texture"] is False
 
 
 def copied_small_manifest(tmp_path):

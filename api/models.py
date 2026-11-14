@@ -42,11 +42,15 @@ class UniverseContext(StrictModel):
     orbit_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
     show_orbits: bool = True
     timeline_algorithm_version: Literal["display-hermite-v1"] | None = None
-    playback_rate_hours_per_second: Literal[1, 6, 24] = 6
+    playback_rate_hours_per_second: Literal[1, 6, 24, 72] = 6
     playback_paused: Literal[True] = True
     follow_object_id: str | None = Field(default=None, max_length=50)
     appearance_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
     extended_solar_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    galaxy_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    show_kuiper_belt: bool = False
+    show_galaxies: bool = False
+    kuiper_display_version: Literal["kuiper-region-v1"] | None = None
 
 
 class Session(StrictModel):

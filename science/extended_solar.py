@@ -543,7 +543,9 @@ def acquire_vectors(root: Path, *, retry_failed: bool = False, limit: int | None
     return manifest
 
 
-def get_extended_solar(root: Path, *, parent_id: str | None = None) -> dict:
+def get_extended_solar(
+    root: Path, *, parent_id: str | None = None, include_vectors: bool = True
+) -> dict:
     """Read acquired, manifest-verified local data only; no network access."""
     root = Path(root).resolve()
     manifest = json.loads((root / MANIFEST).read_text(encoding="utf-8"))
@@ -572,7 +574,7 @@ def get_extended_solar(root: Path, *, parent_id: str | None = None) -> dict:
         if parent_id not in CATALOG_PARENTS:
             raise ValueError("unknown_extended_parent")
         manifest["objects"] = [obj for obj in manifest["objects"] if obj["parent_id"] == parent_id]
-    for obj in manifest["objects"]:
+    for obj in manifest["objects"] if include_vectors else ():
         if obj["status"] == "available":
             response = json.loads(
                 (root / obj["source"]["local_relative_path"]).read_text(encoding="utf-8")

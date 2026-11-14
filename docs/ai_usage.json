@@ -16,7 +16,10 @@
     "SETUP-009",
     "DEV-001",
     "DEV-002",
-    "DEV-003"
+    "DEV-003",
+    "DEV-004",
+    "DEV-005",
+    "DEV-006"
   ],
   "assistance": [
     "repository_configuration",
@@ -43,7 +46,21 @@
     "source_backed_osculating_orbit_guides",
     "bounded_cubic_hermite_display_interpolation",
     "timeline_play_pause_and_camera_follow",
-    "independent_midpoint_query_validation"
+    "independent_midpoint_query_validation",
+    "public_surface_map_credit_and_uv_integration",
+    "source_backed_ring_orientation_and_envelope_display",
+    "complete_moon_catalog_and_bounded_parent_relative_vectors",
+    "nasa_public_exoplanet_catalog_and_illustrative_glsl_schematics",
+    "authorized_mvp_commit_and_repository_push",
+    "source_backed_approximate_cosmic_chronology",
+    "separate_gyr_history_player_and_conceptual_scene",
+    "official_rounded_galaxy_direction_distance_context",
+    "sourced_kuiper_region_and_display_assumptions",
+    "seventy_two_model_hours_per_second_playback",
+    "layer_settings_legacy_restore_and_referenced_file_integrity",
+    "observed_galaxy_morphology_source_acquisition",
+    "distinct_source_backed_galaxy_renderer_guides",
+    "unknown_orientation_and_illustrative_geometry_disclosure"
   ],
   "application_code_generated_in_this_setup": true,
   "science_detection_or_fit_performed": false,
@@ -73,7 +90,7 @@
     "public_service_deployed": false
   },
   "universe_slice": {
-    "version": "0.3.0",
+    "version": "0.5.0",
     "source": "JPL Horizons geometric heliocentric ephemerides and IRSA SPHEREx L2",
     "scene_objects": 11,
     "raw_observation_inputs": [
@@ -84,7 +101,7 @@
       "S14",
       "L051"
     ],
-    "scene_appearance": "Illustrative code-rendered geometry, artistic colors/fill and decorative starfield; not measured images",
+    "scene_appearance": "31 unmodified sourced observation/radar/representative-atmosphere maps with per-asset credits and limitations; fallback and exoplanet shader appearances are illustrative; 4 sourced ring systems have explicit display assumptions",
     "science_motion_or_flux_validated": false,
     "public_service_deployed": false,
     "orbit_guides": {
@@ -97,7 +114,7 @@
       "display_reference_epoch_utc": "2026-11-14T00:00:00Z"
     },
     "previous_completed_version": "0.2.0",
-    "version_status": "integration_and_release_verification_in_progress",
+    "version_status": "final_dev005_browser_regression_and_release_verification_in_progress",
     "source_knot_epochs_utc": [
       "2026-11-13T00:00:00Z",
       "2026-11-14T00:00:00Z",
@@ -135,8 +152,341 @@
     "global_error_bound_claimed": false,
     "independent_dynamical_model_validation_claimed": false,
     "science_tests_passed": 17,
-    "api_frontend_browser_release_verification": "in_progress_see_worklog",
+    "api_frontend_browser_release_verification": "Python100, Vitest18, Chrome11 (4 new timeline paths), strict/Vite passed; no completed v0.3 ZIP handoff; current v0.4 release checks pending",
     "public_service_deployed": false,
-    "linux_container_verified": false
+    "linux_container_verified": false,
+    "expanded_in_dev005_playback_rates_model_hours_per_real_second": [
+      1,
+      6,
+      24,
+      72
+    ]
+  },
+  "procedural_rendered_illustrations": true,
+  "procedural_illustration_status": "Classification-based shader terrains, clouds and schematic geometry; not resolved observed maps or image-generation-service output",
+  "extended_catalog_slice": {
+    "work_id": "DEV-004",
+    "version": "0.4.0",
+    "original_observations_unchanged": true,
+    "extended_solar": {
+      "objects": 476,
+      "moons": 468,
+      "available_objects": 471,
+      "available_moons": 463,
+      "unavailable_moons": 5,
+      "additional_dwarfs_and_candidates": 8,
+      "referenced_original_files": 509,
+      "referenced_original_bytes": 19411029,
+      "source_knots": 52527,
+      "manifest": "data/manifests/extended_solar.json",
+      "manifest_sha256": "34afdc84d913e7e2089b06d9e0518acff011713df3ac7185b7372ba0ef6ef7a5",
+      "science_tests_passed": 20,
+      "independent_read_check": "All 471 available raw targets/centers/UTC endpoints and 476 unique IDs checked; unavailable knots remain empty",
+      "tno_same_primary_solution": true,
+      "original_barycenter_sources_retained": true,
+      "tno_separate_km_s_samples": 5,
+      "maximum_sampled_center_composition_discrepancy_km": 9.893717514424786e-05,
+      "global_error_bound_claimed": false
+    },
+    "appearance": {
+      "maps": 31,
+      "ring_systems": 4,
+      "adopted_map_bytes": 102820603,
+      "manifest": "data/manifests/appearance.json",
+      "manifest_sha256": "4c0f0a03eda761d8bbdcfc57db09874b4ca2ab6416fa94b189c4f7cdefa3458e",
+      "science_tests_passed": 11,
+      "published_image_bytes_unchanged": true,
+      "texture_meridian_and_spin_phase_verified": false,
+      "earth_precision_eop_orientation_claimed": false,
+      "selected_and_parent_high_resolution_map_limit": 2,
+      "browser_paths_passed": 3,
+      "browser_duration_minutes": 1.8,
+      "all_31_http_original_bytes_and_hashes_verified": true
+    },
+    "exoplanets": {
+      "source": "NASA Science public exoplanet/star REST collections",
+      "ps_default_solutions_acquired": false,
+      "planet_count": 6470,
+      "host_count": 4862,
+      "raw_pages": 115,
+      "raw_bytes": 13740795,
+      "manifest_sha256": "5b803ea060a52b50ca9afa61ec1a49ee889a7617864c5ba51469e828757f4c06",
+      "source_list_sha256": "4b8361bb95ce146780faf6aeed6fd9d73b2344ae77fd5366a4499f8038a03b85",
+      "tests_passed": 6,
+      "reported_estimates_and_missing_values_preserved": true,
+      "validated_physical_distances_or_current_planet_positions_claimed": false,
+      "resolved_exoplanet_surface_maps_claimed": false,
+      "orientation_phase_and_24h_spin_assumed": true
+    },
+    "frontend_unit_tests_passed": 27,
+    "individual_exoplanet_browser_paths_passed": 1,
+    "individual_exoplanet_browser_duration_seconds": 16.5,
+    "whole_python_browser_and_release_verification": "DEV004 individual map browser3/exoplanet browser1 completed; current DEV005 final suite and v0.5 ZIP pending",
+    "public_service_deployed": false,
+    "linux_container_verified": false,
+    "repository_checkpoint": {
+      "commit": "5d3a450dfd3fb82946387e03e31b2c01e56a8bb4",
+      "committed_at_kst": "2026-11-14T13:51:47+09:00",
+      "message": "MVP입니다",
+      "remote": "origin/main",
+      "push_and_remote_sha_verified": true,
+      "final_post_checkpoint_changes_included": false
+    },
+    "notion_midwork_read": {
+      "verified_at_kst": "2026-11-14T13:57:21+09:00",
+      "url": "https://app.notion.com/p/417d0a43a5058140b867fcf93b1f81f3",
+      "scope": "Related issue-report page only, background read; no change observed",
+      "performed_at_start_gate": false,
+      "page_modified": false,
+      "home_or_all_qa_requeried": false,
+      "completion_requery": "completed_2026-11-14T14:08:05+09:00_related_issue_page_only"
+    },
+    "notion_completion_read": {
+      "verified_at_kst": "2026-11-14T14:08:05+09:00",
+      "url": "https://app.notion.com/p/417d0a43a5058140b867fcf93b1f81f3",
+      "scope": "Related issue-report page only, background read; unchanged from midwork check",
+      "home_or_all_qa_requeried": false,
+      "page_modified": false
+    }
+  },
+  "cosmic_layers_slice": {
+    "work_id": "DEV-005",
+    "version": "0.5.0",
+    "original_observations_and_timestamps_unchanged": true,
+    "cosmic_history": {
+      "manifest": "data/manifests/cosmic_history.json",
+      "manifest_bytes": 15783,
+      "manifest_sha256": "bf947edd0a0859466d594b4e968997a70cd51511dd78fbccf6653b042f65b03f",
+      "source_html_count": 4,
+      "source_bytes": 1269070,
+      "stage_count": 10,
+      "reference_age_gyr": 13.8,
+      "reference_age_approximate": true,
+      "age_unit": "Gyr since hot Big Bang",
+      "lookback_definition": "13.8 minus age_gyr",
+      "stage_selection": "latest illustrative display anchor; not a sharp physical boundary",
+      "rates_myr_per_real_second": [
+        1,
+        10,
+        100,
+        1000
+      ],
+      "default_rate_myr_per_real_second": 100,
+      "camera_representation": "cosmic-concept-v1",
+      "source_conflicts_preserved": true,
+      "measured_spatial_reconstruction_claimed": false,
+      "science_tests_passed": 12
+    },
+    "galaxies": {
+      "manifest": "data/reference/galaxies/catalog_before_morphology_v1.json",
+      "manifest_bytes": 24160,
+      "manifest_sha256": "7fd74f67e48a1d5c7ecd4566e69a4ecc808853b00d553d0cb7a32eb084b54e7f",
+      "objects": [
+        "galaxy-m31",
+        "galaxy-m33",
+        "galaxy-m81",
+        "galaxy-m87"
+      ],
+      "source_html_count": 7,
+      "source_bytes": 1301145,
+      "native_directions": "Rounded Chandra/CXC J2000 equatorial Fast Facts; frame realization unspecified; copied numerically as approximate ICRS display directions",
+      "adopted_rounded_distances_million_ly": [
+        2.5,
+        3,
+        11.6,
+        54
+      ],
+      "source_difference_m87_cxc_million_ly": 55,
+      "distance_conversion": "Astropy ly to Mpc unit conversion; no added accuracy",
+      "shape_rotation_radius_and_2400_points": "Illustrative renderer assumptions; not measured stars or pose",
+      "images_downloaded": false,
+      "science_tests_passed": 8,
+      "status": "Historical DEV-005 four-object checkpoint; current nine-object source contract is galaxy_morphology_slice"
+    },
+    "kuiper": {
+      "manifest": "data/manifests/kuiper_display.json",
+      "manifest_bytes": 2071,
+      "manifest_sha256": "8ea4e597e3c18a363625b493fbdae05ed40ebe359666c5d3f7e7afdfd6675957",
+      "source_html_count": 1,
+      "source_bytes": 291005,
+      "display_version": "kuiper-region-v1",
+      "main_region_au": [
+        30,
+        50
+      ],
+      "scattered_disk_outer_reach_approx_au": 1000,
+      "scattered_disk_rendered": false,
+      "seeded_points": 650,
+      "height_range_au": [
+        -0.6,
+        0.6
+      ],
+      "points_counts_density_and_height_are_measured": false
+    },
+    "new_html_sources_total": 12,
+    "new_html_bytes_total": 2861220,
+    "new_independent_observation_count_claimed": false,
+    "independent_primary_source_and_coordinate_arithmetic_review": "passed_no_blocking_findings",
+    "catalog_api_tests_passed_individually": 19,
+    "frontend_vitest_passed": 36,
+    "strict_typecheck_and_vite_build": "passed",
+    "new_browser_paths_in_progress": 5,
+    "settings": {
+      "new_session_show_kuiper_belt": true,
+      "new_session_show_galaxies": true,
+      "legacy_context_without_fields_show_kuiper_belt": false,
+      "legacy_context_without_fields_show_galaxies": false,
+      "optional_kuiper_display_version": "kuiper-region-v1",
+      "galaxy_manifest_sha256_saved": true,
+      "referenced_appearance_extended_and_galaxy_files_reverified_on_import": true
+    },
+    "solar_history_bce_mode": "deferred; current official JPL approximation table has 8 planets/EM barycenter and excludes Pluto; no billion-year solar extrapolation",
+    "cosmic_scene_in_existing_observation_evidence_saved": false,
+    "public_service_deployed": false,
+    "linux_container_verified": false,
+    "release_zip_status": "v0.5 preparation; final archive/extraction/runtime/hash checks pending",
+    "post_mvp_final_commit_push_status": "pending",
+    "notion_midwork_read": {
+      "verified_at_kst": "2026-11-14T14:17:17+09:00",
+      "url": "https://app.notion.com/p/417d0a43a5058140b867fcf93b1f81f3",
+      "scope": "Related issue-report page only; late midwork background read, unchanged",
+      "performed_at_start_gate": false,
+      "home_or_all_qa_requeried": false,
+      "page_modified": false,
+      "completion_requery": "pending"
+    },
+    "intermediate_whole_python_checkpoint": {
+      "passed": 176,
+      "seconds": 34.15,
+      "warnings": 1,
+      "later_small_changes_require_final_rerun": true
+    },
+    "source_counts_status": "Historical initial DEV-005 acquisition totals; current chronology/galaxy/Kuiper sources are 21 HTML and 1 PDF, 7507781 bytes"
+  },
+  "galaxy_morphology_slice": {
+    "work_id": "DEV-006",
+    "version": "0.5.0",
+    "fsd_version": "0.9",
+    "algorithm_version": "official-rounded-galaxy-context-v1",
+    "morphology_algorithm_version": "observed-morphology-guide-v1",
+    "manifest": "data/manifests/galaxies.json",
+    "manifest_bytes": 80168,
+    "manifest_sha256": "1363cee1eb52a93d4e6505d437dd3d2291f16592e166fc33bbaef7864ba0890f",
+    "object_count": 9,
+    "objects": [
+      "galaxy-m31",
+      "galaxy-m33",
+      "galaxy-m81",
+      "galaxy-m87",
+      "galaxy-lmc",
+      "galaxy-smc",
+      "galaxy-m51",
+      "galaxy-m104",
+      "galaxy-centaurus-a"
+    ],
+    "source_html_count": 16,
+    "source_pdf_count": 1,
+    "official_original_bytes": 5947706,
+    "additional_original_documents_since_dev005": 10,
+    "additional_original_bytes_since_dev005": 4646561,
+    "superseded_catalog": {
+      "local_relative_path": "data/reference/galaxies/catalog_before_morphology_v1.json",
+      "sha256": "7fd74f67e48a1d5c7ecd4566e69a4ecc808853b00d553d0cb7a32eb084b54e7f",
+      "bytes": 24160,
+      "reason": "Original four-object derived catalog retained; its source response bytes and four directions/distances are unchanged."
+    },
+    "original_four_directions_distances_and_coordinate_sources_preserved": true,
+    "renderers": {
+      "galaxy-m31": "inclined_spiral",
+      "galaxy-m33": "flocculent_spiral",
+      "galaxy-m81": "grand_design_spiral",
+      "galaxy-m87": "elliptical_jet",
+      "galaxy-lmc": "irregular_barred",
+      "galaxy-smc": "irregular_cloud",
+      "galaxy-m51": "interacting_pair",
+      "galaxy-m104": "edge_on_dust_disk",
+      "galaxy-centaurus-a": "dust_lane_elliptical"
+    },
+    "numerical_inclinations": {
+      "galaxy-m31": 77
+    },
+    "other_inclinations_and_all_position_angles": null,
+    "m81_two_arms": "NASA official educational lithograph PDF text",
+    "lmc_bar_and_one_arm": "NASA-hosted APOD description; copyrighted photograph linked, not reproduced",
+    "m33_flocculent": "Renderer style for referenced wispy/patchy arms; not claimed as an explicit NASA classification",
+    "elliptical_arm_zero": "Morphological rendering classification, not a new arm-count measurement",
+    "m51_companion": "Source-confirmed NGC 5195; displayed offset is assumed, angular separation and PA remain null",
+    "lmc_direction": "Harvard SIMBAD explicitly ICRS epJ2000, source bibcode retained; no proper-motion extrapolation",
+    "new_observation_images_copied_into_application_assets": false,
+    "official_observation_reference_page_links": true,
+    "procedural_geometry_represents_resolved_physical_pose_or_stars": false,
+    "new_probability_claimed": false,
+    "science_tests_passed": 14,
+    "science_test_seconds": 2.73,
+    "ruff": "passed",
+    "source_acquisition_tls_validation": "standard certificate and hostname checks retained",
+    "runtime_network_requests": false,
+    "browser_morphology_and_final_whole_suite_status": "21 unique workflows covered: initial19 passed, final4 affected reruns passed; official images compared; JS/GLSL errors0",
+    "release_zip_status": "Extracted/runtime/restart checked; final exact archive in external checksum/verification JSON",
+    "post_mvp_final_commit_push_status": "Final source commit pinned in release_manifest.base_commit; remote checked at delivery",
+    "linux_container_verified": false,
+    "public_service_deployed": false,
+    "notion_completion_read": "14:48:40 KST attempt unavailable: issue window absent; last actual read 14:17:17 KST; no focus movement or writes"
+  },
+  "final_v0_5_verification": {
+    "recorded_at": "2026-11-14T14:51:14+09:00",
+    "python_tests_passed": 185,
+    "python_seconds": 325.37,
+    "vitest_passed": 40,
+    "browser_unique_scenarios": 21,
+    "initial_full_run_passed": 19,
+    "initial_full_run_failed": 2,
+    "final_targeted_passed": 4,
+    "final_vite_entry": "index-CJgIAKg2.js",
+    "typecheck_ruff_build": "passed",
+    "archive": "NASA_SPACE_APPS_CHALLENGE_v0.5.0_20261114_144922KST.zip",
+    "initial_extracted_verification": {
+      "checked_at": "2026-11-14T05:50:41.905350+00:00",
+      "status": "passed",
+      "archive": "NASA_SPACE_APPS_CHALLENGE_v0.5.0_20261114_144922KST.zip",
+      "extracted": "tmp/release-verify-4ju8fpkc/extracted",
+      "manifest_files_verified": 1599,
+      "fresh_runtime_install": "reused previously verified isolated runtime",
+      "windows_runtime": {
+        "status": "passed",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "evidence_id": "ev_d7fea0f9f07447eba4a45c992cd5fa2c",
+        "quality_pixels": [
+          29,
+          32
+        ],
+        "scene_object_count": 11,
+        "timeline_midpoint": "2026-11-14T12:00:00Z",
+        "timeline_validation_samples": 27,
+        "appearance_maps": 31,
+        "solar_extension_objects": 476,
+        "exoplanets": 6470,
+        "history_milestones": 10,
+        "galaxies": 9,
+        "kuiper_range_au": [
+          30,
+          50
+        ],
+        "pluto_result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+        "pluto_evidence_id": "ev_4bfe7ea3dd1c49729ac5eeac41292253"
+      },
+      "server_restart_evidence_restore": "passed: same epsilon/pluto evidence and result IDs",
+      "linux_container": "not_run",
+      "public_service": "not_deployed"
+    },
+    "final_archive_verification": "same-name external verification JSON is authoritative after finalization",
+    "notion_completion_attempt_kst": "14:48:40",
+    "notion_completion_read_status": "unavailable: previous native issue window absent; last actual read 14:17:17 KST",
+    "notion_home_or_full_qa_read": false,
+    "linux_container_verified": false,
+    "public_service_deployed": false,
+    "observed_galaxy_photos_copied_into_product": false,
+    "locale_count": 5,
+    "locale_keys": 261
   }
 }

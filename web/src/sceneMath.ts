@@ -75,6 +75,7 @@ export interface FocusTransition {
   duration: number;
   objectId: string;
   directionOnly?: boolean;
+  sphericalCameraOffset?:boolean;
 }
 
 export interface NavigationMotion {
@@ -125,24 +126,42 @@ export function makeFocus(
   };
 }
 
+/** Approach a galaxy along its catalogue line of sight, starting at the current free camera. */
+export function makeGalaxyFocus(current:CameraState,objectId:string,center:Vec3,radius:number,fov:number,aspect:number,startedAt:number,reducedMotion:boolean):FocusTransition {
+  const transition=makeFocus(current,objectId,center,radius,fov,aspect,startedAt,reducedMotion);
+  transition.to.position=add(center,scale(normalized(center),-focusDistance(radius,fov,aspect)));
+  transition.sphericalCameraOffset=true;
+  return transition;
+}
+
+function sphericalDirection(a:Vec3,b:Vec3,fraction:number):Vec3 {
+  a=normalized(a);b=normalized(b);const dot=Math.max(-1,Math.min(1,a[0]*b[0]+a[1]*b[1]+a[2]*b[2]));
+  const cross=(u:Vec3,v:Vec3):Vec3=>[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];
+  let axis=cross(a,b);if(magnitude(axis)<1e-8)axis=cross(a,Math.abs(a[0])<.9?[1,0,0]:[0,1,0]);axis=normalized(axis);
+  const angle=Math.acos(dot)*fraction;
+  return add(scale(a,Math.cos(angle)),scale(cross(axis,a),Math.sin(angle)));
+}
+
 export function sampleFocus(transition: FocusTransition, time: number): {camera: CameraState; done: boolean} {
   const raw = transition.duration === 0 ? 1 : Math.max(0, Math.min(1, (time - transition.startedAt) / transition.duration));
   if (raw === 1) return {camera:{...transition.to,position:[...transition.to.position],target:[...transition.to.target]},done:true};
+  if (raw === 0) return {camera:{...transition.from,position:[...transition.from.position],target:[...transition.from.target]},done:false};
   const eased = raw * raw * raw * (raw * (raw * 6 - 15) + 10);
   const lerp = (a: Vec3, b: Vec3): Vec3 => add(a, scale(subtract(b, a), eased));
   let target=lerp(transition.from.target,transition.to.target);
+  let position=lerp(transition.from.position,transition.to.position);
   if(transition.directionOnly){
     const from=subtract(transition.from.target,transition.from.position);const to=subtract(transition.to.target,transition.to.position);
-    const a=normalized(from);const b=normalized(to);const dot=Math.max(-1,Math.min(1,a[0]*b[0]+a[1]*b[1]+a[2]*b[2]));
-    const cross=(u:Vec3,v:Vec3):Vec3=>[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];
-    let axis=cross(a,b);if(magnitude(axis)<1e-8)axis=cross(a,Math.abs(a[0])<.9?[1,0,0]:[0,1,0]);axis=normalized(axis);
-    const angle=Math.acos(dot)*eased;
-    const direction=add(scale(a,Math.cos(angle)),scale(cross(axis,a),Math.sin(angle)));
+    const direction=sphericalDirection(from,to,eased);
     const distance=Math.max(.05,magnitude(from)+(magnitude(to)-magnitude(from))*eased);
-    target=add(lerp(transition.from.position,transition.to.position),scale(direction,distance));
+    target=add(position,scale(direction,distance));
+  }else if(transition.sphericalCameraOffset){
+    const from=subtract(transition.from.position,transition.from.target),to=subtract(transition.to.position,transition.to.target);
+    const distance=Math.max(.05,magnitude(from)+(magnitude(to)-magnitude(from))*eased);
+    position=add(target,scale(sphericalDirection(from,to,eased),distance));
   }
   return {
-    camera: { position: lerp(transition.from.position, transition.to.position), target, representation_version: REPRESENTATION_VERSION },
+    camera: { position, target, representation_version: REPRESENTATION_VERSION },
     done: raw === 1,
   };
 }

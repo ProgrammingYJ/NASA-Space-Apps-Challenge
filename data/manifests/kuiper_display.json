@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "kuiper-region-v1",
+  "display_version": "kuiper-region-v1",
+  "created_utc": "2026-11-14T05:12:33.008876+00:00",
+  "range_au": [
+    30,
+    50
+  ],
+  "center": "sun",
+  "range_kind": "approximate_inner_main_Kuiper_region_not_all_trans_Neptunian_space",
+  "source": {
+    "url": "https://science.nasa.gov/solar-system/kuiper-belt/facts/",
+    "resolved_url": "https://science.nasa.gov/solar-system/kuiper-belt/facts/",
+    "label": "NASA: Kuiper Belt Facts, Size and Distance",
+    "local_relative_path": "data/reference/kuiper/nasa_kuiper_facts.html",
+    "bytes": 291005,
+    "sha256": "1f814d9a2e0cd139422a62c4a161ccc5bc53385f0212f02b9c7d4ff753e3b318",
+    "retrieved_utc": "2026-11-14T05:12:33.007482+00:00"
+  },
+  "separate_scattered_disk_reference": {
+    "outer_reach_au_approximately": 1000,
+    "rendered_by_this_annulus": false
+  },
+  "renderer_assumptions": {
+    "representation": "seeded_explanatory_annulus",
+    "seed": 1949030,
+    "point_count": 650,
+    "height_range_au": [
+      -0.6,
+      0.6
+    ],
+    "points_are_catalog_objects": false,
+    "distribution_is_measured_density": false,
+    "height_is_measured_thickness": false
+  },
+  "limitations": [
+    "NASA's approximately 30–50 AU bounds describe the inner/main region; the scattered disk and detached populations extend beyond it.",
+    "650 seeded points, vertical height ±0.6 AU, planar geometry, colors, opacity and display compression are explanatory choices, not observed objects, population counts, density, orbital inclinations or measured thickness.",
+    "Actual known objects use their own separate ephemeris/catalog records; a seeded point must not be selected as an observed KBO or counted as an independent observation.",
+    "Visibility on/off changes only the explanatory layer; it does not alter physical membership, actual observations, catalog positions or scientific judgments.",
+    "No evolution over billions of years, orbit determination or existence/detection probability is inferred from this annulus."
+  ]
+}

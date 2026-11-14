@@ -1,5 +1,6 @@
 """Run against an extracted release's live API; no mocks or production writes."""
 
+import hashlib
 import json
 import sys
 import time
@@ -80,6 +81,37 @@ def main(base):
         for body in moving_scene["objects"]
         if body.get("orbit")
     )
+    appearance = call(base, "/api/v1/appearance")
+    assert len(appearance["objects"]) >= 31 and len(appearance["rings"]) == 4
+    assert "saturn" in appearance["objects"] and "moon-301" in appearance["objects"]
+    for entry in appearance["objects"].values():
+        image = call(base, entry["texture_url"])
+        assert hashlib.sha256(image).hexdigest() == entry["sha256"]
+    extended = call(base, "/api/v1/catalog/solar-system")
+    assert len(extended["objects"]) == 476
+    assert sum(obj["kind"] == "moon" for obj in extended["objects"]) == 468
+    assert sum(obj["status"] == "available" for obj in extended["objects"]) == 471
+    for parent in ("haumea", "eris", "quaoar", "orcus", "makemake", "gonggong"):
+        subset = call(base, "/api/v1/catalog/solar-system?parent_id=" + parent)
+        assert all(obj["parent_id"] == parent for obj in subset["objects"])
+    exoplanets = call(base, "/api/v1/catalog/exoplanets")
+    assert len(exoplanets["objects"]) == exoplanets["planet_count"] == 6470
+    selected = next(obj for obj in exoplanets["objects"] if obj["name"] == "TRAPPIST-1 e")
+    exoplanet = call(base, "/api/v1/catalog/exoplanets/" + selected["object_id"])
+    assert exoplanet["surface_status"] == "unresolved_illustration"
+    assert len(exoplanet["system_planets"]) == 7
+    history = call(base, "/api/v1/cosmic-history")
+    assert len(history["stages"]) == 10 and history["reference_age_gyr"] == 13.8
+    sample = call(base, "/api/v1/cosmic-history/sample?age_gyr=9.2")
+    assert sample["stage_id"] == "solar_system" and sample["lookback_gyr"] == 4.6
+    galaxies = call(base, "/api/v1/catalog/galaxies")
+    assert len(galaxies["objects"]) == 9
+    assert all(obj["distance_mpc"] > 0 for obj in galaxies["objects"])
+    morphology = {obj["object_id"]: obj["appearance"] for obj in galaxies["objects"]}
+    assert morphology["galaxy-m87"]["renderer"] == "elliptical_jet"
+    assert morphology["galaxy-m31"]["inclination_deg"] == 77
+    kuiper = call(base, "/api/v1/kuiper-belt")
+    assert kuiper["range_au"] == [30, 50]
     pluto_job = call(base, "/api/v1/comparison-jobs", {"observation_ids": ["S12", "S14"]})
     for _ in range(160):
         pluto_job = call(base, "/api/v1/jobs/" + pluto_job["job_id"])
@@ -106,9 +138,15 @@ def main(base):
                     "orbit_manifest_sha256": scene["orbit_manifest_sha256"],
                     "show_orbits": False,
                     "timeline_algorithm_version": timeline["algorithm_version"],
-                    "playback_rate_hours_per_second": 24,
+                    "playback_rate_hours_per_second": 72,
                     "playback_paused": True,
                     "follow_object_id": "pluto",
+                    "appearance_manifest_sha256": appearance["source_manifest_sha256"],
+                    "extended_solar_manifest_sha256": extended["source_manifest_sha256"],
+                    "galaxy_manifest_sha256": galaxies["source_manifest_sha256"],
+                    "show_kuiper_belt": False,
+                    "show_galaxies": True,
+                    "kuiper_display_version": "kuiper-region-v1",
                     "camera": {
                         "position": [0, 95, 150],
                         "target": [0, 0, 0],
@@ -133,6 +171,12 @@ def main(base):
                 "scene_object_count": len(scene["objects"]),
                 "timeline_midpoint": moving_scene["epoch"],
                 "timeline_validation_samples": timeline["validation"]["sample_count"],
+                "appearance_maps": len(appearance["objects"]),
+                "solar_extension_objects": len(extended["objects"]),
+                "exoplanets": len(exoplanets["objects"]),
+                "history_milestones": len(history["stages"]),
+                "galaxies": len(galaxies["objects"]),
+                "kuiper_range_au": kuiper["range_au"],
                 "pluto_result_id": pluto["result_id"],
                 "pluto_evidence_id": pluto_saved["evidence_id"],
             },
