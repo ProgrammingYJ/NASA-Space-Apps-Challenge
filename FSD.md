@@ -1,6 +1,6 @@
 # Planet X and SPHEREx — 기능·개발 명세서
 
-문서 버전 `FSD-0.16` · 갱신일 2026-11-14 KST · 현재 작업 `OPS-013 / v0.9.1` 기본 HTTP 포트3002 수정·새 ZIP 검사 중 · 보존된 소스/검증 기록 `v0.8.0 / b6b4545` · 검증된 완결 ZIP `v0.9.0` · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
+문서 버전 `FSD-0.16` · 갱신일 2026-11-14 KST · 현재 작업 `OPS-013 / v0.9.1` 기본 HTTP 포트3002·Windows 정확 ZIP 검증 완료 · 보존된 소스/검증 기록 `v0.8.0 / b6b4545` · 검증된 완결 ZIP `v0.9.1` · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
 
 **이 파일은 프로젝트의 기능·화면·계산·API·데이터·실행·검사·배포 명세를 통합 관리하는 문서다.** 기능이나 계약을 바꾸는 작업에서는 관련 절과 아래 구현 현황을 함께 갱신한다. 규칙은 [AGENTS.md](./AGENTS.md), 실제 작업 증거는 [작업 기록](./docs/worklog.md), 적용 스킬은 [SKILLS.md](./SKILLS.md)에서 연결한다. 기능·개발 명세는 이 파일에서 유지한다. 사용자의 명시적 요청으로 만든 [Data_Spec.md](./Data_Spec.md)는 실제 사용/확보/이전 데이터의 전수 목록·출처·해시·가공/권리·한계를 담당하며 실행 manifest/타입과 함께 갱신한다. OpenAPI/타입/스키마·lockfile·테스트는 실행 가능한 계약으로 별도 유지하고 이 문서에서 경로/버전을 참조한다.
 
@@ -845,3 +845,8 @@ Moon의표시R0.20874/물리R1737.4km·group/mesh scale1은선택전후유지됐
 `NASA_SPACE_APPS_CHALLENGE_v0.9.0_20261114_213804KST.zip`는 **495916482B/2223파일**, SHA256 **`fd3c694f354bac02ba9728dae521b13d7b41250870bc3b050ee8629d6b467db7`**이다. source `7b2dbf7c4e5ee6798fd9c56230a7858ae8dde3e4`의 clean tree, 최종 DLJsfpSc 프런트와 Node 전용 `app.js`/검증된103JSON으로 생성했다. 추적 manifest/source sidecar33개의 Git index와 실제 동결바이트도 전부 일치했다.
 
 정확한 ZIP을 새 `tmp/node-release-verify-r4s83m6d/extracted`에 풀어2222개 release manifest 항목의경로/바이트/SHA와필수원본·캐시를확인했다. Node22.17 절대경로와 `app.js`만서버로실행했고 PATH에서Python실행파일을찾을수없게했다. 개발검증기/HTTP클라이언트의Python과서버의Node를구분한다. 실제두관측·29/32품질·지도/사진·카탈로그·새가정을확인하고실제Node프로세스와worker thread를종료/재시작한뒤 εB/Pluto및추가근거의같은ID·판단·카메라·밀도/관측자설정·export원바이트/import복원을통과했다. 정확완료시각 `2026-11-14T12:40:02.175944+00:00`이다. 상세는 `docs/releases/v0.9.0.json`과ZIP밖동명verification/checksum JSON을따른다. 이사후문서는검증한불변ZIP에추가하지않는다. 기존v0.8 ZIP/원본/Git이력도보존했다. Linux/Docker·공개서비스·사람/원어민검수는수행하지않았다.
+
+
+### OPS-013 v0.9.1 기본3002 완결 ZIP 검증 확정 · 2026-11-14 22:08:22 KST
+
+`NASA_SPACE_APPS_CHALLENGE_v0.9.1_20261114_220703KST.zip`는 495928120B/2224파일, SHA256 `53a162c40395198559eb1ef2d67840e44aa568bf2a5afebffa47857706c30803`다. source `4b18d32b37c5bccb37e08ed040ffd5931f129dec`의 clean tree에서 생성했고 기존 프런트/과학103JSON 및 Data_Spec SHA를 보존했다. 정확한 ZIP을 새 폴더에 해제해 manifest2223개와 모든 필수자료를 검사했다. PORT/APP_PORT 없이 `node app.js`만으로 기본3002에서 실제 Node 서버를 실행했고 ready·실제 관측/품질·근거저장과 프로세스/worker 재시작 뒤 같은 근거/결과·export 바이트 복원을 통과했다. Python은 개발 검증/HTTP 클라이언트일 뿐 서버 의존성이 아니다. Node전체18PASS10.909초와 변경 배포도구Ruff를 확인했다. 정본은 `docs/releases/v0.9.1.json` 및 ZIP 밖 동명 checksum/verification JSON이다. 이전 ZIP/원본/사용자 상태는 변경하지 않았고 이 사후문서는 이미 검증한 불변 ZIP에 넣지 않는다. 실제 MCSM/nginx 설정 변경·Linux/Docker·공개502 복구는 수행/확인하지 않았다.

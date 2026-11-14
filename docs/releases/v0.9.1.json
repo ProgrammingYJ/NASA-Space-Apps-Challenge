@@ -1,0 +1,78 @@
+{
+  "release": "0.9.1",
+  "work_id": "OPS-013",
+  "source_commit": "4b18d32b37c5bccb37e08ed040ffd5931f129dec",
+  "archive": {
+    "filename": "NASA_SPACE_APPS_CHALLENGE_v0.9.1_20261114_220703KST.zip",
+    "bytes": 495928120,
+    "sha256": "53a162c40395198559eb1ef2d67840e44aa568bf2a5afebffa47857706c30803",
+    "file_count": 2224
+  },
+  "completed_at": "2026-11-14T13:08:22.648364+00:00",
+  "verification_status": "passed",
+  "exact_archive_report": "artifacts/NASA_SPACE_APPS_CHALLENGE_v0.9.1_20261114_220703KST.verification.json",
+  "manifest_files_verified": 2223,
+  "runtime_integrity": {
+    "required_sources_verified": 1564,
+    "optional_sources_present_verified": 29,
+    "optional_sources_not_deployed": 266,
+    "runtime_manifest_sha256": "9dfe12f530da0e6993ced98cc1a94932eb8aef161b6ca68e1a5cb081df44a2af"
+  },
+  "server_start": {
+    "command": "node app.js",
+    "version": "v22.17.0",
+    "PORT": null,
+    "APP_PORT": null,
+    "actual_http_port": 3002,
+    "startup_port_source": "code_default",
+    "python_required": false
+  },
+  "health_before_restart": {
+    "runtime": "node",
+    "science_mode": "verified_build_cache_and_ported_display_models",
+    "source_bundle_verified": true,
+    "status": "ready",
+    "storage_writable": true,
+    "worker_alive": true
+  },
+  "health_after_restart": {
+    "runtime": "node",
+    "science_mode": "verified_build_cache_and_ported_display_models",
+    "source_bundle_verified": true,
+    "status": "ready",
+    "storage_writable": true,
+    "worker_alive": true
+  },
+  "evidence_restart_restore": [
+    {
+      "evidence_id": "ev_35a3a53b93e2463ebb1e92089e675ccc",
+      "result_id": "cmp_d88083664b6fd27592eb68c1",
+      "same_export_bytes_session_judgment": true,
+      "camera_and_mass_observer_assumptions_present": false
+    },
+    {
+      "evidence_id": "ev_3189d74090c1443fb72df7d85739d168",
+      "result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+      "same_export_bytes_session_judgment": true,
+      "camera_and_mass_observer_assumptions_present": true
+    },
+    {
+      "evidence_id": "ev_4a0416d1e0fe47248fddd972475d210f",
+      "result_id": "cmp_d88083664b6fd27592eb68c1",
+      "same_export_bytes_session_judgment": true,
+      "camera_and_mass_observer_assumptions_present": true
+    }
+  ],
+  "tests": {
+    "node_passed": 18,
+    "node_seconds": 10.909,
+    "ruff_changed_deploy_files": "passed",
+    "frontend_scientific_data_changed": false
+  },
+  "limits": [
+    "Windows exact ZIP extraction, default-port startup and real Node restart verified.",
+    "Linux/Docker and public deployment not performed; public nginx 502 was observed before server update.",
+    "Existing PORT or APP_PORT overrides the default and must match the intended hosting configuration."
+  ],
+  "post_verification_document_outside_immutable_archive": true
+}
