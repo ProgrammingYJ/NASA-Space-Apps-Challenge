@@ -15,7 +15,8 @@
     "SETUP-008",
     "SETUP-009",
     "DEV-001",
-    "DEV-002"
+    "DEV-002",
+    "DEV-003"
   ],
   "assistance": [
     "repository_configuration",
@@ -39,7 +40,10 @@
     "official_jpl_ephemeris_acquisition_and_validation",
     "pluto_originals_and_observer_prediction",
     "object_workspaces_and_camera_context_restore",
-    "source_backed_osculating_orbit_guides"
+    "source_backed_osculating_orbit_guides",
+    "bounded_cubic_hermite_display_interpolation",
+    "timeline_play_pause_and_camera_follow",
+    "independent_midpoint_query_validation"
   ],
   "application_code_generated_in_this_setup": true,
   "science_detection_or_fit_performed": false,
@@ -69,15 +73,9 @@
     "public_service_deployed": false
   },
   "universe_slice": {
-    "version": "0.2.0",
+    "version": "0.3.0",
     "source": "JPL Horizons geometric heliocentric ephemerides and IRSA SPHEREx L2",
     "scene_objects": 11,
-    "supported_model_epochs_utc": [
-      "2026-11-13T00:00:00Z",
-      "2026-11-14T00:00:00Z",
-      "2026-11-15T00:00:00Z",
-      "2026-11-16T00:00:00Z"
-    ],
     "raw_observation_inputs": [
       "S01",
       "S02",
@@ -95,7 +93,50 @@
       "algorithm": "osculating-kepler-guide-v1",
       "points_per_guide": 257,
       "not_full_period_integrated_trajectories": true,
-      "source_manifest": "data/manifests/solar_system_orbits.json"
+      "source_manifest": "data/manifests/solar_system_orbits.json",
+      "display_reference_epoch_utc": "2026-11-14T00:00:00Z"
+    },
+    "previous_completed_version": "0.2.0",
+    "version_status": "integration_and_release_verification_in_progress",
+    "source_knot_epochs_utc": [
+      "2026-11-13T00:00:00Z",
+      "2026-11-14T00:00:00Z",
+      "2026-11-15T00:00:00Z",
+      "2026-11-16T00:00:00Z"
+    ],
+    "supported_model_time_range_utc": {
+      "start": "2026-11-13T00:00:00Z",
+      "end": "2026-11-16T00:00:00Z",
+      "extrapolation": false
     }
+  },
+  "timeline_slice": {
+    "work_id": "DEV-003",
+    "baseline_commit": "54756ca",
+    "baseline_committed_at_kst": "2026-11-14T13:12:27+09:00",
+    "baseline_changed_files": 140,
+    "algorithm_version": "display-hermite-v1",
+    "original_jpl_knots_unchanged": true,
+    "original_observations_unchanged": true,
+    "interpolation_time_coordinate": "TDB days",
+    "display_time_scale": "UTC",
+    "interpolated_positions_are_display_calculations": true,
+    "playback_rate_model_hours_per_real_second": [
+      1,
+      6,
+      24
+    ],
+    "default_playback_rate": 6,
+    "save_and_restore_paused": true,
+    "validation_manifest": "data/manifests/timeline_validation.json",
+    "validation_sha256": "6562f9898ba8716d41595f1b9288c0cf364b3ec4119e02cafb6a961a19527f99",
+    "validation_samples": 27,
+    "maximum_observed_midpoint_discrepancy_km": 18.986654240281606,
+    "global_error_bound_claimed": false,
+    "independent_dynamical_model_validation_claimed": false,
+    "science_tests_passed": 17,
+    "api_frontend_browser_release_verification": "in_progress_see_worklog",
+    "public_service_deployed": false,
+    "linux_container_verified": false
   }
 }

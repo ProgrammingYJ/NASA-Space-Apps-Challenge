@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Planet X · SPHEREx",
-    "version": "0.2.0"
+    "version": "0.4.0"
   },
   "paths": {
     "/health/live": {
@@ -91,6 +91,135 @@
                 "schema": {
                   "$ref": "#/components/schemas/HTTPValidationError"
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/timeline": {
+      "get": {
+        "summary": "Timeline",
+        "operationId": "timeline_api_v1_timeline_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/catalog/exoplanets": {
+      "get": {
+        "summary": "Exoplanets",
+        "operationId": "exoplanets_api_v1_catalog_exoplanets_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/catalog/exoplanets/{object_id}": {
+      "get": {
+        "summary": "Exoplanet",
+        "operationId": "exoplanet_api_v1_catalog_exoplanets__object_id__get",
+        "parameters": [
+          {
+            "name": "object_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Object Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/catalog/solar-system": {
+      "get": {
+        "summary": "Extended Solar",
+        "operationId": "extended_solar_api_v1_catalog_solar_system_get",
+        "parameters": [
+          {
+            "name": "parent_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Parent Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/appearance": {
+      "get": {
+        "summary": "Appearance",
+        "operationId": "appearance_api_v1_appearance_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -723,6 +852,70 @@
             "type": "boolean",
             "title": "Show Orbits",
             "default": true
+          },
+          "timeline_algorithm_version": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "display-hermite-v1"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timeline Algorithm Version"
+          },
+          "playback_rate_hours_per_second": {
+            "type": "integer",
+            "enum": [
+              1,
+              6,
+              24
+            ],
+            "title": "Playback Rate Hours Per Second",
+            "default": 6
+          },
+          "playback_paused": {
+            "type": "boolean",
+            "const": true,
+            "title": "Playback Paused",
+            "default": true
+          },
+          "follow_object_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 50
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Follow Object Id"
+          },
+          "appearance_manifest_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Appearance Manifest Sha256"
+          },
+          "extended_solar_manifest_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extended Solar Manifest Sha256"
           }
         },
         "additionalProperties": false,

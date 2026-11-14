@@ -33,6 +33,30 @@ export function displayOrbitPoints(pointsAu: Vec3[]): Vec3[] {
   return pointsAu.map(displayPosition);
 }
 
+/** Parent-centered moon distances are expanded separately from heliocentric compression. */
+export function displayMoonOffset(relativeAu:Vec3,parentRadiusKm:number|null,parentDisplayRadius:number):Vec3|null{
+  if(!relativeAu.every(Number.isFinite)||(parentRadiusKm!==null&&(!Number.isFinite(parentRadiusKm)||parentRadiusKm<=0))||!Number.isFinite(parentDisplayRadius)||parentDisplayRadius<=0)return null;
+  const radiusAu=magnitude(relativeAu);if(radiusAu===0)return [0,0,0];
+  // Unknown physical radii stay unknown: 0.0001 AU is only a display reference.
+  const referenceAu=parentRadiusKm===null?.0001:parentRadiusKm/149597870.7;
+  const radiusInParentRadii=radiusAu/referenceAu;
+  const distance=parentDisplayRadius*(1.8+1.35*Math.log1p(radiusInParentRadii));
+  return scale(displayDirection(relativeAu),distance);
+}
+
+export interface DisplayBodyInput {object_id:string;kind:string;parent_id?:string;position_au?:Vec3;parent_relative_position_au?:Vec3;radius_km?:number|null}
+export function bodyDisplayPositions(bodies:DisplayBodyInput[]):Map<string,Vec3>{
+  const byId=new Map(bodies.map(body=>[body.object_id,body]));const result=new Map<string,Vec3>();const visiting=new Set<string>();
+  const locate=(id:string):Vec3|null=>{
+    const previous=result.get(id);if(previous)return previous;const body=byId.get(id);if(!body||visiting.has(id))return null;visiting.add(id);
+    let position:Vec3|null=null;
+    if(body.kind==='moon'&&body.parent_id){const parent=byId.get(body.parent_id);const parentPosition=locate(body.parent_id);const relative=body.parent_relative_position_au??(body.position_au&&parent?.position_au?subtract(body.position_au,parent.position_au):undefined);if(parent&&parentPosition&&relative){const offset=displayMoonOffset(relative,parent.radius_km??null,displayRadius(parent.radius_km??0,parent.object_id==='sun'));if(offset)position=add(parentPosition,offset);}}
+    else if(body.kind!=='direction'&&body.position_au&&body.position_au.every(Number.isFinite))position=displayPosition(body.position_au);
+    visiting.delete(id);if(position)result.set(id,position);return position;
+  };
+  bodies.forEach(body=>locate(body.object_id));return result;
+}
+
 /** Deliberately exaggerated for navigation, independent of distance compression. */
 export function displayRadius(radiusKm: number, isSun = false): number {
   if (isSun) return 2.65;
@@ -51,6 +75,29 @@ export interface FocusTransition {
   duration: number;
   objectId: string;
   directionOnly?: boolean;
+}
+
+export interface NavigationMotion {
+  camera:CameraState;
+  transition:FocusTransition|null;
+  followedObjectId:string|null;
+}
+
+/** Update navigation for a moving body using renderer coordinates, without creating a focus request. */
+export function advanceNavigationForBody(
+  navigation:NavigationMotion,
+  objectId:string,
+  previous:Vec3,
+  current:Vec3,
+  directionOnly=false,
+):NavigationMotion {
+  const moveCamera=(camera:CameraState):CameraState=>{
+    if(directionOnly){const distance=magnitude(subtract(camera.target,camera.position));return {...camera,position:[...camera.position],target:add(camera.position,scale(normalized(current),distance))};}
+    const delta=subtract(current,previous);return {...camera,position:add(camera.position,delta),target:add(camera.target,delta)};
+  };
+  if(navigation.transition?.objectId===objectId){return {...navigation,transition:{...navigation.transition,to:moveCamera(navigation.transition.to)}};}
+  if(navigation.followedObjectId!==objectId)return navigation;
+  return {...navigation,camera:moveCamera(navigation.camera)};
 }
 
 export function makeFocus(

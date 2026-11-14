@@ -41,6 +41,12 @@ class UniverseContext(StrictModel):
     source_manifest_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
     orbit_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
     show_orbits: bool = True
+    timeline_algorithm_version: Literal["display-hermite-v1"] | None = None
+    playback_rate_hours_per_second: Literal[1, 6, 24] = 6
+    playback_paused: Literal[True] = True
+    follow_object_id: str | None = Field(default=None, max_length=50)
+    appearance_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    extended_solar_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
 
 
 class Session(StrictModel):
@@ -59,6 +65,11 @@ class Session(StrictModel):
             raise ValueError("Observation pair must belong to selected object")
         if self.universe_context and self.universe_context.selected_object_id != self.object_id:
             raise ValueError("Exploration context must belong to selected object")
+        if self.universe_context and self.universe_context.follow_object_id not in (
+            None,
+            self.object_id,
+        ):
+            raise ValueError("Following object must belong to selected context")
         return self
 
 

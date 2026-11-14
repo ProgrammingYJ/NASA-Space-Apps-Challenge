@@ -6,6 +6,8 @@ import re
 import time
 import uuid
 from contextlib import asynccontextmanager
+from datetime import datetime
+from functools import lru_cache
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
@@ -43,7 +45,7 @@ def create_app(state_dir: Path | None = None):
         yield
         app.state.service.close()
 
-    app = FastAPI(title="Planet X · SPHEREx", version="0.2.0", lifespan=lifespan)
+    app = FastAPI(title="Planet X · SPHEREx", version="0.4.0", lifespan=lifespan)
 
     @app.middleware("http")
     async def bounds(request, call_next):
@@ -131,13 +133,21 @@ def create_app(state_dir: Path | None = None):
     @app.get("/api/v1/universe")
     def universe(epoch: str | None = None):
         from science.orbits import get_orbits
-        from science.solar_system import get_universe
+        from science.solar_system import DEFAULT_EPOCH
+        from science.timeline import sample_timeline
 
+        if epoch is not None:
+            try:
+                parsed = datetime.fromisoformat(epoch)
+            except ValueError:
+                raise HTTPException(422, "unsupported_model_epoch") from None
+            if parsed.tzinfo is None:
+                raise HTTPException(422, "unsupported_model_epoch")
         try:
-            value = get_universe(ROOT, epoch)
-            orbits = get_orbits(ROOT, value["epoch"])
+            value = sample_timeline(ROOT, epoch or DEFAULT_EPOCH)
+            orbits = get_orbits(ROOT, value["guide_reference_epoch"])
         except ValueError as exc:
-            if "epoch" in str(exc):
+            if str(exc) == "unsupported_timeline_epoch":
                 raise HTTPException(422, "unsupported_model_epoch") from None
             raise
         value["source_manifest_sha256"] = hashlib.sha256(
@@ -151,14 +161,95 @@ def create_app(state_dir: Path | None = None):
                 body["orbit"] = orbits["orbits"][body["object_id"]]
         return value
 
+    @app.get("/api/v1/timeline")
+    def timeline():
+        from science.timeline import get_timeline
+
+        return get_timeline(ROOT)
+
+    @lru_cache(maxsize=1)
+    def exoplanet_catalog():
+        from science.exoplanets import load_catalog
+
+        try:
+            return load_catalog(ROOT)
+        except FileNotFoundError:
+            raise HTTPException(503, "catalog_unavailable") from None
+
+    @app.get("/api/v1/catalog/exoplanets")
+    def exoplanets():
+        from science.exoplanets import index
+
+        return index(exoplanet_catalog())
+
+    @app.get("/api/v1/catalog/exoplanets/{object_id}")
+    def exoplanet(object_id: str):
+        from science.exoplanets import planet
+
+        value = planet(exoplanet_catalog(), object_id)
+        if value is None:
+            raise HTTPException(404, "object_not_found")
+        return value
+
+    @lru_cache(maxsize=1)
+    def extended_catalog():
+        from science.extended_solar import get_extended_solar
+
+        try:
+            value = get_extended_solar(ROOT)
+        except FileNotFoundError:
+            raise HTTPException(503, "catalog_unavailable") from None
+        value["source_manifest_sha256"] = hashlib.sha256(
+            (ROOT / "data/manifests/extended_solar.json").read_bytes()
+        ).hexdigest()
+        return value
+
+    @app.get("/api/v1/catalog/solar-system")
+    def extended_solar(parent_id: str | None = None):
+        from science.extended_solar import PARENTS
+
+        if parent_id is not None and parent_id not in PARENTS:
+            raise HTTPException(422, "unknown_extended_parent")
+        value = extended_catalog()
+        objects = value["objects"]
+        if parent_id is not None:
+            objects = [obj for obj in objects if obj["parent_id"] == parent_id]
+        else:
+            objects = [
+                {key: item for key, item in obj.items() if key != "knots"} for obj in objects
+            ]
+        return {**value, "objects": objects}
+
+    @lru_cache(maxsize=1)
+    def appearance_catalog():
+        from science.appearance import get_appearance
+
+        try:
+            return get_appearance(ROOT)
+        except FileNotFoundError:
+            raise HTTPException(503, "appearance_unavailable") from None
+
+    @app.get("/api/v1/appearance")
+    def appearance():
+        return appearance_catalog()
+
     def context_reasons(session):
         context = session.universe_context
         if context is None:
             return []
-        from science.solar_system import get_universe
+        from science.solar_system import DEFAULT_EPOCH, get_universe
 
         try:
-            get_universe(ROOT, context.model_epoch)
+            if context.timeline_algorithm_version:
+                from science.timeline import sample_timeline
+
+                sample_timeline(ROOT, context.model_epoch)
+            else:
+                get_universe(ROOT, context.model_epoch)
+                if context.orbit_manifest_sha256 and datetime.fromisoformat(
+                    context.model_epoch
+                ) != datetime.fromisoformat(DEFAULT_EPOCH):
+                    return ["orbit_guide_reference_changed"]
         except ValueError:
             return ["unsupported_model_epoch"]
         source = ROOT / "data/manifests/solar_system_ephemeris.json"
@@ -175,6 +266,19 @@ def create_app(state_dir: Path | None = None):
                 != context.orbit_manifest_sha256
             ):
                 return ["orbit_ephemeris_changed"]
+        for expected, filename, reason in (
+            (context.appearance_manifest_sha256, "appearance.json", "appearance_sources_changed"),
+            (
+                context.extended_solar_manifest_sha256,
+                "extended_solar.json",
+                "extended_solar_sources_changed",
+            ),
+        ):
+            path = ROOT / "data/manifests" / filename
+            if expected and (
+                not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected
+            ):
+                return [reason]
         return []
 
     @app.get("/api/v1/observations")
@@ -376,6 +480,8 @@ def create_app(state_dir: Path | None = None):
     static = ROOT / "web/dist"
     if static.is_dir():
         app.mount("/assets", StaticFiles(directory=static / "assets"), name="assets")
+        if (static / "textures").is_dir():
+            app.mount("/textures", StaticFiles(directory=static / "textures"), name="textures")
 
         @app.get("/")
         def index():

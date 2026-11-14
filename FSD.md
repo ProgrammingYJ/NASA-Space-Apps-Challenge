@@ -1,6 +1,6 @@
 # Planet X and SPHEREx — 기능·개발 명세서
 
-문서 버전 `FSD-0.5` · 갱신일 2026-11-14 KST · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
+문서 버전 `FSD-0.7` · 갱신일 2026-11-14 KST · 현재 릴리스 준비 `v0.4.0` · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
 
 **이 파일은 프로젝트의 기능·화면·계산·API·데이터·실행·검사·배포 명세를 통합 관리하는 문서다.** 기능이나 계약을 바꾸는 작업에서는 관련 절과 아래 구현 현황을 함께 갱신한다. 규칙은 [AGENTS.md](./AGENTS.md), 실제 작업 증거는 [작업 기록](./docs/worklog.md), 적용 스킬은 [SKILLS.md](./SKILLS.md)에서 연결한다. 세부 명세를 다른 MD로 분산해 서로 다른 최신본을 만들지 않는다. OpenAPI/타입/스키마·lockfile·테스트는 실행 가능한 계약으로 별도 유지하고 이 문서에서 경로/버전을 참조한다.
 
@@ -96,9 +96,35 @@ DEV-001은관측기능의첫독립작업대였다. 사용자는우주를탐색�
 
 관측버튼으로같은천체의실제자료목록/노출을연다. 공간장면을유지하고분석패널을접을수있다. object_id별workspace에선택노출/표시·비교·판단/근거ID를보관한다. εB→명왕성→εB로옮겨도각판단을보존하고다른대상의관측으로보이지않는다. 늦은응답은선택/작업generation·revision·unmount경계를확인하며현재선택/새세션을덮지않는다.
 
-모형시각은실제확보한11/13·14·15·16 00:00UTC의4개만지원한다(72시간범위). 보간/외삽/임의시간사진생성은없다. 시각전환중에는이전표시시각과로딩을알려새날짜아래이전위치를조용히두지않는다. 모형시각/카메라변경은실노출DATE-AVG·관측자·선택/판단을바꾸지않는다. 근거에는universe_context의선택천체·장면출처SHA·모형시각·카메라position/target·표현버전·패널상태를추가저장/복원한다.
+원본 천체력은 11/13·14·15·16 00:00 UTC의 정확한 네 표본이다. DEV-003은 이 표본을 바꾸지 않고 두 표본 사이를 명시적인 표시 보간으로 연결해 72시간 연속 재생을 제공한다(2.6절). 범위 밖 외삽과 임의 시각의 실제 사진 생성은 허용하지 않는다. 로딩/실패 상태에서 이전 위치를 새 시각의 결과로 표시하지 않는다. 모형시각/카메라변경은 실노출 DATE-AVG·관측자·선택/판단을 바꾸지 않는다. 근거에는 universe_context의 선택천체·장면출처SHA·모형시각·카메라 position/target·표현버전·패널상태를 저장/복원한다.
 
 사용자의추가요청으로수성~명왕성9개궤도안내선을기본표시한다. 선은1px·기본opacity.22/선택.58이며선택천체를강조하고상단궤도버튼으로전체를켠다/끈다. 선은클릭대상이아니며전환으로카메라/선택/관측을바꾸지않는다. Sun은태양중심원점,εB는방향층으로별도의궤도를생성하지않는다. 궤도표시조건/원출처SHA도근거에저장하고새세션에서동일하게복원한다.
+
+### 2.6 DEV-003 연속 시간 재생·정지 계약
+
+사용자는 현재 완성 작업을 먼저 commit한 뒤 시간 재생을 추가하도록 지시했다. `54756ca`(2026-11-14 13:12:27 KST, 140파일)를 보존 기준으로 확정한 후 구현을 시작했다. 원격 push·공개 서버 배포를 수행한 commit은 아니다.
+
+재생 범위는 **2026-11-13 00:00:00 ~ 2026-11-16 00:00:00 UTC, 72시간**이다. 시작은 정지이며 Play/Pause와 수동 시각 탐색을 제공한다. 속도는 실제 1초당 모형 1/6/24시간, 기본 6시간이다. UI 모형 상태는 최대 약 30fps로 갱신하며 이는 보장 성능값이 아니다. 끝에 도달하면 정확한 끝 시각에서 멈추고, 끝에서 다시 Play하면 시작 시각부터 재생한다. 수동 시각 변경·숨겨진 탭·근거 저장은 재생을 멈춘다. import·새 세션도 정지 상태로 시작한다. 탭 복귀 때 숨겨진 시간을 한꺼번에 더하지 않는다.
+
+초기 `/universe` 장면과 `/timeline`의 작은 표본 묶음을 읽은 뒤 브라우저가 오프라인 수식으로 연속 표시를 계산한다. 매 프레임 서버나 외부 Horizons를 조회하지 않는다. 천체력 원본 시각에서는 원 위치·속도를 그대로 쓰고, 중간 시각에는 `display-hermite-v1` 표시 보간임을 알린다. 서버도 같은 범위의 임의 시각을 `/universe?epoch=`로 재현한다. 실제 SPHEREx 노출·관측자·품질·판단은 시간 재생과 독립적이다.
+
+선택에 의한 포커스 요청과 시간 tick을 분리한다. 재생 tick이 매번 새 자동 포커스를 시작하지 않는다. 포커스 완료 후 추적 중인 천체는 현재 카메라 offset을 유지해 이동을 따르며, 드래그/줌/키보드로 수동 조작하면 추적을 해제해 카메라를 고정한다. 선택한 천체와 optional `follow_object_id`를 별도로 저장한다. 전체 보기·새 세션·복원 경계에서도 이전 자동 이동이 새 상태를 덮지 않는다.
+
+아홉 궤도 안내선은 **2026-11-14 00:00 UTC의 접촉궤도**로 고정한다. 이동하는 천체의 모형시각과 안내선 기준시각을 따로 표시하며, 재생 중 매 프레임 새 Horizons 궤도를 추론한 것처럼 바꾸지 않는다. ε Indi B는 두 catalog 방향 표본의 정규화 보간으로 표현하고 물리적 거리를 만들지 않는다.
+
+### 2.7 표면·고리·위성·외계행성 전체 카탈로그 (DEV-004, 통합 검사 중)
+
+사용자는 태양계 왜행성·위성과 태양계 밖 외계행성을 **둘 다 포함**하라고 확인했다. 기존 실노출/근거 경로를 보존하며 공개 원본 지도·실제 위성 천체력·전체 공개 외계행성 카탈로그를 추가한다.
+
+- `science/appearance.py`·`appearance.json`: 공개 지도31개와 거대행성 고리4개. 관측 모자이크/레이더/대표 대기 지도와 설명용 외관을 구분한다. 원 URL·전체 SHA·바이트·촬영시기·credit·미관측 영역을 보존하며 원본 이미지를 고치지 않는다. 논문 그림의 지도 창은 `texture_region_px`를 GPU UV에 적용해 축/캡션을 제외한다. 선택 천체만 고해상도 지도를 읽고 다른 천체는 설명용 외관으로 보여 GPU 사용량을 제한한다. 지도 경도 정합·실시간 대기·측광은 미검증이다.
+- `science/extended_solar.py`·`extended_solar.json`: 위성468개+추가 왜행성/후보8개=476개 등록, 실제2026-11-13~16 천체력 지원471개(위성463개). 미지원5개는 목록/사유만 표시한다. 인정된 왜행성5개(기존 명왕성+추가4개)와 외곽 후보4개를 구분하며 모든 소행성·모든 왜행성 후보를 구현했다는 뜻은 아니다. 부모중심·TDB/UTC·J2000황도·AU/AU-day·cadence를 보존한다. TNO위성5개는 모천체 PRIMARY 중심과 정합한 원본을 별도로 사용한다.
+- 위성의 실제 부모상대 벡터와 태양중심 합성값을 구분한다. 화면은 부모 표시위치에 별도 확대 거리를 더한다. 미측정 반지름은 과학값 `null`, 표시 크기만 사용하며 부모 반지름 미상시 표시 기준0.0001AU는 물리값이 아니다. 부모 선택시 위성 목록/표식을 열고 상시 라벨은 큰 위성/선택 위성으로 제한한다. 추가 천체의 선은 확보한72시간의 **예측 표본 경로**로 열린 선이며 완전 궤도/실측 운동이 아니다.
+- `science/exoplanets.py`/`nasa_catalog.py`·`exoplanets.json`: NASA Science 공개6470행성·4862모항성계의 날짜 고정 전체 목록. TAP호스트 timeout후 공식 NASA 공개 REST115페이지로 대체 취득했으며 PS 문헌 기본해를 취득한 것으로 주장하지 않는다. 원문 표시이름·추정 질량/반지름 표기·누락값을 보존한다. 게시물 오류 제목 대신 원본 `acf.display_name`을 사용한다.
+- 외계행성 방향구는 원 카탈로그 RA/Dec를 쓰며 거리 단위·epoch/고유운동·공분산 미검증으로 3D 항성 거리를 만들지 않는다. 선택은 항성계 모식도·상세 구와 공개 수치/출처로 연결한다. 표면은 분류에 따른 절차적 **설명용 외관**이며 실제 지형/구름 관측이나 생명·존재확률이 아니다. 모식도의 방향·위상·24시간 자전은 가정이고 보고된 주기만 표시 재생에 사용한다. 현재 위치 예측·자기일관된 동역학 모형으로 해석하지 않는다.
+- 새 읽기 API: GET `/api/v1/appearance`, `/api/v1/catalog/solar-system`(목록; `parent_id` 지정시 해당 부모의 시간표본 포함), `/api/v1/catalog/exoplanets`(전체 색인), `/api/v1/catalog/exoplanets/{object_id}`(원 수치/항성계/출처). 서버는 로컬 원본을 검증하며 요청 중 외부 자료를 가져오지 않는다. 검증한 빌드의 지도는 `/textures`에서 제공한다.
+- 기존 εB/명왕성 근거의 `universe_context`에 선택적으로 `appearance_manifest_sha256`·`extended_solar_manifest_sha256`를 저장하며 변경시 재계산 필요를 알린다. 카탈로그 화면과 기존 두 실제 관측의 근거 저장을 구분하며 미연결 노출을 생성하지 않는다.
+
+실제 브라우저 GPU/지도·위성/카탈로그·원본 회귀·릴리스 ZIP 결과는 작업기록에서 확정한다. 이 체크포인트를 공개 서버·Linux·전체 해상 표면 관측 완료로 해석하지 않는다.
 
 ## 3. 언어·라이브러리·프로세스 책임
 
@@ -127,6 +153,7 @@ DEV-001은관측기능의첫독립작업대였다. 사용자는우주를탐색�
 | `data/manifests/datasets.json` | 현재 확보한 102원본/참조의 source·SHA·바이트·실행 상대경로. 파일 수를 독립 관측 수로 쓰지 않음 |
 | `data/manifests/drive_sources.json` | 공유 Drive 출처/ID 연결 |
 | `data/manifests/solar_system_source_candidates.json` | 새 태양계 링크 후보. 물리량/궤도 원본 및 102파일 관측 목록과 분리 |
+| `data/manifests/timeline_validation.json` | DEV-003 표시 보간의 별도 JPL 중간 시각 27개 검산·원응답/해시. 관측102파일 목록과 분리 |
 | `data/raw/`, `data/calibration/`, `data/reference/` | 불변 원본/보정/문헌·참조. Git 제외 |
 | `data/derived/` | 행사 중 계산한 파생 결과. 입력·처리 버전/설정 추적 |
 | `var/jobs/`, `var/cache/`, `var/evidence/`, `var/logs/` | 작업/캐시·근거·로그; 실제 `.env` 디렉터리 키와 맞춰 영속 volume 구성 |
@@ -192,6 +219,14 @@ DEV-002의science/solar_system.py는새solar_system_ephemeris.json에실제Horiz
 
 science/orbits.py의osculating-kepler-guide-v1은solar_system_orbits.json에추가취득한9개Horizons ELEMENTS 원응답/해시를보존한다. 실제4UTC시각을TDB JD로변환해동일event의태양중심J2000황도a/e/i/Ω/ω/진근점이각과Keplerian GM을읽는다. 이심근점이각E기준의점[a(cosE−e),a√(1−e²)sinE,0]을Rz(Ω)Rx(i)Rz(ω)로회전해257점닫힌안내선을만든다. 현재위치를첫점으로두며모든점에같은화면거리압축을적용한다. 이는선택시각의접촉궤도Kepler근사이고수백년의실제N체적분궤적/후속위치예측으로쓰지않는다. 9천체×4시각의별도statevector첫점잔차max5.86e-12au·독립P/Q타원/평면검사는같은JPL자료/수식의수치일관성이다. 물리적정밀도보증으로해석하지않는다.
 
+### 8.1 DEV-003 표시 보간의 계산·검산
+
+`science/timeline.py`와 `web/src/timelineMath.ts`의 `display-hermite-v1`은 원본 네 매듭의 위치 AU·속도 AU/TDB-day를 사용한다. 인접한 두 TDB 시각 차이를 Δ, 구간 비율을 u라 하면 `p(u)=(2u³−3u²+1)p0+(u³−2u²+u)Δv0+(−2u³+3u²)p1+(u³−u²)Δv1`이다. 속도는 이 식을 TDB-day로 미분한 값이며 매듭의 원래 위치·속도는 직접 반환한다. UI는 UTC를 표시하고 서버는 Astropy UTC→TDB 변환을 쓴다. 브라우저의 매듭 간 UTC 밀리초→TDB 구간 비율 근사와 서버의 차이는 이 범위의 표본으로 별도 검사한다. 이를 천체력 자체의 오차 검증으로 확대하지 않는다.
+
+새 `timeline_validation.json`은 아홉 천체×세 중간 시각(각 날짜 12:00 UTC)의 별도 Horizons VECTORS/UT 조회 27개와 원응답·파라미터·SHA를 보존한다. 13:14:35 KST 기록의 파일은 86,812B, SHA256 `6562f9898ba8716d41595f1b9288c0cf364b3ec4119e02cafb6a961a19527f99`다. 검사된 중간 시각의 최대 위치 차이는 수성 약 18.986654km(목성 약 6.944946km, 명왕성 약 5.120192km, 지구 약 0.052990km)다. 같은 JPL 동역학 자료의 별도 시각 조회와 보간을 비교한 결과이며, 전 구간 상한·물리적 위치 불확도·독립 동역학 모형 검증이 아니다. 표시용 보간은 측광/위치/운동 측정 입력으로 쓰지 않는다.
+
+궤도 원소·원 응답은 그대로 보존한다. DEV-003 화면과 `/universe`의 아홉 안내선은 `guide_reference_epoch=2026-11-14T00:00:00Z`를 사용하며, 재생 모형시각과 다를 수 있다. 기존 원본 시각에서의 궤도 첫점 일관성 검사를 임의 재생 시각의 실제 위치 검증으로 주장하지 않는다.
+
 ## 9. Planet X와 외계행성 실험
 
 ### Planet X
@@ -232,7 +267,8 @@ HiPS는 102개 파장층이며 시간/거리축이 아니다. NHITS는 방문 �
 | GET `/evidence/{id}/export` | format=json/csv; JSON이 복원 정본, CSV는 frame JSON·판단 등 보조 | 로컬 구현·API 검사 |
 | POST `/evidence/import` | 정본JSON→restored 또는 recalculation_required·reasons | 로컬 구현·API 검사 |
 | GET `/objects` | 공식5대상+명왕성의 ID/이름·available/unverified 상태 | 로컬 구현 |
-| GET `/universe` | optional epoch(실제4UTC중하나)→천체/방향·기준계/단위·원출처·장면manifest SHA | DEV-002 로컬구현·검사 |
+| GET `/universe` | optional timezone 명시 epoch(72시간 범위)→원본 또는 표시 보간 천체/방향·기준계/단위·원출처SHA·고정 기준 궤도 | DEV-003 확장·종합 검사 진행 |
+| GET `/timeline` | 원본 네 매듭의 UTC/TDB·아홉 위치/속도·방향·보간버전·범위·검산 요약/SHA | DEV-003 구현·과학 검사; 브라우저 통합 검사 진행 |
 | POST `/simulation-jobs` | 범위 내 가정/epoch/관측자 검증→예측 경로/곡선 | 예정 |
 
 health는 prefix와 구분해 `/health/live`(프로세스 응답), `/health/ready`(실제 저장 쓰기/읽기·worker alive/heartbeat60초 이내)를 구현했다. 저장 불가·worker 미준비는503이다. 입력 오류422, 미존재404, 무결성/선택 불일치409,8MB 초과413, worker/queue/자료목록 미준비503을 공통 code/message_key/details/request_id로 반환한다. 결과ID는 cmp_+정본내용SHA 앞24자리, 근거ID는 ev_+UUID32자리다. 두 번째 API는 동일상태영역 잠금에 실패해 시작하지 않는다.
@@ -242,6 +278,8 @@ DEV-001의 Session schema1.0 기반은 object_id:epsilon-indi-b, observation_ids
 DEV-002 additive계약: 비교요청은εB의S01/S02또는명왕성S12/S14두쌍만허용하며서로섞인쌍은422다. Session.object_id는εB/pluto이며노출쌍과일치해야한다. optional universe_context가있으면selected_object_id/model_epoch/source_manifest_sha256/panel_open과optionalcamera를검사한다. 카메라는solar-display-v1·유한3좌표/target,|position|<10000·.05≤시선거리<10000로프런트/서버검사를일치시킨다. 구버전context없는근거도복원한다. 장면출처/모형시각·Pluto예측manifest/알고리즘이바뀌면재계산필요로반환하고유효복원이라고하지않는다. 전체새필드는OpenAPI/프런트타입과같이관리한다.
 
 궤도추가: GET/universe는각body.orbit의257점AU배열/kind/epoch/TDB/원요소·원출처와top-level orbit_algorithm_version/orbit_manifest_sha256/exclusions를제공한다. universe_context.show_orbits(defaulttrue),optional orbit_manifest_sha256를추가한다. 새UI는표시조건과실제원출처SHA를반드시저장하며이전context없는근거는호환한다. 원출처해시가변경되면orbit_ephemeris_changed로재계산필요이며유효복원화면을채우지않는다.
+
+DEV-003 additive 계약: `/timeline`은 약 9KB의 정본 매듭·`display-hermite-v1`·지원 범위·`source_manifest_sha256`·검산 요약/해시를 제공한다. `/universe?epoch=`는 명시적 시간대가 있는 ISO 시각만 받으며 범위 밖·시각 형식/시간대 누락은 422다. 원본/보간 상태와 양 끝 source_epochs·TDB 비율·`guide_reference_epoch`를 구분한다. `UniverseContext`에는 optional `timeline_algorithm_version`, `playback_rate_hours_per_second`(1/6/24, 기본6), `playback_paused`(항상true), `follow_object_id`(선택 대상 또는null)를 추가한다. 새 UI는 연속 시각과 버전을 함께 저장하고 정지 상태로 복원한다. 과거 네 원본 시각의 context는 새 버전 없이도 호환하며, 연속 시각에 버전이 없거나 버전이 맞지 않으면 정상 복원으로 처리하지 않는다. 저장된 카메라·모형시각·원본 노출은 재생 시작점으로 조용히 바꾸지 않는다. 실행 필드는 `api/models.py`·OpenAPI·TS 타입이 정본이며 추가 검사 결과는 DEV-003 기록에서 확정한다.
 
 ## 12. 저장 데이터·에러 계약
 
@@ -296,6 +334,7 @@ DEV-001: 단일 API+별도 spawn worker/Pipe·직렬화RLock·OS 인스턴스잠
 | QA07 | 5언어·키보드·색/상태·깜빡임 | 키/의미/상태/세션 보존과 실제 화면 검사 |
 | QA08 | 공식5대상 검사 | 각 대상 입력·기대/실제·품질/신호/불충분·증거를 기록 |
 | QA09 | 릴리스ZIP 해제·대상환경 실행·health/대표 경로·재시작 | 완결 파일/상대경로·필수자료·영속저장·실제 검사 범위·ZIP SHA |
+| QA10 | 72시간 Play/Pause·속도/끝/숨김탭·수동탐색·저장/import·추적/수동카메라 | 원본 매듭 보존·표시 보간/기준 궤도 구분·범위 밖 거부·연속 시각 정지 복원. DEV-003 종합검사 진행 |
 
 각 검사에 실제 입력·기대/실제·실행 명령·버전·pass/fail/not-run·증거 경로를 남긴다. 아직 없는 명령/브라우저 경로를 통과로 기록하지 않는다. 앱 구현 전 과거 연구 검사·파일 확보를 이 표의 통과로 올리지 않는다.
 
@@ -327,13 +366,15 @@ Notion 접근이 안 되면 접근 실패/마지막 확인본을 구분하고 �
 
 ## 20. 구현 상태·미확정·변경 이력
 
+DEV-003/v0.3.0은 baseline commit `54756ca` 이후 시간 재생·정지, bounded 연속 표시 보간, 추적/수동 카메라 구분과 재생 조건의 저장/복원을 추가하는 릴리스다. 현재 개별 과학 검사 `tests/test_timeline.py` 17개와 Ruff는 통과했다. API 통합·프런트 수학/빌드·실제 Chrome의 새 재생 시나리오·완결 ZIP 재생/해제 실행 검사는 진행 중이며 최종 수치와 증거를 작업기록에서 확정한다. 이 진행 상태를 이전 릴리스의 검사 통과 수에 더해 완료로 표시하지 않는다. 기존 F01 잔여·F04/F05·사람 검수·Linux/공개 서버 제한은 유지한다.
+
 DEV-001/002 현재완료: 우주기본화면/자유조작·선택자동포커스·실제JPL위치/평균반지름·별방향층·εB/Pluto원본품질/근거·카메라/시각/대상별workspace보존·5언어·새세션/재시작복원. Python3.12/Node22.17.0 Windows에서실제실행/검사했다. 공개배포·자유좌표·공식4대상정밀품질·Planet X/문헌밀도(F04)·TESS(F05)·사람/원어민검수는미완료다. HiPS는이번최소장면에서채택하지않았다.
 
 QA01/QA02/QA03과QA04의취소·재시작·늦은응답·복원경계는첫εB범위에서검사했다(Python21·Vitest3·Chrome2통과). QA07의5언어키/화면·언어전환상태·깜빡임정지는자동검사했고전체접근성/원어민검수는미수행이다. QA08은εB만실제품질,나머지4개는자료목록/미검증안내까지다. QA05/전체QA06은후속단계다.
 
 v0.1.0 서버전달ZIP은 artifacts/NASA_SPACE_APPS_CHALLENGE_v0.1.0_20261114_105939KST.zip이며필수3입력·빌드·코드·lock·설정·라이선스/출처·실행복구안내·파일SHA목록을포함한다. 11:01:17 KST에깨끗한폴더해제·포함140파일SHA/바이트·새Python런타임의존성설치·실제health/비교/근거복원을통과했다. 최종ZIP의파일수/외부SHA·바이트·검사기록은동명 .zip.sha256.json 및 .verification.json에서확인한다. QA09는Windows로컬해제실행범위만확인했으며Linux/컨테이너/공개서버는미검증이다.
 
-최신DEV-002/v0.2.0은우주기본화면·9궤도선·Pluto입력을포함한다. Python67·TSstrict/Vite·Vitest10·Chrome7고유시나리오를통과했다. 현재화면은var/browser-results/universe-orbits.png와universe-pluto-orbit.png다. 최종ZIP은artifacts/NASA_SPACE_APPS_CHALLENGE_v0.2.0_20261114_113413KST.zip이며필수6원본/보정·3JPLmanifest·빌드/코드/lock/고지를포함한다. 궤도추가전1차ZIP은11:25:45KST에독립해제실행을검사했으며,궤도포함최종ZIP의해제검사/파일수/SHA/바이트는동명외부checksum/verification JSON과DEV-002작업기록에확정한다. Linux/실서버미검증표시는유지한다.
+DEV-002/v0.2.0은우주기본화면·9궤도선·Pluto입력을포함한다. Python67·TSstrict/Vite·Vitest10·Chrome7고유시나리오를통과했다. 현재화면은var/browser-results/universe-orbits.png와universe-pluto-orbit.png다. 최종ZIP은artifacts/NASA_SPACE_APPS_CHALLENGE_v0.2.0_20261114_113413KST.zip이며필수6원본/보정·3JPLmanifest·빌드/코드/lock/고지를포함한다. 궤도추가전1차ZIP은11:25:45KST에독립해제실행을검사했으며,궤도포함최종ZIP의해제검사/파일수/SHA/바이트는동명외부checksum/verification JSON과DEV-002작업기록에확정한다. Linux/실서버미검증표시는유지한다.
 
 궤도포함해제실행은11:35:23KST에실제163개포함파일SHA/바이트/경로와태양계11객체·9궤도·εB/Pluto원본품질/근거·카메라/시각/표시off복원을통과했다. 독립가상환경의검증된동일런타임을재사용했고새앱이미지는서버로전송하지않았다. 최종manifest/문서확정후동일해제검증을실행하며정확한ZIP SHA/실측크기는ZIP밖checksum JSON에기록한다.
 
@@ -348,3 +389,4 @@ v0.1.0 서버전달ZIP은 artifacts/NASA_SPACE_APPS_CHALLENGE_v0.1.0_20261114_10
 | FSD-0.3 / DEV-001 | 실제ε Indi B 원본→품질→파일근거→새세션복원 구현; IPC worker·API/OpenAPI/프런트 타입·native/SWCS/마스크·5언어·무결성/재계산 계약 | 실제 원본 회귀·API/복원·프런트 빌드/브라우저 결과는 작업기록. 정밀측정·3D·공개서버 미완료 |
 | FSD-0.4 / DEV-002 | 사용자정정반영:우주탐색을실제기본화면으로연결,Three.js자유조작/자동포커스·JPL최소태양계/εB방향층·Pluto실노출·대상별보관/카메라복원 | Python54·TS빌드/Vitest·실제Chrome검사. 정확한최종수/스크린샷·ZIP검사는DEV-002기록;F04/F05·Linux/공개서버미완료 |
 | FSD-0.5 / DEV-002 궤도추가 | 사용자요청대로9개태양계접촉궤도안내선·선택강조/표시전환·궤도출처/조건저장복원 | Python67·Vitest10·새Chrome2추가검사;수치일관성과장기실제궤적을구분. 최종ZIP검사는작업기록 |
+| FSD-0.6 / DEV-003 | 먼저54756ca commit 보존 후72시간 연속재생·TDB Hermite 표시보간·고정기준궤도·추적/수동카메라·정지상태저장복원 계약 | 개별과학17·27중간시각 검산/Ruff 통과. API·프런트/Chrome·v0.3 ZIP 종합검사는 진행 중, 최종 결과는 작업기록 |

@@ -53,6 +53,7 @@ FILES = (
     "data/manifests/solar_system_ephemeris.json",
     "data/manifests/pluto_ephemeris.json",
     "data/manifests/solar_system_orbits.json",
+    "data/manifests/timeline_validation.json",
     "docs/worklog.md",
     "docs/data_inventory.md",
     "docs/evidence_index.md",
@@ -179,7 +180,7 @@ def prepare(built_at):
     )
     manifest = {
         "release": version,
-        "work_id": "DEV-002",
+        "work_id": "DEV-003",
         "built_at": built_at,
         "base_commit": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
@@ -190,6 +191,7 @@ def prepare(built_at):
             "pluto-native-v1",
             "solar-display-v1",
             "osculating-kepler-guide-v1",
+            "display-hermite-v1",
         ],
         "input_ids": [
             {key: record[key] for key in ("id", "local_relative_path", "sha256", "bytes")}

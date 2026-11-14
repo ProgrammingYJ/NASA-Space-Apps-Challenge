@@ -79,6 +79,8 @@ def universe_api(tmp_path_factory):
 
 def test_universe_supported_epochs_and_source_contract(universe_api):
     client, _, scene, _, _ = universe_api
+    reference_bodies = {body["object_id"]: body for body in scene["objects"]}
+    guide_epoch = "2026-11-14T00:00:00Z"
     expected_ids = {
         "sun",
         "mercury",
@@ -106,6 +108,7 @@ def test_universe_supported_epochs_and_source_contract(universe_api):
         assert response.status_code == 200, response.text
         value = response.json()
         assert value["epoch"] == epoch
+        assert value["guide_reference_epoch"] == guide_epoch
         assert {body["object_id"] for body in value["objects"]} == expected_ids
         assert value["coordinate_frame"] == "Ecliptic of J2000.0"
         assert value["time_scale"] == "UTC"
@@ -126,14 +129,20 @@ def test_universe_supported_epochs_and_source_contract(universe_api):
             assert guide["coordinate_frame"] == "Ecliptic of J2000.0"
             assert guide["center"] == "Sun (10)"
             assert guide["units"] == "au" and guide["closed"] is True
-            assert guide["epoch_tdb_jd"] == pytest.approx(Time(epoch, scale="utc").tdb.jd, abs=1e-8)
+            assert guide["epoch"] == guide_epoch
+            assert guide["epoch_tdb_jd"] == pytest.approx(
+                Time(guide_epoch, scale="utc").tdb.jd, abs=1e-8
+            )
+            reference = reference_bodies[body["object_id"]]
+            assert guide == reference["orbit"]
             points = guide["points_au"]
             assert len(points) == 257
             assert all(len(point) == 3 and all(math.isfinite(v) for v in point) for point in points)
             assert points[-1] == pytest.approx(points[0], abs=1e-12)
-            # The independently acquired scene VECTORS were queried in UTC. The
-            # guide ELEMENTS use the same event converted to TDB, not the UTC JD.
-            assert points[0] == pytest.approx(body["position_au"], abs=1e-7)
+            # The independently acquired reference VECTORS were queried in UTC.
+            # Moving scene positions retain the fixed guide reference event.
+            # ELEMENTS use that event converted to TDB, not a UTC JD.
+            assert points[0] == pytest.approx(reference["position_au"], abs=1e-7)
             assert guide["limitations"]
 
 

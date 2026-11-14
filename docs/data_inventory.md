@@ -24,6 +24,10 @@ DEV-001: S01 DR1·S02 QR3·S10 SWCS v5를 실제 reader/worker/API/브라우저 
 
 DEV-002: S12/S14 QR3D3·D3보정L051도같은native원본/품질/근거경로에연결했다. 현재DataLink의DR1보정을정상TLS로전체스트리밍해기존L051와SHA/바이트동일함을확인했고원취득QR3 URL은보존했다. 새작은 `solar_system_ephemeris.json`과 `pluto_ephemeris.json`은JPL장면/노출시각의관측자별예측및DataLink출처증거이며기존관측102파일을새관측수로증가시키지않는다. 장면은태양/8행성/명왕성의실제4시각·평균반지름과εB방향을제공한다. 예측변위는실측이아니다. 출처·응답SHA/기준계/단위/제한·검사는FSD8절과DEV-002기록에연결한다.
 
+DEV-003은 기존 네 JPL 시각과 관측 원본을 바꾸지 않고 `display-hermite-v1`로 인접 표본 사이를 표시 보간한다. 위치 AU·속도 AU/TDB-day·UTC→TDB 조건을 보존하고, 재생 범위는 2026-11-13 00:00~11-16 00:00 UTC(72시간)다. `/timeline`의 작은 원본 매듭을 한 번 읽어 브라우저에서 재생하며, 실제 SPHEREx 날짜/파장/원본을 추가 생성하지 않는다. `solar_system_orbits.json`의 아홉 안내선은 11월14일00:00 UTC 기준으로 고정한다.
+
+추가 [timeline_validation.json](../data/manifests/timeline_validation.json)은 13:14:35 KST에 별도 취득한 아홉 천체×세 중간시각의 JPL 응답/검산27개다. 86,812B, SHA256 `6562f9898ba8716d41595f1b9288c0cf364b3ec4119e02cafb6a961a19527f99`. 실제 표본에서 관찰한 최대 보간 차이는 수성 약18.99km이며 전체 구간의 오차 상한이 아니다. 같은 JPL 모형의 별도 시각 조회와 표시 보간의 비교로 한정한다. 기존102 원본/참조 수, 관측 횟수 또는 실측 검출 성과에 더하지 않는다. 수식/범위·검사 상태의 정본은 FSD8.1절과 DEV-003 작업기록이다.
+
 로컬 분류는 raw57개/reference39개/calibration6개다. 이 중VY비교3개는기본인증검증으로재취득해이전SHA와일치했고,동일보정중복3개는재업로드없이같은해시파일로연결했다. π Men의실제FITS는과거HEAD기록만있어가용원본으로포함하지않았다. 누락값/검증이력을숨기지않는다.
 
 [Drive출처목록](https://drive.google.com/file/d/1XL1IS37QMpPsViaLtRaxPMwsU_VvSBeR/view?usp=drivesdk)

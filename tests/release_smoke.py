@@ -68,6 +68,18 @@ def main(base):
     assert scene["coordinate_frame"] and scene["source_manifest_sha256"]
     assert len([body for body in scene["objects"] if body.get("orbit")]) == 9
     assert scene["orbit_manifest_sha256"]
+    timeline = call(base, "/api/v1/timeline")
+    assert timeline["algorithm_version"] == "display-hermite-v1"
+    assert len(timeline["knots"]) == 4
+    assert timeline["validation"]["sample_count"] == 27
+    moving_scene = call(base, "/api/v1/universe?epoch=2026-11-14T12:00:00Z")
+    assert moving_scene["position_sampling"] == "display_interpolation"
+    assert moving_scene["source_manifest_sha256"] == scene["source_manifest_sha256"]
+    assert all(
+        body["orbit"]["epoch"] == timeline["guide_reference_epoch"]
+        for body in moving_scene["objects"]
+        if body.get("orbit")
+    )
     pluto_job = call(base, "/api/v1/comparison-jobs", {"observation_ids": ["S12", "S14"]})
     for _ in range(160):
         pluto_job = call(base, "/api/v1/jobs/" + pluto_job["job_id"])
@@ -88,11 +100,15 @@ def main(base):
                 "observation_ids": ["S12", "S14"],
                 "universe_context": {
                     "selected_object_id": "pluto",
-                    "model_epoch": scene["epoch"],
+                    "model_epoch": moving_scene["epoch"],
                     "panel_open": True,
                     "source_manifest_sha256": scene["source_manifest_sha256"],
                     "orbit_manifest_sha256": scene["orbit_manifest_sha256"],
                     "show_orbits": False,
+                    "timeline_algorithm_version": timeline["algorithm_version"],
+                    "playback_rate_hours_per_second": 24,
+                    "playback_paused": True,
+                    "follow_object_id": "pluto",
                     "camera": {
                         "position": [0, 95, 150],
                         "target": [0, 0, 0],
@@ -115,6 +131,8 @@ def main(base):
                 "evidence_id": saved["evidence_id"],
                 "quality_pixels": [29, 32],
                 "scene_object_count": len(scene["objects"]),
+                "timeline_midpoint": moving_scene["epoch"],
+                "timeline_validation_samples": timeline["validation"]["sample_count"],
                 "pluto_result_id": pluto["result_id"],
                 "pluto_evidence_id": pluto_saved["evidence_id"],
             },

@@ -125,3 +125,25 @@
 - 시각증거 var/browser-results/universe-orbits.png,universe-pluto-orbit.png를주에이전트가직접열어가는선과기울어진Pluto안내선·선택강조/가독성을확인했다. 궤도요청전기본/관측스크린샷은앞선검사기록이며현재기본화면은궤도on이다. 11:25의궤도미포함1차ZIP은최종전달본으로쓰지않고새시각의완결ZIP을다시만든다.
 - 궤도포함ZIP실행11:35:23.771KST: `artifacts/NASA_SPACE_APPS_CHALLENGE_v0.2.0_20261114_113413KST.zip`을새폴더로해제해163개포함파일(자기manifest제외)SHA/바이트/경로와제외목록을검사했다. 같은검증된별도가상환경에서health·11객체/4시각/9궤도·εB와Pluto실제worker·근거/카메라/시각·궤도표시off복원PASS. 별도Python의존성버전은앞선격리신규설치와동일한runtime lock을재사용했다. 임시8011프로세스종료. 최종manifest에67/10/7검사와해제결과를확정하고새ZIP을다시해제해정본파일해시/대표경로를확인한다. 최종ZIP의SHA/바이트는자기순환을피해ZIP밖동명checksum/verification JSON에남긴다.
 - 최종확인11:36:18.020KST: 동일최종ZIP을다시새폴더에해제해163개포함파일SHA/바이트·대표실행/저장복원PASS. ZIP총164파일,236,678,269B,SHA256 `acec9d6e1feac9ffdc31e2556c955ed7116ac153c9b513f3be15cb62e0f2ad64`. 별도파일해시재계산일치와로컬8000 ready·9궤도/osculating-kepler-guide-v1 응답을확인했다. 임시검사서버종료,로컬앱은검토가능하게유지. 이마지막자기ZIP해시는순환방지를위해ZIP밖기록에만추가한다. 공개서버배포·Linux검사는수행하지않았다.
+
+## DEV-003 · 2026-11-14T13:23:48+09:00 · 기존 완성본 commit 후 시간 재생·정지
+
+- 사용자 요청: 현재 완성된 작업을 먼저 commit한 다음 시간에 따라 천체가 움직이는 재생/정지를 추가한다. 실제 Git 조회로 `54756ca`, commit시각2026-11-14 13:12:27KST,140파일 변경을 확인했다. 이 기준을 확정한 뒤 새 구현을 진행했으며 원격 push·history rewrite·공개 서버 배포는 수행하지 않았다. 이전 DEV-001/002 실행·ZIP 기록은 그대로 보존한다.
+- 적용: 기존 documentation·원본/Astropy·과학검산·브라우저/검토 스킬을 필요한 범위에서 사용했다. 과학 코드/검사·새 검산manifest, API/계약·배포, 프런트 시간/카메라, 독립검토를 파일 소유별로 분리했다. 새 패키지/자격증명·AI API·이미지/영상/음성 생성은 없다.
+- 계약: FSD-0.6/v0.3.0,2026-11-13 00:00~11-16 00:00UTC의72시간만 연속 표시한다. 원본 네 시각의 아홉 천체 위치AU·속도AU/TDB-day를 변경하지 않고 `display-hermite-v1` bounded cubic Hermite와 그 미분을 쓴다. 원본 매듭은 원 배열을 직접 반환하며 중간 시각은 표시 보간으로 알린다. UI는UTC, 계산은TDB 구간이다. εB 방향은 정규화 보간이며 실제 거리를 생성하지 않는다. SPHEREx 촬영 시각·관측자·원본/품질·판단은 그대로다.
+- UI/API 연결: 초기 `/universe`와 약9KB `/timeline`을 읽고 클라이언트가 오프라인 계산한다. 매프레임 API/Horizons 요청은 없다. 실제1초당 모형1/6/24시간(기본6),최대약30fps 상태갱신이며 보장SLA가 아니다. 시작정지·끝정지/끝에서재생시처음·수동탐색/숨김탭/저장시정지·import/새세션정지를 적용한다. 포커스요청과 tick을 분리해 시간갱신이 자동이동을 반복하지 않게 하고, 선택추적은offset유지·수동조작은추적해제한다. 전체 통합 동작은 아래 최종 검사에서 확정한다.
+- 궤도/복원: 아홉 접촉궤도 안내선은11/14 00:00UTC 기준으로 고정해 이동시각과 별도 표시한다. 기존 원소/응답/SHA를 바꾸거나 매프레임 새 궤도를 추론하지 않는다. UniverseContext에 optional timeline_algorithm_version·playback_rate_hours_per_second·playback_paused:true·follow_object_id를 추가하고 연속시각/원카메라·추적조건을 저장해 정지 복원한다. 과거 네 원본시각 context는 호환하며 버전 없는 연속시각은 정상복원으로 처리하지 않는다. 실행 스키마/OpenAPI/TS 계약은 통합 검사와 함께 확정한다.
+- 실제 검산자료: 정상TLS·bounded순차요청으로9천체×세 중간시각의 별도 Horizons VECTORS/UT27표본을 취득했다. `timeline_validation.json` 취득기록13:14:35KST,86812B,SHA256 `6562f9898ba8716d41595f1b9288c0cf364b3ec4119e02cafb6a961a19527f99`. 원응답/쿼리/해시·실제위치/속도·보간 차이를 보존한다. 최대관찰 위치차이 수성18.986654km,목성6.944946km,명왕성5.120192km,지구0.052990km. 같은JPL동역학 자료의 별도시각 조회 비교이며 전구간 상한·물리적 불확도·독립천체력 모형 검증이 아니다. 기존102 관측/참조 수에 더하지 않는다.
+- 현재 확인된 검사: `.venv/Scripts/python -X utf8 -m pytest -q tests/test_timeline.py`17PASS(1.04초),대상Ruff PASS. 원본매듭/속도·출처보존,알려진cubic/미분·TDB단위,지원범위/명시적시간대,거리없는방향층,27원응답/해시와차이재계산,브라우저UTC구간근사와서버TDB의표본차이를 확인했다. 독립검토도Hermite수식/단위·원본/범위·표본검산한계를 대조했다. API 통합 전체수·프런트수학/빌드·Chrome 새4시나리오·완결v0.3 ZIP해제/실행 검사는 진행 중이며 아직 통과로 기재하지 않는다.
+- Notion 시작확인13:13:10KST: 관련 이슈보고페이지 `https://app.notion.com/p/417d0a43a5058140b867fcf93b1f81f3`를 background로 읽어 기존본문과 동일함을 확인했다. 완료13:26:49KST에같은관련페이지만재확인했다. 홈/전체QA 최신조회나 정확한편집시각 확인으로 확대하지 않는다. 페이지쓰기/댓글/예약변경 없음.
+- DEV-003 통합확인: Python100PASS(23.52초,기존Starlette경고1),Vitest18PASS·TSstrict/Vite,실제Chrome전체11경로PASS(2.5분). 기존원본/품질·5언어·늦은응답·궤도·카메라와 새4재생/정지복원을 함께 검사했다. 숨김탭은headless의 hidden상태+visibilitychange 주입검사로실제OS탭전환과구분한다. timeline-manual-camera.png/timeline-observation-snapshot.png를직접열어확인하고range폭/Play hover대비를수정했다.
+- 문서 동기화: FSD·README·자료/근거·AI MD/JSON·외부고지를 함께 갱신했다. 기존F01자유좌표/다른4대상 정량품질·F04/F05·팀원/원어민검수·Linux/실서버 제한을 유지한다. v0.3 ZIP의 실제 경로/SHA/바이트·해제대표경로·최종 검사 결과는 패키지 완성 후 추가한다. 현재 준비를 완결 배포/공개서비스 성공으로 표시하지 않는다.
+
+## DEV-004 · 2026-11-14 · 표면·고리·위성·외계행성 및 GitHub 체크포인트
+
+- 사용자요청: 공개자료/논문으로 행성표면·고리/위성·추가행성구현, 범위답변은태양계왜행성/위성과태양계밖외계행성 **둘다포함**. 원본/Git와기존실노출/근거를보존하고FSD0.7/v0.4.0에확장계약을반영한다. 원래미완료범위를조용히완료로변경하지않는다.
+- 공개NASA6470행성/4862모항성계/115페이지13740795B취득. 원페이지source목록정본SHA `4b8361bb95ce146780faf6aeed6fd9d73b2344ae77fd5366a4499f8038a03b85`. 원본data/reference/catalog/nasa_science,Gitmanifest3955802B. TAP와별도공식호스트timeout후공식NASA REST로대체했으며PS일관문헌해취득주장없음. 제목공백4개/Debug오류제목4개를원문display_name으로대조해6470개정체성을보존했다.
+- 확장태양계: 위성468+추가왜행성/후보8=476등록,463위성+8=471위치지원. Daphnis/S2009S1/S2025U1/MK2/Xiangliu5개는원응답과사유를보존하고위치미생성. 원참조509개19411029B/52527시간표본,manifest1186595B SHA `34afdc84d913e7e2089b06d9e0518acff011713df3ac7185b7372ba0ef6ef7a5`. TNO위성/PRIMARY의별도KM-S5조회합성차이max0.0000989372km는내부정합이며실제불확도상한아님. 실제reader/과학20PASS/Ruff.
+- 외관31지도/4고리원본102820603B준비. 관측/레이더/대표대기와미해상설명용외관을구분하고선택시고해상도로드한다. 실제지도원본무가공·SHA/출처/날짜/미관측영역·지도창UV를보존한다. 새5언어문구의Windows pipe인코딩손상을발견해UTF8파일입력으로교정하고??/대체문자없음을확인했다.
+- 현재검사: 외계행성실제원본/이름/누락/추정/경로탈출/API6PASS,확장과학20PASS,프런트수학27PASS·TSstrict/Vite. GPU사전검사에서ringshader중복include와/textures route누락을발견해교정한다. 새표면/위성/외계행성종합Chrome·완결ZIP·Linux/공개배포는체크포인트에서완료로주장하지않는다.
+- 사용자추가Git요청: GitHub에안보인다고질문하며 `git commit -m "MVP입니다"`를지정했다. 실제조회로54756ca는로컬,origin/main은68c6cae임을확인했다. 지정메시지로체크포인트commit하고지정origin/main일반push후SHA를대조한다. .env/원본FITS·내부문서·개인정보·var/tmp/artifacts는staging에서제외하고force/historyrewrite는하지않는다. 결과는후속기록한다. push후확장통합검사를계속한다.

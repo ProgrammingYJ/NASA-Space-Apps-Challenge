@@ -1,12 +1,13 @@
 import {useEffect, useRef, useState} from 'react';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {displayDirection, displayPosition, displayRadius, displayOrbitPoints, makeFocus, sampleFocus, validCamera, type CameraState, type FocusTransition, type Vec3} from './sceneMath';
+import {displayDirection, displayRadius, displayOrbitPoints, displayMoonOffset, bodyDisplayPositions, advanceNavigationForBody, makeFocus, sampleFocus, validCamera, type CameraState, type FocusTransition, type Vec3} from './sceneMath';
+import {createBodyAppearance,scaledRingBands,type AppearanceManifest,type AppearanceStatus,type AppearanceEntry,type RingEntry,type BodyAppearance} from './planetAppearance';
 import styles from './UniverseScene.module.css';
 
 export type {CameraState} from './sceneMath';
 export interface OrbitGuide {
-  kind:'osculating_kepler_guide';
+  kind:'osculating_kepler_guide'|'sampled_ephemeris_trace';
   epoch:string;
   points_au:Vec3[];
   source:{url:string;label?:string;sha256?:string;response_sha256?:string};
@@ -21,15 +22,18 @@ export interface OrbitGuide {
 export interface UniverseBody {
   object_id: string;
   name: string;
-  kind: 'solar_system' | 'direction';
+  kind: 'solar_system' | 'direction'|'moon'|'dwarf_planet'|'dwarf_candidate';
+  parent_id?:string;
+  parent_relative_position_au?:Vec3;
   position_au?: Vec3;
-  radius_km?: number;
+  radius_km?: number|null;
   direction_ecliptic?: Vec3;
   direction_ecliptic_unit?: Vec3;
   direction_icrs_deg?: {ra:number;dec:number};
   distance_au?: number | null;
   color?: string;
   body_class?: string;
+  position_kind?:string;
   source?: {url:string;label:string};
   radius_source?: {url:string;definition:string;uncertainty_km:number|null};
   orbit?: OrbitGuide;
@@ -43,14 +47,20 @@ export interface UniverseData {
   limitations?: string[];
 }
 export interface UniverseSceneProps {
+  active?:boolean;
   data: UniverseData | null;
   selectedObjectId: string | null;
   selectionSequence?: number;
   overviewSequence?: number;
   showOrbits?: boolean;
+  appearance?:AppearanceManifest|null;
+  onAppearanceStatus?:(status:AppearanceStatus)=>void;
+  frameSelectedSystem?:boolean;
   onSelect: (objectId:string) => void;
   onCameraChange?: (camera:CameraState) => void;
+  onFollowChange?: (objectId:string|null) => void;
   restoredCamera?: CameraState | null;
+  restoredFollowObjectId?:string|null;
   restoreSequence?: number;
   labels?: Record<string,string>;
   controlsLabel?: string;
@@ -60,7 +70,7 @@ export interface UniverseSceneProps {
   onError?: (message:string) => void;
 }
 
-interface BodyView {body:UniverseBody;group:THREE.Group;radius:number;position:THREE.Vector3;direction:THREE.Vector3|null;label:HTMLButtonElement}
+interface BodyView {body:UniverseBody;group:THREE.Group;radius:number;framingRadius:number;position:THREE.Vector3;direction:THREE.Vector3|null;label:HTMLButtonElement;appearance:BodyAppearance|null;appearanceEntry:AppearanceEntry|undefined;ringEntry:RingEntry|undefined;fallback:THREE.Mesh|null}
 interface Runtime {
   renderer: THREE.WebGLRenderer;
   scene: THREE.Scene;
@@ -71,9 +81,16 @@ interface Runtime {
   focus: FocusTransition | null;
   mode: 'overview' | 'focusing' | 'focused' | 'manual' | 'restored';
   focusedId: string | null;
+  followedId: string | null;
+  focusRequest: {objectId:string|null;sequence:number;system:boolean}|null;
+  restoredRequest:{sequence:number;selectionSequence:number;objectId:string|null}|null;
+  lastFollowEmitted:string|null|undefined;
+  motionTick:number;
   lastEmit: number;
   disposed: boolean;
   animationId: number;
+  pausedAt:number|null;
+  resume:()=>void;
   applyCamera: (value:CameraState) => void;
   cameraState: () => CameraState;
   emit: () => void;
@@ -123,7 +140,6 @@ export default function UniverseScene(props:UniverseSceneProps) {
   const labelsLayer=useRef<HTMLDivElement>(null);
   const runtime=useRef<Runtime|null>(null);
   const latest=useRef(props);latest.current=props;
-  const appliedRestore=useRef<{sequence:number;selectionSequence:number;objectId:string|null}|null>(null);
   const appliedOverview=useRef(0);
   const [error,setError]=useState(false);
 
@@ -145,17 +161,17 @@ export default function UniverseScene(props:UniverseSceneProps) {
     addDecorativeStars(scene);
     const camera=new THREE.PerspectiveCamera(48,container.clientWidth/Math.max(1,container.clientHeight),.025,6000);camera.position.fromArray(INITIAL.position);
     const controls=new OrbitControls(camera,renderer.domElement);controls.target.fromArray(INITIAL.target);controls.enableDamping=true;controls.dampingFactor=.08;controls.rotateSpeed=.65;controls.zoomSpeed=.85;controls.panSpeed=.7;controls.minDistance=.2;controls.maxDistance=1100;controls.screenSpacePanning=true;controls.update();
-    const rt:Runtime={renderer,scene,camera,controls,bodies:new Map(),orbits:new Map(),focus:null,mode:'overview',focusedId:null,lastEmit:0,disposed:false,animationId:0,
+    const rt:Runtime={renderer,scene,camera,controls,bodies:new Map(),orbits:new Map(),focus:null,mode:'overview',focusedId:null,followedId:null,focusRequest:null,restoredRequest:null,lastFollowEmitted:undefined,motionTick:0,lastEmit:0,disposed:false,animationId:0,pausedAt:null,resume:()=>{},
       cameraState:()=>({position:camera.position.toArray() as Vec3,target:controls.target.toArray() as Vec3,representation_version:'solar-display-v1'}),
       applyCamera:value=>{camera.position.fromArray(value.position);controls.target.fromArray(value.target);controls.update();},
-      emit:()=>{latest.current.onCameraChange?.(rt.cameraState());container.dataset.cameraPosition=camera.position.toArray().map(n=>n.toFixed(5)).join(',');container.dataset.cameraTarget=controls.target.toArray().map(n=>n.toFixed(5)).join(',');container.dataset.cameraMode=rt.mode;container.dataset.focusedObject=rt.focusedId??'';},
+      emit:()=>{latest.current.onCameraChange?.(rt.cameraState());if(rt.lastFollowEmitted!==rt.followedId){rt.lastFollowEmitted=rt.followedId;latest.current.onFollowChange?.(rt.followedId);}container.dataset.cameraPosition=camera.position.toArray().map(n=>n.toFixed(5)).join(',');container.dataset.cameraTarget=controls.target.toArray().map(n=>n.toFixed(5)).join(',');container.dataset.cameraMode=rt.mode;container.dataset.focusedObject=rt.focusedId??'';container.dataset.followObject=rt.followedId??'';container.dataset.focusStartedAt=rt.focus?String(rt.focus.startedAt):'';},
     };
     runtime.current=rt;
-    const cancelFocus=()=>{rt.focus=null;rt.mode='manual';rt.focusedId=null;controls.enableDamping=true;rt.emit();};
+    const cancelFocus=()=>{rt.focus=null;rt.mode='manual';rt.focusedId=null;rt.followedId=null;controls.enableDamping=true;rt.emit();};
     const onControlChange=()=>{if(performance.now()-rt.lastEmit>150){rt.lastEmit=performance.now();rt.emit();}};
     controls.addEventListener('start',cancelFocus);controls.addEventListener('change',onControlChange);controls.addEventListener('end',rt.emit);
     const keys=new Set<string>();const movementKeys=new Set(['KeyW','KeyA','KeyS','KeyD','KeyQ','KeyE','ArrowUp','ArrowDown','ArrowLeft','ArrowRight']);
-    const onKeyDown=(event:KeyboardEvent)=>{if(document.activeElement!==renderer.domElement||!movementKeys.has(event.code))return;event.preventDefault();cancelFocus();keys.add(event.code);};
+    const onKeyDown=(event:KeyboardEvent)=>{if(latest.current.active===false||document.activeElement!==renderer.domElement||!movementKeys.has(event.code))return;event.preventDefault();cancelFocus();keys.add(event.code);};
     const onKeyUp=(event:KeyboardEvent)=>{if(keys.delete(event.code))rt.emit();};
     const onBlur=()=>{keys.clear();rt.emit();};
     window.addEventListener('keydown',onKeyDown);window.addEventListener('keyup',onKeyUp);window.addEventListener('blur',onBlur);
@@ -175,27 +191,33 @@ export default function UniverseScene(props:UniverseSceneProps) {
     renderer.domElement.addEventListener('pointerdown',pointerDown,{capture:true});renderer.domElement.addEventListener('pointerup',pointerUp);renderer.domElement.addEventListener('wheel',wheel,{capture:true,passive:true});
     const resize=new ResizeObserver(()=>{const w=container.clientWidth;const h=container.clientHeight;if(w===0||h===0)return;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h);});resize.observe(container);
     let previous=performance.now();
-    const forward=new THREE.Vector3();const right=new THREE.Vector3();const move=new THREE.Vector3();const projection=new THREE.Vector3();const clearance=new THREE.Vector3();
+    const forward=new THREE.Vector3();const right=new THREE.Vector3();const move=new THREE.Vector3();const projection=new THREE.Vector3();const clearance=new THREE.Vector3();const sunlight=new THREE.Vector3();const previousEye=camera.position.clone();
     const animate=(now:number)=>{
-      if(rt.disposed)return;rt.animationId=requestAnimationFrame(animate);
+      if(rt.disposed)return;if(latest.current.active===false){rt.animationId=0;rt.pausedAt=now;keys.clear();return;}rt.animationId=requestAnimationFrame(animate);
       const elapsed=Math.min(.05,(now-previous)/1000);previous=now;
-      if(rt.focus){const sampled=sampleFocus(rt.focus,now);camera.position.fromArray(sampled.camera.position);controls.target.fromArray(sampled.camera.target);if(sampled.done){rt.focusedId=rt.focus.objectId||null;rt.mode=rt.focus.objectId?'focused':'overview';rt.focus=null;controls.enableDamping=true;rt.emit();}}
+      if(rt.focus){const sampled=sampleFocus(rt.focus,now);camera.position.fromArray(sampled.camera.position);controls.target.fromArray(sampled.camera.target);if(sampled.done){rt.focusedId=rt.focus.objectId||null;rt.followedId=rt.focus.objectId||null;rt.mode=rt.focus.objectId?'focused':'overview';rt.focus=null;controls.enableDamping=true;rt.emit();}}
       if(keys.size){camera.getWorldDirection(forward);right.crossVectors(forward,camera.up).normalize();move.set(0,0,0);if(keys.has('KeyW')||keys.has('ArrowUp'))move.add(forward);if(keys.has('KeyS')||keys.has('ArrowDown'))move.sub(forward);if(keys.has('KeyD')||keys.has('ArrowRight'))move.add(right);if(keys.has('KeyA')||keys.has('ArrowLeft'))move.sub(right);if(keys.has('KeyE'))move.add(camera.up);if(keys.has('KeyQ'))move.sub(camera.up);const distance=Math.max(3,camera.position.distanceTo(controls.target));move.normalize().multiplyScalar(elapsed*distance*.6);camera.position.add(move);controls.target.add(move);}
       controls.update();
       // Keep the free camera outside the exaggerated visible surfaces.
       for(const view of rt.bodies.values()){
         if(view.direction)continue;
+        if(rt.mode==='manual'&&camera.position.distanceToSquared(previousEye)<1e-12)continue;
         clearance.copy(camera.position).sub(view.group.position);const distance=clearance.length();const minimum=view.radius*1.08;
         if(distance<minimum){if(distance<1e-8)clearance.set(0,0,1);else clearance.divideScalar(distance);clearance.multiplyScalar(minimum-distance);camera.position.add(clearance);controls.target.add(clearance);}
       }
+      previousEye.copy(camera.position);
       const w=container.clientWidth;const h=container.clientHeight;
+      const epochMs=Date.parse(latest.current.data?.epoch??'2026-11-14T00:00:00Z');
+      const selectedBody=latest.current.selectedObjectId?rt.bodies.get(latest.current.selectedObjectId)?.body:null;const selectedParent=selectedBody?.kind==='moon'?selectedBody.parent_id:latest.current.selectedObjectId;
       const occupied:{left:number;top:number;right:number;bottom:number}[]=[];
       const ordered=[...rt.bodies.entries()].sort(([a],[b])=>Number(b===latest.current.selectedObjectId)-Number(a===latest.current.selectedObjectId));
       for(const [id,view] of ordered){
+        if(view.appearance&&view.body.position_au){const p=view.body.position_au;sunlight.set(-p[0],-p[2],p[1]).normalize();view.appearance.update(epochMs,sunlight);}
         if(view.direction){view.group.position.copy(camera.position).addScaledVector(view.direction,300);view.group.quaternion.copy(camera.quaternion);}
         const world=view.group.position;projection.copy(world).project(camera);
-        const visible=projection.z>-1&&projection.z<1&&projection.x>-.96&&projection.x<.96&&projection.y>-.93&&projection.y<.93;
-        view.label.hidden=!visible;
+        const lodVisible=view.body.kind!=='moon'||id===latest.current.selectedObjectId||(view.body.parent_id===selectedParent&&view.label.dataset.majorMoon==='true');
+        const visible=lodVisible&&projection.z>-1&&projection.z<1&&projection.x>-.96&&projection.x<.96&&projection.y>-.93&&projection.y<.93;
+        if(view.label.hidden===visible)view.label.hidden=!visible;
         if(visible){
           const x=(projection.x+1)*w/2;const originY=(-projection.y+1)*h/2;const width=view.label.offsetWidth||90;const height=view.label.offsetHeight||28;
           let y=originY+(view.direction?-height-12:12);
@@ -205,26 +227,35 @@ export default function UniverseScene(props:UniverseSceneProps) {
       }
       renderer.render(scene,camera);
     };
+    rt.resume=()=>{if(rt.disposed||rt.animationId!==0||latest.current.active===false)return;const now=performance.now();if(rt.pausedAt!==null&&rt.focus)rt.focus.startedAt+=now-rt.pausedAt;rt.pausedAt=null;previous=now;rt.animationId=requestAnimationFrame(animate);};
     rt.animationId=requestAnimationFrame(animate);rt.emit();
     return()=>{
       rt.disposed=true;cancelAnimationFrame(rt.animationId);resize.disconnect();controls.dispose();
       window.removeEventListener('keydown',onKeyDown);window.removeEventListener('keyup',onKeyUp);window.removeEventListener('blur',onBlur);
       renderer.domElement.removeEventListener('pointerdown',pointerDown,true);renderer.domElement.removeEventListener('pointerup',pointerUp);renderer.domElement.removeEventListener('wheel',wheel,true);
-      disposeObject(scene);renderer.dispose();renderer.domElement.remove();rt.bodies.forEach(view=>view.label.remove());runtime.current=null;
+      rt.bodies.forEach(view=>{if(view.appearance){view.group.remove(view.appearance.group);view.appearance.dispose();}view.label.remove();});disposeObject(scene);renderer.dispose();renderer.domElement.remove();runtime.current=null;
     };
   },[]);
 
   useEffect(()=>{
     const rt=runtime.current;const layer=labelsLayer.current;if(!rt||!layer||!props.data)return;
-    const retained=new Set(props.data.objects.map(body=>body.object_id));
-    for(const [id,view] of rt.bodies){if(!retained.has(id)){rt.scene.remove(view.group);disposeObject(view.group);view.label.remove();rt.bodies.delete(id);}}
+    const locations=bodyDisplayPositions(props.data.objects);
+    const retained=new Set(props.data.objects.filter(body=>body.kind==='direction'?(body.direction_ecliptic??body.direction_ecliptic_unit):locations.has(body.object_id)).map(body=>body.object_id));
+    for(const [id,view] of rt.bodies){if(!retained.has(id)){rt.scene.remove(view.group);if(view.appearance){view.group.remove(view.appearance.group);view.appearance.dispose();}disposeObject(view.group);view.label.remove();rt.bodies.delete(id);}}
+    const majorMoons=new Set<string>();const parents=new Set(props.data.objects.filter(body=>body.kind==='moon').map(body=>body.parent_id));for(const parent of parents){props.data.objects.filter(body=>body.kind==='moon'&&body.parent_id===parent).sort((a,b)=>(b.radius_km??0)-(a.radius_km??0)).slice(0,12).forEach(body=>majorMoons.add(body.object_id));}
     for(const body of props.data.objects){
       const sourceDirection=body.direction_ecliptic??body.direction_ecliptic_unit;
-      if(body.kind==='solar_system'&&!body.position_au)continue;
+      if(body.kind!=='direction'&&!locations.has(body.object_id))continue;
       if(body.kind==='direction'&&!sourceDirection)continue;
-      const position=new THREE.Vector3().fromArray(body.kind==='direction'?displayDirection(sourceDirection!):displayPosition(body.position_au!));
-      const radius=body.kind==='direction'?1.05:displayRadius(body.radius_km??0,body.object_id==='sun');
+      const position=new THREE.Vector3().fromArray(body.kind==='direction'?displayDirection(sourceDirection!):locations.get(body.object_id)!);
+      const radius=body.kind==='direction'?1.05:body.kind==='moon'?(body.object_id===props.selectedObjectId?Math.max(.32,displayRadius(body.radius_km??0)):Math.max(.035,Math.min(.22,(body.radius_km??0)/10000+.035))):displayRadius(body.radius_km??0,body.object_id==='sun');
       let view=rt.bodies.get(body.object_id);
+      if(view&&(rt.focus?.objectId===body.object_id||rt.followedId===body.object_id)){
+        const updated=advanceNavigationForBody({camera:rt.cameraState(),transition:rt.focus,followedObjectId:rt.followedId},body.object_id,view.position.toArray() as Vec3,position.toArray() as Vec3,body.kind==='direction');
+        rt.focus=updated.transition;
+        if(updated.camera.position!==undefined){rt.camera.position.fromArray(updated.camera.position);rt.controls.target.fromArray(updated.camera.target);}
+        rt.emit();
+      }
       if(!view){
         const group=new THREE.Group();group.name=body.object_id;
         if(body.kind==='direction'){
@@ -233,57 +264,79 @@ export default function UniverseScene(props:UniverseSceneProps) {
         }else{
           const color=body.color??COLORS[body.object_id]??'#9eabbc';
           const material=body.object_id==='sun'?new THREE.MeshBasicMaterial({color:'#ffce80'}):new THREE.MeshStandardMaterial({color,roughness:.95,metalness:0,emissive:new THREE.Color(color),emissiveIntensity:.035});
-          const sphere=new THREE.Mesh(new THREE.SphereGeometry(radius,48,32),material);sphere.userData.objectId=body.object_id;group.add(sphere);
+          const sphere=new THREE.Mesh(new THREE.SphereGeometry(radius,body.kind==='moon'?12:48,body.kind==='moon'?8:32),material);sphere.userData.objectId=body.object_id;group.add(sphere);
           if(body.object_id==='sun')group.add(makeGlow('rgba(255,199,122,0.8)',radius*7));
         }
         const label=document.createElement('button');label.className=styles.bodyLabel;label.type='button';label.dataset.testid=`object-label-${body.object_id}`;label.addEventListener('click',event=>{event.stopPropagation();latest.current.onSelect(body.object_id);});layer.append(label);
-        view={body,group,radius,position,direction:body.kind==='direction'?position.clone():null,label};rt.bodies.set(body.object_id,view);rt.scene.add(group);
+        view={body,group,radius,framingRadius:radius,position,direction:body.kind==='direction'?position.clone():null,label,appearance:null,appearanceEntry:undefined,ringEntry:undefined,fallback:group.children.find(child=>child instanceof THREE.Mesh) as THREE.Mesh??null};rt.bodies.set(body.object_id,view);rt.scene.add(group);
       }
+      if(view.radius!==radius&&view.fallback){view.fallback.geometry.dispose();view.fallback.geometry=new THREE.SphereGeometry(radius,body.kind==='moon'?12:48,body.kind==='moon'?8:32);}
+      view.radius=radius;view.framingRadius=radius;
+      const appearanceEntry=body.object_id===props.selectedObjectId?props.appearance?.objects[body.object_id]:undefined;const ringEntry=props.appearance?.rings[body.object_id];
+      const wantsAppearance=body.kind!=='direction'&&Boolean(props.appearance)&&(body.kind!=='moon'||body.object_id===props.selectedObjectId);
+      if(view.appearance&&(!wantsAppearance||view.appearanceEntry!==appearanceEntry||view.ringEntry!==ringEntry)){view.group.remove(view.appearance.group);view.appearance.dispose();view.appearance=null;}
+      if(wantsAppearance&&!view.appearance){if(view.fallback){view.group.remove(view.fallback);disposeObject(view.fallback);view.fallback=null;}const activeView=view;view.appearance=createBodyAppearance({objectId:body.object_id,displayRadius:radius,physicalRadiusKm:body.radius_km??0,fallbackColor:body.color??COLORS[body.object_id]??'#a7a19b',appearance:appearanceEntry,rings:ringEntry,anisotropy:rt.renderer.capabilities.getMaxAnisotropy(),onStatus:status=>{activeView.label.dataset.appearanceState=status.state;activeView.label.dataset.appearanceKind=status.kind;latest.current.onAppearanceStatus?.(status);}});view.group.add(view.appearance.group);view.appearanceEntry=appearanceEntry;view.ringEntry=ringEntry;}
+      if(!wantsAppearance&&!view.fallback&&body.kind!=='direction'){const mesh=new THREE.Mesh(new THREE.SphereGeometry(radius,12,8),new THREE.MeshStandardMaterial({color:body.color??COLORS[body.object_id]??'#9a9690',roughness:1}));mesh.userData.objectId=body.object_id;view.group.add(mesh);view.fallback=mesh;}
+      const bands=scaledRingBands(ringEntry?.bands_km??[],body.radius_km??0,radius);if(bands.length)view.framingRadius=Math.max(radius,...bands.map(band=>band.outer));
       view.body=body;view.position.copy(position);view.direction=body.kind==='direction'?position.clone():null;
-      if(body.kind==='solar_system')view.group.position.copy(position);
-      const name=props.labels?.[body.object_id]??body.name;view.label.textContent=body.kind==='direction'?`${name} · ${props.directionLabel??'direction'}`:name;view.label.setAttribute('aria-label',name);
+      if(body.kind!=='direction')view.group.position.copy(position);
+      const name=props.labels?.[body.object_id]??body.name;const text=body.kind==='direction'?`${name} · ${props.directionLabel??'direction'}`:name;if(view.label.textContent!==text)view.label.textContent=text;if(view.label.getAttribute('aria-label')!==name)view.label.setAttribute('aria-label',name);
       view.label.setAttribute('aria-pressed',String(props.selectedObjectId===body.object_id));
+      view.label.tabIndex=props.active===false?-1:0;view.label.dataset.majorMoon=String(majorMoons.has(body.object_id));
+      view.label.dataset.worldPosition=position.toArray().map(value=>value.toFixed(9)).join(',');
+      view.label.dataset.sourcePositionAu=body.position_au?.map(value=>value.toFixed(12)).join(',')??'';
+      view.label.dataset.positionKind=body.position_kind??body.kind;
     }
-  },[props.data,props.labels,props.directionLabel,props.selectedObjectId]);
+    if(props.frameSelectedSystem&&props.selectedObjectId){const parent=rt.bodies.get(props.selectedObjectId);if(parent){for(const view of rt.bodies.values()){if(view.body.kind==='moon'&&view.body.parent_id===props.selectedObjectId)parent.framingRadius=Math.max(parent.framingRadius,parent.position.distanceTo(view.position)+view.radius);}}}
+    rt.motionTick++;if(host.current){host.current.dataset.modelEpoch=props.data.epoch;host.current.dataset.motionTick=String(rt.motionTick);}
+  },[props.data,props.labels,props.directionLabel,props.selectedObjectId,props.appearance,props.frameSelectedSystem,props.active]);
 
   useEffect(()=>{
     const rt=runtime.current;if(!rt)return;
     if(props.data){
-      const guides=props.data.objects.filter(body=>body.kind==='solar_system'&&body.object_id!=='sun'&&body.orbit?.kind==='osculating_kepler_guide');
+      const guides=props.data.objects.filter(body=>body.kind!=='direction'&&body.object_id!=='sun'&&body.orbit&&rt.bodies.has(body.object_id));
       const retained=new Set(guides.map(body=>body.object_id));
       for(const [id,line] of rt.orbits){if(!retained.has(id)){rt.scene.remove(line);disposeObject(line);rt.orbits.delete(id);}}
       for(const body of guides){
         const guide=body.orbit!;let line=rt.orbits.get(body.object_id);
         if(line?.userData.pointsReference!==guide.points_au){
-          const vertices=displayOrbitPoints(guide.points_au);
+          const parent=body.kind==='moon'&&body.parent_id?rt.bodies.get(body.parent_id):null;
+          const vertices=body.kind==='moon'&&parent?guide.points_au.map(point=>displayMoonOffset(point,parent.body.radius_km??null,parent.radius)).filter((point):point is Vec3=>point!==null):displayOrbitPoints(guide.points_au);
           if(vertices.length===0){if(line){rt.scene.remove(line);disposeObject(line);rt.orbits.delete(body.object_id);}continue;}
           const geometry=new THREE.BufferGeometry().setFromPoints(vertices.map(vertex=>new THREE.Vector3().fromArray(vertex)));
           if(line){line.geometry.dispose();line.geometry=geometry;}
           else{line=new THREE.Line(geometry,new THREE.LineBasicMaterial({color:'#718cad',transparent:true,opacity:.22,depthWrite:false}));line.name=`orbit-guide-${body.object_id}`;rt.orbits.set(body.object_id,line);rt.scene.add(line);}
-          line.userData.pointsReference=guide.points_au;line.userData.epoch=guide.epoch;
+          line.userData.pointsReference=guide.points_au;line.userData.epoch=guide.epoch;line.userData.kind=guide.kind;line.userData.parentId=body.kind==='moon'?body.parent_id:null;
         }
+        if(line&&body.kind==='moon'&&body.parent_id){const parent=rt.bodies.get(body.parent_id);if(parent)line.position.copy(parent.position);}
       }
     }
     const visible=props.showOrbits!==false;
-    for(const [id,line] of rt.orbits){line.visible=visible;line.material.opacity=id===props.selectedObjectId ? .58 : .22;line.material.color.set(id===props.selectedObjectId?'#b3ccec':'#718cad');}
-    if(host.current){host.current.dataset.orbitCount=String(visible?rt.orbits.size:0);host.current.dataset.orbitIds=visible?[...rt.orbits.keys()].join(','):'';host.current.dataset.orbitKind='osculating_kepler_guide';}
+    const selected=props.selectedObjectId?rt.bodies.get(props.selectedObjectId)?.body:null;const selectedParent=selected?.kind==='moon'?selected.parent_id:props.selectedObjectId;
+    for(const [id,line] of rt.orbits){line.visible=visible&&(!line.userData.parentId||line.userData.parentId===selectedParent);line.material.opacity=id===props.selectedObjectId ? .58 : .22;line.material.color.set(id===props.selectedObjectId?'#b3ccec':'#718cad');}
+    const visibleGuides=[...rt.orbits.entries()].filter(([,line])=>line.visible&&line.userData.kind==='osculating_kepler_guide').map(([id])=>id);const visibleTraces=[...rt.orbits.entries()].filter(([,line])=>line.visible&&line.userData.kind==='sampled_ephemeris_trace').map(([id])=>id);
+    if(host.current){host.current.dataset.orbitCount=String(visibleGuides.length);host.current.dataset.orbitIds=visibleGuides.join(',');host.current.dataset.orbitKind='osculating_kepler_guide';host.current.dataset.traceCount=String(visibleTraces.length);host.current.dataset.traceIds=visibleTraces.join(',');}
   },[props.data,props.showOrbits,props.selectedObjectId]);
 
   useEffect(()=>{
     const rt=runtime.current;if(!rt)return;
+    const sequence=props.selectionSequence??0;
+    const system=props.frameSelectedSystem??false;
     const overviewSequence=props.overviewSequence??0;
-    if(appliedOverview.current!==overviewSequence){appliedOverview.current=overviewSequence;rt.focus={from:rt.cameraState(),to:{...INITIAL,position:[...INITIAL.position],target:[...INITIAL.target]},startedAt:performance.now(),duration:window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:1000,objectId:''};rt.mode='focusing';rt.focusedId=null;rt.controls.enableDamping=false;rt.controls.minDistance=.2;rt.emit();return;}
+    if(appliedOverview.current!==overviewSequence){appliedOverview.current=overviewSequence;rt.focusRequest={objectId:props.selectedObjectId,sequence,system};rt.followedId=null;rt.focus={from:rt.cameraState(),to:{...INITIAL,position:[...INITIAL.position],target:[...INITIAL.target]},startedAt:performance.now(),duration:window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:1000,objectId:''};rt.mode='focusing';rt.focusedId=null;rt.controls.enableDamping=false;rt.controls.minDistance=.2;rt.emit();return;}
     const restoreSequence=props.restoreSequence??0;
-    if(props.restoredCamera&&validCamera(props.restoredCamera)&&appliedRestore.current?.sequence!==restoreSequence){appliedRestore.current={sequence:restoreSequence,selectionSequence:props.selectionSequence??0,objectId:props.selectedObjectId};rt.focus=null;rt.mode='restored';rt.focusedId=props.selectedObjectId;rt.controls.enableDamping=false;rt.controls.minDistance=.05;rt.applyCamera(props.restoredCamera);rt.controls.enableDamping=true;rt.emit();return;}
-    if(props.restoredCamera&&appliedRestore.current?.sequence===restoreSequence&&appliedRestore.current.selectionSequence===(props.selectionSequence??0)&&appliedRestore.current.objectId===props.selectedObjectId)return;
-    const view=props.selectedObjectId?rt.bodies.get(props.selectedObjectId):null;if(!view){if(rt.focus?.objectId||rt.focusedId){rt.focus=null;rt.mode='manual';rt.focusedId=null;rt.controls.enableDamping=true;rt.emit();}return;}
+    if(props.restoredCamera&&validCamera(props.restoredCamera)&&rt.restoredRequest?.sequence!==restoreSequence){rt.restoredRequest={sequence:restoreSequence,selectionSequence:sequence,objectId:props.selectedObjectId};rt.focusRequest={objectId:props.selectedObjectId,sequence,system};rt.followedId=props.restoredFollowObjectId===props.selectedObjectId?props.selectedObjectId:null;rt.focus=null;rt.mode='restored';rt.focusedId=props.selectedObjectId;rt.controls.enableDamping=false;rt.controls.minDistance=.05;rt.applyCamera(props.restoredCamera);rt.controls.enableDamping=true;rt.emit();return;}
+    if(rt.focusRequest?.objectId===props.selectedObjectId&&rt.focusRequest.sequence===sequence&&rt.focusRequest.system===system)return;
+    const view=props.selectedObjectId?rt.bodies.get(props.selectedObjectId):null;if(!view){if(rt.focus?.objectId||rt.focusedId||rt.followedId){rt.focus=null;rt.mode='manual';rt.focusedId=null;rt.followedId=null;rt.controls.enableDamping=true;rt.emit();}if(!props.selectedObjectId)rt.focusRequest={objectId:null,sequence,system};return;}
     rt.controls.enableDamping=false;rt.controls.update();
     const current=rt.cameraState();const center=view.direction?(view.body.direction_ecliptic??view.body.direction_ecliptic_unit)!:view.position.toArray() as Vec3;
-    rt.focus=makeFocus(current,view.body.object_id,center,view.radius,rt.camera.fov,rt.camera.aspect,performance.now(),window.matchMedia('(prefers-reduced-motion: reduce)').matches,Boolean(view.direction));
+    rt.focusRequest={objectId:props.selectedObjectId,sequence,system};rt.followedId=view.body.object_id;
+    rt.focus=makeFocus(current,view.body.object_id,center,view.framingRadius,rt.camera.fov,rt.camera.aspect,performance.now(),window.matchMedia('(prefers-reduced-motion: reduce)').matches,Boolean(view.direction));
     rt.focusedId=view.body.object_id;rt.mode='focusing';rt.controls.minDistance=view.direction?0.2:view.radius*1.2;rt.emit();
-  },[props.data,props.selectedObjectId,props.selectionSequence,props.overviewSequence,props.restoredCamera,props.restoreSequence]);
+  },[props.data,props.selectedObjectId,props.selectionSequence,props.overviewSequence,props.restoredCamera,props.restoredFollowObjectId,props.restoreSequence,props.frameSelectedSystem]);
 
   useEffect(()=>{runtime.current?.renderer.domElement.setAttribute('aria-label',props.controlsLabel??'3D universe');},[props.controlsLabel]);
+  useEffect(()=>{const rt=runtime.current;if(!rt)return;const active=props.active!==false;rt.renderer.domElement.tabIndex=active?0:-1;if(host.current)host.current.dataset.sceneActive=String(active);if(active)rt.resume();},[props.active]);
 
   return <div ref={host} className={styles.scene} data-testid="universe-scene" data-selected-object={props.selectedObjectId??''}>
     <div ref={labelsLayer} className={styles.labels} aria-label={props.controlsLabel}/>
