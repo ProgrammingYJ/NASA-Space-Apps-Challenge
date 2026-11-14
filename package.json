@@ -1,6 +1,6 @@
 {
   "name": "planet-x-spherex-node-runtime",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "private": true,
   "description": "Node-only runtime for source-verified Planet X and SPHEREx exploration",
   "type": "commonjs",

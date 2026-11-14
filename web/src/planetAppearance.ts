@@ -52,7 +52,7 @@ export interface RingEntry {
 }
 export interface AppearanceManifest {objects:Record<string,AppearanceEntry>;rings:Record<string,RingEntry>;source_manifest_sha256:string}
 export type AppearanceLightingMode='inspection'|'solar';
-export type AppearanceCoverageMode='marked'|'original';
+export type AppearanceCoverageMode='representative'|'marked'|'original';
 export interface AppearanceStatus {
   object_id:string;
   state:'loading'|'ready'|'fallback'|'failed';
@@ -132,7 +132,7 @@ function displayLighting(mode:AppearanceLightingMode):[number,number]{
 
 function markedCoverage(mode:AppearanceCoverageMode):number{
   if(mode==='marked')return 1;
-  if(mode==='original')return 0;
+  if(mode==='original'||mode==='representative')return 0;
   throw new Error('invalid_appearance_coverage_mode');
 }
 

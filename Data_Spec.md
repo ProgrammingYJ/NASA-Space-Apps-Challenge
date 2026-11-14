@@ -3881,3 +3881,13 @@ DEV-021 중앙 검사 확정(2026-11-15 08:30 KST): 보완 빌드의 strict Type
 
 
 DEV-021 사후 배포 확정(2026-11-15 08:35 KST): 정확082938 디렉터리의 file1626/전체667,431,826B, release_manifest SHA374cbe532a29d8ba2083ef9d91de4a19d55068e2be1e982f06620826f4f7286b를 새Ubuntu clean-copy에서 Node-only PATH·실제PID9669→9682·εB/Pluto/P9 저장/복원으로 검증했다. runtime필수1182와배포선택23을검증했고선택67은미배포로명시했다. 같은 디렉터리를Sydney에활성화해기존핵심14파일 원바이트와21파일 일관백업을보존했다. 정식HTTPS Chrome 새8경로와기존실관측/새세션복원2경로를통과했고운영PID9844→10096 실제재시작후기존3근거의정본exportSHA/ID/비교/판단이모두같았다. 새ZIP은만들지않았다. 사후기록은검증디렉터리를재작성하지않고 docs/releases/v0.14.0.json에분리한다. Gitcommit/push는검증후마지막단계다.
+
+
+### DEV-022 기본 외관 긴급 교체
+
+기본 회색 사선/OPAL결측 표시를 거절한 최신 사용자 지시에 따라 설명용 NASA VTAD 3D 모델의 embedded image0(baseColorTexture0)를 별도 기본 외관으로 연결한다. 실측 전구 대기 지도나 현재 기상 관측으로 주장하지 않는다. source GLB를 보존하고 PNG bufferView의 원바이트를 그대로 추출했으며 디코딩/재색칠/리사이즈/결측 보충/새 이미지 생성은 하지 않았다. 원 OPAL API·manifest·TIFF/PNG는 불변이다. 원본/진단모드를 명시적으로 선택한 경우에만 기존 지도를 볼 수 있다. 위성·좌표·실제 관측·질량은 바꾸지 않는다.
+
+전체 메타는 data/manifests/representative_appearance.json 및 data/reference/appearance/dev022/*-vtad-extraction.json이다. Uranus 공식 GLB172652B/SHA9c56f96bbfa82d923479c3dd83a00c35238a36addcfbcc61916f1377fe586bd5에서 추출한 PNG30807B/SHA cf72fd1f5a8fd2ca14d268503db7f94b57adab8be3b80b3a1dc460644c97be28, Neptune GLB585104B/SHA2fc3af08d56ed429b9cc56b95d151102aa5807ea958e7cb8806a42e12a699ba8에서 PNG443257B/SHA471826354bab45d381ba552503ac138c779e3ae539b5f14206c42426195077cd다. 모두1024×512다. **원 GLB 수치와SHA는 아래 검증 정본을 우선하며 실제 추출JSON과 직접 대조한다.** 출처는 https://science.nasa.gov/resource/uranus-3d-model/ 와 https://science.nasa.gov/resource/neptune-3d-model/ , credit NASA Visualization Technology Applications and Development (VTAD)다. 재배포 설명은 NASA 매체 이용 지침 https://www.nasa.gov/nasa-brand-center/images-and-media/ 에 연결한다. 코드이식은 GLB의 전체3D geometry가 아니라 배포된 embedded base-color PNG 원바이트만 사용한다. 기본은 representative로저장하며 display_version=nasa-vtad-ice-giants-v1을보존한다.
+
+
+DEV-022 0.14.1 긴급 배포 확정: NASA VTAD 대표 외관을 기본으로 변경해 U/N 각3각도 총6이미지를 직접 열람했고 사선/검은 결측구멍/형광색 접합 없는 구체를 확인했다. 실제 OPAL 원본 선택과바이트/SHA·5언어/물리크기불변회귀는로컬및정식HTTPS Chrome에서통과했다. strict/Vite·Vitest101·Node후속9·Python6/3subtests·Ruff와새directory Node-only실제재시작검증을통과했다. 정확084608디렉터리 manifestSHA a914fde4e2ab09af68d1468a0a5b7565a5355483ff85d94e926491a23997f815를AWS에활성화했고PID10096→10927·기존핵심16파일SHA·일관백업25파일을보존했다. runtimeSHA a73e222d7be2b840215aa3c97ccbea30e469f36f99905bae6073051308ee501c·source1274/필수1184다. 원본 OPAL과독립관측/계산4comparison은바뀌지않았다. NASA모형외관을관측전구지도로주장하지않으며source별선택과출처를명시한다. 자세한사후기록 docs/releases/v0.14.1.json. 별도진행중P9유사궤도기능은이긴급배포에포함하지않았다.

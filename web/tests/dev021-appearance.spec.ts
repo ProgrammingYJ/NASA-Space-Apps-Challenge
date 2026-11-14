@@ -63,6 +63,7 @@ for(const entry of cases){
       await selectBody(page,entry.id);
       const label=page.getByTestId('object-label-'+entry.id),mode=page.getByTestId('appearance-coverage'),policy=page.getByTestId('appearance-coverage-policy');
       await expect(label).toHaveAttribute('data-appearance-state','ready',{timeout:45000});
+      await mode.selectOption('marked');
       await expect(label).toHaveAttribute('data-coverage-overlay','ready');
       await expect(mode).toHaveValue('marked');await expect(label).toHaveAttribute('data-coverage-mode','marked');
       const size=await dimensions(label);for(const value of Object.values(size))expect(value).toBeGreaterThan(0);

@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Planet X · SPHEREx",
-    "version": "0.14.0"
+    "version": "0.14.1"
   },
   "paths": {
     "/health/live": {
@@ -1199,6 +1199,7 @@
               {
                 "type": "string",
                 "enum": [
+                  "representative",
                   "marked",
                   "original"
                 ]
@@ -1208,6 +1209,18 @@
               }
             ],
             "title": "Appearance Coverage"
+          },
+          "appearance_display_version": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "nasa-vtad-ice-giants-v1"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Appearance Display Version"
           },
           "moon_simulation_algorithm_version": {
             "anyOf": [

@@ -535,3 +535,11 @@ DEV-021 시작 · 2026-11-15T07:59:47.477185+09:00: 사용자실화면의표본�
 
 
 DEV-021 Git 확정(2026-11-15 08:36 KST): 기능 commit `600cf1dfe596dc12828eb68871d48df25ee938ea`를 ProgrammingYJ/NASA-Space-Apps-Challenge의 main에 push했고 ls-remote가 로컬HEAD와 일치했다. 실행/계약/프런트/서버 소스는 검증·배포 디렉터리와 파일별SHA가 같음을 commit 전 재대조했다. FSD/Data_Spec·릴리스/작업 사후기록만 동결 디렉터리 밖에서 확정한다. 기존 untracked 사용자 복사본MD는 그대로 보존했다.
+
+
+### DEV-022 긴급 시작 — 2026-11-15 KST
+
+사용자가 Uranus/Neptune 기본 사선 외관을 거절했다. 과학 주의 표시를 구체 대부분에 강제한 잘못된 기본 UX로 판단한다. 단순 원본 모드로 회귀하면 검은 채움/강한 색 접합이 돌아오므로 NASA 공식 VTAD 대표 모델 외관을 별도로 기본에 연결하고, 실제 OPAL은 원본 관측지도 선택으로 보존한다. source/물리량/위성/실제관측값과 기존 근거는 보존하며 표시선택/명시적 대표모형 안내·버전만 추가한다. 긴급 영향 검사/실제 이미지 열람·회전/공개 AWS 확인 후 기록한다.
+
+
+DEV-022 0.14.1 긴급 배포 확정: NASA VTAD 대표 외관을 기본으로 변경해 U/N 각3각도 총6이미지를 직접 열람했고 사선/검은 결측구멍/형광색 접합 없는 구체를 확인했다. 실제 OPAL 원본 선택과바이트/SHA·5언어/물리크기불변회귀는로컬및정식HTTPS Chrome에서통과했다. strict/Vite·Vitest101·Node후속9·Python6/3subtests·Ruff와새directory Node-only실제재시작검증을통과했다. 정확084608디렉터리 manifestSHA a914fde4e2ab09af68d1468a0a5b7565a5355483ff85d94e926491a23997f815를AWS에활성화했고PID10096→10927·기존핵심16파일SHA·일관백업25파일을보존했다. runtimeSHA a73e222d7be2b840215aa3c97ccbea30e469f36f99905bae6073051308ee501c·source1274/필수1184다. 원본 OPAL과독립관측/계산4comparison은바뀌지않았다. NASA모형외관을관측전구지도로주장하지않으며source별선택과출처를명시한다. 자세한사후기록 docs/releases/v0.14.1.json. 별도진행중P9유사궤도기능은이긴급배포에포함하지않았다.

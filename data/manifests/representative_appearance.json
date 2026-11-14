@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "display_version": "nasa-vtad-ice-giants-v1",
+  "representation_not_observation": true,
+  "original_opal_manifest_unchanged": true,
+  "assets": [
+    {
+      "source_url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/u/Uranus_1_51118.glb",
+      "resolved_url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/u/Uranus_1_51118.glb",
+      "bytes": 172652,
+      "sha256": "9c56f96bbfa82d923479c3dd83a00c35238a36addcfbcc61916f1377fe586bd5",
+      "schema_version": "1.0",
+      "retrieved_utc": "2026-11-14T23:41:28.808459+00:00",
+      "source_page": "https://science.nasa.gov/resource/uranus-3d-model/",
+      "source_glb_path": "data/reference/appearance/dev022/uranus-vtad.glb",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+      "representation_not_observation": true,
+      "role": "NASA VTAD representative 3D model base-color texture; not an observed full-coverage map",
+      "extraction": "Exact embedded image bufferView bytes; no decoding, recoloring, resizing, filling or image generation",
+      "material_index": 0,
+      "material_name": "Default OBJ.001",
+      "texture_index": 0,
+      "image_index": 0,
+      "buffer_view_index": 4,
+      "image_path": "web/public/textures/uranus-vtad-cf72fd1f5a8f.png",
+      "texture_url": "/textures/uranus-vtad-cf72fd1f5a8f.png",
+      "image_bytes": 30807,
+      "image_sha256": "cf72fd1f5a8fd2ca14d268503db7f94b57adab8be3b80b3a1dc460644c97be28",
+      "pixel_dimensions": [
+        1024,
+        512
+      ],
+      "limitations": [
+        "Representative visualization texture, not an independent observation or a measured cloud map at the selected model time.",
+        "The original OPAL observation maps remain separate and unchanged.",
+        "Texture-to-globe longitude/phase alignment is not validated."
+      ]
+    },
+    {
+      "source_url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/n/Neptune_1_49528.glb",
+      "resolved_url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/n/Neptune_1_49528.glb",
+      "bytes": 585104,
+      "sha256": "2fc3af08d56ed429b9cc56b95d151102aa5807ea958e7cb8806a42e12a699ba8",
+      "schema_version": "1.0",
+      "retrieved_utc": "2026-11-14T23:41:28.808459+00:00",
+      "source_page": "https://science.nasa.gov/resource/neptune-3d-model/",
+      "source_glb_path": "data/reference/appearance/dev022/neptune-vtad.glb",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+      "representation_not_observation": true,
+      "role": "NASA VTAD representative 3D model base-color texture; not an observed full-coverage map",
+      "extraction": "Exact embedded image bufferView bytes; no decoding, recoloring, resizing, filling or image generation",
+      "material_index": 0,
+      "material_name": "Default OBJ.001",
+      "texture_index": 0,
+      "image_index": 0,
+      "buffer_view_index": 4,
+      "image_path": "web/public/textures/neptune-vtad-471826354bab.png",
+      "texture_url": "/textures/neptune-vtad-471826354bab.png",
+      "image_bytes": 443257,
+      "image_sha256": "471826354bab45d381ba552503ac138c779e3ae539b5f14206c42426195077cd",
+      "pixel_dimensions": [
+        1024,
+        512
+      ],
+      "limitations": [
+        "Representative visualization texture, not an independent observation or a measured cloud map at the selected model time.",
+        "The original OPAL observation maps remain separate and unchanged.",
+        "Texture-to-globe longitude/phase alignment is not validated."
+      ]
+    }
+  ]
+}

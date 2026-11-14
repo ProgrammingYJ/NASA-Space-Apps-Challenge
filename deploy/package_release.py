@@ -49,6 +49,7 @@ FILES = (
     "deploy/requirements.appearance-validation.lock.txt",
     "data/reference/outer-tno/dev019-interpretation/source.json",
     "data/manifests/mcp_tools.json",
+    "data/manifests/representative_appearance.json",
     "data/reference/mcp/dev018/astronomy.json",
     "data/reference/mcp/dev018/pipeworx.json",
     "data/reference/mcp/dev018/pds.json",
@@ -115,6 +116,13 @@ FILES = (
     "docs/qa/dev020_local_verification.json",
     "docs/qa/dev020_platform_parity.json",
     "docs/qa/dev021_local_verification.json",
+    "data/reference/appearance/dev022/uranus-vtad.glb",
+    "data/reference/appearance/dev022/uranus-vtad.source.json",
+    "data/reference/appearance/dev022/uranus-vtad-extraction.json",
+    "data/reference/appearance/dev022/neptune-vtad.glb",
+    "data/reference/appearance/dev022/neptune-vtad.source.json",
+    "data/reference/appearance/dev022/neptune-vtad-extraction.json",
+
     "docs/decisions/ADR-001.md",
     "docs/decisions/ADR-002.md",
     "docs/decisions/ADR-003.md",
@@ -280,7 +288,7 @@ def prepare(built_at, source_provenance=None, delivery_format="directory"):
     manifest = {
         "delivery_format": delivery_format,
         "release": version,
-        "work_id": "DEV-021",
+        "work_id": "DEV-022",
         "work_ids": [
             "DEV-009",
             "DEV-010",
@@ -296,6 +304,7 @@ def prepare(built_at, source_provenance=None, delivery_format="directory"):
             "OPS-020",
             "DEV-020",
             "DEV-021",
+            "DEV-022",
         ],
         "built_at": built_at,
         **source_revision(ROOT, source_provenance),

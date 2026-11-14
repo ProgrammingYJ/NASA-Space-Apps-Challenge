@@ -55,7 +55,7 @@ export interface UniverseData {
 export interface UniverseSceneProps {
   renderPreset?:RenderPreset;
   lightingMode?:LightingMode;
-  coverageMode?:'marked'|'original';
+  coverageMode?:'representative'|'marked'|'original';
   outerTnoCatalog?:OuterTnoCatalog;
   outerTnoEpochJd?:number;
   outerTnoSelected?:OuterTnoObject;

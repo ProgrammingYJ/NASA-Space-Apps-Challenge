@@ -1,0 +1,32 @@
+{
+  "source_url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/u/Uranus_1_51118.glb",
+  "resolved_url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/u/Uranus_1_51118.glb",
+  "bytes": 172652,
+  "sha256": "9c56f96bbfa82d923479c3dd83a00c35238a36addcfbcc61916f1377fe586bd5",
+  "schema_version": "1.0",
+  "retrieved_utc": "2026-11-14T23:41:28.808459+00:00",
+  "source_page": "https://science.nasa.gov/resource/uranus-3d-model/",
+  "source_glb_path": "data/reference/appearance/dev022/uranus-vtad.glb",
+  "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+  "representation_not_observation": true,
+  "role": "NASA VTAD representative 3D model base-color texture; not an observed full-coverage map",
+  "extraction": "Exact embedded image bufferView bytes; no decoding, recoloring, resizing, filling or image generation",
+  "material_index": 0,
+  "material_name": "Default OBJ.001",
+  "texture_index": 0,
+  "image_index": 0,
+  "buffer_view_index": 4,
+  "image_path": "web/public/textures/uranus-vtad-cf72fd1f5a8f.png",
+  "texture_url": "/textures/uranus-vtad-cf72fd1f5a8f.png",
+  "image_bytes": 30807,
+  "image_sha256": "cf72fd1f5a8fd2ca14d268503db7f94b57adab8be3b80b3a1dc460644c97be28",
+  "pixel_dimensions": [
+    1024,
+    512
+  ],
+  "limitations": [
+    "Representative visualization texture, not an independent observation or a measured cloud map at the selected model time.",
+    "The original OPAL observation maps remain separate and unchanged.",
+    "Texture-to-globe longitude/phase alignment is not validated."
+  ]
+}

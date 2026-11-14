@@ -1,0 +1,45 @@
+{
+  "release": "0.14.1",
+  "work_id": "DEV-022",
+  "status": "deployed_and_verified",
+  "delivery": {
+    "delivery_format": "directory",
+    "directory": "NASA_SPACE_APPS_CHALLENGE_v0.14.1_20261115_084608KST",
+    "directory_manifest_sha256": "a914fde4e2ab09af68d1468a0a5b7565a5355483ff85d94e926491a23997f815",
+    "file_count": 1639,
+    "payload_bytes": 668863448,
+    "directory_bytes": 669174453
+  },
+  "runtime_manifest_sha256": "a73e222d7be2b840215aa3c97ccbea30e469f36f99905bae6073051308ee501c",
+  "public_url": "https://nasaspaceappschallenge.marulee.dev/",
+  "presentation": "NASA VTAD model appearance by default; original OPAL preserved as an explicit source-map option",
+  "representation_not_observation": true,
+  "source_provenance": "data/manifests/representative_appearance.json",
+  "checks": {
+    "strict_vite": "pass",
+    "vitest_pass": 101,
+    "node_followup_pass": 9,
+    "python_followup_pass": 6,
+    "python_subtests": 3,
+    "ruff": "pass",
+    "clean_directory_node_only_restart": "passed",
+    "clean_process_ids": [
+      10764,
+      10777
+    ],
+    "local_browser": "pass",
+    "public_https_browser": "pass",
+    "six_rotation_images_reviewed": true,
+    "physical_radii_unchanged": true,
+    "original_opal_bytes_sha_unchanged": true,
+    "new_release_zip_created": false
+  },
+  "deployment": {
+    "directory": "NASA_SPACE_APPS_CHALLENGE_v0.14.1_20261115_084608KST",
+    "old_pid": 10096,
+    "new_pid": 10927,
+    "preserved_evidence_comparison_files": 16,
+    "consistent_backup_files": 25
+  },
+  "pending_independent_work": "P9 automatic source-sample orbit execution and catalogue-element analogue comparison is not part of this appearance hotfix."
+}

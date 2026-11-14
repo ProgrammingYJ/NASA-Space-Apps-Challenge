@@ -12,7 +12,7 @@ const en={
   unresolved:'No resolved observation map is connected. The display does not create measured surface terrain.',
   lodLoading:'Loading detail; keeping the available map.',lodRetained:'Detail could not load; keeping the previously verified map.',
   sourceMap:'Open published map',
-  coverage:'Map caution overlay',marked:'Mark zero-channel areas',original:'Published map without overlay',
+  representative:'NASA 3D model appearance',representativeNote:'NASA VTAD representative 3D-model appearance for visual exploration. This is not a resolved observation map or weather at the model date. Select the published OPAL map to inspect the actual source mosaic.',coverage:'Globe appearance',marked:'Mark zero-channel areas',original:'Published map without overlay',
   markedNote:'Diagonal gray hatching is a display aid for exact zero RGB channels, including black fill, and declared unmapped areas. Zero channels can also be valid data: this is not a scientific quality or missing-data mask. A six-source-pixel display buffer also covers adjacent pixels, which may be valid, to distinguish color seams. It adds no observed terrain; other mosaic artifacts may remain.',
   originalNote:'The published map is shown without the caution overlay. Black fill and bright color seams remain as published; they are not confirmed atmospheric features. The original image is unchanged in both modes.',
   overlayUnavailable:'The caution overlay could not be prepared. The published map remains available; its black fill and color seams are still visible.',
@@ -30,7 +30,7 @@ const ko:typeof en={
   unresolved:'연결된 분해 관측 지도가 없습니다. 측정하지 못한 표면 지형을 만들어 채우지 않습니다.',
   lodLoading:'상세 지도 로딩 중 · 현재 지도 유지',lodRetained:'상세 지도 로딩 실패 · 확인된 이전 지도 유지',
   sourceMap:'공개 지도 열기',
-  coverage:'지도 표시 주의 영역',marked:'0채널 영역 표시',original:'표시 보조 없는 공개 지도',
+  representative:'NASA 3D 모형 외관',representativeNote:'탐색을 위한 NASA VTAD 3D 모형의 설명용 외관입니다. 실측 전구 지도나 선택 시각의 기상이 아닙니다. 실제 자료는 공개 OPAL 지도에서 확인할 수 있습니다.',coverage:'천체 외관',marked:'0채널 영역 표시',original:'표시 보조 없는 공개 지도',
   markedNote:'회색 사선은 검은 채움을 포함해 RGB 채널값이 정확히 0인 곳과 명시된 지도 밖을 구별하는 표시 보조입니다. 0채널도 유효한 자료일 수 있으며 과학적 품질·미관측 판정 마스크가 아닙니다. 색 접합을 구별하려 원본 6픽셀 주변까지 표시하며 유효한 인접 픽셀도 가릴 수 있습니다. 관측 지형을 만들지 않으며 다른 접합 흔적은 남을 수 있습니다.',
   originalNote:'표시 보조 없이 공개 지도를 보여줍니다. 원본의 검은 채움·강한 색 접합은 남으며 확인된 대기 구조가 아닙니다. 두 모드 모두 원본 이미지는 바꾸지 않습니다.',
   overlayUnavailable:'표시 보조를 준비하지 못했습니다. 공개 지도는 그대로 볼 수 있으며 원본의 검은 채움·색 접합이 보입니다.',
@@ -48,7 +48,7 @@ const ja:typeof en={
   unresolved:'分解された観測地図は接続されていません。実測した表面地形を生成しません。',
   lodLoading:'詳細を読み込み中・現在の地図を維持',lodRetained:'詳細を読み込めません・確認済みの地図を維持',
   sourceMap:'公開地図を開く',
-  coverage:'地図の注意表示',marked:'ゼロチャンネル領域を表示',original:'注意表示なしの公開地図',
+  representative:'NASA 3Dモデルの外観',representativeNote:'探索用のNASA VTAD 3Dモデルの説明的な外観です。実測全球地図や模型日時の天気ではありません。実資料は公開OPAL地図で確認できます。',coverage:'天体の外観',marked:'ゼロチャンネル領域を表示',original:'注意表示なしの公開地図',
   markedNote:'灰色の斜線は、黒い塗りを含むRGB値が厳密に0のチャンネルと、明示された地図範囲外を区別する表示補助です。0のチャンネルにも有効なデータが含まれ得ます。色の接合部を区別するため原画像の6ピクセル分を周囲に追加し、有効な隣接ピクセルも覆う場合があります。科学的な品質・欠測判定マスクではなく、観測地形を生成しません。他の接合痕跡は残る場合があります。',
   originalNote:'注意表示なしで公開地図を示します。原資料の黒い塗りや強い色の接合部は、確認済みの大気構造ではありません。どちらのモードも原画像は変更しません。',
   overlayUnavailable:'注意表示を準備できませんでした。公開地図は利用でき、元の黒い塗りや色の接合部も表示されます。',
@@ -66,7 +66,7 @@ const zh:typeof en={
   unresolved:'尚未連接可解析的觀測地圖，不會生成實測表面地形。',
   lodLoading:'正在載入細節・保留目前地圖',lodRetained:'無法載入細節・保留已驗證的地圖',
   sourceMap:'開啟公開地圖',
-  coverage:'地圖注意區域顯示',marked:'標示零通道區域',original:'不加標示的公開地圖',
+  representative:'NASA 3D模型外觀',representativeNote:'供探索使用的NASA VTAD 3D模型示意外觀。這不是實測全球地圖或模型時刻的天氣。可選擇公開OPAL地圖檢視實際資料。',coverage:'天體外觀',marked:'標示零通道區域',original:'不加標示的公開地圖',
   markedNote:'灰色斜線是顯示輔助，用來區分含黑色填補在內、RGB通道值恰為0的區域，以及已明示的地圖範圍外。零通道也可能是有效資料；這不是科學品質或缺測判定遮罩。為區分彩色接縫，另向周圍擴大原圖6像素，也可能遮住有效的相鄰像素。不會生成觀測地形，其他拼接痕跡可能仍存在。',
   originalNote:'不加注意區域標示，顯示公開地圖。原圖的黑色填補及強烈色彩接縫不是已確認的大氣結構。兩種模式都不更改原始影像。',
   overlayUnavailable:'無法準備注意區域標示。公開地圖仍可檢視，原圖的黑色填補及色彩接縫仍會顯示。',
@@ -84,7 +84,7 @@ const fr:typeof en={
   unresolved:'Aucune carte résolue n’est reliée à cet objet. Aucun relief de surface mesuré n’est inventé.',
   lodLoading:'Chargement des détails ; carte actuelle conservée.',lodRetained:'Détails indisponibles ; carte vérifiée précédente conservée.',
   sourceMap:'Ouvrir la carte publiée',
-  coverage:'Repères de prudence sur la carte',marked:'Signaler les canaux nuls',original:'Carte publiée sans repères',
+  representative:'Aspect du modèle 3D NASA',representativeNote:'Aspect illustratif du modèle 3D NASA VTAD pour l’exploration. Ce n’est ni une carte observée complète ni la météo à la date simulée. La carte OPAL publiée reste accessible pour examiner les données réelles.',coverage:'Aspect du globe',marked:'Signaler les canaux nuls',original:'Carte publiée sans repères',
   markedNote:'Les hachures grises signalent les canaux RGB exactement nuls, dont les plages noires, et les zones explicitement hors carte. Un canal nul peut être valide : ce repère visuel n’est ni un masque scientifique de qualité ni une preuve de données manquantes. Une marge de six pixels de l’image source couvre aussi des pixels voisins éventuellement valides pour distinguer les raccords colorés. Aucun terrain observé n’est créé ; d’autres raccords peuvent rester visibles.',
   originalNote:'La carte publiée est montrée sans repères. Les plages noires et raccords très colorés restent tels que publiés, sans constituer des structures atmosphériques confirmées. L’image originale reste inchangée dans les deux modes.',
   overlayUnavailable:'Les repères n’ont pas pu être préparés. La carte publiée reste accessible, avec ses plages noires et ses raccords colorés.',
@@ -97,6 +97,7 @@ export function appearanceCopy(language:string){
 export function appearanceMapNotice(objectId:string,entry:AppearanceEntry|undefined,language:string):string{
   const copy=appearanceCopy(language);
   if(!entry?.texture_url)return copy.unresolved;
+  if((objectId==='neptune'||objectId==='uranus')&&entry.kind==='illustration')return copy.representativeNote;
   if(objectId==='neptune'||objectId==='uranus')return entry.map_color_type==='published_rgb_composite'?copy.rgb:copy.monochrome;
   if(objectId==='saturn')return copy.saturn;
   if(objectId==='pluto')return copy.pluto;
