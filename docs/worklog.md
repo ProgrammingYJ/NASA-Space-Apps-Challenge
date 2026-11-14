@@ -532,3 +532,6 @@ DEV-021 시작 · 2026-11-15T07:59:47.477185+09:00: 사용자실화면의표본�
 - 실제운영PID9844→10096 재시작·HTTPS ready·nginx정상·기존3근거export원바이트/ID/비교/판단동일을확인했다. full source inventory1272 중필수1182·선택23은배포검증,선택67은미배포로정확히기록한다. 사후정본 docs/releases/v0.14.0.json이며검증디렉터리 자체는동결한다.
 - 지구는기존EMB기준,453위성은J2/조석/상호섭동/장기정확도미검증2체외삽이다. 미지원15는구체이유로남고원목록은보존한다. RGB회색사선은유효이웃도포함할수있는표시보조이며새관측/지형/과학품질마스크가아니다. 단위sr^-1와kg/m^3를구분하며P9질량은문헌가정이다.
 - 마지막 조치: 최신 origin/main과 HEAD가동일함을fetch로확인했다. 현재변경을commit/push하고원격해시를대조한다. 사용자기존 untracked 복사본MD는보존하며커밋대상에서제외한다.
+
+
+DEV-021 Git 확정(2026-11-15 08:36 KST): 기능 commit `600cf1dfe596dc12828eb68871d48df25ee938ea`를 ProgrammingYJ/NASA-Space-Apps-Challenge의 main에 push했고 ls-remote가 로컬HEAD와 일치했다. 실행/계약/프런트/서버 소스는 검증·배포 디렉터리와 파일별SHA가 같음을 commit 전 재대조했다. FSD/Data_Spec·릴리스/작업 사후기록만 동결 디렉터리 밖에서 확정한다. 기존 untracked 사용자 복사본MD는 그대로 보존했다.

@@ -58,7 +58,7 @@ DEV-021:
 - [x] TOP5표본중앙창·가시적상태/timeout/포커스·정확source표본M⊕
 - [x] 위치확률밀도/물질밀도구분·현재M⊕/kg·nativeρR직접계산CTA
 - [x] 2035수축계측·P9비동기결과와카메라축척분리/회귀
-- [ ] ZIP없이직접AWS검증배포·기존근거/재시작·Gitcommit/push
+- [x] ZIP없이직접AWS검증배포·기존근거/재시작·Gitcommit/push
 
 - [x] 위성453/토성291 장기달력복구·원source/반지름·Titan/EMB/5언어 Chrome
 - [x] OPAL 원본보존·RGB경계표시주의/원본전환·두행성5언어 Chrome/실제이미지검토
