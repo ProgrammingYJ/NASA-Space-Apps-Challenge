@@ -1,6 +1,11 @@
 # 작업 기록
 
 
+## RELEASE-011 · 2026-11-15 · v0.11.0 검증·전달
+
+RELEASE-011 · v0.11.0 완결 ZIP 검증 확정: `NASA_SPACE_APPS_CHALLENGE_v0.11.0_20261115_001122KST.zip` / 580,411,280B / 2,320파일 / SHA256 `db7468317fa4ab1d3c0a8a616815d12ca22bb15bd1486f6848b5a8d2c1715d69`. clean source `aa3b2c44cba9125e7832f535ce8232c4b20ab8e9`에서 패키징했다. 실제 ZIP을 새 폴더에 풀어 2,319 manifest 항목·필수1,586 source·107생성JSON을 대조했고, Node22.17.0만 PATH에 둔 app.js 실행/ready·ε Indi B/Pluto 실원본/품질·근거 내보내기/가져오기·실제 프로세스 재시작 후 복원을 PASS했다. 정확 ZIP은 기존LAN을 유지하기 위해 PORT8011로 검사했고 기본3002는 현재 Node22 child회귀에서 별도로 확인했다. 새GWGC53,162·SXS13,869·혜성4/489 TDB표본 HTTP검사도 PASS했다. source297이 아니라 최종 source1885/필수1586/선택299이며 ZIP에는 선택32개가 있고267개는 보류/감사본으로 제외됐다. 현재 LAN CumtP9k6와 기존var/node는 계속 실행/보존한다. 공개호스팅/Linux/모든물리법칙·runtimefullGR/결합 계산은 완료로 올리지 않는다. 최종 공개 기록은 `docs/releases/v0.11.0.json`, 정확검증은 동명 외부 `.verification.json`이다. 이 사후문서 기록은 이미 검증한 ZIP 바이트를 수정하지 않는다.
+
+
 ## DEV-016 · 2026-11-14 23:41 KST 통합 중 · 실제 은하와 제한 물리 계산
 
 - 최종 후속: 2026-11-15 00:05:23 KST 동결 검증: 107 JSON/76348584B, source1885개·필수1586개/623292613B·선택299개. manifest480792B/SHA`aa8895a820e4356747570c381d8af1c317f90e60e7598abda89e54916c01b204`. 실제 FITS4비교의 기존 result ID/내용SHA를 보존했다. Python전체 608 passed, 1 warning in 106.21s (0:01:46); Vitest154PASS·strictTS·Ruff전체 PASS, Node전체22PASS. Production ZVxA7rKp Chrome42PASS/417.029초(새 PDE/NR·Atlas·기존관측/복원), 이후 T=-3 렌즈형 경계1곳 교정의 최종 CumtP9k6 빌드 Atlas Chrome3PASS/34.552초를 구분한다. 로컬기기/자동검사이며 사람·원어민·Linux/공개호스팅 검증으로 확대하지 않는다.

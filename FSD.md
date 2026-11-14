@@ -1,6 +1,6 @@
 # Planet X and SPHEREx — 기능·개발 명세서
 
-문서 버전 `FSD-0.19` · 갱신일 2026-11-15 KST · 현재 작업 `DEV-015–016 / v0.11.0` 표면·혜성·자유 중력·GWGC 은하·독립 PDE·실제 NR 파형 로컬 검증 완료 / 완결 ZIP 검사 대기 · 검증된 이전 완결 ZIP `v0.9.1` · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
+문서 버전 `FSD-0.19` · 갱신일 2026-11-15 KST · 현재 작업 `DEV-015–016 / v0.11.0` 표면·혜성·자유 중력·GWGC 은하·독립 PDE·실제 NR 파형 로컬·완결 ZIP 검증 완료 · 현재 완결 ZIP `v0.11.0` · 이전 `v0.9.1` 보존 · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
 
 **이 파일은 프로젝트의 기능·화면·계산·API·데이터·실행·검사·배포 명세를 통합 관리하는 문서다.** 기능이나 계약을 바꾸는 작업에서는 관련 절과 아래 구현 현황을 함께 갱신한다. 규칙은 [AGENTS.md](./AGENTS.md), 실제 작업 증거는 [작업 기록](./docs/worklog.md), 적용 스킬은 [SKILLS.md](./SKILLS.md)에서 연결한다. 기능·개발 명세는 이 파일에서 유지한다. 사용자의 명시적 요청으로 만든 [Data_Spec.md](./Data_Spec.md)는 실제 사용/확보/이전 데이터의 전수 목록·출처·해시·가공/권리·한계를 담당하며 실행 manifest/타입과 함께 갱신한다. OpenAPI/타입/스키마·lockfile·테스트는 실행 가능한 계약으로 별도 유지하고 이 문서에서 경로/버전을 참조한다.
 
@@ -784,6 +784,8 @@ Notion 접근이 안 되면 접근 실패/마지막 확인본을 구분하고 �
 
 ## 20. 구현 상태·미확정·변경 이력
 
+RELEASE-011 · v0.11.0 완결 ZIP 검증 확정: `NASA_SPACE_APPS_CHALLENGE_v0.11.0_20261115_001122KST.zip` / 580,411,280B / 2,320파일 / SHA256 `db7468317fa4ab1d3c0a8a616815d12ca22bb15bd1486f6848b5a8d2c1715d69`. clean source `aa3b2c44cba9125e7832f535ce8232c4b20ab8e9`에서 패키징했다. 실제 ZIP을 새 폴더에 풀어 2,319 manifest 항목·필수1,586 source·107생성JSON을 대조했고, Node22.17.0만 PATH에 둔 app.js 실행/ready·ε Indi B/Pluto 실원본/품질·근거 내보내기/가져오기·실제 프로세스 재시작 후 복원을 PASS했다. 정확 ZIP은 기존LAN을 유지하기 위해 PORT8011로 검사했고 기본3002는 현재 Node22 child회귀에서 별도로 확인했다. 새GWGC53,162·SXS13,869·혜성4/489 TDB표본 HTTP검사도 PASS했다. source297이 아니라 최종 source1885/필수1586/선택299이며 ZIP에는 선택32개가 있고267개는 보류/감사본으로 제외됐다. 현재 LAN CumtP9k6와 기존var/node는 계속 실행/보존한다. 공개호스팅/Linux/모든물리법칙·runtimefullGR/결합 계산은 완료로 올리지 않는다. 최종 공개 기록은 `docs/releases/v0.11.0.json`, 정확검증은 동명 외부 `.verification.json`이다. 이 사후문서 기록은 이미 검증한 ZIP 바이트를 수정하지 않는다.
+
 2026-11-15 00:05:23 KST 동결 검증: 107 JSON/76348584B, source1885개·필수1586개/623292613B·선택299개. manifest480792B/SHA`aa8895a820e4356747570c381d8af1c317f90e60e7598abda89e54916c01b204`. 실제 FITS4비교의 기존 result ID/내용SHA를 보존했다. Python전체 608 passed, 1 warning in 106.21s (0:01:46); Vitest154PASS·strictTS·Ruff전체 PASS, Node전체22PASS. Production ZVxA7rKp Chrome42PASS/417.029초(새 PDE/NR·Atlas·기존관측/복원), 이후 T=-3 렌즈형 경계1곳 교정의 최종 CumtP9k6 빌드 Atlas Chrome3PASS/34.552초를 구분한다. 로컬기기/자동검사이며 사람·원어민·Linux/공개호스팅 검증으로 확대하지 않는다.
 
 DEV-016 / v0.11.0 통합 검사 중: 생성 JSON 107개/76348584B(실제 reader snapshot103개+새 FITS 비교4개), source 1885개/필수 1588개로 확장했다. 실제 GWGC/NR reader41PASS, Python catalog API29PASS(기존 Starlette 경고1), Node22PASS11.854초, PDE 수치13PASS와 codec11PASS를 확인했다. DEV-015 core production은28/30PASS 후 의도적으로 남는 은하9개를 제외하도록 낡은 검사1건을 교정했고, 근거 응답 지연1건은 등록 정적자산 검증 범위 수정 후 기존15초 assertion의 fresh-context Chrome1PASS39.52초로 재검사했다. LAN core RqSGaKPZ를 반영하고 원 var/node를 유지했다. Atlas/고급실험/NR 최종 production·전수 Data_Spec·완결 ZIP은 후속 확정한다.
@@ -908,3 +910,6 @@ Moon의표시R0.20874/물리R1737.4km·group/mesh scale1은선택전후유지됐
 DEV-016 최종 전달 준비: Data_Spec 2,102,484B/3,660행/SHA70c0f51522c110ecbfd4421583d46dc0f8bf2d7aa3cbd194226691f67d8a4a29의 30정본·2,186파일 목록·기존102입력987,987,584B·Node1,885 source 전수 재해시 불일치0을 확인했다. Node107JSON76,348,584B·필수1586/623,292,613B·선택299 및 과거4개 comparison ID가 일치한다. 감사보고서는 var/qa/dev016-data-spec-verification.json이다. 본문/원본/정본은 동결했다.
 
 DEV-016 LAN: 최종 CumtP9k6 프런트를 기존 var/node/3002에 반영했다. 실제 Wi-Fi HTTP origin에서 양자1단계·실제NR13,869표본·은하53,162검색/포커스·ε Indi B S01/S02의 기존 cmp_d88083664b6fd27592eb68c1 표시를 확인했다. pageerror0, ready200이다. var/qa/dev016-lan-final.json/PNG가 자동검사 근거이며 다른 물리기기의 최신빌드 검사를 대신하지 않는다. IP/PID는 Git제외 var/lan-host.json에 보관한다. 이전 빌드와 var/node 근거를 보존했고 공개 MCSM/nginx 설정은 변경하지 않았다.
+
+
+Atlas 위치층은 최초 진입/설정에서 명시적으로 켜며 현재 관측 근거 JSON에는 해당 도감 선택/층을 저장하지 않는다. 새 세션/관측 복원은 Atlas 층 꺼짐으로 시작하고 기존 관측·카메라·과학 맥락을 복원한다.

@@ -1,0 +1,115 @@
+{
+  "release": "0.11.0",
+  "source_commit": "aa3b2c44cba9125e7832f535ce8232c4b20ab8e9",
+  "source_worktree_clean_at_packaging": true,
+  "built_at_utc": "2026-11-14T15:11:22.865034+00:00",
+  "verified_at_utc": "2026-11-14T15:14:13.199303+00:00",
+  "archive": "NASA_SPACE_APPS_CHALLENGE_v0.11.0_20261115_001122KST.zip",
+  "archive_bytes": 580411280,
+  "archive_sha256": "db7468317fa4ab1d3c0a8a616815d12ca22bb15bd1486f6848b5a8d2c1715d69",
+  "archive_files": 2320,
+  "exact_archive_verification": {
+    "status": "passed",
+    "report": "NASA_SPACE_APPS_CHALLENGE_v0.11.0_20261115_001122KST.verification.json",
+    "server": "Node.js v22.17.0",
+    "server_python_required": false,
+    "server_PATH_python_resolution": {
+      "python": null,
+      "python3": null,
+      "python.exe": null,
+      "python3.exe": null,
+      "py": null,
+      "py.exe": null,
+      "uvicorn": null
+    },
+    "tested_port": 8011,
+    "default_port": 3002,
+    "default_port_actual_child_regression": "passed in current Node22 tests; exact ZIP used PORT=8011 to preserve LAN3002",
+    "restart_evidence_restore": [
+      {
+        "evidence_id": "ev_a58b36c538c0499c97cdceb89a0c3d79",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_observer_assumptions_present": false
+      },
+      {
+        "evidence_id": "ev_1583386df78a42d7abcaed63f678cba0",
+        "result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_observer_assumptions_present": true
+      },
+      {
+        "evidence_id": "ev_135cdf9bd1cf40a6bf7ec0f578bd2766",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_observer_assumptions_present": true
+      }
+    ],
+    "runtime_integrity": {
+      "required_sources_verified": 1586,
+      "optional_sources_present_verified": 32,
+      "optional_sources_not_deployed": 267,
+      "runtime_manifest_sha256": "aa8895a820e4356747570c381d8af1c317f90e60e7598abda89e54916c01b204"
+    },
+    "catalogues": {
+      "GWGC_galaxies": 53162,
+      "NR_native_h22_samples": 13869,
+      "JPL_comets": 4,
+      "JPL_TDB_knots": 489
+    }
+  },
+  "checks": {
+    "python": {
+      "passed": 608,
+      "warnings": 1,
+      "seconds": 106.21
+    },
+    "frontend_unit": {
+      "passed": 154
+    },
+    "Node": {
+      "passed": 22
+    },
+    "browser_baseline": {
+      "build": "ZVxA7rKp",
+      "passed": 42,
+      "seconds": 417.028619
+    },
+    "browser_corrected_atlas": {
+      "build": "CumtP9k6",
+      "passed": 3,
+      "seconds": 34.55237
+    },
+    "LAN_actual_origin_smoke": "passed; quantum/NR/atlas/epsilon source result; zero page errors",
+    "git_index_runtime_source_bytes": {
+      "checked": 116,
+      "mismatches": 0
+    }
+  },
+  "data_spec": {
+    "bytes": 2102484,
+    "sha256": "70c0f51522c110ecbfd4421583d46dc0f8bf2d7aa3cbd194226691f67d8a4a29",
+    "original_input_files": 102,
+    "original_input_bytes": 987987584,
+    "node_source_refs": 1885,
+    "node_generated_JSON_files": 107,
+    "node_generated_bytes": 76348584
+  },
+  "runtime_verification_policy": "sha256-stat-fingerprint-v2-scoped-assets",
+  "preserved": [
+    "existing Git history",
+    "all102original inputs",
+    "existing var/node evidence",
+    "v0.9.1 and earlier immutable archives"
+  ],
+  "limits": [
+    "No runtime full Einstein merger solver or arbitrary mass-ratio/spin interpolation",
+    "Only archived complex h22, no full observer/detector strain",
+    "Quantum1D/MaxwellTMz2D/Euler2D independent scaled models, no all-physics coupling",
+    "GWGC markers are fixed FK5/J2000 catalogue references, not resolved galaxy/member-star images",
+    "Node observations reuse verified build-time results for exactly two adopted FITS pairs",
+    "Linux/container/public MCSM deployment not performed; local Windows Node and LAN verified",
+    "No new native-language or external human usability review"
+  ],
+  "documentation_followup_does_not_modify_archive": true
+}
