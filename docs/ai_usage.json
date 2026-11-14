@@ -523,49 +523,12 @@
   "current_checkpoint": {
     "work_id": "DEV-012",
     "version": "0.9.0",
-    "status": "node_only_runtime_implemented_integration_and_archive_verification_in_progress",
+    "status": "windows_exact_node_only_archive_verified",
     "entrypoint": "app.js",
-    "start_command": "node app.js",
-    "runtime": "Node.js >=22.17.0, CommonJS, built-in modules only",
-    "python_required_at_runtime": false,
-    "new_external_runtime_dependencies": [],
-    "project_license_newly_selected": false,
-    "node_tests": {
-      "passed": 14,
-      "seconds": 21.9002488
-    },
-    "independent_python_free_path_http_math_checks": {
-      "passed": 67,
-      "seconds": 19.13,
-      "scope": "48 mass + 8 long-term dates + 6 interpolation + 5 invalid inputs"
-    },
-    "existing_release_smoke_against_node": "passed; actual observations 29/32 quality,31 maps and current catalogue/source/evidence contracts",
-    "frontend": {
-      "strict_typecheck": "passed",
-      "vite_identifier": "DLJsfpSc",
-      "vitest_passed": 71,
-      "vitest_seconds": 1.62
-    },
-    "whole_python": {
-      "first_run": {
-        "passed": 483,
-        "fixture_setup_errors": 67,
-        "seconds_approx": 172,
-        "reason": "2s cold-source health probe TimeoutError was not caught by the shared Node test fixture; independent 67 tests did not execute in that whole-suite run."
-      },
-      "correction": "Catch TimeoutError in addition to URLError during readiness probing.",
-      "rerun": {
-        "passed": 550,
-        "seconds": 113.36,
-        "warnings": "one pre-existing Starlette/httpx deprecation warning"
-      },
-      "prior_standalone_67": "passed,19.13s"
-    },
-    "new_browser_23": "in progress against the pure Node server on port8081; previous Python server on8000 preserved",
-    "exact_release_zip": "pending",
+    "server_python_required": false,
+    "release_record": "docs/releases/v0.9.0.json",
     "public_service_deployed": false,
-    "linux_verified": false,
-    "human_native_review": false
+    "linux_verified": false
   },
   "travel_checkpoint_v0_6": {
     "version": "0.6.0",
@@ -1412,7 +1375,7 @@
       "not_run": 3,
       "report": "var/qa/dev012-node-initial-partial.json"
     },
-    "final_browser_and_exact_archive_status": "pending"
+    "final_browser_and_exact_archive_status": "23_unique_browser_paths_verified_22_plus_1_followup_and_exact_Node_only_archive_restart_passed"
   },
   "dev012_final_browser": {
     "runtime": "node",
@@ -1429,6 +1392,287 @@
     "individual_expect_timeout_seconds_unchanged": 15,
     "scientific_expected_values_changed": false,
     "all_unique_paths_passed_in_one_batch": false,
-    "exact_archive_status": "pending"
+    "exact_archive_status": "passed"
+  },
+  "v0_9_final_archive_verification": {
+    "release": "0.9.0",
+    "release_source_commit": "7b2dbf7c4e5ee6798fd9c56230a7858ae8dde3e4",
+    "archive": {
+      "filename": "NASA_SPACE_APPS_CHALLENGE_v0.9.0_20261114_213804KST.zip",
+      "bytes": 495916482,
+      "sha256": "fd3c694f354bac02ba9728dae521b13d7b41250870bc3b050ee8629d6b467db7",
+      "file_count": 2223
+    },
+    "verification": {
+      "checked_at": "2026-11-14T12:39:16.570207+00:00",
+      "status": "passed",
+      "archive": "NASA_SPACE_APPS_CHALLENGE_v0.9.0_20261114_213804KST.zip",
+      "extracted": "tmp/node-release-verify-r4s83m6d/extracted",
+      "logs": "tmp/node-release-verify-r4s83m6d",
+      "development_verifier": {
+        "runtime": "Python standard library",
+        "executable": ".venv/Scripts/python.exe",
+        "role": "ZIP/hash orchestration and HTTP test client only; not the server"
+      },
+      "server_python_required": false,
+      "linux_container": "not_run",
+      "public_service": "not_deployed",
+      "archive_bytes": 495916482,
+      "archive_sha256": "fd3c694f354bac02ba9728dae521b13d7b41250870bc3b050ee8629d6b467db7",
+      "release": "0.9.0",
+      "release_base_commit": "7b2dbf7c4e5ee6798fd9c56230a7858ae8dde3e4",
+      "manifest_files_verified": 2222,
+      "runtime_integrity": {
+        "required_sources_verified": 1564,
+        "optional_sources_present_verified": 29,
+        "optional_sources_not_deployed": 266,
+        "runtime_manifest_sha256": "9dfe12f530da0e6993ced98cc1a94932eb8aef161b6ca68e1a5cb081df44a2af"
+      },
+      "archive_policy": "path/case/symlink/special-file/private-path/environment/key-header/local-only exclusions passed",
+      "stage": "complete",
+      "node_runtime": {
+        "status": "passed",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "evidence_id": "ev_dd872728835e4e0aa7091cfacaad0191",
+        "quality_pixels": [
+          29,
+          32
+        ],
+        "scene_object_count": 11,
+        "timeline_midpoint": "2026-11-14T12:00:00Z",
+        "timeline_validation_samples": 27,
+        "appearance_maps": 31,
+        "small_body_profiles": 8,
+        "planet_criteria_objects": 17,
+        "mass_scenario_analogues": 6,
+        "mass_hypothesis_kg": 1.0315679968452945e+21,
+        "black_holes": 11,
+        "actual_eht_images": 2,
+        "observer_inverse_table_rows": 2049,
+        "sedna_circular_reference_minimum_earth_mass": 1.4803626010357875,
+        "small_body_ring_centers": 3,
+        "solar_extension_objects": 476,
+        "exoplanets": 6470,
+        "published_planet_observations": 3,
+        "confirmed_extragalactic_planets": 0,
+        "excluded_literature_cases": 5,
+        "legacy_history_milestones": 10,
+        "history_morphology_examples": 6,
+        "simulation_model_bodies": 8,
+        "simulation_dates_tested": [
+          -2999,
+          0,
+          99,
+          2500,
+          3000
+        ],
+        "curated_hierarchy_objects": 24,
+        "milky_way_entries": 4871,
+        "trappist_planets": 7,
+        "observed_history_cases": 5,
+        "galaxies": 9,
+        "kuiper_range_au": [
+          30,
+          50
+        ],
+        "pluto_result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+        "pluto_evidence_id": "ev_29246bc1c1544c48ab391f5676024b16"
+      },
+      "server": {
+        "engine": "Node.js",
+        "version": "v22.17.0",
+        "executable": "C:\\Program Files\\nodejs\\node.exe",
+        "argv": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "app.js"
+        ],
+        "PATH": "C:\\Program Files\\nodejs",
+        "PORT": 8011,
+        "APP_STATE_DIR": "tmp/node-release-verify-r4s83m6d/extracted/var/node",
+        "owned_process_ids": [
+          49964,
+          32968
+        ],
+        "worker_model": "node:worker_threads, verified through actual health/source responses",
+        "Python_interpreters_resolvable_on_PATH": {
+          "python": null,
+          "python3": null,
+          "python.exe": null,
+          "python3.exe": null,
+          "py": null,
+          "py.exe": null,
+          "uvicorn": null
+        },
+        "source_child_process_import_scan": "none",
+        "stop_method": "only owned Popen process; Windows terminate is abrupt process/thread termination"
+      },
+      "runtime_disclosure": {
+        "arbitrary_fits_inputs": false,
+        "observation_processing": "verified_build_cache",
+        "runtime": "node",
+        "schema_version": "1.0",
+        "snapshot_exported_utc": "2026-11-14T12:00:18.388103+00:00",
+        "source_verification_policy": {
+          "batching": "simultaneously_queued_transactions_share_one_validation_pass_no_time_ttl",
+          "comparison_payload": "raw_sha256_checked_each_read",
+          "deployment_input_contract": "immutable_read_only_source_files",
+          "each_transaction": "all_required_paths_and_file_fingerprints_checked",
+          "fingerprint": [
+            "dev",
+            "ino",
+            "size",
+            "mtimeNs",
+            "ctimeNs"
+          ],
+          "full_audit": "startup_and_node_app_js_verify_sources_and_exact_release_audit",
+          "initial_verification": "full_sha256_all_bundle_and_required_source_files",
+          "limit": "A host administrator able to forge file identity and all timestamps is outside this metadata-cache trust boundary.",
+          "metadata_change": "full_sha256_required_before_use",
+          "unchanged_fingerprint": "reuse_previously_verified_sha256",
+          "version": "sha256-stat-fingerprint-v1"
+        },
+        "supported_observation_pairs": [
+          [
+            "S01",
+            "S02"
+          ],
+          [
+            "S12",
+            "S14"
+          ]
+        ]
+      },
+      "health_before_restart": {
+        "runtime": "node",
+        "science_mode": "verified_build_cache_and_ported_display_models",
+        "source_bundle_verified": true,
+        "status": "ready",
+        "storage_writable": true,
+        "worker_alive": true
+      },
+      "health_after_restart": {
+        "runtime": "node",
+        "science_mode": "verified_build_cache_and_ported_display_models",
+        "source_bundle_verified": true,
+        "status": "ready",
+        "storage_writable": true,
+        "worker_alive": true
+      },
+      "runtime_disclosure_after_restart": {
+        "arbitrary_fits_inputs": false,
+        "observation_processing": "verified_build_cache",
+        "runtime": "node",
+        "schema_version": "1.0",
+        "snapshot_exported_utc": "2026-11-14T12:00:18.388103+00:00",
+        "source_verification_policy": {
+          "batching": "simultaneously_queued_transactions_share_one_validation_pass_no_time_ttl",
+          "comparison_payload": "raw_sha256_checked_each_read",
+          "deployment_input_contract": "immutable_read_only_source_files",
+          "each_transaction": "all_required_paths_and_file_fingerprints_checked",
+          "fingerprint": [
+            "dev",
+            "ino",
+            "size",
+            "mtimeNs",
+            "ctimeNs"
+          ],
+          "full_audit": "startup_and_node_app_js_verify_sources_and_exact_release_audit",
+          "initial_verification": "full_sha256_all_bundle_and_required_source_files",
+          "limit": "A host administrator able to forge file identity and all timestamps is outside this metadata-cache trust boundary.",
+          "metadata_change": "full_sha256_required_before_use",
+          "unchanged_fingerprint": "reuse_previously_verified_sha256",
+          "version": "sha256-stat-fingerprint-v1"
+        },
+        "supported_observation_pairs": [
+          [
+            "S01",
+            "S02"
+          ],
+          [
+            "S12",
+            "S14"
+          ]
+        ]
+      },
+      "server_restart_evidence_restore": [
+        {
+          "evidence_id": "ev_dd872728835e4e0aa7091cfacaad0191",
+          "result_id": "cmp_d88083664b6fd27592eb68c1",
+          "same_export_bytes_session_judgment": true,
+          "camera_and_mass_observer_assumptions_present": false
+        },
+        {
+          "evidence_id": "ev_29246bc1c1544c48ab391f5676024b16",
+          "result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+          "same_export_bytes_session_judgment": true,
+          "camera_and_mass_observer_assumptions_present": true
+        },
+        {
+          "evidence_id": "ev_28e9105d034b472fa37dd27350c65101",
+          "result_id": "cmp_d88083664b6fd27592eb68c1",
+          "same_export_bytes_session_judgment": true,
+          "camera_and_mass_observer_assumptions_present": true
+        }
+      ],
+      "actual_comparison_raw_hashes": {
+        "cmp_d88083664b6fd27592eb68c1": {
+          "cache_and_evidence_raw_sha256": "88219adf492f225e5be126e8f7e5577b74475aff4067f5797d63540ba044d74c",
+          "HTTP_JSON_wire_sha256": "90d4b829f3a467bd71a8462a453901fb90df62a6836af5703a01775078c402bd",
+          "semantic_equality": true
+        },
+        "cmp_0d749ea3f9ec3a8da925dc44": {
+          "cache_and_evidence_raw_sha256": "9ebe635e2ddd0230b50e38cce35a468acf826654199a9403d36f4189fa1d12f8",
+          "HTTP_JSON_wire_sha256": "bb5b7f410d32ba78189a4d64e750f0218536ea414549b904de678f23132c0217",
+          "semantic_equality": true
+        }
+      },
+      "comparison_hash_scope": "Evidence comparison_sha256 covers the preserved Python-canonical build-cache bytes. HTTP JSON serialization may have a different raw SHA while preserving the same parsed values.",
+      "hosting_scope": "Node-only server verified under closed PATH; Python executed only as this development verifier and the packaged standard-library HTTP smoke client. This is not an OS sandbox or proof that Python is uninstalled.",
+      "completed_at": "2026-11-14T12:40:02.175944+00:00"
+    },
+    "entrypoint": "app.js",
+    "start_command": "node app.js",
+    "server_python_required": false,
+    "frontend_asset": "index-DLJsfpSc.js",
+    "checks": {
+      "python_whole_passed": 550,
+      "python_whole_seconds": 113.36,
+      "python_dependency_warnings": 1,
+      "vitest_passed": 71,
+      "vitest_seconds": 1.62,
+      "node_after_verification_optimization_passed": 14,
+      "node_after_verification_optimization_seconds": 9.515,
+      "node_own_property_guard_http_followup_passed": 6,
+      "node_own_property_guard_http_followup_seconds": 10.265,
+      "python_free_http_parity_passed": 67,
+      "python_free_http_parity_seconds": 14.12,
+      "chrome_unique_paths": 23,
+      "chrome_batch_passed": 22,
+      "chrome_batch_workflow_timeout": 1,
+      "chrome_batch_seconds": 374.878,
+      "chrome_followup_passed": 1,
+      "chrome_followup_seconds": 68.454,
+      "workflow_budget_followup_seconds": 120,
+      "individual_assertion_budget_seconds_unchanged": 15,
+      "all_chrome_paths_same_batch": false
+    },
+    "data_spec": {
+      "bytes": 2026860,
+      "sha256": "e441b64d2d22dfda73342cb5465825b9e74fc7ca8a21ca44b0565337cfe796c5",
+      "canonical_manifests": 27,
+      "physical_files": 2146,
+      "original_files_preserved": 102,
+      "original_bytes_preserved": 987987584,
+      "node_derived_files": 103,
+      "node_derived_bytes": 66642151,
+      "runtime_manifest_sha256": "9dfe12f530da0e6993ced98cc1a94932eb8aef161b6ca68e1a5cb081df44a2af"
+    },
+    "limits": [
+      "Node-only server ran under a PATH without Python; Python was used solely as the local development verifier/HTTP client, not as a hosting dependency.",
+      "Existing fixed observation pairs use actual FITS results computed at build time and verified on Node. Arbitrary new FITS/coordinates are not analyzed at runtime.",
+      "Read-only source fingerprint/hash cache is disclosed; full SHA audit remains available.",
+      "Windows actual Node process/thread restart verified; Linux container/public deployment/native-language or teammate study not performed."
+    ],
+    "post_verification_document_outside_immutable_archive": true
   }
 }

@@ -53,3 +53,10 @@ Docker 환경에서는 `docker compose -f deploy/compose.yaml up --build -d`를 
 정확한 v0.9 ZIP 식별/파일 수·실측 바이트/SHA·실제 Node 재시작 검증은 최종 ZIP 옆 동명 checksum/verification JSON과 `docs/releases/v0.9.0.json`에서 확정한다. 사후 검증문서는 이미 검증한 ZIP 바이트를 수정하지 않고 별도 기록한다. v0.8.0의 불변 ZIP과 Git 이력도 보존한다.
 
 현재 Node 검증 정책은 `sha256-stat-fingerprint-v1`이다. 최초 전체 SHA 검증 뒤 매 요청 묶음에서 모든 필수 실경로·파일 ID(dev/ino)·크기·나노초 mtime/ctime을 검사하고, 변경 시 원바이트 SHA를 다시 계산한다. 변경 없는 불변 입력은 검증된 digest를 재사용하며 시간 TTL로 검사를 생략하지 않는다. 원 비교 JSON의 SHA는 읽을 때마다 확인한다. `node app.js --verify-sources`로 명시적 전체 SHA 감사를 실행할 수 있다. 원본/캐시는 읽기전용으로 운영하고 바꾸려면 새 빌드·새 배포 검증을 수행한다.
+
+
+### DEV-012 최종 완결 ZIP 검증 확정 · 2026-11-14 21:40:02 KST
+
+`NASA_SPACE_APPS_CHALLENGE_v0.9.0_20261114_213804KST.zip`는 **495916482B/2223파일**, SHA256 **`fd3c694f354bac02ba9728dae521b13d7b41250870bc3b050ee8629d6b467db7`**이다. source `7b2dbf7c4e5ee6798fd9c56230a7858ae8dde3e4`의 clean tree, 최종 DLJsfpSc 프런트와 Node 전용 `app.js`/검증된103JSON으로 생성했다. 추적 manifest/source sidecar33개의 Git index와 실제 동결바이트도 전부 일치했다.
+
+정확한 ZIP을 새 `tmp/node-release-verify-r4s83m6d/extracted`에 풀어2222개 release manifest 항목의경로/바이트/SHA와필수원본·캐시를확인했다. Node22.17 절대경로와 `app.js`만서버로실행했고 PATH에서Python실행파일을찾을수없게했다. 개발검증기/HTTP클라이언트의Python과서버의Node를구분한다. 실제두관측·29/32품질·지도/사진·카탈로그·새가정을확인하고실제Node프로세스와worker thread를종료/재시작한뒤 εB/Pluto및추가근거의같은ID·판단·카메라·밀도/관측자설정·export원바이트/import복원을통과했다. 정확완료시각 `2026-11-14T12:40:02.175944+00:00`이다. 상세는 `docs/releases/v0.9.0.json`과ZIP밖동명verification/checksum JSON을따른다. 이사후문서는검증한불변ZIP에추가하지않는다. 기존v0.8 ZIP/원본/Git이력도보존했다. Linux/Docker·공개서비스·사람/원어민검수는수행하지않았다.

@@ -1,10 +1,10 @@
 # Planet X and SPHEREx — 기능·개발 명세서
 
-문서 버전 `FSD-0.15` · 갱신일 2026-11-14 KST · 현재 작업 `DEV-012 / v0.9.0` Node 전용 실행 전환·검사 중 · 보존된 소스/검증 기록 `v0.8.0 / b6b4545` · 검증된 완결 ZIP `v0.8.0` · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
+문서 버전 `FSD-0.15` · 갱신일 2026-11-14 KST · 현재 작업 `DEV-012 / v0.9.0` Node 전용 실행·Windows 정확 ZIP 검증 완료 · 보존된 소스/검증 기록 `v0.8.0 / b6b4545` · 검증된 완결 ZIP `v0.9.0` · 기준: v1.7 통합 계획서와 최신 사용자 지시·D-Day 공식 안내.
 
 **이 파일은 프로젝트의 기능·화면·계산·API·데이터·실행·검사·배포 명세를 통합 관리하는 문서다.** 기능이나 계약을 바꾸는 작업에서는 관련 절과 아래 구현 현황을 함께 갱신한다. 규칙은 [AGENTS.md](./AGENTS.md), 실제 작업 증거는 [작업 기록](./docs/worklog.md), 적용 스킬은 [SKILLS.md](./SKILLS.md)에서 연결한다. 기능·개발 명세는 이 파일에서 유지한다. 사용자의 명시적 요청으로 만든 [Data_Spec.md](./Data_Spec.md)는 실제 사용/확보/이전 데이터의 전수 목록·출처·해시·가공/권리·한계를 담당하며 실행 manifest/타입과 함께 갱신한다. OpenAPI/타입/스키마·lockfile·테스트는 실행 가능한 계약으로 별도 유지하고 이 문서에서 경로/버전을 참조한다.
 
-현재 DEV-012는 사용자가 확인한 **Node.js만 실행 가능한 호스팅**에 맞춰 루트 `app.js`/`node app.js`를 기본으로 한다. 실제자료 검증 캐시·기존 UI API·파일근거 및 질량/Hermite/Kepler 계산을 Node로 제공하고 Python은 선택적 빌드/참조로 보존한다. Node14검사·Python 없는 PATH에서 독립 HTTP/과학67검사·기존 Node대상 배포smoke와 strict/Vite DLJsfpSc/Vitest71을 통과했다. 전체Python550PASS113.36초(기존Starlette경고1)도확인했다. Node8081의 Chrome23고유경로(22+1후속)를 확인했고 정확v0.9 ZIP 검증은 후속 확정한다. 기존원본/근거·v0.8 불변ZIP을 보존한다.
+현재 DEV-012는 사용자가 확인한 **Node.js만 실행 가능한 호스팅**에 맞춰 루트 `app.js`/`node app.js`를 기본으로 한다. 실제자료 검증 캐시·기존 UI API·파일근거 및 질량/Hermite/Kepler 계산을 Node로 제공하고 Python은 선택적 빌드/참조로 보존한다. Node14검사·Python 없는 PATH에서 독립 HTTP/과학67검사·기존 Node대상 배포smoke와 strict/Vite DLJsfpSc/Vitest71을 통과했다. 전체Python550PASS113.36초(기존Starlette경고1)도확인했다. Node8081의 Chrome23고유경로(22+1후속)를 확인했고 정확v0.9 ZIP 실행·실제 Node 재시작 복원도 통과했으며 최종 검증 기록을 따른다. 기존원본/근거·v0.8 불변ZIP을 보존한다.
 
 보존된 DEV-011은 **반지름·비교위성의 밀도를 가정한 질량 실험**과 출처/실측을 분리한 제한된 관측자·블랙홀 물리 실험을 v0.8.0으로 확장한다. 질량가정은 기존 본체질량/공식3요건을 바꾸지 않으며 위성6개×대상6개의 조건부36비교와 직접입력실험을 구분한다. 물리자료/새App·API 연결을 마쳤고 모든물리법칙·실제이동관측·블랙홀내부/회전시공간·실제새사진을 구현했다는 주장은 하지 않는다. 전체Python483/Vitest70·자료/Data_Spec동결을 확인했다. CNYGnNg7 빌드의 Chrome13회귀와 마지막 간격교정 빌드 BfRDPmgL의 후속2검사를 통과했으며 정확v0.8 ZIP의 새폴더 해제·실제서버재시작 복원도 통과했다. 최종 절과 docs/releases/v0.8.0.json을 따른다.
 
@@ -828,3 +828,10 @@ Node14 회귀는 같은크기+mtime복원변조/누락/강재fullaudit/동시5�
 DEV-012 최종 브라우저 확정: Node8081/최종 client `index-DLJsfpSc.js`·runtime manifest9dfe…에서23고유경로를 확인했다. 23개 batch는22 PASS/1복합workflow 전체60초 timeout(374.878초)이었고 개별15초 기대값 실패는0이다. 5언어/깜빡임/PNG·JSON·CSV/새문맥복원/공식4대상왕복을한case로묶은검사만전체120초로명시해별도후속1 PASS68.454초(2026-11-14T12:35:11.024Z시작)를확인했다. 과학기대값·단계별15초·제품/Node/source를변경하지않았다. 23개가같은batch모두통과했다고주장하지않고22+1후속으로기록한다. 초기최적화전부분실행15PASS/4지연실패와도구분한다. 정본은 var/qa/dev012-node-final-browser-results.json,dev012-node-observation-followup.json과review보고서다.
 
 Moon의표시R0.20874/물리R1737.4km·group/mesh scale1은선택전후유지됐고camera eye-target은3.089216→0.923769표시단위로접근했다. Phobos의표시R0.036108/물리R11.08km도유지됐고camera거리는0.159789였다. bounding sphere≤1.5e-9차이는12→64 subdivision Float32정점반올림이며확대scale가아니다. 실측첨부 var/qa/dev012-moon-geometry-evidence.json에원수치를보존했다. 질량approx/원mass null/IAU분류·늦은결과·실제촬영시각/품질·관측자/근거/복원·Node사전계산5언어고지도검사했다. 정확v0.9 ZIP의실제Node실행/재시작검증은최종사후기록으로확정한다.
+
+
+### DEV-012 최종 완결 ZIP 검증 확정 · 2026-11-14 21:40:02 KST
+
+`NASA_SPACE_APPS_CHALLENGE_v0.9.0_20261114_213804KST.zip`는 **495916482B/2223파일**, SHA256 **`fd3c694f354bac02ba9728dae521b13d7b41250870bc3b050ee8629d6b467db7`**이다. source `7b2dbf7c4e5ee6798fd9c56230a7858ae8dde3e4`의 clean tree, 최종 DLJsfpSc 프런트와 Node 전용 `app.js`/검증된103JSON으로 생성했다. 추적 manifest/source sidecar33개의 Git index와 실제 동결바이트도 전부 일치했다.
+
+정확한 ZIP을 새 `tmp/node-release-verify-r4s83m6d/extracted`에 풀어2222개 release manifest 항목의경로/바이트/SHA와필수원본·캐시를확인했다. Node22.17 절대경로와 `app.js`만서버로실행했고 PATH에서Python실행파일을찾을수없게했다. 개발검증기/HTTP클라이언트의Python과서버의Node를구분한다. 실제두관측·29/32품질·지도/사진·카탈로그·새가정을확인하고실제Node프로세스와worker thread를종료/재시작한뒤 εB/Pluto및추가근거의같은ID·판단·카메라·밀도/관측자설정·export원바이트/import복원을통과했다. 정확완료시각 `2026-11-14T12:40:02.175944+00:00`이다. 상세는 `docs/releases/v0.9.0.json`과ZIP밖동명verification/checksum JSON을따른다. 이사후문서는검증한불변ZIP에추가하지않는다. 기존v0.8 ZIP/원본/Git이력도보존했다. Linux/Docker·공개서비스·사람/원어민검수는수행하지않았다.
