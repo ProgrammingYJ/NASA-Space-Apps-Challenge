@@ -102,8 +102,20 @@ def main(base):
     assert len(exoplanet["system_planets"]) == 7
     history = call(base, "/api/v1/cosmic-history")
     assert len(history["stages"]) == 10 and history["reference_age_gyr"] == 13.8
+    assert len(history["morphology_reference"]["examples"]) == 6
+    assert history["morphology_reference"]["algorithm_version"] == "cosmic-morphology-reference-v1"
+    assert not history["morphology_reference"]["visual_policy"]["morphology_fractions_available"]
     sample = call(base, "/api/v1/cosmic-history/sample?age_gyr=9.2")
     assert sample["stage_id"] == "solar_system" and sample["lookback_gyr"] == 4.6
+    observed_history = call(base, "/api/v1/cosmic-observations")
+    assert observed_history["algorithm_version"] == "cosmic-observation-viewer-v1"
+    assert len(observed_history["objects"]) == 5
+    for case in observed_history["objects"]:
+        assert (
+            hashlib.sha256(call(base, case["image"]["url"])).hexdigest() == case["image"]["sha256"]
+        )
+        assert case["image"]["kind"] == "published_observation_composite"
+        assert case["image"]["credit"] and case["image"]["license"]
     galaxies = call(base, "/api/v1/catalog/galaxies")
     assert len(galaxies["objects"]) == 9
     assert all(obj["distance_mpc"] > 0 for obj in galaxies["objects"])
@@ -112,6 +124,23 @@ def main(base):
     assert morphology["galaxy-m31"]["inclination_deg"] == 77
     kuiper = call(base, "/api/v1/kuiper-belt")
     assert kuiper["range_au"] == [30, 50]
+    model = call(base, "/api/v1/long-term-model")
+    assert model["algorithm_version"] == "jpl-kepler-long-term-v1"
+    assert len(model["tables"]["long"]["bodies"]) == 8
+    for year in (-2999, 0, 99, 2500, 3000):
+        simulation = call(base, f"/api/v1/long-term-simulation?year={year}")
+        assert simulation["position_kind"] == "approximate_simulation"
+        assert len(simulation["objects"]) == 8
+        assert next(v for v in simulation["objects"] if v["object_id"] == "earth")[
+            "model_body_id"
+        ] == "earth-moon-barycenter"
+    hierarchy = call(base, "/api/v1/catalog/universe")
+    assert len(hierarchy["objects"]) == 24
+    members = call(base, "/api/v1/catalog/universe?galaxy_id=galaxy-milky-way")
+    assert len(members["objects"]) == 4871
+    host = next(v for v in members["objects"] if v["name"] == "TRAPPIST-1")
+    host_children = call(base, "/api/v1/catalog/universe?parent_id=" + host["object_id"])
+    assert len(host_children["objects"]) == 7
     pluto_job = call(base, "/api/v1/comparison-jobs", {"observation_ids": ["S12", "S14"]})
     for _ in range(160):
         pluto_job = call(base, "/api/v1/jobs/" + pluto_job["job_id"])
@@ -147,6 +176,13 @@ def main(base):
                     "show_kuiper_belt": False,
                     "show_galaxies": True,
                     "kuiper_display_version": "kuiper-region-v1",
+                    "simulation_context": {
+                        "algorithm_version": "jpl-kepler-long-term-v1",
+                        "source_manifest_sha256": model["source_manifest_sha256"],
+                        "model_calendar_ms": -62167219200000,
+                        "playback_rate_hours_per_second": 876600,
+                        "playback_paused": True,
+                    },
                     "camera": {
                         "position": [0, 95, 150],
                         "target": [0, 0, 0],
@@ -174,7 +210,14 @@ def main(base):
                 "appearance_maps": len(appearance["objects"]),
                 "solar_extension_objects": len(extended["objects"]),
                 "exoplanets": len(exoplanets["objects"]),
-                "history_milestones": len(history["stages"]),
+                "legacy_history_milestones": len(history["stages"]),
+                "history_morphology_examples": len(history["morphology_reference"]["examples"]),
+                "simulation_model_bodies": len(model["tables"]["long"]["bodies"]),
+                "simulation_dates_tested": [-2999, 0, 99, 2500, 3000],
+                "curated_hierarchy_objects": len(hierarchy["objects"]),
+                "milky_way_entries": len(members["objects"]),
+                "trappist_planets": len(host_children["objects"]),
+                "observed_history_cases": len(observed_history["objects"]),
                 "galaxies": len(galaxies["objects"]),
                 "kuiper_range_au": kuiper["range_au"],
                 "pluto_result_id": pluto["result_id"],

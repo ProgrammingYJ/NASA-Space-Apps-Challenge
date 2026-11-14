@@ -1,0 +1,1297 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "jpl-kepler-long-term-v1",
+  "created_utc": "2026-11-14T06:42:52.572647+00:00",
+  "model_manifest_sha256": "879e79d54dca7a96e280dc0ad56b2ac459e329e50bf2be2934f82e1b1c14c40f",
+  "reference_frame": "Heliocentric geometric J2000 ecliptic, ICRF system; planetary-system barycenters 1 through 8",
+  "reference_time_scale": "TDB",
+  "reference_position_unit": "au",
+  "results": [
+    {
+      "object_id": "mercury",
+      "model_body_id": "mercury",
+      "reference_target": "1",
+      "source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=1&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=1355817.500000000+2451544.500000000+2461358.500000000+2634166.500000000&TLIST_TYPE=JD&TIME_TYPE=TDB&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "1",
+          "OBJ_DATA": "NO",
+          "MAKE_EPHEM": "YES",
+          "EPHEM_TYPE": "VECTORS",
+          "CENTER": "500@10",
+          "TLIST": "1355817.500000000 2451544.500000000 2461358.500000000 2634166.500000000",
+          "TLIST_TYPE": "JD",
+          "TIME_TYPE": "TDB",
+          "REF_PLANE": "ECLIPTIC",
+          "REF_SYSTEM": "ICRF",
+          "OUT_UNITS": "AU-D",
+          "VEC_TABLE": "2",
+          "VEC_CORR": "NONE",
+          "CSV_FORMAT": "YES",
+          "VEC_LABELS": "YES"
+        },
+        "local_relative_path": "data/reference/long-term/validation/mercury.json",
+        "bytes": 5709,
+        "sha256": "6a38efe3fbf669a5d4cb17176c0a2e19d5b56ee818ff6f28c520ef9d8db134aa",
+        "retrieved_utc": "2026-11-14T06:42:05.498898+00:00"
+      },
+      "checks": [
+        {
+          "date_tdb": {
+            "year": -1000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 1355817.5,
+          "position_au": [
+            0.2349080886781985,
+            -0.3510752353554542,
+            -0.05056378893456985
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                0.2349153555923129,
+                -0.3510583903070643,
+                -0.050564904878285556
+              ],
+              "longitude_error_arcsec": 7.523492050639526,
+              "latitude_error_arcsec": 1.111100059491314,
+              "distance_error_km": 1459.392729986735,
+              "vector_error_km": 2749.5462985336485
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2451544.5,
+          "position_au": [
+            -0.1407280797108344,
+            -0.4439009580270337,
+            -0.02334555919971206
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                -0.14071600681454283,
+                -0.44390762055766253,
+                -0.023340883546716623
+              ],
+              "longitude_error_arcsec": 5.989305614483632,
+              "latitude_error_arcsec": 2.1256872199824173,
+              "distance_error_km": 368.7994919029034,
+              "vector_error_km": 2178.208031950007
+            },
+            "short": {
+              "position_au": [
+                -0.1407230670403103,
+                -0.44390571592858674,
+                -0.023346080595162643
+              ],
+              "longitude_error_arcsec": 2.753350356113066,
+              "latitude_error_arcsec": 0.16345851912461298,
+              "distance_error_km": 455.2195948689913,
+              "vector_error_km": 1036.8367809815347
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2026,
+            "month": 11,
+            "day": 14
+          },
+          "jd_tdb": 2461358.5,
+          "position_au": [
+            -0.05506162458356689,
+            0.3053255013831533,
+            0.03000253050928545
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                -0.0550420895727817,
+                0.30532575284846736,
+                0.029999584498034918
+              ],
+              "longitude_error_arcsec": 12.811148767615755,
+              "latitude_error_arcsec": 1.735445599858692,
+              "distance_error_km": 521.7239369527708,
+              "vector_error_km": 2955.6801469818147
+            },
+            "short": {
+              "position_au": [
+                -0.05502860293540038,
+                0.30532831195328036,
+                0.029999826029084537
+              ],
+              "longitude_error_arcsec": 21.93720803783131,
+              "latitude_error_arcsec": 1.5843852394035203,
+              "distance_error_km": 499.469611387038,
+              "vector_error_km": 4974.309761519076
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2500,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2634166.5,
+          "position_au": [
+            -0.1837512897744745,
+            -0.426041112180003,
+            -0.01845080825849326
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                -0.18372244129568827,
+                -0.42605718167522827,
+                -0.01843165372696623
+              ],
+              "longitude_error_arcsec": 14.605281522461421,
+              "latitude_error_arcsec": 8.560602626746546,
+              "distance_error_km": 384.2292023187253,
+              "vector_error_km": 5710.955257365736
+            }
+          }
+        }
+      ]
+    },
+    {
+      "object_id": "venus",
+      "model_body_id": "venus",
+      "reference_target": "2",
+      "source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=2&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=1355817.500000000+2451544.500000000+2461358.500000000+2634166.500000000&TLIST_TYPE=JD&TIME_TYPE=TDB&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "2",
+          "OBJ_DATA": "NO",
+          "MAKE_EPHEM": "YES",
+          "EPHEM_TYPE": "VECTORS",
+          "CENTER": "500@10",
+          "TLIST": "1355817.500000000 2451544.500000000 2461358.500000000 2634166.500000000",
+          "TLIST_TYPE": "JD",
+          "TIME_TYPE": "TDB",
+          "REF_PLANE": "ECLIPTIC",
+          "REF_SYSTEM": "ICRF",
+          "OUT_UNITS": "AU-D",
+          "VEC_TABLE": "2",
+          "VEC_CORR": "NONE",
+          "CSV_FORMAT": "YES",
+          "VEC_LABELS": "YES"
+        },
+        "local_relative_path": "data/reference/long-term/validation/venus.json",
+        "bytes": 5709,
+        "sha256": "dcb47ede4cfcb4139c76bbe1af7a4c66cfdcae39922c7a8c47b26981f1457163",
+        "retrieved_utc": "2026-11-14T06:42:49.525164+00:00"
+      },
+      "checks": [
+        {
+          "date_tdb": {
+            "year": -1000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 1355817.5,
+          "position_au": [
+            0.5312620545415033,
+            0.4895836155546287,
+            -0.02877430165444742
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                0.5312764823472462,
+                0.4895598553392719,
+                -0.02869824298936373
+              ],
+              "longitude_error_arcsec": 7.780076146819717,
+              "latitude_error_arcsec": 21.61887656333188,
+              "distance_error_km": 1273.0881421254942,
+              "vector_error_km": 12114.31507263644
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2451544.5,
+          "position_au": [
+            -0.7186302169204941,
+            -0.02250380069428597,
+            0.0411718412863683
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                -0.718623883927307,
+                -0.022531737217484415,
+                0.041208704858246764
+              ],
+              "longitude_error_arcsec": 8.06755126333992,
+              "latitude_error_arcsec": 10.630386248854677,
+              "distance_error_km": 499.2915864432615,
+              "vector_error_km": 6983.9603116260005
+            },
+            "short": {
+              "position_au": [
+                -0.7186446369848261,
+                -0.022556262100460134,
+                0.04117329295234363
+              ],
+              "longitude_error_arcsec": 14.913165646393145,
+              "latitude_error_arcsec": 0.15217263569167958,
+              "distance_error_km": 2410.5640351784227,
+              "vector_error_km": 8142.0896434076885
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2026,
+            "month": 11,
+            "day": 14
+          },
+          "jd_tdb": 2461358.5,
+          "position_au": [
+            0.3185965522667876,
+            0.647241397898462,
+            -0.009488057936352191
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                0.3185818863344603,
+                0.6472453379106152,
+                -0.00949407735395832
+              ],
+              "longitude_error_arcsec": 4.2597394122287415,
+              "latitude_error_arcsec": 1.7318476893178865,
+              "distance_error_km": 428.2102509213137,
+              "vector_error_km": 2443.7472933440304
+            },
+            "short": {
+              "position_au": [
+                0.3185967477143064,
+                0.6472351616818082,
+                -0.009489767750051663
+              ],
+              "longitude_error_arcsec": 0.8376050301658251,
+              "latitude_error_arcsec": 0.5095030118439489,
+              "distance_error_km": 820.6669247308602,
+              "vector_error_km": 967.796028737809
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2500,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2634166.5,
+          "position_au": [
+            0.06409647129711117,
+            0.7171844374886251,
+            0.007115432109548191
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                0.06415081127035366,
+                0.7172028995622759,
+                0.007119360461427325
+              ],
+              "longitude_error_arcsec": 15.033258976677445,
+              "latitude_error_arcsec": 1.0594314561385527,
+              "distance_error_km": 3480.4839457985004,
+              "vector_error_km": 8605.600840994322
+            }
+          }
+        }
+      ]
+    },
+    {
+      "object_id": "earth",
+      "model_body_id": "earth-moon-barycenter",
+      "reference_target": "3",
+      "source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=3&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=1355817.500000000+2451544.500000000+2461358.500000000+2634166.500000000&TLIST_TYPE=JD&TIME_TYPE=TDB&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "3",
+          "OBJ_DATA": "NO",
+          "MAKE_EPHEM": "YES",
+          "EPHEM_TYPE": "VECTORS",
+          "CENTER": "500@10",
+          "TLIST": "1355817.500000000 2451544.500000000 2461358.500000000 2634166.500000000",
+          "TLIST_TYPE": "JD",
+          "TIME_TYPE": "TDB",
+          "REF_PLANE": "ECLIPTIC",
+          "REF_SYSTEM": "ICRF",
+          "OUT_UNITS": "AU-D",
+          "VEC_TABLE": "2",
+          "VEC_CORR": "NONE",
+          "CSV_FORMAT": "YES",
+          "VEC_LABELS": "YES"
+        },
+        "local_relative_path": "data/reference/long-term/validation/earth.json",
+        "bytes": 5709,
+        "sha256": "6c80ba494a21f49b57d49671f787e6e999f7d49dbdf6ef92a7e57591043eab8a",
+        "retrieved_utc": "2026-11-14T06:42:50.026118+00:00"
+      },
+      "checks": [
+        {
+          "date_tdb": {
+            "year": -1000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 1355817.5,
+          "position_au": [
+            -0.7891817449376204,
+            0.5948149689739689,
+            0.004344446972209271
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                -0.7891971286732578,
+                0.5948221409531117,
+                0.004360647057867863
+              ],
+              "longitude_error_arcsec": 0.7371922946752318,
+              "latitude_error_arcsec": 3.3659258793436435,
+              "distance_error_km": 2494.2518491955607,
+              "vector_error_km": 3510.100956399635
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2451544.5,
+          "position_au": [
+            -0.1685504484594163,
+            0.9687636587587728,
+            -1.151366377347781e-06
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                -0.1686021875868662,
+                0.9687288667889047,
+                -9.006451284367533e-06
+              ],
+              "longitude_error_arcsec": 11.943673925566465,
+              "latitude_error_arcsec": 1.6477652703299595,
+              "distance_error_km": 3800.794696325252,
+              "vector_error_km": 9401.033998631146
+            },
+            "short": {
+              "position_au": [
+                -0.16856286531223225,
+                0.968758969709345,
+                -2.558653782299318e-07
+              ],
+              "longitude_error_arcsec": 2.7346687452404166,
+              "latitude_error_arcsec": 0.1878440120627296,
+              "distance_error_km": 372.67684057961037,
+              "vector_error_km": 1990.086593804986
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2026,
+            "month": 11,
+            "day": 14
+          },
+          "jd_tdb": 2461358.5,
+          "position_au": [
+            0.6193724961290565,
+            0.7717063969462024,
+            -5.147924973300261e-05
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                0.6193596824486144,
+                0.7716645119606953,
+                -5.951387121724343e-05
+              ],
+              "longitude_error_arcsec": 3.382017936118669,
+              "latitude_error_arcsec": 1.675319004020363,
+              "distance_error_km": 6086.4025948354165,
+              "vector_error_km": 6661.889918634746
+            },
+            "short": {
+              "position_au": [
+                0.6193822808866668,
+                0.771672525884006,
+                -4.7055435552559686e-05
+              ],
+              "longitude_error_arcsec": 6.010099217305055,
+              "latitude_error_arcsec": 0.9219385631634579,
+              "distance_error_km": 3035.4185151262077,
+              "vector_error_km": 5315.590364415005
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2500,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2634166.5,
+          "position_au": [
+            -0.06043680849538124,
+            0.9819574676601853,
+            -0.001099819008649609
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                -0.060489914065667366,
+                0.9818832174284666,
+                -0.0011402104607733414
+              ],
+              "longitude_error_arcsec": 12.07015491908968,
+              "latitude_error_arcsec": 8.485596010601366,
+              "distance_error_km": 10591.522111497807,
+              "vector_error_km": 14933.410589084147
+            }
+          }
+        }
+      ]
+    },
+    {
+      "object_id": "mars",
+      "model_body_id": "mars",
+      "reference_target": "4",
+      "source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=4&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=1355817.500000000+2451544.500000000+2461358.500000000+2634166.500000000&TLIST_TYPE=JD&TIME_TYPE=TDB&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "4",
+          "OBJ_DATA": "NO",
+          "MAKE_EPHEM": "YES",
+          "EPHEM_TYPE": "VECTORS",
+          "CENTER": "500@10",
+          "TLIST": "1355817.500000000 2451544.500000000 2461358.500000000 2634166.500000000",
+          "TLIST_TYPE": "JD",
+          "TIME_TYPE": "TDB",
+          "REF_PLANE": "ECLIPTIC",
+          "REF_SYSTEM": "ICRF",
+          "OUT_UNITS": "AU-D",
+          "VEC_TABLE": "2",
+          "VEC_CORR": "NONE",
+          "CSV_FORMAT": "YES",
+          "VEC_LABELS": "YES"
+        },
+        "local_relative_path": "data/reference/long-term/validation/mars.json",
+        "bytes": 5709,
+        "sha256": "28a78344fcd7de4a6d38d391ced5b8229780944f44027fef2bca47f6f84e3566",
+        "retrieved_utc": "2026-11-14T06:42:50.556295+00:00"
+      },
+      "checks": [
+        {
+          "date_tdb": {
+            "year": -1000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 1355817.5,
+          "position_au": [
+            1.410673065218149,
+            0.1213318519444516,
+            -0.04094220653066737
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                1.410564335015473,
+                0.12142422989379542,
+                -0.04077142148351285
+              ],
+              "longitude_error_arcsec": 14.76647701307227,
+              "latitude_error_arcsec": 24.43827337334669,
+              "distance_error_km": 15751.901345601142,
+              "vector_error_km": 33291.31628437668
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2451544.5,
+          "position_au": [
+            1.390361066039282,
+            -0.02100972225804086,
+            -0.03461801440935307
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                1.3903028749226944,
+                -0.021567638963057967,
+                -0.03474007947935836
+              ],
+              "longitude_error_arcsec": 82.88333310046924,
+              "latitude_error_arcsec": 18.27931252947534,
+              "distance_error_km": 6968.8240723927565,
+              "vector_error_km": 85879.75024743388
+            },
+            "short": {
+              "position_au": [
+                1.390312344582298,
+                -0.020984869103028714,
+                -0.03461160316974062
+              ],
+              "longitude_error_arcsec": 3.577137721245514,
+              "latitude_error_arcsec": 0.7692800018219453,
+              "distance_error_km": 7365.532870361693,
+              "vector_error_km": 8238.162922249972
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2026,
+            "month": 11,
+            "day": 14
+          },
+          "jd_tdb": 2461358.5,
+          "position_au": [
+            -0.4582101466396399,
+            1.540546502861516,
+            0.04351945733788384
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                -0.45770819088469633,
+                1.540498263629148,
+                0.04348420135006803
+              ],
+              "longitude_error_arcsec": 59.98697557071502,
+              "latitude_error_arcsec": 3.864472869164141,
+              "distance_error_km": 28447.037673650997,
+              "vector_error_km": 75621.62570282686
+            },
+            "short": {
+              "position_au": [
+                -0.4580950514783158,
+                1.5404986169591692,
+                0.043517004506214
+              ],
+              "longitude_error_arcsec": 12.406297983609974,
+              "latitude_error_arcsec": 0.041249895400879345,
+              "distance_error_km": 11780.20725762172,
+              "vector_error_km": 18652.384320525813
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2500,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2634166.5,
+          "position_au": [
+            0.4187375937597875,
+            -1.362827451813438,
+            -0.038587110436693
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                0.4182838339241558,
+                -1.363325222213707,
+                -0.03861888335309404
+              ],
+              "longitude_error_arcsec": 83.88366146201844,
+              "latitude_error_arcsec": 3.2518381723886476,
+              "distance_error_km": 51371.51805393023,
+              "vector_error_km": 100874.10911306115
+            }
+          }
+        }
+      ]
+    },
+    {
+      "object_id": "jupiter",
+      "model_body_id": "jupiter",
+      "reference_target": "5",
+      "source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=5&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=1355817.500000000+2451544.500000000+2461358.500000000+2634166.500000000&TLIST_TYPE=JD&TIME_TYPE=TDB&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "5",
+          "OBJ_DATA": "NO",
+          "MAKE_EPHEM": "YES",
+          "EPHEM_TYPE": "VECTORS",
+          "CENTER": "500@10",
+          "TLIST": "1355817.500000000 2451544.500000000 2461358.500000000 2634166.500000000",
+          "TLIST_TYPE": "JD",
+          "TIME_TYPE": "TDB",
+          "REF_PLANE": "ECLIPTIC",
+          "REF_SYSTEM": "ICRF",
+          "OUT_UNITS": "AU-D",
+          "VEC_TABLE": "2",
+          "VEC_CORR": "NONE",
+          "CSV_FORMAT": "YES",
+          "VEC_LABELS": "YES"
+        },
+        "local_relative_path": "data/reference/long-term/validation/jupiter.json",
+        "bytes": 5709,
+        "sha256": "8dbaa957817ba1396ab5e2d13e682ac4c9cb7ca87d893f0131d747bec0a21149",
+        "retrieved_utc": "2026-11-14T06:42:51.073995+00:00"
+      },
+      "checks": [
+        {
+          "date_tdb": {
+            "year": -1000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 1355817.5,
+          "position_au": [
+            1.42241327279559,
+            4.897075559933323,
+            -0.04689644489006344
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                1.4265134626001934,
+                4.896695249541363,
+                -0.04779979282180227
+              ],
+              "longitude_error_arcsec": 163.52905909751013,
+              "latitude_error_arcsec": 36.240028798455,
+              "distance_error_km": 117945.93976107647,
+              "vector_error_km": 630661.5785498638
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2451544.5,
+          "position_au": [
+            4.003460107960301,
+            2.935353615837558,
+            -0.1018230356434724
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                3.997807144717323,
+                2.9456937753891763,
+                -0.10109922679043365
+              ],
+              "longitude_error_arcsec": 485.2094876063521,
+              "latitude_error_arcsec": 31.38826379870619,
+              "distance_error_km": 232454.08495074208,
+              "vector_error_km": 1766261.1544060404
+            },
+            "short": {
+              "position_au": [
+                4.000605672562917,
+                2.9424922446563553,
+                -0.1017556475840658
+              ],
+              "longitude_error_arcsec": 309.2105063876239,
+              "latitude_error_arcsec": 4.43663565314633,
+              "distance_error_km": 287656.3712606716,
+              "vector_error_km": 1150176.7276792545
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2026,
+            "month": 11,
+            "day": 14
+          },
+          "jd_tdb": 2461358.5,
+          "position_au": [
+            -3.73777755044109,
+            3.786496804689657,
+            0.06789874781812448
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                -3.7378176621750763,
+                3.7859877997790568,
+                0.06792766464372377
+              ],
+              "longitude_error_arcsec": 14.970155433694597,
+              "latitude_error_arcsec": 1.2861659789784765,
+              "distance_error_km": 49913.980800528305,
+              "vector_error_km": 76504.52264551871
+            },
+            "short": {
+              "position_au": [
+                -3.737810248836735,
+                3.7833406136750596,
+                0.06790936753274948
+              ],
+              "longitude_error_arcsec": 86.89606444743768,
+              "latitude_error_arcsec": 1.5117352995210382,
+              "distance_error_km": 332467.4876846684,
+              "vector_error_km": 472187.46596292494
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2500,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2634166.5,
+          "position_au": [
+            -0.3759012798981326,
+            5.127914869658286,
+            -0.01447155847564865
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                -0.36683074159576134,
+                5.127594560987507,
+                -0.013730443356122243
+              ],
+              "longitude_error_arcsec": 362.0318524258171,
+              "latitude_error_arcsec": 29.626120566947428,
+              "distance_error_km": 146111.9016123746,
+              "vector_error_km": 1362297.9955287825
+            }
+          }
+        }
+      ]
+    },
+    {
+      "object_id": "saturn",
+      "model_body_id": "saturn",
+      "reference_target": "6",
+      "source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=6&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=1355817.500000000+2451544.500000000+2461358.500000000+2634166.500000000&TLIST_TYPE=JD&TIME_TYPE=TDB&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "6",
+          "OBJ_DATA": "NO",
+          "MAKE_EPHEM": "YES",
+          "EPHEM_TYPE": "VECTORS",
+          "CENTER": "500@10",
+          "TLIST": "1355817.500000000 2451544.500000000 2461358.500000000 2634166.500000000",
+          "TLIST_TYPE": "JD",
+          "TIME_TYPE": "TDB",
+          "REF_PLANE": "ECLIPTIC",
+          "REF_SYSTEM": "ICRF",
+          "OUT_UNITS": "AU-D",
+          "VEC_TABLE": "2",
+          "VEC_CORR": "NONE",
+          "CSV_FORMAT": "YES",
+          "VEC_LABELS": "YES"
+        },
+        "local_relative_path": "data/reference/long-term/validation/saturn.json",
+        "bytes": 5709,
+        "sha256": "e16b1c7061714986f7718211f852b8edd9793f50d2e33bd129055eee58dc3ae1",
+        "retrieved_utc": "2026-11-14T06:42:51.574707+00:00"
+      },
+      "checks": [
+        {
+          "date_tdb": {
+            "year": -1000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 1355817.5,
+          "position_au": [
+            -3.17055969719308,
+            8.44184621918141,
+            -0.06878759445506204
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                -3.1986474738220507,
+                8.42939758950628,
+                -0.06681070246264512
+              ],
+              "longitude_error_arcsec": 701.6979782792683,
+              "latitude_error_arcsec": 44.92346014528062,
+              "distance_error_km": 260432.26333888786,
+              "vector_error_km": 4605573.214166919
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2451544.5,
+          "position_au": [
+            6.40855472744363,
+            6.568044142800221,
+            -0.3691278824046708
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                6.434088356757423,
+                6.520894434942051,
+                -0.3706524619221232
+              ],
+              "longitude_error_arcsec": 1152.9023287966377,
+              "latitude_error_arcsec": 48.53378717581482,
+              "distance_error_km": 2348382.9544825153,
+              "vector_error_km": 8024619.317020072
+            },
+            "short": {
+              "position_au": [
+                6.41692506330357,
+                6.543720277069578,
+                -0.36919797141789834
+              ],
+              "longitude_error_arcsec": 517.1346914724792,
+              "latitude_error_arcsec": 12.00083159147516,
+              "distance_error_km": 1723839.2889809152,
+              "vector_error_km": 3848237.3156323405
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2026,
+            "month": 11,
+            "day": 14
+          },
+          "jd_tdb": 2461358.5,
+          "position_au": [
+            9.196379504882605,
+            2.006562855468002,
+            -0.4010179913824164
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                9.206321514116741,
+                1.9941318174545661,
+                -0.4024993360828015
+              ],
+              "longitude_error_arcsec": 312.3526460555572,
+              "latitude_error_arcsec": 25.79037712200912,
+              "distance_error_km": 1066783.8739732082,
+              "vector_error_km": 2391548.482165776
+            },
+            "short": {
+              "position_au": [
+                9.194232906718163,
+                2.0185021448004976,
+                -0.4009803634177253
+              ],
+              "longitude_error_arcsec": 265.63095089491776,
+              "latitude_error_arcsec": 1.2476769460404638,
+              "distance_error_km": 67871.82687646209,
+              "vector_error_km": 1814739.510913935
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2500,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2634166.5,
+          "position_au": [
+            7.599650565811811,
+            5.319788543729173,
+            -0.3954720580078297
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                7.560840876152975,
+                5.342532607999793,
+                -0.3967344583502442
+              ],
+              "longitude_error_arcsec": 910.9945895197959,
+              "latitude_error_arcsec": 45.766869169431594,
+              "distance_error_km": 2781013.378942869,
+              "vector_error_km": 6732034.040484018
+            }
+          }
+        }
+      ]
+    },
+    {
+      "object_id": "uranus",
+      "model_body_id": "uranus",
+      "reference_target": "7",
+      "source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=7&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=1355817.500000000+2451544.500000000+2461358.500000000+2634166.500000000&TLIST_TYPE=JD&TIME_TYPE=TDB&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "7",
+          "OBJ_DATA": "NO",
+          "MAKE_EPHEM": "YES",
+          "EPHEM_TYPE": "VECTORS",
+          "CENTER": "500@10",
+          "TLIST": "1355817.500000000 2451544.500000000 2461358.500000000 2634166.500000000",
+          "TLIST_TYPE": "JD",
+          "TIME_TYPE": "TDB",
+          "REF_PLANE": "ECLIPTIC",
+          "REF_SYSTEM": "ICRF",
+          "OUT_UNITS": "AU-D",
+          "VEC_TABLE": "2",
+          "VEC_CORR": "NONE",
+          "CSV_FORMAT": "YES",
+          "VEC_LABELS": "YES"
+        },
+        "local_relative_path": "data/reference/long-term/validation/uranus.json",
+        "bytes": 5709,
+        "sha256": "9d3a7a3fee5c1bfb10d415418080af934886828f2b6ba0be9be077bffea725d0",
+        "retrieved_utc": "2026-11-14T06:42:52.059184+00:00"
+      },
+      "checks": [
+        {
+          "date_tdb": {
+            "year": -1000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 1355817.5,
+          "position_au": [
+            10.98667049109029,
+            16.20702449430611,
+            -0.07958084473098677
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                10.954269651898354,
+                16.160913052556527,
+                -0.07943552856079311
+              ],
+              "longitude_error_arcsec": 9.98755957874399,
+              "latitude_error_arcsec": 0.8843513095887596,
+              "distance_error_km": 8429673.765602836,
+              "vector_error_km": 8430872.743266024
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2451544.5,
+          "position_au": [
+            14.43051749299078,
+            -13.73565775341348,
+            -0.2381293006266945
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                14.42542004150626,
+                -13.707012847597216,
+                -0.23814241104674705
+              ],
+              "longitude_error_arcsec": 178.63878489118548,
+              "latitude_error_arcsec": 3.0388633401486618,
+              "distance_error_km": 3505415.050448082,
+              "vector_error_km": 4352539.218913745
+            },
+            "short": {
+              "position_au": [
+                14.42412425813129,
+                -13.738978288718389,
+                -0.23802068662353204
+              ],
+              "longitude_error_arcsec": 70.54552466847112,
+              "latitude_error_arcsec": 0.8348817742443734,
+              "distance_error_km": 350272.9775978948,
+              "vector_error_km": 1077844.1318151464
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2026,
+            "month": 11,
+            "day": 14
+          },
+          "jd_tdb": 2461358.5,
+          "position_au": [
+            8.775143202567216,
+            17.33918844389859,
+            -0.04938300222596463
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                8.757373468485639,
+                17.362201569354102,
+                -0.04887874553080998
+              ],
+              "longitude_error_arcsec": 278.40260359033437,
+              "latitude_error_arcsec": 5.686369703925064,
+              "distance_error_km": 1873823.9870365763,
+              "vector_error_km": 4350242.462779668
+            },
+            "short": {
+              "position_au": [
+                8.772769561951332,
+                17.334510312687748,
+                -0.0493748589793194
+              ],
+              "longitude_error_arcsec": 0.057763443894832386,
+              "latitude_error_arcsec": 0.055073018820132574,
+              "distance_error_km": 784770.1140439829,
+              "vector_error_km": 784770.9200122621
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2500,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2634166.5,
+          "position_au": [
+            10.01705950794822,
+            -16.99066791908622,
+            -0.1900042670494567
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                9.953406065311114,
+                -17.00582764321881,
+                -0.18929732226886634
+              ],
+              "longitude_error_arcsec": 654.5833564788688,
+              "latitude_error_arcsec": 5.466675579488677,
+              "distance_error_km": 2868570.628431674,
+              "vector_error_km": 9789323.64908001
+            }
+          }
+        }
+      ]
+    },
+    {
+      "object_id": "neptune",
+      "model_body_id": "neptune",
+      "reference_target": "8",
+      "source": {
+        "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=8&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=1355817.500000000+2451544.500000000+2461358.500000000+2634166.500000000&TLIST_TYPE=JD&TIME_TYPE=TDB&REF_PLANE=ECLIPTIC&REF_SYSTEM=ICRF&OUT_UNITS=AU-D&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES",
+        "parameters": {
+          "format": "json",
+          "COMMAND": "8",
+          "OBJ_DATA": "NO",
+          "MAKE_EPHEM": "YES",
+          "EPHEM_TYPE": "VECTORS",
+          "CENTER": "500@10",
+          "TLIST": "1355817.500000000 2451544.500000000 2461358.500000000 2634166.500000000",
+          "TLIST_TYPE": "JD",
+          "TIME_TYPE": "TDB",
+          "REF_PLANE": "ECLIPTIC",
+          "REF_SYSTEM": "ICRF",
+          "OUT_UNITS": "AU-D",
+          "VEC_TABLE": "2",
+          "VEC_CORR": "NONE",
+          "CSV_FORMAT": "YES",
+          "VEC_LABELS": "YES"
+        },
+        "local_relative_path": "data/reference/long-term/validation/neptune.json",
+        "bytes": 5709,
+        "sha256": "096bea4c1d8f7a4ac7758e2c8aa0942854c85db39c6de6fce7ca4bcde725d379",
+        "retrieved_utc": "2026-11-14T06:42:52.572647+00:00"
+      },
+      "checks": [
+        {
+          "date_tdb": {
+            "year": -1000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 1355817.5,
+          "position_au": [
+            -19.73666060187386,
+            -23.0440294479758,
+            0.9261687646846952
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                -19.702497960442717,
+                -23.03926410206199,
+                0.9252927259536473
+              ],
+              "longitude_error_arcsec": 155.4517692336302,
+              "latitude_error_arcsec": 0.59451423409053,
+              "distance_error_km": 3866833.0426494987,
+              "vector_error_km": 5161803.013439789
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2000,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2451544.5,
+          "position_au": [
+            16.81075730709689,
+            -24.99265130682372,
+            0.1272708345808137
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                16.805071516796854,
+                -25.00393814755181,
+                0.1276624793912919
+              ],
+              "longitude_error_arcsec": 75.43093846344208,
+              "latitude_error_arcsec": 2.5022057170906487,
+              "distance_error_km": 926853.7863694646,
+              "vector_error_km": 1891536.9785364803
+            },
+            "short": {
+              "position_au": [
+                16.803470361250653,
+                -24.993594553704998,
+                0.1274512099942044
+              ],
+              "longitude_error_arcsec": 45.01604753648316,
+              "latitude_error_arcsec": 1.3303503722788848,
+              "distance_error_km": 491101.6882284725,
+              "vector_error_km": 1099537.5285182886
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2026,
+            "month": 11,
+            "day": 14
+          },
+          "jd_tdb": 2461358.5,
+          "position_au": [
+            29.8297170209359,
+            1.518814814697105,
+            -0.7186966157273572
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                29.82765519683212,
+                1.5000532148203494,
+                -0.7182326423765744
+              ],
+              "longitude_error_arcsec": 128.68510601643518,
+              "latitude_error_arcsec": 2.7030831085663287,
+              "distance_error_km": 451436.33219316753,
+              "vector_error_km": 2824445.91052064
+            },
+            "short": {
+              "position_au": [
+                29.829555501419968,
+                1.5142382213228132,
+                -0.7185968437563222
+              ],
+              "longitude_error_arcsec": 31.50783112309736,
+              "latitude_error_arcsec": 0.6232347115137944,
+              "distance_error_km": 59236.14731987778,
+              "vector_error_km": 685237.4503006838
+            }
+          }
+        },
+        {
+          "date_tdb": {
+            "year": 2500,
+            "month": 1,
+            "day": 1
+          },
+          "jd_tdb": 2634166.5,
+          "position_au": [
+            21.60260701524188,
+            -20.90696649999319,
+            -0.06756300628005106
+          ],
+          "fits": {
+            "long": {
+              "position_au": [
+                21.61577598853339,
+                -20.90508230713858,
+                -0.06812684223683137
+              ],
+              "longitude_error_arcsec": 72.10600465004973,
+              "latitude_error_arcsec": 3.7417750613537692,
+              "distance_error_km": 1220079.4339826154,
+              "vector_error_km": 1991899.7281918845
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "long": {
+      "sample_count": 32,
+      "longitude_error_arcsec": 1152.9023287966377,
+      "latitude_error_arcsec": 48.53378717581482,
+      "distance_error_km": 8429673.765602836,
+      "vector_error_km": 9789323.64908001
+    },
+    "short": {
+      "sample_count": 16,
+      "longitude_error_arcsec": 517.1346914724792,
+      "latitude_error_arcsec": 12.00083159147516,
+      "distance_error_km": 1723839.2889809152,
+      "vector_error_km": 3848237.3156323405
+    }
+  },
+  "limitations": [
+    "These are finite reference samples at four declared epochs, not a global accuracy bound or an uncertainty/covariance model.",
+    "Horizons references are planetary-system barycenters, including the Earth-Moon barycenter; they are not satellite or surface centers.",
+    "The comparison checks implementation signs, time, frame and the size of approximation discrepancies. It does not turn a fitted Kepler model into an integrated ephemeris.",
+    "Discrete JDTDB values define the reference epochs. Horizons' printed ancient calendar labels use its mixed Julian/Gregorian default and are not parsed as the model's proleptic Gregorian input dates."
+  ]
+}

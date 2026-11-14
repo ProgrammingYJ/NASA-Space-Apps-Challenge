@@ -19,7 +19,9 @@
     "DEV-003",
     "DEV-004",
     "DEV-005",
-    "DEV-006"
+    "DEV-006",
+    "DEV-007",
+    "DEV-008"
   ],
   "assistance": [
     "repository_configuration",
@@ -488,5 +490,18 @@
     "observed_galaxy_photos_copied_into_product": false,
     "locale_count": 5,
     "locale_keys": 261
+  },
+  "current_checkpoint": {
+    "version": "0.6.0",
+    "recorded_at_kst": "2026-11-14T15:54:38+09:00",
+    "status": "user_requested_urgent_shutdown_checkpoint",
+    "actual_history_images": 5,
+    "localized_object_ids": 476,
+    "python": "275 passed;1 test setup failure corrected,rerun pending",
+    "vitest_passed": 54,
+    "strict_vite": "passed",
+    "new_browser": "6 written,not executed",
+    "public_service_deployed": false,
+    "linux_verified": false
   }
 }

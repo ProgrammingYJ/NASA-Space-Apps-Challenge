@@ -201,3 +201,47 @@
 - Notion 완료/배포전 조회 시도: 14:48:40 KST. native inventory에 기존 ‘이슈 보고 전달’ 창이 없어 포커스/창/탭 이동 없이 재열람하지 못했다. 이번 내용 재확인은 미완료/접근불가이며 최신 내용 확인 완료로 쓰지 않는다. 마지막 실제 확인은14:17:17KST의 관련 이슈 한 페이지였고 당시 기존 미시작/P1·환경/재현/기대/실제/증거 규칙과 동일했다. 홈/전체QA·현재 편집시각은 미확인이고 포커스/창이동/쓰기는 없었다.
 - Git: 사용자 요청 MVP는5d3a450(13:51:47KST) origin/main 일반push/원격SHA 대조 완료. 이 통합의 최종 source commit/push는 release_manifest.base_commit과 실제 원격 SHA로 확정한다. .env/관측원본/팀내부/var/tmp/artifacts는 Git에서 제외하고 이전 코드·작업·근거와 Git 이력은 보존한다.
 - Linux/공개서버·실제 제출·F01잔여/F04/F05·사람/원어민 검수는 완료로 올리지 않는다.
+
+## DEV-007 · 2026-11-14 · 우주 역사 초기 은하의 반복 모양 수정
+
+- 진행 중 첫 실제 시각 조회15:00:07 KST. 사용자가 빅뱅 모드의 초기 은하가 모두 같은 모형이라고 지적했다. 착수 직후의 초 단위 시각은 별도 계측하지 않았으므로 이 시각을 최초 착수 시각으로 주장하지 않는다. Git기준은 origin/main에 반영한 b2930ec이고 작업 전 변경은 없었다.
+- 원인 재현/독립 검토: 현재 UniverseHistoryScene의35개 노드는 모두190점과 동일한 세 팔 `(i%3)*2π/3+r*.7` 기하를 사용한다. 반경/자세만 달라지고 시간은 전체 불투명도를 바꿔 실제 형태 다양성/개별 성장은 구현되지 않았다. 이전 DEV-006의9개 현대 은하 개선은 별도 우주 역사 장면에 적용되지 않았다.
+- 적용: 실제 debug·validate-data·spaceapps-browser-qa·documentation·ux-copy 지침/설치 lock을 확인한다. 프런트 형태/연속 성장·공식 초기 은하 원문/사진 검토·독립 회귀를 파일 소유별로 분리하고 root가 API/5언어/명세/배포 통합을 맡는다. 현재까지의 관측·Git·근거는 보존한다.
+- 과학 경계: 초기 은하를 모두 동일한 현대 나선은하로 그리지 않는다. 형태 다양성을 근거로 clumpy/compact/작은 disk/disturbed 등의 설명용 가상 개체를 구분하되 개체 수·위치·형태 비율·전이 시각을 실측 통계/동역학이나 개별 은하 복원으로 내보내지 않는다. 기존10개 연대 anchor와 불변 관측 원본·UTC/역사 모드 구분은 유지한다.
+- Notion 시작 조회14:59:39 KST: 관련 이슈 창이 native inventory에 없어 내용을 재확인하지 못했다. 마지막 실제 조회는14:17:17KST이며 이번 내용 확인 완료로 재사용하지 않는다. 포커스/창/탭 이동·쓰기는 없었고 가능한 개발을 계속한다.
+- 구현·수학/API·5언어·실제Chrome·최신 ZIP/해제·원격 Git 결과는 완료 후 후속 기록한다.
+
+### DEV-007 사용자 정확성 확인·명시 선택 반영
+
+- 사용자가 ‘실제 데이터와 사실만을 바탕으로 된 것인지’를 질문했다. 실제SPHEREx/천체력/공개지도와 가상35은하의 위치·모양·성장이 다름을 즉시 설명했고, 사용자는 **실제 관측 사례와 확인된 연대만 표시**를 선택했다. 이후 가상 시안의 게시/ZIP을 중단하고 관측-only로 교체한다.
+- 중간 시안의205Python/43Vitest/Chrome7PASS는 프로그램 동작·가정 표시 검사이며 과거 우주의 실측 복원 검증이 아니다. 이 시안은 완료 제품으로 전달하지 않는다. var/qa/dev007-superseded-diversity/에 이전QA를 보존한다.
+- 새 계약은 실제 관측5이미지·published approximate age 또는CEERS범위다. image간 자동넘김은 슬라이드쇼이며 물리적 진화/중간시각 생성이 아니다. 당시임의10anchor/가상scene은 현재 App에서 제거한다. 이전원문/코드는 비활성/레거시로 보존한다.
+- 사용자 추가 요청으로 root Data_Spec.md를 데이터 전수 기록 전용으로 작성한다. FSD는 기능·화면/실행 명세를 유지하고 원본/사용/확보만/이전 자료의 출처·가공·권리·SHA·바이트는 Data_Spec과 canonical manifest로 연결한다.
+
+### DEV-007 실제 관측 전용 경로 검증
+
+- Python227 PASS(43.32초, 기존Starlette경고1), Vitest45 PASS, strict/Vite 최종 index-DZP8VB6-/CosmicObservationViewer-OpoqVQrh, Ruff43파일 통과. 실제Chrome 관련6경로 모두 PASS(1.6분)다. 다른 전체브라우저 경로를 이번에 모두 재실행했다고 주장하지 않는다.
+- 공개관측5이미지2,034,618B SHA/바이트/치수·원문11개1,572,536B·크레딧/권리·CEERS.6–6Gyr/다른4근사연대·5언어298키를 확인했다. 이전동일35모형/다양성중간7QA는 superseded 기록으로보존한다.
+- 최초관측전용빌드의클릭실패(pointer-events상속)와숨김사진의inlinevisibility우선문제를재현·수정했고수정빌드6검사로재확인했다. 독립보고 var/qa/dev007-observed-review.json 및5사례/εB새세션복원사진을직접대조했다.
+- Data_Spec.md 별도작성: data1454+public43=1497물리파일/내장원응답32/서빙복제43. 전체상대경로와실제SHA전수독립대조 누락0. 원본102개987,987,584B의SHA/크기불변 확인. 이후DEV008추가원문은최종snapshot에서재생성한다.
+- Notion 완료시도15:31:01KST: 기존관련창없어내용재확인실패. 포커스/창/탭이동·쓰기없음. 마지막실제읽기14:17:17KST를이번최신조회로주장하지않는다.
+- 사용자새요청을DEV008로이어받아現在v0.5.1 ZIP/Git전달은중간출시하지않고최종v0.6.0에묶는다. 이전v0.5.0/b2930ec원격과ZIP은보존한다.
+
+## DEV-008 · 위성 현지 이름·과거/미래 시뮬레이션·은하 내부 계층 탐색
+
+- 기록시각 2026-11-14T15:49:33+09:00. 사용자요청: 언어를바꾸면위성이름도변경, 과거/미래시간확장, 은하→행성·갈색왜성등모든종류선택/확대, 빅뱅모드진입복구. 기존데이터·원본·Git/품질근거는보존한다.
+- 3병렬분담: 이름helper/5언어사전·기관표기출처, 장기JPL계수/검산과학, 실제천체계층/원문/방향검토. root는시간/은하UI·API/저장계약·통합검사/FSD/DataSpec/ZIP을담당한다.
+- 명시선택한실제관측-only우주역사는유지하고상단항상보이는‘빅뱅·우주역사’진입버튼을추가한다. 가상35개·수십억년개별성장장면을조용히되살리지않는다.
+- JPL공식장기근사는prolepticGregorian astronomical연도-2999(3000BCE)-01-01~3000-01-01 TDB달력라벨만지원한다. 8행성계+Sun원점/EMB(지구-달질량중심),미지원Pluto/달/왜행성/별은기존다른epoch로고정표시하지않는다. 원정밀2026-11-13~16시각과관측DATE-AVG는보존한다.
+- 은하내지도는출처확인하늘방향투영이며깊이/물리반경/현재3D위치를임의생성하지않는다. 외부9은하대표구성원+우리은하의태양계/갈색왜성/여러종류·기존NASA4862host/6470planet를계층참조한다. host→planet선택은기존설명용3D항성계로연결하고측정표면으로주장하지않는다.
+- 새원문/공식표기·계수/검산·은하좌표의SHA/bytes/원URL/취득시각을불변보존하고Data_Spec전수snapshot을재생성한다. 최종테스트/브라우저/ZIP해제·재시작/Git결과는후속실행으로확정한다.
+
+## DEV-008 urgent travel checkpoint - 2026-11-14T15:54:38+09:00
+
+User explicitly requested wrap-up within one minute before shutting down. Stop new browser/release work and preserve current source/data/Git.
+Implemented v0.6.0: 476 object names in five locales with original designations/IDs retained; separate JPL fitted Kepler simulation -2999-01-01 through 3000-01-01 TDB calendar labels (8 systems + Sun; Earth icon means EMB; unsupported objects omitted); source-backed galaxy-member hierarchy and angular zoom with existing exoplanet-system links; visible header Big Bang/history entry. History remains five published actual observation products and approximate source ages, with no synthetic 35-galaxy growth scene.
+
+Verified: strict TypeScript/Vite index-DSKEjKdg.js; Vitest54 passed; Ruff check/48-file format. Whole pytest:275 passed,1 failed in60.64s. Failure was a test setup calling calendar_jd(-3000), which correctly rejects unsupported input; changed setup to one day before the supported minimum JD. Rerun after that test-only correction is PENDING. New long-term28/catalog19/names4 targeted tests passed previously. DEV007 observed-only Chrome6 passed on its prior build. DEV008 new six browser scenarios were WRITTEN/DISCOVERED, NOT EXECUTED. Do not claim current whole browser verification.
+
+Resume: read AGENTS,SKILLS,FSD,START_HERE,Data_Spec and this checkpoint; preserve raw/data/var/Git. Run whole pytest and new simulation-names/universe-catalog browser scenarios, then existing cosmic/observations. Build complete v0.6 ZIP and verify fresh extraction,health,epsilon/Pluto evidence and real server restart. No public/Linux deployment or F01 remaining/F04/F05/native-language/human QA claimed.
+

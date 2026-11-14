@@ -1,0 +1,311 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "cosmic-morphology-reference-v1",
+  "created_utc": "2026-11-14T06:05:28.278085+00:00",
+  "age_unit": "Gyr_since_hot_Big_Bang",
+  "reference_age_gyr": 13.8,
+  "examples": [
+    {
+      "id": "cosmic_gems_clusters",
+      "name": "Cosmic Gems arc (SPT0615-JD1)",
+      "approx_age_gyr": 0.46,
+      "sample_age_range_gyr": null,
+      "age_scope": "Approximate cosmic age of this strongly lensed observed system",
+      "source_id": "esa_cosmic_gems",
+      "observed_features": [
+        "Dense, compact star-forming clusters are resolved inside a young galaxy.",
+        "The observed chain and mirrored image are altered by strong gravitational lensing."
+      ],
+      "visual_families": [
+        "clumpy",
+        "compact"
+      ],
+      "image_reference": "https://esawebb.org/images/weic2418c/",
+      "limitations": [
+        "The five detected clusters are specific to this observation, not a required number in each conceptual galaxy.",
+        "Do not render the stretched arc or mirrored copies as the intrinsic galaxy structure."
+      ],
+      "source": {
+        "url": "https://esawebb.org/news/weic2418/",
+        "resolved_url": "https://esawebb.org/news/weic2418/",
+        "label": "ESA/Webb: Star clusters in the Cosmic Gems arc (2024)",
+        "local_relative_path": "data/reference/cosmic-morphology/esa_cosmic_gems.html",
+        "bytes": 70161,
+        "sha256": "09193e72dc098978a34f9d4c058088bfb1ee70d64ac3a970d3895a7fd2c87ea6",
+        "retrieved_utc": "2026-11-14T06:01:23.330111+00:00"
+      }
+    },
+    {
+      "id": "firefly_sparkle_assembly",
+      "name": "Firefly Sparkle and companions",
+      "approx_age_gyr": 0.6,
+      "sample_age_range_gyr": null,
+      "age_scope": "Approximate cosmic age of the observed galaxy",
+      "source_id": "nasa_firefly_sparkle",
+      "observed_features": [
+        "Compact luminous star clusters lie within diffuse, asymmetric galactic light.",
+        "Nearby companions may influence later assembly; the eventual shape cannot be predicted from this example."
+      ],
+      "visual_families": [
+        "clumpy",
+        "compact",
+        "diffuse_irregular"
+      ],
+      "image_reference": "https://science.nasa.gov/missions/webb/found-first-actively-forming-galaxy-as-lightweight-as-young-milky-way/",
+      "limitations": [
+        "The lensed observation and the separately labelled artist reconstruction are distinct products.",
+        "Companions are observed; a merger trajectory, tidal distortion and deterministic future morphology are not measured here."
+      ],
+      "source": {
+        "url": "https://science.nasa.gov/missions/webb/found-first-actively-forming-galaxy-as-lightweight-as-young-milky-way/",
+        "resolved_url": "https://science.nasa.gov/missions/webb/found-first-actively-forming-galaxy-as-lightweight-as-young-milky-way/",
+        "label": "NASA Webb: Firefly Sparkle and companions (2024)",
+        "local_relative_path": "data/reference/cosmic-morphology/nasa_firefly_sparkle.html",
+        "bytes": 336241,
+        "sha256": "c12df71d57ebf1d9b996c1ee1abea9c8317a64c9cefad2d48cbea32c209be135",
+        "retrieved_utc": "2026-11-14T06:01:24.666203+00:00"
+      }
+    },
+    {
+      "id": "ceers_projected_shapes",
+      "name": "CEERS observed projected shape examples",
+      "approx_age_gyr": null,
+      "sample_age_range_gyr": [
+        0.6,
+        6.0
+      ],
+      "age_scope": "Broad cosmic-age range of the study sample, not an individual age for every pictured object",
+      "source_id": "nasa_ceers_shapes",
+      "observed_features": [
+        "Elongated, flattened, disk-like and compact spherical appearances occur within the study sample.",
+        "Apparent two-dimensional shape and model-inferred three-dimensional geometry are different quantities."
+      ],
+      "visual_families": [
+        "elongated",
+        "compact",
+        "small_disk",
+        "spheroid"
+      ],
+      "image_reference": "https://science.nasa.gov/missions/webb/webb-shows-many-early-galaxies-looked-like-pool-noodles-surfboards/",
+      "limitations": [
+        "Published sample fractions are not used as scene family probabilities or universal population fractions.",
+        "The sample range does not date the beginning of disk or spheroid formation."
+      ],
+      "source": {
+        "url": "https://science.nasa.gov/missions/webb/webb-shows-many-early-galaxies-looked-like-pool-noodles-surfboards/",
+        "resolved_url": "https://science.nasa.gov/missions/webb/webb-shows-many-early-galaxies-looked-like-pool-noodles-surfboards/",
+        "label": "NASA Webb: CEERS distant-galaxy shape diversity (2024)",
+        "local_relative_path": "data/reference/cosmic-morphology/nasa_ceers_shapes.html",
+        "bytes": 328164,
+        "sha256": "e7ce06ecefd0da8a82424bf9efee2ad535970affe614f713f6063b25d21b2e28",
+        "retrieved_utc": "2026-11-14T06:01:22.442323+00:00"
+      }
+    },
+    {
+      "id": "rebels25_rotating_disc",
+      "name": "REBELS-25",
+      "approx_age_gyr": 0.7,
+      "sample_age_range_gyr": null,
+      "age_scope": "Approximate cosmic age of this observed rotating-disc example",
+      "source_id": "eso_rebels25",
+      "observed_features": [
+        "ALMA gas kinematics establish an early strongly rotating disc.",
+        "Suggested bar and spiral structure are tentative and require more observations."
+      ],
+      "visual_families": [
+        "small_disk"
+      ],
+      "image_reference": "https://www.eso.org/public/images/eso2415b/",
+      "limitations": [
+        "A gas intensity/velocity map is not an optical stellar surface map.",
+        "The conceptual early disc has no source-claimed measured bar or grand-design spiral arms.",
+        "This exceptional observed system does not establish that all galaxies have orderly discs at this age."
+      ],
+      "source": {
+        "url": "https://www.eso.org/public/news/eso2415/",
+        "resolved_url": "https://www.eso.org/public/news/eso2415/",
+        "label": "ESO/ALMA: REBELS-25 rotating disc (2024)",
+        "local_relative_path": "data/reference/cosmic-morphology/eso_rebels25.html",
+        "bytes": 89926,
+        "sha256": "1d63151ad0321ce17d18b37b28f4eb811dbd42469ec0386a1b441f20eb269420",
+        "retrieved_utc": "2026-11-14T06:01:28.794808+00:00"
+      }
+    },
+    {
+      "id": "zs7_ongoing_merger",
+      "name": "ZS7 galaxy merger system",
+      "approx_age_gyr": 0.74,
+      "sample_age_range_gyr": null,
+      "age_scope": "Approximate cosmic age of this observed interacting system",
+      "source_id": "esa_zs7_merger",
+      "observed_features": [
+        "JWST imaging and spectroscopy provide evidence for an ongoing merger of two galaxies hosting massive black holes.",
+        "The system provides an early example of assembly through galaxy interactions."
+      ],
+      "visual_families": [
+        "disturbed_pair",
+        "disturbed"
+      ],
+      "image_reference": "https://esawebb.org/images/weic2413b/",
+      "limitations": [
+        "The scene's pair separation, tidal geometry and motion are illustrative, not fits to this system.",
+        "This is evidence for ongoing galaxy assembly, not a direct observation of completed black-hole coalescence or gravitational waves."
+      ],
+      "source": {
+        "url": "https://esawebb.org/news/weic2413/",
+        "resolved_url": "https://esawebb.org/news/weic2413/",
+        "label": "ESA/Webb: ZS7 ongoing galaxy merger evidence (2024)",
+        "local_relative_path": "data/reference/cosmic-morphology/esa_zs7_merger.html",
+        "bytes": 67690,
+        "sha256": "420698ad16de1c92650bbeefdd4e375c3094a3900c3ac88343bb8afec94d4138",
+        "retrieved_utc": "2026-11-14T06:04:44.284201+00:00"
+      }
+    },
+    {
+      "id": "later_coexisting_morphologies",
+      "name": "Later galaxy assembly and coexisting forms",
+      "approx_age_gyr": null,
+      "sample_age_range_gyr": null,
+      "age_scope": "Broad qualitative evolution context, not a dated transition or exclusive late-time population",
+      "source_id": "nasa_galaxies_over_time",
+      "observed_features": [
+        "Modern spiral and elliptical systems developed through varied assembly histories.",
+        "Irregular, clumpy and interacting systems continue to exist; merging and assembly also occur today."
+      ],
+      "visual_families": [
+        "disk",
+        "spheroid",
+        "irregular",
+        "disturbed"
+      ],
+      "image_reference": "https://science.nasa.gov/mission/webb/galaxies-over-time/",
+      "limitations": [
+        "Later conceptual families overlap rather than all replacing early forms on one date.",
+        "No present-day catalog galaxy is identified as the future descendant of a scene node."
+      ],
+      "source": {
+        "url": "https://science.nasa.gov/mission/webb/galaxies-over-time/",
+        "resolved_url": "https://science.nasa.gov/mission/webb/galaxies-over-time/",
+        "label": "NASA Webb: Galaxies Over Time",
+        "local_relative_path": "data/reference/cosmic-morphology/nasa_galaxies_over_time.html",
+        "bytes": 568267,
+        "sha256": "cc5180785fd477db0c13ee2dece4a5717e8afdf6917a50bf416e251a4777dc0f",
+        "retrieved_utc": "2026-11-14T06:01:21.153614+00:00"
+      }
+    }
+  ],
+  "sources": {
+    "nasa_galaxies_over_time": {
+      "url": "https://science.nasa.gov/mission/webb/galaxies-over-time/",
+      "resolved_url": "https://science.nasa.gov/mission/webb/galaxies-over-time/",
+      "label": "NASA Webb: Galaxies Over Time",
+      "local_relative_path": "data/reference/cosmic-morphology/nasa_galaxies_over_time.html",
+      "bytes": 568267,
+      "sha256": "cc5180785fd477db0c13ee2dece4a5717e8afdf6917a50bf416e251a4777dc0f",
+      "retrieved_utc": "2026-11-14T06:01:21.153614+00:00"
+    },
+    "nasa_ceers_shapes": {
+      "url": "https://science.nasa.gov/missions/webb/webb-shows-many-early-galaxies-looked-like-pool-noodles-surfboards/",
+      "resolved_url": "https://science.nasa.gov/missions/webb/webb-shows-many-early-galaxies-looked-like-pool-noodles-surfboards/",
+      "label": "NASA Webb: CEERS distant-galaxy shape diversity (2024)",
+      "local_relative_path": "data/reference/cosmic-morphology/nasa_ceers_shapes.html",
+      "bytes": 328164,
+      "sha256": "e7ce06ecefd0da8a82424bf9efee2ad535970affe614f713f6063b25d21b2e28",
+      "retrieved_utc": "2026-11-14T06:01:22.442323+00:00"
+    },
+    "esa_cosmic_gems": {
+      "url": "https://esawebb.org/news/weic2418/",
+      "resolved_url": "https://esawebb.org/news/weic2418/",
+      "label": "ESA/Webb: Star clusters in the Cosmic Gems arc (2024)",
+      "local_relative_path": "data/reference/cosmic-morphology/esa_cosmic_gems.html",
+      "bytes": 70161,
+      "sha256": "09193e72dc098978a34f9d4c058088bfb1ee70d64ac3a970d3895a7fd2c87ea6",
+      "retrieved_utc": "2026-11-14T06:01:23.330111+00:00"
+    },
+    "nasa_firefly_sparkle": {
+      "url": "https://science.nasa.gov/missions/webb/found-first-actively-forming-galaxy-as-lightweight-as-young-milky-way/",
+      "resolved_url": "https://science.nasa.gov/missions/webb/found-first-actively-forming-galaxy-as-lightweight-as-young-milky-way/",
+      "label": "NASA Webb: Firefly Sparkle and companions (2024)",
+      "local_relative_path": "data/reference/cosmic-morphology/nasa_firefly_sparkle.html",
+      "bytes": 336241,
+      "sha256": "c12df71d57ebf1d9b996c1ee1abea9c8317a64c9cefad2d48cbea32c209be135",
+      "retrieved_utc": "2026-11-14T06:01:24.666203+00:00"
+    },
+    "eso_rebels25": {
+      "url": "https://www.eso.org/public/news/eso2415/",
+      "resolved_url": "https://www.eso.org/public/news/eso2415/",
+      "label": "ESO/ALMA: REBELS-25 rotating disc (2024)",
+      "local_relative_path": "data/reference/cosmic-morphology/eso_rebels25.html",
+      "bytes": 89926,
+      "sha256": "1d63151ad0321ce17d18b37b28f4eb811dbd42469ec0386a1b441f20eb269420",
+      "retrieved_utc": "2026-11-14T06:01:28.794808+00:00"
+    },
+    "esa_zs7_merger": {
+      "url": "https://esawebb.org/news/weic2413/",
+      "resolved_url": "https://esawebb.org/news/weic2413/",
+      "label": "ESA/Webb: ZS7 ongoing galaxy merger evidence (2024)",
+      "local_relative_path": "data/reference/cosmic-morphology/esa_zs7_merger.html",
+      "bytes": 67690,
+      "sha256": "420698ad16de1c92650bbeefdd4e375c3094a3900c3ac88343bb8afec94d4138",
+      "retrieved_utc": "2026-11-14T06:04:44.284201+00:00"
+    }
+  },
+  "image_review": {
+    "reviewed_at_utc": "2026-11-14T06:04:54+00:00",
+    "scope": "Five published observation collages directly inspected; not only article alt text. Temporary review copies are not application assets.",
+    "observations": [
+      {
+        "source_id": "nasa_ceers_shapes",
+        "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2024/01/STScI-01HHZ8T813KV44MSB91ZGM102C.png?w=900&h=600&fit=clip",
+        "credit": "NASA, ESA, CSA, STScI, Steve Finkelstein, Micaela Bagley, Rebecca Larson",
+        "kind": "JWST NIRCam observed cutouts; projected appearances and sample ages differ"
+      },
+      {
+        "source_id": "esa_cosmic_gems",
+        "url": "https://esawebb.org/media/archives/images/medium/weic2418c.jpg",
+        "credit": "ESA/Webb, NASA & CSA, L. Bradley, A. Adamo and the Cosmic Spring collaboration",
+        "kind": "Lensed observation collage; stretched/mirrored light does not imply an intrinsic arc"
+      },
+      {
+        "source_id": "nasa_firefly_sparkle",
+        "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2024/12/STScI-01J4A44SME50MYJ4QVW1AWQW5V.png?w=900&h=448&fit=clip",
+        "credit": "NASA, ESA, CSA, STScI, Chris Willott, Lamiya Mowla, Kartheik Iyer",
+        "kind": "Actual lensed NIRCam observation with companions; not the separate artist concept"
+      },
+      {
+        "source_id": "eso_rebels25",
+        "url": "https://cdn.eso.org/images/large/eso2415b.jpg",
+        "credit": "ALMA (ESO/NAOJ/NRAO)/L. Rowland et al.",
+        "kind": "Gas emission and line-of-sight velocity map; not a visible-light stellar map"
+      },
+      {
+        "source_id": "esa_zs7_merger",
+        "url": "https://esawebb.org/media/archives/images/medium/weic2413b.jpg",
+        "credit": "ESA/Webb, NASA, CSA, J. Dunlop and collaborators; individual image-page credits apply",
+        "kind": "NIRCam observation zoom sequence; merger interpretation also uses NIRSpec spectroscopy, not shape alone"
+      }
+    ]
+  },
+  "visual_policy": {
+    "scene_population_is_observed": false,
+    "morphology_fractions_available": false,
+    "transition_times_are_display_assumptions": true,
+    "all_nodes_share_one_evolution_track": false,
+    "source_age_is_first_appearance_date": false,
+    "early_disc_example_age_gyr": 0.7,
+    "early_disc_bar_and_arms_confirmed": false,
+    "early_disk_display_before_example": "Not adopted by this conservative visual guide; this is not a physical exclusion at earlier ages.",
+    "chronology_stage_ids_and_ages_unchanged": true,
+    "observed_images_copied_into_app_assets": false
+  },
+  "limitations": [
+    "Observed examples illustrate diversity; they are not a census or an age-dependent morphology fraction.",
+    "A source's approximate observation age is not a first-appearance date, a universal transition, or the age of every galaxy in an illustrative scene.",
+    "The scene's 35 nodes, seeds, family assignments, colors, sizes and individual morph timings are display assumptions, not measured objects or evolutionary tracks.",
+    "Projected light, observing wavelength, resolution and gravitational lensing affect observed shapes; a lensed arc is not the intrinsic shape of a galaxy.",
+    "Early rotating discs exist; REBELS-25's proposed bar and spiral arms require further confirmation and are not adopted as measured structures.",
+    "Nearby spirals, spheroids, irregular and interacting galaxies coexist; no single final shape or deterministic evolution is prescribed.",
+    "Original chronology stages, current catalog coordinates, JPL model time and SPHEREx observations remain unchanged.",
+    "Reference observation pages are linked; the renderer is a conceptual code illustration, not a copied observation or a reconstruction of the past sky."
+  ]
+}

@@ -1,0 +1,1712 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "sourced-universe-hierarchy-v1",
+  "created_utc": "2026-11-14T06:44:10.089969+00:00",
+  "objects": [
+    {
+      "object_id": "member-m31-g1",
+      "name": "Mayall II (G1)",
+      "kind": "globular_cluster",
+      "galaxy_id": "galaxy-m31",
+      "parent_id": "galaxy-m31",
+      "membership_evidence": "G1 is a globular cluster orbiting the Andromeda galaxy. The release-page object coordinates refer to M31 and are not adopted for G1.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://science.nasa.gov/asset/hubble/globular-cluster-mayall-ii-in-the-neighboring-andromeda-galaxy-m31/",
+        "resolved_url": "https://science.nasa.gov/asset/hubble/globular-cluster-mayall-ii-in-the-neighboring-andromeda-galaxy-m31/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-00.html",
+        "bytes": 287255,
+        "sha256": "0d72d584d3c373cc557fd9a9f991e4f4917199e59185475fd62c86a9ca420350",
+        "retrieved_utc": "2026-11-14T06:41:23.052455+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 8.19388491738,
+        "dec_deg": 39.577918000850005,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "NAME Mayall II",
+        "catalog_type": "GlC",
+        "catalog_oid": "@1555930",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 00 32 46.5323801712  +39 34 40.504803060 (Opt ) C [3.7999 2.8257 90] 2020yCat.1350....0G",
+        "coordinate_reference_detail": "(Opt ) C [3.7999 2.8257 90] 2020yCat.1350....0G",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Mayall+II&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Mayall+II&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-m31-g1.txt",
+          "bytes": 10509,
+          "sha256": "7bdba3e3bdd94f8665d69550bf41742f8309cd35bbaaf1507fb1bd5cfda7df33",
+          "retrieved_utc": "2026-11-14T06:41:22.316918+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://science.nasa.gov/asset/hubble/globular-cluster-mayall-ii-in-the-neighboring-andromeda-galaxy-m31/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-m33-ngc604",
+      "name": "NGC 604",
+      "kind": "emission_nebula",
+      "galaxy_id": "galaxy-m33",
+      "parent_id": "galaxy-m33",
+      "membership_evidence": "NGC 604 is a star-forming region within Messier 33.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://www.nasa.gov/image-article/ngc-604/",
+        "resolved_url": "https://www.nasa.gov/image-article/ngc-604/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-01.html",
+        "bytes": 272067,
+        "sha256": "d30a10c9483dada1660aa1d0de2f07e4566a2994f4e0214a18a9be5635bb983f",
+        "retrieved_utc": "2026-11-14T06:41:22.813735+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 23.63375,
+        "dec_deg": 30.783611111111114,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "NGC 604",
+        "catalog_type": "HII",
+        "catalog_oid": "@1521790",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 01 34 32.1  +30 47 01 (MIR ) D [~ ~ ] 2015AJ....149...57M",
+        "coordinate_reference_detail": "(MIR ) D [~ ~ ] 2015AJ....149...57M",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+604&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+604&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-m33-ngc604.txt",
+          "bytes": 14586,
+          "sha256": "98a36ea87437089dab8ac7719567a6e0466c4057ef0179a0ef3e9c05e951d00a",
+          "retrieved_utc": "2026-11-14T06:41:22.292117+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://www.nasa.gov/image-article/ngc-604/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-m33-x7",
+      "name": "M33 X-7",
+      "kind": "black_hole_binary",
+      "galaxy_id": "galaxy-m33",
+      "parent_id": "galaxy-m33",
+      "membership_evidence": "An eclipsing binary in M33 contains a stellar-mass black hole and a massive companion star. The main release graphic is an illustration and is not adopted as an observed surface.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://chandra.harvard.edu/photo/2007/m33x7/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2007/m33x7/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-02.html",
+        "bytes": 31662,
+        "sha256": "1540df70a51d5dcb362a9ea3fac08a13c562bf0a1179854d872ca89495812feb",
+        "retrieved_utc": "2026-11-14T06:41:23.455499+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 23.392208333333333,
+        "dec_deg": 30.536472222222223,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "NAME M33 X-7",
+        "catalog_type": "HXB",
+        "catalog_oid": "@1517214",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 01 33 34.13  +30 32 11.3 (Xray) C [130 130 90] 2008ApJS..174..366P",
+        "coordinate_reference_detail": "(Xray) C [130 130 90] 2008ApJS..174..366P",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M33+X-7&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M33+X-7&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-m33-x7.txt",
+          "bytes": 6301,
+          "sha256": "e9a0fd011a9d22727a44f06171f43d342884bb64b146612479d2c5abcdd4d236",
+          "retrieved_utc": "2026-11-14T06:41:22.961692+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://chandra.harvard.edu/photo/2007/m33x7/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-m81-nucleus",
+      "name": "M81 nuclear black hole",
+      "kind": "supermassive_black_hole",
+      "galaxy_id": "galaxy-m81",
+      "parent_id": "galaxy-m81",
+      "membership_evidence": "The M81 nucleus contains a feeding supermassive black hole. The SIMBAD direction refers to the host's active nucleus, not an independently resolved black-hole centroid.",
+      "coordinate_role": "host_nucleus_reference",
+      "source": {
+        "url": "https://chandra.harvard.edu/photo/2008/m81/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2008/m81/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-03.html",
+        "bytes": 60745,
+        "sha256": "1668683df96982a6431da18e2b5d0e634910abea387ed88f006791f740e9fdc0",
+        "retrieved_utc": "2026-11-14T06:41:24.155351+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 148.88821939854,
+        "dec_deg": 69.06529514038,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "M 81",
+        "catalog_type": "Sy2",
+        "catalog_oid": "@434630",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 09 55 33.1726556496  +69 03 55.062505368 (Opt ) A [0.0459 0.0494 90] 2020yCat.1350....0G",
+        "coordinate_reference_detail": "(Opt ) A [0.0459 0.0494 90] 2020yCat.1350....0G",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M81&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M81&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-m81-nucleus-af00cf554f.txt",
+          "bytes": 105874,
+          "sha256": "b09b71867ef03dae9a3c9a802373d41e648989e9859b9bedab0748ea1cdf189d",
+          "retrieved_utc": "2026-11-14T06:43:09.926253+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "host_nucleus_reference"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://chandra.harvard.edu/photo/2008/m81/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-m87-black-hole",
+      "name": "M87*",
+      "kind": "supermassive_black_hole",
+      "galaxy_id": "galaxy-m87",
+      "parent_id": "galaxy-m87",
+      "membership_evidence": "Event Horizon Telescope observations resolve emission and a shadow associated with M87's central supermassive black hole. The SIMBAD AGN direction is a nuclear reference, not the EHT image registration.",
+      "coordinate_role": "host_nucleus_reference",
+      "source": {
+        "url": "https://www.eso.org/public/news/eso1907/",
+        "resolved_url": "https://www.eso.org/public/news/eso1907/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-04.html",
+        "bytes": 112090,
+        "sha256": "4faa8baee6048ae67b44836ffa32f530fa8c5b48bdbadf6de238ee3bb1ffe4f2",
+        "retrieved_utc": "2026-11-14T06:41:25.177793+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 187.70593076725,
+        "dec_deg": 12.391123246083334,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "M 87",
+        "catalog_type": "AGN",
+        "catalog_oid": "@1937204",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 12 30 49.42338414  +12 23 28.0436859 (Rad ) A [0.0304732 0.0308 0] 2020A&A...644A.159C",
+        "coordinate_reference_detail": "(Rad ) A [0.0304732 0.0308 0] 2020A&A...644A.159C",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M87%2A&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M87%2A&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-m87-black-hole.txt",
+          "bytes": 176417,
+          "sha256": "0787243cf1368eeb725b85a77897e2784bc2bd73e899b3bc6dd28a2c46d8ccfb",
+          "retrieved_utc": "2026-11-14T06:41:24.898385+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "host_nucleus_reference"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://www.eso.org/public/news/eso1907/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-lmc-tarantula",
+      "name": "Tarantula Nebula (30 Doradus)",
+      "kind": "emission_nebula",
+      "galaxy_id": "galaxy-lmc",
+      "parent_id": "galaxy-lmc",
+      "membership_evidence": "The Tarantula Nebula is a star-forming region in the Large Magellanic Cloud. SIMBAD's 30 Dor alias resolves the embedded R136 cluster: that cluster direction is an explicit reference, not the nebula's measured geometric centroid.",
+      "coordinate_role": "embedded_cluster_reference",
+      "source": {
+        "url": "https://science.nasa.gov/missions/hubble/hubbles-bubbles-in-the-tarantula-nebula/",
+        "resolved_url": "https://science.nasa.gov/missions/hubble/hubbles-bubbles-in-the-tarantula-nebula/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-05.html",
+        "bytes": 298357,
+        "sha256": "16118f56a3cd1fc921b511b7d0b6f46314adace91f522ae790367da024a07d4e",
+        "retrieved_utc": "2026-11-14T06:41:24.753698+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 84.67665,
+        "dec_deg": -69.10093333333333,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "RMC 136",
+        "catalog_type": "Cl*",
+        "catalog_oid": "@3116409",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 05 38 42.396  -69 06 03.36 (Opt ) D [~ ~ ] 2000A&A...355L..27H",
+        "coordinate_reference_detail": "(Opt ) D [~ ~ ] 2000A&A...355L..27H",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=30+Dor&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=30+Dor&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-lmc-tarantula.txt",
+          "bytes": 50761,
+          "sha256": "aafc19059de586e8ca1d9a6d95680bf7469144572dd4b76c0fc490acbefc2102",
+          "retrieved_utc": "2026-11-14T06:41:25.106364+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "embedded_cluster_reference"
+      },
+      "additional_sources": [
+        {
+          "url": "https://www.eso.org/public/news/eso1030/",
+          "resolved_url": "https://www.eso.org/public/news/eso1030/",
+          "local_relative_path": "data/reference/universe-catalog/member-release-06.html",
+          "bytes": 86669,
+          "sha256": "0f83e7bc57de1a7885b7112ff96ff08dd48914a7f84d3ef24ae4273c7cd17eb4",
+          "retrieved_utc": "2026-11-14T06:41:26.259555+00:00",
+          "label": "Official object membership release"
+        }
+      ],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://science.nasa.gov/missions/hubble/hubbles-bubbles-in-the-tarantula-nebula/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-lmc-r136",
+      "name": "R136",
+      "kind": "young_star_cluster",
+      "galaxy_id": "galaxy-lmc",
+      "parent_id": "member-lmc-tarantula",
+      "membership_evidence": "The R136 young cluster lies within the Tarantula Nebula in the Large Magellanic Cloud.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://www.eso.org/public/news/eso1030/",
+        "resolved_url": "https://www.eso.org/public/news/eso1030/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-06.html",
+        "bytes": 86669,
+        "sha256": "0f83e7bc57de1a7885b7112ff96ff08dd48914a7f84d3ef24ae4273c7cd17eb4",
+        "retrieved_utc": "2026-11-14T06:41:26.259555+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 84.67665,
+        "dec_deg": -69.10093333333333,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "RMC 136",
+        "catalog_type": "Cl*",
+        "catalog_oid": "@3116409",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 05 38 42.396  -69 06 03.36 (Opt ) D [~ ~ ] 2000A&A...355L..27H",
+        "coordinate_reference_detail": "(Opt ) D [~ ~ ] 2000A&A...355L..27H",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=RMC+136&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=RMC+136&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-lmc-r136.txt",
+          "bytes": 50763,
+          "sha256": "4b0670f1d7421afbe576cdf4a4b587441d8338347c3e5f699b21033738fd065e",
+          "retrieved_utc": "2026-11-14T06:41:25.823337+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://www.eso.org/public/news/eso1030/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-lmc-r136a1",
+      "name": "R136a1",
+      "kind": "massive_star",
+      "galaxy_id": "galaxy-lmc",
+      "parent_id": "member-lmc-r136",
+      "membership_evidence": "R136a1 is an individually identified massive star in the R136 cluster. The dated release's mass record is not adopted as a current mass measurement.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://www.eso.org/public/news/eso1030/",
+        "resolved_url": "https://www.eso.org/public/news/eso1030/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-06.html",
+        "bytes": 86669,
+        "sha256": "0f83e7bc57de1a7885b7112ff96ff08dd48914a7f84d3ef24ae4273c7cd17eb4",
+        "retrieved_utc": "2026-11-14T06:41:26.259555+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 84.67665,
+        "dec_deg": -69.10079722222221,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "BAT99 108",
+        "catalog_type": "WR*",
+        "catalog_oid": "@3107839",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 05 38 42.396  -69 06 02.87 (Opt ) C [~ ~ ] 2022A&A...663A..36B",
+        "coordinate_reference_detail": "(Opt ) C [~ ~ ] 2022A&A...663A..36B",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=RMC+136a1&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=RMC+136a1&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-lmc-r136a1.txt",
+          "bytes": 3524,
+          "sha256": "3d7ef86349f6f1fdf5f2ed3dae9b136acc1960f06903445af8351ef5de4ab1a8",
+          "retrieved_utc": "2026-11-14T06:41:25.754399+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://www.eso.org/public/news/eso1030/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-lmc-sn1987a",
+      "name": "SN 1987A remnant",
+      "kind": "supernova_remnant",
+      "galaxy_id": "galaxy-lmc",
+      "parent_id": "galaxy-lmc",
+      "membership_evidence": "The remnant of SN 1987A is in the Large Magellanic Cloud. A linked simulated 3D print is not adopted as a measured 3D surface.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://www.chandra.harvard.edu/deadstar/sn1987a.html",
+        "resolved_url": "https://www.chandra.harvard.edu/deadstar/sn1987a.html",
+        "local_relative_path": "data/reference/universe-catalog/member-release-08.html",
+        "bytes": 26993,
+        "sha256": "e974a8c5fa6ddaaa7de252b62dfe7c9ecb0447b17c467c8b1744e56f6a6fd351",
+        "retrieved_utc": "2026-11-14T06:41:26.326323+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 83.86661833333334,
+        "dec_deg": -69.26975372222222,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "SN 1987A",
+        "catalog_type": "SN*",
+        "catalog_oid": "@3111723",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 05 35 27.98840  -69 16 11.1134 (Opt ) B [16.3 13.6 90] 2025A&A...704A.272T",
+        "coordinate_reference_detail": "(Opt ) B [16.3 13.6 90] 2025A&A...704A.272T",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=SN+1987A&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=SN+1987A&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-lmc-sn1987a.txt",
+          "bytes": 114234,
+          "sha256": "64eefd2c320cfe6e0d8a3a43945645cb3bdebf655500a027276948e261e601d3",
+          "retrieved_utc": "2026-11-14T06:41:26.963219+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://www.chandra.harvard.edu/deadstar/sn1987a.html",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-smc-ngc346",
+      "name": "NGC 346",
+      "kind": "young_star_cluster",
+      "galaxy_id": "galaxy-smc",
+      "parent_id": "galaxy-smc",
+      "membership_evidence": "NGC 346 is a young cluster embedded in the SMC's N66 nebula.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://science.nasa.gov/centers-and-facilities/goddard/hubble-captures-unique-ultraviolet-view-of-a-spectacular-star-cluster/",
+        "resolved_url": "https://science.nasa.gov/centers-and-facilities/goddard/hubble-captures-unique-ultraviolet-view-of-a-spectacular-star-cluster/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-09.html",
+        "bytes": 303945,
+        "sha256": "f50556a0c4ed9c8b16544b078d29eb0657b7610d0acc06f1b24e52618ab34c62",
+        "retrieved_utc": "2026-11-14T06:41:26.927265+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 14.768333333333333,
+        "dec_deg": -72.17750000000001,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "NGC 346",
+        "catalog_type": "Cl*",
+        "catalog_oid": "@3255864",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 00 59 04.4000  -72 10 39.000 (Opt ) E [~ ~ ] 1933BHarO.891....2C",
+        "coordinate_reference_detail": "(Opt ) E [~ ~ ] 1933BHarO.891....2C",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+346&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+346&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-smc-ngc346.txt",
+          "bytes": 13136,
+          "sha256": "9a3b55869c2b7079e625f79a2fce35cd8fb6f2f9a3b81691d4d93b76757994f6",
+          "retrieved_utc": "2026-11-14T06:41:26.960968+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://science.nasa.gov/centers-and-facilities/goddard/hubble-captures-unique-ultraviolet-view-of-a-spectacular-star-cluster/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-smc-ngc602",
+      "name": "NGC 602",
+      "kind": "young_star_cluster",
+      "galaxy_id": "galaxy-smc",
+      "parent_id": "galaxy-smc",
+      "membership_evidence": "NGC 602 is a young star cluster in the Small Magellanic Cloud. The resource's 3D model is not used as a measured depth map.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://science.nasa.gov/3d-resources/ngc602/",
+        "resolved_url": "https://science.nasa.gov/3d-resources/ngc602/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-10.html",
+        "bytes": 253788,
+        "sha256": "8bc4f3a849fd9a6db4585f0dc66a8037e44fddbbfe48c0259aebce8a6ab0b5bc",
+        "retrieved_utc": "2026-11-14T06:41:27.545327+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 22.3838875,
+        "dec_deg": -73.56059166666667,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "NGC 602",
+        "catalog_type": "Cl*",
+        "catalog_oid": "@3227924",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 01 29 32.133  -73 33 38.13 (Opt ) C [~ ~ ] 2012ApJ...748...64G",
+        "coordinate_reference_detail": "(Opt ) C [~ ~ ] 2012ApJ...748...64G",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+602&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+602&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-smc-ngc602.txt",
+          "bytes": 3338,
+          "sha256": "a16c1483e009820af933960888fa1b154c1a6b8de2e09a0d762c1d67f2520910",
+          "retrieved_utc": "2026-11-14T06:41:27.724885+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://science.nasa.gov/3d-resources/ngc602/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-m51-nucleus",
+      "name": "NGC 5194 nuclear black hole",
+      "kind": "supermassive_black_hole",
+      "galaxy_id": "galaxy-m51",
+      "parent_id": "galaxy-m51",
+      "membership_evidence": "The central regions of NGC 5194 and NGC 5195 host supermassive black holes; the adopted M51 coordinate is only the host's nuclear direction reference.",
+      "coordinate_role": "host_nucleus_reference",
+      "source": {
+        "url": "https://chandra.harvard.edu/photo/2002/0158/",
+        "resolved_url": "https://chandra.harvard.edu/photo/2002/0158/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-11.html",
+        "bytes": 36401,
+        "sha256": "a01b5f1ebcb228a8b01b5b6ba39f85ba43458f1332c2b6f6014372d0ce69793e",
+        "retrieved_utc": "2026-11-14T06:41:28.255371+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 202.469575,
+        "dec_deg": 47.19525833333333,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "M 51",
+        "catalog_type": "Sy2",
+        "catalog_oid": "@587337",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 13 29 52.698  +47 11 42.93 (IR  ) C [~ ~ ] 2006AJ....131.1163S",
+        "coordinate_reference_detail": "(IR  ) C [~ ~ ] 2006AJ....131.1163S",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M51&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M51&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-m51-nucleus.txt",
+          "bytes": 102434,
+          "sha256": "1c3fb21341fd07387cd26ecdc22d4faa10cc558e02984a5405a21bba40513f71",
+          "retrieved_utc": "2026-11-14T06:41:28.259209+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "host_nucleus_reference"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://chandra.harvard.edu/photo/2002/0158/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-m51-ngc5195",
+      "name": "NGC 5195",
+      "kind": "companion_galaxy",
+      "galaxy_id": "galaxy-m51",
+      "parent_id": "galaxy-m51",
+      "membership_evidence": "NGC 5195 is the interacting companion in the M51 pair, not a star or planet inside NGC 5194.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://www.chandra.harvard.edu/photo/2016/ngc5195/",
+        "resolved_url": "https://www.chandra.harvard.edu/photo/2016/ngc5195/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-12.html",
+        "bytes": 65050,
+        "sha256": "6818c8a73bdf0baa82f17cd9417278e2e06bf54f83691d17fdbfb1fb409cb9ee",
+        "retrieved_utc": "2026-11-14T06:41:29.075470+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 202.49829166666666,
+        "dec_deg": 47.266127777777776,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "NGC 5195",
+        "catalog_type": "GiG",
+        "catalog_oid": "@586527",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 13 29 59.590  +47 15 58.06 (IR  ) C [~ ~ ] 2006AJ....131.1163S",
+        "coordinate_reference_detail": "(IR  ) C [~ ~ ] 2006AJ....131.1163S",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+5195&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+5195&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-m51-ngc5195.txt",
+          "bytes": 19927,
+          "sha256": "a5442e56c84a5da83e76671ff79b44e6709a0d9005126ac3de0737364c919709",
+          "retrieved_utc": "2026-11-14T06:41:28.409032+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://www.chandra.harvard.edu/photo/2016/ngc5195/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-m104-nucleus",
+      "name": "M104 nuclear black hole",
+      "kind": "supermassive_black_hole",
+      "galaxy_id": "galaxy-m104",
+      "parent_id": "galaxy-m104",
+      "membership_evidence": "The Sombrero Galaxy contains a central supermassive black hole; only the host nucleus direction is adopted, not a resolved black-hole surface or a selected mass solution.",
+      "coordinate_role": "host_nucleus_reference",
+      "source": {
+        "url": "https://science.nasa.gov/missions/hubble/hubble-provides-new-view-of-galactic-favorite/",
+        "resolved_url": "https://science.nasa.gov/missions/hubble/hubble-provides-new-view-of-galactic-favorite/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-13.html",
+        "bytes": 317805,
+        "sha256": "d7f93c06e53610e1d051367001c2c1916022d7d78e2a1ed9e930cb2d4bbb353d",
+        "retrieved_utc": "2026-11-14T06:41:29.926146+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 189.99763274591666,
+        "dec_deg": -11.623054494444444,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "M 104",
+        "catalog_type": "LIN",
+        "catalog_oid": "@1971559",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 12 39 59.43185902  -11 37 22.9961800 (Rad ) A [0.36444 0.9537 0] 2020A&A...644A.159C",
+        "coordinate_reference_detail": "(Rad ) A [0.36444 0.9537 0] 2020A&A...644A.159C",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M104&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M104&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-m104-nucleus.txt",
+          "bytes": 34836,
+          "sha256": "29319da0c1e7b5ea27848d93dfaff1ad3a02ab9c05f23e2bfe1adadeea7ee2f0",
+          "retrieved_utc": "2026-11-14T06:41:29.351110+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "host_nucleus_reference"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://science.nasa.gov/missions/hubble/hubble-provides-new-view-of-galactic-favorite/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-centaurus-a-nucleus",
+      "name": "Centaurus A nuclear black hole",
+      "kind": "supermassive_black_hole",
+      "galaxy_id": "galaxy-centaurus-a",
+      "parent_id": "galaxy-centaurus-a",
+      "membership_evidence": "Centaurus A hosts a central supermassive black hole and high-energy jets. The host's nuclear direction is a reference, not a resolved black-hole position solution.",
+      "coordinate_role": "host_nucleus_reference",
+      "source": {
+        "url": "https://www.chandra.harvard.edu/photo/2023/cena/index.html",
+        "resolved_url": "https://www.chandra.harvard.edu/photo/2023/cena/index.html",
+        "local_relative_path": "data/reference/universe-catalog/member-release-14.html",
+        "bytes": 71938,
+        "sha256": "e91c0b87d01efa4062f4df6b14cba649cea4a4e65682defdfab2e77c0668ef54",
+        "retrieved_utc": "2026-11-14T06:41:29.926146+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 201.36506337683332,
+        "dec_deg": -43.01911250808333,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "NAME Centaurus A",
+        "catalog_type": "BLL",
+        "catalog_oid": "@3392496",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 13 25 27.61521044  -43 01 08.8050291 (Rad ) A [0.20027 0.3998 0] 2020A&A...644A.159C",
+        "coordinate_reference_detail": "(Rad ) A [0.20027 0.3998 0] 2020A&A...644A.159C",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Cen+A&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Cen+A&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-centaurus-a-nucleus.txt",
+          "bytes": 108781,
+          "sha256": "b7a014b61ef1fb59bc22c6ce1dac83979822504cb42ba1c6f92f0d8b3894166c",
+          "retrieved_utc": "2026-11-14T06:41:30.425819+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "host_nucleus_reference"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://www.chandra.harvard.edu/photo/2023/cena/index.html",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-mw-sagittarius-a",
+      "name": "Sagittarius A*",
+      "kind": "supermassive_black_hole",
+      "galaxy_id": "galaxy-milky-way",
+      "parent_id": "galaxy-milky-way",
+      "membership_evidence": "Sagittarius A* is the central supermassive black hole of the Milky Way. The release's artist concept is not used as an observation.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://science.nasa.gov/missions/webb/webb-reveals-rapid-fire-light-show-from-milky-ways-central-black-hole/",
+        "resolved_url": "https://science.nasa.gov/missions/webb/webb-reveals-rapid-fire-light-show-from-milky-ways-central-black-hole/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-15.html",
+        "bytes": 318995,
+        "sha256": "49b2b161c5b5ee54f41325ac0af99a7372f2a4a8708ec25968cbd2d82daa6f99",
+        "retrieved_utc": "2026-11-14T06:41:30.916588+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 266.416816625,
+        "dec_deg": -29.007824972222224,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "NAME Sgr A*",
+        "catalog_type": "X",
+        "catalog_oid": "@2419046",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 17 45 40.03599  -29 00 28.1699 (Rad ) B [2.65 1.42 0] 2011AJ....142...35P",
+        "coordinate_reference_detail": "(Rad ) B [2.65 1.42 0] 2011AJ....142...35P",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Sgr+A%2A&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Sgr+A%2A&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-sagittarius-a.txt",
+          "bytes": 111645,
+          "sha256": "a98dd0a1601d63ea8e473a394c26be4f0afae198d48eb8762d106f87bef6cd78",
+          "retrieved_utc": "2026-11-14T06:41:31.349692+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://science.nasa.gov/missions/webb/webb-reveals-rapid-fire-light-show-from-milky-ways-central-black-hole/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-mw-orion",
+      "name": "Orion Nebula (M42)",
+      "kind": "emission_nebula",
+      "galaxy_id": "galaxy-milky-way",
+      "parent_id": "galaxy-milky-way",
+      "membership_evidence": "The Orion Nebula is a nearby Milky Way star-forming region containing the Trapezium and young stars.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://science.nasa.gov/asset/hubble/hubbles-sharpest-view-of-the-orion-nebula/",
+        "resolved_url": "https://science.nasa.gov/asset/hubble/hubbles-sharpest-view-of-the-orion-nebula/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-16.html",
+        "bytes": 386466,
+        "sha256": "2f4f463259c394c956b90611fd0a5c2c244675a121e3c34f7df66cb486f5723f",
+        "retrieved_utc": "2026-11-14T06:41:31.445025+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 83.82000000000001,
+        "dec_deg": -5.3875,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "M 42",
+        "catalog_type": "HII",
+        "catalog_oid": "@810146",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 05 35 16.8  -05 23 15 (Xray) D [5000 5000 90] 2022A&A...661A..38P",
+        "coordinate_reference_detail": "(Xray) D [5000 5000 90] 2022A&A...661A..38P",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M42&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M42&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-orion.txt",
+          "bytes": 97827,
+          "sha256": "34ccc2bfa7faf9d5c36b493cbde46697ef7ff80516140f4910b7d6807a940570",
+          "retrieved_utc": "2026-11-14T06:41:31.858276+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://science.nasa.gov/asset/hubble/hubbles-sharpest-view-of-the-orion-nebula/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-mw-trapezium",
+      "name": "Trapezium cluster",
+      "kind": "young_star_cluster",
+      "galaxy_id": "galaxy-milky-way",
+      "parent_id": "member-mw-orion",
+      "membership_evidence": "The Trapezium grouping lies in the Orion Nebula.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://science.nasa.gov/missions/hubble/chaos-at-the-heart-of-orion/",
+        "resolved_url": "https://science.nasa.gov/missions/hubble/chaos-at-the-heart-of-orion/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-17.html",
+        "bytes": 279219,
+        "sha256": "8888f66ecb0af0f17ed0a37eee29c6cdde9f69ce65dac22427964c128bba0bc9",
+        "retrieved_utc": "2026-11-14T06:41:32.158262+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 83.81875,
+        "dec_deg": -5.387222222222222,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "NAME Ori Trapezium",
+        "catalog_type": "OpC",
+        "catalog_oid": "@808485",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 05 35 16.5  -05 23 14 (~) E [~ ~ ] 2007A&A...474..515M",
+        "coordinate_reference_detail": "(~) E [~ ~ ] 2007A&A...474..515M",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NAME+Trapezium+Cluster&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NAME+Trapezium+Cluster&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-trapezium.txt",
+          "bytes": 38652,
+          "sha256": "c9cd86749297e0c60a6f21fc440e3daa98425b7e131ce9089db1f8ba5de735dc",
+          "retrieved_utc": "2026-11-14T06:41:32.264747+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://science.nasa.gov/missions/hubble/chaos-at-the-heart-of-orion/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-mw-crab",
+      "name": "Crab Nebula",
+      "kind": "supernova_remnant",
+      "galaxy_id": "galaxy-milky-way",
+      "parent_id": "galaxy-milky-way",
+      "membership_evidence": "The Crab Nebula is a Galactic supernova remnant energized by its central pulsar.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://chandra.harvard.edu/press/crabfact.html",
+        "resolved_url": "https://chandra.harvard.edu/press/crabfact.html",
+        "local_relative_path": "data/reference/universe-catalog/member-release-18.html",
+        "bytes": 20607,
+        "sha256": "dfb8d51bcbd70a0680b14d17daf8338d185cba7ace60ba3530534887128b08ee",
+        "retrieved_utc": "2026-11-14T06:41:32.542467+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 83.6325,
+        "dec_deg": 22.0175,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "M 1",
+        "catalog_type": "SNR",
+        "catalog_oid": "@795871",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 05 34 31.8  +22 01 03 (Xray) D [5000 5000 90] 2022A&A...661A..38P",
+        "coordinate_reference_detail": "(Xray) D [5000 5000 90] 2022A&A...661A..38P",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M1&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M1&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-crab.txt",
+          "bytes": 143817,
+          "sha256": "afcba3a680b66e68be2d70c2eefe63d357a8d6ad47860451cc91de1dacccdd13",
+          "retrieved_utc": "2026-11-14T06:41:33.156665+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://chandra.harvard.edu/press/crabfact.html",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-mw-crab-pulsar",
+      "name": "Crab pulsar",
+      "kind": "neutron_star",
+      "galaxy_id": "galaxy-milky-way",
+      "parent_id": "member-mw-crab",
+      "membership_evidence": "The Crab pulsar is a rotating neutron star inside the Crab Nebula.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://chandra.harvard.edu/press/crabfact.html",
+        "resolved_url": "https://chandra.harvard.edu/press/crabfact.html",
+        "local_relative_path": "data/reference/universe-catalog/member-release-18.html",
+        "bytes": 20607,
+        "sha256": "dfb8d51bcbd70a0680b14d17daf8338d185cba7ace60ba3530534887128b08ee",
+        "retrieved_utc": "2026-11-14T06:41:32.542467+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 83.63311445609,
+        "dec_deg": 22.01448713834,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "V* CM Tau",
+        "catalog_type": "Psr",
+        "catalog_oid": "@6339838",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 05 34 31.9474694616  +22 00 52.153698024 (Opt ) A [0.0732 0.0606 90] 2020yCat.1350....0G",
+        "coordinate_reference_detail": "(Opt ) A [0.0732 0.0606 90] 2020yCat.1350....0G",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=PSR+B0531%2B21&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=PSR+B0531%2B21&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-crab-pulsar.txt",
+          "bytes": 120346,
+          "sha256": "d2058adba30e8e4f399bd2b9107ed6ca9ec68e4be2e5343fb9800402bec1ab1c",
+          "retrieved_utc": "2026-11-14T06:41:33.444238+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://chandra.harvard.edu/press/crabfact.html",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-mw-sirius",
+      "name": "Sirius A",
+      "kind": "star",
+      "galaxy_id": "galaxy-milky-way",
+      "parent_id": "galaxy-milky-way",
+      "membership_evidence": "Sirius A has the white-dwarf companion Sirius B; their separate catalog directions are not a propagated binary orbit.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://science.nasa.gov/missions/hubble/measuring-a-white-dwarf-star/",
+        "resolved_url": "https://science.nasa.gov/missions/hubble/measuring-a-white-dwarf-star/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-20.html",
+        "bytes": 279067,
+        "sha256": "c9cb5df091575f238a68d8434562b753fcd2650a3742cf77bd8250675f4e3b92",
+        "retrieved_utc": "2026-11-14T06:41:33.538209+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 101.28715533333333,
+        "dec_deg": -16.71611586111111,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "* alf CMa",
+        "catalog_type": "SB*",
+        "catalog_oid": "@8399845",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 06 45 08.91728  -16 42 58.0171 (Opt ) A [11.70 10.90 90] 2007A&A...474..653V",
+        "coordinate_reference_detail": "(Opt ) A [11.70 10.90 90] 2007A&A...474..653V",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Sirius+A&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Sirius+A&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-sirius.txt",
+          "bytes": 38282,
+          "sha256": "76b6974dfe4d272f76fe0108df5882433ac10522356de0364d31d3672ad470e9",
+          "retrieved_utc": "2026-11-14T06:41:33.657915+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://science.nasa.gov/missions/hubble/measuring-a-white-dwarf-star/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "member-mw-sirius-b",
+      "name": "Sirius B",
+      "kind": "white_dwarf",
+      "galaxy_id": "galaxy-milky-way",
+      "parent_id": "member-mw-sirius",
+      "membership_evidence": "Sirius B is the white-dwarf companion of Sirius A.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://science.nasa.gov/missions/hubble/measuring-a-white-dwarf-star/",
+        "resolved_url": "https://science.nasa.gov/missions/hubble/measuring-a-white-dwarf-star/",
+        "local_relative_path": "data/reference/universe-catalog/member-release-20.html",
+        "bytes": 279067,
+        "sha256": "c9cb5df091575f238a68d8434562b753fcd2650a3742cf77bd8250675f4e3b92",
+        "retrieved_utc": "2026-11-14T06:41:33.538209+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 101.28876746876541,
+        "dec_deg": -16.716867983351943,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "* alf CMa B",
+        "catalog_type": "WD*",
+        "catalog_oid": "@930049",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 06 45 09.3041925037  -16 43 00.724740067 (Opt ) A [0.1648 0.2273 90] 2020yCat.1350....0G",
+        "coordinate_reference_detail": "(Opt ) A [0.1648 0.2273 90] 2020yCat.1350....0G",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Sirius+B&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Sirius+B&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-sirius-b.txt",
+          "bytes": 15057,
+          "sha256": "6544c65d4e58ffc767247c111848ebe1669f50d2ead615bcd507ceecfebb9910",
+          "retrieved_utc": "2026-11-14T06:41:33.905682+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://science.nasa.gov/missions/hubble/measuring-a-white-dwarf-star/",
+      "appearance": null,
+      "existing_object_id": null,
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    },
+    {
+      "object_id": "epsilon-indi-b",
+      "name": "Epsilon Indi B (Ba/Bb)",
+      "kind": "brown_dwarf_binary",
+      "galaxy_id": "galaxy-milky-way",
+      "parent_id": "galaxy-milky-way",
+      "membership_evidence": "Epsilon Indi Ba/Bb is a brown-dwarf binary. The SPHEREx workbench keeps the existing unresolved B prediction/observation ID; no component orbit is inferred.",
+      "coordinate_role": "object",
+      "source": {
+        "url": "https://www.eso.org/sci/activities/vltsv/visirsv/sterzik.html",
+        "resolved_url": "https://www.eso.org/sci/activities/vltsv/visirsv/sterzik.html",
+        "local_relative_path": "data/reference/universe-catalog/member-release-22.html",
+        "bytes": 32930,
+        "sha256": "9cbde74e79b324b0d023244003382baab7e0e9994efbb7ff10a8f903f7765c10",
+        "retrieved_utc": "2026-11-14T06:41:34.758982+00:00",
+        "label": "Official object membership release"
+      },
+      "coordinate": {
+        "ra_deg": 331.04414658852124,
+        "dec_deg": -56.78284419511611,
+        "frame": "ICRS",
+        "epoch": "J2000",
+        "catalog_identity": "* eps Ind B",
+        "catalog_type": "BD*",
+        "catalog_oid": "@3387843",
+        "native_coordinate_line": "Coordinates(ICRS,ep=J2000,eq=2000): 22 04 10.5951812451  -56 46 58.239102418 (Opt ) A [0.5048 0.4676 90] 2020yCat.1350....0G",
+        "coordinate_reference_detail": "(Opt ) A [0.5048 0.4676 90] 2020yCat.1350....0G",
+        "proper_motion_applied": false,
+        "covariance_available": false,
+        "source": {
+          "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=eps+Indi+B&output.format=ASCII",
+          "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=eps+Indi+B&output.format=ASCII",
+          "local_relative_path": "data/reference/universe-catalog/simbad-epsilon-indi-b.txt",
+          "bytes": 6043,
+          "sha256": "56ca08277ba32e7188f05536f24bc77e593ba01a62ced360389c4b6629534024",
+          "retrieved_utc": "2026-11-14T06:41:34.292963+00:00",
+          "label": "SIMBAD ICRS catalog reference"
+        },
+        "role": "object"
+      },
+      "additional_sources": [],
+      "distance_pc": null,
+      "distance_status": "not_adopted",
+      "galaxy_relative_position_pc": null,
+      "position_kind": "catalog_direction",
+      "image": null,
+      "image_page_url": "https://www.eso.org/sci/activities/vltsv/visirsv/sterzik.html",
+      "appearance": null,
+      "existing_object_id": "epsilon-indi-b",
+      "limitations": [
+        "This direction is a dated catalog reference, not a 2026 proper-motion/orbit solution or a galaxy-centered 3D position.",
+        "Marker type, size and color are symbols; no observed surface, physical radius or intrinsic outline is supplied.",
+        "Missing distance, depth, morphology and image fields remain null; image pages may contain separately identified illustrations."
+      ]
+    }
+  ],
+  "sources": {
+    "member-release-00": {
+      "url": "https://science.nasa.gov/asset/hubble/globular-cluster-mayall-ii-in-the-neighboring-andromeda-galaxy-m31/",
+      "resolved_url": "https://science.nasa.gov/asset/hubble/globular-cluster-mayall-ii-in-the-neighboring-andromeda-galaxy-m31/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-00.html",
+      "bytes": 287255,
+      "sha256": "0d72d584d3c373cc557fd9a9f991e4f4917199e59185475fd62c86a9ca420350",
+      "retrieved_utc": "2026-11-14T06:41:23.052455+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-m31-g1": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Mayall+II&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Mayall+II&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-m31-g1.txt",
+      "bytes": 10509,
+      "sha256": "7bdba3e3bdd94f8665d69550bf41742f8309cd35bbaaf1507fb1bd5cfda7df33",
+      "retrieved_utc": "2026-11-14T06:41:22.316918+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-01": {
+      "url": "https://www.nasa.gov/image-article/ngc-604/",
+      "resolved_url": "https://www.nasa.gov/image-article/ngc-604/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-01.html",
+      "bytes": 272067,
+      "sha256": "d30a10c9483dada1660aa1d0de2f07e4566a2994f4e0214a18a9be5635bb983f",
+      "retrieved_utc": "2026-11-14T06:41:22.813735+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-m33-ngc604": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+604&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+604&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-m33-ngc604.txt",
+      "bytes": 14586,
+      "sha256": "98a36ea87437089dab8ac7719567a6e0466c4057ef0179a0ef3e9c05e951d00a",
+      "retrieved_utc": "2026-11-14T06:41:22.292117+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-02": {
+      "url": "https://chandra.harvard.edu/photo/2007/m33x7/",
+      "resolved_url": "https://chandra.harvard.edu/photo/2007/m33x7/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-02.html",
+      "bytes": 31662,
+      "sha256": "1540df70a51d5dcb362a9ea3fac08a13c562bf0a1179854d872ca89495812feb",
+      "retrieved_utc": "2026-11-14T06:41:23.455499+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-m33-x7": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M33+X-7&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M33+X-7&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-m33-x7.txt",
+      "bytes": 6301,
+      "sha256": "e9a0fd011a9d22727a44f06171f43d342884bb64b146612479d2c5abcdd4d236",
+      "retrieved_utc": "2026-11-14T06:41:22.961692+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-03": {
+      "url": "https://chandra.harvard.edu/photo/2008/m81/",
+      "resolved_url": "https://chandra.harvard.edu/photo/2008/m81/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-03.html",
+      "bytes": 60745,
+      "sha256": "1668683df96982a6431da18e2b5d0e634910abea387ed88f006791f740e9fdc0",
+      "retrieved_utc": "2026-11-14T06:41:24.155351+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-m81-nucleus": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M81&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M81&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-m81-nucleus-af00cf554f.txt",
+      "bytes": 105874,
+      "sha256": "b09b71867ef03dae9a3c9a802373d41e648989e9859b9bedab0748ea1cdf189d",
+      "retrieved_utc": "2026-11-14T06:43:09.926253+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-04": {
+      "url": "https://www.eso.org/public/news/eso1907/",
+      "resolved_url": "https://www.eso.org/public/news/eso1907/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-04.html",
+      "bytes": 112090,
+      "sha256": "4faa8baee6048ae67b44836ffa32f530fa8c5b48bdbadf6de238ee3bb1ffe4f2",
+      "retrieved_utc": "2026-11-14T06:41:25.177793+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-m87-black-hole": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M87%2A&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M87%2A&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-m87-black-hole.txt",
+      "bytes": 176417,
+      "sha256": "0787243cf1368eeb725b85a77897e2784bc2bd73e899b3bc6dd28a2c46d8ccfb",
+      "retrieved_utc": "2026-11-14T06:41:24.898385+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-05": {
+      "url": "https://science.nasa.gov/missions/hubble/hubbles-bubbles-in-the-tarantula-nebula/",
+      "resolved_url": "https://science.nasa.gov/missions/hubble/hubbles-bubbles-in-the-tarantula-nebula/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-05.html",
+      "bytes": 298357,
+      "sha256": "16118f56a3cd1fc921b511b7d0b6f46314adace91f522ae790367da024a07d4e",
+      "retrieved_utc": "2026-11-14T06:41:24.753698+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-lmc-tarantula": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=30+Dor&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=30+Dor&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-lmc-tarantula.txt",
+      "bytes": 50761,
+      "sha256": "aafc19059de586e8ca1d9a6d95680bf7469144572dd4b76c0fc490acbefc2102",
+      "retrieved_utc": "2026-11-14T06:41:25.106364+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-06": {
+      "url": "https://www.eso.org/public/news/eso1030/",
+      "resolved_url": "https://www.eso.org/public/news/eso1030/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-06.html",
+      "bytes": 86669,
+      "sha256": "0f83e7bc57de1a7885b7112ff96ff08dd48914a7f84d3ef24ae4273c7cd17eb4",
+      "retrieved_utc": "2026-11-14T06:41:26.259555+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-lmc-r136": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=RMC+136&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=RMC+136&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-lmc-r136.txt",
+      "bytes": 50763,
+      "sha256": "4b0670f1d7421afbe576cdf4a4b587441d8338347c3e5f699b21033738fd065e",
+      "retrieved_utc": "2026-11-14T06:41:25.823337+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "simbad-member-lmc-r136a1": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=RMC+136a1&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=RMC+136a1&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-lmc-r136a1.txt",
+      "bytes": 3524,
+      "sha256": "3d7ef86349f6f1fdf5f2ed3dae9b136acc1960f06903445af8351ef5de4ab1a8",
+      "retrieved_utc": "2026-11-14T06:41:25.754399+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-08": {
+      "url": "https://www.chandra.harvard.edu/deadstar/sn1987a.html",
+      "resolved_url": "https://www.chandra.harvard.edu/deadstar/sn1987a.html",
+      "local_relative_path": "data/reference/universe-catalog/member-release-08.html",
+      "bytes": 26993,
+      "sha256": "e974a8c5fa6ddaaa7de252b62dfe7c9ecb0447b17c467c8b1744e56f6a6fd351",
+      "retrieved_utc": "2026-11-14T06:41:26.326323+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-lmc-sn1987a": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=SN+1987A&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=SN+1987A&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-lmc-sn1987a.txt",
+      "bytes": 114234,
+      "sha256": "64eefd2c320cfe6e0d8a3a43945645cb3bdebf655500a027276948e261e601d3",
+      "retrieved_utc": "2026-11-14T06:41:26.963219+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-09": {
+      "url": "https://science.nasa.gov/centers-and-facilities/goddard/hubble-captures-unique-ultraviolet-view-of-a-spectacular-star-cluster/",
+      "resolved_url": "https://science.nasa.gov/centers-and-facilities/goddard/hubble-captures-unique-ultraviolet-view-of-a-spectacular-star-cluster/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-09.html",
+      "bytes": 303945,
+      "sha256": "f50556a0c4ed9c8b16544b078d29eb0657b7610d0acc06f1b24e52618ab34c62",
+      "retrieved_utc": "2026-11-14T06:41:26.927265+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-smc-ngc346": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+346&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+346&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-smc-ngc346.txt",
+      "bytes": 13136,
+      "sha256": "9a3b55869c2b7079e625f79a2fce35cd8fb6f2f9a3b81691d4d93b76757994f6",
+      "retrieved_utc": "2026-11-14T06:41:26.960968+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-10": {
+      "url": "https://science.nasa.gov/3d-resources/ngc602/",
+      "resolved_url": "https://science.nasa.gov/3d-resources/ngc602/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-10.html",
+      "bytes": 253788,
+      "sha256": "8bc4f3a849fd9a6db4585f0dc66a8037e44fddbbfe48c0259aebce8a6ab0b5bc",
+      "retrieved_utc": "2026-11-14T06:41:27.545327+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-smc-ngc602": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+602&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+602&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-smc-ngc602.txt",
+      "bytes": 3338,
+      "sha256": "a16c1483e009820af933960888fa1b154c1a6b8de2e09a0d762c1d67f2520910",
+      "retrieved_utc": "2026-11-14T06:41:27.724885+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-11": {
+      "url": "https://chandra.harvard.edu/photo/2002/0158/",
+      "resolved_url": "https://chandra.harvard.edu/photo/2002/0158/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-11.html",
+      "bytes": 36401,
+      "sha256": "a01b5f1ebcb228a8b01b5b6ba39f85ba43458f1332c2b6f6014372d0ce69793e",
+      "retrieved_utc": "2026-11-14T06:41:28.255371+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-m51-nucleus": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M51&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M51&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-m51-nucleus.txt",
+      "bytes": 102434,
+      "sha256": "1c3fb21341fd07387cd26ecdc22d4faa10cc558e02984a5405a21bba40513f71",
+      "retrieved_utc": "2026-11-14T06:41:28.259209+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-12": {
+      "url": "https://www.chandra.harvard.edu/photo/2016/ngc5195/",
+      "resolved_url": "https://www.chandra.harvard.edu/photo/2016/ngc5195/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-12.html",
+      "bytes": 65050,
+      "sha256": "6818c8a73bdf0baa82f17cd9417278e2e06bf54f83691d17fdbfb1fb409cb9ee",
+      "retrieved_utc": "2026-11-14T06:41:29.075470+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-m51-ngc5195": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+5195&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NGC+5195&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-m51-ngc5195.txt",
+      "bytes": 19927,
+      "sha256": "a5442e56c84a5da83e76671ff79b44e6709a0d9005126ac3de0737364c919709",
+      "retrieved_utc": "2026-11-14T06:41:28.409032+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-13": {
+      "url": "https://science.nasa.gov/missions/hubble/hubble-provides-new-view-of-galactic-favorite/",
+      "resolved_url": "https://science.nasa.gov/missions/hubble/hubble-provides-new-view-of-galactic-favorite/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-13.html",
+      "bytes": 317805,
+      "sha256": "d7f93c06e53610e1d051367001c2c1916022d7d78e2a1ed9e930cb2d4bbb353d",
+      "retrieved_utc": "2026-11-14T06:41:29.926146+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-m104-nucleus": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M104&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M104&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-m104-nucleus.txt",
+      "bytes": 34836,
+      "sha256": "29319da0c1e7b5ea27848d93dfaff1ad3a02ab9c05f23e2bfe1adadeea7ee2f0",
+      "retrieved_utc": "2026-11-14T06:41:29.351110+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-14": {
+      "url": "https://www.chandra.harvard.edu/photo/2023/cena/index.html",
+      "resolved_url": "https://www.chandra.harvard.edu/photo/2023/cena/index.html",
+      "local_relative_path": "data/reference/universe-catalog/member-release-14.html",
+      "bytes": 71938,
+      "sha256": "e91c0b87d01efa4062f4df6b14cba649cea4a4e65682defdfab2e77c0668ef54",
+      "retrieved_utc": "2026-11-14T06:41:29.926146+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-centaurus-a-nucleus": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Cen+A&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Cen+A&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-centaurus-a-nucleus.txt",
+      "bytes": 108781,
+      "sha256": "b7a014b61ef1fb59bc22c6ce1dac83979822504cb42ba1c6f92f0d8b3894166c",
+      "retrieved_utc": "2026-11-14T06:41:30.425819+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-15": {
+      "url": "https://science.nasa.gov/missions/webb/webb-reveals-rapid-fire-light-show-from-milky-ways-central-black-hole/",
+      "resolved_url": "https://science.nasa.gov/missions/webb/webb-reveals-rapid-fire-light-show-from-milky-ways-central-black-hole/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-15.html",
+      "bytes": 318995,
+      "sha256": "49b2b161c5b5ee54f41325ac0af99a7372f2a4a8708ec25968cbd2d82daa6f99",
+      "retrieved_utc": "2026-11-14T06:41:30.916588+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-mw-sagittarius-a": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Sgr+A%2A&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Sgr+A%2A&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-sagittarius-a.txt",
+      "bytes": 111645,
+      "sha256": "a98dd0a1601d63ea8e473a394c26be4f0afae198d48eb8762d106f87bef6cd78",
+      "retrieved_utc": "2026-11-14T06:41:31.349692+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-16": {
+      "url": "https://science.nasa.gov/asset/hubble/hubbles-sharpest-view-of-the-orion-nebula/",
+      "resolved_url": "https://science.nasa.gov/asset/hubble/hubbles-sharpest-view-of-the-orion-nebula/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-16.html",
+      "bytes": 386466,
+      "sha256": "2f4f463259c394c956b90611fd0a5c2c244675a121e3c34f7df66cb486f5723f",
+      "retrieved_utc": "2026-11-14T06:41:31.445025+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-mw-orion": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M42&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M42&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-orion.txt",
+      "bytes": 97827,
+      "sha256": "34ccc2bfa7faf9d5c36b493cbde46697ef7ff80516140f4910b7d6807a940570",
+      "retrieved_utc": "2026-11-14T06:41:31.858276+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-17": {
+      "url": "https://science.nasa.gov/missions/hubble/chaos-at-the-heart-of-orion/",
+      "resolved_url": "https://science.nasa.gov/missions/hubble/chaos-at-the-heart-of-orion/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-17.html",
+      "bytes": 279219,
+      "sha256": "8888f66ecb0af0f17ed0a37eee29c6cdde9f69ce65dac22427964c128bba0bc9",
+      "retrieved_utc": "2026-11-14T06:41:32.158262+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-mw-trapezium": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NAME+Trapezium+Cluster&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=NAME+Trapezium+Cluster&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-trapezium.txt",
+      "bytes": 38652,
+      "sha256": "c9cd86749297e0c60a6f21fc440e3daa98425b7e131ce9089db1f8ba5de735dc",
+      "retrieved_utc": "2026-11-14T06:41:32.264747+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-18": {
+      "url": "https://chandra.harvard.edu/press/crabfact.html",
+      "resolved_url": "https://chandra.harvard.edu/press/crabfact.html",
+      "local_relative_path": "data/reference/universe-catalog/member-release-18.html",
+      "bytes": 20607,
+      "sha256": "dfb8d51bcbd70a0680b14d17daf8338d185cba7ace60ba3530534887128b08ee",
+      "retrieved_utc": "2026-11-14T06:41:32.542467+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-mw-crab": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M1&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=M1&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-crab.txt",
+      "bytes": 143817,
+      "sha256": "afcba3a680b66e68be2d70c2eefe63d357a8d6ad47860451cc91de1dacccdd13",
+      "retrieved_utc": "2026-11-14T06:41:33.156665+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "simbad-member-mw-crab-pulsar": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=PSR+B0531%2B21&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=PSR+B0531%2B21&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-crab-pulsar.txt",
+      "bytes": 120346,
+      "sha256": "d2058adba30e8e4f399bd2b9107ed6ca9ec68e4be2e5343fb9800402bec1ab1c",
+      "retrieved_utc": "2026-11-14T06:41:33.444238+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-20": {
+      "url": "https://science.nasa.gov/missions/hubble/measuring-a-white-dwarf-star/",
+      "resolved_url": "https://science.nasa.gov/missions/hubble/measuring-a-white-dwarf-star/",
+      "local_relative_path": "data/reference/universe-catalog/member-release-20.html",
+      "bytes": 279067,
+      "sha256": "c9cb5df091575f238a68d8434562b753fcd2650a3742cf77bd8250675f4e3b92",
+      "retrieved_utc": "2026-11-14T06:41:33.538209+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-member-mw-sirius": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Sirius+A&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Sirius+A&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-sirius.txt",
+      "bytes": 38282,
+      "sha256": "76b6974dfe4d272f76fe0108df5882433ac10522356de0364d31d3672ad470e9",
+      "retrieved_utc": "2026-11-14T06:41:33.657915+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "simbad-member-mw-sirius-b": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Sirius+B&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=Sirius+B&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-member-mw-sirius-b.txt",
+      "bytes": 15057,
+      "sha256": "6544c65d4e58ffc767247c111848ebe1669f50d2ead615bcd507ceecfebb9910",
+      "retrieved_utc": "2026-11-14T06:41:33.905682+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    },
+    "member-release-22": {
+      "url": "https://www.eso.org/sci/activities/vltsv/visirsv/sterzik.html",
+      "resolved_url": "https://www.eso.org/sci/activities/vltsv/visirsv/sterzik.html",
+      "local_relative_path": "data/reference/universe-catalog/member-release-22.html",
+      "bytes": 32930,
+      "sha256": "9cbde74e79b324b0d023244003382baab7e0e9994efbb7ff10a8f903f7765c10",
+      "retrieved_utc": "2026-11-14T06:41:34.758982+00:00",
+      "label": "Official object membership release"
+    },
+    "simbad-epsilon-indi-b": {
+      "url": "https://simbad.harvard.edu/simbad/sim-id?Ident=eps+Indi+B&output.format=ASCII",
+      "resolved_url": "https://simbad.harvard.edu/simbad/sim-id?Ident=eps+Indi+B&output.format=ASCII",
+      "local_relative_path": "data/reference/universe-catalog/simbad-epsilon-indi-b.txt",
+      "bytes": 6043,
+      "sha256": "56ca08277ba32e7188f05536f24bc77e593ba01a62ced360389c4b6629534024",
+      "retrieved_utc": "2026-11-14T06:41:34.292963+00:00",
+      "label": "SIMBAD ICRS catalog reference"
+    }
+  },
+  "dependencies": {
+    "exoplanets": {
+      "path": "data/manifests/exoplanets.json",
+      "sha256": "5b803ea060a52b50ca9afa61ec1a49ee889a7617864c5ba51469e828757f4c06",
+      "bytes": 3955802
+    },
+    "galaxies": {
+      "path": "data/manifests/galaxies.json",
+      "sha256": "1363cee1eb52a93d4e6505d437dd3d2291f16592e166fc33bbaef7864ba0890f",
+      "bytes": 80168
+    },
+    "solar_system_ephemeris": {
+      "path": "data/manifests/solar_system_ephemeris.json",
+      "sha256": "83fb1ac397b4c64e36377965efe57f9a1bf19e5b1a60ce290a12b39411613a8a",
+      "bytes": 172715
+    },
+    "extended_solar": {
+      "path": "data/manifests/extended_solar.json",
+      "sha256": "34afdc84d913e7e2089b06d9e0518acff011713df3ac7185b7372ba0ef6ef7a5",
+      "bytes": 1186595
+    }
+  },
+  "galaxy_ids": [
+    "galaxy-milky-way",
+    "galaxy-m31",
+    "galaxy-m33",
+    "galaxy-m81",
+    "galaxy-m87",
+    "galaxy-lmc",
+    "galaxy-smc",
+    "galaxy-m51",
+    "galaxy-m104",
+    "galaxy-centaurus-a"
+  ],
+  "coverage": "curated_source_confirmed_examples_not_complete_census",
+  "limitations": [
+    "Selected confirmed members and associated systems are examples, not all objects or all object classes in every galaxy.",
+    "No confirmed extragalactic planet or brown dwarf is fabricated. Membership does not supply an orbital path or depth.",
+    "The M51 companion is associated with the interacting pair, not embedded inside the primary galaxy.",
+    "Existing NASA exoplanet hosts are catalog-context references with unpropagated directions and unverified distance units retained separately."
+  ]
+}

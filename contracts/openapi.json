@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Planet X · SPHEREx",
-    "version": "0.5.0"
+    "version": "0.6.0"
   },
   "paths": {
     "/health/live": {
@@ -282,6 +282,22 @@
         }
       }
     },
+    "/api/v1/cosmic-observations": {
+      "get": {
+        "summary": "Cosmic Observations",
+        "operationId": "cosmic_observations_api_v1_cosmic_observations_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/catalog/galaxies": {
       "get": {
         "summary": "Galaxies",
@@ -308,6 +324,149 @@
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/long-term-model": {
+      "get": {
+        "summary": "Long Term Model",
+        "operationId": "long_term_model_api_v1_long_term_model_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/long-term-simulation": {
+      "get": {
+        "summary": "Long Term Simulation",
+        "operationId": "long_term_simulation_api_v1_long_term_simulation_get",
+        "parameters": [
+          {
+            "name": "year",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Year"
+            }
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "title": "Month"
+            }
+          },
+          {
+            "name": "day",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "title": "Day"
+            }
+          },
+          {
+            "name": "hour",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 0,
+              "title": "Hour"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/catalog/universe": {
+      "get": {
+        "summary": "Universe Catalog",
+        "operationId": "universe_catalog_api_v1_catalog_universe_get",
+        "parameters": [
+          {
+            "name": "galaxy_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Galaxy Id"
+            }
+          },
+          {
+            "name": "parent_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Parent Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -892,6 +1051,51 @@
         ],
         "title": "Session"
       },
+      "SimulationContext": {
+        "properties": {
+          "algorithm_version": {
+            "type": "string",
+            "const": "jpl-kepler-long-term-v1",
+            "title": "Algorithm Version"
+          },
+          "source_manifest_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Source Manifest Sha256"
+          },
+          "model_calendar_ms": {
+            "type": "number",
+            "maximum": 8640000000000000.0,
+            "minimum": -8640000000000000.0,
+            "title": "Model Calendar Ms"
+          },
+          "playback_rate_hours_per_second": {
+            "type": "integer",
+            "enum": [
+              72,
+              8766,
+              87660,
+              876600
+            ],
+            "title": "Playback Rate Hours Per Second",
+            "default": 8766
+          },
+          "playback_paused": {
+            "type": "boolean",
+            "const": true,
+            "title": "Playback Paused",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "algorithm_version",
+          "source_manifest_sha256",
+          "model_calendar_ms"
+        ],
+        "title": "SimulationContext"
+      },
       "UniverseContext": {
         "properties": {
           "selected_object_id": {
@@ -1039,6 +1243,16 @@
               }
             ],
             "title": "Kuiper Display Version"
+          },
+          "simulation_context": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SimulationContext"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false,

@@ -33,6 +33,14 @@ class CameraState(StrictModel):
         return self
 
 
+class SimulationContext(StrictModel):
+    algorithm_version: Literal["jpl-kepler-long-term-v1"]
+    source_manifest_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    model_calendar_ms: float = Field(ge=-8640000000000000, le=8640000000000000)
+    playback_rate_hours_per_second: Literal[72, 8766, 87660, 876600] = 8766
+    playback_paused: Literal[True] = True
+
+
 class UniverseContext(StrictModel):
     selected_object_id: str = Field(max_length=50)
     model_epoch: str = Field(max_length=40)
@@ -51,6 +59,7 @@ class UniverseContext(StrictModel):
     show_kuiper_belt: bool = False
     show_galaxies: bool = False
     kuiper_display_version: Literal["kuiper-region-v1"] | None = None
+    simulation_context: SimulationContext | None = None
 
 
 class Session(StrictModel):

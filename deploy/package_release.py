@@ -33,12 +33,18 @@ DIRECTORIES = (
     "data/reference/solar-extension",
     "data/reference/appearance",
     "data/reference/history",
+    "data/reference/cosmic-morphology",
+    "data/reference/cosmic-observations",
+    "data/reference/long-term",
+    "data/reference/universe-catalog",
+    "data/reference/object-names",
     "data/reference/galaxies",
     "data/reference/kuiper",
 )
 FILES = (
     "README.md",
     "FSD.md",
+    "Data_Spec.md",
     "AGENTS.md",
     "SKILLS.md",
     "START_HERE_PROMPT.md",
@@ -65,6 +71,12 @@ FILES = (
     "data/manifests/exoplanets.json",
     "data/manifests/extended_solar.json",
     "data/manifests/cosmic_history.json",
+    "data/manifests/cosmic_morphology.json",
+    "data/manifests/cosmic_observations.json",
+    "data/manifests/long_term_model.json",
+    "data/manifests/long_term_validation.json",
+    "data/manifests/universe_catalog.json",
+    "data/manifests/object_names.json",
     "data/manifests/galaxies.json",
     "data/manifests/kuiper_display.json",
     "docs/worklog.md",
@@ -193,7 +205,7 @@ def prepare(built_at):
     )
     manifest = {
         "release": version,
-        "work_id": "DEV-006",
+        "work_id": "DEV-008",
         "built_at": built_at,
         "base_commit": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
@@ -211,10 +223,17 @@ def prepare(built_at):
             "nasa-science-catalog-v1",
             "extended-solar-parent-hermite-v1",
             "cosmic-chronology-v1",
+            "cosmic-morphology-reference-v1",
+            "cosmic-observation-viewer-v1",
+            "jpl-kepler-long-term-v1",
+            "sourced-universe-hierarchy-v1",
+            "localized-object-names-v1",
             "official-rounded-galaxy-context-v1",
             "observed-morphology-guide-v1",
             "kuiper-region-v1",
         ],
+        "inactive_conceptual_renderers": ["cosmic-concept-v1", "cosmic-diversity-v1"],
+        "cosmic_history_ui": "published_observation_images_only",
         "input_ids": [
             {key: record[key] for key in ("id", "local_relative_path", "sha256", "bytes")}
             for record in inputs

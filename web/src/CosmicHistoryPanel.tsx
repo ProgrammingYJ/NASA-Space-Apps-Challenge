@@ -35,6 +35,18 @@ export function CosmicHistoryPanel({history,age,onSeek,onClose,loading,error,onR
     {loading&&<p role="status">{t('cosmicLoading')}</p>}
     {error&&<div role="alert"><p>{t('cosmicError')}</p><button onClick={onRetry}>{t('retry')}</button></div>}
     {history&&<>
+      <details className={styles.morphology} data-testid="cosmic-morphology-guide">
+        <summary>{t('cosmicMorphologyTitle')}</summary>
+        <p>{t('cosmicMorphologyNote')}</p>
+        <ul className={styles.families}>
+          {['clumpy','compact','elongated','small_disk','disturbed_pair'].map(family=><li key={family}>{t(`cosmicFamily_${family}`)}</li>)}
+        </ul>
+        <p>{t('cosmicMorphologyAssumptions')}</p>
+        {history.morphology_reference&&<div data-testid="cosmic-morphology-sources">
+          <strong>{t('cosmicMorphologySources')}</strong>
+          {history.morphology_reference.examples.map(example=><a key={example.id} href={example.source.url} target="_blank" rel="noreferrer">{example.name}{example.approx_age_gyr!==null?<> · ≈ {new Intl.NumberFormat(i18n.language,{maximumFractionDigits:3}).format(example.approx_age_gyr)} Gyr</>:example.sample_age_range_gyr&&<> · ≈ {example.sample_age_range_gyr.map(age=>new Intl.NumberFormat(i18n.language,{maximumFractionDigits:3}).format(age)).join('–')} Gyr</>} ↗</a>)}
+        </div>}
+      </details>
       <nav className={styles.milestones} aria-label={t('cosmicMilestones')}>
         {history.stages.map(stage=><button key={stage.stage_id} data-testid={`cosmic-milestone-${stage.stage_id}`} aria-pressed={stage.stage_id===current?.stage_id} onClick={()=>onSeek(stage.age_gyr)}>
           <span>{t(stage.label_key.replaceAll('.','_'))}</span><small>{format(stage.age_gyr)} Gyr</small>

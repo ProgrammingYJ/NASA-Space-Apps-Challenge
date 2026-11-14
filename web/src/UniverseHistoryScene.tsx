@@ -2,6 +2,7 @@ import {useEffect,useRef,useState} from 'react';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {historyVisualState,seededRandom} from './historySceneMath';
+import {createEarlyGalaxyField,sampleEarlyGalaxyField,EARLY_GALAXY_RENDER_VERSION} from './earlyGalaxyAppearance';
 import type {Vec3} from './sceneMath';
 import styles from './UniverseHistoryScene.module.css';
 
@@ -55,14 +56,17 @@ export default function UniverseHistoryScene(props:UniverseHistorySceneProps) {
     for(let i=0;i<3600;i++){const phi=random()*Math.PI*2,z=random()*2-1,radius=25+Math.pow(random(),.3)*125,q=Math.sqrt(1-z*z);plasmaPositions.push(radius*q*Math.cos(phi),radius*z,radius*q*Math.sin(phi));const color=new THREE.Color().setHSL(.035+random()*.07,.84,.37+random()*.3);plasmaColors.push(color.r,color.g,color.b);}
     const plasma=points(plasmaPositions,plasmaColors,11,.8);
     const cmb=points(plasmaPositions,plasmaColors,3.1,.6);
-    const galaxyPositions:number[]=[],galaxyColors:number[]=[],starPositions:number[]=[],starColors:number[]=[],nodes:THREE.Vector3[]=[];
-    // Stable illustrative clusters and filaments. Their count/density have no measured meaning.
-    for(let g=0;g<35;g++){
-      const node=new THREE.Vector3((random()-.5)*240,(random()-.5)*95,(random()-.5)*170);nodes.push(node);const angle=random()*Math.PI*2,tilt=(random()-.5)*1.1,rotation=new THREE.Euler(tilt,angle,(random()-.5)*.4);const radius=2.2+random()*6.5;
-      for(let i=0;i<190;i++){const r=Math.pow(random(),.65)*radius,a=(i%3)*Math.PI*2/3+r*.7+(random()-.5)*.5;const v=new THREE.Vector3(Math.cos(a)*r,(random()-.5)*radius*.12,Math.sin(a)*r).applyEuler(rotation).add(node);galaxyPositions.push(v.x,v.y,v.z);const c=new THREE.Color().setHSL(r/radius>.5?.61:.11,.3,.58+random()*.3);galaxyColors.push(c.r,c.g,c.b);}
-      for(let i=0;i<35;i++){starPositions.push(node.x+(random()-.5)*30,node.y+(random()-.5)*20,node.z+(random()-.5)*30);const c=new THREE.Color().setHSL(.1+random()*.55,.2,.6+random()*.35);starColors.push(c.r,c.g,c.b);}
-    }
-    const galaxies=points(galaxyPositions,galaxyColors,.85,1),stars=points(starPositions,starColors,1.15,.8);
+    const galaxyField=createEarlyGalaxyField(),galaxyPositions=new Float32Array(galaxyField.early.length),galaxyColors=new Float32Array(galaxyField.early.length);
+    const galaxyGeometry=new THREE.BufferGeometry(),galaxyPositionAttribute=new THREE.BufferAttribute(galaxyPositions,3),galaxyColorAttribute=new THREE.BufferAttribute(galaxyColors,3);
+    galaxyPositionAttribute.setUsage(THREE.DynamicDrawUsage);galaxyColorAttribute.setUsage(THREE.DynamicDrawUsage);galaxyGeometry.setAttribute('position',galaxyPositionAttribute);galaxyGeometry.setAttribute('color',galaxyColorAttribute);
+    const galaxies=new THREE.Points(galaxyGeometry,new THREE.PointsMaterial({size:1.05,map,vertexColors:true,transparent:true,opacity:1,depthWrite:false,blending:THREE.AdditiveBlending,sizeAttenuation:true}));
+    // Fixed illustrative layout; evolving local shapes do not reconstruct an actual population or its dynamics.
+    galaxies.frustumCulled=false;world.add(galaxies);let previousGalaxyAge:number|null=null;
+    const nodes=galaxyField.models.map(model=>new THREE.Vector3().fromArray(model.node)),starPositions:number[]=[],starColors:number[]=[];
+    for(const node of nodes){for(let i=0;i<35;i++){starPositions.push(node.x+(random()-.5)*30,node.y+(random()-.5)*20,node.z+(random()-.5)*30);const c=new THREE.Color().setHSL(.1+random()*.55,.2,.6+random()*.35);starColors.push(c.r,c.g,c.b);}}
+    const stars=points(starPositions,starColors,1.15,.8);
+    container.dataset.modelRenderVersion=EARLY_GALAXY_RENDER_VERSION;container.dataset.modelGalaxyCount=String(galaxyField.models.length);container.dataset.modelSeed=String(galaxyField.seed);container.dataset.modelPointsPerGalaxy=String(galaxyField.pointsPerModel);
+    container.dataset.modelOrientationRange=JSON.stringify([Math.min(...galaxyField.models.flatMap(model=>model.orientation)),Math.max(...galaxyField.models.flatMap(model=>model.orientation))]);
     const filamentPositions:number[]=[];
     for(let i=0;i<nodes.length;i++){const neighbors=nodes.map((node,j)=>({node,j,d:node.distanceToSquared(nodes[i])})).filter(value=>value.j!==i).sort((a,b)=>a.d-b.d).slice(0,2);for(const neighbor of neighbors){filamentPositions.push(...nodes[i].toArray(),...neighbor.node.toArray());}}
     const filaments=new THREE.LineSegments(new THREE.BufferGeometry().setAttribute('position',new THREE.Float32BufferAttribute(filamentPositions,3)),new THREE.LineBasicMaterial({color:'#6478c0',transparent:true,opacity:.12,depthWrite:false}));world.add(filaments);
@@ -81,6 +85,12 @@ export default function UniverseHistoryScene(props:UniverseHistorySceneProps) {
     const animate=(now:number)=>{
       if(rt.disposed)return;if(!latest.current.visible){rt.frame=0;keys.clear();return;}rt.frame=requestAnimationFrame(animate);const elapsed=Math.min(.05,(now-previous)/1000);previous=now;
       const state=historyVisualState(latest.current.ageGyr);world.scale.setScalar(state.expansion);radiationMaterial.uniforms.plasmaWeight.value=state.plasma;radiationMaterial.uniforms.cmbWeight.value=state.lastScattering;radiation.visible=state.plasma+state.lastScattering>.001;plasma.material.opacity=.85*state.plasma;plasma.visible=state.plasma>.001;cmb.material.opacity=.7*state.lastScattering;cmb.visible=state.lastScattering>.001;stars.material.opacity=state.stars*.75;galaxies.material.opacity=state.structure;filaments.material.opacity=state.structure*.1;solar.visible=state.solar>.001;(sun.material as THREE.SpriteMaterial).opacity=state.solar;(disk.material as THREE.MeshBasicMaterial).opacity=state.solar*.16;planetMarks.material.opacity=state.solar;
+      if(previousGalaxyAge!==state.ageGyr){
+        previousGalaxyAge=state.ageGyr;const frame=sampleEarlyGalaxyField(galaxyField,state.ageGyr,galaxyPositions,galaxyColors);galaxyPositionAttribute.needsUpdate=true;galaxyColorAttribute.needsUpdate=true;
+        container.dataset.modelActiveFamilies=JSON.stringify(frame.activeFamilies);container.dataset.modelSizeRange=JSON.stringify(frame.sizeRange);container.dataset.modelTransitionProgress=JSON.stringify(frame.transitionProgress);container.dataset.modelDiskProgress=JSON.stringify(frame.diskProgress);container.dataset.modelGeometryFingerprint=frame.fingerprint;
+      }
+      stars.visible=stars.material.opacity>0;galaxies.visible=galaxies.material.opacity>0;
+      container.dataset.starsVisible=String(stars.visible);container.dataset.galaxiesVisible=String(galaxies.visible);container.dataset.solarVisible=String(solar.visible);
       if(keys.size){camera.getWorldDirection(forward);right.crossVectors(forward,camera.up).normalize();move.set(0,0,0);if(keys.has('KeyW')||keys.has('ArrowUp'))move.add(forward);if(keys.has('KeyS')||keys.has('ArrowDown'))move.sub(forward);if(keys.has('KeyA')||keys.has('ArrowLeft'))move.sub(right);if(keys.has('KeyD')||keys.has('ArrowRight'))move.add(right);if(keys.has('KeyQ'))move.sub(camera.up);if(keys.has('KeyE'))move.add(camera.up);move.normalize().multiplyScalar(elapsed*Math.max(8,camera.position.distanceTo(controls.target))*.6);camera.position.add(move);controls.target.add(move);emit();}
       controls.update();renderer.render(scene,camera);container.dataset.ageGyr=String(state.ageGyr);container.dataset.stageId=latest.current.stageId??'';container.dataset.frameCount=String(Number(container.dataset.frameCount??0)+1);
     };

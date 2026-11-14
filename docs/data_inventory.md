@@ -80,3 +80,12 @@ NASA 외계행성 공개 REST는 TAP 접속 timeout 후 채택한 별도 공식 
 
 새로 전달된57천체/7통합출처는 [검토문](./solar_system_sources.md)과 [후보 manifest](../data/manifests/solar_system_source_candidates.json)로 분리했다. 고유34URL의 접속/title을 확인했지만 개별 물리량·epoch별 궤도를 채택/검증한 묶음은 아니다. 기존102개 파일/최신46개 목록의 수를 늘리지 않는다. 3D 선택정보/출처와 추후 검증할 천체력·물리량 입력 후보로 활용하며, 실제 채택한 필드/조건/검사·기능/결과는 [FSD.md](../FSD.md)에 연결한다.
 
+
+
+## DEV-007 데이터 전수 정본과 실제 과거 관측
+
+사용자의 명시적 요청으로 [Data_Spec.md](../Data_Spec.md)를 별도 전수 기록으로 만들었다. 파일1497개(data1454+public43), 내장원응답32개, 정적복제43개와 후보/URL검토를 기록하며 실사용6원본/보정과 확보만96개를 구분한다. 이 파일의 이전 요약/취득 이력은 보존하고 최신 데이터별용도/가공/권리·SHA는Data_Spec 및실행manifest에서확인한다.
+
+현재 역사화면은 cosmic_observations.json29,430B/SHA bc12aa27c63d8c7b88d8b175534c0b935f4546beb029ccca31c1ce2c14d0b0d6의5공개관측이미지2,034,618B를쓴다. 기존기사5개892,182B재사용+새정책/caption6HTML680,354B=11참조1,572,536B다. age.46/.6/.7/.74Gyr와CEERS.6–6Gyr는출처의추정/표본범위다. raw detector/자연색으로주장하지않고lens/ALMA gas·velocity/처리와credit/license를함께표시한다. NASA2는해당미디어지침,ESA/ESO3은CC-BY4.0/전체credit을보존한다.
+
+기존 cosmic_history/morphology 원문과 가상 renderer는이전/중간기록으로보존하지만현재App에서가상35은하/변형/임의10anchor를표시하지않는다. 사용자실제관측-only선택이중간시안보다우선한다. 별도 관측이 없는 날짜의사진/관측사이중간프레임을만들지않는다.

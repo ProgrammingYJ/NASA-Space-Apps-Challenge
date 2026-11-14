@@ -45,7 +45,7 @@ def create_app(state_dir: Path | None = None):
         yield
         app.state.service.close()
 
-    app = FastAPI(title="Planet X · SPHEREx", version="0.5.0", lifespan=lifespan)
+    app = FastAPI(title="Planet X · SPHEREx", version="0.6.0", lifespan=lifespan)
 
     @app.middleware("http")
     async def bounds(request, call_next):
@@ -251,14 +251,30 @@ def create_app(state_dir: Path | None = None):
     @app.get("/api/v1/cosmic-history")
     def cosmic_history():
         from science.history import get_cosmic_history
+        from science.history_morphology import get_history_morphology
 
-        return get_cosmic_history(ROOT)
+        try:
+            return {
+                **get_cosmic_history(ROOT),
+                "morphology_reference": get_history_morphology(ROOT),
+            }
+        except (FileNotFoundError, ValueError):
+            raise HTTPException(503, "history_source_unavailable") from None
 
     @app.get("/api/v1/cosmic-history/sample")
     def cosmic_history_sample(age_gyr: float = Query(0, ge=0, le=13.8, allow_inf_nan=False)):
         from science.history import sample_history
 
         return sample_history(ROOT, age_gyr)
+
+    @app.get("/api/v1/cosmic-observations")
+    def cosmic_observations():
+        from science.history_observations import get_cosmic_observations
+
+        try:
+            return get_cosmic_observations(ROOT)
+        except (FileNotFoundError, ValueError):
+            raise HTTPException(503, "history_observation_unavailable") from None
 
     @app.get("/api/v1/catalog/galaxies")
     def galaxies():
@@ -271,6 +287,43 @@ def create_app(state_dir: Path | None = None):
         from science.kuiper import get_kuiper_display
 
         return get_kuiper_display(ROOT)
+
+    @app.get("/api/v1/long-term-model")
+    def long_term_model():
+        from science.long_term_model import get_long_term_model
+
+        try:
+            return get_long_term_model(ROOT)
+        except (ValueError, FileNotFoundError):
+            raise HTTPException(503, "simulation_source_unavailable") from None
+
+    @app.get("/api/v1/long-term-simulation")
+    def long_term_simulation(year: int, month: int = 1, day: int = 1, hour: float = 0):
+        from science.long_term_model import sample_long_term
+
+        try:
+            return sample_long_term(ROOT, year, month, day, hour)
+        except FileNotFoundError:
+            raise HTTPException(503, "simulation_source_unavailable") from None
+        except ValueError:
+            raise HTTPException(422, "unsupported_simulation_date") from None
+
+    @app.get("/api/v1/catalog/universe")
+    def universe_catalog(galaxy_id: str | None = None, parent_id: str | None = None):
+        from science.universe_catalog import get_universe_catalog
+
+        try:
+            return get_universe_catalog(ROOT, galaxy_id=galaxy_id, parent_id=parent_id)
+        except FileNotFoundError:
+            raise HTTPException(503, "universe_catalog_unavailable") from None
+        except ValueError as exc:
+            if str(exc) in {
+                "unknown_universe_galaxy",
+                "unknown_universe_parent",
+                "universe_parent_galaxy_mismatch",
+            }:
+                raise HTTPException(422, "unsupported_catalog_selection") from None
+            raise HTTPException(503, "universe_catalog_unavailable") from None
 
     def context_reasons(session):
         context = session.universe_context
@@ -350,6 +403,22 @@ def create_app(state_dir: Path | None = None):
                 get_galaxies(ROOT)
             except (ValueError, FileNotFoundError):
                 return ["galaxy_data_unavailable"]
+        if context.simulation_context:
+            from science.long_term_model import get_long_term_model
+
+            try:
+                model = get_long_term_model(ROOT)
+            except (ValueError, FileNotFoundError):
+                return ["simulation_data_unavailable"]
+            if model["source_manifest_sha256"] != context.simulation_context.source_manifest_sha256:
+                return ["simulation_model_changed"]
+            from science.long_term_model import calendar_jd
+
+            # Calendar-label arithmetic: no historical UTC/TDB conversion.
+            jd = context.simulation_context.model_calendar_ms / 86400000 + 2440587.5
+            low, high = model["coverage"]["min_date"], model["coverage"]["max_date"]
+            if not calendar_jd(**low) <= jd <= calendar_jd(**high):
+                return ["unsupported_simulation_date"]
         return []
 
     @app.get("/api/v1/observations")
@@ -553,6 +622,12 @@ def create_app(state_dir: Path | None = None):
         app.mount("/assets", StaticFiles(directory=static / "assets"), name="assets")
         if (static / "textures").is_dir():
             app.mount("/textures", StaticFiles(directory=static / "textures"), name="textures")
+        if (static / "observations").is_dir():
+            app.mount(
+                "/observations",
+                StaticFiles(directory=static / "observations"),
+                name="observation-images",
+            )
 
         @app.get("/")
         def index():

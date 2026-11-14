@@ -267,3 +267,47 @@ def test_continuous_time_rate_camera_and_original_survive_api_restart(timeline_a
         assert context["follow_object_id"] == "epsilon-indi-b"
         assert restored["comparison"] == result
         assert restored["judgment"] == saved["judgment"]
+
+
+def test_simulation_context_roundtrip_is_separate_from_original_observation_time(timeline_api):
+    from science.long_term_model import calendar_jd, get_long_term_model
+
+    client, _, _, result, saved = timeline_api
+    session = deepcopy(saved["session"])
+    session["universe_context"]["simulation_context"] = {
+        "algorithm_version": "jpl-kepler-long-term-v1",
+        "source_manifest_sha256": get_long_term_model(ROOT)["source_manifest_sha256"],
+        "model_calendar_ms": (calendar_jd(0, 1, 1) - 2440587.5) * 86400000,
+        "playback_rate_hours_per_second": 876600,
+        "playback_paused": True,
+    }
+    response = client.post(
+        "/api/v1/evidence",
+        json={
+            "result_id": result["result_id"],
+            "session": session,
+            "judgment": "Separate simulation.",
+        },
+    )
+    assert response.status_code == 201, response.text[:300]
+    exported = response.json()
+    restored = client.post("/api/v1/evidence/import", json=exported)
+    assert restored.status_code == 200
+    assert restored.json()["status"] == "restored"
+    assert restored.json()["session"] == exported["session"]
+    assert restored.json()["comparison"] == result
+    assert restored.json()["session"]["universe_context"]["model_epoch"] == MIDPOINT
+    changed = deepcopy(exported)
+    changed["session"]["universe_context"]["simulation_context"]["source_manifest_sha256"] = (
+        "f" * 64
+    )
+    blocked = client.post("/api/v1/evidence/import", json=changed).json()
+    assert blocked["status"] == "recalculation_required"
+    assert "simulation_model_changed" in blocked["reasons"]
+    changed = deepcopy(exported)
+    changed["session"]["universe_context"]["simulation_context"]["model_calendar_ms"] = (
+        calendar_jd(-2999, 1, 1) - 2440587.5 - 1
+    ) * 86400000
+    blocked = client.post("/api/v1/evidence/import", json=changed).json()
+    assert blocked["status"] == "recalculation_required"
+    assert "unsupported_simulation_date" in blocked["reasons"]

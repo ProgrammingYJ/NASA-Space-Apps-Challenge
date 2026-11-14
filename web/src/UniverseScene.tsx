@@ -10,7 +10,7 @@ import styles from './UniverseScene.module.css';
 export type {CameraState} from './sceneMath';
 export type {GalaxyData,GalaxyObject} from './universeLayers';
 export interface OrbitGuide {
-  kind:'osculating_kepler_guide'|'sampled_ephemeris_trace';
+  kind:'osculating_kepler_guide'|'sampled_ephemeris_trace'|'fitted_kepler_simulation_guide';
   epoch:string;
   points_au:Vec3[];
   source:{url:string;label?:string;sha256?:string;response_sha256?:string};
@@ -323,6 +323,7 @@ export default function UniverseScene(props:UniverseSceneProps) {
 
   useEffect(()=>{
     const rt=runtime.current;if(!rt)return;
+    if(!props.data){for(const line of rt.orbits.values()){rt.scene.remove(line);disposeObject(line);}rt.orbits.clear();}
     if(props.data){
       const guides=props.data.objects.filter(body=>body.kind!=='direction'&&body.object_id!=='sun'&&body.orbit&&rt.bodies.has(body.object_id));
       const retained=new Set(guides.map(body=>body.object_id));

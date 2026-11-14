@@ -1,0 +1,712 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "jpl-kepler-long-term-v1",
+  "created_utc": "2026-11-14T06:41:04.297606+00:00",
+  "source": {
+    "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+    "resolved_url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+    "local_relative_path": "data/reference/long-term/jpl_approximate_positions.html",
+    "bytes": 29585,
+    "sha256": "9f7b30ca81cc548a879565bb3f70e6899a38ff5877cb1ff16bb04892f9c4d742",
+    "retrieved_utc": "2026-11-14T06:40:00.425481+00:00",
+    "label": "NASA/JPL SSD Approximate Positions of the Planets"
+  },
+  "frame": "mean ecliptic and equinox of J2000",
+  "center": "Sun (heliocentric)",
+  "position_unit": "au",
+  "time_scale": "TDB",
+  "calendar": "proleptic_gregorian_astronomical_year",
+  "coverage": {
+    "min_date": {
+      "year": -2999,
+      "month": 1,
+      "day": 1
+    },
+    "max_date": {
+      "year": 3000,
+      "month": 1,
+      "day": 1
+    }
+  },
+  "default_table": "long",
+  "element_order": [
+    "a",
+    "e",
+    "I",
+    "L",
+    "varpi",
+    "Omega"
+  ],
+  "element_units": [
+    "au",
+    "dimensionless",
+    "deg",
+    "deg",
+    "deg",
+    "deg"
+  ],
+  "rate_interval": "Julian century (36525 TDB days)",
+  "additional_term_units": {
+    "b": "deg/century^2",
+    "c": "deg",
+    "s": "deg",
+    "f": "deg/century"
+  },
+  "formula": {
+    "T": "(JD_TDB - 2451545.0) / 36525",
+    "element": "base + rate*T",
+    "M_deg": "L - varpi + b*T*T + c*cos_deg(f*T) + s*sin_deg(f*T)",
+    "kepler": "M_rad = E_rad - e*sin(E_rad)",
+    "rotation": "JPL published component equations; equivalent active Rz(Omega) Rx(I) Rz(varpi-Omega)"
+  },
+  "tables": {
+    "short": {
+      "source_table": "Table 1",
+      "coverage": {
+        "min_date": {
+          "year": 1800,
+          "month": 1,
+          "day": 1
+        },
+        "max_date": {
+          "year": 2050,
+          "month": 1,
+          "day": 1
+        }
+      },
+      "bodies": [
+        {
+          "object_id": "mercury",
+          "model_body_id": "mercury",
+          "name": "Mercury",
+          "source_table_label": "Mercury",
+          "reference_target": "1",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            0.38709927,
+            0.20563593,
+            7.00497902,
+            252.2503235,
+            77.45779628,
+            48.33076593
+          ],
+          "rates_per_century": [
+            3.7e-07,
+            1.906e-05,
+            -0.00594749,
+            149472.67411175,
+            0.16047689,
+            -0.12534081
+          ],
+          "additional_terms": {
+            "b": 0.0,
+            "c": 0.0,
+            "s": 0.0,
+            "f": 0.0
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 15.0,
+            "latitude_arcsec": 1.0,
+            "distance_thousand_km": 1.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        },
+        {
+          "object_id": "venus",
+          "model_body_id": "venus",
+          "name": "Venus",
+          "source_table_label": "Venus",
+          "reference_target": "2",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            0.72333566,
+            0.00677672,
+            3.39467605,
+            181.9790995,
+            131.60246718,
+            76.67984255
+          ],
+          "rates_per_century": [
+            3.9e-06,
+            -4.107e-05,
+            -0.0007889,
+            58517.81538729,
+            0.00268329,
+            -0.27769418
+          ],
+          "additional_terms": {
+            "b": 0.0,
+            "c": 0.0,
+            "s": 0.0,
+            "f": 0.0
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 20.0,
+            "latitude_arcsec": 1.0,
+            "distance_thousand_km": 4.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        },
+        {
+          "object_id": "earth",
+          "model_body_id": "earth-moon-barycenter",
+          "name": "Earth-Moon Barycenter",
+          "source_table_label": "EM Bary",
+          "reference_target": "3",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            1.00000261,
+            0.01671123,
+            -1.531e-05,
+            100.46457166,
+            102.93768193,
+            0.0
+          ],
+          "rates_per_century": [
+            5.62e-06,
+            -4.392e-05,
+            -0.01294668,
+            35999.37244981,
+            0.32327364,
+            0.0
+          ],
+          "additional_terms": {
+            "b": 0.0,
+            "c": 0.0,
+            "s": 0.0,
+            "f": 0.0
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 20.0,
+            "latitude_arcsec": 8.0,
+            "distance_thousand_km": 6.0
+          },
+          "position_identity": "Earth-Moon system barycenter, not Earth center"
+        },
+        {
+          "object_id": "mars",
+          "model_body_id": "mars",
+          "name": "Mars",
+          "source_table_label": "Mars",
+          "reference_target": "4",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            1.52371034,
+            0.0933941,
+            1.84969142,
+            -4.55343205,
+            -23.94362959,
+            49.55953891
+          ],
+          "rates_per_century": [
+            1.847e-05,
+            7.882e-05,
+            -0.00813131,
+            19140.30268499,
+            0.44441088,
+            -0.29257343
+          ],
+          "additional_terms": {
+            "b": 0.0,
+            "c": 0.0,
+            "s": 0.0,
+            "f": 0.0
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 40.0,
+            "latitude_arcsec": 2.0,
+            "distance_thousand_km": 25.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        },
+        {
+          "object_id": "jupiter",
+          "model_body_id": "jupiter",
+          "name": "Jupiter",
+          "source_table_label": "Jupiter",
+          "reference_target": "5",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            5.202887,
+            0.04838624,
+            1.30439695,
+            34.39644051,
+            14.72847983,
+            100.47390909
+          ],
+          "rates_per_century": [
+            -0.00011607,
+            -0.00013253,
+            -0.00183714,
+            3034.74612775,
+            0.21252668,
+            0.20469106
+          ],
+          "additional_terms": {
+            "b": 0.0,
+            "c": 0.0,
+            "s": 0.0,
+            "f": 0.0
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 400.0,
+            "latitude_arcsec": 10.0,
+            "distance_thousand_km": 600.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        },
+        {
+          "object_id": "saturn",
+          "model_body_id": "saturn",
+          "name": "Saturn",
+          "source_table_label": "Saturn",
+          "reference_target": "6",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            9.53667594,
+            0.05386179,
+            2.48599187,
+            49.95424423,
+            92.59887831,
+            113.66242448
+          ],
+          "rates_per_century": [
+            -0.0012506,
+            -0.00050991,
+            0.00193609,
+            1222.49362201,
+            -0.41897216,
+            -0.28867794
+          ],
+          "additional_terms": {
+            "b": 0.0,
+            "c": 0.0,
+            "s": 0.0,
+            "f": 0.0
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 600.0,
+            "latitude_arcsec": 25.0,
+            "distance_thousand_km": 1500.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        },
+        {
+          "object_id": "uranus",
+          "model_body_id": "uranus",
+          "name": "Uranus",
+          "source_table_label": "Uranus",
+          "reference_target": "7",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            19.18916464,
+            0.04725744,
+            0.77263783,
+            313.23810451,
+            170.9542763,
+            74.01692503
+          ],
+          "rates_per_century": [
+            -0.00196176,
+            -4.397e-05,
+            -0.00242939,
+            428.48202785,
+            0.40805281,
+            0.04240589
+          ],
+          "additional_terms": {
+            "b": 0.0,
+            "c": 0.0,
+            "s": 0.0,
+            "f": 0.0
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 50.0,
+            "latitude_arcsec": 2.0,
+            "distance_thousand_km": 1000.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        },
+        {
+          "object_id": "neptune",
+          "model_body_id": "neptune",
+          "name": "Neptune",
+          "source_table_label": "Neptune",
+          "reference_target": "8",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            30.06992276,
+            0.00859048,
+            1.77004347,
+            -55.12002969,
+            44.96476227,
+            131.78422574
+          ],
+          "rates_per_century": [
+            0.00026291,
+            5.105e-05,
+            0.00035372,
+            218.45945325,
+            -0.32241464,
+            -0.00508664
+          ],
+          "additional_terms": {
+            "b": 0.0,
+            "c": 0.0,
+            "s": 0.0,
+            "f": 0.0
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 10.0,
+            "latitude_arcsec": 1.0,
+            "distance_thousand_km": 200.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        }
+      ]
+    },
+    "long": {
+      "source_table": "Tables 2a and 2b",
+      "coverage": {
+        "min_date": {
+          "year": -2999,
+          "month": 1,
+          "day": 1
+        },
+        "max_date": {
+          "year": 3000,
+          "month": 1,
+          "day": 1
+        }
+      },
+      "bodies": [
+        {
+          "object_id": "mercury",
+          "model_body_id": "mercury",
+          "name": "Mercury",
+          "source_table_label": "Mercury",
+          "reference_target": "1",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            0.38709843,
+            0.20563661,
+            7.00559432,
+            252.25166724,
+            77.45771895,
+            48.33961819
+          ],
+          "rates_per_century": [
+            0.0,
+            2.123e-05,
+            -0.00590158,
+            149472.67486623,
+            0.15940013,
+            -0.12214182
+          ],
+          "additional_terms": {
+            "b": 0.0,
+            "c": 0.0,
+            "s": 0.0,
+            "f": 0.0
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 20.0,
+            "latitude_arcsec": 15.0,
+            "distance_thousand_km": 1.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        },
+        {
+          "object_id": "venus",
+          "model_body_id": "venus",
+          "name": "Venus",
+          "source_table_label": "Venus",
+          "reference_target": "2",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            0.72332102,
+            0.00676399,
+            3.39777545,
+            181.9797085,
+            131.76755713,
+            76.67261496
+          ],
+          "rates_per_century": [
+            -2.6e-07,
+            -5.107e-05,
+            0.00043494,
+            58517.8156026,
+            0.05679648,
+            -0.27274174
+          ],
+          "additional_terms": {
+            "b": 0.0,
+            "c": 0.0,
+            "s": 0.0,
+            "f": 0.0
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 40.0,
+            "latitude_arcsec": 30.0,
+            "distance_thousand_km": 8.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        },
+        {
+          "object_id": "earth",
+          "model_body_id": "earth-moon-barycenter",
+          "name": "Earth-Moon Barycenter",
+          "source_table_label": "EM Bary",
+          "reference_target": "3",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            1.00000018,
+            0.01673163,
+            -0.00054346,
+            100.46691572,
+            102.93005885,
+            -5.11260389
+          ],
+          "rates_per_century": [
+            -3e-08,
+            -3.661e-05,
+            -0.01337178,
+            35999.37306329,
+            0.3179526,
+            -0.24123856
+          ],
+          "additional_terms": {
+            "b": 0.0,
+            "c": 0.0,
+            "s": 0.0,
+            "f": 0.0
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 40.0,
+            "latitude_arcsec": 15.0,
+            "distance_thousand_km": 15.0
+          },
+          "position_identity": "Earth-Moon system barycenter, not Earth center"
+        },
+        {
+          "object_id": "mars",
+          "model_body_id": "mars",
+          "name": "Mars",
+          "source_table_label": "Mars",
+          "reference_target": "4",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            1.52371243,
+            0.09336511,
+            1.85181869,
+            -4.56813164,
+            -23.91744784,
+            49.71320984
+          ],
+          "rates_per_century": [
+            9.7e-07,
+            9.149e-05,
+            -0.00724757,
+            19140.29934243,
+            0.45223625,
+            -0.26852431
+          ],
+          "additional_terms": {
+            "b": 0.0,
+            "c": 0.0,
+            "s": 0.0,
+            "f": 0.0
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 100.0,
+            "latitude_arcsec": 40.0,
+            "distance_thousand_km": 30.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        },
+        {
+          "object_id": "jupiter",
+          "model_body_id": "jupiter",
+          "name": "Jupiter",
+          "source_table_label": "Jupiter",
+          "reference_target": "5",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            5.20248019,
+            0.0485359,
+            1.29861416,
+            34.33479152,
+            14.27495244,
+            100.29282654
+          ],
+          "rates_per_century": [
+            -2.864e-05,
+            0.00018026,
+            -0.00322699,
+            3034.90371757,
+            0.18199196,
+            0.13024619
+          ],
+          "additional_terms": {
+            "b": -0.00012452,
+            "c": 0.0606406,
+            "s": -0.35635438,
+            "f": 38.35125
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 600.0,
+            "latitude_arcsec": 100.0,
+            "distance_thousand_km": 1000.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        },
+        {
+          "object_id": "saturn",
+          "model_body_id": "saturn",
+          "name": "Saturn",
+          "source_table_label": "Saturn",
+          "reference_target": "6",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            9.54149883,
+            0.05550825,
+            2.49424102,
+            50.07571329,
+            92.86136063,
+            113.63998702
+          ],
+          "rates_per_century": [
+            -3.065e-05,
+            -0.00032044,
+            0.00451969,
+            1222.11494724,
+            0.54179478,
+            -0.25015002
+          ],
+          "additional_terms": {
+            "b": 0.00025899,
+            "c": -0.13434469,
+            "s": 0.87320147,
+            "f": 38.35125
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 1000.0,
+            "latitude_arcsec": 100.0,
+            "distance_thousand_km": 4000.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        },
+        {
+          "object_id": "uranus",
+          "model_body_id": "uranus",
+          "name": "Uranus",
+          "source_table_label": "Uranus",
+          "reference_target": "7",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            19.18797948,
+            0.0468574,
+            0.77298127,
+            314.20276625,
+            172.43404441,
+            73.96250215
+          ],
+          "rates_per_century": [
+            -0.00020455,
+            -1.55e-05,
+            -0.00180155,
+            428.49512595,
+            0.09266985,
+            0.05739699
+          ],
+          "additional_terms": {
+            "b": 0.00058331,
+            "c": -0.97731848,
+            "s": 0.17689245,
+            "f": 7.67025
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 2000.0,
+            "latitude_arcsec": 30.0,
+            "distance_thousand_km": 8000.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        },
+        {
+          "object_id": "neptune",
+          "model_body_id": "neptune",
+          "name": "Neptune",
+          "source_table_label": "Neptune",
+          "reference_target": "8",
+          "reference_target_kind": "Horizons planetary-system barycenter for independent comparison (1 through 8)",
+          "position_kind": "approximate_simulation",
+          "elements_j2000": [
+            30.06952752,
+            0.00895439,
+            1.7700552,
+            304.22289287,
+            46.68158724,
+            131.78635853
+          ],
+          "rates_per_century": [
+            6.447e-05,
+            8.18e-06,
+            0.000224,
+            218.46515314,
+            0.01009938,
+            -0.00606302
+          ],
+          "additional_terms": {
+            "b": -0.00041348,
+            "c": 0.68346318,
+            "s": -0.10162547,
+            "f": 7.67025
+          },
+          "nominal_errors": {
+            "longitude_arcsec": 400.0,
+            "latitude_arcsec": 15.0,
+            "distance_thousand_km": 4000.0
+          },
+          "position_identity": "Approximate heliocentric representative of the named planet"
+        }
+      ]
+    }
+  },
+  "unsupported": [
+    "Pluto",
+    "Earth center",
+    "Moon and all other satellites",
+    "other dwarf planets and candidates",
+    "stars",
+    "exoplanets",
+    "galaxies"
+  ],
+  "source_header_note": "The source preformatted header labels e with rad; eccentricity is treated as dimensionless in Kepler's equation. Original HTML is retained.",
+  "license_note": "Public JPL explanatory numerical tables, attributed to the JPL SSD page; do not imply NASA/JPL endorsement or logo permission. The page attributes the 1992 source article to E.M. Standish and J.G. Williams and explicitly removes Pluto.",
+  "limitations": [
+    "Calculated lower-accuracy planetary positions from JPL's published fitted elements/rates; not fresh Horizons results or precision observations.",
+    "The fit is not valid outside its declared range. This implementation conservatively supports astronomical -2999-01-01 through 3000-01-01, inclusive, in the proleptic Gregorian calendar.",
+    "Astronomical year 0 is 1 BCE; year -2999 is 3000 BCE. Calendar labels are interpreted in TDB, not as historical UTC or a civil-calendar reconstruction.",
+    "The Earth display identifier represents the Earth-Moon barycenter, not Earth's center. It must be labelled as such.",
+    "The published current table omits Pluto; moons, extra dwarf planets, stars and exoplanets have no states in this model and are not frozen at unrelated epochs.",
+    "Nominal source errors in longitude, latitude and range are scale estimates, not confidence intervals, guaranteed maximum errors or a covariance model.",
+    "The long fit is used throughout the full range by default. Short-fit selection is explicit; automatic switching/blending between different fits is not claimed to be continuous.",
+    "These fits do not model planet formation/destruction, billions of years of evolution, galaxy history, an observer's sky view, light time, or SPHEREx exposures.",
+    "The existing 2026-11-13 through 2026-11-16 exact Horizons/Hermite scene and original observations remain separately preserved."
+  ]
+}

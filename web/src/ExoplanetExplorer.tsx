@@ -10,7 +10,7 @@ interface CatalogObject {object_id:string;name:string;hostname:string;ra_deg:num
 interface Catalog {catalog_version:string;retrieved_utc:string;planet_count:number;host_count:number;raw_sha256:string;objects:CatalogObject[];limitations:string[]}
 interface SystemPlanet {object_id:string;name:string;semimajor_axis_au:number|null;period_days:number|null;radius_earth:number|null;eccentricity?:number|null;appearance_class?:string}
 interface Detail {object_id:string;name:string;hostname:string;parameters:Record<string,unknown>&{nasa?:{url:string;description:string;radius_display:string|null;mass_display:string|null;radius_estimated:boolean;appearance_class:string;star_acf:Record<string,unknown>}};source_url:string;retrieved_utc:string;surface_status:string;system_planets:SystemPlanet[];limitations:string[]}
-interface Props {visible:boolean;epochMs:number;onClose:()=>void}
+interface Props {visible:boolean;epochMs:number;onClose:()=>void;initialObjectId?:string;selectionSequence?:number}
 interface PlanetMesh {mesh:THREE.Mesh<THREE.SphereGeometry,THREE.MeshStandardMaterial>;record:SystemPlanet;radius:number;phase:number;orbitRadius:number;last:THREE.Vector3}
 interface Runtime {renderer:THREE.WebGLRenderer;scene:THREE.Scene;camera:THREE.PerspectiveCamera;controls:OrbitControls;group:THREE.Group;planets:Map<string,PlanetMesh>;labels:Map<string,HTMLButtonElement>;points:THREE.Points|null;pointIds:string[];selected:string|null;follow:string|null;focus:{from:THREE.Vector3;fromTarget:THREE.Vector3;to:THREE.Vector3;target:THREE.Vector3;started:number}|null}
 const numeric=(value:unknown)=>typeof value==='number'&&Number.isFinite(value)?value:null;
@@ -51,11 +51,12 @@ function orbitPosition(item:PlanetMesh,epoch:number){
   return new THREE.Vector3(item.orbitRadius*(Math.cos(anomaly)-e),0,item.orbitRadius*Math.sqrt(1-e*e)*Math.sin(anomaly));
 }
 
-export default function ExoplanetExplorer({visible,epochMs,onClose}:Props){
+export default function ExoplanetExplorer({visible,epochMs,onClose,initialObjectId,selectionSequence}:Props){
   const {t}=useTranslation();const [search,setSearch]=useState('');const [page,setPage]=useState(0);const [selected,setSelected]=useState<string|null>(null);const [skySequence,setSkySequence]=useState(0);const [error,setError]=useState(false);
   const host=useRef<HTMLDivElement>(null);const runtime=useRef<Runtime|null>(null);const latest=useRef({visible,epochMs});latest.current={visible,epochMs};const selectRef=useRef(setSelected);selectRef.current=setSelected;
   const catalog=useQuery({queryKey:['exoplanet-catalog'],queryFn:({signal})=>request<Catalog>('/catalog/exoplanets',{signal}),enabled:visible,retry:false,staleTime:Infinity});
   const detail=useQuery({queryKey:['exoplanet',selected],queryFn:({signal})=>request<Detail>(`/catalog/exoplanets/${selected}`,{signal}),enabled:visible&&selected!==null,retry:false,staleTime:Infinity});
+  useEffect(()=>{if(visible&&initialObjectId)setSelected(initialObjectId);},[visible,initialObjectId,selectionSequence]);
   const filtered=useMemo(()=>catalog.data?.objects.filter(row=>`${row.name} ${row.hostname}`.toLowerCase().includes(search.toLowerCase()))??[],[catalog.data,search]);
   const rows=filtered.slice(page*70,(page+1)*70);
   const detailValue=detail.data?.object_id===selected?detail.data:null;
@@ -81,7 +82,7 @@ export default function ExoplanetExplorer({visible,epochMs,onClose}:Props){
         if(rt.follow===item.record.object_id&&!rt.focus){camera.position.add(delta);controls.target.add(delta);}if(rt.focus&&rt.selected===item.record.object_id){rt.focus.to.add(delta);rt.focus.target.add(delta);}item.last.copy(next);}
       if(rt.focus){const u=Math.min(1,(now-rt.focus.started)/1000);const eased=u*u*(3-2*u);camera.position.lerpVectors(rt.focus.from,rt.focus.to,eased);controls.target.lerpVectors(rt.focus.fromTarget,rt.focus.target,eased);if(u===1){rt.focus=null;rt.follow=rt.selected;}}
       if(keys.size){const forward=camera.getWorldDirection(new THREE.Vector3());const right=new THREE.Vector3().crossVectors(forward,camera.up).normalize();const motion=new THREE.Vector3();const speed=Math.max(1,camera.position.distanceTo(controls.target)*.7)*dt;if(keys.has('w')||keys.has('arrowup'))motion.add(forward);if(keys.has('s')||keys.has('arrowdown'))motion.sub(forward);if(keys.has('d')||keys.has('arrowright'))motion.add(right);if(keys.has('a')||keys.has('arrowleft'))motion.sub(right);if(keys.has('e'))motion.y++;if(keys.has('q'))motion.y--;if(motion.lengthSq()>0){motion.normalize().multiplyScalar(speed);camera.position.add(motion);controls.target.add(motion);}}
-      controls.update();renderer.render(scene,camera);element.dataset.selectedObject=rt.selected??'';element.dataset.modelEpoch=new Date(latest.current.epochMs).toISOString();element.dataset.surfaceStatus=rt.selected?'unresolved_illustration':'catalog_direction_layer';
+      controls.update();renderer.render(scene,camera);element.dataset.selectedObject=rt.selected??'';element.dataset.cameraMode=rt.focus?'transition':rt.follow?'focused':'manual';element.dataset.focusedObject=rt.follow??'';element.dataset.cameraPosition=JSON.stringify(camera.position.toArray());element.dataset.cameraTarget=JSON.stringify(controls.target.toArray());element.dataset.modelEpoch=new Date(latest.current.epochMs).toISOString();element.dataset.surfaceStatus=rt.selected?'unresolved_illustration':'catalog_direction_layer';
       for(const [id,label]of rt.labels){const item=rt.planets.get(id)!;const p=item.mesh.position.clone().project(camera);label.style.display=p.z<1&&Math.abs(p.x)<1.2&&Math.abs(p.y)<1.2?'block':'none';label.style.left=`${(p.x+1)*.5*element.clientWidth}px`;label.style.top=`${(1-p.y)*.5*element.clientHeight}px`;label.setAttribute('aria-pressed',String(rt.selected===id));}
     };frame=requestAnimationFrame(tick);
     return()=>{cancelAnimationFrame(frame);observer.disconnect();controls.dispose();release(group);renderer.dispose();renderer.domElement.remove();rt.labels.forEach(label=>label.remove());runtime.current=null;};

@@ -35,3 +35,10 @@ Runtime Python packages and bundled browser packages use their respective licens
 The repository's installed procedural skills are separately attributed in .agents/skill-lock.json and their NOTICE/LICENSE files; skill bodies and research/team documents are not included in the server bundle. The Astropy skill is from K-Dense Scientific Agent Skills. Procedural reference, verified against the current arXiv record (v2): Kassis, T., Agarwal, V., He, Y., Patel, D., & Brueckner, A. M. (2026). [Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents](https://doi.org/10.48550/arXiv.2609.00065). This attribution does not claim task-level validation by its authors.
 
 Official framework guidance consulted: [FastAPI server processes](https://fastapi.tiangolo.com/deployment/server-workers/), [Astropy WCS interface](https://docs.astropy.org/en/stable/wcs/wcsapi.html). The implementation uses one API writer and a separate science process as specified in FSD; no external queue or AI API is required.
+
+
+## DEV-007 published early-universe observations
+
+The current cosmic-history viewer displays five unmodified published observation images: Cosmic Gems, Firefly Sparkle, CEERS observed cutouts, REBELS-25 ALMA maps, and ZS7. These are processed observational products, not raw detector images, natural-color surface maps, generated images or reconstructions of galaxy evolution. Source-image SHA256/dimensions, full credits, processing and lensing notes, source pages and usage-policy references are recorded in data/manifests/cosmic_observations.json and Data_Spec.md. Full credit and the applicable license/use-policy link appear next to each image.
+
+ESA/Webb and ESO images retain CC-BY-4.0 attribution requirements; NASA image records cite the applicable NASA media-use guidance and do not assign an invented CC license. Agency endorsement is not implied. Existing conceptual history code remains archival and is not imported by the current App. Images are rendered with contain sizing; their source bytes, annotations and credits are not altered.

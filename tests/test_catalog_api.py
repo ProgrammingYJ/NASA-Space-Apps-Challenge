@@ -53,6 +53,89 @@ def test_cosmic_age_endpoints_and_recombination_sample(catalog_api, age, expecte
     assert value["stage_anchor_age_gyr"] == age
 
 
+def test_cosmic_morphology_references_are_separate_from_unchanged_chronology(catalog_api):
+    response = catalog_api.get("/api/v1/cosmic-history")
+    assert response.status_code == 200, response.text
+    value = response.json()
+    assert value["source_manifest_sha256"] == (
+        "bf947edd0a0859466d594b4e968997a70cd51511dd78fbccf6653b042f65b03f"
+    )
+    guide = value["morphology_reference"]
+    assert guide["algorithm_version"] == "cosmic-morphology-reference-v1"
+    assert (
+        guide["source_manifest_sha256"]
+        == hashlib.sha256((ROOT / "data/manifests/cosmic_morphology.json").read_bytes()).hexdigest()
+    )
+    assert len(guide["examples"]) == 6
+    assert not guide["visual_policy"]["scene_population_is_observed"]
+    assert not guide["visual_policy"]["morphology_fractions_available"]
+    assert guide["visual_policy"]["transition_times_are_display_assumptions"]
+    assert all(example["source"]["sha256"] for example in guide["examples"])
+    assert len(value["stages"]) == 10
+
+
+def test_missing_cosmic_morphology_reference_is_unavailable_instead_of_fake_data(
+    catalog_api, monkeypatch
+):
+    import science.history_morphology
+
+    def missing_reference(*args, **kwargs):
+        raise FileNotFoundError("missing source")
+
+    monkeypatch.setattr(science.history_morphology, "get_history_morphology", missing_reference)
+    response = catalog_api.get("/api/v1/cosmic-history")
+    assert response.status_code == 503, response.text
+    assert "history_source_unavailable" in response.text
+
+
+def test_observed_history_serves_only_the_five_exact_published_image_files(catalog_api):
+    response = catalog_api.get("/api/v1/cosmic-observations")
+    assert response.status_code == 200, response.text
+    value = response.json()
+    assert value["algorithm_version"] == "cosmic-observation-viewer-v1"
+    assert (
+        value["source_manifest_sha256"]
+        == hashlib.sha256(
+            (ROOT / "data/manifests/cosmic_observations.json").read_bytes()
+        ).hexdigest()
+    )
+    assert len(value["objects"]) == 5
+    cases = {case["id"]: case for case in value["objects"]}
+    assert cases["cosmic_gems_clusters"]["approx_age_gyr"] == 0.46
+    assert cases["firefly_sparkle_assembly"]["approx_age_gyr"] == 0.6
+    assert cases["rebels25_rotating_disc"]["approx_age_gyr"] == 0.7
+    assert cases["zs7_ongoing_merger"]["approx_age_gyr"] == 0.74
+    assert cases["ceers_projected_shapes"]["approx_age_gyr"] is None
+    assert cases["ceers_projected_shapes"]["sample_age_range_gyr"] == [0.6, 6.0]
+    total = 0
+    for case in cases.values():
+        image = case["image"]
+        assert image["kind"] == "published_observation_composite"
+        assert image["credit"] and image["license"] and image["processing"]
+        served = catalog_api.get(image["url"])
+        assert served.status_code == 200, served.text[:120]
+        assert served.headers["content-type"] in {"image/jpeg", "image/png"}
+        assert len(served.content) == image["bytes"]
+        assert hashlib.sha256(served.content).hexdigest() == image["sha256"]
+        total += len(served.content)
+    assert total == 2_034_618
+    assert catalog_api.get("/observations/cosmic/absent.png").status_code == 404
+
+
+def test_missing_observed_history_source_is_503_without_synthetic_substitution(
+    catalog_api, monkeypatch
+):
+    import science.history_observations
+
+    def missing_reference(*args, **kwargs):
+        raise FileNotFoundError("missing source")
+
+    monkeypatch.setattr(science.history_observations, "get_cosmic_observations", missing_reference)
+    response = catalog_api.get("/api/v1/cosmic-observations")
+    assert response.status_code == 503, response.text
+    assert "history_observation_unavailable" in response.text
+
+
 @pytest.mark.parametrize("age", ["-1", "nan", "inf", "13.81"])
 def test_cosmic_invalid_age_is_422_not_silently_clamped_or_nonfinite(catalog_api, age):
     response = catalog_api.get("/api/v1/cosmic-history/sample", params={"age_gyr": age})
@@ -204,3 +287,19 @@ def test_kuiper_api_returns_verified_display_version_and_source_hash(catalog_api
     )
     assert value["source"]["sha256"]
     assert value["renderer_assumptions"]["points_are_catalog_objects"] is False
+
+
+def test_universe_hierarchy_api_links_hosts_members_and_actual_existing_planets(catalog_api):
+    value = catalog_api.get("/api/v1/catalog/universe").json()
+    assert len(value["objects"]) == 24
+    assert value["algorithm_version"] == "sourced-universe-hierarchy-v1"
+    milky = catalog_api.get("/api/v1/catalog/universe?galaxy_id=galaxy-milky-way").json()
+    assert len(milky["objects"]) == 4871
+    host = next(v for v in milky["objects"] if v["name"] == "TRAPPIST-1")
+    children = catalog_api.get(
+        "/api/v1/catalog/universe", params={"parent_id": host["object_id"]}
+    ).json()
+    assert len(children["objects"]) == 7
+    assert all(v["kind"] == "exoplanet" for v in children["objects"])
+    assert all(v["coordinate"] is None for v in children["objects"])
+    assert catalog_api.get("/api/v1/catalog/universe?galaxy_id=invalid").status_code == 422

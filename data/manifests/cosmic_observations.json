@@ -1,0 +1,499 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "cosmic-observation-viewer-v1",
+  "created_utc": "2026-11-14T06:15:08.497587+00:00",
+  "age_unit": "published_approximate_Gyr_since_hot_Big_Bang",
+  "age_interpolation_available": false,
+  "objects": [
+    {
+      "id": "cosmic_gems_clusters",
+      "name": "Cosmic Gems arc (SPT0615-JD1)",
+      "source_id": "esa_cosmic_gems",
+      "approx_age_gyr": 0.46,
+      "sample_age_range_gyr": null,
+      "age_scope": "Published approximate cosmic age of the observed system, not its star-cluster age",
+      "image_page_url": "https://esawebb.org/images/weic2418c/",
+      "instrument": "JWST/NIRCam",
+      "caption": "Observed JWST field and enlarged Cosmic Gems region. Compact star clusters are resolved through strong gravitational lensing.",
+      "limitations": [
+        "Five clusters in this specific observation are not five separate galaxies or a universal cluster count.",
+        "The published approximate cosmic age is not a precise model-independent timestamp."
+      ],
+      "source": {
+        "url": "https://esawebb.org/news/weic2418/",
+        "resolved_url": "https://esawebb.org/news/weic2418/",
+        "label": "ESA/Webb: Star clusters in the Cosmic Gems arc (2024)",
+        "local_relative_path": "data/reference/cosmic-morphology/esa_cosmic_gems.html",
+        "bytes": 70161,
+        "sha256": "09193e72dc098978a34f9d4c058088bfb1ee70d64ac3a970d3895a7fd2c87ea6",
+        "retrieved_utc": "2026-11-14T06:01:23.330111+00:00"
+      },
+      "image": {
+        "url": "/observations/cosmic/cosmic-gems-weic2418c.jpg",
+        "local_path": "web/public/observations/cosmic/cosmic-gems-weic2418c.jpg",
+        "source_url": "https://cdn.esawebb.org/archives/images/screen/weic2418c.jpg",
+        "resolved_source_url": "https://cdn.esawebb.org/archives/images/screen/weic2418c.jpg",
+        "sha256": "4ae11c0d01e609204524f763b87908a784fde99fded5add7d29292564ea6ebcd",
+        "bytes": 164909,
+        "retrieved_utc": "2026-11-14T06:14:16.059846+00:00",
+        "pixel_dimensions": [
+          1280,
+          642
+        ],
+        "kind": "published_observation_composite",
+        "artist_concept": false,
+        "bytes_modified_locally": false,
+        "image_page_source": {
+          "url": "https://esawebb.org/images/weic2418c/",
+          "resolved_url": "https://esawebb.org/images/weic2418c/",
+          "label": "ESA/Webb: Cosmic Gems observation collage and credit",
+          "local_relative_path": "data/reference/cosmic-observations/cosmic_gems_image_page.html",
+          "bytes": 71006,
+          "sha256": "06d5ebfdc4799f08e5364eebdcd6b498ad38b7051212d4bd2572f1800ba27c12",
+          "retrieved_utc": "2026-11-14T06:14:13.884424+00:00"
+        },
+        "credit": "ESA/Webb, NASA & CSA, L. Bradley (STScI), A. Adamo (Stockholm University) and the Cosmic Spring collaboration",
+        "processing": [
+          "Published near-infrared observation composite with inset, assigned display colors and source-side image processing.",
+          "Strong foreground lensing magnifies and stretches the light. The close-up contains two distinct lensed galaxies; the arcs are not intrinsic three-dimensional galaxy outlines."
+        ],
+        "license": {
+          "label": "Creative Commons Attribution 4.0 International",
+          "spdx_id": "CC-BY-4.0",
+          "url": "https://esawebb.org/copyright/",
+          "policy_source": {
+            "url": "https://esawebb.org/copyright/",
+            "resolved_url": "https://esawebb.org/copyright/",
+            "label": "ESA/Webb image, video and text usage conditions",
+            "local_relative_path": "data/reference/cosmic-observations/esawebb_media_policy.html",
+            "bytes": 58839,
+            "sha256": "513c4e1ab9e20b2461e0eeea3201a64f0aa4ca4b4175a5cc34cc0864fcfd12f8",
+            "retrieved_utc": "2026-11-14T06:14:10.798757+00:00"
+          },
+          "no_asset_specific_copyright_restriction_observed": true,
+          "requirements": [
+            "Show the complete source credit clearly beside the image and retain active source links.",
+            "Do not imply institutional endorsement; institutional logos are not licensed by these image terms.",
+            "Published file bytes are unchanged locally; source-side color mapping, layout and annotations are disclosed."
+          ]
+        }
+      }
+    },
+    {
+      "id": "firefly_sparkle_assembly",
+      "name": "Firefly Sparkle and companions",
+      "source_id": "nasa_firefly_sparkle",
+      "approx_age_gyr": 0.6,
+      "sample_age_range_gyr": null,
+      "age_scope": "Published approximate cosmic age of the observed galaxy",
+      "image_page_url": "https://science.nasa.gov/missions/webb/found-first-actively-forming-galaxy-as-lightweight-as-young-milky-way/",
+      "instrument": "JWST/NIRCam",
+      "caption": "Actual NIRCam observation with an enlarged, labelled Firefly Sparkle region and two nearby companions.",
+      "limitations": [
+        "The lensed line of luminous clusters is not an unmodified intrinsic galaxy outline.",
+        "Nearby companions do not specify a measured future merger trajectory or final morphology."
+      ],
+      "source": {
+        "url": "https://science.nasa.gov/missions/webb/found-first-actively-forming-galaxy-as-lightweight-as-young-milky-way/",
+        "resolved_url": "https://science.nasa.gov/missions/webb/found-first-actively-forming-galaxy-as-lightweight-as-young-milky-way/",
+        "label": "NASA Webb: Firefly Sparkle and companions (2024)",
+        "local_relative_path": "data/reference/cosmic-morphology/nasa_firefly_sparkle.html",
+        "bytes": 336241,
+        "sha256": "c12df71d57ebf1d9b996c1ee1abea9c8317a64c9cefad2d48cbea32c209be135",
+        "retrieved_utc": "2026-11-14T06:01:24.666203+00:00"
+      },
+      "image": {
+        "url": "/observations/cosmic/firefly-sparkle-nircam.png",
+        "local_path": "web/public/observations/cosmic/firefly-sparkle-nircam.png",
+        "source_url": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2024/12/STScI-01J4A44SME50MYJ4QVW1AWQW5V.png?w=900&h=448&fit=clip",
+        "resolved_source_url": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2024/12/STScI-01J4A44SME50MYJ4QVW1AWQW5V.png?w=900&h=448&fit=clip",
+        "sha256": "4961c51aec0caed2aa3119ac70becce2056ccdaabd9592a1e219c0093b4569bc",
+        "bytes": 654914,
+        "retrieved_utc": "2026-11-14T06:14:16.368266+00:00",
+        "pixel_dimensions": [
+          899,
+          448
+        ],
+        "kind": "published_observation_composite",
+        "artist_concept": false,
+        "bytes_modified_locally": false,
+        "image_page_source": {
+          "url": "https://science.nasa.gov/missions/webb/found-first-actively-forming-galaxy-as-lightweight-as-young-milky-way/",
+          "resolved_url": "https://science.nasa.gov/missions/webb/found-first-actively-forming-galaxy-as-lightweight-as-young-milky-way/",
+          "label": "NASA Webb: Firefly Sparkle and companions (2024)",
+          "local_relative_path": "data/reference/cosmic-morphology/nasa_firefly_sparkle.html",
+          "bytes": 336241,
+          "sha256": "c12df71d57ebf1d9b996c1ee1abea9c8317a64c9cefad2d48cbea32c209be135",
+          "retrieved_utc": "2026-11-14T06:01:24.666203+00:00"
+        },
+        "credit": "NASA, ESA, CSA, STScI, Chris Willott (National Research Council Canada), Lamiya Mowla (Wellesley College), Kartheik Iyer (Columbia University)",
+        "processing": [
+          "Published near-infrared color composite, field/inset layout and annotations; light is strongly magnified and distorted by foreground gravitational lensing.",
+          "This is the observation image, not the separate artist's reconstruction shown elsewhere in the article."
+        ],
+        "license": {
+          "label": "NASA Images and Media Usage Guidelines (educational/informational use)",
+          "spdx_id": null,
+          "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+          "policy_source": {
+            "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+            "resolved_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+            "label": "NASA Images and Media Usage Guidelines",
+            "local_relative_path": "data/reference/cosmic-observations/nasa_media_policy.html",
+            "bytes": 318232,
+            "sha256": "b0b4d40ca907fe8194aaf4495ee646733e8a34947a96ef8ca085565365957c3b",
+            "retrieved_utc": "2026-11-14T06:14:09.884760+00:00"
+          },
+          "no_asset_specific_copyright_restriction_observed": true,
+          "requirements": [
+            "Show the complete source credit clearly beside the image and retain active source links.",
+            "Do not imply institutional endorsement; institutional logos are not licensed by these image terms.",
+            "Published file bytes are unchanged locally; source-side color mapping, layout and annotations are disclosed."
+          ]
+        }
+      }
+    },
+    {
+      "id": "ceers_projected_shapes",
+      "name": "CEERS projected galaxy-shape examples",
+      "source_id": "nasa_ceers_shapes",
+      "approx_age_gyr": null,
+      "sample_age_range_gyr": [
+        0.6,
+        6.0
+      ],
+      "age_scope": "Published broad cosmic-age range of the study sample; the six pictured cutouts are not assigned one shared or individually resolved age here",
+      "image_page_url": "https://science.nasa.gov/missions/webb/webb-shows-many-early-galaxies-looked-like-pool-noodles-surfboards/",
+      "instrument": "JWST/NIRCam",
+      "caption": "Six actual CEERS galaxy cutouts, grouped by their observed elongated, disk-like and spherical projected appearances.",
+      "limitations": [
+        "The 0.6 to 6 Gyr range belongs to the study sample; it is not one cosmic epoch for the entire collage.",
+        "Apparent two-dimensional shape is distinct from inferred intrinsic three-dimensional geometry.",
+        "No frequency, fraction or evolution probability is calculated from these six display examples."
+      ],
+      "source": {
+        "url": "https://science.nasa.gov/missions/webb/webb-shows-many-early-galaxies-looked-like-pool-noodles-surfboards/",
+        "resolved_url": "https://science.nasa.gov/missions/webb/webb-shows-many-early-galaxies-looked-like-pool-noodles-surfboards/",
+        "label": "NASA Webb: CEERS distant-galaxy shape diversity (2024)",
+        "local_relative_path": "data/reference/cosmic-morphology/nasa_ceers_shapes.html",
+        "bytes": 328164,
+        "sha256": "e7ce06ecefd0da8a82424bf9efee2ad535970affe614f713f6063b25d21b2e28",
+        "retrieved_utc": "2026-11-14T06:01:22.442323+00:00"
+      },
+      "image": {
+        "url": "/observations/cosmic/ceers-observed-shape-cutouts.png",
+        "local_path": "web/public/observations/cosmic/ceers-observed-shape-cutouts.png",
+        "source_url": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2024/01/STScI-01HHZ8T813KV44MSB91ZGM102C.png?w=900&h=600&fit=clip",
+        "resolved_source_url": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2024/01/STScI-01HHZ8T813KV44MSB91ZGM102C.png?w=900&h=600&fit=clip",
+        "sha256": "0ec8a589418d6aa6f6285c282b5e0279e276df7d613871587ba3681a9ed026e4",
+        "bytes": 931391,
+        "retrieved_utc": "2026-11-14T06:14:16.473052+00:00",
+        "pixel_dimensions": [
+          900,
+          600
+        ],
+        "kind": "published_observation_composite",
+        "artist_concept": false,
+        "bytes_modified_locally": false,
+        "image_page_source": {
+          "url": "https://science.nasa.gov/missions/webb/webb-shows-many-early-galaxies-looked-like-pool-noodles-surfboards/",
+          "resolved_url": "https://science.nasa.gov/missions/webb/webb-shows-many-early-galaxies-looked-like-pool-noodles-surfboards/",
+          "label": "NASA Webb: CEERS distant-galaxy shape diversity (2024)",
+          "local_relative_path": "data/reference/cosmic-morphology/nasa_ceers_shapes.html",
+          "bytes": 328164,
+          "sha256": "e7ce06ecefd0da8a82424bf9efee2ad535970affe614f713f6063b25d21b2e28",
+          "retrieved_utc": "2026-11-14T06:01:22.442323+00:00"
+        },
+        "credit": "NASA, ESA, CSA, STScI, Steve Finkelstein (UT Austin), Micaela Bagley (UT Austin), Rebecca Larson (UT Austin)",
+        "processing": [
+          "Published near-infrared color-image cutouts arranged and labelled by the source team.",
+          "These are observation cutouts, not the separate four-shape three-dimensional illustration in the source article."
+        ],
+        "license": {
+          "label": "NASA Images and Media Usage Guidelines (educational/informational use)",
+          "spdx_id": null,
+          "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+          "policy_source": {
+            "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+            "resolved_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+            "label": "NASA Images and Media Usage Guidelines",
+            "local_relative_path": "data/reference/cosmic-observations/nasa_media_policy.html",
+            "bytes": 318232,
+            "sha256": "b0b4d40ca907fe8194aaf4495ee646733e8a34947a96ef8ca085565365957c3b",
+            "retrieved_utc": "2026-11-14T06:14:09.884760+00:00"
+          },
+          "no_asset_specific_copyright_restriction_observed": true,
+          "requirements": [
+            "Show the complete source credit clearly beside the image and retain active source links.",
+            "Do not imply institutional endorsement; institutional logos are not licensed by these image terms.",
+            "Published file bytes are unchanged locally; source-side color mapping, layout and annotations are disclosed."
+          ]
+        }
+      }
+    },
+    {
+      "id": "rebels25_rotating_disc",
+      "name": "REBELS-25 gas distribution and motion",
+      "source_id": "eso_rebels25",
+      "approx_age_gyr": 0.7,
+      "sample_age_range_gyr": null,
+      "age_scope": "Published approximate cosmic age of the observed rotating-disc system",
+      "image_page_url": "https://www.eso.org/public/images/eso2415b/",
+      "instrument": "ALMA",
+      "caption": "Actual ALMA maps: gas distribution at left and line-of-sight gas motion at right, supporting a strongly rotating early disc.",
+      "limitations": [
+        "This is not a visible-light photograph or a resolved stellar surface map.",
+        "A central bar and spiral arms were tentative hints in the release, not adopted confirmed structures."
+      ],
+      "source": {
+        "url": "https://www.eso.org/public/news/eso2415/",
+        "resolved_url": "https://www.eso.org/public/news/eso2415/",
+        "label": "ESO/ALMA: REBELS-25 rotating disc (2024)",
+        "local_relative_path": "data/reference/cosmic-morphology/eso_rebels25.html",
+        "bytes": 89926,
+        "sha256": "1d63151ad0321ce17d18b37b28f4eb811dbd42469ec0386a1b441f20eb269420",
+        "retrieved_utc": "2026-11-14T06:01:28.794808+00:00"
+      },
+      "image": {
+        "url": "/observations/cosmic/rebels25-alma-gas-velocity.jpg",
+        "local_path": "web/public/observations/cosmic/rebels25-alma-gas-velocity.jpg",
+        "source_url": "https://cdn.eso.org/images/large/eso2415b.jpg",
+        "resolved_source_url": "https://cdn.eso.org/images/large/eso2415b.jpg",
+        "sha256": "53ff025a9bfc2bbbfe3779230bd29707694a3362a3567edd2e97243384cc00fd",
+        "bytes": 165652,
+        "retrieved_utc": "2026-11-14T06:14:16.987116+00:00",
+        "pixel_dimensions": [
+          1838,
+          942
+        ],
+        "kind": "published_observation_composite",
+        "artist_concept": false,
+        "bytes_modified_locally": false,
+        "image_page_source": {
+          "url": "https://www.eso.org/public/images/eso2415b/",
+          "resolved_url": "https://www.eso.org/public/images/eso2415b/",
+          "label": "ESO/ALMA: REBELS-25 gas intensity and velocity collage",
+          "local_relative_path": "data/reference/cosmic-observations/rebels25_image_page.html",
+          "bytes": 78101,
+          "sha256": "38820bcdc22bc931d66d19b3d889667003d3bf675c85a61b3463938a5730d742",
+          "retrieved_utc": "2026-11-14T06:14:15.824367+00:00"
+        },
+        "credit": "ALMA (ESO/NAOJ/NRAO)/L. Rowland et al.",
+        "processing": [
+          "Published side-by-side scientific data maps with assigned colors; the right panel is a velocity map, not natural-color starlight.",
+          "Blue and red in the velocity map encode motion toward and away from the observer."
+        ],
+        "license": {
+          "label": "Creative Commons Attribution 4.0 International",
+          "spdx_id": "CC-BY-4.0",
+          "url": "https://www.eso.org/public/outreach/copyright/",
+          "policy_source": {
+            "url": "https://www.eso.org/public/outreach/copyright/",
+            "resolved_url": "https://www.eso.org/public/outreach/copyright/",
+            "label": "ESO image, video and text usage conditions",
+            "local_relative_path": "data/reference/cosmic-observations/eso_media_policy.html",
+            "bytes": 83242,
+            "sha256": "fd53a3123e1757fbaf93e14018017757cc4d65334af0b7b292097e12ef7f7eb8",
+            "retrieved_utc": "2026-11-14T06:14:12.638300+00:00"
+          },
+          "no_asset_specific_copyright_restriction_observed": true,
+          "requirements": [
+            "Show the complete source credit clearly beside the image and retain active source links.",
+            "Do not imply institutional endorsement; institutional logos are not licensed by these image terms.",
+            "Published file bytes are unchanged locally; source-side color mapping, layout and annotations are disclosed."
+          ]
+        }
+      }
+    },
+    {
+      "id": "zs7_ongoing_merger",
+      "name": "ZS7 galaxy merger system",
+      "source_id": "esa_zs7_merger",
+      "approx_age_gyr": 0.74,
+      "sample_age_range_gyr": null,
+      "age_scope": "Published approximate cosmic age of the observed interacting system",
+      "image_page_url": "https://esawebb.org/images/weic2413b/",
+      "instrument": "JWST/NIRCam; interpretation also uses NIRSpec spectroscopy",
+      "caption": "Actual NIRCam field and zoom sequence locating ZS7, a system with evidence for an ongoing galaxy merger.",
+      "limitations": [
+        "No completed black-hole coalescence or gravitational-wave event is directly imaged here.",
+        "The image is not a time sequence, reconstructed orbit, or simulated past trajectory."
+      ],
+      "source": {
+        "url": "https://esawebb.org/news/weic2413/",
+        "resolved_url": "https://esawebb.org/news/weic2413/",
+        "label": "ESA/Webb: ZS7 ongoing galaxy merger evidence (2024)",
+        "local_relative_path": "data/reference/cosmic-morphology/esa_zs7_merger.html",
+        "bytes": 67690,
+        "sha256": "420698ad16de1c92650bbeefdd4e375c3094a3900c3ac88343bb8afec94d4138",
+        "retrieved_utc": "2026-11-14T06:04:44.284201+00:00"
+      },
+      "image": {
+        "url": "/observations/cosmic/zs7-primer-nircam.jpg",
+        "local_path": "web/public/observations/cosmic/zs7-primer-nircam.jpg",
+        "source_url": "https://cdn.esawebb.org/archives/images/screen/weic2413b.jpg",
+        "resolved_source_url": "https://cdn.esawebb.org/archives/images/screen/weic2413b.jpg",
+        "sha256": "83ccd15cb300bfd105541592f9edd023a9a5cad1c1d436d60d6490a39b8e23ad",
+        "bytes": 117752,
+        "retrieved_utc": "2026-11-14T06:14:17.472402+00:00",
+        "pixel_dimensions": [
+          1280,
+          427
+        ],
+        "kind": "published_observation_composite",
+        "artist_concept": false,
+        "bytes_modified_locally": false,
+        "image_page_source": {
+          "url": "https://esawebb.org/images/weic2413b/",
+          "resolved_url": "https://esawebb.org/images/weic2413b/",
+          "label": "ESA/Webb: ZS7 NIRCam observation collage and credit",
+          "local_relative_path": "data/reference/cosmic-observations/zs7_image_page.html",
+          "bytes": 70934,
+          "sha256": "c6d83e64f93e5e04717a0ef1e44835d8c997485c8a52a7aca46f6456032b7006",
+          "retrieved_utc": "2026-11-14T06:14:14.333875+00:00"
+        },
+        "credit": "ESA/Webb, NASA, CSA, J. Dunlop, D. Magee, P. G. Pérez-González, H. Übler, R. Maiolino, et. al",
+        "processing": [
+          "Published observed-image zoom collage. The close-up uses orange and dark red to display emission associated with ionized hydrogen and oxygen.",
+          "The merger interpretation combines imaging with NIRSpec spectral evidence; shape alone is insufficient."
+        ],
+        "license": {
+          "label": "Creative Commons Attribution 4.0 International",
+          "spdx_id": "CC-BY-4.0",
+          "url": "https://esawebb.org/copyright/",
+          "policy_source": {
+            "url": "https://esawebb.org/copyright/",
+            "resolved_url": "https://esawebb.org/copyright/",
+            "label": "ESA/Webb image, video and text usage conditions",
+            "local_relative_path": "data/reference/cosmic-observations/esawebb_media_policy.html",
+            "bytes": 58839,
+            "sha256": "513c4e1ab9e20b2461e0eeea3201a64f0aa4ca4b4175a5cc34cc0864fcfd12f8",
+            "retrieved_utc": "2026-11-14T06:14:10.798757+00:00"
+          },
+          "no_asset_specific_copyright_restriction_observed": true,
+          "requirements": [
+            "Show the complete source credit clearly beside the image and retain active source links.",
+            "Do not imply institutional endorsement; institutional logos are not licensed by these image terms.",
+            "Published file bytes are unchanged locally; source-side color mapping, layout and annotations are disclosed."
+          ]
+        }
+      }
+    }
+  ],
+  "sources": {
+    "esa_cosmic_gems": {
+      "url": "https://esawebb.org/news/weic2418/",
+      "resolved_url": "https://esawebb.org/news/weic2418/",
+      "label": "ESA/Webb: Star clusters in the Cosmic Gems arc (2024)",
+      "local_relative_path": "data/reference/cosmic-morphology/esa_cosmic_gems.html",
+      "bytes": 70161,
+      "sha256": "09193e72dc098978a34f9d4c058088bfb1ee70d64ac3a970d3895a7fd2c87ea6",
+      "retrieved_utc": "2026-11-14T06:01:23.330111+00:00"
+    },
+    "nasa_firefly_sparkle": {
+      "url": "https://science.nasa.gov/missions/webb/found-first-actively-forming-galaxy-as-lightweight-as-young-milky-way/",
+      "resolved_url": "https://science.nasa.gov/missions/webb/found-first-actively-forming-galaxy-as-lightweight-as-young-milky-way/",
+      "label": "NASA Webb: Firefly Sparkle and companions (2024)",
+      "local_relative_path": "data/reference/cosmic-morphology/nasa_firefly_sparkle.html",
+      "bytes": 336241,
+      "sha256": "c12df71d57ebf1d9b996c1ee1abea9c8317a64c9cefad2d48cbea32c209be135",
+      "retrieved_utc": "2026-11-14T06:01:24.666203+00:00"
+    },
+    "nasa_ceers_shapes": {
+      "url": "https://science.nasa.gov/missions/webb/webb-shows-many-early-galaxies-looked-like-pool-noodles-surfboards/",
+      "resolved_url": "https://science.nasa.gov/missions/webb/webb-shows-many-early-galaxies-looked-like-pool-noodles-surfboards/",
+      "label": "NASA Webb: CEERS distant-galaxy shape diversity (2024)",
+      "local_relative_path": "data/reference/cosmic-morphology/nasa_ceers_shapes.html",
+      "bytes": 328164,
+      "sha256": "e7ce06ecefd0da8a82424bf9efee2ad535970affe614f713f6063b25d21b2e28",
+      "retrieved_utc": "2026-11-14T06:01:22.442323+00:00"
+    },
+    "eso_rebels25": {
+      "url": "https://www.eso.org/public/news/eso2415/",
+      "resolved_url": "https://www.eso.org/public/news/eso2415/",
+      "label": "ESO/ALMA: REBELS-25 rotating disc (2024)",
+      "local_relative_path": "data/reference/cosmic-morphology/eso_rebels25.html",
+      "bytes": 89926,
+      "sha256": "1d63151ad0321ce17d18b37b28f4eb811dbd42469ec0386a1b441f20eb269420",
+      "retrieved_utc": "2026-11-14T06:01:28.794808+00:00"
+    },
+    "esa_zs7_merger": {
+      "url": "https://esawebb.org/news/weic2413/",
+      "resolved_url": "https://esawebb.org/news/weic2413/",
+      "label": "ESA/Webb: ZS7 ongoing galaxy merger evidence (2024)",
+      "local_relative_path": "data/reference/cosmic-morphology/esa_zs7_merger.html",
+      "bytes": 67690,
+      "sha256": "420698ad16de1c92650bbeefdd4e375c3094a3900c3ac88343bb8afec94d4138",
+      "retrieved_utc": "2026-11-14T06:04:44.284201+00:00"
+    },
+    "nasa_media_policy": {
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "resolved_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "label": "NASA Images and Media Usage Guidelines",
+      "local_relative_path": "data/reference/cosmic-observations/nasa_media_policy.html",
+      "bytes": 318232,
+      "sha256": "b0b4d40ca907fe8194aaf4495ee646733e8a34947a96ef8ca085565365957c3b",
+      "retrieved_utc": "2026-11-14T06:14:09.884760+00:00"
+    },
+    "esawebb_media_policy": {
+      "url": "https://esawebb.org/copyright/",
+      "resolved_url": "https://esawebb.org/copyright/",
+      "label": "ESA/Webb image, video and text usage conditions",
+      "local_relative_path": "data/reference/cosmic-observations/esawebb_media_policy.html",
+      "bytes": 58839,
+      "sha256": "513c4e1ab9e20b2461e0eeea3201a64f0aa4ca4b4175a5cc34cc0864fcfd12f8",
+      "retrieved_utc": "2026-11-14T06:14:10.798757+00:00"
+    },
+    "eso_media_policy": {
+      "url": "https://www.eso.org/public/outreach/copyright/",
+      "resolved_url": "https://www.eso.org/public/outreach/copyright/",
+      "label": "ESO image, video and text usage conditions",
+      "local_relative_path": "data/reference/cosmic-observations/eso_media_policy.html",
+      "bytes": 83242,
+      "sha256": "fd53a3123e1757fbaf93e14018017757cc4d65334af0b7b292097e12ef7f7eb8",
+      "retrieved_utc": "2026-11-14T06:14:12.638300+00:00"
+    },
+    "cosmic_gems_image_page": {
+      "url": "https://esawebb.org/images/weic2418c/",
+      "resolved_url": "https://esawebb.org/images/weic2418c/",
+      "label": "ESA/Webb: Cosmic Gems observation collage and credit",
+      "local_relative_path": "data/reference/cosmic-observations/cosmic_gems_image_page.html",
+      "bytes": 71006,
+      "sha256": "06d5ebfdc4799f08e5364eebdcd6b498ad38b7051212d4bd2572f1800ba27c12",
+      "retrieved_utc": "2026-11-14T06:14:13.884424+00:00"
+    },
+    "zs7_image_page": {
+      "url": "https://esawebb.org/images/weic2413b/",
+      "resolved_url": "https://esawebb.org/images/weic2413b/",
+      "label": "ESA/Webb: ZS7 NIRCam observation collage and credit",
+      "local_relative_path": "data/reference/cosmic-observations/zs7_image_page.html",
+      "bytes": 70934,
+      "sha256": "c6d83e64f93e5e04717a0ef1e44835d8c997485c8a52a7aca46f6456032b7006",
+      "retrieved_utc": "2026-11-14T06:14:14.333875+00:00"
+    },
+    "rebels25_image_page": {
+      "url": "https://www.eso.org/public/images/eso2415b/",
+      "resolved_url": "https://www.eso.org/public/images/eso2415b/",
+      "label": "ESO/ALMA: REBELS-25 gas intensity and velocity collage",
+      "local_relative_path": "data/reference/cosmic-observations/rebels25_image_page.html",
+      "bytes": 78101,
+      "sha256": "38820bcdc22bc931d66d19b3d889667003d3bf675c85a61b3463938a5730d742",
+      "retrieved_utc": "2026-11-14T06:14:15.824367+00:00"
+    }
+  },
+  "reference_reuse": {
+    "immutable_article_root": "data/reference/cosmic-morphology",
+    "reused_article_count": 5,
+    "new_image_and_usage_document_root": "data/reference/cosmic-observations",
+    "old_chronology_and_morphology_manifests_modified": false
+  },
+  "limitations": [
+    "Only five published observational cases are displayed. No synthetic galaxy population, coordinates, growth animation or interpolated past sky is supplied.",
+    "Cosmic ages are source-published approximate interpretations of the epoch when the light was emitted; they are not camera capture dates, galaxy ages or exact model-independent timestamps.",
+    "CEERS has a study-sample age range, not a single epoch or independently adopted age for every displayed cutout.",
+    "Images are published processed observation products, including color mapping, annotations, collages, lensing or scientific data maps; they are not raw detector exposures or natural-color views.",
+    "A case's cosmic age refers to its target system or explicitly stated sample; other foreground and background objects in a field collage do not share that age.",
+    "The historical chronology and conceptual morphology references remain preserved separately and do not create additional observed cases.",
+    "Selecting a case changes the displayed observation and its published context; it does not generate an image at an arbitrary requested epoch."
+  ]
+}
