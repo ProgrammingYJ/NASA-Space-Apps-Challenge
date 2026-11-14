@@ -234,6 +234,8 @@ def prepare(built_at):
         ],
         "inactive_conceptual_renderers": ["cosmic-concept-v1", "cosmic-diversity-v1"],
         "cosmic_history_ui": "published_observation_images_only",
+        "external_verification_report": name + ".verification.json",
+        "archive_checksum_report": name + ".zip.sha256.json",
         "input_ids": [
             {key: record[key] for key in ("id", "local_relative_path", "sha256", "bytes")}
             for record in inputs
@@ -242,7 +244,7 @@ def prepare(built_at):
             "python_pytest": "see worklog",
             "ruff": "see worklog",
             "frontend": "see worklog",
-            "extracted_windows_smoke": "pending",
+            "extracted_windows_smoke": "not run by packaging; final exact-archive result is in external_verification_report",
             "linux_container": "not run; engine unavailable",
             "public_service": "not deployed",
         },

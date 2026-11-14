@@ -2,6 +2,7 @@ import type {UniverseData,UniverseBody} from './UniverseScene';
 import type {Vec3} from './sceneMath';
 
 export interface ModelDate {year:number;month:number;day:number}
+export interface ModelDateDraft {year:string;month:string;day:string}
 export interface LongTermBody {object_id:string;elements_j2000:number[];rates_per_century:number[];additional_terms:{b:number;c:number;s:number;f:number}}
 export interface LongTermModel {
   algorithm_version:'jpl-kepler-long-term-v1';source_manifest_sha256:string;
@@ -18,6 +19,13 @@ export function modelDateMs(year:number,month=1,day=1){
   return date.getTime();
 }
 export function modelDateParts(ms:number):ModelDate {const d=new Date(ms);return {year:d.getUTCFullYear(),month:d.getUTCMonth()+1,day:d.getUTCDate()};}
+export function parseModelDateDraft(draft:ModelDateDraft):ModelDate {
+  if(!/^-?\d+$/.test(draft.year)||!/^\d+$/.test(draft.month)||!/^\d+$/.test(draft.day))throw new Error('invalid_model_date');
+  const date={year:Number(draft.year),month:Number(draft.month),day:Number(draft.day)};
+  if(![date.year,date.month,date.day].every(Number.isSafeInteger))throw new Error('invalid_model_date');
+  modelDateMs(date.year,date.month,date.day);
+  return date;
+}
 export function simulationOrbit(body:LongTermBody,ms:number):Vec3[] {
   const T=(2440587.5+ms/86400000-2451545)/36525;
   const [a,e,I,,p,N]=body.elements_j2000.map((v,i)=>v+T*body.rates_per_century[i]);

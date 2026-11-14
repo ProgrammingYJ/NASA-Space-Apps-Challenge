@@ -305,8 +305,14 @@ def create_app(state_dir: Path | None = None):
             return sample_long_term(ROOT, year, month, day, hour)
         except FileNotFoundError:
             raise HTTPException(503, "simulation_source_unavailable") from None
-        except ValueError:
-            raise HTTPException(422, "unsupported_simulation_date") from None
+        except ValueError as exc:
+            if str(exc) in {
+                "invalid_long_term_calendar",
+                "long_term_epoch_out_of_range",
+                "unsupported_long_term_table",
+            }:
+                raise HTTPException(422, "unsupported_simulation_date") from None
+            raise HTTPException(503, "simulation_source_unavailable") from None
 
     @app.get("/api/v1/catalog/universe")
     def universe_catalog(galaxy_id: str | None = None, parent_id: str | None = None):

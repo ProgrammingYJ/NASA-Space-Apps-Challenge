@@ -84,8 +84,19 @@ NASA 외계행성 공개 REST는 TAP 접속 timeout 후 채택한 별도 공식 
 
 ## DEV-007 데이터 전수 정본과 실제 과거 관측
 
-사용자의 명시적 요청으로 [Data_Spec.md](../Data_Spec.md)를 별도 전수 기록으로 만들었다. 파일1497개(data1454+public43), 내장원응답32개, 정적복제43개와 후보/URL검토를 기록하며 실사용6원본/보정과 확보만96개를 구분한다. 이 파일의 이전 요약/취득 이력은 보존하고 최신 데이터별용도/가공/권리·SHA는Data_Spec 및실행manifest에서확인한다.
+사용자의 명시적 요청으로 [Data_Spec.md](../Data_Spec.md)를 별도 전수 기록으로 만들었다. DEV-007 당시1497자료파일이었고 DEV-008 최신snapshot은1631자료파일(data1588+public43)+명시참조helper1, 참조경로877개, 내장원응답32개, 정적복제43개와 후보/URL검토를 기록하며 실사용6원본/보정과 확보만96개를 구분한다. 이 파일의 이전 요약/취득 이력은 보존하고 최신 데이터별용도/가공/권리·SHA는Data_Spec 및실행manifest에서확인한다.
 
 현재 역사화면은 cosmic_observations.json29,430B/SHA bc12aa27c63d8c7b88d8b175534c0b935f4546beb029ccca31c1ce2c14d0b0d6의5공개관측이미지2,034,618B를쓴다. 기존기사5개892,182B재사용+새정책/caption6HTML680,354B=11참조1,572,536B다. age.46/.6/.7/.74Gyr와CEERS.6–6Gyr는출처의추정/표본범위다. raw detector/자연색으로주장하지않고lens/ALMA gas·velocity/처리와credit/license를함께표시한다. NASA2는해당미디어지침,ESA/ESO3은CC-BY4.0/전체credit을보존한다.
 
 기존 cosmic_history/morphology 원문과 가상 renderer는이전/중간기록으로보존하지만현재App에서가상35은하/변형/임의10anchor를표시하지않는다. 사용자실제관측-only선택이중간시안보다우선한다. 별도 관측이 없는 날짜의사진/관측사이중간프레임을만들지않는다.
+
+
+## DEV-008 장기모형·계층·표시이름 자료
+
+장기근사는 JPL 공식fitted elements/rates(평균궤도요소 아님)를 long_term_model.json과공식HTML에 보존한다. 별도long_term_validation.json은8원응답의4시각 long32/short16비교이며,총9원본75,257B다. TDB달력−2999-01-01~3000-01-01·Sun+8대표행성계/EMB·Pluto/위성미지원·명목오차가보장상한이아님을 Data_Spec4.1/FSD8.6에서연결한다. 기존72h/실노출원본을고치지않는다.
+
+universe_catalog.json은실제성원23사례와태양계참조를연결하고공식20문서/SIMBAD23응답43원본4,929,139B를보존한다. 외부9은하15대표성원과우리은하8사례이며,우리은하동적목록4871항목은4862기존호스트+사례8+Solar1이다. 자식6470행성은기존카탈로그참조다. 개별방향과핵/성단참조역할·미상거리/깊이·이미지/appearance null을보존한다.
+
+object_names.json은476ID×5언어의표시형/표기방법/원출처와원catalog/helper SHA를연결한다. 이름이있는183개와국제지정명293개를구분한다. 기관HTML/PDF12원본30,323,543B와12sidecar는 data/reference/object-names/에보존하고미확보요청·원어민검수공백·기관표기/프로젝트음역을명시했다. 이름표시는새관측/새위치가아니며원과학명/ID/벡터는바꾸지않는다.
+
+최신전수명세 Data_Spec의1631자료파일+명시참조helper1·877참조경로는파일존재/SHA/바이트를대조한snapshot이며독립관측수/물리정확도·권리보장을뜻하지않는다. 현재기능/API/상태·최신실행검사는 FSD와작업기록을따른다.

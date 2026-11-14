@@ -1,7 +1,14 @@
 import {describe,it,expect} from 'vitest';
-import {modelDateMs,modelDateParts,simulationPosition} from './longTermMath';
+import {modelDateMs,modelDateParts,simulationPosition,parseModelDateDraft} from './longTermMath';
 import fixture from './longTermParity.fixture.json';
 describe('TDB calendar labels and Kepler simulation',()=>{
+  it('accepts year zero and negative date drafts without treating an unfinished field as zero',()=>{
+    expect(parseModelDateDraft({year:'0',month:'11',day:'14'})).toEqual({year:0,month:11,day:14});
+    expect(parseModelDateDraft({year:'-2999',month:'1',day:'1'})).toEqual({year:-2999,month:1,day:1});
+    for(const year of ['','-','1.5','NaN','Infinity'])expect(()=>parseModelDateDraft({year,month:'1',day:'1'})).toThrow();
+    expect(()=>parseModelDateDraft({year:'2000',month:'',day:'1'})).toThrow();
+    expect(()=>parseModelDateDraft({year:'1900',month:'2',day:'29'})).toThrow();
+  });
   it('handles astronomical years 0..99 without Date.UTC century remapping',()=>{
     for(const year of [-2999,-1,0,1,99,100,2000,3000])expect(modelDateParts(modelDateMs(year,1,1))).toEqual({year,month:1,day:1});
     expect(modelDateMs(2000,1,1)/86400000+2440587.5).toBe(2451544.5);

@@ -62,7 +62,13 @@
     "layer_settings_legacy_restore_and_referenced_file_integrity",
     "observed_galaxy_morphology_source_acquisition",
     "distinct_source_backed_galaxy_renderer_guides",
-    "unknown_orientation_and_illustrative_geometry_disclosure"
+    "unknown_orientation_and_illustrative_geometry_disclosure",
+    "published_observation_only_history_viewer",
+    "complete_local_data_provenance_inventory",
+    "localized_moon_names_and_source_status",
+    "bounded_jpl_fitted_element_simulation",
+    "sourced_galaxy_member_hierarchy",
+    "year_zero_enter_blur_date_commit_fix"
   ],
   "application_code_generated_in_this_setup": true,
   "science_detection_or_fit_performed": false,
@@ -493,6 +499,27 @@
   },
   "current_checkpoint": {
     "version": "0.6.0",
+    "recorded_at_kst": "2026-11-14T18:19:13+09:00",
+    "status": "local_checks_and_prepared_archive_runtime_verified",
+    "python_full_passed": 276,
+    "python_full_seconds": 76.9,
+    "later_affected_long_term_api_passed": 29,
+    "vitest_passed": 55,
+    "browser_unique_scenarios_passed": 13,
+    "all_final_browser_cases_same_build": false,
+    "final_vite_entry": "index-D7O_yXx_.js",
+    "locale_count": 5,
+    "locale_keys": 363,
+    "public_service_deployed": false,
+    "linux_verified": false,
+    "human_native_review": false,
+    "final_copy_browser_subset_passed": 4,
+    "final_copy_browser_seconds": 26.4,
+    "final_archive": "NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.zip",
+    "exact_archive_verification_record": "artifacts/NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_182253KST.verification.json"
+  },
+  "travel_checkpoint_v0_6": {
+    "version": "0.6.0",
     "recorded_at_kst": "2026-11-14T15:54:38+09:00",
     "status": "user_requested_urgent_shutdown_checkpoint",
     "actual_history_images": 5,
@@ -503,5 +530,93 @@
     "new_browser": "6 written,not executed",
     "public_service_deployed": false,
     "linux_verified": false
+  },
+  "observation_only_history": {
+    "algorithm": "cosmic-observation-viewer-v1",
+    "cases": 5,
+    "image_bytes": 2034618,
+    "age_interpolation": false,
+    "source_ages": "published approximate estimates; CEERS sample .6-6 Gyr range",
+    "slideshow_is_physical_evolution": false,
+    "legacy_synthetic_scene_active": false,
+    "credits_and_policy_adjacent": true
+  },
+  "dev008_source_backed_navigation": {
+    "localized_object_ids": 476,
+    "named_objects": 183,
+    "unchanged_designations": 293,
+    "original_names_ids_unchanged": true,
+    "source_models": "JPL fitted elements, not mean elements; mean ecliptic is the reference plane",
+    "long_term_tdb_calendar_range": [
+      "-2999-01-01",
+      "3000-01-01"
+    ],
+    "earth_marker_is_emb": true,
+    "unsupported_states_fabricated": false,
+    "curated_members": 23,
+    "milky_way_entries": 4871,
+    "exoplanet_hosts": 4862,
+    "exoplanet_rows_referenced": 6470,
+    "unknown_depth_images_appearance_preserved": true,
+    "all_universe_census_claimed": false,
+    "image_generation_service_used": false
+  },
+  "data_specification": {
+    "path": "Data_Spec.md",
+    "sha256": "a382a30920b18cb50facae5b896992468bd9bd504827a799cf37ac1b26728e36",
+    "data_public_files": 1631,
+    "explicit_helper_file": 1,
+    "manifest_references": 877,
+    "embedded_responses": 32,
+    "static_replicas": 43,
+    "integrity_audit": "all recorded paths/hashes present; no mismatch",
+    "independent_human_review": false
+  },
+  "v0_6_prepared_archive_verification": {
+    "checked_at": "2026-11-14T09:22:00.694531+00:00",
+    "status": "passed",
+    "archive": "NASA_SPACE_APPS_CHALLENGE_v0.6.0_20261114_181913KST.zip",
+    "extracted": "tmp/release-verify-f5vt0brn/extracted",
+    "manifest_files_verified": 1806,
+    "fresh_runtime_install": "reused previously verified isolated runtime",
+    "windows_runtime": {
+      "status": "passed",
+      "result_id": "cmp_d88083664b6fd27592eb68c1",
+      "evidence_id": "ev_6ac1fe0edf004e9f813aca22e0105dc5",
+      "quality_pixels": [
+        29,
+        32
+      ],
+      "scene_object_count": 11,
+      "timeline_midpoint": "2026-11-14T12:00:00Z",
+      "timeline_validation_samples": 27,
+      "appearance_maps": 31,
+      "solar_extension_objects": 476,
+      "exoplanets": 6470,
+      "legacy_history_milestones": 10,
+      "history_morphology_examples": 6,
+      "simulation_model_bodies": 8,
+      "simulation_dates_tested": [
+        -2999,
+        0,
+        99,
+        2500,
+        3000
+      ],
+      "curated_hierarchy_objects": 24,
+      "milky_way_entries": 4871,
+      "trappist_planets": 7,
+      "observed_history_cases": 5,
+      "galaxies": 9,
+      "kuiper_range_au": [
+        30,
+        50
+      ],
+      "pluto_result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+      "pluto_evidence_id": "ev_327e0a433a3743c18a704aa4d2ccbca7"
+    },
+    "server_restart_evidence_restore": "passed: same epsilon/pluto evidence and result IDs",
+    "linux_container": "not_run",
+    "public_service": "not_deployed"
   }
 }

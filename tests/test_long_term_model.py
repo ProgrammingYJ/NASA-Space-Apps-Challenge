@@ -246,3 +246,18 @@ def test_new_read_api_routes_preserve_calendar_contract_and_reject_invalid_dates
         {"year": 2000, "hour": "inf"},
     ]:
         assert client.get("/api/v1/long-term-simulation", params=params).status_code == 422
+
+
+def test_simulation_api_distinguishes_corrupt_sources_from_invalid_dates(monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from api.main import create_app
+
+    def corrupt_source(*args, **kwargs):
+        raise ValueError("long_term_source_integrity")
+
+    monkeypatch.setattr(model, "sample_long_term", corrupt_source)
+    client = TestClient(create_app())
+    response = client.get("/api/v1/long-term-simulation", params={"year": 2026})
+    assert response.status_code == 503
+    assert response.json()["code"] == "simulation_source_unavailable"

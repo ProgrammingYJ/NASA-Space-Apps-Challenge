@@ -131,9 +131,10 @@ def main(base):
         simulation = call(base, f"/api/v1/long-term-simulation?year={year}")
         assert simulation["position_kind"] == "approximate_simulation"
         assert len(simulation["objects"]) == 8
-        assert next(v for v in simulation["objects"] if v["object_id"] == "earth")[
-            "model_body_id"
-        ] == "earth-moon-barycenter"
+        assert (
+            next(v for v in simulation["objects"] if v["object_id"] == "earth")["model_body_id"]
+            == "earth-moon-barycenter"
+        )
     hierarchy = call(base, "/api/v1/catalog/universe")
     assert len(hierarchy["objects"]) == 24
     members = call(base, "/api/v1/catalog/universe?galaxy_id=galaxy-milky-way")
