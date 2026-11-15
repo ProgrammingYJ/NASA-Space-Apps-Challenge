@@ -67,8 +67,12 @@
   "git": {
     "historical_implementation_commit": "a55a0e0d38166911d8fc77daade2cf9850176308",
     "historical_implementation_pushed": true,
-    "withdrawal_commit_and_push": "pending",
-    "branch": "main"
+    "withdrawal_commit_and_push": "verified",
+    "branch": "main",
+    "withdrawal_commit": "d3be874e69ca34661181d952298d42095ac12237",
+    "withdrawal_pushed": true,
+    "remote_main_verified_at_utc": "2026-11-15T13:30:00.801352+00:00",
+    "post_verification_documents": "A following documentation-only commit records this verified source commit and does not modify the deployed immutable directory."
   },
   "history_policy": "The original user files, earlier immutable releases and Git history are preserved. Withdrawn user documents are absent from the current source/assets and no longer downloadable from the current application.",
   "post_withdrawal_public_browser_stats": {

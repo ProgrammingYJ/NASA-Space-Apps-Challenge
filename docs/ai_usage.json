@@ -580,14 +580,16 @@
     "public_browser_passed": 5,
     "human_native_review": false,
     "official_judging_submission": "not_verified",
-    "git_status": "withdrawal_commit_pending; first implementation a55a0e0 pushed",
+    "git_status": "Verified main push: implementation a55a0e0; withdrawal d3be874e69ca34661181d952298d42095ac12237",
     "functional_base_version": "0.17.0",
     "functional_base_public_browser_passed": 10,
     "documentation_only_revision": false,
     "credits": "Approved public aliases, six named testers, teacher retained; no real-name correspondence table",
     "initial_language": "English; explicit selected/restored locale preserved",
     "supplemental_notice": "withdrawn; no merged PDF published",
-    "current_downloads": "one internal DataSpec PDF"
+    "current_downloads": "one internal DataSpec PDF",
+    "source_commit": "d3be874e69ca34661181d952298d42095ac12237",
+    "source_pushed": true
   },
   "dev012_checkpoint_history": {
     "work_id": "DEV-012",

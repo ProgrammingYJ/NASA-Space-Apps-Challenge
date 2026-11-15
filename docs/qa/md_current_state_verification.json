@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-11-15T13:28:53.735278+00:00",
+  "checked_utc": "2026-11-15T13:30:01.721534+00:00",
   "status": "passed",
   "tracked_Markdown_files": 67,
   "updated_project_Markdown_files": 26,
@@ -254,7 +254,7 @@
       "path": "AGENTS.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "dc4bf3f96dd9e2c07c2c55c8568579d499925a9773eb2bf960209b0c5e1637c0"
+      "sha256": "1d27b4f32e9810af320c20ccaa1392f430ed6b4c2f9b7897f956f00a9c7e06b1"
     },
     {
       "path": "Data_Spec.md",
@@ -266,43 +266,43 @@
       "path": "FSD.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "9ac686e9d640b1a79753de11adc8729336fe1d1dca7c98d0ae3770487d3d6c33"
+      "sha256": "702e3c8278e58a1eb3918d26387eab90a196ebaa97b8b862e2244e7d0fb3d5ca"
     },
     {
       "path": "README.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "e7c20d2324d10f087690c3c0425d1151927999656a56150a688c4aeca728e11d"
+      "sha256": "fd99fd354dd62d726dcd76a179989017ca4c494c67551486f1b28b377dda0b97"
     },
     {
       "path": "SKILLS.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "4d883b6e479a969f24eb8fa31b699006032f4098238c720afcb71906415ce431"
+      "sha256": "d3358dcdc55df0a380125ee203d0faed905c398d760ad8db7897ceabfba3ee5f"
     },
     {
       "path": "START_HERE_PROMPT.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "2aecefa211321e8477c35e96756b9686ec42f7eb83f48a7fb5d5ff9d107df09b"
+      "sha256": "c62e78baf9296c20d0f32504bfa3420bb3162562b52dad43890e68f9f9733f59"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "4032704805f3cedd61e4f44abaf88a3e3b01f0de18706938415346a441c73efd"
+      "sha256": "c30856005e428d718826ce4ee9e8bf08ae2e54cb939109ba7dbc45cfda862975"
     },
     {
       "path": "TODO.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "fd182bb2c2df267a640b8a7ec726691a237fd598046c61eec3148d2c2556e461"
+      "sha256": "323d7619bbbda5ca228887004d4ea991375b091bda404d42ccba37c80a98237f"
     },
     {
       "path": "data/README.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "f173e723b0912d666e4d8893598497bfb6d7b58c97454a338ea195aa40370847"
+      "sha256": "b32a71e6c36e25fe31d87a3c2a6116507c3cb7c6797a251807666dc601fd691c"
     },
     {
       "path": "data/reference/spherex-extended-20261115/most/README.md",
@@ -314,103 +314,103 @@
       "path": "deploy/EC2_SETUP.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "b9068be804e546ccda5a826df23dcb9b2be42447e9bb7af94f02d4186ba5d0f7"
+      "sha256": "55b7a77ba5f3e4c5999600c9b3e9cfbf348a7029575566fab4f9b10089c83c16"
     },
     {
       "path": "deploy/README.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "6e2ff3ca65b10e1eecd800d1a600cdb1eac7f801bddeb02ce2eb4b3d9b59547d"
+      "sha256": "20d35f4818b3498527a3c8146e53abd3e152f4869dd387a3c81d759c32c46f8f"
     },
     {
       "path": "deploy/README.python.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "79a6a7ae29ab1206823dfee367b30f02953f67d001ff5a091a44e1aeebd572ab"
+      "sha256": "a5cf3aed514853c18b0c10a9f218297592bd4c6bd3127598cac4cad9e006f4e0"
     },
     {
       "path": "docs/ai_usage.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "be75b44a332a95d867512538f96c5b97820eceb5b14308b387172c3256385785"
+      "sha256": "e7321d028ca614d756aa047f0dfa8666697ec3e57aa34cc1c6f0b63ccfa01221"
     },
     {
       "path": "docs/data_inventory.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "43ac4e11a240d77ec3f86d77df3ccec67faf6f6c5d5437c4c1f6b6febe435f46"
+      "sha256": "2272ee6731215f9bf4cc17a31aa21822d5b10ecbed666a9a7f61b53419839bb9"
     },
     {
       "path": "docs/decisions/ADR-001.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "11ec620f63cd1427b9813351c70b409fdab9f3d9adb2ae8368fea0fd78316285"
+      "sha256": "9862de1d68590f01902700a3d675d97415ce21253a6763982fb414b2f2d67a89"
     },
     {
       "path": "docs/decisions/ADR-002.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "86956579d59ed0b2ced14b1dbd7ce05d11f1be0e94bba02c8738d2ecc2919852"
+      "sha256": "9f6f25e29b9cb639692a017bf53a43e1982450a22c494ee94497d11db709b946"
     },
     {
       "path": "docs/decisions/ADR-003.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "4199550be8c4d95f7353040d49ac5a07860f1450656a5ddcce5deab8d760643d"
+      "sha256": "36fad9cd3b75ed7e54e1591d56892ff4e2bf36211a303c60c62bcdc02cf72415"
     },
     {
       "path": "docs/decisions/ADR-004.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "fd6cbc4ffc3cce41aaad8bd90fc8349c9f4a096444b5449610d2f8be27e395d9"
+      "sha256": "10e60e5cf7c4f11207e7fb31747f0adc83747b37c2a9a712123d51b2c62f3efe"
     },
     {
       "path": "docs/design_references.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "dd4ef8c8feac1828c981c9b18c395c1102b760935a54f8efbcfe8fd0b2f8a19b"
+      "sha256": "96a44c5832bad35c159eb00daee986155b98440adfdc89971ea291e4cc16e08c"
     },
     {
       "path": "docs/evidence_index.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "2e21bc9551ed338f5860856e2561205bfe7af0c6d66d8e352e03ca51f86f1abb"
+      "sha256": "b8859b10b3901bd92588402daa65bbb99e4cf794b3c57ec8498af1f65f374efb"
     },
     {
       "path": "docs/official_rules.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "3a596df9d6bde63f4827ce757a2a682950c4b153dfe2121cd69c948c976d6cc6"
+      "sha256": "57d0d36030fc5da866ac77b50cef8001d370a4d97d11d61a5b1390755484b9b8"
     },
     {
       "path": "docs/reviews/2026-11-15_mcp_review.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "31d12142c6bbb24082adcb545dd92f42fd3e6d71b80e0279b85e0ead0fc729e8"
+      "sha256": "9020b3a03ebb829cdf6634c067aa6ebaad7fbd39fa51f1a87088836d423d1f87"
     },
     {
       "path": "docs/reviews/2026-11-15_planet-nine_sources.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "f0c380b270bf41a7874156ba3320eeae56bf1e2076f523e86163fb101a94b622"
+      "sha256": "ab5e009624da0f978e868631b2685f01630ac88d60e7639a594d039bb3ac7cb2"
     },
     {
       "path": "docs/reviews/2026-11-15_solar_system_1000au_review.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "b83cc553eba981b220f60917a2f20e3cbca536493dccadefdf1fc4a7bc1bab41"
+      "sha256": "abd686a6164912914468a3be5ae84f7f8f6afec7c6249c2b5e2689c98518bd16"
     },
     {
       "path": "docs/solar_system_sources.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "8c08bba5234337a16db7196be88880cc522845d6319bd13d90350c5c1e66cb7e"
+      "sha256": "4d7cb3247cfa1907a5bafdc8f1a324739e96e2f4552e17cd7b43614c3ee2ec9e"
     },
     {
       "path": "docs/worklog.md",
       "classification": "project_current_or_labelled_history",
       "status": "updated_this_work",
-      "sha256": "4fd458009fd7284eec1b4ad0b8c9ced3f7161e2b561a4df4035bb31e063c878e"
+      "sha256": "dd45d3092ea708485c4878bbb1e26a00f9b4cc6868fa0c530769bc3cb6b3ea13"
     }
   ]
 }

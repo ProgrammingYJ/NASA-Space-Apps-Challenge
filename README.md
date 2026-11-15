@@ -1,6 +1,6 @@
 > DEV-021 전달 변경: 사용자의 최신 지시에 따라 새 ZIP은 생성하지 않습니다. `deploy.package_release --delivery-format directory`로 파일별 해시가 있는 릴리스 디렉터리를 준비하고 `deploy.verify_node_release --directory <경로>`로 새 폴더·Node 재시작·근거 복원을 검증합니다. 기존 ZIP/해시는 이전 릴리스 감사 자료로 보존합니다.
 
-> 문서 현행화 정본(2026-11-15): 사용자 최신 지시로 외부 제공 고지서·통합을 철회하고 검증된 **v0.17.3**를 재활성화했다. 현재 다운로드는 자체 데이터 명세서 하나이며 닉네임·영어 기본값은 유지한다. [현재 롤백 정본](docs/releases/notice-withdrawal-20261115.json)과 FSD34.2를 따르며 v0.17.4 수치/검증은 철회된 이력이다. Git 롤백 commit/push는 실제 결과에서 확정한다.
+> 문서 현행화 정본(2026-11-15): 사용자 최신 지시로 외부 제공 고지서·통합을 철회하고 검증된 **v0.17.3**를 재활성화했다. 현재 다운로드는 자체 데이터 명세서 하나이며 닉네임·영어 기본값은 유지한다. [현재 롤백 정본](docs/releases/notice-withdrawal-20261115.json)과 FSD34.2를 따르며 v0.17.4 수치/검증은 철회된 이력이다. Git 구현 a55a0e0·철회 d3be874의 main push를 확인했다.
 
 # Planet X and SPHEREx · Solar System 1000 AU
 

@@ -602,7 +602,10 @@
     "branch": "main",
     "remote": "https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge",
     "implementation_commit": "a55a0e0d38166911d8fc77daade2cf9850176308",
-    "implementation_pushed": true
+    "implementation_pushed": true,
+    "current_source_commit": "d3be874e69ca34661181d952298d42095ac12237",
+    "current_source_pushed": true,
+    "current_operation_record": "docs/releases/notice-withdrawal-20261115.json"
   },
   "current_operation_record": "docs/releases/notice-withdrawal-20261115.json",
   "post_withdrawal_public_browser_stats": {
