@@ -1,12 +1,14 @@
 # Node 서버 실행·복구 — 현재 운영과 OPS-021 검증 이력
 
-> 문서 현행화 정본(2026-11-15): 현재 운영 **v0.17.4**는 승인 닉네임·테스터6명/영어 기본값과 데이터 명세서 아래 보조 고지 PDF를 반영했다. [정확 릴리스 기록](../docs/releases/v0.17.4.json)의 공개 Chrome5경로·두 PDF 원바이트/다운로드·실제 재시작/기존 근거 검증을 따른다. Git commit/push는 후속 정본에서 확정하며 아래 날짜별 기록은 당시 이력이다.
+> 문서 현행화 정본(2026-11-15): 사용자 보조 PDF 철회에 따라 검증된 **v0.17.3을 현재 운영으로 재활성화했다.** 승인 닉네임·테스터6명/영어 기본값은 유지하며 보조 고지 PDF는 공개 동선에서 제거했다. [철회·복귀 정본](../docs/releases/notice-withdrawal-20261115.json)을 따른다. v0.17.4의 수치·SHA·검증은 철회된 과거 이력이며 현재 배포가 아니다. Git 결과는 정본에서 확인하고 아래 날짜별 기록은 당시 이력으로 보존한다.
 
 현재 진입점은 릴리스 디렉터리 루트의 `app.js`, 시작 명령은 `node app.js`다. 검증된 정적 프런트·Node 코드·계약·필수 원자료와 빌드 캐시를 함께 준비한다. Python/PIP/프런트 재빌드는 서버 시작의 필수 단계가 아니다. 큰 원자료가 제외된 Git clone만으로 실행을 보증하지 않는다.
 
-현재 운영 정본은 [v0.17.4 릴리스](../docs/releases/v0.17.4.json)와 [FSD31~34](../FSD.md)다. 활성 디렉터리는 `NASA_SPACE_APPS_CHALLENGE_v0.17.4_20261115_221244KST`, source 검증616개이며 manifest SHA는 `6bae69f6bfe7df117d2d55caf782f011805ba554adcacf64d2996b882cad5490`이다. 보조 고지 PDF1개가 추가돼 runtime source1366/필수1271이며, 기존114생성JSON/74비교의 원핀은 동일하다. 전체 파일 수·바이트/SHA·실제 재시작·Git 상태는 정확 릴리스 정본을 확인한다.
+현재 운영은 보조 고지 PDF를 철회하고 재활성화한 **v0.17.3**이다. source 검증614개·runtime source1365/필수1270이며 기존114생성JSON/74비교 원핀은 동일하다. 실제 복귀·운영 재시작12469→13323·17과학파일 보존·보조 PDF 경로404는 [철회·복귀 정본](../docs/releases/notice-withdrawal-20261115.json)을 따른다. PDF 통합은 실행하지 않았다.
 
-아래 v0.17.0 수치·SHA는 [당시 기능 검증 스냅샷](../docs/releases/v0.17.0.json), [OPS-021 이전·복원 검사](../docs/qa/ops021_migration_verification.json), [DEV-027 검사](../docs/qa/dev027_local_verification.json), [FSD32.4](../FSD.md#324-dev-027ops-021-공개-검증-확정)의 역사다. 현재 v0.17.4의 공개5경로와 당시 v0.17.0의10기능경로를 구분한다. 사후 문서 현행화로 검증한 불변 디렉터리를 변경하지 않는다.
+철회된 과거 검증 v0.17.4의 디렉터리는 `NASA_SPACE_APPS_CHALLENGE_v0.17.4_20261115_221244KST`, source 검증616개이며 manifest SHA는 `6bae69f6bfe7df117d2d55caf782f011805ba554adcacf64d2996b882cad5490`이었다. 보조 고지 PDF1개가 추가된 당시 runtime source1366/필수1271과114생성JSON/74비교의 동일성은 [철회된 릴리스 이력](../docs/releases/v0.17.4.json)에 보존한다. 현재 배포 수치로 사용하지 않는다.
+
+아래 v0.17.0 수치·SHA는 [당시 기능 검증 스냅샷](../docs/releases/v0.17.0.json), [OPS-021 이전·복원 검사](../docs/qa/ops021_migration_verification.json), [DEV-027 검사](../docs/qa/dev027_local_verification.json), [FSD32.4](../FSD.md#324-dev-027ops-021-공개-검증-확정)의 역사다. v0.17.3의 공개5경로와 당시 v0.17.0의10기능경로를 구분한다. 사후 문서 현행화로 검증한 불변 디렉터리를 변경하지 않는다.
 
 ## AWS EC2 구성과 v0.17.0 당시 검증
 
@@ -57,7 +59,7 @@ node app.js --verify-sources
 
 ## 자료·과학 상태·health
 
-v0.17.0 당시 `data/manifests/node_runtime.json`과 `data/node-runtime/runtime_manifest.json`은 생성114JSON/63,027,446B, source1365개 중 필수1270개를 추적했다. 당시 배포는 선택28개 present·67개 미배포를 구분했다. 당시 runtime manifest SHA는 `e12e8a80f5868234bf09e680d68b8057504f6360bafa3f6606d06b37eec28882`다. DEV-027에서 이전114생성파일과74방향별 비교의 핀은 모두 동일하며 새 원관측을 추가하지 않았다. 현재 source/필수 수와 runtime SHA는 위 v0.17.4 정본을 따른다.
+v0.17.0 당시 `data/manifests/node_runtime.json`과 `data/node-runtime/runtime_manifest.json`은 생성114JSON/63,027,446B, source1365개 중 필수1270개를 추적했다. 당시 배포는 선택28개 present·67개 미배포를 구분했다. 당시 runtime manifest SHA는 `e12e8a80f5868234bf09e680d68b8057504f6360bafa3f6606d06b37eec28882`다. DEV-027에서 이전114생성파일과74방향별 비교의 핀은 모두 동일하며 새 원관측을 추가하지 않았다. 현재 source/필수 수와 runtime SHA는 위 철회·복귀 정본을 따른다.
 
 실제 SPHEREx 등록은10대상·40제품·37무순서쌍/양방향74비교다. 대표 ε Indi B S01/S02와 명왕성 S12/S14의 기존 네 정본 ID/원JSON 바이트를 보존한다. Node는 검증된 **빌드 때 FITS 계산 결과**를 제공하며 요청 때 새 FITS 분석·검출/측광/운동 확인을 수행한 것으로 표시하지 않는다. DATE-AVG/TIMESYS/FLAGS·원자료/보정 SHA·품질/미검증 상태를 유지한다. 입력·권리·한계는 [Data_Spec.md](../Data_Spec.md)를 따른다.
 
@@ -77,9 +79,9 @@ PC Chrome을 권장하며 모바일은 탐색 앱/WebGL·과학 API를 로드하
 
 이전 Sydney `16.176.170.4`는 사용자가 삭제했다고 확인했다. 로컬 불변 백업13파일(관측 근거4·P9근거3·비교2·jobs4)에서 근거7개·비교2개의 원바이트를 새 호스트에 복구·검증했다. 별도 구판3근거는 이 범위의 부분집합이므로 더하지 않는다. 사본 없는 이후 근거의 복구는 보장할 수 없다.
 
-v0.17.0의 OPS-021 재시작 후 stopped-writer 백업24파일/10,762,240B를 로컬로 내려받아 SHA `a49928a95ca5b9bba9a04554f55cf1343f8bcd4913bd0e85d75118317030c8aa`를 대조했다. 이는 당시 백업 이력이며 최신 백업은 v0.17.4 정본을 확인한다. 백업 내용은 비공개다. 구 Sydney의 과거 HTTPS/재시작 성공을 새 호스트의 성공으로 대신 쓰지 않는다.
+v0.17.0의 OPS-021 재시작 후 stopped-writer 백업24파일/10,762,240B를 로컬로 내려받아 SHA `a49928a95ca5b9bba9a04554f55cf1343f8bcd4913bd0e85d75118317030c8aa`를 대조했다. 이는 당시 백업 이력이며 최신 상태는 철회·복귀 정본을 확인한다. 백업 내용은 비공개다. 구 Sydney의 과거 HTTPS/재시작 성공을 새 호스트의 성공으로 대신 쓰지 않는다.
 
-아래 v0.12.1의39JSON·4비교·ZIP 전달 및 OPS-020 Sydney 문단 전체는 **당시 기록**이다. 실행 지침은 위의 Node 디렉터리 절차이고 현재 활성 버전은 v0.17.4 정본, 정확한 과거 식별자·상태는 [릴리스 기록](../docs/releases/)과 Git 이력을 따른다. Python v0.8.0 본문은 [README.python.md](README.python.md)에 역사로 남아 있다.
+아래 v0.12.1의39JSON·4비교·ZIP 전달 및 OPS-020 Sydney 문단 전체는 **당시 기록**이다. 실행 지침은 위의 Node 디렉터리 절차이고 현재 활성 버전은 v0.17.3 철회·복귀 정본, 정확한 과거 식별자·상태는 [릴리스 기록](../docs/releases/)과 Git 이력을 따른다. Python v0.8.0 본문은 [README.python.md](README.python.md)에 역사로 남아 있다.
 
 <details>
 <summary>역사: v0.12.1 Node 및 OPS-020 운영 기록</summary>

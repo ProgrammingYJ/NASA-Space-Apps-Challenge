@@ -33,5 +33,8 @@
   "local_build_reference_inputs_not_in_Git": 111,
   "frozen_DataSpec_PDF_and_supplemental_notice_exact": true,
   "private_key_env_internal_review_copy_staged": false,
-  "notes": "Ignored original observations/reference inputs remain file-manifest-pinned build inputs, not newly uploaded to Git. Post-verification documentation updates do not modify the immutable deployed release."
+  "notes": "Ignored original observations/reference inputs remain file-manifest-pinned build inputs, not newly uploaded to Git. Post-verification documentation updates do not modify the immutable deployed release.",
+  "current_operation": false,
+  "historical_scope": "Successfully verified 0.17.4, later withdrawn by user; see current notice-withdrawal operation record.",
+  "current_operation_record": "docs/releases/notice-withdrawal-20261115.json"
 }

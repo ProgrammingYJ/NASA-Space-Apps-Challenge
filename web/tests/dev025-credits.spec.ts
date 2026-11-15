@@ -63,12 +63,7 @@ test('DEV-025 credits: approved nicknames and all six testers, retained teacher,
     await expect(dialog.getByTestId('credits-venue')).toHaveText('송내고교');
     await expect(dialog.getByTestId('credits-data-pdf')).toHaveAttribute('href',releaseMetadata.data_spec_url);
     await expect(dialog.getByTestId('credits-data-pdf')).toContainText(copy.download);
-    const license=dialog.getByTestId('credits-license-pdf');
-    await expect(license).toHaveAttribute('href','/downloads/PlanetX_Source_License_Notices.pdf');
-    await expect(license).toHaveAttribute('download','PlanetX_Source_License_Notices.pdf');
-    await expect(license).toContainText(copy.licenseDownload);
-    expect(await license.evaluate(element=>element.previousElementSibling?.getAttribute('data-testid'))).toBe('credits-data-pdf');
-    await expect(dialog.getByTestId('credits-license-note')).toHaveText(copy.licenseNote);
+    await expect(dialog.locator('section[aria-labelledby="credits-data-title"] a[download]')).toHaveCount(1);
     await expect(dialog.getByTestId('credits-notices')).toHaveAttribute('href',repository+'/blob/main/THIRD_PARTY_NOTICES.md');
     await expect(dialog.getByTestId('credits-ai-usage')).toHaveAttribute('href',repository+'/blob/main/docs/ai_usage.md');
     await expect(dialog.getByTestId('credits-repository')).toHaveAttribute('href',repository);
@@ -90,7 +85,7 @@ test('DEV-025 credits: approved nicknames and all six testers, retained teacher,
   expect(errors).toEqual([]);
 });
 
-test('DEV-025 credits: both PDF downloads preserve their published source bytes and SHA256',async({page},testInfo)=>{
+test('DEV-025 credits: the data specification PDF download preserves its published source bytes and SHA256',async({page},testInfo)=>{
   await page.goto('/');const {dialog}=await openCredits(page);
   const link=dialog.getByTestId('credits-data-pdf');
   await expect(link).toHaveAttribute('href','/downloads/PlanetX_Data_Spec.pdf');
@@ -113,22 +108,6 @@ test('DEV-025 credits: both PDF downloads preserve their published source bytes 
   const downloadPromise=page.waitForEvent('download');await link.click();const download=await downloadPromise;
   expect(download.suggestedFilename()).toBe('PlanetX_Data_Spec.pdf');const saved=testInfo.outputPath('PlanetX_Data_Spec.pdf');await download.saveAs(saved);
   const savedBody=await readFile(saved);expect(savedBody.equals(body)).toBe(true);
-  const license=dialog.getByTestId('credits-license-pdf'),licenseURL='/downloads/PlanetX_Source_License_Notices.pdf';
-  await expect(license).toHaveAttribute('href',licenseURL);
-  const originalLicense=await readFile(new URL('../public/downloads/PlanetX_Source_License_Notices.pdf',import.meta.url));
-  const licenseSHA=createHash('sha256').update(originalLicense).digest('hex');
-  expect(originalLicense.length).toBe(762160);
-  expect(licenseSHA).toBe('aeb12c3a35a959dd1a4a242509eedc2ac44307306eb3ce1ae9e6965ad57ac3c6');
-  const licenseResponse=await page.request.get(licenseURL,{timeout:30000});expect(licenseResponse.ok()).toBe(true);
-  expect(licenseResponse.headers()['content-type']).toContain('application/pdf');const licenseBody=await licenseResponse.body();
-  expect(licenseBody.subarray(0,5).toString('ascii')).toBe('%PDF-');
-  expect(licenseBody.equals(originalLicense)).toBe(true);
-  expect(createHash('sha256').update(licenseBody).digest('hex')).toBe(licenseSHA);
-  const licenseDownloadPromise=page.waitForEvent('download');await license.click();const licenseDownload=await licenseDownloadPromise;
-  expect(licenseDownload.suggestedFilename()).toBe('PlanetX_Source_License_Notices.pdf');
-  const licenseSaved=testInfo.outputPath('PlanetX_Source_License_Notices.pdf');await licenseDownload.saveAs(licenseSaved);
-  const downloadedLicense=await readFile(licenseSaved);expect(downloadedLicense.equals(originalLicense)).toBe(true);
-  expect(createHash('sha256').update(downloadedLicense).digest('hex')).toBe(licenseSHA);
   await page.getByTestId('credits-close').click();await expect(dialog).not.toBeVisible();
 });
 

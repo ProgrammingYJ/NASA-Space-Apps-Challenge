@@ -1,0 +1,58 @@
+{
+  "rendered_pages": 381,
+  "sheets": 6,
+  "sample_pages": [
+    1,
+    2,
+    84,
+    85,
+    150,
+    250,
+    330,
+    340,
+    381
+  ],
+  "version": "0.17.3",
+  "PDF_sha256": "236515182389741aa1e8125389ca67260df18e738c6788fff9183e1d2bd43b7c",
+  "source_MD_sha256": "6a9369a28d250d9f4bb4de6315daf851ea1e1830d6be1db9bf8ea3b82bf1cd91",
+  "PDF_bytes": 5364583,
+  "built_at": "2026-11-15T12:59:21Z",
+  "builder_validation": {
+    "source_embedded_byte_identical": true,
+    "font_glyph_preflight": "passed",
+    "displayed_unique_sha256_count": 2499,
+    "all_unique_source_sha256_indexed_and_extracted": true,
+    "missing_displayed_hashes": [],
+    "all_http_source_link_targets_retained": true,
+    "all_source_headings_extracted": true,
+    "source_unchanged_during_build": true,
+    "visual_render_review": "required_separate_operator_step_not_claimed"
+  },
+  "dependencies": {
+    "reportlab": "4.5.1",
+    "markdown-it-py": "4.3.0",
+    "linkify-it-py": "2.2.0",
+    "fonttools": "4.68.0",
+    "pypdf": "6.21.4"
+  },
+  "status": "passed_current_internal_only_snapshot",
+  "checked_utc": "2026-11-15T13:28:29.154590+00:00",
+  "actually_visually_reviewed": {
+    "contact_sheets": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "full_pages": [
+      1,
+      2,
+      340,
+      381
+    ]
+  },
+  "findings": "Version/source SHA match, no observed major clipping/overlap/glyph boxes; the external notice section is absent.",
+  "visual_limit": "Contact-sheet review is not character-by-character proofreading. Nickname/English section on341 checked in contact sheet, not a separate full-page rendering."
+}

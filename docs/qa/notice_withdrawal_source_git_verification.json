@@ -1,0 +1,41 @@
+{
+  "checked_utc": "2026-11-15T13:29:05.915369+00:00",
+  "status": "passed",
+  "staged_files": 54,
+  "source_proof_rows": 614,
+  "Git_source_exact_byte_matches": 411,
+  "Git_text_EOL_canonical_equivalents": 68,
+  "post_verification_document_changes": [
+    "AGENTS.md",
+    "deploy/EC2_SETUP.md",
+    "deploy/README.md",
+    "deploy/README.python.md",
+    "docs/ai_usage.json",
+    "docs/ai_usage.md",
+    "docs/data_inventory.md",
+    "docs/decisions/ADR-001.md",
+    "docs/decisions/ADR-002.md",
+    "docs/decisions/ADR-003.md",
+    "docs/decisions/ADR-004.md",
+    "docs/design_references.md",
+    "docs/evidence_index.md",
+    "docs/official_rules.md",
+    "docs/reviews/2026-11-15_mcp_review.md",
+    "docs/reviews/2026-11-15_planet-nine_sources.md",
+    "docs/worklog.md",
+    "FSD.md",
+    "README.md",
+    "SKILLS.md",
+    "START_HERE_PROMPT.md",
+    "THIRD_PARTY_NOTICES.md",
+    "TODO.md"
+  ],
+  "new_verification_only_test_changes": [
+    "web/tests/dev025-credits.spec.ts"
+  ],
+  "local_build_reference_inputs_not_in_Git": 111,
+  "frozen_internal_DataSpec_PDF_exact": true,
+  "external_notice_absent": true,
+  "private_key_env_internal_review_copy_staged": false,
+  "notes": "Ignored original observations/reference inputs remain file-manifest-pinned build inputs, not newly uploaded to Git. Post-verification documentation and the single-download browser assertion do not modify the immutable deployed release."
+}

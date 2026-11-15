@@ -19,9 +19,9 @@
   },
   "schema_version": "1.0",
   "date_kst": "2026-11-15",
-  "current_release": "0.17.4",
-  "current_verification_utc": "2026-11-15T13:16:38.874942+00:00",
-  "history_policy": "Work-specific records, assistance categories and previous checkpoints retain their original historical scope. Removed galaxy/exoplanet/history/black-hole/general-physics features are not current product features. Current status is current_checkpoint and dev027_ops021, with immutable external release/QA records.",
+  "current_release": "0.17.3",
+  "current_verification_utc": "2026-11-15T13:27:17.280480+00:00",
+  "history_policy": "Current operation is current_checkpoint and notice-withdrawal release record. Earlier release/source/AI records are retained as dated historical snapshots, including withdrawn 0.17.4.",
   "tool": "Codex",
   "exact_model_identifier": null,
   "model_identifier_status": "not_reported",
@@ -570,23 +570,24 @@
       "DEV-028",
       "OPS-021"
     ],
-    "version": "0.17.4",
-    "status": "deployed_and_verified",
+    "version": "0.17.3",
+    "status": "reactivated_and_publicly_verified",
     "entrypoint": "app.js",
     "server_python_required": false,
-    "release_record": "docs/releases/v0.17.4.json",
+    "release_record": "docs/releases/notice-withdrawal-20261115.json",
     "public_service_deployed": true,
     "linux_verified": true,
     "public_browser_passed": 5,
     "human_native_review": false,
     "official_judging_submission": "not_verified",
-    "git_status": "pending_commit_and_push",
+    "git_status": "withdrawal_commit_pending; first implementation a55a0e0 pushed",
     "functional_base_version": "0.17.0",
     "functional_base_public_browser_passed": 10,
     "documentation_only_revision": false,
     "credits": "Approved public aliases, six named testers, teacher retained; no real-name correspondence table",
     "initial_language": "English; explicit selected/restored locale preserved",
-    "supplemental_notice": "Original user-supplied PDF below data specification; historical scope disclosed"
+    "supplemental_notice": "withdrawn; no merged PDF published",
+    "current_downloads": "one internal DataSpec PDF"
   },
   "dev012_checkpoint_history": {
     "work_id": "DEV-012",
@@ -643,32 +644,18 @@
   },
   "data_specification": {
     "path": "Data_Spec.md",
-    "scope": "Deployed v0.17.4 frozen current Markdown; scientific data and models unchanged.",
-    "frozen_source_MD_sha256": "0d8046f70bf01398e417340bfd42e08dd3ad8fa3cc535cd0fee7943b0e7f2bcd",
+    "scope": "Verified internal-only v0.17.3 frozen Markdown and PDF reactivated; latest operational withdrawal is documented in FSD/worklog/current release record.",
+    "frozen_source_MD_sha256": "6a9369a28d250d9f4bb4de6315daf851ea1e1830d6be1db9bf8ea3b82bf1cd91",
     "pdf": {
       "public_path": "/downloads/PlanetX_Data_Spec.pdf",
       "pages": 381,
-      "bytes": 5364645,
-      "sha256": "3fbdf5e50a6b34c1773d5a6564f5c45877f81b6d0ff0364f335963ab7cf51697",
-      "built_at": "2026-11-15T13:09:37Z",
+      "bytes": 5364583,
+      "sha256": "236515182389741aa1e8125389ca67260df18e738c6788fff9183e1d2bd43b7c",
+      "built_at": "2026-11-15T12:59:21Z",
       "source_attachment_byte_identical": true,
-      "link_and_font_glyph_preflight": "passed",
-      "full_render_pages": 381,
-      "contact_sheets": 6,
-      "visual_review_limit": "Contact-sheet layout review and selected full pages, not character-by-character proofreading or upstream license validation.",
-      "verification_record": "docs/qa/dev028_pdf_verification.json"
+      "verification_record": "docs/qa/current_internal_data_spec_pdf_verification.json"
     },
-    "supplemental_user_notice": {
-      "filename": "PlanetX_Source_License_Notices.pdf",
-      "bytes": 762160,
-      "sha256": "aeb12c3a35a959dd1a4a242509eedc2ac44307306eb3ce1ae9e6965ad57ac3c6",
-      "provenance": "User-provided source and license notice PDF; original bytes preserved.",
-      "scope": "Supplemental user-authored notice; it does not replace original upstream license terms or the data specification.",
-      "local_relative_path": "web/public/downloads/PlanetX_Source_License_Notices.pdf",
-      "pages": 1,
-      "source_kind": "user_provided_supplemental_document",
-      "file_review": "Extracted text and actual page render viewed on 2026-11-15; historical scope identified; original bytes unmodified."
-    },
+    "supplemental_user_notice": "withdrawn and excluded from current source/assets; no merged PDF published",
     "new_scientific_inputs_acquired_in_DEV028": false,
     "AI_generated_original_observations": false
   },
@@ -2174,7 +2161,7 @@
   "dev028": {
     "work": "Nickname-only public credits, English initial/fresh session, supplied supplemental source/license PDF below data specification",
     "authoring": "Codex assisted UI, contract, tests, document/provenance updates and remote release verification",
-    "source_notice": "User-provided bytes unchanged; historical scope clearly distinguished from current data specification and upstream terms",
+    "source_notice": "Both user-provided notices withdrawn before any merged release; only internal DataSpec remains in current application.",
     "scope_limits": "No new observation, mass, orbital or existence-probability result is established by this UI/document change."
   },
   "v0_17_3_verified_checkpoint_history": {
@@ -2218,6 +2205,61 @@
       "verification_record": "docs/qa/dev027_document_pdf_verification.json"
     },
     "new_scientific_inputs_acquired_in_DEV027_OPS021": false,
+    "AI_generated_original_observations": false
+  },
+  "withdrawn_v0_17_4_checkpoint_history": {
+    "work_ids": [
+      "DEV-027",
+      "DEV-028",
+      "OPS-021"
+    ],
+    "version": "0.17.4",
+    "status": "deployed_and_verified",
+    "entrypoint": "app.js",
+    "server_python_required": false,
+    "release_record": "docs/releases/v0.17.4.json",
+    "public_service_deployed": true,
+    "linux_verified": true,
+    "public_browser_passed": 5,
+    "human_native_review": false,
+    "official_judging_submission": "not_verified",
+    "git_status": "pending_commit_and_push",
+    "functional_base_version": "0.17.0",
+    "functional_base_public_browser_passed": 10,
+    "documentation_only_revision": false,
+    "credits": "Approved public aliases, six named testers, teacher retained; no real-name correspondence table",
+    "initial_language": "English; explicit selected/restored locale preserved",
+    "supplemental_notice": "Original user-supplied PDF below data specification; historical scope disclosed"
+  },
+  "withdrawn_v0_17_4_data_specification_history": {
+    "path": "Data_Spec.md",
+    "scope": "Deployed v0.17.4 frozen current Markdown; scientific data and models unchanged.",
+    "frozen_source_MD_sha256": "0d8046f70bf01398e417340bfd42e08dd3ad8fa3cc535cd0fee7943b0e7f2bcd",
+    "pdf": {
+      "public_path": "/downloads/PlanetX_Data_Spec.pdf",
+      "pages": 381,
+      "bytes": 5364645,
+      "sha256": "3fbdf5e50a6b34c1773d5a6564f5c45877f81b6d0ff0364f335963ab7cf51697",
+      "built_at": "2026-11-15T13:09:37Z",
+      "source_attachment_byte_identical": true,
+      "link_and_font_glyph_preflight": "passed",
+      "full_render_pages": 381,
+      "contact_sheets": 6,
+      "visual_review_limit": "Contact-sheet layout review and selected full pages, not character-by-character proofreading or upstream license validation.",
+      "verification_record": "docs/qa/dev028_pdf_verification.json"
+    },
+    "supplemental_user_notice": {
+      "filename": "PlanetX_Source_License_Notices.pdf",
+      "bytes": 762160,
+      "sha256": "aeb12c3a35a959dd1a4a242509eedc2ac44307306eb3ce1ae9e6965ad57ac3c6",
+      "provenance": "User-provided source and license notice PDF; original bytes preserved.",
+      "scope": "Supplemental user-authored notice; it does not replace original upstream license terms or the data specification.",
+      "local_relative_path": "web/public/downloads/PlanetX_Source_License_Notices.pdf",
+      "pages": 1,
+      "source_kind": "user_provided_supplemental_document",
+      "file_review": "Extracted text and actual page render viewed on 2026-11-15; historical scope identified; original bytes unmodified."
+    },
+    "new_scientific_inputs_acquired_in_DEV028": false,
     "AI_generated_original_observations": false
   }
 }

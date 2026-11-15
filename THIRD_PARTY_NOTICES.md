@@ -1,6 +1,6 @@
 # Sources and software notices
 
-> 문서 현행화 정본(2026-11-15): 현재 운영 **v0.17.4**는 승인 닉네임·테스터6명/영어 기본값과 데이터 명세서 아래 보조 고지 PDF를 반영했다. [정확 릴리스 기록](docs/releases/v0.17.4.json)의 공개 Chrome5경로·두 PDF 원바이트/다운로드·실제 재시작/기존 근거 검증을 따른다. Git commit/push는 후속 정본에서 확정하며 아래 날짜별 기록은 당시 이력이다.
+> 문서 현행화 정본(2026-11-15): 사용자 보조 PDF 철회에 따라 검증된 **v0.17.3을 현재 운영으로 재활성화했다.** 승인 닉네임·테스터6명/영어 기본값은 유지하며 보조 고지 PDF는 공개 동선에서 제거했다. [철회·복귀 정본](docs/releases/notice-withdrawal-20261115.json)을 따른다. v0.17.4의 수치·SHA·검증은 철회된 과거 이력이며 현재 배포가 아니다. Git 결과는 정본에서 확인하고 아래 날짜별 기록은 당시 이력으로 보존한다.
 
 > Current scope checkpoint (2026-11-15, DEV-027/OPS-021): the shipped Solar System/P9/SPHEREx inputs and their credits remain unchanged. See [Data_Spec](Data_Spec.md), [FSD](FSD.md), and [verified v0.17.0](docs/releases/v0.17.0.json). Earlier exoplanet/galaxy/history references below retain attribution for historical work; they are not current runtime dependencies. The full Markdown PDF uses the pinned Noto fonts/OFL notices and preserves the original source attachment. This documentation update does not alter upstream licenses or claim new data acquisition.
 

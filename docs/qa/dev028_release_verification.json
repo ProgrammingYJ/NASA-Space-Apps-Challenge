@@ -97,5 +97,8 @@
     "Only preserved local copies from the deleted previous host were recovered; no later uncopied record recovery is claimed.",
     "No new astronomical result or independent legal validation is established by uploading the user-supplied notice."
   ],
-  "git_source_equivalence_record": "docs/qa/dev028_source_git_verification.json"
+  "git_source_equivalence_record": "docs/qa/dev028_source_git_verification.json",
+  "current_operation": false,
+  "historical_scope": "Successfully verified 0.17.4, later withdrawn by user; see current notice-withdrawal operation record.",
+  "current_operation_record": "docs/releases/notice-withdrawal-20261115.json"
 }

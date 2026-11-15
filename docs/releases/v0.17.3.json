@@ -4,7 +4,7 @@
     "DEV-028",
     "OPS-021"
   ],
-  "status": "deployed_and_verified_then_superseded",
+  "status": "reactivated_after_user_notice_withdrawal",
   "checked_utc": "2026-11-15T13:11:08.036812+00:00",
   "public_url": "https://nasaspaceappschallenge.marulee.dev/",
   "delivery": {
@@ -598,8 +598,19 @@
   "functional_verification_base": "docs/qa/dev027_local_verification.json",
   "state_recovery_limit": "Deleted previous host: only locally preserved backup and original envelopes recoverable; no later uncopied record recovery claimed.",
   "git": {
-    "status": "pending_implementation_commit_and_push",
+    "status": "historical_implementation_committed_and_pushed",
     "branch": "main",
-    "remote": "https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge"
+    "remote": "https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge",
+    "implementation_commit": "a55a0e0d38166911d8fc77daade2cf9850176308",
+    "implementation_pushed": true
+  },
+  "current_operation_record": "docs/releases/notice-withdrawal-20261115.json",
+  "post_withdrawal_public_browser_stats": {
+    "startTime": "2026-11-15T13:26:02.647Z",
+    "duration": 39324.655999999995,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
   }
 }

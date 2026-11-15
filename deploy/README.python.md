@@ -1,10 +1,10 @@
 # 선택적 Python 재검산과 이전 운영 기록
 
-> 문서 현행화 정본(2026-11-15): 현재 운영 **v0.17.4**는 승인 닉네임·테스터6명/영어 기본값과 데이터 명세서 아래 보조 고지 PDF를 반영했다. [정확 릴리스 기록](../docs/releases/v0.17.4.json)의 공개 Chrome5경로·두 PDF 원바이트/다운로드·실제 재시작/기존 근거 검증을 따른다. Git commit/push는 후속 정본에서 확정하며 아래 날짜별 기록은 당시 이력이다.
+> 문서 현행화 정본(2026-11-15): 사용자 보조 PDF 철회에 따라 검증된 **v0.17.3을 현재 운영으로 재활성화했다.** 승인 닉네임·테스터6명/영어 기본값은 유지하며 보조 고지 PDF는 공개 동선에서 제거했다. [철회·복귀 정본](../docs/releases/notice-withdrawal-20261115.json)을 따른다. v0.17.4의 수치·SHA·검증은 철회된 과거 이력이며 현재 배포가 아니다. Git 결과는 정본에서 확인하고 아래 날짜별 기록은 당시 이력으로 보존한다.
 
-**현재 v0.17.4/OPS-021 운영은 [Node 실행·복구](README.md)다.** 새 EC2 `54.117.136.144`(ap-northeast-2·m7i.xlarge·Ubuntu24.04.5)는 Node24.22.3·loopback3002/nginx HTTPS로 운영한다. Python API는 개발·독립 재검산을 위한 선택 경로이며 서버 시작의 필수 의존성이 아니다. 새 릴리스는 ZIP 없이 검증된 완결 디렉터리로 전달한다.
+**현재 v0.17.3/OPS-021 운영은 [Node 실행·복구](README.md)다.** 새 EC2 `54.117.136.144`(ap-northeast-2·m7i.xlarge·Ubuntu24.04.5)는 Node24.22.3·loopback3002/nginx HTTPS로 운영한다. 사용자 보조 PDF 철회에 따른 재활성화이며 PDF 통합은 실행하지 않았다. Python API는 개발·독립 재검산을 위한 선택 경로이며 서버 시작의 필수 의존성이 아니다. 새 릴리스는 ZIP 없이 검증된 완결 디렉터리로 전달한다.
 
-현재 검증 상태는 [v0.17.4 정본](../docs/releases/v0.17.4.json)을 따른다. 보조 고지 PDF1개 추가로 runtime source1366/필수1271이며 기존114생성JSON/74비교 원핀은 동일하다. [v0.17.0](../docs/releases/v0.17.0.json)과 [OPS-021](../docs/qa/ops021_migration_verification.json)의 공개 PC Chrome10/10·실제 운영 재시작7024→7175·근거 원봉투 검증은 당시 Node 기능 검증 스냅샷이다. 아래 v0.8.0 Python/Docker 설명을 현재 공개 서버에서 실행·검증한 것으로 바꾸지 않는다.
+현재 검증 상태는 [철회·복귀 정본](../docs/releases/notice-withdrawal-20261115.json)을 따른다. source 검증614개·runtime source1365/필수1270이며 기존114생성JSON/74비교 원핀은 동일하다. v0.17.4의 source1366/필수1271은 보조 PDF가 있던 철회된 과거 검증이다. [v0.17.0](../docs/releases/v0.17.0.json)과 [OPS-021](../docs/qa/ops021_migration_verification.json)의 공개 PC Chrome10/10·실제 운영 재시작7024→7175·근거 원봉투 검증도 당시 Node 기능 검증 스냅샷이다. 아래 v0.8.0 Python/Docker 설명을 현재 공개 서버에서 실행·검증한 것으로 바꾸지 않는다.
 
 ## 현재 개발용 선택 경로
 

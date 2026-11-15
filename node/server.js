@@ -324,8 +324,7 @@ async function start(options = {}) {
       if (relative !== 'index.html' && !['assets/', 'textures/', 'brand/', 'reference/', 'downloads/'].some(prefix => relative.startsWith(prefix))) fail(404, 'not_found');
       let file; try { file = safePath(path.join(root, 'web', 'dist'), relative); if (!fs.statSync(file).isFile()) throw new Error(); } catch { fail(404, 'not_found'); }
       if (['textures/', 'brand/', 'reference/', 'downloads/'].some(prefix => relative.startsWith(prefix))) { try { await sources.call('asset', relative); } catch { fail(503, 'source_unavailable'); } }
-      const publishedDownloads = new Set(['downloads/PlanetX_Data_Spec.pdf', 'downloads/PlanetX_Source_License_Notices.pdf']);
-      const downloadHeaders = publishedDownloads.has(relative) ? { 'Content-Disposition': `attachment; filename="${path.basename(relative)}"`, 'Cache-Control': 'no-cache' } : {};
+      const downloadHeaders = relative === 'downloads/PlanetX_Data_Spec.pdf' ? { 'Content-Disposition': 'attachment; filename="PlanetX_Data_Spec.pdf"', 'Cache-Control': 'no-cache' } : {};
       response.writeHead(200, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Content-Length': fs.statSync(file).size, ...downloadHeaders });
       if (request.method === 'HEAD') return response.end(); fs.createReadStream(file).on('error', () => response.destroy()).pipe(response);
     } catch (error) {

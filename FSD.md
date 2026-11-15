@@ -1,8 +1,8 @@
 # Planet X and SPHEREx — 기능·개발 명세서
 
-> 문서 현행화 정본(2026-11-15): 현재 운영 **v0.17.4**는 승인 닉네임·테스터6명/영어 기본값과 데이터 명세서 아래 보조 고지 PDF를 반영했다. [정확 릴리스 기록](docs/releases/v0.17.4.json)의 공개 Chrome5경로·두 PDF 원바이트/다운로드·실제 재시작/기존 근거 검증을 따른다. Git commit/push는 후속 정본에서 확정하며 아래 날짜별 기록은 당시 이력이다.
+> 문서 현행화 정본(2026-11-15): 사용자 최신 지시로 외부 제공 고지서·통합을 철회하고 검증된 **v0.17.3**를 재활성화했다. 현재 다운로드는 자체 데이터 명세서 하나이며 닉네임·영어 기본값은 유지한다. [현재 롤백 정본](docs/releases/notice-withdrawal-20261115.json)과 FSD34.2를 따르며 v0.17.4 수치/검증은 철회된 이력이다. Git 롤백 commit/push는 실제 결과에서 확정한다.
 
-**현재 OPS-021 / DEV-028 / v0.17.4:** 새 EC254.117.136.144의 221244KST 디렉터리를 활성화했다. 공개Chrome5·두 PDF 다운로드 원바이트·실제재시작12377→12469·구판3근거 원봉투를 확인했다. 17개 과학저장파일·114JSON/74comparison은 보존했다. 상세 정본은 docs/releases/v0.17.4.json이며 기능10경로·복구한계는32절/0.17.0 기록을 따른다.
+**현재 OPS-021 / DEV-028 / v0.17.3 롤백:** 사용자 제공 PDF와 통합 지시를 철회해 220215KST 검증 디렉터리를 재활성화했다. 자체 데이터 명세서 다운로드 하나·승인 닉네임6테스터·영어 기본값을 유지한다. 운영PID12469→13323,17과학파일/구판3근거 원봉투는 보존했다. 상세는 docs/releases/notice-withdrawal-20261115.json과34.2절을 따른다.
 
 **보존 이력 DEV-026 / v0.16.1:** R033 제9행성 탭은 태양 중심 전체 보기로 이동하며 실관측/시각을 보존한다. R034 작업영역과 패널 펼침을 분리해 가설 궤도 보기 후에도 우측 재열기·입력/결과/판단·연속 천체선택을 유지한다. strict/Vite·Vitest132/Node86·메타Python1/Ruff,로컬5고유(초회4/1+동일코드후속1)·공개5/5·390×844/5언어·실제진행중계산/근거복원과정확디렉터리재시작을확인했다. 운영PID24503→24636·기존3근거원봉투와74comparisonID/SHA를보존한다. 새ZIP없이122709KST디렉터리를적용했으며사후정본은 docs/releases/v0.16.1.json과 docs/qa/dev026_local_verification.json이다.**
 
@@ -1417,18 +1417,26 @@ Markdown67개를 분류·점검해 프로젝트 문서26개를 현행화했다. 
 NASA_SPACE_APPS_CHALLENGE_v0.17.1_20261115_214317KST의 source612·1971파일 / 1,103,622,719B를 검증했다. 릴리스 manifest SHA는 b8fe1ebc8b7120b04291d56e3098332a3026664352044ddedc6f45c016eea741, runtime SHA는 f45e9f984e9e62f2677bb5dd79bcd7dc34c2dff008eac1e1098009cd11b82b5d다. 기능 소스188개·114JSON/74comparison은0.17.0과 동일하다. 메타데이터 검사1·strict/Vite·Node-only clean-copy 재시작·공개 크레딧/PDF2개, 운영 PID8390→8485 실제 재시작과 구판3근거 원봉투를 확인했다. 같은 기능10개 검사를 문서판에서 다시 실행했다고 주장하지 않고0.17.0 정본을 참조한다. stopped-writer 신규백업28파일 / 11,571,200B / SHA7d373b893d7bd9f5656131bd9b089c40b08a8146a62b1cfc3e6f2737185f1be0를 로컬에 내려받아 확인했다. 구판0.17.0과 원자료는 보존했다. Git 결과는 사후 정본에서 확정한다.
 
 
-## 34. DEV-028 크레딧 닉네임·영어 초기 언어·보조 고지서
+## 34. DEV-028 크레딧 닉네임·영어 초기 언어와 외부 문서 철회
 
 사용자 최신 지시로 학생 실명·로마자 실명·학년을 제거하고 승인 닉네임만 역할에 표시한다. 수/과학 검산 yocot, UI/UX x0o5m2s4, 백엔드·프로젝트 리더 MaruDev_, 문서/일정 도롱뇽·qltjqdl이다. 테스터는 MaruDev_, 도롱뇽, yocot, qltjqdl, U_S, x0o5m2s4 여섯 명을 각각 표시한다. U_S에 추가 역할을 부여하지 않는다. 2026 SNHS Alpha·송내고교·김민세 선생님 감사는 유지한다. 실명과 닉네임 대응표나 개인명 금지어 테스트 fixture를 공개 코드에 넣지 않는다.
 
 초기 접속/새 세션은 en으로 시작하며 HTML lang과 모바일 진입 안내도 en이다. 사용자가 선택하거나 근거에서 복원한 명시적 locale은 보존한다. five-language 크레딧 역할·이름 순서/좁은 PC 창·포커스/다운로드 및 한국어 브라우저의 초기/새 세션·모바일 영어 진입을 검사한다. v0.17.3에서 공개 Chrome5개·격리5개를 통과했고 17개 과학 저장파일의 원바이트를 유지해 활성화했다.
 
-사용자 보조 출처·라이선스 PDF를 데이터 명세서 바로 아래 독립 다운로드로 제공한다. 경로는 `/downloads/PlanetX_Source_License_Notices.pdf`이고 원본762160B/SHA aeb12c3a35a959dd1a4a242509eedc2ac44307306eb3ce1ae9e6965ad57ac3c6을 변경하지 않는다. 현재 제거된 범위/과거 설명이 포함된 사용자 보충 문서임을 모든 언어로 알리고 최신 채택 자료·개별 권리는 DataSpec/원문 고지로 연결한다. 두 PDF의 Content-Type·attachment 파일명·실제 바이트/전체 SHA·버튼 순서를 검사하고 정적 원본/serving copy를 릴리스 manifest와 Node source 검증에 포함한다. 파일 자체의 문구가 프로그램 실행 권한이나 새 과학/권리 검증 완료를 뜻하지 않는다.
+철회된 v0.17.4 구현 이력: 당시 사용자 보조 출처·라이선스 PDF를 데이터 명세서 바로 아래 독립 다운로드로 제공했다. 현재 배포에는 포함하지 않는다. 경로는 `/downloads/PlanetX_Source_License_Notices.pdf`이고 원본762160B/SHA aeb12c3a35a959dd1a4a242509eedc2ac44307306eb3ce1ae9e6965ad57ac3c6을 변경하지 않는다. 현재 제거된 범위/과거 설명이 포함된 사용자 보충 문서임을 모든 언어로 알리고 최신 채택 자료·개별 권리는 DataSpec/원문 고지로 연결한다. 두 PDF의 Content-Type·attachment 파일명·실제 바이트/전체 SHA·버튼 순서를 검사하고 정적 원본/serving copy를 릴리스 manifest와 Node source 검증에 포함한다. 파일 자체의 문구가 프로그램 실행 권한이나 새 과학/권리 검증 완료를 뜻하지 않는다.
 
 관측/수치규칙/기존 근거는 변경하지 않는다. 실제 v0.17.4 결과·불변 배포 디렉터리·재시작·Git은 후속 릴리스 기록으로 확정한다.
 
-### 34.1 v0.17.4 검증 확정
+### 34.1 철회된 v0.17.4의 당시 검증 이력
 
 격리/공개 Chrome각5개·strict/Vite·관련Vitest4/2파일·메타Python1·Node HTTP/재시작10개를 통과했다. 두 PDF의 Content-Type/attachment파일명·실제HTTP/브라우저 저장바이트·전체SHA,5언어 닉네임/6테스터·명세서 바로 아래 고지서 순서·포커스/좁은PC창,한국어 브라우저의 초기/새세션/모바일영어를 확인했다. Node-only clean-copy재시작과 운영PID12377→12469,기존구판3근거 ID/판단/비교/원봉투를 복원했다. 보존한 과학저장17파일·원백업 과학9파일은 바이트 동일하며 28파일 stopped-writer백업을 로컬 다운로드/SHA대조했다.
 
 정확 디렉터리는 NASA_SPACE_APPS_CHALLENGE_v0.17.4_20261115_221244KST, payload1976파일/1,105,181,795B, manifest SHA6bae69f6bfe7df117d2d55caf782f011805ba554adcacf64d2996b882cad5490이다. source616·runtime1366/필수1271·114생성JSON/74비교를 검증했다. DataSpec PDF381쪽/5,364,645B/SHA3fbdf5e50a6b34c1773d5a6564f5c45877f81b6d0ff0364f335963ab7cf51697,원문SHA0d8046f70bf01398e417340bfd42e08dd3ad8fa3cc535cd0fee7943b0e7f2bcd다. 381쪽 렌더·6접촉표와1/2/341/381쪽 실제 시각검토를 확인했다. 문자별 전수교정/개별 권리 법률검증을 뜻하지 않는다. 사용자 보조PDF는1쪽/762160B/SHAaeb12c3a35a959dd1a4a242509eedc2ac44307306eb3ce1ae9e6965ad57ac3c6로원본동일하다. source/runtime SHA·백업SHA·검사정본과 Git실제결과는 docs/releases/v0.17.4.json, docs/qa/dev028_release_verification.json을 따른다. 사후검증문서는 불변배포디렉터리를 변경하지 않는다.
+
+### 34.2 사용자 제공 문서 철회·자체 DataSpec 단일 다운로드 롤백
+
+사용자는 검수되지 않은 두 외부 제공 고지 PDF의 공개/통합을 취소했다. 통합 PDF는 생성·배포하지 않았으며, 자체DataSpec만 있던 검증된 v0.17.3 220215KST 불변 디렉터리를 즉시 재활성화했다. 기존 외부PDF경로는 HTTP404다. 현재UI는 자체 데이터 명세서 PDF 다운로드 하나이고 외부고지/통합 문구·별도다운로드·새배포 자산을 제외한다. 과거사용자원본/불변릴리스/Git이력은 보존한다.
+
+운영PID12469→13323·정상TLS ready/source검증과 과학저장17파일 원바이트 보존,구판3근거 ID/판단/비교/원JSON봉투 복원을 확인했다. 현재 source614·runtime1365/필수1270·114JSON/74comparison은 0.17.3 정본이다. 자체DataSpec원문SHA6a9369a28d250d9f4bb4de6315daf851ea1e1830d6be1db9bf8ea3b82bf1cd91 및381쪽/5,364,583B PDF SHA236515182389741aa1e8125389ca67260df18e738c6788fff9183e1d2bd43b7c를 원바이트 복원했다. DataSpec의 원문/PDF는 동일 검증 스냅샷으로 유지하고 최신 운영철회·문서 검토는 이 절과 docs/releases/notice-withdrawal-20261115.json에서 기록한다. 승인 닉네임/6테스터·교사/팀명·영어 초기/새세션·명시locale복원은 유지한다.
+
+롤백 후 공개Chrome5/5도 통과했다. 자체PDF다운로드1개·원파일SHA·5언어승인닉네임/6테스터·영어초기/새세션/모바일 안내를 확인했다. 현재원PDF의381쪽기존렌더·6접촉표/표본4쪽시각검토 정본은 docs/qa/current_internal_data_spec_pdf_verification.json이다.

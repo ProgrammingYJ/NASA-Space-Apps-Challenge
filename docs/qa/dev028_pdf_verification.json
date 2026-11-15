@@ -72,5 +72,8 @@
     "source_kind": "user_provided_supplemental_document",
     "file_review": "Extracted text and actual page render viewed on 2026-11-15; historical scope identified; original bytes unmodified.",
     "visual_review": "Original one-page PDF text and page render actually viewed; original bytes preserved; historical scope disclosed."
-  }
+  },
+  "current_operation": false,
+  "historical_scope": "Successfully verified 0.17.4, later withdrawn by user; see current notice-withdrawal operation record.",
+  "current_operation_record": "docs/releases/notice-withdrawal-20261115.json"
 }

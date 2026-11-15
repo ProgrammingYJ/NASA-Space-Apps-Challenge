@@ -1,0 +1,83 @@
+{
+  "status": "deployed_and_verified",
+  "checked_utc": "2026-11-15T13:28:29.152867+00:00",
+  "reason": "User withdrew both supplied license notices and cancelled merge; restore only internally authored DataSpec PDF",
+  "active_release": "0.17.3",
+  "directory": "NASA_SPACE_APPS_CHALLENGE_v0.17.3_20261115_220215KST",
+  "before_pid": 12469,
+  "after_pid": 13323,
+  "scientific_state_files_byte_preserved": 17,
+  "prior_release_preserved_as_withdrawn_history": "0.17.4",
+  "public_url": "https://nasaspaceappschallenge.marulee.dev/",
+  "active_manifest_sha256": "04879a178fe1e7e4022501b2fde127e84cdb9de130c5874b49e87c6a22b271c1",
+  "runtime_manifest_sha256": "acdcc9eb49acbbe324c7381b8fbd748623a3d823a0d2784de245145ddbec2d42",
+  "source_files_verified": 614,
+  "runtime_source_files": 1365,
+  "required_sources": 1270,
+  "generated_JSON_files": 114,
+  "ordered_comparisons": 74,
+  "current_downloads": [
+    "/downloads/PlanetX_Data_Spec.pdf"
+  ],
+  "withdrawn_standalone_download_HTTP_status": 404,
+  "revised_notice_merge": "cancelled_before_any_public_merged_release_was_created",
+  "data_specification": {
+    "version": "0.17.3",
+    "pages": 381,
+    "pdf_bytes": 5364583,
+    "pdf_sha256": "236515182389741aa1e8125389ca67260df18e738c6788fff9183e1d2bd43b7c",
+    "source_sha256": "6a9369a28d250d9f4bb4de6315daf851ea1e1830d6be1db9bf8ea3b82bf1cd91",
+    "built_at": "2026-11-15T12:59:21Z"
+  },
+  "legacy_three_original_envelopes": {
+    "checked_utc": "2026-11-15T13:26:12.721713+00:00",
+    "base": "https://nasaspaceappschallenge.marulee.dev",
+    "evidence": [
+      {
+        "id": "ev_e764a2eb3a294ca890b39ce8be85dc5d",
+        "status": "restored",
+        "original_export_bytes_and_sha_preserved": true,
+        "comparison_and_judgment_preserved": true,
+        "only_verified_visual_context_updated": false,
+        "bytes": 870988,
+        "sha256": "ca26330aab98a9d26cd7b3c440445ef1068b375b75ca2ca784e3c1ec03d57746"
+      },
+      {
+        "id": "ev_4872494bb4c649e3af2ad8d43b0bf4f8",
+        "status": "restored",
+        "original_export_bytes_and_sha_preserved": true,
+        "comparison_and_judgment_preserved": true,
+        "only_verified_visual_context_updated": false,
+        "bytes": 906270,
+        "sha256": "659e6ecf9de6c5572127f5b8d9c68cb2c74f98a76b17c08e35a49def46239e07"
+      },
+      {
+        "id": "p9ev_5453e41e76da4a9786e2aff1503d2134",
+        "status": "restored",
+        "original_export_bytes_and_sha_preserved": true,
+        "comparison_and_judgment_preserved": true,
+        "only_verified_visual_context_updated": false,
+        "bytes": 32807,
+        "sha256": "46f6398b6f28e868326d3d16f56b03bff6553b8b37311439dcc6b28c9d5f1dfb"
+      }
+    ],
+    "status": "passed"
+  },
+  "data_spec_source_policy": "Restore the verified internal-only v0.17.3 Markdown and PDF byte-for-byte; latest operational withdrawal is recorded in FSD/worklog/release record, not by silently mutating the pinned PDF.",
+  "git": {
+    "historical_implementation_commit": "a55a0e0d38166911d8fc77daade2cf9850176308",
+    "historical_implementation_pushed": true,
+    "withdrawal_commit_and_push": "pending",
+    "branch": "main"
+  },
+  "history_policy": "The original user files, earlier immutable releases and Git history are preserved. Withdrawn user documents are absent from the current source/assets and no longer downloadable from the current application.",
+  "post_withdrawal_public_browser_stats": {
+    "startTime": "2026-11-15T13:26:02.647Z",
+    "duration": 39324.655999999995,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "public_checks": "Single internal DataSpec download, exact PDF bytes/SHA, five-language approved nicknames/six testers, English initial/fresh session/mobile gate, no standalone license button"
+}
