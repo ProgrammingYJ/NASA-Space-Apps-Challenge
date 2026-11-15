@@ -1,0 +1,27 @@
+{
+  "release": "0.16.1",
+  "status": "passed",
+  "checked_utc": "2026-11-15T03:19:20.801750+00:00",
+  "source_MD_sha256": "3e57da2c438e4e98c6af65a7712ba0f080e6a3b1eb5e04a09a7a09bae5d00052",
+  "PDF_sha256": "28870617c051a8b1e9cba4d278a362d520abdaf60c97181c860d26f92bb77bd1",
+  "PDF_bytes": 5354290,
+  "pages": 380,
+  "built_at": "2026-11-15T03:14:08Z",
+  "authoring": "same verified builder and fonts; source MD unchanged; release version and generated date/footer updated",
+  "extraction_and_glyph_checks": "builder full document headings, original source attachment, unique SHA values, HTTP links and glyph preflight passed",
+  "rendered_pages": 380,
+  "contact_sheets": 6,
+  "independently_visually_inspected": [
+    "contact1",
+    "contact2",
+    "contact3",
+    "contact4",
+    "contact5",
+    "contact6",
+    "fullpage1",
+    "fullpage2"
+  ],
+  "findings": "No new clipping, overlap or missing glyph boxes. Source body DEV025/v0.16.0 title preserved; generated cover/footer v0.16.1 is the release label.",
+  "new_scientific_inputs": false,
+  "old_PDF_and_release": "Preserved in immutable v0.16.0 release and Git history."
+}

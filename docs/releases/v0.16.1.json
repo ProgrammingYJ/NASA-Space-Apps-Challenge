@@ -1,0 +1,99 @@
+{
+  "release": "0.16.1",
+  "work_id": "DEV-026",
+  "requests": [
+    "R033",
+    "R034"
+  ],
+  "status": "deployed_and_verified",
+  "checked_utc": "2026-11-15T03:31:00.743459+00:00",
+  "public_url": "https://nasaspaceappschallenge.marulee.dev/",
+  "delivery": {
+    "delivery_format": "directory",
+    "directory": "NASA_SPACE_APPS_CHALLENGE_v0.16.1_20261115_122709KST",
+    "directory_manifest_sha256": "3c5775ab1fcbeadb08b7af8f2a0550867b76177287d3d477bef1c991211ccd36",
+    "files": 1956,
+    "payload_bytes": 1103362751,
+    "directory_bytes": 1103740943,
+    "new_release_ZIP": false
+  },
+  "source_revision": {
+    "base_commit": "35aa58a03cefeda30020e8777c73c9cc8eb3d591",
+    "working_tree_has_uncommitted_changes": true,
+    "source_transfer_manifest_sha256": "99ed0637b155b14ca1b6c02fa2fd09968449eba07769207d9a1a28e9fc827b60"
+  },
+  "source_files_verified": 599,
+  "runtime": {
+    "manifest_sha256": "c0a5133801c57e5fd68cc46c6821324815750abc471a1e84f78714b9fe80e380",
+    "files": 114,
+    "bytes": 63027446,
+    "source_files": 1365,
+    "required_sources": 1270,
+    "ordered_comparisons": 74
+  },
+  "changes": {
+    "R033": "Entering Planet Nine from planet/observation returns to a Sun-centred common overview while preserving date, original observation comparison/assessment and mounted hypothesis.",
+    "R034": "Workspace activity and panel expansion are separate; viewOrbit collapses only the panel, persistent right-side keyboard reopen preserves camera/selection/inputs/source/results/evidence, and genuine in-flight requests continue."
+  },
+  "checks": {
+    "strict_Vite": "passed",
+    "Vitest": 132,
+    "Node": 86,
+    "Python_release_metadata": 1,
+    "Ruff": "passed",
+    "isolated_browser_unique": 5,
+    "initial_isolated_pass_fail": [
+      4,
+      1
+    ],
+    "same_code_followup_pass": 1,
+    "public_browser_pass_fail": [
+      5,
+      0
+    ],
+    "exact_Node_only_directory_restart": [
+      24288,
+      24303
+    ],
+    "production_restart": [
+      24503,
+      24636
+    ],
+    "legacy_three_evidence": "original bytes/IDs/judgments unchanged",
+    "record": "docs/qa/dev026_local_verification.json"
+  },
+  "deployment": {
+    "previous_release": "0.16.0",
+    "old_pid": 22451,
+    "activation_pid": 24503,
+    "restarted_pid": 24636,
+    "preserved_evidence_comparison_files": 24,
+    "consistent_stopped_writer_backup_files": 45,
+    "backup_sha256": "5fce4071b6cbd87804e2ad12ec4c073ad938b0943d31b99d73b4fa2aa2f398e1",
+    "TLS_nginx_health_storage_worker_sources": "passed"
+  },
+  "unchanged": {
+    "registered_targets": 10,
+    "products": 40,
+    "unordered_pairs": 37,
+    "ordered_pairs": 74,
+    "all74_comparison_records_ID_SHA_payload_bindings_unchanged": true,
+    "Data_Spec_MD_sha256": "3e57da2c438e4e98c6af65a7712ba0f080e6a3b1eb5e04a09a7a09bae5d00052",
+    "scientific_input_or_algorithm_changes": false
+  },
+  "PDF": {
+    "verification": "docs/qa/dev026_pdf_verification.json",
+    "source_MD_unchanged": true,
+    "source_MD_sha256": "3e57da2c438e4e98c6af65a7712ba0f080e6a3b1eb5e04a09a7a09bae5d00052",
+    "pages": 380,
+    "bytes": 5354290,
+    "sha256": "28870617c051a8b1e9cba4d278a362d520abdaf60c97181c860d26f92bb77bd1"
+  },
+  "post_freeze_changes": "Release/verification/worklog/status documentation only; deployed directory is immutable.",
+  "limits": [
+    "Camera/dock navigation change only; no new observation, detection, physical law, mass or conditional-probability calculation.",
+    "No native-speaker claim for Japanese, Traditional Chinese or French.",
+    "No new ZIP; original FITS/calibration/canonical comparisons, evidence, previous release and user copy preserved."
+  ],
+  "git": "commit/push pending after this verification record"
+}

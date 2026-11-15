@@ -58,3 +58,6 @@
 @container(max-width:430px){.regionCards{grid-template-columns:1fr}.regionFilters{grid-template-columns:1fr}.steps{gap:4px}.steps li{font-size:9px;padding:7px 4px;gap:4px}.regionCoordinates strong{font-size:12px}.regionMetrics dd{font-size:12px}}
 @media(max-width:600px){.memberDialog{padding:14px}.memberPagination{bottom:-14px}.memberList{max-height:48dvh}.memberDialog h2{font-size:16px}.memberDialog header p{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.regionItem{transition:none}}
+
+.headerActions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;min-width:0}
+.workbench .headerActions .returnButton{white-space:normal;max-width:100%;min-width:0;flex:0 1 auto}

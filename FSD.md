@@ -1,6 +1,8 @@
 # Planet X and SPHEREx — 기능·개발 명세서
 
-**현재 운영 DEV-025 / v0.16.0:** 실제SPHEREx10대상40제품·37무순서쌍/74방향별 비교, ε Indi Ba/Bb 별도 상세, TOP5 카드/연속 실제천체 탐색, source 검증 native 기준점/위치표식, 크레딧/전체 데이터 PDF와 설명 카드 가림 수정을 적용했다. 원격 strict/Vite·Vitest132/26파일·Node86·Python45+22subtests/Ruff, 로컬Chrome18고유 경로와 공개HTTPS5고유 경로를 확인했다. 정확115623KST 디렉터리1951payload파일/1,103,298,864B, manifestSHA ab8c13a8b2e49feb4ae7d527dd08107e23ecfc318d7bb91c4f28abc592d6ebd7, runtimeSHA 0ac22b38cb819369e16bdb6835aeddc0ff6a2ddad70020174d2932aab73b7b39·114JSON/63,027,446B다. 운영PID22206→22451 실제재시작후ready/source검증을확인했다. 공개검사초회실패와후속결과·구판근거원봉투복원·Git상태의최종정본은 docs/releases/v0.16.0.json과 docs/qa/dev025_local_verification.json을 따른다. 사후문서가 동결 배포디렉터리를 수정하지 않는다.**
+**현재 운영 DEV-026 / v0.16.1:** R033 제9행성 탭은 태양 중심 전체 보기로 이동하며 실관측/시각을 보존한다. R034 작업영역과 패널 펼침을 분리해 가설 궤도 보기 후에도 우측 재열기·입력/결과/판단·연속 천체선택을 유지한다. strict/Vite·Vitest132/Node86·메타Python1/Ruff,로컬5고유(초회4/1+동일코드후속1)·공개5/5·390×844/5언어·실제진행중계산/근거복원과정확디렉터리재시작을확인했다. 운영PID24503→24636·기존3근거원봉투와74comparisonID/SHA를보존한다. 새ZIP없이122709KST디렉터리를적용했으며사후정본은 docs/releases/v0.16.1.json과 docs/qa/dev026_local_verification.json이다.**
+
+**보존 이력 DEV-025 / v0.16.0:** 실제SPHEREx10대상40제품·37무순서쌍/74방향별 비교, ε Indi Ba/Bb 별도 상세, TOP5 카드/연속 실제천체 탐색, source 검증 native 기준점/위치표식, 크레딧/전체 데이터 PDF와 설명 카드 가림 수정을 적용했다. 원격 strict/Vite·Vitest132/26파일·Node86·Python45+22subtests/Ruff, 로컬Chrome18고유 경로와 공개HTTPS5고유 경로를 확인했다. 정확115623KST 디렉터리1951payload파일/1,103,298,864B, manifestSHA ab8c13a8b2e49feb4ae7d527dd08107e23ecfc318d7bb91c4f28abc592d6ebd7, runtimeSHA 0ac22b38cb819369e16bdb6835aeddc0ff6a2ddad70020174d2932aab73b7b39·114JSON/63,027,446B다. 운영PID22206→22451 실제재시작후ready/source검증을확인했다. 공개검사초회실패와후속결과·구판근거원봉투복원·Git상태의최종정본은 docs/releases/v0.16.0.json과 docs/qa/dev025_local_verification.json을 따른다. 사후문서가 동결 배포디렉터리를 수정하지 않는다.**
 
 **보존 이력 DEV-024 / v0.15.1: 혼합척도를 공통 부모중심 선형거리/전체개략도로 분리했고 원자료 거리비율·mesh반지름·구판카메라 복원을 보존한다. P9오른쪽580px/왼쪽INFO/연속이름선택과출처H·크기/명시ρ·albedo가정의M⊕어림값을 구현했다. 중복전역근거버튼을제거하고관측작업대근거탭으로통합했다. strict/Vite·Vitest122/Node80/Python65+16subtests/Ruff,독립브라우저9경로와구판2경로,정확디렉터리Node-only재시작을확인했다. 공개초회6/7에서좌표도착전Pluto선택race를발견해교정했고실제응답지연/Pluto저장복원과εB5언어원본품질/근거복원2후속을공개HTTPS에서통과했다. 운영PID14484→실제재시작14572,기존3근거원봉투/ID/판단과네comparison정본을보존한다. runtimeSHA cdd9d4591d84b2e5eb4c962233531106c1284b776a6af9c7d68e09db4de9a204,source1275/필수1184·39JSON/19,203,311B. 새ZIP없이095903 검증디렉터리를활성화했으며사후정본은 docs/releases/v0.15.1.json이다.**
 
@@ -9,7 +11,7 @@
 **보존 이력 DEV-020 / v0.13.0:** R029~31의 TNO 전수 설명·판정 대화상자·밀도 선택 기능, 공식 RGB 지도/고리/조명/LOD 복구, 8행성·P9문헌/조합 표시 필터를 구현했다. TypeScript/Vite·Vitest84·Node72·관련Python63·Ruff와 Chrome15개 고유 경로(영향 범위 후속 포함)를 확인했다. runtime SHA ea500e152d49734fcb2dfd65db3f6a2abbf967d77d6a7ae79bc2e8ddcff16f46,39JSON/19,200,366B/source1272·필수1182다. 기존4comparison ID/SHA와 3운영 근거 원봉투를 보존한다. 현재 Sydney 운영은 검증된0.13ZIP으로 갱신됐고 실제 재시작·HTTPS Chrome5흐름·기존근거복원이 완료됐다. 정확기록은 docs/releases/v0.13.0.json이다. 상세계약24절,검증정본 docs/qa/dev020_local_verification.json. 아래 이전 릴리스는 당시 이력이다.
 
 
-문서 버전 `FSD-0.27` · 2026-11-15 KST · DEV-025·DEV-023·DEV-024·OPS-020 EC2이전. 현재범위/기능/자료계약은1.1/2.21/8.14/11.1~2/17.4/21과후속22~29를연결하며충돌시최신29를우선한다. 제외기능의과거완료이력은현재유지범위가아니다.
+문서 버전 `FSD-0.28` · 2026-11-15 KST · DEV-025·DEV-023·DEV-024·OPS-020 EC2이전. 현재범위/기능/자료계약은1.1/2.21/8.14/11.1~2/17.4/21과후속22~30을연결하며충돌시최신30을우선한다. 제외기능의과거완료이력은현재유지범위가아니다.
 
 **이 파일은 프로젝트의 기능·화면·계산·API·데이터·실행·검사·배포 명세를 통합 관리하는 문서다.** 기능이나 계약을 바꾸는 작업에서는 관련 절과 아래 구현 현황을 함께 갱신한다. 규칙은 [AGENTS.md](./AGENTS.md), 실제 작업 증거는 [작업 기록](./docs/worklog.md), 적용 스킬은 [SKILLS.md](./SKILLS.md)에서 연결한다. 기능·개발 명세는 이 파일에서 유지한다. 사용자의 명시적 요청으로 만든 [Data_Spec.md](./Data_Spec.md)는 실제 사용/확보/이전 데이터의 전수 목록·출처·해시·가공/권리·한계를 담당하며 실행 manifest/타입과 함께 갱신한다. OpenAPI/타입/스키마·lockfile·테스트는 실행 가능한 계약으로 별도 유지하고 이 문서에서 경로/버전을 참조한다.
 
@@ -1326,3 +1328,16 @@ DEV-024 공개 확정: DEV-024 / v0.15.1: 혼합척도를 공통 부모중심 �
 - 정확 디렉터리 `NASA_SPACE_APPS_CHALLENGE_v0.16.0_20261115_115623KST`의1951payload파일/1,103,298,864B·manifest SHA `ab8c13a8b2e49feb4ae7d527dd08107e23ecfc318d7bb91c4f28abc592d6ebd7`를 새 빈 폴더에 복사해 검증했다. Node-only PATH의 실제PID22039→22052 재시작과 원본 비교/가설 근거 복원을 통과했다. 이 독립 검사 당시의 `public_service=not_deployed`는 이력 그대로 보존하고 실제 운영 결과와 분리한다.
 - 같은 검증 디렉터리를Sydney EC2에 직접 활성화했다. runtime manifest SHA `0ac22b38cb819369e16bdb6835aeddc0ff6a2ddad70020174d2932aab73b7b39`,114JSON/63,027,446B, source1365개 중 필수1270·선택28개 present 검증/선택67개 미배포다. writer 중지 백업41파일과 기존22comparison/evidence파일 원바이트 보존을 확인했고 실제운영PID22206→22451 재시작 뒤 정상TLS·ready/sourceverified 상태를 확인했다. 새ZIP은 생성하지 않았다.
 - 기존3운영근거의 최종 원봉투/ID/판단 복원, 공개검사 세부 및 Git commit/push 결과는 [외부 릴리스 정본](docs/releases/v0.16.0.json)과 [DEV-025 검사 정본](docs/qa/dev025_local_verification.json)에서 확정한다. 검증 디렉터리와 과거 ZIP을 사후 문서 기록으로 덮어쓰지 않는다. GitHub 저장소는 사용자 지시로PUBLIC 전환됐고 개인키/계정·내부 계획서·연구 원문 논문PDF를 공개 소스에 추가하지 않는다.
+
+
+## 30. DEV-026 — R033/R034 제9행성 시점·패널 보존
+
+- R033: 행성/위성/실관측 화면에서 제9행성 탭 또는 발견 카드로 진입하면 선택·follow·부모중심 선형보기·복원카메라만 해제하고 태양 중심 전체 개략도 카메라로 이동한다. 모형 날짜/시간 출처·실관측 세션/노출 ID·비교 결과·판단·질량가정과 기존 P9 가설/경로·문헌 조건은 초기화하지 않는다. 탭 재진입은 전체 보기 의도이며 별도 패널 재열기와 구분한다.
+- R034: P9 작업영역 활성과 패널 펼침 상태를 분리한다. ‘가설 궤도 보기’는 태양 중심의 기존 가설 경로를 보여주고 오른쪽 패널만 접는다. 우측의 ‘가설 패널 다시 열기’는 항상 발견/키보드 접근이 가능하고 aria-expanded/controls로 상태를 알린다. 재열기는 카메라·선택·시각을 변경하지 않는다. 수동 접기와 기존 탐색 복귀도 구별한다.
+- 작업대는 계속 마운트하고 접기만으로 reset/clearResults/p9Generation 변경·재계산·근거 초기화·진행 중 요청 취소를 하지 않는다. 입력·문헌 원행/영역조건·예측·촬영범위·중력결과·판단·근거 ID·알려진 천체 대조목록을 유지한다. 전역 새 세션과 실제 입력 변경은 기존 무효화 계약을 따른다. 접기 후 포커스는 재열기 버튼, 재열기 후 작업대 영역으로 이동한다.
+- ko/en/ja/zh-Hant/fr의 접기/재열기 문구와 좁은 화면을 검사한다. 행성 근접/실관측→탭→Sun overview, 원행 표본→가설보기→재열기·반복/언어변경→동일 입력/목록/판단/경로/추가 predict 요청0, 실제 TNO 연속선택과 카메라 불변을 실제 브라우저에서 확인한다.
+- 신규 과학자료·수치 알고리즘·원관측/보정·문헌 CSV를 변경하지 않는다. Data_Spec.md의 기존 source SHA와 자료 전수목록은 유지한다. 릴리스 버전 변경에 따른 문서 PDF/크레딧 메타데이터는 별도 생성 manifest로 갱신하며 원MD에 새 자료가 있는 것처럼 쓰지 않는다. 원본/기존 근거/불변 배포는 보존한다.
+
+상태: 구현/원격strict·Vite/Vitest132/Node86/Ruff·릴리스메타1검사와Chrome5고유경로(초회4PASS/표본GET지연1FAIL,동일코드후속1PASS)를확인했다. 390×844/5언어·진행중실응답·실제해왕성관측과근거ID/판단/목록보존을검사했다. 현재 공개 서비스는 DEV-026/v0.16.1이며 정확 디렉터리/AWS 공개5검사·실제재시작/구판근거복원을확인했다. Git commit/push는외부릴리스정본에서확정한다. 상세 docs/qa/dev026_local_verification.json.
+
+DEV-026 공개확정: 122709KST 정확디렉터리1956payload/1,103,362,751B/manifest3c5775ab1fcbeadb08b7af8f2a0550867b76177287d3d477bef1c991211ccd36·Node-only PID24288→24303을검증했다. 같은바이트를AWS에활성화하고공개5/5·실제재시작24503→24636/구판3근거원봉투복원을통과했다. 중지writer45파일백업과기존24근거/비교원바이트를보존했다. 최초pyproject버전표기불일치후보는미배포/검증실패로보존했고최종599sourcebyte를재대조했다. 새릴리스문서PDF만갱신했으며DataSpec원MD·과학자료/74comparison은동일하다. Git결과는외부릴리스정본과작업기록을따른다.

@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "algorithm_version": "full-markdown-linked-cjk-pdf-v1",
-  "version": "0.16.0",
-  "built_at": "2026-11-15T02:14:48Z",
+  "version": "0.16.1",
+  "built_at": "2026-11-15T03:14:08Z",
   "source_filename": "Data_Spec.md",
   "source_bytes": 2205332,
   "source_sha256": "3e57da2c438e4e98c6af65a7712ba0f080e6a3b1eb5e04a09a7a09bae5d00052",
   "pdf_filename": "PlanetX_Data_Spec.pdf",
-  "pdf_bytes": 5354288,
-  "pdf_sha256": "20bbb99c50dcc9f7a72b0911829b2cd526368a3e97e3c365d8ab65fdb50f96e9",
+  "pdf_bytes": 5354290,
+  "pdf_sha256": "28870617c051a8b1e9cba4d278a362d520abdaf60c97181c860d26f92bb77bd1",
   "pages": 380,
   "source_lines": 4137,
   "markdown_block_tokens": 48019,
@@ -36,7 +36,7 @@
       "input_filename": "NotoSansKR[wght].ttf",
       "input_bytes": 10414588,
       "input_sha256": "194018e6b2b293a7964f037b25c0249ce1418bc9ab3c971060a03aa57861e252",
-      "embedded_instance_sha256": "18ef86f7e65164e0266942c2a74e03fd1ccf88af7c636a6f0b372399f26288ff",
+      "embedded_instance_sha256": "3c7251bc9c64b83a1630d39624d4996e2992f027d607341697a63821e3d9ceac",
       "instance_axes": {
         "wght": 400
       },
@@ -48,7 +48,7 @@
       "input_filename": "NotoSansKR[wght].ttf",
       "input_bytes": 10414588,
       "input_sha256": "194018e6b2b293a7964f037b25c0249ce1418bc9ab3c971060a03aa57861e252",
-      "embedded_instance_sha256": "7758afd5ec8f6e66a0393586384f0f50556adf30851345dc81d7227ffb7b41c8",
+      "embedded_instance_sha256": "6618855806617bd91ca73c09e49eab28a4233e962b707d09fa16dbb15821f002",
       "instance_axes": {
         "wght": 700
       },
@@ -60,7 +60,7 @@
       "input_filename": "NotoSans[wdth,wght].ttf",
       "input_bytes": 2049096,
       "input_sha256": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
-      "embedded_instance_sha256": "4189c95997529015241cc809cfa387d24382c9c045300d478c5dbdce31a679ba",
+      "embedded_instance_sha256": "940caf95ba7b859e153f18378a8b1b76f2662112a537fc0140645f0873e5a9f1",
       "instance_axes": {
         "wght": 400,
         "wdth": 100.0

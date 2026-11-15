@@ -10,8 +10,9 @@ import PlanetNineRegions from './PlanetNineRegions';
 import OrbitAnaloguePanel from './OrbitAnaloguePanel';
 import {orbitAnalogueCopy} from './OrbitAnalogueCopy';
 import {p9StepCopy} from './P9StepCopy';
+import {p9NavigationCopy} from './P9NavigationCopy';
 export type {PlanetNinePrediction} from './PlanetNineTypes';
-export interface PlanetNineWorkbenchProps {visible?:boolean;language:string;resetKey?:number|string;onHypothesisPath?:(result:PlanetNinePrediction|null)=>void;onClose?:()=>void;onInspectKnownObject?:(objectId:string)=>void;onViewHypothesis?:()=>void;selectedKnownObjectId?:string|null}
+export interface PlanetNineWorkbenchProps {visible?:boolean;language:string;resetKey?:number|string;onHypothesisPath?:(result:PlanetNinePrediction|null)=>void;onClose?:()=>void;onCollapse?:()=>void;onInspectKnownObject?:(objectId:string)=>void;onViewHypothesis?:()=>void;selectedKnownObjectId?:string|null}
 type Busy='prediction'|'coverage'|'save'|'import'|'gravity'|null;
 const elementFields:[keyof PlanetNineOrbit,string,number,number,number][]=[['a_au','a (au)',.05,2000,.01],['e','e',0,.99,.001],['i_deg','i (°)',0,180,.01],['omega_deg','ω (°)',-1e9,1e9,.01],['Omega_deg','Ω (°)',-1e9,1e9,.01],['M_deg','M (°)',-1e9,1e9,.01],['epoch_jd_tdb','epoch (JD · TDB)',625697.5,2816787.5,.5]];
 const stringValue=(value:unknown)=>typeof value==='string'||typeof value==='number'?String(value):'—';
@@ -19,8 +20,8 @@ function saveJSON(value:unknown,name:string){const url=URL.createObjectURL(new B
 // Formatting only: the original numeric orbit remains unchanged until an edit.
 function numeric(value:number){return Number.isFinite(value)?Number(value.toPrecision(12)):'';}
 
-export default function PlanetNineWorkbench({visible=true,language,resetKey,onHypothesisPath,onClose,onInspectKnownObject,onViewHypothesis,selectedKnownObjectId}:PlanetNineWorkbenchProps){
-  const ic=planetNineInteractionCopy(language),oc=orbitAnalogueCopy(language),sc=p9StepCopy(language),c=planetNineCopy(language),dc=planetNineDiagnosticsCopy(language),gc=planetNineGravitySourceCopy(language),format=(value:number,digits=6)=>value.toLocaleString(language,{maximumSignificantDigits:digits});
+export default function PlanetNineWorkbench({visible=true,language,resetKey,onHypothesisPath,onClose,onCollapse,onInspectKnownObject,onViewHypothesis,selectedKnownObjectId}:PlanetNineWorkbenchProps){
+  const nav=p9NavigationCopy(language),ic=planetNineInteractionCopy(language),oc=orbitAnalogueCopy(language),sc=p9StepCopy(language),c=planetNineCopy(language),dc=planetNineDiagnosticsCopy(language),gc=planetNineGravitySourceCopy(language),format=(value:number,digits=6)=>value.toLocaleString(language,{maximumSignificantDigits:digits});
   const [presets,setPresets]=useState<PlanetNinePresets|null>(null),[presetId,setPresetId]=useState(''),[orbit,setOrbit]=useState<PlanetNineOrbit|null>(null);
   const [startDate,setStartDate]=useState('2026-09-29'),[endDate,setEndDate]=useState('2026-10-02'),[observer,setObserver]=useState<PlanetNineObserver>('earth_moon_barycenter');
   const [prediction,setPrediction]=useState<PlanetNinePrediction|null>(null),[coverage,setCoverage]=useState<PlanetNineCoverage|null>(null),[judgment,setJudgment]=useState(''),[evidenceId,setEvidenceId]=useState('');
@@ -72,7 +73,7 @@ export default function PlanetNineWorkbench({visible=true,language,resetKey,onHy
   const currentStep=prediction?3:rowSelecting||busy==='prediction'||regionContext?2:1;
   const activeSourceRow=savedSource?.row_index??(prediction?sourcePreset?.row_index:undefined);
   return <section className={styles.workbench} hidden={!visible} data-testid="planet-nine-workbench" aria-labelledby="p9-title" aria-busy={pending||sourceLoading}>
-    <header className={styles.header}><div><small>{c.kicker}</small><h1 id="p9-title">{c.title}</h1><p>{sc.intro}</p><details className={styles.headerExplanation}><summary>{sc.headerDetails}</summary><p>{c.intro}</p></details></div>{onClose&&<button className={styles.returnButton} onClick={onClose}><span>{c.close}</span><span aria-hidden="true">×</span></button>}</header>
+    <header className={styles.header}><div><small>{c.kicker}</small><h1 id="p9-title">{c.title}</h1><p>{sc.intro}</p><details className={styles.headerExplanation}><summary>{sc.headerDetails}</summary><p>{c.intro}</p></details></div>{(onCollapse||onClose)&&<div className={styles.headerActions}>{onCollapse&&<button className={styles.returnButton} data-testid="p9-collapse-panel" aria-expanded={true} aria-controls="planet-nine-panel" onClick={onCollapse}>{nav.collapse} ‹</button>}{onClose&&<button className={styles.returnButton} onClick={onClose}><span>{c.close}</span><span aria-hidden="true">×</span></button>}</div>}</header>
     <ol role="list" aria-label={sc.workflow} className={styles.steps} data-testid="p9-workflow-steps">{[sc.regionStep,sc.sampleStep,sc.compareStep].map((label,index)=><li key={index} aria-current={currentStep===index+1?'step':undefined} data-state={currentStep===index+1?'current':'inactive'}><span aria-hidden="true">{index+1}</span><span>{label}</span></li>)}</ol>
     <nav className={styles.quickNav} aria-label={c.title}><button data-testid="p9-goto-top-five" disabled={!orbit} onClick={()=>{setTopFiveReset(value=>value+1);goTo(regionsTarget.current);}}>{topFiveLabel}</button><button data-testid="p9-goto-analogues" disabled={!orbit} onClick={()=>goTo(analoguesTarget.current)}>{oc.title}</button></nav>
     {orbit&&(activeSourceRow!==undefined||prediction)&&<div className={styles.hypothesisSummary} data-testid="p9-active-hypothesis" data-source-row={activeSourceRow??''}><strong>{sc.activeHypothesis} · {activeSourceRow===undefined?sc.manualHypothesis:`${sc.sourceRow} #${activeSourceRow}`}</strong><span>a {format(orbit.a_au)} au · e {format(orbit.e)} · i {format(orbit.i_deg)}° · {format(orbit.mass_earth)} M⊕</span></div>}

@@ -76,7 +76,8 @@ test('DEV-023: selecting literature row 2413 automatically calculates its actual
   await expect(scene).toHaveAttribute('data-hypothesis-orbit-points','257');
   await expect(scene).toHaveAttribute('data-camera-mode','overview');
   await expect(scene).toHaveAttribute('data-selected-object','');
-  await page.getByTestId('open-planet-nine').click();
+  await expect(page.getByTestId('p9-reopen-panel')).toBeVisible();
+  await page.getByTestId('p9-reopen-panel').click();
   await expect(page.getByTestId('p9-orbit-analogue-1')).toHaveAttribute('data-object-id','sbdb-20689335');
   await page.getByTestId('p9-inspect-analogue-1').click();
   await expect(page.getByTestId('planet-nine-panel')).toBeVisible();

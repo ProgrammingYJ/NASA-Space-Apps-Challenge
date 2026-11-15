@@ -1,0 +1,703 @@
+{
+  "work_id": "DEV-026",
+  "requests": [
+    "R033",
+    "R034"
+  ],
+  "release": "0.16.1",
+  "status": "deployed_and_verified",
+  "checked_utc": "2026-11-15T03:31:00.743459+00:00",
+  "strict_typecheck_vite": "passed",
+  "vitest": {
+    "passed": 132,
+    "files": 26
+  },
+  "Node": {
+    "passed": 86,
+    "skipped": 0
+  },
+  "python": "public release metadata 1 passed; no science/API algorithms changed; prior DEV025 affected science checks retained as history",
+  "ruff": "passed",
+  "browser": {
+    "initial_pass": 4,
+    "initial_failed": 1,
+    "same_code_fresh_context_followup_passed": 1,
+    "unique_final_passed": 5,
+    "cases": [
+      {
+        "title": "DEV-023: selecting literature row 2413 automatically calculates its actual orbit and exposes honest catalogue comparisons",
+        "status": "passed",
+        "duration_ms": 36741
+      },
+      {
+        "title": "DEV-026 R033: entering Planet Nine from a focused observed planet returns to the Sun while its real observation workspace survives",
+        "status": "passed",
+        "duration_ms": 31225
+      },
+      {
+        "title": "DEV-026 R034: a genuine in-flight hypothesis calculation completes while only the panel is collapsed and does not recenter the camera",
+        "status": "passed",
+        "duration_ms": 21561
+      },
+      {
+        "title": "DEV-026 R034: mobile hypothesis collapse and reopen controls fit their panel and viewport in all five languages",
+        "status": "passed",
+        "duration_ms": 18735
+      },
+      {
+        "title": "DEV-026 R034: hypothesis orbit view keeps a keyboard-reopenable workspace with unchanged source rows, inputs, evidence and continuous real-object selection",
+        "status": "passed",
+        "duration_ms": 38775
+      }
+    ],
+    "failure": "population/2413 read-only GET aborted at 15-second bounded timeout while initial multi-MB moon catalogues downloaded; normal retry UI visible, no console/page error, prediction POST had not started. Test waited for later POST and reached 150 seconds. Same-code fresh-context followup passed in 38.8s; no application/test modification or POST retry.",
+    "independent_GET_comparison": {
+      "AWS_loopback_HTTP": 200,
+      "AWS_loopback_seconds": 0.029645,
+      "tunnel_HTTP": 200,
+      "tunnel_seconds": 7.485,
+      "bytes": 1597
+    }
+  },
+  "coverage": [
+    "Neptune real observations/assessment plus 2035 scene survive entering Sun-centred P9 workspace.",
+    "Actual row2413, inputs, conditional region/source, saved evidence ID, judgment, analogue IDs and 257-point path persist across viewOrbit/collapse/keyboard-reopen/five locales/two known-TNO selections.",
+    "One genuine in-flight predict completes after collapse without extra POST or camera change.",
+    "390x844 mobile controls fit viewport/panel in five locales; focus/Enter/aria-controls preserved."
+  ],
+  "PDF": {
+    "verification": "docs/qa/dev026_pdf_verification.json",
+    "source_MD_unchanged": true,
+    "source_MD_sha256": "3e57da2c438e4e98c6af65a7712ba0f080e6a3b1eb5e04a09a7a09bae5d00052",
+    "pages": 380,
+    "bytes": 5354290,
+    "sha256": "28870617c051a8b1e9cba4d278a362d520abdaf60c97181c860d26f92bb77bd1"
+  },
+  "runtime": {
+    "manifest_sha256": "c0a5133801c57e5fd68cc46c6821324815750abc471a1e84f78714b9fe80e380",
+    "files": 114,
+    "bytes": 63027446,
+    "source_files": 1365,
+    "required_sources": 1270,
+    "ordered_comparisons": 74
+  },
+  "production": {
+    "directory": "NASA_SPACE_APPS_CHALLENGE_v0.16.1_20261115_122709KST",
+    "activated_pid": 24503,
+    "actual_restarted_pid": 24636,
+    "HTTPS_ready": true,
+    "worker_alive": true,
+    "storage_writable": true,
+    "source_bundle_verified": true,
+    "legacy_three_evidence": {
+      "checked_utc": "2026-11-15T03:29:58.725122+00:00",
+      "base": "https://nasaspaceappschallenge.marulee.dev",
+      "evidence": [
+        {
+          "id": "ev_e764a2eb3a294ca890b39ce8be85dc5d",
+          "status": "restored",
+          "original_export_bytes_and_sha_preserved": true,
+          "comparison_and_judgment_preserved": true,
+          "only_verified_visual_context_updated": false,
+          "bytes": 870988,
+          "sha256": "ca26330aab98a9d26cd7b3c440445ef1068b375b75ca2ca784e3c1ec03d57746"
+        },
+        {
+          "id": "ev_4872494bb4c649e3af2ad8d43b0bf4f8",
+          "status": "restored",
+          "original_export_bytes_and_sha_preserved": true,
+          "comparison_and_judgment_preserved": true,
+          "only_verified_visual_context_updated": false,
+          "bytes": 906270,
+          "sha256": "659e6ecf9de6c5572127f5b8d9c68cb2c74f98a76b17c08e35a49def46239e07"
+        },
+        {
+          "id": "p9ev_5453e41e76da4a9786e2aff1503d2134",
+          "status": "restored",
+          "original_export_bytes_and_sha_preserved": true,
+          "comparison_and_judgment_preserved": true,
+          "only_verified_visual_context_updated": false,
+          "bytes": 32807,
+          "sha256": "46f6398b6f28e868326d3d16f56b03bff6553b8b37311439dcc6b28c9d5f1dfb"
+        }
+      ],
+      "status": "passed"
+    },
+    "comparison_records_all_74_unchanged": true
+  },
+  "limits": [
+    "Camera/dock navigation change only; no new observation, detection, physical law, mass or conditional-probability calculation.",
+    "No native-speaker claim for Japanese, Traditional Chinese or French.",
+    "No new ZIP; original FITS/calibration/canonical comparisons, evidence, previous release and user copy preserved."
+  ],
+  "exact_directory": {
+    "checked_at": "2026-11-15T03:27:12.333363+00:00",
+    "status": "passed",
+    "delivery_format": "directory",
+    "logs": "/home/ubuntu/planet-x-dev020-build/tmp/node-release-verify-eaf20x_l",
+    "development_verifier": {
+      "runtime": "Python standard library",
+      "executable": "/home/ubuntu/planet-x-dev020-build/.venv/bin/python",
+      "role": "Directory-copy/hash orchestration and HTTP test client only; not the server"
+    },
+    "server_python_required": false,
+    "linux_container": "not_run",
+    "public_service": "not_deployed",
+    "input_directory": "/home/ubuntu/planet-x-dev020-build/artifacts/NASA_SPACE_APPS_CHALLENGE_v0.16.1_20261115_122709KST",
+    "clean_copy": "/home/ubuntu/planet-x-dev020-build/tmp/node-release-verify-eaf20x_l/clean_copy",
+    "input_semantics": "complete directory copied to a new empty folder; no ZIP creation or extraction",
+    "directory_manifest_sha256": "3c5775ab1fcbeadb08b7af8f2a0550867b76177287d3d477bef1c991211ccd36",
+    "directory_bytes": 1103740943,
+    "release": "0.16.1",
+    "release_base_commit": "35aa58a03cefeda30020e8777c73c9cc8eb3d591",
+    "manifest_files_verified": 1956,
+    "runtime_integrity": {
+      "required_sources_verified": 1270,
+      "optional_sources_present_verified": 28,
+      "optional_sources_not_deployed": 67,
+      "runtime_manifest_sha256": "c0a5133801c57e5fd68cc46c6821324815750abc471a1e84f78714b9fe80e380"
+    },
+    "directory_policy": "path/case/symlink/special-file/private-path/environment/key-header/local-only exclusions passed",
+    "solar_scope_checks": {
+      "radius_au": 1000,
+      "P9_source_sha256": "050b68182ecbf7fd76f280d8cc43c0683d207499aba1488a68092b834420a422",
+      "removed_API_status": 410
+    },
+    "p9_restart_restore": {
+      "evidence_id": "p9ev_e4c1af487e0b4410a9b28489b804ce57",
+      "same_export_bytes": true,
+      "gravity_recomputed": true
+    },
+    "stage": "complete",
+    "node_runtime": {
+      "status": "passed",
+      "scope": "solar_system_1000au",
+      "surface_maps": 31,
+      "registered_targets": 10,
+      "registered_unordered_pairs": 37,
+      "evidence_id": "ev_1312f842399d4a97870543a8d0cf4209",
+      "result_id": "cmp_d88083664b6fd27592eb68c1",
+      "pluto_evidence_id": "ev_cb71e921b80349ba91cd114645cd46cf",
+      "pluto_result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+      "p9_evidence_id": "p9ev_e4c1af487e0b4410a9b28489b804ce57",
+      "p9_source_sha256": "050b68182ecbf7fd76f280d8cc43c0683d207499aba1488a68092b834420a422"
+    },
+    "server": {
+      "engine": "Node.js",
+      "version": "v24.22.3",
+      "executable": "/usr/local/lib/planet-x-node-v24.22.3/bin/node",
+      "argv": [
+        "/usr/local/lib/planet-x-node-v24.22.3/bin/node",
+        "app.js"
+      ],
+      "PATH": "/usr/local/lib/planet-x-node-v24.22.3/bin",
+      "PORT": "8013",
+      "APP_PORT": null,
+      "actual_http_port": 8013,
+      "startup_port_source": "PORT_environment",
+      "APP_STATE_DIR": "/home/ubuntu/planet-x-dev020-build/tmp/node-release-verify-eaf20x_l/clean_copy/var/node",
+      "owned_process_ids": [
+        24288,
+        24303
+      ],
+      "worker_model": "node:worker_threads, verified through actual health/source responses",
+      "Python_interpreters_resolvable_on_PATH": {
+        "python": null,
+        "python3": null,
+        "python.exe": null,
+        "python3.exe": null,
+        "py": null,
+        "py.exe": null,
+        "uvicorn": null
+      },
+      "source_child_process_import_scan": "none",
+      "stop_method": "only owned Popen process SIGTERM; kill only on timeout"
+    },
+    "runtime_disclosure": {
+      "arbitrary_fits_inputs": false,
+      "feature_flags": {
+        "black_holes": false,
+        "cosmic_history": false,
+        "exoplanets": false,
+        "galaxies": false,
+        "galaxy_atlas": false,
+        "historical_comets": false,
+        "observer_experiment": false,
+        "physics_lab": false,
+        "planet_nine_hypothesis": true
+      },
+      "observation_processing": "verified_build_cache",
+      "ordered_comparison_count": 74,
+      "physics_capabilities": {
+        "all_bodies_known": false,
+        "all_physics": false,
+        "force_cutoff_au": null,
+        "gravity": "newtonian_prescribed_sun_and_eight_planets_restricted_test_particle",
+        "hypothesis": "p9-kepler-sky-v1",
+        "max_integrator_steps": 4096,
+        "optional_solar_1pn": true,
+        "study_radius_au": 1000
+      },
+      "public_scope": "solar_system_1000au",
+      "runtime": "node",
+      "schema_version": "1.0",
+      "snapshot_exported_utc": "2026-11-15T03:17:30.242886+00:00",
+      "source_verification_policy": {
+        "asset_readiness": "asset_success_does_not_mark_science_sources_ready",
+        "batching": "simultaneously_queued_transactions_share_one_validation_pass_no_time_ttl",
+        "comparison_payload": "raw_sha256_checked_each_read",
+        "deployment_input_contract": "immutable_read_only_source_files",
+        "each_transaction": "science_transactions_check_all_required_paths_and_file_fingerprints",
+        "fingerprint": [
+          "dev",
+          "ino",
+          "size",
+          "mtimeNs",
+          "ctimeNs"
+        ],
+        "full_audit": "startup_and_node_app_js_verify_sources_and_exact_release_audit",
+        "initial_verification": "full_sha256_all_bundle_and_required_source_files",
+        "limit": "A host administrator able to forge file identity and all timestamps is outside this metadata-cache trust boundary.",
+        "metadata_change": "full_sha256_required_before_use",
+        "static_assets": "after_initial_full_audit_check_manifest_identity_and_requested_registered_serving_file_fingerprint_and_sha_only",
+        "unchanged_fingerprint": "reuse_previously_verified_sha256",
+        "version": "sha256-stat-fingerprint-v2-scoped-assets"
+      },
+      "supported_observation_pairs": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S01",
+          "L033"
+        ],
+        [
+          "S01",
+          "L035"
+        ],
+        [
+          "S02",
+          "L033"
+        ],
+        [
+          "S02",
+          "L035"
+        ],
+        [
+          "S12",
+          "S13"
+        ],
+        [
+          "S12",
+          "S14"
+        ],
+        [
+          "S13",
+          "S14"
+        ],
+        [
+          "L001",
+          "L005"
+        ],
+        [
+          "L002",
+          "L006"
+        ],
+        [
+          "L003",
+          "L004"
+        ],
+        [
+          "L007",
+          "L008"
+        ],
+        [
+          "L009",
+          "L011"
+        ],
+        [
+          "L010",
+          "L012"
+        ],
+        [
+          "L013",
+          "L016"
+        ],
+        [
+          "L013",
+          "L027"
+        ],
+        [
+          "L013",
+          "L028"
+        ],
+        [
+          "L013",
+          "L029"
+        ],
+        [
+          "L014",
+          "L017"
+        ],
+        [
+          "L015",
+          "L018"
+        ],
+        [
+          "L016",
+          "L027"
+        ],
+        [
+          "L016",
+          "L028"
+        ],
+        [
+          "L016",
+          "L029"
+        ],
+        [
+          "L033",
+          "L035"
+        ],
+        [
+          "L023",
+          "L024"
+        ],
+        [
+          "L023",
+          "L025"
+        ],
+        [
+          "L023",
+          "L026"
+        ],
+        [
+          "L024",
+          "L025"
+        ],
+        [
+          "L024",
+          "L026"
+        ],
+        [
+          "L025",
+          "L026"
+        ],
+        [
+          "L027",
+          "L028"
+        ],
+        [
+          "L027",
+          "L029"
+        ],
+        [
+          "L028",
+          "L029"
+        ],
+        [
+          "SPX-J01",
+          "SPX-J02"
+        ],
+        [
+          "SPX-N01",
+          "SPX-N02"
+        ],
+        [
+          "SPX-S01",
+          "SPX-S02"
+        ],
+        [
+          "SPX-U01",
+          "SPX-U02"
+        ]
+      ]
+    },
+    "health_before_restart": {
+      "runtime": "node",
+      "science_mode": "verified_build_cache_and_ported_display_models",
+      "source_bundle_verified": true,
+      "status": "ready",
+      "storage_writable": true,
+      "worker_alive": true
+    },
+    "health_after_restart": {
+      "runtime": "node",
+      "science_mode": "verified_build_cache_and_ported_display_models",
+      "source_bundle_verified": true,
+      "status": "ready",
+      "storage_writable": true,
+      "worker_alive": true
+    },
+    "runtime_disclosure_after_restart": {
+      "arbitrary_fits_inputs": false,
+      "feature_flags": {
+        "black_holes": false,
+        "cosmic_history": false,
+        "exoplanets": false,
+        "galaxies": false,
+        "galaxy_atlas": false,
+        "historical_comets": false,
+        "observer_experiment": false,
+        "physics_lab": false,
+        "planet_nine_hypothesis": true
+      },
+      "observation_processing": "verified_build_cache",
+      "ordered_comparison_count": 74,
+      "physics_capabilities": {
+        "all_bodies_known": false,
+        "all_physics": false,
+        "force_cutoff_au": null,
+        "gravity": "newtonian_prescribed_sun_and_eight_planets_restricted_test_particle",
+        "hypothesis": "p9-kepler-sky-v1",
+        "max_integrator_steps": 4096,
+        "optional_solar_1pn": true,
+        "study_radius_au": 1000
+      },
+      "public_scope": "solar_system_1000au",
+      "runtime": "node",
+      "schema_version": "1.0",
+      "snapshot_exported_utc": "2026-11-15T03:17:30.242886+00:00",
+      "source_verification_policy": {
+        "asset_readiness": "asset_success_does_not_mark_science_sources_ready",
+        "batching": "simultaneously_queued_transactions_share_one_validation_pass_no_time_ttl",
+        "comparison_payload": "raw_sha256_checked_each_read",
+        "deployment_input_contract": "immutable_read_only_source_files",
+        "each_transaction": "science_transactions_check_all_required_paths_and_file_fingerprints",
+        "fingerprint": [
+          "dev",
+          "ino",
+          "size",
+          "mtimeNs",
+          "ctimeNs"
+        ],
+        "full_audit": "startup_and_node_app_js_verify_sources_and_exact_release_audit",
+        "initial_verification": "full_sha256_all_bundle_and_required_source_files",
+        "limit": "A host administrator able to forge file identity and all timestamps is outside this metadata-cache trust boundary.",
+        "metadata_change": "full_sha256_required_before_use",
+        "static_assets": "after_initial_full_audit_check_manifest_identity_and_requested_registered_serving_file_fingerprint_and_sha_only",
+        "unchanged_fingerprint": "reuse_previously_verified_sha256",
+        "version": "sha256-stat-fingerprint-v2-scoped-assets"
+      },
+      "supported_observation_pairs": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S01",
+          "L033"
+        ],
+        [
+          "S01",
+          "L035"
+        ],
+        [
+          "S02",
+          "L033"
+        ],
+        [
+          "S02",
+          "L035"
+        ],
+        [
+          "S12",
+          "S13"
+        ],
+        [
+          "S12",
+          "S14"
+        ],
+        [
+          "S13",
+          "S14"
+        ],
+        [
+          "L001",
+          "L005"
+        ],
+        [
+          "L002",
+          "L006"
+        ],
+        [
+          "L003",
+          "L004"
+        ],
+        [
+          "L007",
+          "L008"
+        ],
+        [
+          "L009",
+          "L011"
+        ],
+        [
+          "L010",
+          "L012"
+        ],
+        [
+          "L013",
+          "L016"
+        ],
+        [
+          "L013",
+          "L027"
+        ],
+        [
+          "L013",
+          "L028"
+        ],
+        [
+          "L013",
+          "L029"
+        ],
+        [
+          "L014",
+          "L017"
+        ],
+        [
+          "L015",
+          "L018"
+        ],
+        [
+          "L016",
+          "L027"
+        ],
+        [
+          "L016",
+          "L028"
+        ],
+        [
+          "L016",
+          "L029"
+        ],
+        [
+          "L033",
+          "L035"
+        ],
+        [
+          "L023",
+          "L024"
+        ],
+        [
+          "L023",
+          "L025"
+        ],
+        [
+          "L023",
+          "L026"
+        ],
+        [
+          "L024",
+          "L025"
+        ],
+        [
+          "L024",
+          "L026"
+        ],
+        [
+          "L025",
+          "L026"
+        ],
+        [
+          "L027",
+          "L028"
+        ],
+        [
+          "L027",
+          "L029"
+        ],
+        [
+          "L028",
+          "L029"
+        ],
+        [
+          "SPX-J01",
+          "SPX-J02"
+        ],
+        [
+          "SPX-N01",
+          "SPX-N02"
+        ],
+        [
+          "SPX-S01",
+          "SPX-S02"
+        ],
+        [
+          "SPX-U01",
+          "SPX-U02"
+        ]
+      ]
+    },
+    "server_restart_evidence_restore": [
+      {
+        "evidence_id": "ev_1312f842399d4a97870543a8d0cf4209",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_assumptions_present": true
+      },
+      {
+        "evidence_id": "ev_cb71e921b80349ba91cd114645cd46cf",
+        "result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_assumptions_present": true
+      },
+      {
+        "evidence_id": "ev_c736301e107747d4b46059cd6dfae047",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_assumptions_present": true
+      }
+    ],
+    "actual_comparison_raw_hashes": {
+      "cmp_d88083664b6fd27592eb68c1": {
+        "cache_and_evidence_raw_sha256": "88219adf492f225e5be126e8f7e5577b74475aff4067f5797d63540ba044d74c",
+        "HTTP_JSON_wire_sha256": "90d4b829f3a467bd71a8462a453901fb90df62a6836af5703a01775078c402bd",
+        "semantic_equality": true
+      },
+      "cmp_0d749ea3f9ec3a8da925dc44": {
+        "cache_and_evidence_raw_sha256": "9ebe635e2ddd0230b50e38cce35a468acf826654199a9403d36f4189fa1d12f8",
+        "HTTP_JSON_wire_sha256": "bb5b7f410d32ba78189a4d64e750f0218536ea414549b904de678f23132c0217",
+        "semantic_equality": true
+      }
+    },
+    "comparison_hash_scope": "Evidence comparison_sha256 covers the preserved Python-canonical build-cache bytes. HTTP JSON serialization may have a different raw SHA while preserving the same parsed values.",
+    "hosting_scope": "Node-only server verified under closed PATH; Python executed only as this development verifier and the packaged standard-library HTTP smoke client. This is not an OS sandbox or proof that Python is uninstalled.",
+    "completed_at": "2026-11-15T03:27:26.748205+00:00"
+  },
+  "public_browser": {
+    "url": "https://nasaspaceappschallenge.marulee.dev/",
+    "passed": 5,
+    "failed": 0,
+    "cases": [
+      {
+        "title": "DEV-025 credits: the download is an actual PDF whose bytes match the generated publication hash",
+        "status": "passed",
+        "duration_ms": 30679
+      },
+      {
+        "title": "DEV-026 R033: entering Planet Nine from a focused observed planet returns to the Sun while its real observation workspace survives",
+        "status": "passed",
+        "duration_ms": 7115
+      },
+      {
+        "title": "DEV-026 R034: hypothesis orbit view keeps a keyboard-reopenable workspace with unchanged source rows, inputs, evidence and continuous real-object selection",
+        "status": "passed",
+        "duration_ms": 26134
+      },
+      {
+        "title": "DEV-026 R034: a genuine in-flight hypothesis calculation completes while only the panel is collapsed and does not recenter the camera",
+        "status": "passed",
+        "duration_ms": 5144
+      },
+      {
+        "title": "DEV-026 R034: mobile hypothesis collapse and reopen controls fit their panel and viewport in all five languages",
+        "status": "passed",
+        "duration_ms": 7756
+      }
+    ]
+  },
+  "packaging_initial_failure": "First candidate used stale pyproject 0.16.0 while Node/frontend were 0.16.1; no 0.16.1 directory matched, clean-copy verifier rejected empty input resolving to build root (directory_copy_requires_separate_empty_target). Candidate never activated; pyproject aligned to 0.16.1 and all599 source files reverified before final directory validation. No original/source-cache data modified."
+}

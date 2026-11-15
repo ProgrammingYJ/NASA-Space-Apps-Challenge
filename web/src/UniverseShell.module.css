@@ -117,3 +117,10 @@
 @media(max-width:1100px){.shell>.exploreSidebar{margin-left:22px;width:min(320px,calc(100% - 44px))}}
 @media(min-width:761px) and (max-width:1100px){.shell>.exploreSidebar{margin-top:150px}}
 @media(max-width:760px){.shell>.exploreSidebar{margin:176px 12px 12px;width:calc(100% - 24px);gap:14px}.exploreSidebar>.catalogGateway{padding:14px}.exploreSidebar .intro h1{font-size:24px}.exploreSidebar>.search{width:100%}.exploreSidebar .catalogGateway button{font-size:11px}}
+
+/* A collapsed hypothesis keeps its workspace mounted and the scene available. */
+.p9Collapsed>.scene{left:0;right:0;bottom:180px}
+.p9Reopen{position:absolute;z-index:8;right:18px;top:110px;max-width:280px;min-height:44px;padding:12px 16px;background:#142b43;border:1px solid #82add4;border-radius:9px;color:#e4effc;white-space:normal;overflow-wrap:anywhere;cursor:pointer}
+.p9Reopen:focus-visible,.analysis:focus-visible{outline:3px solid #a3d9ff;outline-offset:3px}
+@media(max-width:1100px){.p9Collapsed>.scene{left:0;right:0;bottom:200px}.p9Reopen{top:155px;right:12px}}
+@media(max-width:760px){.p9Collapsed>.scene{left:0;right:0;bottom:165px}.p9Reopen{top:160px;max-width:45vw;padding:10px;font-size:11px}}
