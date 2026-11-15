@@ -1,5 +1,9 @@
 # 프로젝트 Skills 운용표
 
+> 문서 현행화 정본(2026-11-15): 현재 운영 **v0.17.4**는 승인 닉네임·테스터6명/영어 기본값과 데이터 명세서 아래 보조 고지 PDF를 반영했다. [정확 릴리스 기록](docs/releases/v0.17.4.json)의 공개 Chrome5경로·두 PDF 원바이트/다운로드·실제 재시작/기존 근거 검증을 따른다. Git commit/push는 후속 정본에서 확정하며 아래 날짜별 기록은 당시 이력이다.
+
+> 현재 작업 기준(2026-11-15): DEV-027/OPS-021은 새 EC2에서 공개 Chrome10개·실제 재시작·구판3근거 원봉투 복원을 확인했다. 현재 실행/문서 결과는 [FSD31~34](FSD.md)와 [v0.17.4 정본](docs/releases/v0.17.4.json)을 따르며 기능10경로의 이전 검증은 [v0.17.0](docs/releases/v0.17.0.json)에 연결한다. 설치된 외부 스킬의 ZIP 예시는 최신 사용자 지시인 디렉터리 전달로 적용한다. 실제 스킬 원문·라이선스·고정 SHA는 보존하고 이 운용표에서 프로젝트 우선순위를 관리한다.
+
 이 파일을 **AGENTS.md 다음에** 읽는다. 실제 설치 위치는 `.agents/skills/<name>/SKILL.md`이며,이 파일은 선택·사용 순서를 안내하는 프로젝트 문서다. `SKILLS.md`만 존재하는 것으로 스킬이 설치됐다고 판단하지 않는다. 설치 파일/검증/출처는 `.agents/skill-lock.json`과 실제 디렉터리로 확인한다.
 
 사용자가2026-11-14에 필요한 실제 스킬의 프로젝트 설치를 명시했다. **실제 스킬14개(외부10개+프로젝트 전용4개)를 `.agents/skills/`에 설치·작성했다.** 출처·고정 commit·설치 파일SHA·수정/라이선스·구조 검증 결과는 [잠금 목록](./.agents/skill-lock.json)에 기록한다. 앱 의존성(Astropy/React/Playwright 등) 설치와 스킬 지침 설치는 구분한다. VS Code Codex의 다음 턴/새 대화에서 이 프로젝트를 열고 인식 여부를 확인한다. 현재 UI 자동 발견은 검증하지 않았다.
@@ -32,7 +36,7 @@
 | 접근성 | `$accessibility-review` | `.agents/skills/accessibility-review/SKILL.md` | 키보드/포커스·대비·색 외 상태·깜빡임 정지·오류 안내. 규격 수준은 원문과 별도 확인 |
 | 문구/5언어 | `$ux-copy` | `.agents/skills/ux-copy/SKILL.md` | unit/status/condition/error/verification의 자연스러운 설명·누락/길이·의미 일치 |
 | 배포 검사 | `$deploy-checklist` | `.agents/skills/deploy-checklist/SKILL.md` | 실제 health/저장/worker·롤백·동작 확인. 불필요한 고급 운영/외부 통보는 자동 추가하지 않음 |
-| 근거·서버 ZIP | `$spaceapps-evidence-release` | `.agents/skills/spaceapps-evidence-release/SKILL.md` | E1–E6/공식 규격·개인정보/AI고지·완결 ZIP·해제/실행 검증 |
+| 근거·서버 전달 | `$spaceapps-evidence-release` | `.agents/skills/spaceapps-evidence-release/SKILL.md` | E1–E6/공식 규격·개인정보/AI고지·완결 디렉터리·새 경로 복사/실행 검증 |
 
 기본 조합은 **documentation + spherex-data-contract + 해당 구현/검수 스킬**이다. architecture는 새 결정이 있을 때,debug는 오류가 있을 때,출시 스킬은 실제 릴리스 단계에서 읽는다. 모든 스킬을 한 작업에 의무적으로 적용하지 않는다.
 
@@ -54,8 +58,8 @@
 ### 서버 업로드용 릴리스
 
 - 선택: code-review,deploy-checklist,spaceapps-evidence-release,documentation.
-- 작업: 필요한 코드/빌드/설정·필수 데이터/보정·라이선스/배포복구 안내·release manifest를 하나의ZIP으로 묶는다.
-- 검수: 깨끗한 경로에 해제→대상 실행/대표 경로·데이터/영속저장/복원→ZIP SHA256·바이트와 실제 검사 결과 기록.
+- 작업: 필요한 코드/빌드/설정·필수 데이터/보정·라이선스/배포복구 안내·release manifest를 완결 디렉터리로 준비한다. 최신 사용자 지시에 따라 새 릴리스 ZIP은 만들지 않는다.
+- 검수: 새로운 빈 경로에 디렉터리 복사→Node-only 실행/대표 경로·데이터/영속저장/복원→파일별 SHA256·바이트와 실제 검사 결과를 기록한다. 기존 ZIP 검사는 보존 이력이다.
 
 ## 4. 조건부 후보와 현재 범위
 

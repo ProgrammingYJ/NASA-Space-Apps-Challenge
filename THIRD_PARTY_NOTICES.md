@@ -1,5 +1,9 @@
 # Sources and software notices
 
+> 문서 현행화 정본(2026-11-15): 현재 운영 **v0.17.4**는 승인 닉네임·테스터6명/영어 기본값과 데이터 명세서 아래 보조 고지 PDF를 반영했다. [정확 릴리스 기록](docs/releases/v0.17.4.json)의 공개 Chrome5경로·두 PDF 원바이트/다운로드·실제 재시작/기존 근거 검증을 따른다. Git commit/push는 후속 정본에서 확정하며 아래 날짜별 기록은 당시 이력이다.
+
+> Current scope checkpoint (2026-11-15, DEV-027/OPS-021): the shipped Solar System/P9/SPHEREx inputs and their credits remain unchanged. See [Data_Spec](Data_Spec.md), [FSD](FSD.md), and [verified v0.17.0](docs/releases/v0.17.0.json). Earlier exoplanet/galaxy/history references below retain attribution for historical work; they are not current runtime dependencies. The full Markdown PDF uses the pinned Noto fonts/OFL notices and preserves the original source attachment. This documentation update does not alter upstream licenses or claim new data acquisition.
+
 This application uses original SPHEREx L2 archive data served by NASA/IPAC IRSA. IMAGE is calibrated surface brightness, not an AI-generated image. Each observation and calibration actually used retains its original bytes and full SHA256 in data/manifests/datasets.json and the corresponding comparison/evidence export. Source URLs, release, observation times, calibration and processing limitations are preserved. Archive access and data use do not imply NASA endorsement or permission to use institutional logos. No NASA logo assets are included.
 
 The catalog proper-motion prediction uses SIMBAD ε Indi B ICRS J2000 coordinates and proper motions, with the original URL/bibcode and omitted terms recorded in science/spherex.py and evidence. It is not a measured centroid or a validated motion detection. DEV-002 also uses Pluto S12/S14 and calibration L051, tied to observer-specific JPL Horizons predictions for the SPHEREx spacecraft. Its TLE-based trajectory and source-association limits are retained.

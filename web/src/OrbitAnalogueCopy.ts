@@ -1,6 +1,10 @@
 const en={
-  title:'Orbital-element comparisons with known objects',
-  intro:'Compare up to 10 objects from the observed catalogue using a, e and i of the selected hypothesis. These are comparison objects, not newly found candidates.',
+  title:'Known-object orbital similarity TOP 5',
+  intro:'Show the five real catalogue objects with the closest a, e and i under the displayed rule, relative to the selected hypothesis. These are known comparison objects.',
+  explanationTitle:'What does this TOP 5 mean?',
+  explanation:'The literature search-region TOP 5 ranks places on the sky. This separate list ranks already known objects by differences from one hypothesis: a is semimajor axis, e is eccentricity, and i is inclination.',
+  repeated:'Nearby hypotheses can return the same objects. Changing only mass or the displayed date does not change this a/e/i rule. The order is not a planet-classification result or the likelihood of being Planet Nine.',
+  next:'Choose another literature sample or edit a, e or i to recalculate this ordering. Click a name to inspect that real object; its three planet criteria are shown separately in its information panel.',
   loading:'Reading source orbital elements…',
   error:'The orbital-element comparison could not be loaded.',
   retry:'Try again',
@@ -40,8 +44,12 @@ const en={
 };
 type Copy=typeof en;
 const ko:Copy={
-  title:'실제 천체의 궤도 원소 대조',
-  intro:'관측 목록의 천체 중 선택한 가설의 a·e·i와 가까운 최대 10개를 비교합니다. 새로 발견한 후보가 아닌 대조용 천체입니다.',
+  title:'실제 천체 궤도 유사도 TOP 5',
+  intro:'선택한 가설의 a·e·i와 가까운 실제 목록 천체 5개를 아래 규칙으로 비교합니다. 이미 알려진 대조용 천체입니다.',
+  explanationTitle:'이 TOP 5는 무엇인가요?',
+  explanation:'문헌 탐색 영역 TOP 5는 먼저 살펴볼 하늘 영역의 순위입니다. 이 목록은 가설 하나의 궤도와 이미 알려진 실제 천체를 비교한 별도 순위입니다. a는 반장축, e는 이심률, i는 궤도 경사각입니다.',
+  repeated:'비슷한 가설에서는 같은 천체가 다시 나올 수 있습니다. 질량이나 화면 날짜만 바꾸면 a·e·i 비교 순위는 달라지지 않습니다. 행성의 3요건 충족 여부나 제9행성일 가능성을 판정한 결과가 아닙니다.',
+  next:'다른 문헌 표본을 고르거나 a·e·i를 바꾸면 이 목록을 다시 정렬합니다. 이름을 누르면 해당 실제 천체로 이동하며, 행성의 3요건은 그 천체의 정보에서 따로 확인합니다.',
   loading:'원자료의 궤도 원소를 읽는 중…',
   error:'궤도 원소 비교를 불러오지 못했습니다.',
   retry:'다시 시도',
@@ -80,8 +88,12 @@ const ko:Copy={
   pathReady:'가설 궤도 계산이 완료되었습니다. 아래 대조 천체를 확인하거나 3D 전체 보기로 이동하세요.',
 };
 const ja:Copy={
-  title:'既知天体との軌道要素の比較',
-  intro:'観測カタログの天体から、選択した仮説のa・e・iに近い最大10天体を比較します。新たに発見した候補ではなく、比較用の天体です。',
+  title:'実在天体の軌道類似度 TOP 5',
+  intro:'選択した仮説のa・e・iに近い実在カタログ天体5個を、表示した規則で比較します。すでに知られた比較用天体です。',
+  explanationTitle:'このTOP 5は何を示しますか？',
+  explanation:'文献探索領域TOP 5は、先に調べる空の領域の順位です。この別の一覧は一つの仮説軌道と既知の実在天体を比較します。aは軌道長半径、eは離心率、iは軌道傾斜角です。',
+  repeated:'近い仮説では同じ天体が再び現れることがあります。質量や表示日付だけを変えても、このa・e・i規則の順位は変わりません。惑星の3条件や第9惑星である可能性の判定ではありません。',
+  next:'別の文献標本を選ぶかa・e・iを編集すると、一覧を再び並べ替えます。名前を押すと実在天体へ移動し、惑星の3条件はその天体の情報で別に確認できます。',
   loading:'出典の軌道要素を読み込み中…',
   error:'軌道要素の比較を読み込めませんでした。',
   retry:'再試行',
@@ -120,8 +132,12 @@ const ja:Copy={
   pathReady:'仮説軌道の計算が完了しました。下の比較天体を確認するか、3Dで軌道全体を表示してください。',
 };
 const zh:Copy={
-  title:'與已知天體比較軌道要素',
-  intro:'從觀測目錄中比較與所選假說的a、e、i較接近的最多10個天體。這些是對照天體，並非新發現的候選者。',
+  title:'真實天體軌道相似度 TOP 5',
+  intro:'依畫面所示規則，比較與所選假說的a、e、i較接近的五個真實目錄天體。這些是已知的對照天體。',
+  explanationTitle:'這個TOP 5代表什麼？',
+  explanation:'文獻探索區域TOP 5排序的是優先查看的天空區域。此清單則比較單一假說軌道與已知真實天體，是另一種排序。a是半長軸，e是離心率，i是軌道傾角。',
+  repeated:'相近的假說可能再次列出相同天體。只改變質量或畫面日期不會改變此a、e、i規則的排序。這並非行星三條件或成為第九行星可能性的判定結果。',
+  next:'選擇其他文獻樣本，或修改a、e、i後，會重新排序此清單。點選名稱可前往該真實天體；行星三條件可在該天體的資訊中另行確認。',
   loading:'正在讀取來源的軌道要素…',
   error:'無法載入軌道要素比較。',
   retry:'重試',
@@ -160,8 +176,12 @@ const zh:Copy={
   pathReady:'假說軌道已計算完成。請查看下方對照天體，或前往3D完整軌道檢視。',
 };
 const fr:Copy={
-  title:'Comparaison des éléments orbitaux avec des objets connus',
-  intro:'Comparez au plus 10 objets du catalogue observé selon a, e et i de l’hypothèse choisie. Ce sont des objets de comparaison, pas de nouveaux candidats découverts.',
+  title:'TOP 5 des objets réels aux éléments orbitaux proches',
+  intro:'Comparez les cinq objets réels du catalogue les plus proches selon la règle affichée pour a, e et i de l’hypothèse choisie. Ce sont des objets de comparaison déjà connus.',
+  explanationTitle:'Que représente ce TOP 5 ?',
+  explanation:'Le TOP 5 des régions publiées classe des zones du ciel à examiner. Cette liste distincte compare une orbite hypothétique aux objets réels déjà connus : a désigne le demi-grand axe, e l’excentricité et i l’inclinaison.',
+  repeated:'Des hypothèses proches peuvent retrouver les mêmes objets. Modifier seulement la masse ou la date affichée ne change pas le classement selon a, e et i. Ce résultat ne juge ni les trois critères d’une planète ni la possibilité d’être la planète Neuf.',
+  next:'Choisissez un autre échantillon publié ou modifiez a, e ou i pour recalculer l’ordre. Cliquez sur un nom pour inspecter l’objet réel ; ses trois critères planétaires figurent séparément dans son panneau d’information.',
   loading:'Lecture des éléments orbitaux sources…',
   error:'La comparaison des éléments orbitaux n’a pas pu être chargée.',
   retry:'Réessayer',

@@ -1,10 +1,14 @@
 > DEV-021 전달 변경: 사용자의 최신 지시에 따라 새 ZIP은 생성하지 않습니다. `deploy.package_release --delivery-format directory`로 파일별 해시가 있는 릴리스 디렉터리를 준비하고 `deploy.verify_node_release --directory <경로>`로 새 폴더·Node 재시작·근거 복원을 검증합니다. 기존 ZIP/해시는 이전 릴리스 감사 자료로 보존합니다.
 
+> 문서 현행화 정본(2026-11-15): 현재 운영 **v0.17.4**는 승인 닉네임·테스터6명/영어 기본값과 데이터 명세서 아래 보조 고지 PDF를 반영했다. [정확 릴리스 기록](docs/releases/v0.17.4.json)의 공개 Chrome5경로·두 PDF 원바이트/다운로드·실제 재시작/기존 근거 검증을 따른다. Git commit/push는 후속 정본에서 확정하며 아래 날짜별 기록은 당시 이력이다.
+
 # Planet X and SPHEREx · Solar System 1000 AU
 
 NASA Space Apps Seoul 2026. 태양계 외곽의 알려진 천체·문헌 제9행성 가설·실제 SPHEREx 관측을 연결하고 근거를 저장·복원하는 웹사이트다. 최신 개발 명세는 [FSD](FSD.md), 자료·출처·해시·한계는 [Data_Spec](Data_Spec.md), 진행 상태는 [TODO](TODO.md)와 [작업 기록](docs/worklog.md)을 따른다.
 
-공개 운영은 **v0.16.1 / DEV-026**다. 실제 관측 등록·ε Indi Ba/Bb 별도 상세·제9행성 TOP5 카드와 연속 탐색·크레딧/PDF·줌아웃 및 설명 카드 오류를 반영했고 공개 HTTPS의5개 고유 경로를 확인했다. 정확한 검사 범위와 후속 상태는 [릴리스 기록](docs/releases/v0.16.1.json)을 따른다. 팀 결정에 따라 은하/은하지도·외계행성 도감·빅뱅/우주역사·역사 혜성·블랙홀·범용 물리실험 구현/API/신규 배포 자료를 제거했다. 이전 Git·불변 릴리스 ZIP·로컬 불변 원자료는 보존한다. 과거 릴리스의 검증 결과는 [이전 릴리스 기록](https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge/tree/main/docs/releases)이며 새 소스의 검증으로 대체하지 않는다.
+**현재 OPS-021 / DEV-028 / v0.17.4 운영 중**이다. Node24.22.3/nginx1.24/HTTPS의 새 EC2 `54.117.136.144`에서 승인 닉네임·테스터6명, 영어 초기/새세션, 명세서 아래 보조PDF를 공개 Chrome5경로로 검증했다. 두PDF 다운로드 원바이트·운영 재시작12377→12469·구판3근거 원봉투를 확인했다. [현재 릴리스](docs/releases/v0.17.4.json)와 [기능10경로 검증](docs/qa/dev027_local_verification.json)을 구분한다. 삭제된 이전 호스트의 확보된 로컬13파일을 복원했으며 이후 사본 없는 최신 근거는 복구를 보장하지 않는다. 상세는 FSD32~34절을 따른다.
+
+팀 결정에 따라 은하/은하지도·외계행성 도감·빅뱅/우주역사·역사 혜성·블랙홀·범용 물리실험 구현/API/신규 배포 자료를 제거했다. 이전 Git·불변 릴리스 ZIP·로컬 불변 원자료와 과거 검증 이력은 보존한다.
 
 ## 실행
 
@@ -16,7 +20,7 @@ node app.js
 
 기본 주소는 `http://127.0.0.1:3002/`, 기본 bind는 `0.0.0.0`이다. `APP_HOST`로 bind를 바꾸고, 포트는 `PORT` → `APP_PORT` →3002 순서로 선택한다. `APP_STATE_DIR`의 기본값은 `var/node`다. 기존 상태와 원본을 삭제하거나 두 writer를 동시에 실행하지 않는다. `.env`는 복사만으로 로드되지 않는다. 환경변수를 지정하거나 Node의 `--env-file` 옵션을 사용한다.
 
-[배포 안내](deploy/README.md)는 Node 실행·자료·상태/복구를, [EC2 안내](deploy/EC2_SETUP.md)는 사용자 생성 AWS 서버의 설치·nginx/systemd·HTTPS 순서를 설명한다. 현재 사용자 생성 서버의 사양은 **시드니 m7i.xlarge / Ubuntu Server24.04LTS 일반판 amd64 / 암호화 gp3 50GiB**다. 전용 프로세스는3002 loopback, 외부 접속은nginx80/443으로 분리한다. EC2 원격 배포 완료는 실제 IP/health/재시작 기록으로만 확정한다.
+[배포 안내](deploy/README.md)는 Node 실행·자료·상태/복구를, [EC2 안내](deploy/EC2_SETUP.md)는 사용자 생성 AWS 서버의 설치·nginx/systemd·HTTPS 순서를 설명한다. OPS-021의 SSH/IMDS 확인 사양은 **ap-northeast-2·m7i.xlarge / Ubuntu24.04.5 x86_64 / 4CPU·16GB RAM / 루트 약48GB·여유46GB**다. 리전은 IP로 추정하지 않는다. 앱은 127.0.0.1:3002에서 실행하고 nginx80/443으로 공개한다. 실제 활성화·health/source·운영 재시작을 확인했으며 상세 결과는 현재 릴리스 정본을 따른다.
 
 ## 탐색과 근거
 
@@ -63,10 +67,10 @@ node app.js --verify-sources
 DEV-018 MCP후속확인: 현재Codex대화에서3서버의native16도구가실제발견됐고PDS세드나검색/Astronomy명왕성위치/Horizons명왕성Sun벡터를각1회native호출해모두성공했다(2026-11-15 03:45:58KST). 이전“자동발견미확인”상태를대체하며8개응답·대조기록파일/입력/전체SHA는data/manifests/mcp_tools.json에연결한다. 제품관측/발견의독립검증으로승격하지않는다.
 
 
-운영 주소는 **https://nasaspaceappschallenge.marulee.dev/** 의Sydney EC2다. v0.16.1의 검증 디렉터리 `20261115_122709KST`를 직접 활성화했고 Node 단독 clean-copy/재시작·공개 HTTPS5개 고유 경로와 실제 운영PID24503→24636 재시작 후 ready/source 검증을 확인했다. 기존 근거 원바이트 복원의 최종 결과·정확 활성 버전/SHA·검증한계는 [릴리스 기록](docs/releases/v0.16.1.json)을 따른다. 사후 문서는 검증한 불변 배포디렉터리/이전ZIP을 변경하지 않는다.
+이전 운영 이력: **https://nasaspaceappschallenge.marulee.dev/** 의Sydney EC2에서 v0.16.1 검증 디렉터리 `20261115_122709KST`를 직접 활성화했고 Node 단독 clean-copy/재시작·공개 HTTPS5개 고유 경로와 실제 운영PID24503→24636 재시작 후 ready/source 검증을 확인했다. 당시 근거 원바이트 복원·버전/SHA·검증한계는 [릴리스 기록](docs/releases/v0.16.1.json)을 따른다. 현재 도메인의 A는 OPS-021 새 호스트이며 이 과거 검사가 새 앱의 배포·복원 완료를 뜻하지 않는다. 사후 문서는 검증한 불변 배포디렉터리/이전ZIP을 변경하지 않는다.
 
 
-OPS-020 현재운영: 사용자요청으로16.176.170.4(ap-southeast-2)로이전했고기존13개저장파일을정지백업/해시검사해복원했다. 정상HTTPS·기존관측근거·개별TNO/과거표시검사를확인했다. 현재 활성 릴리스는 위의 최신 디렉터리/외부 검증 기록을 따른다. 최초 이전 때의 완결ZIP은 이력으로 보존한다. 이전서울EC2의앱은중지했으나컴퓨트인스턴스자체는중지하지않았다.
+OPS-020 보존 이력: 사용자요청으로16.176.170.4(ap-southeast-2)로이전했고기존13개저장파일을정지백업/해시검사해복원했다. 당시 정상HTTPS·기존관측근거·개별TNO/과거표시검사를확인했다. 최초 이전 때의 완결ZIP은 이력으로 보존한다. OPS-021에서 사용자는 이 Sydney 인스턴스의 종료·삭제를 확인했으므로 현재 접근 가능한 복구 원본으로 취급하지 않는다.
 
 
 - 새 전체 지도는 위성도 같은 거리압축으로 표시한다. 행성/위성 선택시 근접 보기의 모든 본체·궤도에 같은 선형배율을 적용해 지구–달/금성 3D 거리비를 보존한다. 반지름·고리는 별도확대 외관이며 픽셀 길이는 실거리가 아니다. INFO의 현재거리/원점/시각·전체복귀/위성계전체보기로 조작한다.
@@ -78,3 +82,5 @@ OPS-020 현재운영: 사용자요청으로16.176.170.4(ap-southeast-2)로이전
 설정의 크레딧은 **2026 SNHS Alpha** 제작자·감사·제공기관/라이선스/AI고지와 공개 [GitHub 저장소](https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge)를 연결한다. 데이터 명세서 전체 PDF는 `/downloads/PlanetX_Data_Spec.pdf`다. 생성 기준 MD SHA와 PDF SHA/bytes/작성시각·폰트/도구는 `data/manifests/data_spec_pdf.json`을 따른다. `deploy/build_data_spec_pdf.py`로 현재 Data_Spec 전체를 다시 만들고 `python -m deploy.update_release_metadata` → 프런트 build → Node runtime export 순서로 갱신한다. 버전·문서 SHA가 다르면 exporter가 중단되므로 배포 때 오래된 날짜/PDF를 남기지 않는다. 이 PDF/한국어 폰트는 문서 파생물이며 새 관측/검출이 아니다. 공개 저장소에 개인 키·계정 자료·내부 계획서를 포함하지 않는다.
 
 제9행성 탭으로 진입하면 태양 중심 전체 보기로 이동한다. 가설 궤도 보기는 오른쪽 패널만 접으며, 우측 재열기 버튼으로 기존 입력·결과·근거와 알려진 천체 목록을 유지한 채 돌아온다. 패널 재열기는 현재 카메라/선택을 바꾸지 않는다.
+
+DEV-028: 크레딧은 승인 닉네임·테스터6명을 표시하고 초기/새 세션은 영어다. 사용자가 고른 언어·근거 복원 언어는 보존한다. 데이터 명세서 아래 사용자 제공 보조 출처·라이선스 PDF를 원바이트로 내려받는다. 보조 문서의 과거 범위와 최신 채택 자료/원문 권리를 구분한다.

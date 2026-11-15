@@ -5,7 +5,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { Sources } = require('./sources');
 const { parse, canonical, hash, safePath, atomic, atomicRaw, lock } = require('./storage');
-const { validator, sessionRules, resolveRegisteredPair, omitNullFields, migrateSolarSession, nativeTnoContextReasons } = require('./schema');
+const { validator, sessionRules, resolveRegisteredPair, omitNullFields, migrateSolarSession, nativeTnoContextReasons, orbitAnalogueContextReasons } = require('./schema');
 const { massScenario, longTerm, timelineScene, calendarMs, finite } = require('./science');
 const { SOURCE_VERIFICATION_POLICY } = require('./verification-policy');
 const { loadPresets, normalizeOrbit, skyPath } = require('./planet-nine');
@@ -146,8 +146,11 @@ async function start(options = {}) {
     if (!c.timeline_algorithm_version && c.orbit_manifest_sha256 && epoch !== Date.parse(timeline.default_epoch)) return ['orbit_guide_reference_changed'];
     const fields = [ ['source_manifest_sha256', 'solar_system_ephemeris.json', 'universe_ephemeris_changed'], ['orbit_manifest_sha256', 'solar_system_orbits.json', 'orbit_ephemeris_changed'], ['appearance_manifest_sha256', 'appearance.json', 'appearance_sources_changed'], ['small_body_appearance_manifest_sha256', 'small_body_appearance.json', 'small_body_appearance_sources_changed'], ['planet_criteria_manifest_sha256', 'planet_criteria.json', 'planet_criteria_sources_changed'], ['mass_scenarios_manifest_sha256', 'mass_scenarios.json', 'mass_scenario_sources_changed'], ['extended_solar_manifest_sha256', 'extended_solar.json', 'extended_solar_sources_changed'] ];
     for (const [field, name, reason] of fields) if (c[field] && hashes.get('data/manifests/' + name) !== c[field]) return [reason];
-    if (c.outer_tno_manifest_sha256 != null || c.native_tno_simulation_algorithm_version != null) {
-      let current; try { current = tnoCatalog().catalog(); } catch { return ['outer_tno_data_unavailable']; }
+    if (c.outer_tno_manifest_sha256 != null || c.native_tno_simulation_algorithm_version != null || c.orbit_analogue_context != null) {
+      // Saving/importing a new TOP 5 context verifies current on-disk originals;
+      // a catalogue cached by an earlier scene request cannot establish this.
+      let current; try { current = (c.orbit_analogue_context != null ? createOuterCatalog(root) : tnoCatalog()).catalog(); } catch { return [c.orbit_analogue_context != null ? 'orbit_analogue_data_unavailable' : 'outer_tno_data_unavailable']; }
+      const analogueReasons = orbitAnalogueContextReasons(c, current); if (analogueReasons.length) return analogueReasons;
       const reasons = nativeTnoContextReasons(c, current); if (reasons.length) return reasons;
     }
     if (c.mass_scenario) { try { massScenario(values.mass_scenarios, c.mass_scenario); } catch { return ['mass_scenario_data_unavailable']; } }
@@ -321,7 +324,8 @@ async function start(options = {}) {
       if (relative !== 'index.html' && !['assets/', 'textures/', 'brand/', 'reference/', 'downloads/'].some(prefix => relative.startsWith(prefix))) fail(404, 'not_found');
       let file; try { file = safePath(path.join(root, 'web', 'dist'), relative); if (!fs.statSync(file).isFile()) throw new Error(); } catch { fail(404, 'not_found'); }
       if (['textures/', 'brand/', 'reference/', 'downloads/'].some(prefix => relative.startsWith(prefix))) { try { await sources.call('asset', relative); } catch { fail(503, 'source_unavailable'); } }
-      const downloadHeaders = relative === 'downloads/PlanetX_Data_Spec.pdf' ? { 'Content-Disposition': 'attachment; filename="PlanetX_Data_Spec.pdf"', 'Cache-Control': 'no-cache' } : {};
+      const publishedDownloads = new Set(['downloads/PlanetX_Data_Spec.pdf', 'downloads/PlanetX_Source_License_Notices.pdf']);
+      const downloadHeaders = publishedDownloads.has(relative) ? { 'Content-Disposition': `attachment; filename="${path.basename(relative)}"`, 'Cache-Control': 'no-cache' } : {};
       response.writeHead(200, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Content-Length': fs.statSync(file).size, ...downloadHeaders });
       if (request.method === 'HEAD') return response.end(); fs.createReadStream(file).on('error', () => response.destroy()).pipe(response);
     } catch (error) {

@@ -20,10 +20,11 @@ export default function OrbitAnaloguePanel({language,orbit,active=true,onInspect
   const loading=source.isFetching&&!catalogue,error=source.isError||(source.data!=null&&!catalogue);
   const [clickedObject,setClickedObject]=useState<string|null>(null),currentObject=selectedKnownObjectId===undefined?clickedObject:selectedKnownObjectId;
   function inspect(objectId:string){setClickedObject(objectId);onInspectKnownObject?.(objectId);}
-  const result=useMemo(()=>catalogue?rankOrbitAnalogues(orbit,catalogue.objects,catalogue):null,[catalogue,orbit.a_au,orbit.e,orbit.i_deg,orbit.epoch_jd_tdb]);
+  const result=useMemo(()=>catalogue?rankOrbitAnalogues(orbit,catalogue.objects,catalogue,5):null,[catalogue,orbit.a_au,orbit.e,orbit.i_deg,orbit.epoch_jd_tdb]);
   const excluded=result?Object.values(result.excluded).reduce((sum,value)=>sum+value,0):0;
-  return <section className={styles.panel} data-testid="p9-orbit-analogues" data-algorithm={ORBIT_ANALOGUE_RULE} aria-labelledby="p9-orbit-analogue-title">
+  return <section className={styles.panel} data-testid="p9-orbit-analogues" data-algorithm={ORBIT_ANALOGUE_RULE} data-display-limit="5" aria-labelledby="p9-orbit-analogue-title">
     <h2 id="p9-orbit-analogue-title">{c.title}</h2><p>{c.intro}</p>
+    <details data-testid="p9-analogue-explanation"><summary>{c.explanationTitle}</summary><p>{c.explanation}</p><p>{c.repeated}</p><p>{c.next}</p></details>
     <label className={styles.method}>{c.methodLabel}<select data-testid="p9-analogue-method" value={method} onChange={event=>setMethod(event.target.value as typeof method)}><option value="catalogue">{c.catalogueMethod}</option><option value="unidentified">{c.unidentifiedMethod}</option></select></label>
     {method==='unidentified'?<div role="status" data-testid="p9-future-unidentified-sources"><h3>{c.futureTitle}</h3><p>{c.futureNote}</p><p>{c.futureSteps}</p><button data-testid="p9-analogue-return-catalogue" onClick={()=>setMethod('catalogue')}>{c.returnCatalogue}</button></div>:<>
     <p className={styles.note}>{c.knownNote}</p>

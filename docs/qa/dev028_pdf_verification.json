@@ -1,0 +1,76 @@
+{
+  "rendered_pages": 381,
+  "sheets": 6,
+  "sample_pages": [
+    1,
+    2,
+    84,
+    85,
+    150,
+    250,
+    330,
+    340,
+    341,
+    381
+  ],
+  "version": "0.17.4",
+  "PDF_sha256": "3fbdf5e50a6b34c1773d5a6564f5c45877f81b6d0ff0364f335963ab7cf51697",
+  "source_MD_sha256": "0d8046f70bf01398e417340bfd42e08dd3ad8fa3cc535cd0fee7943b0e7f2bcd",
+  "PDF_bytes": 5364645,
+  "built_at": "2026-11-15T13:09:37Z",
+  "builder_validation": {
+    "source_embedded_byte_identical": true,
+    "font_glyph_preflight": "passed",
+    "displayed_unique_sha256_count": 2500,
+    "all_unique_source_sha256_indexed_and_extracted": true,
+    "missing_displayed_hashes": [],
+    "all_http_source_link_targets_retained": true,
+    "all_source_headings_extracted": true,
+    "source_unchanged_during_build": true,
+    "visual_render_review": "required_separate_operator_step_not_claimed"
+  },
+  "dependencies": {
+    "reportlab": "4.5.1",
+    "markdown-it-py": "4.3.0",
+    "linkify-it-py": "2.2.0",
+    "fonttools": "4.68.0",
+    "pypdf": "6.21.4"
+  },
+  "status": "passed",
+  "checked_utc": "2026-11-15T13:16:38.874942+00:00",
+  "independently_visually_inspected": {
+    "contact_sheets": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "full_pages": [
+      1,
+      2,
+      341,
+      381
+    ]
+  },
+  "findings": [
+    "All 381 pages rendered; six contact sheets and selected full pages actually viewed.",
+    "Version, source SHA, current summary and historical snapshot distinction visible.",
+    "Nickname/English default and user-provided historical-scope notice on page341 fit within margins.",
+    "No observed major clipping, overlap or missing-glyph boxes."
+  ],
+  "visual_limit": "Contact-sheet layout review and selected full pages, not character-by-character proofreading or upstream license validation.",
+  "supplemental_notice": {
+    "filename": "PlanetX_Source_License_Notices.pdf",
+    "bytes": 762160,
+    "sha256": "aeb12c3a35a959dd1a4a242509eedc2ac44307306eb3ce1ae9e6965ad57ac3c6",
+    "provenance": "User-provided source and license notice PDF; original bytes preserved.",
+    "scope": "Supplemental user-authored notice; it does not replace original upstream license terms or the data specification.",
+    "local_relative_path": "web/public/downloads/PlanetX_Source_License_Notices.pdf",
+    "pages": 1,
+    "source_kind": "user_provided_supplemental_document",
+    "file_review": "Extracted text and actual page render viewed on 2026-11-15; historical scope identified; original bytes unmodified.",
+    "visual_review": "Original one-page PDF text and page render actually viewed; original bytes preserved; historical scope disclosed."
+  }
+}

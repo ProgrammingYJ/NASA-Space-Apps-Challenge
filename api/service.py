@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import multiprocessing as mp
+import re
 import threading
 import time
 import uuid
@@ -15,6 +17,121 @@ from api.storage import InstanceLock, atomic_json, digest, read_json
 from worker.process import run
 
 NATIVE_TNO_SIMULATION_ALGORITHM = "jpl-sbdb-tno-two-body-v2"
+ORBIT_ANALOGUE_ALGORITHM = "tno-source-aei-exploratory-v1"
+
+
+def _verified_tno_source_file(root: Path, record):
+    """Read a declared source only after checking its actual location and bytes."""
+    relative = record["local_relative_path"]
+    if (
+        not isinstance(relative, str)
+        or "\\" in relative
+        or ":" in relative
+        or any(part in ("", ".", "..") for part in relative.split("/"))
+        or Path(relative).is_absolute()
+    ):
+        raise ValueError("Invalid TNO source path")
+    base = root.resolve(strict=True)
+    path = (base / relative).resolve(strict=True)
+    if not path.is_relative_to(base) or path == base:
+        raise ValueError("TNO source is outside the project")
+    expected_bytes, expected_sha = record["bytes"], record["sha256"]
+    if (
+        type(expected_bytes) is not int
+        or expected_bytes < 0
+        or not isinstance(expected_sha, str)
+        or not re.fullmatch(r"[a-f0-9]{64}", expected_sha)
+    ):
+        raise ValueError("Invalid TNO source record")
+    raw = path.read_bytes()
+    if len(raw) != expected_bytes or hashlib.sha256(raw).hexdigest() != expected_sha:
+        raise ValueError("TNO source bytes changed")
+    return raw
+
+
+def orbit_analogue_context_reasons(context, root: Path):
+    """Validate TOP 5 restoration inputs against the actual adopted catalogue.
+
+    These are source-epoch a/e/i comparisons, not propagated orbit fits. A hash
+    string alone is insufficient: verify the manifest's original SBDB response,
+    request metadata and mapped orbital elements before allowing restoration.
+    Older evidence without this optional context never reads the TNO files.
+    """
+    saved = context.orbit_analogue_context
+    if saved is None:
+        return []
+    if saved.algorithm_version != ORBIT_ANALOGUE_ALGORITHM:
+        return ["orbit_analogue_algorithm_changed"]
+    try:
+        raw = (root / "data/manifests/outer_tno.json").read_bytes()
+    except OSError:
+        return ["orbit_analogue_data_unavailable"]
+    if hashlib.sha256(raw).hexdigest() != saved.source_manifest_sha256:
+        return ["orbit_analogue_sources_changed"]
+    try:
+        manifest = json.loads(raw)
+        if (
+            manifest["schema_version"] != "1.0"
+            or manifest["algorithm_version"] != "jpl-sbdb-tno-two-body-v1"
+            or manifest["time_scale"] != "TDB"
+            or manifest["coordinate_frame"] != "heliocentric_IAU76_80_ecliptic_J2000"
+        ):
+            raise ValueError("Unsupported TNO source")
+        source = manifest["source"]
+        original = json.loads(_verified_tno_source_file(root, source))
+        _verified_tno_source_file(root, source["request_metadata"])
+        objects, selection = manifest["objects"], manifest["selection"]
+        if (
+            not isinstance(objects, list)
+            or selection["complete_response"] is not True
+            or type(selection["reported_count"]) is not int
+            or selection["reported_count"] != len(objects)
+            or float(original["count"]) != len(objects)
+            or len(original["data"]) != len(objects)
+        ):
+            raise ValueError("Incomplete TNO catalogue")
+        fields = original["fields"]
+        mapping = {
+            "a_au": "a", "e": "e", "i_deg": "i", "omega_deg": "w",
+            "Omega_deg": "om", "M_deg": "ma", "epoch_jd_tdb": "epoch",
+        }
+        indices = {key: fields.index(value) for key, value in mapping.items()}
+        spk_index = fields.index("spkid")
+        rows = {str(row[spk_index]): row for row in original["data"]}
+        if len(rows) != len(objects):
+            raise ValueError("Duplicate TNO source identity")
+        ids = set()
+        for obj in objects:
+            spkid, identifier = obj["spkid"], obj["object_id"]
+            if (
+                not isinstance(spkid, str)
+                or not spkid.isascii()
+                or not spkid.isdigit()
+                or identifier != "sbdb-" + spkid
+                or identifier in ids
+                or obj["catalog_class"] != "TNO"
+                or spkid not in rows
+            ):
+                raise ValueError("Inconsistent TNO identity")
+            ids.add(identifier)
+            orbit = obj["orbit"]
+            if orbit is None:
+                continue
+            if any(
+                type(orbit[key]) not in (int, float)
+                or not math.isfinite(orbit[key])
+                or float(rows[spkid][index]) != orbit[key]
+                for key, index in indices.items()
+            ) or not (
+                0 < orbit["a_au"] <= 1e9
+                and 0 <= orbit["e"] < 1
+                and 0 <= orbit["i_deg"] <= 180
+                and 625697.5 <= orbit["epoch_jd_tdb"] <= 2816787.5
+            ):
+                raise ValueError("Inconsistent TNO elements")
+    except (OSError, RuntimeError, ValueError, TypeError, KeyError, IndexError, AttributeError):
+        return ["orbit_analogue_data_unavailable"]
+    return []
 
 
 def outer_tno_context_reasons(context, root: Path):
@@ -23,6 +140,9 @@ def outer_tno_context_reasons(context, root: Path):
     The stored source manifest is v1; the adopted runtime two-body propagator is
     v2. Missing fields deliberately retain the previous restoration behaviour.
     """
+    analogue_reasons = orbit_analogue_context_reasons(context, root)
+    if analogue_reasons:
+        return analogue_reasons
     expected = context.outer_tno_manifest_sha256
     algorithm = context.native_tno_simulation_algorithm_version
     if expected is None and algorithm is None:

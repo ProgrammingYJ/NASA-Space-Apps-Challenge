@@ -1,0 +1,163 @@
+{
+  "release": "0.17.0",
+  "work_id": "DEV-027",
+  "status": "passed",
+  "checked_utc": "2026-11-15T12:32:01.403479+00:00",
+  "unit_checks": {
+    "remote_TypeScript_strict_Vite": "passed",
+    "Vitest": {
+      "files": 27,
+      "tests": 135
+    },
+    "Python_context_tests": 28,
+    "Python_release_metadata_tests": 1,
+    "Ruff": "passed",
+    "Node_runtime_tests": 91,
+    "post_contract_format_affected_Node_tests": 7
+  },
+  "browser_engine": "actual PC Google Chrome; one worker; balanced scene budget",
+  "isolated_browser": {
+    "transport": "local loopback SSH forward to isolated AWS Node8012; no local app server",
+    "initial": {
+      "stats": {
+        "startTime": "2026-11-15T12:19:45.308Z",
+        "duration": 52302.426,
+        "expected": 7,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "DEV-027 R040: global JSON import visibly restores genuine Pluto observations, source dates, assessment and saved model time",
+          "status": "failed"
+        },
+        {
+          "title": "DEV-027 R040: global JSON import routes genuine Planet Nine evidence to its hypothesis workspace without observation misdelivery",
+          "status": "passed"
+        },
+        {
+          "title": "DEV-027 R035/R040: observation evidence preserves its custom TOP 5 basis on the first P9 opening and visibly migrates an unversioned filter without changing either export",
+          "status": "failed"
+        },
+        {
+          "title": "DEV-027 R040: malformed JSON and the actual data-document manifest are visibly rejected without replacing the current scene",
+          "status": "passed"
+        },
+        {
+          "title": "DEV-027 R037/R038: search closes on background, Escape and explicit back while camera drag locking leaves text fields usable",
+          "status": "passed"
+        },
+        {
+          "title": "DEV-027 R041: mobile identities see a PC Chrome notice without loading the explorer or requesting science data",
+          "status": "passed"
+        },
+        {
+          "title": "DEV-027 guide: a narrow touch PC remains allowed and the five-language guide preserves the scene and keyboard focus",
+          "status": "passed"
+        },
+        {
+          "title": "DEV-027 PC headers: recommendation and guide remain accessible at narrow desktop widths in five languages",
+          "status": "passed"
+        },
+        {
+          "title": "DEV-027 R035/R036: actual orbital-similarity TOP 5 initializes in a fresh session and panels reopen without losing the hypothesis, native bodies or real observations",
+          "status": "passed"
+        }
+      ]
+    },
+    "second_attempt": {
+      "stats": {
+        "startTime": "2026-11-15T12:22:22.449Z",
+        "duration": 4218.669,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "failure": "Test expected only request fields; server correctly supplied 4 declared defaults."
+    },
+    "final_affected_rerun": {
+      "stats": {
+        "startTime": "2026-11-15T12:23:06.377Z",
+        "duration": 42556.12,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "DEV-027 R040: global JSON import visibly restores genuine Pluto observations, source dates, assessment and saved model time",
+          "status": "passed"
+        },
+        {
+          "title": "DEV-027 R035/R040: observation evidence preserves its custom TOP 5 basis on the first P9 opening and visibly migrates an unversioned filter without changing either export",
+          "status": "passed"
+        }
+      ]
+    },
+    "unique_paths_passed": 9,
+    "initial_failure_cause": "Two fixture saves omitted the mandatory source-manifest SHA. Actual API pins and explicit schema defaults added; exact envelope/SHA assertions retained; no POST retries."
+  },
+  "public_browser": {
+    "url": "https://nasaspaceappschallenge.marulee.dev/",
+    "stats": {
+      "startTime": "2026-11-15T12:26:38.997Z",
+      "duration": 117971.724,
+      "expected": 10,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "DEV-025 separate brown-dwarf detail opens preserved S01/S02 quality and one real evidence export restores in a clean session",
+        "status": "passed"
+      },
+      {
+        "title": "DEV-027 R040: global JSON import visibly restores genuine Pluto observations, source dates, assessment and saved model time",
+        "status": "passed"
+      },
+      {
+        "title": "DEV-027 R040: global JSON import routes genuine Planet Nine evidence to its hypothesis workspace without observation misdelivery",
+        "status": "passed"
+      },
+      {
+        "title": "DEV-027 R035/R040: observation evidence preserves its custom TOP 5 basis on the first P9 opening and visibly migrates an unversioned filter without changing either export",
+        "status": "passed"
+      },
+      {
+        "title": "DEV-027 R040: malformed JSON and the actual data-document manifest are visibly rejected without replacing the current scene",
+        "status": "passed"
+      },
+      {
+        "title": "DEV-027 R037/R038: search closes on background, Escape and explicit back while camera drag locking leaves text fields usable",
+        "status": "passed"
+      },
+      {
+        "title": "DEV-027 R041: mobile identities see a PC Chrome notice without loading the explorer or requesting science data",
+        "status": "passed"
+      },
+      {
+        "title": "DEV-027 guide: a narrow touch PC remains allowed and the five-language guide preserves the scene and keyboard focus",
+        "status": "passed"
+      },
+      {
+        "title": "DEV-027 PC headers: recommendation and guide remain accessible at narrow desktop widths in five languages",
+        "status": "passed"
+      },
+      {
+        "title": "DEV-027 R035/R036: actual orbital-similarity TOP 5 initializes in a fresh session and panels reopen without losing the hypothesis, native bodies or real observations",
+        "status": "passed"
+      }
+    ],
+    "unique_paths_passed": 10
+  },
+  "scientific_inputs": "No new raw observations, orbital model or existence probability. All prior 74 comparison entries and 114 derived JSON byte pins equal after regeneration.",
+  "verification_limits": [
+    "Five-language layout/conditions checked; native-language human review is not claimed.",
+    "Source-a/e/i similarity is descriptive, not orbit fitting or Planet Nine existence probability.",
+    "Unknown post-backup evidence on the deleted previous host cannot be recovered without a local copy."
+  ]
+}

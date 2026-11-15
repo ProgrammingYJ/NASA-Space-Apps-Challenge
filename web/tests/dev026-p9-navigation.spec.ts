@@ -99,7 +99,7 @@ test('DEV-026 R034: hypothesis orbit view keeps a keyboard-reopenable workspace 
   const prediction=await response.json() as {status:string;full_orbit_au:number[][];orbit:{a_au:number;e:number;i_deg:number;mass_earth:number}};
   expect(prediction.status).toBe('conditional_hypothesis');expect(prediction.orbit).toMatchObject({a_au:390.78,e:.139,i_deg:16.32,mass_earth:6.14});expect(prediction.full_orbit_au).toHaveLength(257);
   await expect(page.getByTestId('p9-preset')).toHaveValue('caltech-row-2413');
-  await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(10);
+  await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(5);
   await page.getByTestId('p9-judgment').fill('DEV-026 R034 QA: literature row 2413 remains a conditional hypothesis while the panel is collapsed; analogue rank is not discovery probability.');
   await page.getByTestId('p9-save').click();await expect(page.getByTestId('p9-evidence-id').locator('code')).toHaveText(/^p9ev_[a-f0-9]+$/);
   const before=await hypothesisState(page),clock=await page.getByTestId('timeline-clock').textContent();

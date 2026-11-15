@@ -82,11 +82,26 @@ class SimulationContext(StrictModel):
     playback_paused: Literal[True] = True
 
 
+class OrbitAnalogueHypothesis(StrictModel):
+    a_au: float = Field(gt=0, le=2000, strict=True)
+    e: float = Field(ge=0, le=0.99, strict=True)
+    i_deg: float = Field(ge=0, le=180, strict=True)
+    epoch_jd_tdb: float = Field(ge=625697.5, le=2816787.5, strict=True)
+
+
+class OrbitAnalogueContext(StrictModel):
+    algorithm_version: Literal["tno-source-aei-exploratory-v1"]
+    hypothesis: OrbitAnalogueHypothesis
+    source_manifest_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
 class UniverseContext(StrictModel):
     # Omission deliberately preserves the legacy expanded-moon camera interpretation.
     distance_view: DistanceView | None = None
     approximate_mass_algorithm_version: Literal["source-size-or-H-albedo-density-mass-v1"] | None = None
     scene_filter: Literal["all", "confirmed-planets", "p9-reference", "planets-and-p9"] | None = None
+    scene_filter_version: Literal["actual-analogue-top5-v1"] | None = None
+    orbit_analogue_context: OrbitAnalogueContext | None = None
     render_preset: Literal["balanced", "detail"] | None = None
     appearance_lighting: Literal["inspection", "solar"] | None = None
     appearance_coverage: Literal["representative", "marked", "original"] | None = None
@@ -128,6 +143,14 @@ class UniverseContext(StrictModel):
 
     @model_validator(mode="after")
     def consistent_time_preference(self):
+        if self.orbit_analogue_context is not None and self.scene_filter_version is None:
+            raise ValueError("Orbital TOP 5 context requires an explicit filter version")
+        if (
+            self.scene_filter_version is not None
+            and self.scene_filter in ("p9-reference", "planets-and-p9")
+            and self.orbit_analogue_context is None
+        ):
+            raise ValueError("Versioned TOP 5 views require their comparison inputs and source")
         local_distance = (
             self.distance_view is not None
             and self.distance_view.algorithm_version == "parent-linear-distance-v1"

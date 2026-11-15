@@ -1,0 +1,54 @@
+{
+  "rendered_pages": 380,
+  "sheets": 6,
+  "sample_pages": [
+    1,
+    2,
+    84,
+    85,
+    150,
+    250,
+    330,
+    340,
+    380
+  ],
+  "version": "0.17.0",
+  "PDF_sha256": "faac2aeb13e65440421999300d3b57e9c0c92032431fe240f66f9bbb24ce06f9",
+  "source_MD_sha256": "477a9bb3e2a88b7212a22cfafd95d1deedbdf4692899c443b4a8f4acaeebc116",
+  "PDF_bytes": 5360649,
+  "built_at": "2026-11-15T12:17:45Z",
+  "builder_validation": {
+    "source_embedded_byte_identical": true,
+    "font_glyph_preflight": "passed",
+    "displayed_unique_sha256_count": 2499,
+    "all_unique_source_sha256_indexed_and_extracted": true,
+    "missing_displayed_hashes": [],
+    "all_http_source_link_targets_retained": true,
+    "all_source_headings_extracted": true,
+    "source_unchanged_during_build": true,
+    "visual_render_review": "required_separate_operator_step_not_claimed"
+  },
+  "dependencies": {
+    "reportlab": "4.5.1",
+    "markdown-it-py": "4.3.0",
+    "linkify-it-py": "2.2.0",
+    "fonttools": "4.68.0",
+    "pypdf": "6.21.4"
+  },
+  "status": "passed",
+  "checked_utc": "2026-11-15T12:32:01.403479+00:00",
+  "independently_visually_inspected": [
+    "contact1",
+    "contact2",
+    "contact3",
+    "contact4",
+    "contact5",
+    "contact6",
+    "fullpage1",
+    "fullpage2",
+    "fullpage340"
+  ],
+  "findings": "No new clipping/overlap/missing glyph boxes observed. Long tables within page bounds. Original DEV025/v0.16.0 source snapshot text intentionally retained under new release cover/footer.",
+  "visual_limit": "Contact sheets check page layout, not character-by-character visual proofreading. Builder full text/glyph/link/source attachment checks are separate.",
+  "new_scientific_inputs": false
+}

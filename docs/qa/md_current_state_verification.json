@@ -1,0 +1,416 @@
+{
+  "checked_utc": "2026-11-15T13:20:47.044213+00:00",
+  "status": "passed",
+  "tracked_Markdown_files": 67,
+  "updated_project_Markdown_files": 26,
+  "preserved_pinned_skill_Markdown_files": 40,
+  "preserved_pinned_acquisition_records": 1,
+  "relative_Markdown_links_missing": [],
+  "untracked_user_review_copy": "preserved_and_excluded_from_edits_and_staging",
+  "scope": "Current operational documents and historical-review labels updated; locked upstream skills/licenses and immutable acquisition notes remain source records. New external rule review or final judging submission is not claimed.",
+  "data_spec_PDF": "Regenerated from the frozen updated Markdown in release 0.17.4; supplementary user-provided notice is a separate original-byte PDF with historical-scope disclosure. See release/PDF records.",
+  "rows": [
+    {
+      "path": ".agents/skills/accessibility-review/NOTICE.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "990360817fc15412f96360638e904bd48aa3ee79b2997bd633f70b845528ac0d"
+    },
+    {
+      "path": ".agents/skills/accessibility-review/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "4ce5b0b726be500a7a6f36ffc93c104ebb913e613f6d6c16e12383cda4e7b418"
+    },
+    {
+      "path": ".agents/skills/accessibility-review/references/CONNECTORS.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "242e232bb37b2bd5778d2e88db7edb53a6100819a8f037d786a3e1a55b4d141f"
+    },
+    {
+      "path": ".agents/skills/architecture/NOTICE.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "8b09e6ef242a394da474308bcaf0e9ebe60cc02e92ed6591cff44d20d27c53fb"
+    },
+    {
+      "path": ".agents/skills/architecture/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "184f66d655ddf67166bb7a40dcf4e530a05fcf7e561d3371eac3d53f52fe0c03"
+    },
+    {
+      "path": ".agents/skills/architecture/references/CONNECTORS.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "00f8a815f649a0e54bc738057f050259c2b6e08534f3c2171f657b70bed6a131"
+    },
+    {
+      "path": ".agents/skills/astrometry-motion-qa/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "f8d228ebc027c06175b0c27f5b8b14195a7a72a3d20e0537003b4cb30ffbf8bf"
+    },
+    {
+      "path": ".agents/skills/astropy/LICENSE.upstream-repository.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1"
+    },
+    {
+      "path": ".agents/skills/astropy/NOTICE.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "35814d0e7411688fa282142ba55cbc3357d38f49c8ca5f14fa3191870743e351"
+    },
+    {
+      "path": ".agents/skills/astropy/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "79e5294033338a3376e43b731d04d55c4ed08abde3040655b2b56ab100517390"
+    },
+    {
+      "path": ".agents/skills/astropy/references/coordinates.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "2773d6f4086c287436a4b5a4100fd74a951a1688b09cd307bd2afc2945cc27fb"
+    },
+    {
+      "path": ".agents/skills/astropy/references/cosmology.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "71b7e19b9861147480f5a62a34e692d4caf90cfd0ab4bd1fcca765a9cbb6001f"
+    },
+    {
+      "path": ".agents/skills/astropy/references/fits.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "27ee0335641eadc71a62551d7d58d0cb2b5b651b4b4dbbfca42a40f78be4e836"
+    },
+    {
+      "path": ".agents/skills/astropy/references/review.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "d508fe2c8f2969a3aecfd615088b06159b2f653c4b378f1e7bfc83d76db75986"
+    },
+    {
+      "path": ".agents/skills/astropy/references/tables.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "b2cc2a568ca4b0d514346d1db5b2e8d704fbd181cb56dc1b1edae86fb9c06dae"
+    },
+    {
+      "path": ".agents/skills/astropy/references/time.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "4741498365348fd65fda0ff8ddcb57572cd3e5e7d5ff96f965f6567667b8b987"
+    },
+    {
+      "path": ".agents/skills/astropy/references/units.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "1df6212fab813f85dd6788551f474a68103ee694051d89194cfe8a09e90a88b0"
+    },
+    {
+      "path": ".agents/skills/astropy/references/wcs_and_other_modules.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "5201dfc5450a4648a3c550cf58444f209bcff9b082ece4354e3dbf9becb13cc8"
+    },
+    {
+      "path": ".agents/skills/code-review/NOTICE.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "0a2b439c3f3870176651081d91c9afefabf1776c5d6e3cf181a7772d867f65ca"
+    },
+    {
+      "path": ".agents/skills/code-review/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "74ee162bf849afa3fea1001ed4949c7164eb52955621d3b69e3bae69c1c1fa07"
+    },
+    {
+      "path": ".agents/skills/code-review/references/CONNECTORS.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "00f8a815f649a0e54bc738057f050259c2b6e08534f3c2171f657b70bed6a131"
+    },
+    {
+      "path": ".agents/skills/debug/NOTICE.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "7558d814f4c58fc2a483ce193478db1c432431fb68f49d1b10cc7f40229bb9df"
+    },
+    {
+      "path": ".agents/skills/debug/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "6db240fe22f85f4f01b1612ae6cad2027426ec90b25d73c5808cb8fe7b29b1fc"
+    },
+    {
+      "path": ".agents/skills/debug/references/CONNECTORS.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "00f8a815f649a0e54bc738057f050259c2b6e08534f3c2171f657b70bed6a131"
+    },
+    {
+      "path": ".agents/skills/deploy-checklist/NOTICE.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "a99935110fd0bbe59843105edc5ea39648c69e6ad3a8235f9bb6e2ff0119e2b2"
+    },
+    {
+      "path": ".agents/skills/deploy-checklist/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "3515103f72a255dba4f69813fdfff43a156ece8cb975e572bf43ff307d1a38c2"
+    },
+    {
+      "path": ".agents/skills/deploy-checklist/references/CONNECTORS.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "00f8a815f649a0e54bc738057f050259c2b6e08534f3c2171f657b70bed6a131"
+    },
+    {
+      "path": ".agents/skills/documentation/NOTICE.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "8c8dfc0a3099c76f55bd19bbb9685f20574034412b968ae7ba5c7a59231036cd"
+    },
+    {
+      "path": ".agents/skills/documentation/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "1d469418f786a05be83d2a05f04d68788aeed584d13863a650f5ad73c6c4cf50"
+    },
+    {
+      "path": ".agents/skills/spaceapps-browser-qa/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "c1dfdf09a9515b70b6daccf0f273eb40476a310589b84b926bfa5aea1cc7cc04"
+    },
+    {
+      "path": ".agents/skills/spaceapps-evidence-release/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "712baf95aa3f027eb193e403798478fc4996c12e646dab54230b34633c541197"
+    },
+    {
+      "path": ".agents/skills/spherex-data-contract/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "ff3732e0d91864e2fb03fd147493427820e85a2dde4b189378c0624a132683e3"
+    },
+    {
+      "path": ".agents/skills/testing-strategy/NOTICE.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "a72fb41b20ae3adcc168cead07d26bfeefe54d52d0fbd6d82b2ff27c3cf707ae"
+    },
+    {
+      "path": ".agents/skills/testing-strategy/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "5c5e95830754bbdd838213fa05fc8f07523f591fd558fd3c86031ffd479f7a9e"
+    },
+    {
+      "path": ".agents/skills/ux-copy/NOTICE.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "a04dd2c5222699168531dc05d8b3a71d93d8baec5a8fb12b386a592c5d540b5b"
+    },
+    {
+      "path": ".agents/skills/ux-copy/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "5d2c1ac29c3652a579ab8efbd5cd48aa83346c2c98cab7048275ae7f14012a74"
+    },
+    {
+      "path": ".agents/skills/ux-copy/references/CONNECTORS.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "242e232bb37b2bd5778d2e88db7edb53a6100819a8f037d786a3e1a55b4d141f"
+    },
+    {
+      "path": ".agents/skills/validate-data/NOTICE.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "842fa38c31abac49903daf1ea80c763e7124d77f4311f0ce348048eafa0c868a"
+    },
+    {
+      "path": ".agents/skills/validate-data/SKILL.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "73cb5ca773d47d0aa249bff17f031395c0bbe9cc11f20c8ebb6764c7b09ac56b"
+    },
+    {
+      "path": ".agents/skills/validate-data/references/CONNECTORS.md",
+      "classification": "pinned_skill_or_attribution_source",
+      "status": "locked_bytes_verified_and_preserved",
+      "sha256": "79de0e9613ef7870e773b6dcdcb7d50f4bff2c0574c14ab5e0aeb29014dcec7b"
+    },
+    {
+      "path": "AGENTS.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "a8d8ef8823e9343de6a6d67d82d809c5a2af1738a5aa90ff506ac90f039db48e"
+    },
+    {
+      "path": "Data_Spec.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "0d8046f70bf01398e417340bfd42e08dd3ad8fa3cc535cd0fee7943b0e7f2bcd"
+    },
+    {
+      "path": "FSD.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "108baad4cac58985383e2fb9ba82a18d78ad7ae824c1375973e6ae7d4f8c29f8"
+    },
+    {
+      "path": "README.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "aeb27a4c95a52ef87180d3d72a8988fafbc46e2db2256577680aba6b33cd3487"
+    },
+    {
+      "path": "SKILLS.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "67d6891060590da56b297fbb88d2192a28e020666a76b85724cf3f8552531e15"
+    },
+    {
+      "path": "START_HERE_PROMPT.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "f816baed333307a09c168fc9b6ffe06849fd9e26b740a377ce61779da41d31a9"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "5e99e44ef985ae1a53da708142778034852689ad187401c57a6295b5663db161"
+    },
+    {
+      "path": "TODO.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "f39cdf73d6379d1ce3fe28253bcde80c15098c251a944b3833ea836ace1dfb05"
+    },
+    {
+      "path": "data/README.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "b14303c2e8bffa44244631493b8c2736bf68a0381b8de8e166014c7d83871e54"
+    },
+    {
+      "path": "data/reference/spherex-extended-20261115/most/README.md",
+      "classification": "pinned_acquisition_record",
+      "status": "preserved_as_dated_source_with_current_pointer_in_data_README",
+      "sha256": "f385096ba17a82fb60e185bbab4ceab5c1c675cd7804986b6033edc0faae5053"
+    },
+    {
+      "path": "deploy/EC2_SETUP.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "da015e49acf27d6b7b2e5007e86dbc1bacfe3851ce41c4eb8c9c96fc80478545"
+    },
+    {
+      "path": "deploy/README.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "6b29a602d0ef22e33a827ecbad07b5b31ae41df3a4293b5503d547af2d8ef858"
+    },
+    {
+      "path": "deploy/README.python.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "1871cf47ec162e02ba6040b94bfca5a8ca21aa917fd74ae0b86ab264fe113937"
+    },
+    {
+      "path": "docs/ai_usage.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "0d842a44b718958bc81dd79dfb29fcd7ea2719717c5e69be0fb5ab2e74e9d125"
+    },
+    {
+      "path": "docs/data_inventory.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "76f10e6d1534e66a3753393331f58a2613c5a930515cdb6ed9f6c04bf7e18094"
+    },
+    {
+      "path": "docs/decisions/ADR-001.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "315ec8e64603014636ae66fe3f2be93e44e6bcbb0ae57cd6d45167a9dd56bc30"
+    },
+    {
+      "path": "docs/decisions/ADR-002.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "d8b832cad8721f7267fa87f28ad8c1c646250ebe3948bbd60b39385b1e036e57"
+    },
+    {
+      "path": "docs/decisions/ADR-003.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "9ac18f8249663ea974f9009bcabb60054db716c30631e4b8559c89fc838e24c3"
+    },
+    {
+      "path": "docs/decisions/ADR-004.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "240c2fd86c6400646a028366240a1d37006afb286b67b6cb8e3dde8b44dc4a9f"
+    },
+    {
+      "path": "docs/design_references.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "fcbfdb11918afb6073cbc08b9fddfdf80b990e05cfa90bf3cc24b4bd8bb3fa4e"
+    },
+    {
+      "path": "docs/evidence_index.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "36b5ed925c82ee8ee9cfae6b478d28d1acc5c951b4e23d6626a07af822cab7d5"
+    },
+    {
+      "path": "docs/official_rules.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "048e46b9c7c6070855f3a20e0a5bbccba04a971d9c5cc7e6fc8d70722f69c8b3"
+    },
+    {
+      "path": "docs/reviews/2026-11-15_mcp_review.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "73e005da1ed0195cb88318cf0dfa36271a56dc43bee45363c657f80377b73587"
+    },
+    {
+      "path": "docs/reviews/2026-11-15_planet-nine_sources.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "ef01aa8a0c8ed18c52f65517a5f691e47b71b7b19d582fe3be8761c1d45d0ece"
+    },
+    {
+      "path": "docs/reviews/2026-11-15_solar_system_1000au_review.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "12286bd3969e1c381ad60671a2813bdda1b829415b60a9e695af8d223c1d19e7"
+    },
+    {
+      "path": "docs/solar_system_sources.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "1791f9d0135c8cd9c56fb80150d0c2c8dcaa5e4bad9de00f16a66681a13c5695"
+    },
+    {
+      "path": "docs/worklog.md",
+      "classification": "project_current_or_labelled_history",
+      "status": "updated_this_work",
+      "sha256": "18a686eb22407250959999cd51c94708fc10bd425926f3425e1fc282fa191fe3"
+    }
+  ]
+}

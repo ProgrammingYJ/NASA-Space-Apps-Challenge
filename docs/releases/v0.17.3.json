@@ -1,0 +1,605 @@
+{
+  "release": "0.17.3",
+  "work_id": [
+    "DEV-028",
+    "OPS-021"
+  ],
+  "status": "deployed_and_verified_then_superseded",
+  "checked_utc": "2026-11-15T13:11:08.036812+00:00",
+  "public_url": "https://nasaspaceappschallenge.marulee.dev/",
+  "delivery": {
+    "delivery_format": "directory",
+    "directory": "NASA_SPACE_APPS_CHALLENGE_v0.17.3_20261115_220215KST",
+    "directory_manifest_sha256": "04879a178fe1e7e4022501b2fde127e84cdb9de130c5874b49e87c6a22b271c1",
+    "files": 1973,
+    "payload_bytes": 1103644382,
+    "directory_bytes": 1104025408,
+    "new_release_ZIP": false
+  },
+  "source_revision": {
+    "base_commit": "12b36e4f92283f7d034c8d40b181ea163ffaa7f0",
+    "working_tree_has_uncommitted_changes": true,
+    "source_transfer_manifest_sha256": "0dd0b0fb2aa0c4e10048d9428827dfaf0bdb5f41044c0d1661240905693e47fa"
+  },
+  "source_files_verified": 614,
+  "runtime": {
+    "manifest_sha256": "acdcc9eb49acbbe324c7381b8fbd748623a3d823a0d2784de245145ddbec2d42",
+    "source_files": 1365,
+    "required_sources": 1270,
+    "generated_JSON_files": 114,
+    "ordered_comparisons": 74,
+    "all_previous_generated_file_pins_and_comparison_bindings_equal": true
+  },
+  "changes": {
+    "credits": "Approved role-specific public nicknames and six explicit testers; no real-name correspondence table",
+    "initial_locale": "English initial/fresh session and mobile gate; explicit selected/restored locale retained"
+  },
+  "Node_only_directory_verification": {
+    "checked_at": "2026-11-15T13:02:18.085584+00:00",
+    "status": "passed",
+    "delivery_format": "directory",
+    "logs": "/home/ubuntu/planet-x-build/tmp/node-release-verify-dlmultg2",
+    "development_verifier": {
+      "runtime": "Python standard library",
+      "executable": "/home/ubuntu/planet-x-build/.venv/bin/python",
+      "role": "Directory-copy/hash orchestration and HTTP test client only; not the server"
+    },
+    "server_python_required": false,
+    "linux_container": "not_run",
+    "public_service": "not_deployed",
+    "input_directory": "/home/ubuntu/planet-x-build/artifacts/NASA_SPACE_APPS_CHALLENGE_v0.17.3_20261115_220215KST",
+    "clean_copy": "/home/ubuntu/planet-x-build/tmp/node-release-verify-dlmultg2/clean_copy",
+    "input_semantics": "complete directory copied to a new empty folder; no ZIP creation or extraction",
+    "directory_manifest_sha256": "04879a178fe1e7e4022501b2fde127e84cdb9de130c5874b49e87c6a22b271c1",
+    "directory_bytes": 1104025408,
+    "release": "0.17.3",
+    "release_base_commit": "12b36e4f92283f7d034c8d40b181ea163ffaa7f0",
+    "manifest_files_verified": 1973,
+    "runtime_integrity": {
+      "required_sources_verified": 1270,
+      "optional_sources_present_verified": 28,
+      "optional_sources_not_deployed": 67,
+      "runtime_manifest_sha256": "acdcc9eb49acbbe324c7381b8fbd748623a3d823a0d2784de245145ddbec2d42"
+    },
+    "directory_policy": "path/case/symlink/special-file/private-path/environment/key-header/local-only exclusions passed",
+    "solar_scope_checks": {
+      "radius_au": 1000,
+      "P9_source_sha256": "050b68182ecbf7fd76f280d8cc43c0683d207499aba1488a68092b834420a422",
+      "removed_API_status": 410
+    },
+    "p9_restart_restore": {
+      "evidence_id": "p9ev_ff832a4dbb934c6d930c1d149b6eaf29",
+      "same_export_bytes": true,
+      "gravity_recomputed": true
+    },
+    "stage": "complete",
+    "node_runtime": {
+      "status": "passed",
+      "scope": "solar_system_1000au",
+      "surface_maps": 31,
+      "registered_targets": 10,
+      "registered_unordered_pairs": 37,
+      "evidence_id": "ev_7ed7f391c3754d3d891b541ea9970d01",
+      "result_id": "cmp_d88083664b6fd27592eb68c1",
+      "pluto_evidence_id": "ev_d43d0044f6304540a0a8f5f0191f6157",
+      "pluto_result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+      "p9_evidence_id": "p9ev_ff832a4dbb934c6d930c1d149b6eaf29",
+      "p9_source_sha256": "050b68182ecbf7fd76f280d8cc43c0683d207499aba1488a68092b834420a422"
+    },
+    "server": {
+      "engine": "Node.js",
+      "version": "v24.22.3",
+      "executable": "/usr/local/lib/planet-x-node/bin/node",
+      "argv": [
+        "/usr/local/lib/planet-x-node/bin/node",
+        "app.js"
+      ],
+      "PATH": "/usr/local/lib/planet-x-node/bin",
+      "PORT": "8013",
+      "APP_PORT": null,
+      "actual_http_port": 8013,
+      "startup_port_source": "PORT_environment",
+      "APP_STATE_DIR": "/home/ubuntu/planet-x-build/tmp/node-release-verify-dlmultg2/clean_copy/var/node",
+      "owned_process_ids": [
+        10651,
+        10727
+      ],
+      "worker_model": "node:worker_threads, verified through actual health/source responses",
+      "Python_interpreters_resolvable_on_PATH": {
+        "python": null,
+        "python3": null,
+        "python.exe": null,
+        "python3.exe": null,
+        "py": null,
+        "py.exe": null,
+        "uvicorn": null
+      },
+      "source_child_process_import_scan": "none",
+      "stop_method": "only owned Popen process SIGTERM; kill only on timeout"
+    },
+    "runtime_disclosure": {
+      "arbitrary_fits_inputs": false,
+      "feature_flags": {
+        "black_holes": false,
+        "cosmic_history": false,
+        "exoplanets": false,
+        "galaxies": false,
+        "galaxy_atlas": false,
+        "historical_comets": false,
+        "observer_experiment": false,
+        "physics_lab": false,
+        "planet_nine_hypothesis": true
+      },
+      "observation_processing": "verified_build_cache",
+      "ordered_comparison_count": 74,
+      "physics_capabilities": {
+        "all_bodies_known": false,
+        "all_physics": false,
+        "force_cutoff_au": null,
+        "gravity": "newtonian_prescribed_sun_and_eight_planets_restricted_test_particle",
+        "hypothesis": "p9-kepler-sky-v1",
+        "max_integrator_steps": 4096,
+        "optional_solar_1pn": true,
+        "study_radius_au": 1000
+      },
+      "public_scope": "solar_system_1000au",
+      "runtime": "node",
+      "schema_version": "1.0",
+      "snapshot_exported_utc": "2026-11-15T13:00:38.438327+00:00",
+      "source_verification_policy": {
+        "asset_readiness": "asset_success_does_not_mark_science_sources_ready",
+        "batching": "simultaneously_queued_transactions_share_one_validation_pass_no_time_ttl",
+        "comparison_payload": "raw_sha256_checked_each_read",
+        "deployment_input_contract": "immutable_read_only_source_files",
+        "each_transaction": "science_transactions_check_all_required_paths_and_file_fingerprints",
+        "fingerprint": [
+          "dev",
+          "ino",
+          "size",
+          "mtimeNs",
+          "ctimeNs"
+        ],
+        "full_audit": "startup_and_node_app_js_verify_sources_and_exact_release_audit",
+        "initial_verification": "full_sha256_all_bundle_and_required_source_files",
+        "limit": "A host administrator able to forge file identity and all timestamps is outside this metadata-cache trust boundary.",
+        "metadata_change": "full_sha256_required_before_use",
+        "static_assets": "after_initial_full_audit_check_manifest_identity_and_requested_registered_serving_file_fingerprint_and_sha_only",
+        "unchanged_fingerprint": "reuse_previously_verified_sha256",
+        "version": "sha256-stat-fingerprint-v2-scoped-assets"
+      },
+      "supported_observation_pairs": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S01",
+          "L033"
+        ],
+        [
+          "S01",
+          "L035"
+        ],
+        [
+          "S02",
+          "L033"
+        ],
+        [
+          "S02",
+          "L035"
+        ],
+        [
+          "S12",
+          "S13"
+        ],
+        [
+          "S12",
+          "S14"
+        ],
+        [
+          "S13",
+          "S14"
+        ],
+        [
+          "L001",
+          "L005"
+        ],
+        [
+          "L002",
+          "L006"
+        ],
+        [
+          "L003",
+          "L004"
+        ],
+        [
+          "L007",
+          "L008"
+        ],
+        [
+          "L009",
+          "L011"
+        ],
+        [
+          "L010",
+          "L012"
+        ],
+        [
+          "L013",
+          "L016"
+        ],
+        [
+          "L013",
+          "L027"
+        ],
+        [
+          "L013",
+          "L028"
+        ],
+        [
+          "L013",
+          "L029"
+        ],
+        [
+          "L014",
+          "L017"
+        ],
+        [
+          "L015",
+          "L018"
+        ],
+        [
+          "L016",
+          "L027"
+        ],
+        [
+          "L016",
+          "L028"
+        ],
+        [
+          "L016",
+          "L029"
+        ],
+        [
+          "L033",
+          "L035"
+        ],
+        [
+          "L023",
+          "L024"
+        ],
+        [
+          "L023",
+          "L025"
+        ],
+        [
+          "L023",
+          "L026"
+        ],
+        [
+          "L024",
+          "L025"
+        ],
+        [
+          "L024",
+          "L026"
+        ],
+        [
+          "L025",
+          "L026"
+        ],
+        [
+          "L027",
+          "L028"
+        ],
+        [
+          "L027",
+          "L029"
+        ],
+        [
+          "L028",
+          "L029"
+        ],
+        [
+          "SPX-J01",
+          "SPX-J02"
+        ],
+        [
+          "SPX-N01",
+          "SPX-N02"
+        ],
+        [
+          "SPX-S01",
+          "SPX-S02"
+        ],
+        [
+          "SPX-U01",
+          "SPX-U02"
+        ]
+      ]
+    },
+    "health_before_restart": {
+      "runtime": "node",
+      "science_mode": "verified_build_cache_and_ported_display_models",
+      "source_bundle_verified": true,
+      "status": "ready",
+      "storage_writable": true,
+      "worker_alive": true
+    },
+    "health_after_restart": {
+      "runtime": "node",
+      "science_mode": "verified_build_cache_and_ported_display_models",
+      "source_bundle_verified": true,
+      "status": "ready",
+      "storage_writable": true,
+      "worker_alive": true
+    },
+    "runtime_disclosure_after_restart": {
+      "arbitrary_fits_inputs": false,
+      "feature_flags": {
+        "black_holes": false,
+        "cosmic_history": false,
+        "exoplanets": false,
+        "galaxies": false,
+        "galaxy_atlas": false,
+        "historical_comets": false,
+        "observer_experiment": false,
+        "physics_lab": false,
+        "planet_nine_hypothesis": true
+      },
+      "observation_processing": "verified_build_cache",
+      "ordered_comparison_count": 74,
+      "physics_capabilities": {
+        "all_bodies_known": false,
+        "all_physics": false,
+        "force_cutoff_au": null,
+        "gravity": "newtonian_prescribed_sun_and_eight_planets_restricted_test_particle",
+        "hypothesis": "p9-kepler-sky-v1",
+        "max_integrator_steps": 4096,
+        "optional_solar_1pn": true,
+        "study_radius_au": 1000
+      },
+      "public_scope": "solar_system_1000au",
+      "runtime": "node",
+      "schema_version": "1.0",
+      "snapshot_exported_utc": "2026-11-15T13:00:38.438327+00:00",
+      "source_verification_policy": {
+        "asset_readiness": "asset_success_does_not_mark_science_sources_ready",
+        "batching": "simultaneously_queued_transactions_share_one_validation_pass_no_time_ttl",
+        "comparison_payload": "raw_sha256_checked_each_read",
+        "deployment_input_contract": "immutable_read_only_source_files",
+        "each_transaction": "science_transactions_check_all_required_paths_and_file_fingerprints",
+        "fingerprint": [
+          "dev",
+          "ino",
+          "size",
+          "mtimeNs",
+          "ctimeNs"
+        ],
+        "full_audit": "startup_and_node_app_js_verify_sources_and_exact_release_audit",
+        "initial_verification": "full_sha256_all_bundle_and_required_source_files",
+        "limit": "A host administrator able to forge file identity and all timestamps is outside this metadata-cache trust boundary.",
+        "metadata_change": "full_sha256_required_before_use",
+        "static_assets": "after_initial_full_audit_check_manifest_identity_and_requested_registered_serving_file_fingerprint_and_sha_only",
+        "unchanged_fingerprint": "reuse_previously_verified_sha256",
+        "version": "sha256-stat-fingerprint-v2-scoped-assets"
+      },
+      "supported_observation_pairs": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S01",
+          "L033"
+        ],
+        [
+          "S01",
+          "L035"
+        ],
+        [
+          "S02",
+          "L033"
+        ],
+        [
+          "S02",
+          "L035"
+        ],
+        [
+          "S12",
+          "S13"
+        ],
+        [
+          "S12",
+          "S14"
+        ],
+        [
+          "S13",
+          "S14"
+        ],
+        [
+          "L001",
+          "L005"
+        ],
+        [
+          "L002",
+          "L006"
+        ],
+        [
+          "L003",
+          "L004"
+        ],
+        [
+          "L007",
+          "L008"
+        ],
+        [
+          "L009",
+          "L011"
+        ],
+        [
+          "L010",
+          "L012"
+        ],
+        [
+          "L013",
+          "L016"
+        ],
+        [
+          "L013",
+          "L027"
+        ],
+        [
+          "L013",
+          "L028"
+        ],
+        [
+          "L013",
+          "L029"
+        ],
+        [
+          "L014",
+          "L017"
+        ],
+        [
+          "L015",
+          "L018"
+        ],
+        [
+          "L016",
+          "L027"
+        ],
+        [
+          "L016",
+          "L028"
+        ],
+        [
+          "L016",
+          "L029"
+        ],
+        [
+          "L033",
+          "L035"
+        ],
+        [
+          "L023",
+          "L024"
+        ],
+        [
+          "L023",
+          "L025"
+        ],
+        [
+          "L023",
+          "L026"
+        ],
+        [
+          "L024",
+          "L025"
+        ],
+        [
+          "L024",
+          "L026"
+        ],
+        [
+          "L025",
+          "L026"
+        ],
+        [
+          "L027",
+          "L028"
+        ],
+        [
+          "L027",
+          "L029"
+        ],
+        [
+          "L028",
+          "L029"
+        ],
+        [
+          "SPX-J01",
+          "SPX-J02"
+        ],
+        [
+          "SPX-N01",
+          "SPX-N02"
+        ],
+        [
+          "SPX-S01",
+          "SPX-S02"
+        ],
+        [
+          "SPX-U01",
+          "SPX-U02"
+        ]
+      ]
+    },
+    "server_restart_evidence_restore": [
+      {
+        "evidence_id": "ev_7ed7f391c3754d3d891b541ea9970d01",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_assumptions_present": true
+      },
+      {
+        "evidence_id": "ev_d43d0044f6304540a0a8f5f0191f6157",
+        "result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_assumptions_present": true
+      },
+      {
+        "evidence_id": "ev_4078074e624340c8a85fc3605057abcd",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_assumptions_present": true
+      }
+    ],
+    "actual_comparison_raw_hashes": {
+      "cmp_d88083664b6fd27592eb68c1": {
+        "cache_and_evidence_raw_sha256": "88219adf492f225e5be126e8f7e5577b74475aff4067f5797d63540ba044d74c",
+        "HTTP_JSON_wire_sha256": "90d4b829f3a467bd71a8462a453901fb90df62a6836af5703a01775078c402bd",
+        "semantic_equality": true
+      },
+      "cmp_0d749ea3f9ec3a8da925dc44": {
+        "cache_and_evidence_raw_sha256": "9ebe635e2ddd0230b50e38cce35a468acf826654199a9403d36f4189fa1d12f8",
+        "HTTP_JSON_wire_sha256": "bb5b7f410d32ba78189a4d64e750f0218536ea414549b904de678f23132c0217",
+        "semantic_equality": true
+      }
+    },
+    "comparison_hash_scope": "Evidence comparison_sha256 covers the preserved Python-canonical build-cache bytes. HTTP JSON serialization may have a different raw SHA while preserving the same parsed values.",
+    "hosting_scope": "Node-only server verified under closed PATH; Python executed only as this development verifier and the packaged standard-library HTTP smoke client. This is not an OS sandbox or proof that Python is uninstalled.",
+    "completed_at": "2026-11-15T13:02:32.176437+00:00"
+  },
+  "activation": {
+    "status": "passed",
+    "before_pid": 9846,
+    "after_pid": 10923,
+    "scientific_state_files_byte_preserved": 17,
+    "prior_release_preserved": "0.17.2"
+  },
+  "public_browser_stats": {
+    "startTime": "2026-11-15T13:06:20.015Z",
+    "duration": 31278.450000000004,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "data_PDF": {
+    "version": "0.17.3",
+    "built_at": "2026-11-15T12:59:21Z",
+    "pages": 381,
+    "pdf_bytes": 5364583,
+    "pdf_sha256": "236515182389741aa1e8125389ca67260df18e738c6788fff9183e1d2bd43b7c",
+    "source_sha256": "6a9369a28d250d9f4bb4de6315daf851ea1e1830d6be1db9bf8ea3b82bf1cd91"
+  },
+  "actual_same_version_restart": "not separately rerun for this intermediate version; clean-directory restart verified",
+  "functional_verification_base": "docs/qa/dev027_local_verification.json",
+  "state_recovery_limit": "Deleted previous host: only locally preserved backup and original envelopes recoverable; no later uncopied record recovery claimed.",
+  "git": {
+    "status": "pending_implementation_commit_and_push",
+    "branch": "main",
+    "remote": "https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge"
+  }
+}

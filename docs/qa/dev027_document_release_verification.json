@@ -1,0 +1,74 @@
+{
+  "release": "0.17.1",
+  "status": "passed",
+  "checked_utc": "2026-11-15T12:47:29.730968+00:00",
+  "documentation_only": true,
+  "unchanged_functional_source_files": 188,
+  "all_114_generated_JSON_pins_unchanged": true,
+  "all_74_comparison_entries_unchanged": true,
+  "TypeScript_Vite": "passed during metadata build",
+  "release_metadata_test": 1,
+  "Node_only_clean_directory": "passed",
+  "public_browser_stats": {
+    "startTime": "2026-11-15T12:44:35.735Z",
+    "duration": 22984.27,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "inherited_functional_checks": "docs/qa/dev027_local_verification.json",
+  "MD_audit": "docs/qa/md_current_state_verification.json",
+  "PDF_audit": "docs/qa/dev027_document_pdf_verification.json",
+  "restart": {
+    "status": "passed",
+    "before_pid": 8390,
+    "after_pid": 8485,
+    "recovered_original_scientific_files_preserved": 9,
+    "all_scientific_state_files_preserved": 17,
+    "consistent_backup_file_count": 28,
+    "backup_sha256": "7d373b893d7bd9f5656131bd9b089c40b08a8146a62b1cfc3e6f2737185f1be0",
+    "backup_bytes": 11571200
+  },
+  "legacy_three_original_envelopes": {
+    "checked_utc": "2026-11-15T12:45:58.759313+00:00",
+    "base": "https://nasaspaceappschallenge.marulee.dev",
+    "evidence": [
+      {
+        "id": "ev_e764a2eb3a294ca890b39ce8be85dc5d",
+        "status": "restored",
+        "original_export_bytes_and_sha_preserved": true,
+        "comparison_and_judgment_preserved": true,
+        "only_verified_visual_context_updated": false,
+        "bytes": 870988,
+        "sha256": "ca26330aab98a9d26cd7b3c440445ef1068b375b75ca2ca784e3c1ec03d57746"
+      },
+      {
+        "id": "ev_4872494bb4c649e3af2ad8d43b0bf4f8",
+        "status": "restored",
+        "original_export_bytes_and_sha_preserved": true,
+        "comparison_and_judgment_preserved": true,
+        "only_verified_visual_context_updated": false,
+        "bytes": 906270,
+        "sha256": "659e6ecf9de6c5572127f5b8d9c68cb2c74f98a76b17c08e35a49def46239e07"
+      },
+      {
+        "id": "p9ev_5453e41e76da4a9786e2aff1503d2134",
+        "status": "restored",
+        "original_export_bytes_and_sha_preserved": true,
+        "comparison_and_judgment_preserved": true,
+        "only_verified_visual_context_updated": false,
+        "bytes": 32807,
+        "sha256": "46f6398b6f28e868326d3d16f56b03bff6553b8b37311439dcc6b28c9d5f1dfb"
+      }
+    ],
+    "status": "passed"
+  },
+  "new_private_local_backup": {
+    "files": 28,
+    "bytes": 11571200,
+    "sha256": "7d373b893d7bd9f5656131bd9b089c40b08a8146a62b1cfc3e6f2737185f1be0",
+    "downloaded_and_verified": true
+  },
+  "scope_limits": "Deleted previous host: 7 evidence and 2 comparisons from 13-file backup verified. Later records without local copies cannot be reconstructed."
+}

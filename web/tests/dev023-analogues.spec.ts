@@ -44,7 +44,7 @@ test('DEV-023: selecting literature row 2413 automatically calculates its actual
   await expect(panel).toHaveAttribute('data-algorithm',ORBIT_ANALOGUE_RULE);
   await expect(page.getByTestId('p9-analogue-count')).toContainText('8,340 / 8,341');
   await expect(page.getByTestId('p9-analogue-exclusions')).toContainText('No complete orbit record: 1');
-  await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(10);
+  await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(5);
   const first=page.getByTestId('p9-orbit-analogue-1'),object=catalogue.objects.find(row=>row.object_id==='sbdb-20689335')!;
   expect(object).toBeTruthy();expect(object.spkid).toBe('20689335');expect(object.orbit).not.toBeNull();
   await expect(first).toHaveAttribute('data-object-id','sbdb-20689335');await expect(first).toHaveAttribute('data-spkid','20689335');
@@ -67,7 +67,7 @@ test('DEV-023: selecting literature row 2413 automatically calculates its actual
     await expect(page.getByTestId('p9-orbit-analogue-table')).toHaveCount(0);
     await page.getByTestId('p9-analogue-return-catalogue').click();
     await expect(page.getByTestId('p9-analogue-method')).toHaveValue('catalogue');
-    await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(10);
+    await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(5);
   }
   await page.getByTestId('language').selectOption('en');expect(requests).toHaveLength(1);
   await page.getByTestId('p9-view-hypothesis-orbit').click();

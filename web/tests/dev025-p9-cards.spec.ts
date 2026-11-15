@@ -78,7 +78,7 @@ test('DEV-025: sample cards show loading, cancel stale selection and keep P9 hyp
   await expect(dialog).not.toBeVisible();await expect(page.getByTestId('p9-sample-applied')).toContainText(p9StepCopy('en').applied);
   await expect(page.getByTestId('p9-preset')).toHaveValue('caltech-row-2413');const summary=page.getByTestId('p9-active-hypothesis');await expect(summary).toHaveAttribute('data-source-row','2413');
   const hypothesisSummary=(await summary.textContent())!;await expect(page.getByTestId('p9-sky-path')).toBeVisible();await page.getByTestId('p9-goto-analogues').click();
-  await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(10);
+  await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(5);
   for(const rank of [1,2]){
     const row=page.getByTestId('p9-orbit-analogue-'+rank),id=await row.getAttribute('data-object-id');expect(id).toMatch(/^sbdb-/);
     await page.getByTestId('p9-analogue-name-'+rank).click();await expect(page.getByTestId('planet-nine-panel')).toBeVisible();await expect(summary).toHaveText(hypothesisSummary);
@@ -115,7 +115,7 @@ test('DEV-025: catalogue errors remain retryable and App/P9 share one genuine re
     await expect(page.getByTestId('planet-nine-panel')).toBeVisible();await page.getByTestId('p9-goto-analogues').click();
     await expect(analogues.getByRole('status')).toHaveText(orbitAnalogueCopy('en').loading);expect(requests).toBe(2);
     release();await delivery;expect(abortedRetries).toBe(0);
-    await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(10);
+    await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(5);
     expect(rawSource).toBeTruthy();expect(rawSource!.objects).toHaveLength(8341);expect(rawSource!.coordinate_frame).toBe('heliocentric_IAU76_80_ecliptic_J2000');expect(rawSource!.time_scale).toBe('TDB');
     expect(rawSource!.source_manifest_sha256).toBe('6dd683ace22417072aaba17ee3f61937aa926598265b6082edeea278bfd452c1');
     await expect(analogues.locator('code').last()).toContainText(rawSource!.source_manifest_sha256);

@@ -1,27 +1,27 @@
 {
   "schema_version": "1.0",
   "algorithm_version": "full-markdown-linked-cjk-pdf-v1",
-  "version": "0.16.1",
-  "built_at": "2026-11-15T03:14:08Z",
+  "version": "0.17.4",
+  "built_at": "2026-11-15T13:09:37Z",
   "source_filename": "Data_Spec.md",
-  "source_bytes": 2205332,
-  "source_sha256": "3e57da2c438e4e98c6af65a7712ba0f080e6a3b1eb5e04a09a7a09bae5d00052",
+  "source_bytes": 2211208,
+  "source_sha256": "0d8046f70bf01398e417340bfd42e08dd3ad8fa3cc535cd0fee7943b0e7f2bcd",
   "pdf_filename": "PlanetX_Data_Spec.pdf",
-  "pdf_bytes": 5354290,
-  "pdf_sha256": "28870617c051a8b1e9cba4d278a362d520abdaf60c97181c860d26f92bb77bd1",
-  "pages": 380,
-  "source_lines": 4137,
-  "markdown_block_tokens": 48019,
+  "pdf_bytes": 5364645,
+  "pdf_sha256": "3fbdf5e50a6b34c1773d5a6564f5c45877f81b6d0ff0364f335963ab7cf51697",
+  "pages": 381,
+  "source_lines": 4164,
+  "markdown_block_tokens": 48057,
   "rendered": {
-    "inline_text_nodes": 27724,
-    "headings": 84,
-    "paragraphs": 251,
+    "inline_text_nodes": 27748,
+    "headings": 88,
+    "paragraphs": 259,
     "list_items": 25,
     "table_cells": 13300,
     "tables": 63,
     "source_table_rows_including_headers": 3340
   },
-  "visible_source_sha256_audit_index_count": 2507,
+  "visible_source_sha256_audit_index_count": 2508,
   "page_size": "a4",
   "orientation": "landscape",
   "layout": {
@@ -36,7 +36,7 @@
       "input_filename": "NotoSansKR[wght].ttf",
       "input_bytes": 10414588,
       "input_sha256": "194018e6b2b293a7964f037b25c0249ce1418bc9ab3c971060a03aa57861e252",
-      "embedded_instance_sha256": "3c7251bc9c64b83a1630d39624d4996e2992f027d607341697a63821e3d9ceac",
+      "embedded_instance_sha256": "650031263517d88bf6a5338e81fb9490fbe09ccbb768dfc7c3d60f92d8d7e6be",
       "instance_axes": {
         "wght": 400
       },
@@ -48,7 +48,7 @@
       "input_filename": "NotoSansKR[wght].ttf",
       "input_bytes": 10414588,
       "input_sha256": "194018e6b2b293a7964f037b25c0249ce1418bc9ab3c971060a03aa57861e252",
-      "embedded_instance_sha256": "6618855806617bd91ca73c09e49eab28a4233e962b707d09fa16dbb15821f002",
+      "embedded_instance_sha256": "68fae23a6460aa71245e74ea0b73c8eeb8f2230d7f4b9a14da654ad7adfda512",
       "instance_axes": {
         "wght": 700
       },
@@ -60,7 +60,7 @@
       "input_filename": "NotoSans[wdth,wght].ttf",
       "input_bytes": 2049096,
       "input_sha256": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
-      "embedded_instance_sha256": "940caf95ba7b859e153f18378a8b1b76f2662112a537fc0140645f0873e5a9f1",
+      "embedded_instance_sha256": "181791463fe1c366f0b4fb7e61e6a226cf9ba85fa2cb870dadf3922a6f612673",
       "instance_axes": {
         "wght": 400,
         "wdth": 100.0
@@ -3617,7 +3617,7 @@
   "validation": {
     "source_embedded_byte_identical": true,
     "font_glyph_preflight": "passed",
-    "displayed_unique_sha256_count": 2499,
+    "displayed_unique_sha256_count": 2500,
     "all_unique_source_sha256_indexed_and_extracted": true,
     "missing_displayed_hashes": [],
     "all_http_source_link_targets_retained": true,

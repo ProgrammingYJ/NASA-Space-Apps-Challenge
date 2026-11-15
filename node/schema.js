@@ -1,5 +1,11 @@
 'use strict';
 const { strict } = require('./storage');
+const ORBIT_ANALOGUE_ALGORITHM = 'tno-source-aei-exploratory-v1';
+function orbitAnalogueContextRules(context) {
+  if (context.orbit_analogue_context != null && context.scene_filter_version == null
+      || context.scene_filter_version != null && ['p9-reference', 'planets-and-p9'].includes(context.scene_filter) && context.orbit_analogue_context == null) throw new Error('invalid_request');
+  return context;
+}
 function validator(document) {
   function check(schema, value) {
     if (schema.$ref) return check(schema.$ref.split('/').slice(1).reduce((v, k) => v[k], document), value);
@@ -18,6 +24,7 @@ function validator(document) {
         else result[key] = check(props[key], item);
       }
       for (const [key, spec] of Object.entries(props)) if (!(key in value) && 'default' in spec) result[key] = structuredClone(spec.default);
+      if (schema.title === 'UniverseContext') orbitAnalogueContextRules(result);
       return result;
     }
     if (schema.type === 'array') {
@@ -45,6 +52,20 @@ function nativeTnoContextReasons(context, current) {
   if (context.native_tno_simulation_algorithm_version != null && context.native_tno_simulation_algorithm_version !== current.algorithm_version) return ['native_tno_algorithm_changed'];
   return [];
 }
+function orbitAnalogueContextReasons(context, current, algorithmVersion = ORBIT_ANALOGUE_ALGORITHM) {
+  const saved = context.orbit_analogue_context;
+  if (saved == null) return [];
+  if (saved.algorithm_version !== algorithmVersion) return ['orbit_analogue_algorithm_changed'];
+  // `current` must come from createOuterCatalog(), which verifies the complete
+  // original response/request bytes and mapped elements. This metadata check
+  // deliberately does not claim that a syntactically valid SHA proves a source.
+  if (!current || typeof current.source_manifest_sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(current.source_manifest_sha256)
+      || current.source_algorithm_version !== 'jpl-sbdb-tno-two-body-v1'
+      || current.coordinate_frame !== 'heliocentric_IAU76_80_ecliptic_J2000'
+      || current.time_scale !== 'TDB') return ['orbit_analogue_data_unavailable'];
+  if (saved.source_manifest_sha256 !== current.source_manifest_sha256) return ['orbit_analogue_sources_changed'];
+  return [];
+}
 function resolveRegisteredPair(registry, ids, objectId) {
   if (!Array.isArray(ids) || ids.length !== 2 || ids[0] === ids[1] || ids.some(id => typeof id !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$/.test(id))) throw new Error('invalid_request');
   const epsilon = ids.every(id => ['S01','S02'].includes(id)), pluto = ids.every(id => ['S12','S14'].includes(id));
@@ -65,6 +86,7 @@ function sessionRules(session, registry) {
   resolveRegisteredPair(registry,session.observation_ids,session.object_id);
   const c = session.universe_context;
   if (!c) return session;
+  orbitAnalogueContextRules(c);
   if (c.selected_object_id !== session.object_id || c.follow_object_id != null && c.follow_object_id !== session.object_id) throw new Error('invalid_request');
   for (const [field, sha] of [['mass_scenario', 'mass_scenarios_manifest_sha256'], ['observer_experiment', 'observer_physics_manifest_sha256'], ['selected_black_hole_id', 'black_holes_manifest_sha256']]) if (c[field] != null && c[sha] == null) throw new Error('invalid_request');
   if (c.time_preference === 'ephemeris' && c.simulation_context != null || c.time_preference === 'simulation' && c.simulation_context == null) throw new Error('invalid_request');
@@ -104,4 +126,4 @@ function migrateSolarSession(session, currentVisualHashes = {}, compatibleRefere
   }
   return { session: migrated, omitted_contexts };
 }
-module.exports = { validator, sessionRules, resolveRegisteredPair, omitNullFields, migrateSolarSession, nativeTnoContextReasons };
+module.exports = { validator, sessionRules, resolveRegisteredPair, omitNullFields, migrateSolarSession, nativeTnoContextReasons, orbitAnalogueContextReasons };

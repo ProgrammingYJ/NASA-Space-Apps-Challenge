@@ -45,6 +45,7 @@ FILES = (
     "package-lock.json",
     "data/manifests/node_runtime.json",
     "data/manifests/data_spec_pdf.json",
+    "data/manifests/source_license_notice.json",
     "requirements.pdf.lock.txt",
     "docs/qa/dev025_pdf_verification.json",
     "docs/qa/dev025_local_verification.json",

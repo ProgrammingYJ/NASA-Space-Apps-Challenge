@@ -1,0 +1,102 @@
+{
+  "work_id": "OPS-021",
+  "release": "0.17.0",
+  "status": "deployed_and_verified",
+  "checked_utc": "2026-11-15T12:32:01.403479+00:00",
+  "host": {
+    "public_ipv4": "54.117.136.144",
+    "region": "ap-northeast-2",
+    "instance_type": "m7i.xlarge",
+    "identity_basis": "SSH and IMDSv2; not IP geolocation",
+    "OS": "Ubuntu24.04.5 LTS x86_64",
+    "CPUs": 4,
+    "RAM_GB_approx": 16,
+    "root_filesystem_GB_approx": 48,
+    "Node": "24.22.3",
+    "nginx": "1.24.0",
+    "bind": "127.0.0.1:3002",
+    "public_ports": [
+      80,
+      443
+    ]
+  },
+  "DNS": "A record points to new host",
+  "TLS": {
+    "verified": true,
+    "certificate_expires": "2027-02-13",
+    "renewal_timer": "enabled and active"
+  },
+  "state_recovery": {
+    "previous_host": "16.176.170.4",
+    "previous_host_deleted": "user_confirmed",
+    "recovered_backup_files": 13,
+    "recovered_observation_evidence": 4,
+    "recovered_P9_evidence": 3,
+    "recovered_comparisons": 2,
+    "recovered_job_states": 4,
+    "backup_source_sha256": "243207fea55d1ef55827cb2b8ffbdd6591076dc0db79cae6744ccc6b8047c18d",
+    "legacy_three_are_a_subset_not_additional_records": true,
+    "recovered_scientific_files_byte_identical": 9,
+    "missing_later_copies": "not_recoverable_from_deleted_host_without_local_exports"
+  },
+  "restart": {
+    "status": "passed",
+    "before_pid": 7024,
+    "after_pid": 7175,
+    "recovered_original_scientific_files_preserved": 9,
+    "all_scientific_state_files_preserved": 16,
+    "consistent_backup_file_count": 24,
+    "backup_sha256": "a49928a95ca5b9bba9a04554f55cf1343f8bcd4913bd0e85d75118317030c8aa",
+    "backup_bytes": 10762240
+  },
+  "legacy_original_envelopes": {
+    "checked_utc": "2026-11-15T12:29:15.231847+00:00",
+    "base": "https://nasaspaceappschallenge.marulee.dev",
+    "evidence": [
+      {
+        "id": "ev_e764a2eb3a294ca890b39ce8be85dc5d",
+        "status": "restored",
+        "original_export_bytes_and_sha_preserved": true,
+        "comparison_and_judgment_preserved": true,
+        "only_verified_visual_context_updated": false,
+        "bytes": 870988,
+        "sha256": "ca26330aab98a9d26cd7b3c440445ef1068b375b75ca2ca784e3c1ec03d57746"
+      },
+      {
+        "id": "ev_4872494bb4c649e3af2ad8d43b0bf4f8",
+        "status": "restored",
+        "original_export_bytes_and_sha_preserved": true,
+        "comparison_and_judgment_preserved": true,
+        "only_verified_visual_context_updated": false,
+        "bytes": 906270,
+        "sha256": "659e6ecf9de6c5572127f5b8d9c68cb2c74f98a76b17c08e35a49def46239e07"
+      },
+      {
+        "id": "p9ev_5453e41e76da4a9786e2aff1503d2134",
+        "status": "restored",
+        "original_export_bytes_and_sha_preserved": true,
+        "comparison_and_judgment_preserved": true,
+        "only_verified_visual_context_updated": false,
+        "bytes": 32807,
+        "sha256": "46f6398b6f28e868326d3d16f56b03bff6553b8b37311439dcc6b28c9d5f1dfb"
+      }
+    ],
+    "status": "passed"
+  },
+  "new_local_backup": {
+    "files": 24,
+    "bytes": 10762240,
+    "sha256": "a49928a95ca5b9bba9a04554f55cf1343f8bcd4913bd0e85d75118317030c8aa",
+    "downloaded_and_verified": true,
+    "private_content": "Excluded from Git/public artifacts"
+  },
+  "initial_failures": [
+    "Old-host SSH timed out; user then confirmed deletion.",
+    "New key permissions corrected only on ignored local working copy; original preserved.",
+    "Initial source checks rejected intentionally changed code/docs; explicit path checks and regenerated manifest resolved this without bypassing final verification.",
+    "Release metadata rejected old PDF version before regeneration.",
+    "Activation succeeded; non-root audit lacked shared read permission. Same read-only audit passed under sudo; no permissions broadened."
+  ],
+  "public_checks": "docs/qa/dev027_local_verification.json",
+  "delivery": "No new release ZIP; verified directory activated; prior local immutable artifacts preserved."
+}

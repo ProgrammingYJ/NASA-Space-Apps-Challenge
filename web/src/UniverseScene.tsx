@@ -56,6 +56,7 @@ export interface UniverseData {
   limitations?: string[];
 }
 export interface UniverseSceneProps {
+  cameraDragLocked?:boolean;
   distanceView?:DistanceView;
   renderPreset?:RenderPreset;
   lightingMode?:LightingMode;
@@ -278,7 +279,7 @@ export default function UniverseScene(props:UniverseSceneProps) {
     const onBlur=()=>{keys.clear();rt.emit();};
     window.addEventListener('keydown',onKeyDown);window.addEventListener('keyup',onKeyUp);window.addEventListener('blur',onBlur);
     let pointer:{x:number;y:number;id:number}|null=null;
-    const pointerDown=(event:PointerEvent)=>{pointer={x:event.clientX,y:event.clientY,id:event.pointerId};renderer.domElement.focus({preventScroll:true});cancelFocus();};
+    const pointerDown=(event:PointerEvent)=>{window.getSelection()?.removeAllRanges();pointer={x:event.clientX,y:event.clientY,id:event.pointerId};renderer.domElement.focus({preventScroll:true});if(!latest.current.cameraDragLocked)cancelFocus();};
     const pointerUp=(event:PointerEvent)=>{
       if(!pointer||event.pointerId!==pointer.id)return;
       const down=pointer;pointer=null;if(event.button!==0||Math.hypot(event.clientX-down.x,event.clientY-down.y)>5)return;
@@ -318,6 +319,7 @@ export default function UniverseScene(props:UniverseSceneProps) {
       }));
     };
     navigationOverlays.forEach(layer=>layer.addEventListener('wheel',overlayWheel,{capture:true,passive:false}));
+    const pointerCancel=()=>{pointer=null;keys.clear();};renderer.domElement.addEventListener('pointercancel',pointerCancel);
     renderer.domElement.addEventListener('pointerdown',pointerDown,{capture:true});renderer.domElement.addEventListener('pointerup',pointerUp);renderer.domElement.addEventListener('wheel',wheel,{capture:true,passive:true});
     const resize=new ResizeObserver(()=>{const w=container.clientWidth;const h=container.clientHeight;if(w===0||h===0)return;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h);});resize.observe(container);
     let previous=performance.now(),lastRendered=-Infinity,lastAppearanceRefresh=-Infinity,lastTnoRefresh=-Infinity,lastTnoEpoch=NaN;let followedTnoPosition:Vec3|null=null;
@@ -385,11 +387,12 @@ export default function UniverseScene(props:UniverseSceneProps) {
       rt.disposed=true;document.removeEventListener('visibilitychange',onVisibility);cancelAnimationFrame(rt.animationId);resize.disconnect();controls.dispose();
       window.removeEventListener('keydown',onKeyDown);window.removeEventListener('keyup',onKeyUp);window.removeEventListener('blur',onBlur);
       navigationOverlays.forEach(layer=>layer.removeEventListener('wheel',overlayWheel,true));
-      renderer.domElement.removeEventListener('pointerdown',pointerDown,true);renderer.domElement.removeEventListener('pointerup',pointerUp);renderer.domElement.removeEventListener('wheel',wheel,true);
+      renderer.domElement.removeEventListener('pointercancel',pointerCancel);renderer.domElement.removeEventListener('pointerdown',pointerDown,true);renderer.domElement.removeEventListener('pointerup',pointerUp);renderer.domElement.removeEventListener('wheel',wheel,true);
       if(rt.tno){scene.remove(rt.tno.group);rt.tno.dispose();rt.tno=null;}rt.bodies.forEach(view=>{view.pendingAppearance?.dispose();if(view.appearance){view.group.remove(view.appearance.group);view.appearance.dispose();}view.label.remove();view.marker.remove();});disposeObject(scene);renderer.dispose();renderer.domElement.remove();runtime.current=null;
     };
   },[]);
 
+  useEffect(()=>{const rt=runtime.current;if(rt){rt.controls.enableRotate=!props.cameraDragLocked;rt.controls.enablePan=!props.cameraDragLocked;}if(host.current)host.current.dataset.cameraDragLocked=String(Boolean(props.cameraDragLocked));},[props.cameraDragLocked]);
   useEffect(()=>{const rt=runtime.current;if(!rt)return;rt.renderer.setPixelRatio(Math.min(window.devicePixelRatio,renderingBudget(props.renderPreset??'balanced').dpr));const container=host.current;if(container)rt.renderer.setSize(container.clientWidth,container.clientHeight);},[props.renderPreset]);
   useEffect(()=>{const rt=runtime.current;if(rt)refreshBodyAppearances(rt,props);},[props.renderPreset,props.lightingMode,props.coverageMode]);
 

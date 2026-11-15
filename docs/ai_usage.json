@@ -18,7 +18,10 @@
     "exact_release_verification": "passed; docs/releases/v0.9.1.json and external exact-archive verification JSON"
   },
   "schema_version": "1.0",
-  "date_kst": "2026-11-14",
+  "date_kst": "2026-11-15",
+  "current_release": "0.17.4",
+  "current_verification_utc": "2026-11-15T13:16:38.874942+00:00",
+  "history_policy": "Work-specific records, assistance categories and previous checkpoints retain their original historical scope. Removed galaxy/exoplanet/history/black-hole/general-physics features are not current product features. Current status is current_checkpoint and dev027_ops021, with immutable external release/QA records.",
   "tool": "Codex",
   "exact_model_identifier": null,
   "model_identifier_status": "not_reported",
@@ -43,14 +46,22 @@
     "DEV-009",
     "DEV-010",
     "DEV-011",
+    "DEV-012",
     "DEV-015",
     "DEV-016",
+    "DEV-018",
     "DEV-019",
+    "DEV-020",
+    "OPS-013",
     "OPS-020",
     "DEV-021",
     "DEV-022",
     "DEV-023",
-    "DEV-024"
+    "DEV-024",
+    "DEV-025",
+    "DEV-026",
+    "DEV-027",
+    "OPS-021"
   ],
   "assistance": [
     "repository_configuration",
@@ -117,15 +128,22 @@
     "parameter_corner_ranges_and_fixed_source_survey_not_probabilities",
     "global_mass_hypothesis_source_hash_evidence_restore",
     "bounded_observer_relativity_and_black_hole_source_integration",
-    "provider_publication_host_and_original_observation_provenance_separation"
+    "provider_publication_host_and_original_observation_provenance_separation",
+    "registered_actual_observation_pairs_and_source_pinned_native_caches",
+    "separate_epsilon_indi_ba_bb_source_photo_detail",
+    "actual_known_object_orbit_similarity_top_five_and_persistent_panels",
+    "kind_specific_global_observation_and_p9_evidence_import_with_stale_response_protection",
+    "mobile_explorer_gate_pc_chrome_recommendation_and_five_locale_quick_guide",
+    "authorized_ec2_state_recovery_and_actual_restart_verification",
+    "complete_data_specification_pdf_source_attachment_and_render_review"
   ],
   "application_code_generated_in_this_setup": true,
   "science_detection_or_fit_performed": false,
   "image_video_voice_generation": false,
   "original_observations_are_AI_generated": false,
-  "human_review_status": "pending_user_review",
+  "human_review_status": "automated_and_agent_review_recorded; team_two_person_tasks_and_native_language_human_review_not_verified",
   "validation_record": "docs/worklog.md",
-  "automated_validation_record": "docs/worklog.md",
+  "automated_validation_record": "docs/qa/dev027_local_verification.json",
   "skill_structure_checks_passed": 14,
   "skill_ui_discovery_verified": false,
   "notion_requeried_in_skills_spec_work": false,
@@ -547,6 +565,30 @@
     "locale_keys": 261
   },
   "current_checkpoint": {
+    "work_ids": [
+      "DEV-027",
+      "DEV-028",
+      "OPS-021"
+    ],
+    "version": "0.17.4",
+    "status": "deployed_and_verified",
+    "entrypoint": "app.js",
+    "server_python_required": false,
+    "release_record": "docs/releases/v0.17.4.json",
+    "public_service_deployed": true,
+    "linux_verified": true,
+    "public_browser_passed": 5,
+    "human_native_review": false,
+    "official_judging_submission": "not_verified",
+    "git_status": "pending_commit_and_push",
+    "functional_base_version": "0.17.0",
+    "functional_base_public_browser_passed": 10,
+    "documentation_only_revision": false,
+    "credits": "Approved public aliases, six named testers, teacher retained; no real-name correspondence table",
+    "initial_language": "English; explicit selected/restored locale preserved",
+    "supplemental_notice": "Original user-supplied PDF below data specification; historical scope disclosed"
+  },
+  "dev012_checkpoint_history": {
     "work_id": "DEV-012",
     "version": "0.9.0",
     "status": "windows_exact_node_only_archive_verified",
@@ -600,6 +642,37 @@
     "image_generation_service_used": false
   },
   "data_specification": {
+    "path": "Data_Spec.md",
+    "scope": "Deployed v0.17.4 frozen current Markdown; scientific data and models unchanged.",
+    "frozen_source_MD_sha256": "0d8046f70bf01398e417340bfd42e08dd3ad8fa3cc535cd0fee7943b0e7f2bcd",
+    "pdf": {
+      "public_path": "/downloads/PlanetX_Data_Spec.pdf",
+      "pages": 381,
+      "bytes": 5364645,
+      "sha256": "3fbdf5e50a6b34c1773d5a6564f5c45877f81b6d0ff0364f335963ab7cf51697",
+      "built_at": "2026-11-15T13:09:37Z",
+      "source_attachment_byte_identical": true,
+      "link_and_font_glyph_preflight": "passed",
+      "full_render_pages": 381,
+      "contact_sheets": 6,
+      "visual_review_limit": "Contact-sheet layout review and selected full pages, not character-by-character proofreading or upstream license validation.",
+      "verification_record": "docs/qa/dev028_pdf_verification.json"
+    },
+    "supplemental_user_notice": {
+      "filename": "PlanetX_Source_License_Notices.pdf",
+      "bytes": 762160,
+      "sha256": "aeb12c3a35a959dd1a4a242509eedc2ac44307306eb3ce1ae9e6965ad57ac3c6",
+      "provenance": "User-provided source and license notice PDF; original bytes preserved.",
+      "scope": "Supplemental user-authored notice; it does not replace original upstream license terms or the data specification.",
+      "local_relative_path": "web/public/downloads/PlanetX_Source_License_Notices.pdf",
+      "pages": 1,
+      "source_kind": "user_provided_supplemental_document",
+      "file_review": "Extracted text and actual page render viewed on 2026-11-15; historical scope identified; original bytes unmodified."
+    },
+    "new_scientific_inputs_acquired_in_DEV028": false,
+    "AI_generated_original_observations": false
+  },
+  "dev012_data_specification_history": {
     "path": "Data_Spec.md",
     "bytes": 2026860,
     "lines": 3422,
@@ -1936,5 +2009,215 @@
     },
     "new_discovery_or_all_physics_claim": false,
     "validation": "DEV-023 public v0.15.0 verified; DEV-024 integrated build/browser/release pending final record"
+  },
+  "dev027_ops021": {
+    "work_ids": [
+      "DEV-027",
+      "OPS-021"
+    ],
+    "requests": [
+      "R035",
+      "R036",
+      "R037",
+      "R038",
+      "R039",
+      "R040",
+      "R041"
+    ],
+    "assistance": [
+      "Existing source-a/e/i descriptive actual-object TOP5; persistent search and hypothesis panels",
+      "Kind-specific observation/P9 JSON imports; source-pinned optional context, visible status and stale-response protection",
+      "PC Chrome recommendation, mobile App/3D/science-query gate, five-language keyboard guide",
+      "Authorized Node/nginx/HTTPS host migration, available-backup recovery and actual restart audits",
+      "Complete Data_Spec PDF, original source attachment, provenance and independent PNG visual review"
+    ],
+    "validation": {
+      "remote_TypeScript_strict_Vite": "passed",
+      "Vitest_tests": 135,
+      "Vitest_files": 27,
+      "Python_context_tests": 28,
+      "Python_release_metadata_tests": 1,
+      "Ruff": "passed",
+      "Node_runtime_tests": 91,
+      "post_contract_format_affected_Node_tests": 7,
+      "isolated_Chrome_unique_paths_passed": 9,
+      "isolated_initial": "7 PASS and 2 fixture saves missing mandatory source SHA; preserved failure records",
+      "isolated_second_attempt": "2 exact-oracle failures because test expectations omitted declared API defaults",
+      "isolated_affected_final": "2 PASS after authentic API source pins and explicit defaults were supplied; no scientific thresholds relaxed or automatic POST retries",
+      "public_Chrome_paths_passed": 10,
+      "public_scope": "Nine DEV-027 paths plus epsilon Indi B S01/S02 actual-original quality, evidence export and clean-session restoration",
+      "record": "docs/qa/dev027_local_verification.json"
+    },
+    "data_preservation": {
+      "runtime_manifest_sha256": "e12e8a80f5868234bf09e680d68b8057504f6360bafa3f6606d06b37eec28882",
+      "generated_JSON_files": 114,
+      "generated_JSON_bytes": 63027446,
+      "ordered_comparison_bindings": 74,
+      "all_prior_generated_JSON_pins_equal": true,
+      "all_prior_comparison_bindings_equal": true,
+      "new_raw_FITS_or_orbital_model_inputs": false,
+      "new_scientific_rule": false,
+      "original_observations_or_catalogue_values_AI_generated": false,
+      "image_video_voice_generation_service": false
+    },
+    "migration": {
+      "record": "docs/qa/ops021_migration_verification.json",
+      "OS": "Ubuntu24.04.5 LTS x86_64",
+      "Node": "24.22.3",
+      "server_python_required": false,
+      "clean_copy_restart_PIDs": [
+        6870,
+        6883
+      ],
+      "production_restart_PIDs": [
+        7024,
+        7175
+      ],
+      "previous_host_deleted": "user_confirmed",
+      "recovered_backup_files": 13,
+      "recovered_observation_evidence": 4,
+      "recovered_P9_evidence": 3,
+      "recovered_comparisons": 2,
+      "recovered_job_states": 4,
+      "recovered_scientific_files_byte_identical": 9,
+      "legacy_three_are_a_subset_not_additional_records": true,
+      "legacy_three_original_envelopes_ID_judgment_comparison_SHA": "restored",
+      "post_public_check_local_backup": {
+        "stopped_writer": true,
+        "files": 24,
+        "bytes": 10762240,
+        "sha256": "a49928a95ca5b9bba9a04554f55cf1343f8bcd4913bd0e85d75118317030c8aa",
+        "downloaded_and_verified": true,
+        "private_content_public_or_Git_inclusion": false
+      },
+      "later_evidence_without_local_copies": "recovery_not_guaranteed_from_deleted_host",
+      "aws_account_or_credit_created_by_agent": false,
+      "private_key_packaged_or_published": false,
+      "new_release_ZIP": false
+    },
+    "limits": [
+      "Source-a/e/i similarity is descriptive, not an independent orbital fit, planet classification or existence/discovery probability.",
+      "No new detection or discovery and no claim of implementing all physical laws.",
+      "Five-language layout/conditions and keyboard behavior checked; native-language human review and team two-person task study not verified.",
+      "Official judging submission not verified; Git commit/push completion is taken only from the external release record.",
+      "Post-verification documentation does not rewrite the verified v0.17.0 directory, earlier ZIPs, original observations or exported evidence."
+    ]
+  },
+  "v0_17_0_verified_checkpoint_history": {
+    "work_ids": [
+      "DEV-027",
+      "OPS-021"
+    ],
+    "version": "0.17.0",
+    "status": "deployed_and_verified",
+    "entrypoint": "app.js",
+    "server_python_required": false,
+    "release_record": "docs/releases/v0.17.0.json",
+    "public_service_deployed": true,
+    "linux_verified": true,
+    "public_browser_passed": 10,
+    "human_native_review": false,
+    "official_judging_submission": "not_verified",
+    "git_status": "resolve_from_release_record; no commit_or_push_completion_inferred"
+  },
+  "v0_17_0_data_specification_history": {
+    "path": "Data_Spec.md",
+    "scope": "Deployed v0.17.0 frozen source, complete through EOF DEV-027 and OPS-021; later live Markdown edits are separate from this immutable deployed hash.",
+    "frozen_source_MD_sha256": "477a9bb3e2a88b7212a22cfafd95d1deedbdf4692899c443b4a8f4acaeebc116",
+    "pdf": {
+      "public_path": "/downloads/PlanetX_Data_Spec.pdf",
+      "pages": 380,
+      "bytes": 5360649,
+      "sha256": "faac2aeb13e65440421999300d3b57e9c0c92032431fe240f66f9bbb24ce06f9",
+      "built_at": "2026-11-15T12:17:45Z",
+      "source_attachment_byte_identical": true,
+      "link_and_font_glyph_preflight": "passed",
+      "full_render_pages": 380,
+      "contact_sheets": 6,
+      "visual_review_limit": "Page layout and selected full pages reviewed; not character-by-character visual proofreading.",
+      "verification_record": "docs/qa/dev027_pdf_verification.json"
+    },
+    "new_scientific_inputs_acquired_in_DEV027_OPS021": false,
+    "AI_generated_original_observations": false
+  },
+  "documentation_revision_v0_17_1": {
+    "AI_support": "Project Markdown inventory, current-state corrections, historical labels, link/pinned-source audit, full-source PDF and metadata release, independent visual review. No original observation/data generation.",
+    "Markdown_checked": 67,
+    "project_MD_updated": 26,
+    "pinned_skill_MD_preserved": 40,
+    "pinned_acquisition_note_preserved": 1,
+    "new_scientific_inputs": false,
+    "original_observations_AI_generated": false,
+    "verification": "docs/qa/dev027_document_release_verification.json"
+  },
+  "v0_17_1_verified_checkpoint_history": {
+    "work_ids": [
+      "DEV-027",
+      "OPS-021"
+    ],
+    "version": "0.17.1",
+    "status": "deployed_and_verified",
+    "entrypoint": "app.js",
+    "server_python_required": false,
+    "release_record": "docs/releases/v0.17.1.json",
+    "public_service_deployed": true,
+    "linux_verified": true,
+    "public_browser_passed": 2,
+    "human_native_review": false,
+    "official_judging_submission": "not_verified",
+    "git_status": "resolve_from_release_record; no commit_or_push_completion_inferred",
+    "functional_base_version": "0.17.0",
+    "functional_base_public_browser_passed": 10,
+    "documentation_only_revision": true,
+    "unchanged_functional_source_files": 188
+  },
+  "dev028": {
+    "work": "Nickname-only public credits, English initial/fresh session, supplied supplemental source/license PDF below data specification",
+    "authoring": "Codex assisted UI, contract, tests, document/provenance updates and remote release verification",
+    "source_notice": "User-provided bytes unchanged; historical scope clearly distinguished from current data specification and upstream terms",
+    "scope_limits": "No new observation, mass, orbital or existence-probability result is established by this UI/document change."
+  },
+  "v0_17_3_verified_checkpoint_history": {
+    "work_ids": [
+      "DEV-027",
+      "DEV-028",
+      "OPS-021"
+    ],
+    "version": "0.17.3",
+    "status": "deployed_and_verified; 0.17.4 supplementary PDF change in verification",
+    "entrypoint": "app.js",
+    "server_python_required": false,
+    "release_record": "docs/releases/v0.17.3.json",
+    "public_service_deployed": true,
+    "linux_verified": true,
+    "public_browser_passed": 5,
+    "human_native_review": false,
+    "official_judging_submission": "not_verified",
+    "git_status": "pending_commit_and_push",
+    "functional_base_version": "0.17.0",
+    "functional_base_public_browser_passed": 10,
+    "documentation_only_revision": false,
+    "credits": "Approved public aliases, six named testers, teacher retained; no real-name correspondence table",
+    "initial_language": "English; explicit selected/restored locale preserved"
+  },
+  "v0_17_1_data_specification_history": {
+    "path": "Data_Spec.md",
+    "scope": "Deployed v0.17.1 full current Markdown with recovery confirmed; original data/model unchanged.",
+    "frozen_source_MD_sha256": "9cfed2c4bb202beb2defac52ee848075200e71aaa8a2519b3b05fcff329bf96b",
+    "pdf": {
+      "public_path": "/downloads/PlanetX_Data_Spec.pdf",
+      "pages": 380,
+      "bytes": 5362365,
+      "sha256": "fd3a657a209631638e59c37cb776aca6ee5bdbf8fd0e6a8177d930b309cde3be",
+      "built_at": "2026-11-15T12:38:49Z",
+      "source_attachment_byte_identical": true,
+      "link_and_font_glyph_preflight": "passed",
+      "full_render_pages": 380,
+      "contact_sheets": 6,
+      "visual_review_limit": "Page layout and selected full pages reviewed; not character-by-character visual proofreading.",
+      "verification_record": "docs/qa/dev027_document_pdf_verification.json"
+    },
+    "new_scientific_inputs_acquired_in_DEV027_OPS021": false,
+    "AI_generated_original_observations": false
   }
 }

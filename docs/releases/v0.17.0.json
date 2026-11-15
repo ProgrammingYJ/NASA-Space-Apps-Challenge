@@ -1,0 +1,99 @@
+{
+  "release": "0.17.0",
+  "work_id": [
+    "DEV-027",
+    "OPS-021"
+  ],
+  "requests": [
+    "R035",
+    "R036",
+    "R037",
+    "R038",
+    "R039",
+    "R040",
+    "R041"
+  ],
+  "status": "deployed_and_verified",
+  "checked_utc": "2026-11-15T12:32:01.403479+00:00",
+  "public_url": "https://nasaspaceappschallenge.marulee.dev/",
+  "delivery": {
+    "delivery_format": "directory",
+    "directory": "NASA_SPACE_APPS_CHALLENGE_v0.17.0_20261115_212528KST",
+    "directory_manifest_sha256": "acde18eded0d97f6d65768910a172b8ae14606a25827d45b1478a10af59af591",
+    "files": 1971,
+    "payload_bytes": 1103576581,
+    "directory_bytes": 1103957262,
+    "new_release_ZIP": false
+  },
+  "source_revision": {
+    "base_commit": "12b36e4f92283f7d034c8d40b181ea163ffaa7f0",
+    "working_tree_has_uncommitted_changes": true,
+    "source_transfer_manifest_sha256": "135a13868ae056e44310ec9bd27e48adc1739ff62cdb89f26b4be1289aafd6c8"
+  },
+  "source_files_verified": 612,
+  "runtime": {
+    "manifest_sha256": "e12e8a80f5868234bf09e680d68b8057504f6360bafa3f6606d06b37eec28882",
+    "files": 114,
+    "bytes": 63027446,
+    "source_files": 1365,
+    "required_sources": 1270,
+    "ordered_comparisons": 74,
+    "all_previous_114_generated_file_pins_equal": true,
+    "all_previous_74_comparison_bindings_equal": true
+  },
+  "changes": {
+    "R035_R039": "Actual known-object orbit-similarity TOP5 initializes from first published hypothesis; a/e/i changes rerank it; descriptive comparison separate from conditional sky regions/probability.",
+    "R036_R037_R038": "Persistent panel controls, search outside/Escape/reset, scoped text selection and optional drag lock preserve scientific state.",
+    "R040": "Global kind-specific observation/P9 imports, visible status and stale-input protection; source-pinned TOP5 context and explicit legacy display migration.",
+    "R041": "Mobile App/3D/science requests gated; PC Chrome recommendation and five-language keyboard-accessible guide."
+  },
+  "clean_directory_verification": {
+    "status": "passed",
+    "server_python_required": false,
+    "node_only_PATH": "/usr/local/lib/planet-x-node/bin",
+    "process_ids": [
+      6870,
+      6883
+    ],
+    "original_comparison_raw_hashes": {
+      "cmp_d88083664b6fd27592eb68c1": {
+        "cache_and_evidence_raw_sha256": "88219adf492f225e5be126e8f7e5577b74475aff4067f5797d63540ba044d74c",
+        "HTTP_JSON_wire_sha256": "90d4b829f3a467bd71a8462a453901fb90df62a6836af5703a01775078c402bd",
+        "semantic_equality": true
+      },
+      "cmp_0d749ea3f9ec3a8da925dc44": {
+        "cache_and_evidence_raw_sha256": "9ebe635e2ddd0230b50e38cce35a468acf826654199a9403d36f4189fa1d12f8",
+        "HTTP_JSON_wire_sha256": "bb5b7f410d32ba78189a4d64e750f0218536ea414549b904de678f23132c0217",
+        "semantic_equality": true
+      }
+    }
+  },
+  "public_browser_passed": 10,
+  "actual_restart": {
+    "status": "passed",
+    "before_pid": 7024,
+    "after_pid": 7175,
+    "recovered_original_scientific_files_preserved": 9,
+    "all_scientific_state_files_preserved": 16,
+    "consistent_backup_file_count": 24,
+    "backup_sha256": "a49928a95ca5b9bba9a04554f55cf1343f8bcd4913bd0e85d75118317030c8aa",
+    "backup_bytes": 10762240
+  },
+  "data_PDF": {
+    "pages": 380,
+    "bytes": 5360649,
+    "sha256": "faac2aeb13e65440421999300d3b57e9c0c92032431fe240f66f9bbb24ce06f9",
+    "source_MD_sha256": "477a9bb3e2a88b7212a22cfafd95d1deedbdf4692899c443b4a8f4acaeebc116",
+    "built_at": "2026-11-15T12:17:45Z"
+  },
+  "migration_record": "docs/qa/ops021_migration_verification.json",
+  "verification_record": "docs/qa/dev027_local_verification.json",
+  "PDF_record": "docs/qa/dev027_pdf_verification.json",
+  "state_recovery_limit": "Deleted previous host: 7 evidence and 2 comparisons from 13-file backup verified. Later records without local copies cannot be reconstructed.",
+  "git": {
+    "status": "pending_implementation_commit_and_push",
+    "remote": "https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge",
+    "branch": "main",
+    "post_verification_documents": "Recorded after immutable deployment; they do not change the verified directory."
+  }
+}

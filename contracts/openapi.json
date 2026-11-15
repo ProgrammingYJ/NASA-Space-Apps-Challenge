@@ -1593,6 +1593,28 @@
                 "type": "null"
               }
             ]
+          },
+          "scene_filter_version": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "actual-analogue-top5-v1"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scene Filter Version"
+          },
+          "orbit_analogue_context": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OrbitAnalogueContext"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false,
@@ -1643,6 +1665,68 @@
           "type"
         ],
         "title": "ValidationError"
+      },
+      "OrbitAnalogueContext": {
+        "properties": {
+          "algorithm_version": {
+            "type": "string",
+            "const": "tno-source-aei-exploratory-v1",
+            "title": "Algorithm Version"
+          },
+          "hypothesis": {
+            "$ref": "#/components/schemas/OrbitAnalogueHypothesis"
+          },
+          "source_manifest_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Source Manifest Sha256"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "algorithm_version",
+          "hypothesis",
+          "source_manifest_sha256"
+        ],
+        "title": "OrbitAnalogueContext"
+      },
+      "OrbitAnalogueHypothesis": {
+        "properties": {
+          "a_au": {
+            "type": "number",
+            "maximum": 2000.0,
+            "exclusiveMinimum": 0.0,
+            "title": "A Au"
+          },
+          "e": {
+            "type": "number",
+            "maximum": 0.99,
+            "minimum": 0.0,
+            "title": "E"
+          },
+          "i_deg": {
+            "type": "number",
+            "maximum": 180.0,
+            "minimum": 0.0,
+            "title": "I Deg"
+          },
+          "epoch_jd_tdb": {
+            "type": "number",
+            "maximum": 2816787.5,
+            "minimum": 625697.5,
+            "title": "Epoch Jd Tdb"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "a_au",
+          "e",
+          "i_deg",
+          "epoch_jd_tdb"
+        ],
+        "title": "OrbitAnalogueHypothesis"
       }
     }
   }

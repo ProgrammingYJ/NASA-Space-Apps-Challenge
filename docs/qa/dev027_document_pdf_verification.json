@@ -1,0 +1,53 @@
+{
+  "rendered_pages": 380,
+  "sheets": 6,
+  "sample_pages": [
+    1,
+    2,
+    84,
+    85,
+    150,
+    250,
+    330,
+    340,
+    380
+  ],
+  "version": "0.17.1",
+  "PDF_sha256": "fd3a657a209631638e59c37cb776aca6ee5bdbf8fd0e6a8177d930b309cde3be",
+  "source_MD_sha256": "9cfed2c4bb202beb2defac52ee848075200e71aaa8a2519b3b05fcff329bf96b",
+  "PDF_bytes": 5362365,
+  "built_at": "2026-11-15T12:38:49Z",
+  "builder_validation": {
+    "source_embedded_byte_identical": true,
+    "font_glyph_preflight": "passed",
+    "displayed_unique_sha256_count": 2499,
+    "all_unique_source_sha256_indexed_and_extracted": true,
+    "missing_displayed_hashes": [],
+    "all_http_source_link_targets_retained": true,
+    "all_source_headings_extracted": true,
+    "source_unchanged_during_build": true,
+    "visual_render_review": "required_separate_operator_step_not_claimed"
+  },
+  "dependencies": {
+    "reportlab": "4.5.1",
+    "markdown-it-py": "4.3.0",
+    "linkify-it-py": "2.2.0",
+    "fonttools": "4.68.0",
+    "pypdf": "6.21.4"
+  },
+  "status": "passed",
+  "checked_utc": "2026-11-15T12:47:29.730968+00:00",
+  "independently_visually_inspected": [
+    "contact1",
+    "contact2",
+    "contact3",
+    "contact4",
+    "contact5",
+    "contact6",
+    "fullpage1",
+    "fullpage2",
+    "fullpage340"
+  ],
+  "findings": "Updated checkpoint and verified recovery/subset explanation visible. No new clipping, overlap or missing glyphs observed. Historical dataset/decision text preserved; source attachment byte-identical.",
+  "visual_limit": "Contact sheets check layout rather than character-by-character proofreading."
+}

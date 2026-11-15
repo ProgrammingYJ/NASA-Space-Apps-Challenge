@@ -9,13 +9,13 @@ const releaseMetadata=JSON.parse(readFileSync(new URL('../src/generated/releaseM
 // source response, external-provider click, or extra scientific computation.
 const languages=['ko','en','ja','zh-Hant','fr'] as const;
 const repository='https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge';
-const people=[
-  {id:'science',names:['송내고교 1학년 윤서진']},
-  {id:'testers',names:['SNHS Alpha 전원 참여']},
-  {id:'design',names:['송내고교 1학년 김민정']},
-  {id:'backend',names:['송내고교 1학년 이용진']},
-  {id:'management',names:['송내고교 2학년 유영준','송내고교 1학년 박형섭']},
-  {id:'leader',names:['송내고교 1학년 이용진']},
+const contributions=[
+  {id:'science',aliases:['yocot']},
+  {id:'testers',aliases:['MaruDev_','도롱뇽','yocot','qltjqdl','U_S','x0o5m2s4']},
+  {id:'design',aliases:['x0o5m2s4']},
+  {id:'backend',aliases:['MaruDev_']},
+  {id:'management',aliases:['도롱뇽','qltjqdl']},
+  {id:'leader',aliases:['MaruDev_']},
 ] as const;
 const hash=(value:unknown)=>typeof value==='string'&&/^[a-f0-9]{64}$/i.test(value)?value.toLowerCase():null;
 
@@ -27,7 +27,7 @@ async function openCredits(page:Page){
   await expect(page.getByTestId('credits-close')).toBeFocused();return {dialog,opener};
 }
 
-test('DEV-025 credits: exact approved contributors, five-language roles, direct sources and keyboard focus',async({page},testInfo)=>{
+test('DEV-025 credits: approved nicknames and all six testers, retained teacher, five-language roles, sources and focus',async({page},testInfo)=>{
   test.setTimeout(120000);const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
   await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');
   const keys=Object.keys(creditsCopy('en')).sort();
@@ -41,11 +41,17 @@ test('DEV-025 credits: exact approved contributors, five-language roles, direct 
     const top=await dialog.getByTestId('credits-team').boundingBox();const creators=await dialog.getByTestId('credits-creators').boundingBox();
     expect(top).not.toBeNull();expect(creators).not.toBeNull();expect(top!.y).toBeLessThan(creators!.y);
     await expect(dialog.getByTestId('credits-creators').locator(':scope > div')).toHaveCount(6);
-    for(const row of people){
+    for(const row of contributions){
       const credit=dialog.getByTestId('credits-role-'+row.id);await expect(credit.locator('dt')).toHaveText(copy[row.id]);
-      const names=credit.locator('dd > span');await expect(names).toHaveText([...row.names]);
-      for(const name of await names.all())await expect(name).toHaveAttribute('lang','ko');
+      await expect(credit.locator('dd > span')).toHaveText([...row.aliases]);
     }
+    // Only approved public aliases render; there is no real-name mapping or grade field.
+    await expect(dialog.getByTestId('credits-creators').locator('dt')).toHaveText(contributions.map(row=>copy[row.id]));
+    await expect(dialog.getByTestId('credits-role-testers').locator('dd > span')).toHaveCount(6);
+    await expect(dialog.getByTestId('credits-creators').locator('dd > span').filter({hasText:/^U_S$/})).toHaveCount(1);
+    await expect(dialog.getByTestId('credits-role-testers').locator('dd > span').filter({hasText:/^U_S$/})).toHaveCount(1);
+    await expect(dialog.getByTestId('credits-creators').locator('[data-person-name],[data-student-name],[data-grade]')).toHaveCount(0);
+    await expect(dialog.getByTestId('credits-creators')).not.toContainText(/\d\s*학년|grade\s*\d|year\s*\d|\d\s*年生/i);
     // Independent literal checks of the approved Korean role spellings.
     if(language==='ko'){
       await expect(dialog.getByTestId('credits-role-science').locator('dt')).toHaveText('수/과학 검산');
@@ -57,6 +63,12 @@ test('DEV-025 credits: exact approved contributors, five-language roles, direct 
     await expect(dialog.getByTestId('credits-venue')).toHaveText('송내고교');
     await expect(dialog.getByTestId('credits-data-pdf')).toHaveAttribute('href',releaseMetadata.data_spec_url);
     await expect(dialog.getByTestId('credits-data-pdf')).toContainText(copy.download);
+    const license=dialog.getByTestId('credits-license-pdf');
+    await expect(license).toHaveAttribute('href','/downloads/PlanetX_Source_License_Notices.pdf');
+    await expect(license).toHaveAttribute('download','PlanetX_Source_License_Notices.pdf');
+    await expect(license).toContainText(copy.licenseDownload);
+    expect(await license.evaluate(element=>element.previousElementSibling?.getAttribute('data-testid'))).toBe('credits-data-pdf');
+    await expect(dialog.getByTestId('credits-license-note')).toHaveText(copy.licenseNote);
     await expect(dialog.getByTestId('credits-notices')).toHaveAttribute('href',repository+'/blob/main/THIRD_PARTY_NOTICES.md');
     await expect(dialog.getByTestId('credits-ai-usage')).toHaveAttribute('href',repository+'/blob/main/docs/ai_usage.md');
     await expect(dialog.getByTestId('credits-repository')).toHaveAttribute('href',repository);
@@ -78,7 +90,7 @@ test('DEV-025 credits: exact approved contributors, five-language roles, direct 
   expect(errors).toEqual([]);
 });
 
-test('DEV-025 credits: the download is an actual PDF whose bytes match the generated publication hash',async({page},testInfo)=>{
+test('DEV-025 credits: both PDF downloads preserve their published source bytes and SHA256',async({page},testInfo)=>{
   await page.goto('/');const {dialog}=await openCredits(page);
   const link=dialog.getByTestId('credits-data-pdf');
   await expect(link).toHaveAttribute('href','/downloads/PlanetX_Data_Spec.pdf');
@@ -101,6 +113,22 @@ test('DEV-025 credits: the download is an actual PDF whose bytes match the gener
   const downloadPromise=page.waitForEvent('download');await link.click();const download=await downloadPromise;
   expect(download.suggestedFilename()).toBe('PlanetX_Data_Spec.pdf');const saved=testInfo.outputPath('PlanetX_Data_Spec.pdf');await download.saveAs(saved);
   const savedBody=await readFile(saved);expect(savedBody.equals(body)).toBe(true);
+  const license=dialog.getByTestId('credits-license-pdf'),licenseURL='/downloads/PlanetX_Source_License_Notices.pdf';
+  await expect(license).toHaveAttribute('href',licenseURL);
+  const originalLicense=await readFile(new URL('../public/downloads/PlanetX_Source_License_Notices.pdf',import.meta.url));
+  const licenseSHA=createHash('sha256').update(originalLicense).digest('hex');
+  expect(originalLicense.length).toBe(762160);
+  expect(licenseSHA).toBe('aeb12c3a35a959dd1a4a242509eedc2ac44307306eb3ce1ae9e6965ad57ac3c6');
+  const licenseResponse=await page.request.get(licenseURL,{timeout:30000});expect(licenseResponse.ok()).toBe(true);
+  expect(licenseResponse.headers()['content-type']).toContain('application/pdf');const licenseBody=await licenseResponse.body();
+  expect(licenseBody.subarray(0,5).toString('ascii')).toBe('%PDF-');
+  expect(licenseBody.equals(originalLicense)).toBe(true);
+  expect(createHash('sha256').update(licenseBody).digest('hex')).toBe(licenseSHA);
+  const licenseDownloadPromise=page.waitForEvent('download');await license.click();const licenseDownload=await licenseDownloadPromise;
+  expect(licenseDownload.suggestedFilename()).toBe('PlanetX_Source_License_Notices.pdf');
+  const licenseSaved=testInfo.outputPath('PlanetX_Source_License_Notices.pdf');await licenseDownload.saveAs(licenseSaved);
+  const downloadedLicense=await readFile(licenseSaved);expect(downloadedLicense.equals(originalLicense)).toBe(true);
+  expect(createHash('sha256').update(downloadedLicense).digest('hex')).toBe(licenseSHA);
   await page.getByTestId('credits-close').click();await expect(dialog).not.toBeVisible();
 });
 

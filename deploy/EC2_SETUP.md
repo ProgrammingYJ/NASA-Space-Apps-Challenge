@@ -1,6 +1,12 @@
 # AWS EC2 생성 안내
 
-OPS-020 최신 운영 안내다. 이전 DEV-018 서울 배포 기록은 이력으로 보존한다. 개발·계산·저장/배포 정본 계약은 [FSD17.4](../FSD.md)를 따른다. 사용자가서버를생성했고SSH에서Ubuntu24.04.5LTS/x86_64/4vCPU/약16GBRAM/루트약50GB를확인했다. 현재같은ZIP의실제EC2배포·프로세스재시작/복원·도메인DNS/HTTPS·기본Chrome3흐름·인증서갱신dry-run까지완료했다. 현재 사용자 생성 호스트는16.176.170.4/시드니 ap-southeast-2이며 Ubuntu24.04.5/m7i.xlarge/4vCPU/16GiB/50GiB를 확인했다. 최종 이전 기록은../docs/qa/ops020_migration_verification.json과 릴리스 외부 보고서를 따른다.
+> 문서 현행화 정본(2026-11-15): 현재 운영 **v0.17.4**는 승인 닉네임·테스터6명/영어 기본값과 데이터 명세서 아래 보조 고지 PDF를 반영했다. [정확 릴리스 기록](../docs/releases/v0.17.4.json)의 공개 Chrome5경로·두 PDF 원바이트/다운로드·실제 재시작/기존 근거 검증을 따른다. Git commit/push는 후속 정본에서 확정하며 아래 날짜별 기록은 당시 이력이다.
+
+**OPS-021 호스트 구성과 v0.17.0 당시 검증(2026-11-15):** 사용자가 새 호스트 `54.117.136.144`와 DNS A 변경을 승인했다. SSH/IMDS에서 **Ubuntu24.04.5 x86_64·ap-northeast-2·m7i.xlarge·4CPU·16GB RAM·루트 약48GB/여유46GB**를 확인했다. 리전은 IP 주소로 추정하지 않는다. Node24.22.3과nginx1.24 설치·DNS A 확인·Let's Encrypt HTTPS 인증서 발급(만료2027-02-13)은 완료했다. **v0.17.0 당시 Node-only 정확 디렉터리·앱 활성화·정상 health/source·공개 Chrome10개·실제 재시작7024→7175·구판3근거 복원을 확인했다.** 이는 [v0.17.0 기능 검증 스냅샷](../docs/releases/v0.17.0.json)이다. 현재 활성 버전과 정확한 검증은 [v0.17.4 정본](../docs/releases/v0.17.4.json)·[FSD31~34](../FSD.md)를 따른다. 인프라 준비와 앱 운영 검증을 구분한다.
+
+이전 Sydney `16.176.170.4`는 사용자가 이미 종료·삭제했다고 확인했다. 확보된 로컬 OPS-020 불변 tgz13파일(관측 근거4·P9근거3·비교2·jobs4)과 구판 근거3원봉투를 원바이트로 보존·검증해 복구한다. 그 이후 로컬 사본이 없는 최신 근거는 복구를 보장할 수 없다. 새 ZIP은 만들지 않고 파일별 SHA가 있는 새 릴리스 디렉터리로 직접 배포한다. 개인키 내용·경로는 공개 문서나Git에 기록하지 않는다. 앱3002 loopback/nginx80·443, 영속shared 분리와 검증 후 활성화 계약은 유지한다.
+
+아래 생성 표와 ZIP 실행 순서는 **OPS-020 이전 운영 이력**이다. 당시 Ubuntu24.04.5/m7i.xlarge/4vCPU/16GiB/50GiB·ap-southeast-2를 확인했고 실제 배포·프로세스 재시작/복원·DNS/HTTPS·Chrome3흐름·인증서 갱신dry-run을 검사했다. 당시 기록은 [OPS-020 검사](../docs/qa/ops020_migration_verification.json)와 릴리스 외부 보고서를 따르며 새 호스트의 완료 증거로 사용하지 않는다.
 
 | 콘솔 항목 | 선택 |
 | --- | --- |
@@ -28,7 +34,7 @@ OPS-020 최신 운영 안내다. 이전 DEV-018 서울 배포 기록은 이력�
 
 [EC2 요금](https://aws.amazon.com/ec2/pricing/on-demand/), [EBS 요금](https://aws.amazon.com/ebs/pricing/), [IPv4 요금](https://aws.amazon.com/vpc/pricing/).
 
-## ZIP을 받은 뒤 실행 순서
+## 이전 ZIP 전달 당시 실행 순서
 
 설정 파일은 `deploy/ec2`에 있다. 이 문서만으로 새 ZIP의 실행 검증이 완료됐다는 뜻은 아니다. 최종 ZIP과 외부 검증 보고서의 정확한 식별자를 확인한 뒤 진행한다.
 
@@ -42,7 +48,7 @@ OPS-020 최신 운영 안내다. 이전 DEV-018 서울 배포 기록은 이력�
 
 실제 EC2 생성/SSH 접속과 사양 확인은 완료했다. 로컬 개인키의 과도한 상속 접근권한을 전용 사용자로 제한한 뒤 접속했으며 개인키 내용을 출력/전송/패키징하지 않았다. 기존 도메인 A는 아직 이전 호스트이며 새 서버 검증 후 전환한다.
 
-현재운영:정식HTTPS주소·systemd planet-x·/srv/planet-x/current/app.js·/srv/planet-x/shared/node. 재시작은 `sudo systemctl restart planet-x`, 로그는 `sudo journalctl -u planet-x -n 100 --no-pager`. 이미HTTPS가설정된호스트에1회용install-host.sh를다시실행해nginx구성을덮어쓰지않는다. 다음릴리스는검증한새완결ZIP/activate를사용하고shared·인증서를유지한다. 본설정의원복드릴은실제구EC2버전부재로미수행이다.
+OPS-020 당시 운영:정식HTTPS주소·systemd planet-x·/srv/planet-x/current/app.js·/srv/planet-x/shared/node. 재시작은 `sudo systemctl restart planet-x`, 로그는 `sudo journalctl -u planet-x -n 100 --no-pager`. 이미HTTPS가설정된호스트에1회용install-host.sh를다시실행해nginx구성을덮어쓰지않는다. 당시전달은검증한완결ZIP/activate를사용했으며shared·인증서를유지했다. 본설정의원복드릴은실제구EC2버전부재로미수행이었다. OPS-021 신규 전달은 위의 릴리스 디렉터리 방식을 따른다.
 
 
 ## OPS-020 전송 압축과 호스트 이전

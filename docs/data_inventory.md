@@ -1,5 +1,28 @@
 # 과학 자료 저장 위치와 사용 상태
 
+> 문서 현행화 정본(2026-11-15): 현재 운영 **v0.17.4**는 승인 닉네임·테스터6명/영어 기본값과 데이터 명세서 아래 보조 고지 PDF를 반영했다. [정확 릴리스 기록](releases/v0.17.4.json)의 공개 Chrome5경로·두 PDF 원바이트/다운로드·실제 재시작/기존 근거 검증을 따른다. Git commit/push는 후속 정본에서 확정하며 아래 날짜별 기록은 당시 이력이다.
+
+## 현재 채택 자료와 DEV-027 / OPS-021 · v0.17.0 검증 스냅샷
+
+현재 배포/자료 검증은 [FSD31~34](../FSD.md)와 [v0.17.4 정본](releases/v0.17.4.json)을 따른다. 보조 고지 PDF1개 추가로 runtime source1366/필수1271이며 기존114생성JSON/74비교 원핀은 동일하다. 아래 표의 파일 수·PDF·백업·SHA는 v0.17.0 당시 기능 검증 스냅샷으로 보존한다. 전체 최신 수치와 정확한 원바이트 식별자는 v0.17.4 릴리스/QA 정본에서 확인한다.
+
+2026-11-15 21:32 KST 기준 새 EC2에 활성화한 [v0.17.0 릴리스 정본](releases/v0.17.0.json)을 따른다. 기능/상태/운영 계약은 [FSD](../FSD.md)31~32절, 파일별 원출처·바이트/SHA·권리와 사용/확보/이전 구분의 전수 정본은 [Data_Spec.md](../Data_Spec.md)다. 아래 DEV별 자료 목록은 당시 취득/사용 이력이며 현재 필수자료 목록이나 현재 지원 기능의 합계로 사용하지 않는다.
+
+| 현재 입력/산출물 | 사용·검증 상태 | 정본/추적 |
+| --- | --- | --- |
+| 실제 SPHEREx 등록 입력 | 10대상40제품·37무순서쌍/양방향74선택. ε Indi B·명왕성과 공식대상/추가 태양계 원본·보정·시간/품질 연결을 보존. 같은 노출의 순서변경/재처리는 독립 관측으로 더하지 않음 | [observation_registry.json](../data/manifests/observation_registry.json)·[datasets.json](../data/manifests/datasets.json)·Data_Spec DEV-025 |
+| Node 빌드 파생 캐시 | 114JSON/63,027,446B와74방향별 비교의 기존 핀 모두 동일. runtime SHA `e12e8a80f5868234bf09e680d68b8057504f6360bafa3f6606d06b37eec28882`; source1365/필수1270·배포된 선택28개 검증. Node가 요청 때 새 FITS 분석을 수행하는 것은 아님 | [node_runtime.json](../data/manifests/node_runtime.json)·[DEV-027 검사](qa/dev027_local_verification.json) |
+| JPL TNO·문헌 P9 표본 | 기존8,341개 exactSPK/원소/누락값 및 저자 합성100,000행·17열·2018 epoch를 그대로 사용. 실제 궤도 유사도 TOP5는 source a/e/i의 설명용 비교; 문헌 조건부 하늘 영역과 별개이며 진위/존재확률·새 관측 목록이 아님 | [outer_tno.json](../data/manifests/outer_tno.json)·[planet_nine_scope.json](../data/manifests/planet_nine_scope.json)·FSD31 |
+| 관측·P9 근거/상태 복구 | 삭제된 이전 호스트의 확보된 불변백업13파일 = 관측근거4+P9근거3+비교2+jobs4. 별도 원봉투 검증한 구판3근거는7근거의 부분집합. 과학파일9개의 원바이트 및 재시작 후 ID/판단/SHA를 보존 | [OPS-021 복구 검사](qa/ops021_migration_verification.json). 이후 로컬 사본 없는 최신 근거 복구는 보장하지 않음 |
+| 새 stopped-writer 상태 백업 | 공개검사 후24파일/10,762,240B, SHA `a49928a95ca5b9bba9a04554f55cf1343f8bcd4913bd0e85d75118317030c8aa`를 로컬 다운로드 검증. 원관측 자료나 독립 발견 건수와 합산하지 않음 | OPS-021 검사. 개인 상태 내용은 Git/공개 배포에서 제외 |
+| 데이터 명세서 PDF | 원MD SHA `477a9bb3e2a88b7212a22cfafd95d1deedbdf4692899c443b4a8f4acaeebc116`의 EOF DEV-027·OPS-021까지 전체변환. 380쪽/5,360,649B, SHA `faac2aeb13e65440421999300d3b57e9c0c92032431fe240f66f9bbb24ce06f9`, 빌드시각2026-11-15T12:17:45Z. 원문첨부/링크/글리프·전수렌더/접촉표·표본 시각검토 확인 | [PDF manifest](../data/manifests/data_spec_pdf.json)·[PDF 검사](qa/dev027_pdf_verification.json). 관측 원본이 아닌 문서 파생물; 사후 MD 편집과 배포 동결판 해시를 구별 |
+
+DEV-027/OPS-021은 **새 원FITS·관측/천체력/문헌 데이터 취득이나 과학 수치규칙 변경 없이**, 기존 실제 자료로 TOP5·패널/검색·JSON 복원·PC 안내/모바일 차단·가이드를 구현하고 운영 호스트/근거를 이전한 작업이다. 공개 정상 TLS Chrome10/10은 DEV-027 9개 경로와 ε Indi B 원본→품질→저장/새 세션 복원을 포함한다. 새 ZIP 없이 검증 디렉터리를 직접 배포했고 과거 ZIP·원자료·기존 비교/근거는 보존한다. 모든 물리법칙·새 발견·원어민 검수를 완료로 표시하지 않는다.
+
+현재 우선 사용은 실제 SPHEREx 등록부/보정·품질, 태양계 JPL/외관/위성·장기모형, TNO/행성3요건·질량가정, P9 문헌 가설/실제 궤도 대조 및 근거 복원이다. 은하/지도·외계행성 도감/TESS·빅뱅/역사·역사혜성·블랙홀/범용실험의 원본·당시 기록은 보존하되 현재 제품/API/필수 배포 의존성에 포함하지 않는다. 촬영범위·등록된 사진·검출·질량어림값과 실측값을 구별한다.
+
+## 이전 취득·사용 보존 이력
+
 DEV-018 문서 단계: 최신1000AU회의/제공사진·로고/위키·공식논문·MCP3개원문을검토하고FSD0.20·Data_Spec·TODO에연결했다. AI는문서/코드지원을했고원관측/로고를생성·변경하지않았다. 후보확률은조건부문헌위치분포만허용하며실제존재확률/새발견을생성하지않는다. 새제품기능/브라우저/정확ZIP·MCP연결은미완료다. 아래제외기능의실사용/검증기록은당시보존이력이며현재유지범위가아니다.
 
 - 지정 팀 Drive: https://drive.google.com/drive/folders/1J065qY_U-Eb_bmOauJH4S4CeRN7KTQPS

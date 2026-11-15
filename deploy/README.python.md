@@ -1,6 +1,32 @@
-> Preserved v0.8.0 Python operations history. Current Node-only deployment uses README.md in this directory. The old Docker/compose examples describe v0.8.0; optional Python rebuilds use Dockerfile.python.
+# 선택적 Python 재검산과 이전 운영 기록
 
-# v0.8.0 실행·복구
+> 문서 현행화 정본(2026-11-15): 현재 운영 **v0.17.4**는 승인 닉네임·테스터6명/영어 기본값과 데이터 명세서 아래 보조 고지 PDF를 반영했다. [정확 릴리스 기록](../docs/releases/v0.17.4.json)의 공개 Chrome5경로·두 PDF 원바이트/다운로드·실제 재시작/기존 근거 검증을 따른다. Git commit/push는 후속 정본에서 확정하며 아래 날짜별 기록은 당시 이력이다.
+
+**현재 v0.17.4/OPS-021 운영은 [Node 실행·복구](README.md)다.** 새 EC2 `54.117.136.144`(ap-northeast-2·m7i.xlarge·Ubuntu24.04.5)는 Node24.22.3·loopback3002/nginx HTTPS로 운영한다. Python API는 개발·독립 재검산을 위한 선택 경로이며 서버 시작의 필수 의존성이 아니다. 새 릴리스는 ZIP 없이 검증된 완결 디렉터리로 전달한다.
+
+현재 검증 상태는 [v0.17.4 정본](../docs/releases/v0.17.4.json)을 따른다. 보조 고지 PDF1개 추가로 runtime source1366/필수1271이며 기존114생성JSON/74비교 원핀은 동일하다. [v0.17.0](../docs/releases/v0.17.0.json)과 [OPS-021](../docs/qa/ops021_migration_verification.json)의 공개 PC Chrome10/10·실제 운영 재시작7024→7175·근거 원봉투 검증은 당시 Node 기능 검증 스냅샷이다. 아래 v0.8.0 Python/Docker 설명을 현재 공개 서버에서 실행·검증한 것으로 바꾸지 않는다.
+
+## 현재 개발용 선택 경로
+
+Python3.12와 필요한 채택 원자료가 있는 별도 개발 환경에서 저장소 루트를 기준으로 실행한다. 운영 Node shared와 Python 상태를 공유하지 않는다.
+
+```sh
+python3.12 -m venv .venv-dev
+.venv-dev/bin/python -m pip install -r requirements.runtime.lock.txt
+APP_STATE_DIR="$PWD/var/python-review" .venv-dev/bin/python -m uvicorn api.main:app --host 127.0.0.1 --port 8000 --workers 1
+```
+
+위 예시는 POSIX 개발 환경용이다. Windows에서는 가상환경의 `Scripts/python.exe`와 PowerShell 환경변수 문법을 사용한다. API 작성자는 하나만 실행하며 `--reload`/여러 worker를 운영 구성으로 사용하지 않는다. 테스트 의존성이 필요할 때만 `requirements.lock.txt`를 사용한다. 이 명령 예시를 제공한 사실 자체가 모든 Python 경로의 현재 검증 완료를 뜻하지 않는다.
+
+기존 Node 산출물의 원핀을 읽기 전용으로 검사할 때는 가상환경 Python으로 `deploy/export_node_runtime.py --verify-only`를 실행할 수 있다. 재생성은 별도 검토·실제 과학 계산과 출처 대조를 거치는 빌드 작업이며, 이미 배포된114JSON/74비교 또는 기존 네 비교 정본을 임의 덮어쓰지 않는다. DEV-027은 이전114파일/74비교 원핀을 유지했고 새 원관측을 추가하지 않았다. 원자료·시간계·품질·출처 범위는 [Data_Spec.md](../Data_Spec.md)와 [FSD](../FSD.md)를 따른다.
+
+현재 `deploy/compose.yaml`의 build 대상은 **Node용 `deploy/Dockerfile`**이다. Python용 파일은 `deploy/Dockerfile.python`이며, 아래 구판 compose 명령이 Python 컨테이너를 실행한다고 해석하지 않는다. Python 이미지/compose 전체 실행은 해당 검증 기록이 없으면 미검증이다.
+
+## 역사: v0.8.0 Python 운영 본문
+
+아래 내용은 당시의 기능·파일 수·전달·검사 계획을 원문으로 보존한 것이다. 은하·외계행성·역사·블랙홀/물리실험과 당시 필수자료/ZIP 규칙은 현재 활성 범위가 아니다. 현재 범위는 태양계1000AU·실관측·P9/실제 궤도 유사도 TOP5·근거 복원이며, 문헌의 조건부 하늘 영역 순위와 실제 천체 유사도 순위를 구분한다. 삭제된 Sydney에서 로컬 사본이 없는 후속 상태까지 복구됐다고 주장하지 않는다.
+
+### v0.8.0 실행·복구
 
 팀 회의의 핵심 기능인 행성3요건 판정은 GET /api/v1/planet-criteria로17개 천체(행성8/공식왜소행성5/후보4)를 제공한다. 선택 정보창의3요건과 확장 대화상자, ‘최소 질량: X M⊕ (현재 질량: Y)’를 확인한다. IAU공식 분류와 태양1M☉·10Gyr·C=2√3 조건의 Margot 원형궤도 청소 참고모형을 구분한다. Sedna의 본체 질량/평형·지배력 미확정과 높은 이심률 한계를 숨기지 않으며, 위성포함 계 질량을 본체 단독값으로 쓰지 않는다. a는 현재 태양 거리가 아닌 source epoch의 긴반지름이다. data/manifests/planet_criteria.json과 data/reference/planet-criteria/facts/·sidecar19쌍이 필수이며 upstream 전체문헌은 로컬 감사용·배포 제외다. 같은 원 물리 HTML을 재사용한 값과 새SBDB8을 구별하고 새로운 독립 관측으로 세지 않는다. optional planet_criteria_manifest_sha256 저장/복원과 해시 변경 시 재계산 필요를 확인한다.
 

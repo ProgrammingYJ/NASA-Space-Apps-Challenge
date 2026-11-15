@@ -11,7 +11,7 @@ async function unchangedHypothesis(page:Page){
   await expect(page.getByTestId('p9-preset')).toHaveValue('caltech-row-2413');
   for(const [key,value]of Object.entries(hypothesisFields))await expect(page.getByTestId('p9-'+key)).toHaveValue(value);
   await expect(page.getByTestId('p9-sky-path')).toBeVisible();
-  await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(10);
+  await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(5);
 }
 
 for(const width of [1440,2542]){
