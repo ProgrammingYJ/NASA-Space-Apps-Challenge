@@ -45,17 +45,35 @@ test('five locales keep real moon names, units and the fixed source-corner filte
   }
 });
 
-test('compact criteria and an opened optional editor apply no density until explicitly chosen; a late target response cannot overwrite another target',async({page})=>{
+test('compact criteria use a separate automatic estimate while the optional editor stays blank; a late target response cannot overwrite another target',async({page})=>{
   test.setTimeout(90000);const data=await catalogue(page),posts:ScenarioInput[]=[];
   await page.route('**/api/v1/mass-scenarios/calculate',route=>{posts.push(route.request().postDataJSON() as ScenarioInput);return route.continue();});
   await page.goto('/');await page.getByTestId('language').selectOption('en');await choose(page,'sedna');const compact=page.getByTestId('planet-criteria-card');
-  await expect(compact.getByTestId('criteria-minimum-mass')).toHaveAttribute('data-current-mass-kind','unavailable');await expect(compact.getByTestId('criteria-mass-assumption')).toHaveCount(0);expect(posts).toEqual([]);
+  expect(data.targets.sedna.radius_km).toBe(497.5);expect(data.targets.eris.radius_km).toBe(1163);expect(data.model.earth_mass_kg).toBe(5.97217e24);
+  async function expectDefaultEstimate(id:'sedna'|'eris'){
+    const radius=data.targets[id].radius_km,kg=1000*(4*Math.PI/3)*(radius*1000)**3,earth=kg/5.97217e24;
+    const line=compact.getByTestId('criteria-minimum-mass'),details=compact.getByTestId('approximate-mass-details');
+    await expect(line).toHaveAttribute('data-current-mass-kind','estimate');await expect(line).toHaveAttribute('data-applied-density','1000');await expect(line).toContainText('≈');await expect(compact.getByTestId('criteria-mass-assumption')).toContainText('1,000 kg/m³');
+    await expect(details).toHaveAttribute('data-mass-kind','estimate');await expect(details).toHaveAttribute('data-size-origin','physical_radius');await expect(details).toHaveAttribute('data-diameter-km',String(radius*2));
+    await expect.poll(async()=>Number(await line.getAttribute('data-current-mass-kg'))/kg).toBeCloseTo(1,12);await expect.poll(async()=>Number(await line.getAttribute('data-current-mass-earth'))/earth).toBeCloseTo(1,12);
+  }
+  await expectDefaultEstimate('sedna');expect(posts).toEqual([]);
   await page.getByTestId('open-planet-criteria').click();await expect(panel(page)).not.toHaveAttribute('open','');await expect(panel(page).getByTestId('mass-scenario-result')).toHaveCount(0);
   await panel(page).getByTestId('mass-scenario-toggle').click();await expect(panel(page).getByTestId('mass-density')).toBeVisible();await expect(panel(page).getByTestId('mass-density')).toHaveValue('');await expect(panel(page).getByTestId('mass-analogue')).toHaveValue('');await expect(panel(page).getByTestId('mass-no-assumption')).toBeVisible();await expect(panel(page).getByTestId('mass-analogue-explanation')).toContainText('Tethys');expect(posts).toEqual([]);
   await page.unroute('**/api/v1/mass-scenarios/calculate');
+  // Capture a real server calculation before intercepting the browser request.
+  // Holding route.fetch() itself can leave the arrival gate waiting on the test socket.
+  const lateResponse=await page.request.post('/api/v1/mass-scenarios/calculate',{data:{target_id:'sedna',density_kg_m3:2500,analogue_id:null,include_source_ranges:true},timeout:15000,maxRetries:2});
+  expect(lateResponse.ok()).toBe(true);const lateBody=await lateResponse.body(),lateValue=JSON.parse(lateBody.toString()) as Scenario;
+  expect(lateValue.inputs).toMatchObject({target_id:'sedna',density_kg_m3:2500});expect(lateValue.source_manifest_sha256).toBe(data.source_manifest_sha256);expect(lateValue.mass_kg/(2500*(4*Math.PI/3)*(497.5*1000)**3)).toBeCloseTo(1,12);
   let release!:()=>void,seen!:()=>void,done!:()=>void;const gate=new Promise<void>(resolve=>release=resolve),arrived=new Promise<void>(resolve=>seen=resolve),finished=new Promise<void>(resolve=>done=resolve);
-  await page.route('**/api/v1/mass-scenarios/calculate',async route=>{const input=route.request().postDataJSON() as ScenarioInput;if(input.target_id!=='sedna'||input.density_kg_m3!==2500){await route.continue();return;}try{const response=await route.fetch();seen();await gate;await route.fulfill({response});}catch{/* An obsolete target calculation may correctly be aborted. */}finally{done();}});
-  await customDensity(page,'2500');await arrived;await page.keyboard.press('Escape');await choose(page,'eris');await expect(compact.getByTestId('criteria-minimum-mass')).toHaveAttribute('data-current-mass-kind','unavailable');release();await finished;await expect(compact).toHaveAttribute('data-object-id','eris');await expect(compact.getByTestId('criteria-minimum-mass')).toHaveAttribute('data-current-mass-kind','unavailable');await expect(compact.getByTestId('criteria-minimum-mass')).toHaveAttribute('data-applied-density','');expect(data.targets.eris.measured_primary_mass.earth_masses).toBeNull();
+  let received=false,routeError:unknown;
+  const within=async(promise:Promise<void>,label:string,ms=10000)=>{let timer:ReturnType<typeof setTimeout>|undefined;try{await Promise.race([promise,new Promise<void>((_,reject)=>{timer=setTimeout(()=>reject(new Error(label)),ms);})]);}finally{if(timer)clearTimeout(timer);}};
+  await page.route('**/api/v1/mass-scenarios/calculate',async route=>{const input=route.request().postDataJSON() as ScenarioInput;if(input.target_id!=='sedna'||input.density_kg_m3!==2500){await route.continue();return;}received=true;seen();try{await gate;await route.fulfill({status:lateResponse.status(),contentType:lateResponse.headers()['content-type']??'application/json',body:lateBody});}catch(error){if(!route.request().failure()&&!page.isClosed()&&!/aborted|Invalid InterceptionId|Target.*closed|Request.*disposed/i.test(String(error)))routeError=error;}finally{done();}});
+  try{
+    await customDensity(page,'2500');await within(arrived,'Browser Sedna calculation was not intercepted');await page.keyboard.press('Escape');await choose(page,'eris');await expectDefaultEstimate('eris');release();await within(finished,'Delayed source response was not released');if(routeError)throw routeError;
+    await expect(compact).toHaveAttribute('data-object-id','eris');await expectDefaultEstimate('eris');expect(data.targets.eris.measured_primary_mass.earth_masses).toBeNull();
+  }finally{release();try{if(received)await within(finished,'Delayed response cleanup timed out',3000);}finally{try{await page.unroute('**/api/v1/mass-scenarios/calculate');}finally{await lateResponse.dispose();}}}
   await choose(page,'earth');await expect(compact.getByTestId('criteria-minimum-mass')).toHaveAttribute('data-current-mass-kind','measured');await expect(compact.getByTestId('criteria-minimum-mass')).not.toContainText('≈');await expect(compact.getByTestId('criteria-mass-assumption')).toHaveCount(0);
 });
 

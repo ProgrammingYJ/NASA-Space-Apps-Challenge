@@ -9,6 +9,9 @@ import {outerObjectMatches,resolvePlanetCriteriaObject} from './PlanetCriteriaAd
 import type {PlanetCriterion,PlanetCriterionObject,PlanetCriteriaCatalogue} from './PlanetCriteriaAdapter';
 import {r029Copy} from './R029Copy';
 import {canOpenDensityCalculator} from './massScenarioDefaults';
+import {approximateMass} from './ApproximateMassMath';
+import {approximateMassCopy} from './ApproximateMassCopy';
+import ApproximateMassDetails from './ApproximateMassDetails';
 export type {PlanetCriterionObject,PlanetCriteriaCatalogue} from './PlanetCriteriaAdapter';
 
 const supported=new Set(['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune','pluto','ceres','haumea','makemake','eris','sedna','quaoar','orcus','gonggong']);
@@ -34,8 +37,8 @@ function OrbitDiagram({object}:{object:PlanetCriterionObject}){
   </figure>;
 }
 
-export default function PlanetCriteriaPanel({objectId,name,catalogue,loading,error,onRetry,labels,massScenario,onMassScenarioChange,outerObject}:{objectId:string;name:string;catalogue?:PlanetCriteriaCatalogue;loading:boolean;error:boolean;onRetry:()=>void;labels?:Record<string,string>;massScenario?:AppliedMassScenario|null;onMassScenarioChange?:(value:AppliedMassScenario)=>void;outerObject?:OuterTnoObject}){
-  const {t,i18n}=useTranslation(),copy=r029Copy(i18n.language);
+export default function PlanetCriteriaPanel({objectId,name,catalogue,loading,error,onRetry,labels,massScenario,onMassScenarioChange,outerObject,radiusKm,radiusSourceUrl}:{objectId:string;name:string;catalogue?:PlanetCriteriaCatalogue;loading:boolean;error:boolean;onRetry:()=>void;labels?:Record<string,string>;massScenario?:AppliedMassScenario|null;onMassScenarioChange?:(value:AppliedMassScenario)=>void;outerObject?:OuterTnoObject;radiusKm?:number;radiusSourceUrl?:string}){
+  const {t,i18n}=useTranslation(),copy=r029Copy(i18n.language),massCopy=approximateMassCopy(i18n.language);
   const [expanded,setExpanded]=useState(false),dialog=useRef<HTMLDivElement>(null);
   const [massEditorRequest,setMassEditorRequest]=useState(0),opener=useRef<HTMLElement|null>(null);
   const object=resolvePlanetCriteriaObject(catalogue,objectId,outerObject);
@@ -62,8 +65,10 @@ export default function PlanetCriteriaPanel({objectId,name,catalogue,loading,err
   },[expanded]);
   const number=(value:number|null|undefined)=>typeof value==='number'&&Number.isFinite(value)?value.toLocaleString(i18n.language,{maximumSignificantDigits:5}):t('unknown');
   const assumed=object?.mass.earth_masses===null&&massModel.value&&Number.isFinite(massModel.value.mass_earth)?massModel.value:undefined;
-  const massLine=object?assumed?t('criteriaMinimumMassHypothesis',{minimum:number(object.clearing.minimum_mass_earth),current:number(assumed.mass_earth)}):t('criteriaMinimumMass',{minimum:number(object.clearing.minimum_mass_earth),current:object.mass.earth_masses===null?t('criteriaMassUnknown'):`${number(object.mass.earth_masses)} M⊕`}):'';
-  const massNote=assumed?t('criteriaMassAssumption',{density:number(assumed.density_kg_m3)}):null;
+  const currentMass=approximateMass({objectId:modelObjectId,measuredPrimaryMassEarth:object?.mass.earth_masses,measuredSourceUrl:object?.mass.source?.url,explicitMass:assumed,radiusKm,radiusSourceUrl,outerObject});
+  const currentMassText=currentMass.kind==='estimate'&&currentMass.mass_earth!==null?currentMass.mass_earth.toLocaleString(i18n.language,{maximumSignificantDigits:3}):number(currentMass.mass_earth);
+  const massLine=object?currentMass.kind==='hypothesis'||currentMass.kind==='estimate'?t('criteriaMinimumMassHypothesis',{minimum:number(object.clearing.minimum_mass_earth),current:currentMassText}):t('criteriaMinimumMass',{minimum:number(object.clearing.minimum_mass_earth),current:currentMass.kind==='measured'?`${currentMassText} M⊕`:t('criteriaMassUnknown')}):'';
+  const massNote=currentMass.kind==='hypothesis'?t('criteriaMassAssumption',{density:number(currentMass.density_kg_m3)}):currentMass.kind==='estimate'?`${massCopy.estimate} · ${massCopy.density}: ${number(currentMass.density_kg_m3)} kg/m³`:null;
   const canCalculate=canOpenDensityCalculator(modelObjectId,object?.mass.earth_masses);
   function openCriteria(launcher:HTMLElement,focusDensity=false){
     opener.current=launcher;
@@ -77,13 +82,14 @@ export default function PlanetCriteriaPanel({objectId,name,catalogue,loading,err
   }
   function rows(full:boolean){return object?.criteria.map(row=><div key={row.id} className={styles.criterion} data-testid={`criterion-${row.id}`} data-status={row.status}>
     <div><strong>{t(`criteria_${row.id}`)}</strong><span className={styles.badge} data-status={row.status}>{row.status==='met'?'✓':row.status==='not_met'?'×':'—'} {t(`criteriaStatus_${row.status}`)}</span></div>
-    {row.id==='orbital_dominance'&&<><p className={styles.mass} data-testid="criteria-minimum-mass" data-current-mass-kind={assumed?'hypothesis':object.mass.earth_masses===null?'unavailable':'measured'} data-current-mass-earth={assumed?.mass_earth??object.mass.earth_masses??''} data-applied-density={assumed?.density_kg_m3??''}>{massLine}</p>{massNote&&<p className={styles.notice} data-testid="criteria-mass-assumption">{massNote}</p>}<p className={styles.modelLabel}>{t('criteriaModelLabel')} · {t('criteriaEarthMassUnit')}</p>{object.system_mass&&<p data-testid="criteria-system-mass">{t('criteriaSystemMass',{mass:number(object.system_mass.earth_masses)})}<br/>{t('criteriaSystemMassNote')}{full&&<a href={object.system_mass.source.url} target="_blank" rel="noreferrer"> {t('source')} ↗</a>}</p>}</>}
+    {row.id==='orbital_dominance'&&<><p className={styles.mass} data-testid="criteria-minimum-mass" data-current-mass-kind={currentMass.kind} data-current-mass-earth={currentMass.mass_earth??''} data-current-mass-kg={currentMass.mass_kg??''} data-applied-density={currentMass.density_kg_m3??''}>{massLine}</p>{massNote&&<p className={styles.notice} data-testid="criteria-mass-assumption">{massNote}</p>}<p className={styles.modelLabel}>{t('criteriaModelLabel')} · {t('criteriaEarthMassUnit')}</p>{object.system_mass&&<p data-testid="criteria-system-mass">{t('criteriaSystemMass',{mass:number(object.system_mass.earth_masses)})}<br/>{t('criteriaSystemMassNote')}{full&&<a href={object.system_mass.source.url} target="_blank" rel="noreferrer"> {t('source')} ↗</a>}</p>}</>}
     {full&&<p>{reason(row)} <a href={row.source.url} target="_blank" rel="noreferrer">{t('source')} ↗</a></p>}
   </div>);}
   return <section className={styles.card} data-testid="planet-criteria-card" data-object-id={objectId} data-generic-tno={generic}>
     <h2>{t('criteriaTitle')}</h2>
     {!applicable?<p data-testid="criteria-not-applicable">{t('criteriaNotApplicable')}</p>:error?<p role="alert">{t('criteriaError')} <button onClick={onRetry}>{t('retry')}</button></p>:loading||!object?<p role="status">{t('loading')}</p>:<>
       {rows(false)}
+      {!expanded&&<ApproximateMassDetails objectId={objectId} value={currentMass} language={i18n.language}/>}
       {canCalculate&&<button className={styles.massAction} data-testid="open-mass-calculator" aria-haspopup="dialog" onClick={event=>openCriteria(event.currentTarget,true)}>{copy.calculateCurrentMass} ↗</button>}
       {object.mass.earth_masses===null&&massModel.active&&(massModel.source.isError||massModel.result.isError)&&<p role="alert" data-testid="criteria-mass-error">{t('massError')} <button onClick={()=>{if(massModel.source.isError)void massModel.source.refetch();else void massModel.result.refetch();}}>{t('retry')}</button></p>}
       {!assumed&&massModel.active&&(massModel.source.isFetching||massModel.result.isFetching)&&<p role="status">{t('massLoading')}</p>}
@@ -94,7 +100,8 @@ export default function PlanetCriteriaPanel({objectId,name,catalogue,loading,err
       <div className={styles.body}><section>
         {modelObjectId==='pluto'&&<p data-testid="pluto-classification-lesson" className={styles.notice}>{t('criteriaPlutoLesson')} <a href="https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx" target="_blank" rel="noreferrer">IAU 2006 ↗</a></p>}
         {rows(true)}
-        {generic&&<section className={styles.calculation} data-testid="criteria-mass-availability"><h2>{t('outerTnoMass')}</h2><p>{outerObject?.physical.diameter_km==null?copy.massSizeMissing:copy.massDensityMissing}</p><p>{copy.sourceModelNote}</p><a href={object.orbit.source.url} target="_blank" rel="noreferrer">JPL SBDB ↗</a></section>}
+        <ApproximateMassDetails objectId={objectId} value={currentMass} language={i18n.language} expanded/>
+        {generic&&<section className={styles.calculation} data-testid="criteria-mass-availability"><h2>{t('outerTnoMass')}</h2><p>{copy.sourceModelNote}</p><a href={object.orbit.source.url} target="_blank" rel="noreferrer">JPL SBDB ↗</a></section>}
         <MassScenarioPanel key={modelObjectId} objectId={modelObjectId} labels={labels} model={massModel} openRequest={massEditorRequest}/>
         <p className={styles.notice}>{t('criteriaDefinitionNote')}</p>
         <section className={styles.calculation} data-testid="criteria-clearing-model"><h2>{t('criteriaModelLabel')}</h2><p className={styles.mass}>{massLine}</p>{massNote&&<p className={styles.notice}>{massNote}</p>}<code>m_clear ≈ {catalogue.model.coefficient_earth_mass} (a / au)<sup>9/8</sup> M⊕</code><p>{t('criteriaModelNote')}</p><p className={styles.notice}>{t('criteriaEccentricNote',{eccentricity:number(object.orbit.eccentricity)})}</p>

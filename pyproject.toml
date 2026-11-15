@@ -1,6 +1,6 @@
 [project]
 name = "planet-x-spherex"
-version = "0.14.1"
+version = "0.15.1"
 requires-python = ">=3.12,<3.13"
 dependencies = ["fastapi", "uvicorn", "pydantic", "astropy", "numpy", "scipy", "python-dotenv", "psutil"]
 

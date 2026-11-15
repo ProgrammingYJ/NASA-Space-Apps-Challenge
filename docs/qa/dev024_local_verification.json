@@ -1,0 +1,97 @@
+{
+  "work_id": "DEV-024",
+  "release": "0.15.1",
+  "phase": "isolated_build_before_release",
+  "runtime_manifest_sha256": "cdd9d4591d84b2e5eb4c962233531106c1284b776a6af9c7d68e09db4de9a204",
+  "source_files": 1275,
+  "required_sources": 1184,
+  "snapshots": 39,
+  "snapshot_bytes": 19203311,
+  "checks": {
+    "strict_typecheck_vite": "pass; navigation-only and delayed-selection correction builds passed",
+    "vitest": {
+      "pass": 122,
+      "files": 23
+    },
+    "node_pass": 80,
+    "node_exclusion": "unchanged entrypoint.test.js default3002 conflicts with active production port; exact release verifies actual Node startup on8013",
+    "python_pass": 65,
+    "python_subtests": 16,
+    "ruff": "pass",
+    "new_and_prior_browser_unique_paths": 9,
+    "legacy_catalogue_and_mass_race_browser": 2,
+    "final_public_https_and_restart": "pending",
+    "public_https_initial": {
+      "passed": 6,
+      "failed": 1,
+      "failure": "Pluto selected before universe coordinates arrived chose the overview mode"
+    },
+    "delayed_real_coordinate_delivery_and_Pluto_evidence_restore": "pass on isolated server; real response gated without fabricated coordinates"
+  },
+  "initial_browser_failures": [
+    {
+      "case": "Sedna automatic source-size priority",
+      "reason": "App passed a null ephemeris radius while the separately authored thermal radius497.5km was available",
+      "fix": "Prefer the sourced appearance physical reference radius and its paired sourceURL before H/albedo",
+      "targeted_recheck": "pass"
+    },
+    {
+      "case": "legacy delayed mass request harness",
+      "reason": "Playwright transport socket hang up; separate direct API returned actual correct calculation in0.91s",
+      "fix": "Capture a real response before interception, bounded gates and network retry for pure calculation",
+      "targeted_recheck": "pass; no product code change for this transport failure"
+    },
+    {
+      "case": "public Pluto selection before coordinates arrive",
+      "reason": "choose() depended on coordinate response completion instead of physical object identity",
+      "fix": "Keep known physical-body local projection intent while waiting for actual origin coordinates",
+      "targeted_recheck": "pass on isolated server; public recheck pending"
+    }
+  ],
+  "distance": {
+    "algorithm": "parent-linear-distance-v1",
+    "all_position_scale_display_per_au": 10000,
+    "source_3D_ratios_preserved": true,
+    "mesh_radii_unchanged": true,
+    "old_context_missing_projection": "legacy-expanded-v1",
+    "tested_years": [
+      1371,
+      2035,
+      3000
+    ],
+    "source_distances_example_km": {
+      "earth_marker_moon": 405584,
+      "earth_marker_venus": 48717661
+    }
+  },
+  "hypothesis_dock": {
+    "width_max_px": 580,
+    "info": "left",
+    "name_click_keeps_hypothesis_and_filters": true,
+    "viewport_widths": [
+      1440,
+      2542
+    ],
+    "ranked_TNOs_are_discovered_planet_nine_candidates": false
+  },
+  "mass": {
+    "algorithm": "source-size-or-H-albedo-density-mass-v1",
+    "source_total": 8341,
+    "finite_H": 8339,
+    "source_diameter": 13,
+    "no_size_or_H": 2,
+    "project_density_kg_m3": 1000,
+    "project_albedo_if_missing": 0.1,
+    "defaults_are_per_body_measurements": false,
+    "original_mass_and_classification_unchanged": true,
+    "known_radius_precedes_photometric_size": true
+  },
+  "original_four_comparisons_and_observations_changed": false,
+  "delivery": "verified_directory_no_new_release_zip",
+  "independent_reviews": [
+    "r029_science math/source and Node/Python context parity",
+    "tno_metadata scene transformation and browser source oracles",
+    "r030_appearance source radius/provenance and rendering safeguards"
+  ],
+  "followup": "DEV-025 registered observations, epsilonIndiB detail and verified Gemini Canvas layout; local shim.html found, its scientific mock values will not be copied"
+}

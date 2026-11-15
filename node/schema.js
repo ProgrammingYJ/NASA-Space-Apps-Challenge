@@ -46,7 +46,12 @@ function sessionRules(session) {
   if (c.selected_object_id !== session.object_id || c.follow_object_id != null && c.follow_object_id !== session.object_id) throw new Error('invalid_request');
   for (const [field, sha] of [['mass_scenario', 'mass_scenarios_manifest_sha256'], ['observer_experiment', 'observer_physics_manifest_sha256'], ['selected_black_hole_id', 'black_holes_manifest_sha256']]) if (c[field] != null && c[sha] == null) throw new Error('invalid_request');
   if (c.time_preference === 'ephemeris' && c.simulation_context != null || c.time_preference === 'simulation' && c.simulation_context == null) throw new Error('invalid_request');
-  if (c.camera) { const { position, target } = c.camera, distance = Math.hypot(...position.map((v, i) => v - target[i])); if (Math.hypot(...position) >= 10000 || distance < .05 || distance >= 10000) throw new Error('invalid_request'); }
+  const localDistance = c.distance_view?.algorithm_version === 'parent-linear-distance-v1';
+  if (c.distance_view) {
+    const origin = c.distance_view.origin_object_id;
+    if (localDistance ? typeof origin !== 'string' || !origin.trim() || origin.length > 50 : origin != null) throw new Error('invalid_request');
+  }
+  if (c.camera) { const { position, target } = c.camera, distance = Math.hypot(...position.map((v, i) => v - target[i])), limit = localDistance ? 1e8 : 10000; if (![...position,...target].every(Number.isFinite) || Math.hypot(...position) >= limit || distance < .05 || distance >= limit) throw new Error('invalid_request'); }
   return session;
 }
 function migrateSolarSession(session, currentVisualHashes = {}, compatibleReferences = []) {

@@ -44,11 +44,29 @@ class CameraState(StrictModel):
 
     @model_validator(mode="after")
     def bounded(self):
+        # The enclosing UniverseContext selects the coordinate interpretation.
+        # Only explicit parent-linear views may use this larger transport envelope.
         if (
-            math.hypot(*self.position) >= 10000
-            or not 0.05 <= math.dist(self.position, self.target) < 10000
+            math.hypot(*self.position) >= 1e8
+            or not 0.05 <= math.dist(self.position, self.target) < 1e8
         ):
             raise ValueError("Camera exceeds display bounds or view-distance limits")
+        return self
+
+
+class DistanceView(StrictModel):
+    algorithm_version: Literal[
+        "solar-overview-common-v2", "parent-linear-distance-v1", "legacy-expanded-v1"
+    ]
+    origin_object_id: str | None = Field(default=None, min_length=1, max_length=50)
+
+    @model_validator(mode="after")
+    def consistent_origin(self):
+        if self.algorithm_version == "parent-linear-distance-v1":
+            if self.origin_object_id is None or not self.origin_object_id.strip():
+                raise ValueError("Parent-linear distance views require an origin object")
+        elif self.origin_object_id is not None:
+            raise ValueError("Only parent-linear distance views carry an origin object")
         return self
 
 
@@ -61,6 +79,9 @@ class SimulationContext(StrictModel):
 
 
 class UniverseContext(StrictModel):
+    # Omission deliberately preserves the legacy expanded-moon camera interpretation.
+    distance_view: DistanceView | None = None
+    approximate_mass_algorithm_version: Literal["source-size-or-H-albedo-density-mass-v1"] | None = None
     scene_filter: Literal["all", "confirmed-planets", "p9-reference", "planets-and-p9"] | None = None
     render_preset: Literal["balanced", "detail"] | None = None
     appearance_lighting: Literal["inspection", "solar"] | None = None
@@ -101,6 +122,16 @@ class UniverseContext(StrictModel):
 
     @model_validator(mode="after")
     def consistent_time_preference(self):
+        local_distance = (
+            self.distance_view is not None
+            and self.distance_view.algorithm_version == "parent-linear-distance-v1"
+        )
+        camera_limit = 1e8 if local_distance else 10000
+        if self.camera is not None and (
+            math.hypot(*self.camera.position) >= camera_limit
+            or not 0.05 <= math.dist(self.camera.position, self.camera.target) < camera_limit
+        ):
+            raise ValueError("Camera exceeds the declared distance-view bounds")
         if self.mass_scenario is not None and self.mass_scenarios_manifest_sha256 is None:
             raise ValueError("Mass hypotheses require a source manifest hash")
         if self.observer_experiment is not None and self.observer_physics_manifest_sha256 is None:

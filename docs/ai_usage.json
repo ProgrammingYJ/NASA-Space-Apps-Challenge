@@ -46,7 +46,11 @@
     "DEV-015",
     "DEV-016",
     "DEV-019",
-    "OPS-020"
+    "OPS-020",
+    "DEV-021",
+    "DEV-022",
+    "DEV-023",
+    "DEV-024"
   ],
   "assistance": [
     "repository_configuration",
@@ -1914,5 +1918,23 @@
       "linux_fresh_result_role": "separate numerical comparison, not replacement canonical evidence",
       "science_thresholds_relaxed": false
     }
+  },
+  "dev023_024": {
+    "assistance": [
+      "P9 auto sample orbit and a/e/i catalogue comparison UI",
+      "Solar-only night shading and screenshot QA",
+      "Common-scale distance view and versioned saved-coordinate metadata",
+      "Persistent narrow hypothesis dock and left object information",
+      "Explicit approximate mass formula/source/assumption labels and generic TNO fallback"
+    ],
+    "original_observations_or_catalogue_values_AI_generated": false,
+    "image_generation": false,
+    "approximate_mass_defaults": {
+      "density_kg_m3": 1000,
+      "geometric_albedo": 0.1,
+      "status": "explicit project assumptions, not per-body measured or population fit"
+    },
+    "new_discovery_or_all_physics_claim": false,
+    "validation": "DEV-023 public v0.15.0 verified; DEV-024 integrated build/browser/release pending final record"
   }
 }

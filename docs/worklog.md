@@ -543,3 +543,18 @@ DEV-021 Git 확정(2026-11-15 08:36 KST): 기능 commit `600cf1dfe596dc12828eb68
 
 
 DEV-022 0.14.1 긴급 배포 확정: NASA VTAD 대표 외관을 기본으로 변경해 U/N 각3각도 총6이미지를 직접 열람했고 사선/검은 결측구멍/형광색 접합 없는 구체를 확인했다. 실제 OPAL 원본 선택과바이트/SHA·5언어/물리크기불변회귀는로컬및정식HTTPS Chrome에서통과했다. strict/Vite·Vitest101·Node후속9·Python6/3subtests·Ruff와새directory Node-only실제재시작검증을통과했다. 정확084608디렉터리 manifestSHA a914fde4e2ab09af68d1468a0a5b7565a5355483ff85d94e926491a23997f815를AWS에활성화했고PID10096→10927·기존핵심16파일SHA·일관백업25파일을보존했다. runtimeSHA a73e222d7be2b840215aa3c97ccbea30e469f36f99905bae6073051308ee501c·source1274/필수1184다. 원본 OPAL과독립관측/계산4comparison은바뀌지않았다. NASA모형외관을관측전구지도로주장하지않으며source별선택과출처를명시한다. 자세한사후기록 docs/releases/v0.14.1.json. 별도진행중P9유사궤도기능은이긴급배포에포함하지않았다.
+
+
+### DEV-023 시작 — 2026-11-15 KST
+
+사용자는 ‘1순위 선택→가설표본 궤도 시뮬→해당/비슷한 실제 천체 찾기’를 명확히 했다. 비동기 답변으로 실제목록 비교를 먼저완주하고실영상미확인점광원은추후선택가능한준비중단계로확정했다. 별도Workbench/비교패널에서기존원본TNO8341·문헌CSV를사용하며전파시각/질량/정체/후보확률을만들지않는다. a/e/i탐색용지수와차이·출처/누락을명시하고같은sbdb-ID로실제선택에연결한다. phase2는완료로체크하지않는다. 외관긴급0.14.1은분리소스로먼저검증·배포했고진행중Workbench변경은포함하지않았다.
+
+
+DEV-023 공개확정(2026-11-15 09:06 KST): DEV-023 / v0.15.0: 문헌 TOP5 영역→원표본 선택→자동 가설 궤도→실제 TNO a/e/i 대조 상위10→실제천체 선택을 구현했다. 태양방향 기본조명과 밤쪽 보조광0을 적용했고 대표 NASA 외관/원OPAL 선택을 유지한다. strict/Vite·Vitest109(22파일)·Node후속9·Python6/3subtests·Ruff·정확디렉터리 Node-only 재시작·정식HTTPS 새3흐름과 εB 저장/새세션복원을 통과했다. 운영 PID10927→11925→실제재시작12172, 기존3근거 원바이트/ID/판단을 보존한다. runtimeSHA b95a10ca2cd3761d5e42b38098886bc2d2c8174e64f0987f3ea6dd0d8b333c16, source1274/필수1184·39JSON/19,203,311B. 새ZIP 없이 정확085950 디렉터리를 직접배포했으며 사후정본은 docs/releases/v0.15.0.json이다. 실영상 미확인점광원 탐색은 준비중이며 비교점수는 발견확률이 아니다. 최초 조명브라우저 실패는canvas드래그가body label위에서시작한QA조작문제로대조한뒤수정했고새실제회전후통과했다. GLSL/pageerror는0이다. 289개실행/계약/검사source중원격패키징시재생성하는requirements.runtime.lock.txt 외의바이트가정확배포manifest와같았다. 그lock은플랫폼의개발검증의존성snapshot이며Node서버가Python을요구하지않는다. 원시관측·보정과네comparison정본은불변이다.
+
+DEV-024 시작: 사용자가EarthMoon보다Venus가가깝게보이는혼합척도를지적했다. 원인은위성별도확대이며현재천체력오류로설명하지않는다. FSD28/Data_Spec에원좌표공통선형모드·전체개략도분리·기존카메라복원계약을먼저기록하고Scene/Math/API/QA를독립분담했다. 현재구현진행중이다.
+
+
+DEV-024 공개확정: DEV-024 / v0.15.1: 혼합척도를 공통 부모중심 선형거리/전체개략도로 분리했고 원자료 거리비율·mesh반지름·구판카메라 복원을 보존한다. P9오른쪽580px/왼쪽INFO/연속이름선택과출처H·크기/명시ρ·albedo가정의M⊕어림값을 구현했다. 중복전역근거버튼을제거하고관측작업대근거탭으로통합했다. strict/Vite·Vitest122/Node80/Python65+16subtests/Ruff,독립브라우저9경로와구판2경로,정확디렉터리Node-only재시작을확인했다. 공개초회6/7에서좌표도착전Pluto선택race를발견해교정했고실제응답지연/Pluto저장복원과εB5언어원본품질/근거복원2후속을공개HTTPS에서통과했다. 운영PID14484→실제재시작14572,기존3근거원봉투/ID/판단과네comparison정본을보존한다. runtimeSHA cdd9d4591d84b2e5eb4c962233531106c1284b776a6af9c7d68e09db4de9a204,source1275/필수1184·39JSON/19,203,311B. 새ZIP없이095903 검증디렉터리를활성화했으며사후정본은 docs/releases/v0.15.1.json이다. 초회095159배포는Pluto초기선택race로후속095903에교체했다. 중지writer36파일backupSHA04d6cbe6429af1deae7fbdd2cb4b07df8e5a9115865adf4c6be37a25b31dbe73,기존20comparison/evidence파일SHA보존. 공개6PASS와교정후2PASS를분리기록한다.
+
+DEV-025 착수: 사용자Gemini저장폴더의실제Canvas코드를읽고목업과실데이터를구별했다. FSD29/DataSpec의등록형실관측·εB상세·TOP5디자인계약을먼저작성했고원관측/네정본/1000AU범위/5언어를보호하며독립분담했다.

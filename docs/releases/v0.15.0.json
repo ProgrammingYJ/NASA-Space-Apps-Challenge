@@ -1,0 +1,72 @@
+{
+  "release": "0.15.0",
+  "work_id": "DEV-023",
+  "status": "deployed_and_verified",
+  "delivery": {
+    "delivery_format": "directory",
+    "directory": "NASA_SPACE_APPS_CHALLENGE_v0.15.0_20261115_085950KST",
+    "directory_manifest_sha256": "ade12668d3a04e11c786215250ba1e8b63a2fb259915ac525fb2775ee4a9f9d1",
+    "file_count": 1649,
+    "payload_bytes": 668956292,
+    "directory_bytes": 669269103
+  },
+  "runtime_manifest_sha256": "b95a10ca2cd3761d5e42b38098886bc2d2c8174e64f0987f3ea6dd0d8b333c16",
+  "public_url": "https://nasaspaceappschallenge.marulee.dev/",
+  "checks": {
+    "strict_typecheck_vite": "pass",
+    "vitest": {
+      "pass": 109,
+      "files": 22
+    },
+    "node_followup_pass": 9,
+    "python_followup_pass": 6,
+    "python_subtests": 3,
+    "ruff": "pass",
+    "clean_directory_node_only_restart": "pass",
+    "public_new_browser_pass": 3,
+    "public_epsilon_indi_b_new_session_restore": "pass",
+    "legacy_three_evidence_after_actual_restart": "pass",
+    "solar_night_screenshot_rgb_check": "pass",
+    "calibrated_photometry": false,
+    "new_zip_created": false
+  },
+  "deployment": {
+    "old_pid": 10927,
+    "activated_pid": 11925,
+    "actual_restarted_pid": 12172,
+    "preserved_evidence_comparison_files": 16,
+    "stopped_writer_backup_files": 25,
+    "backup_sha256": "2ebfe086a2db05a41d620c57766f365607f56eed04f81253810ecd12e2c1aae6"
+  },
+  "catalogue_comparison": {
+    "population": 8341,
+    "comparable": 8340,
+    "excluded": 1,
+    "sample": 2413,
+    "top_id": "sbdb-20689335",
+    "algorithm": "tno-source-aei-exploratory-v1",
+    "is_discovery_probability": false,
+    "unidentified_point_sources": "not_implemented_preparation_state"
+  },
+  "lighting": {
+    "default": "solar",
+    "night_fill": 0,
+    "explicit_inspection_available": true,
+    "geometry_unchanged": true,
+    "screenshots": {
+      "earth_night_rgb": [
+        0,
+        0,
+        0
+      ],
+      "neptune_night_rgb": [
+        4,
+        5,
+        5
+      ]
+    },
+    "RGB_scope": "rendered screenshot samples only, not calibrated photometry"
+  },
+  "independent_final_review": "r029_science: no material blocker; code-read only",
+  "followup": "DEV-024 mixed distance scaling display correction in progress; not part of this immutable release"
+}

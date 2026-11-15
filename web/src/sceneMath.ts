@@ -1,4 +1,7 @@
 export type Vec3 = [number, number, number];
+/** Camera transport stays v1; these fields declare how its numeric coordinates are interpreted. */
+export interface DistanceView {algorithm_version:'solar-overview-common-v2'|'parent-linear-distance-v1'|'legacy-expanded-v1';origin_object_id?:string|null}
+export const LOCAL_DISTANCE_SCALE=10000;
 export interface CameraState {
   position: Vec3;
   target: Vec3;
@@ -45,7 +48,51 @@ export function displayMoonOffset(relativeAu:Vec3,parentRadiusKm:number|null,par
 }
 
 export interface DisplayBodyInput {object_id:string;kind:string;parent_id?:string;position_au?:Vec3;parent_relative_position_au?:Vec3;radius_km?:number|null}
-export function bodyDisplayPositions(bodies:DisplayBodyInput[]):Map<string,Vec3>{
+const finiteVector=(value:unknown):value is Vec3=>Array.isArray(value)&&value.length===3&&value.every(component=>typeof component==='number'&&Number.isFinite(component));
+function validDistanceView(view:DistanceView):boolean{
+  if(view.algorithm_version==='parent-linear-distance-v1')return typeof view.origin_object_id==='string'&&view.origin_object_id.trim().length>0&&view.origin_object_id.length<=50;
+  return (view.algorithm_version==='legacy-expanded-v1'||view.algorithm_version==='solar-overview-common-v2')&&view.origin_object_id==null;
+}
+
+/** Resolve source positions before any display mapping; a supplied parent-relative state takes precedence. */
+export function bodySourcePositions(bodies:DisplayBodyInput[]):Map<string,Vec3>{
+  const byId=new Map(bodies.map(body=>[body.object_id,body])),result=new Map<string,Vec3>(),visiting=new Set<string>();
+  const locate=(id:string):Vec3|null=>{
+    const previous=result.get(id);if(previous)return previous;const body=byId.get(id);if(!body||body.kind==='direction'||visiting.has(id))return null;
+    visiting.add(id);let position:Vec3|null=null;
+    if(body.kind==='moon'&&body.parent_id&&finiteVector(body.parent_relative_position_au)){
+      const parent=locate(body.parent_id);if(parent)position=add(parent,body.parent_relative_position_au);
+    }
+    if(!position&&finiteVector(body.position_au))position=[...body.position_au];
+    visiting.delete(id);if(position)result.set(id,position);return position;
+  };
+  bodies.forEach(body=>locate(body.object_id));return result;
+}
+
+/** One common mapper for every source position in a view. Local coordinates are linear, never AU-labelled display values. */
+export function distanceViewPosition(positionAu:Vec3,view?:DistanceView,originAu?:Vec3):Vec3|null{
+  if(!finiteVector(positionAu)||(view&&!validDistanceView(view)))return null;
+  if(!view||view.algorithm_version==='legacy-expanded-v1'||view.algorithm_version==='solar-overview-common-v2')return displayPosition(positionAu);
+  if(view.algorithm_version!=='parent-linear-distance-v1'||!view.origin_object_id||!finiteVector(originAu))return null;
+  const relative=subtract(positionAu,originAu);
+  const position:Vec3=[relative[0]*LOCAL_DISTANCE_SCALE,relative[2]*LOCAL_DISTANCE_SCALE,-relative[1]*LOCAL_DISTANCE_SCALE];
+  return finiteVector(position)?position:null;
+}
+
+/** Every guide vertex uses exactly the same mapper and source origin as body centres. */
+export function distanceViewOrbitPoints(pointsAu:Vec3[],view?:DistanceView,originAu?:Vec3):Vec3[]{
+  if(pointsAu.length<3||pointsAu.some(point=>!finiteVector(point)))return [];
+  const output=pointsAu.map(point=>distanceViewPosition(point,view,originAu));
+  return output.every((point):point is Vec3=>point!==null)?output:[];
+}
+
+export function bodyDisplayPositions(bodies:DisplayBodyInput[],view?:DistanceView):Map<string,Vec3>{
+  if(view&&view.algorithm_version!=='legacy-expanded-v1'){
+    const source=bodySourcePositions(bodies),result=new Map<string,Vec3>();
+    const origin=view.algorithm_version==='parent-linear-distance-v1'?source.get(view.origin_object_id??''):undefined;
+    for(const [id,position]of source){const mapped=distanceViewPosition(position,view,origin);if(mapped)result.set(id,mapped);}
+    return result;
+  }
   const byId=new Map(bodies.map(body=>[body.object_id,body]));const result=new Map<string,Vec3>();const visiting=new Set<string>();
   const locate=(id:string):Vec3|null=>{
     const previous=result.get(id);if(previous)return previous;const body=byId.get(id);if(!body||visiting.has(id))return null;visiting.add(id);
@@ -172,10 +219,14 @@ export function sampleFocus(transition: FocusTransition, time: number): {camera:
   };
 }
 
-export function validCamera(value: CameraState | null | undefined): value is CameraState {
+export function validCamera(value: CameraState | null | undefined,view?:DistanceView): value is CameraState {
   if (!value || value.representation_version !== REPRESENTATION_VERSION) return false;
   if (!Array.isArray(value.position) || !Array.isArray(value.target) || value.position.length!==3 || value.target.length!==3) return false;
   if (![...value.position, ...value.target].every(Number.isFinite)) return false;
+  if(view&&!validDistanceView(view))return false;
+  const local=view?.algorithm_version==='parent-linear-distance-v1';
+  if(local&&!view.origin_object_id)return false;
+  const limit=local?1e8:10000;
   const distance = magnitude(subtract(value.position, value.target));
-  return distance >= 0.05 && distance < 10000 && magnitude(value.position) < 10000;
+  return distance >= 0.05 && distance < limit && magnitude(value.position) < limit;
 }

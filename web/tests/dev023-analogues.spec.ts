@@ -1,0 +1,92 @@
+import {test,expect} from '@playwright/test';
+import type {OuterTnoCatalog} from '../src/OuterTnoPanel';
+import {orbitAnalogueCopy} from '../src/OrbitAnalogueCopy';
+import {ORBIT_ANALOGUE_RULE} from '../src/OrbitAnalogueMath';
+
+// Run only when requested against PLAYWRIGHT_BASE_URL. Existing config uses one
+// Chrome worker and failure-only screenshots. No archive calls or mocked data.
+const languages=['ko','en','ja','zh-Hant','fr'] as const;
+const sourceSha='6dd683ace22417072aaba17ee3f61937aa926598265b6082edeea278bfd452c1';
+
+test('DEV-023: selecting literature row 2413 automatically calculates its actual orbit and exposes honest catalogue comparisons',async({page},testInfo)=>{
+  test.setTimeout(120000);await page.emulateMedia({reducedMotion:'reduce'});
+  const requests:Array<Record<string,unknown>>=[];
+  page.on('request',request=>{if(request.method()==='POST'&&new URL(request.url()).pathname==='/api/v1/planet-nine/predict')requests.push(request.postDataJSON() as Record<string,unknown>);});
+  const catalogueResponse=page.waitForResponse(response=>new URL(response.url()).pathname==='/api/v1/catalog/outer-tno'&&response.request().method()==='GET');
+  await page.goto('/');await page.getByTestId('language').selectOption('en');
+  const catalogueReply=await catalogueResponse;expect(catalogueReply.ok()).toBe(true);
+  const catalogue=await catalogueReply.json() as OuterTnoCatalog;
+  expect(catalogue.objects).toHaveLength(8341);expect(catalogue.source_manifest_sha256).toBe(sourceSha);
+  const clockBefore=await page.getByTestId('timeline-clock').innerText();
+  await page.getByTestId('open-planet-nine').click();
+  await expect(page.getByTestId('p9-region-3682')).toBeEnabled();
+  await page.getByTestId('p9-region-3682').click();
+  const dialog=page.getByTestId('p9-members-dialog');await expect(dialog).toBeVisible();
+  const sample=dialog.getByTestId('p9-row-2413');await expect(sample).toBeEnabled();await expect(sample).toContainText('6.14');
+  const automaticRequest=page.waitForRequest(request=>request.method()==='POST'&&new URL(request.url()).pathname==='/api/v1/planet-nine/predict');
+  const automaticResponse=page.waitForResponse(response=>response.request().method()==='POST'&&new URL(response.url()).pathname==='/api/v1/planet-nine/predict');
+  await sample.click(); // Deliberately never click p9-predict in this test.
+  const sent=(await automaticRequest).postDataJSON() as {orbit:{mass_earth:number;a_au:number;e:number;i_deg:number;epoch_jd_tdb:number};samples:number};
+  expect(sent.orbit).toMatchObject({mass_earth:6.14,a_au:390.78,e:.139,i_deg:16.32,epoch_jd_tdb:2458270});
+  const response=await automaticResponse;expect(response.ok()).toBe(true);
+  const prediction=await response.json() as {status:string;orbit:typeof sent.orbit;path:unknown[];full_orbit_au:number[][];assumptions:{measured_motion:boolean}};
+  expect(prediction.status).toBe('conditional_hypothesis');expect(prediction.orbit).toMatchObject(sent.orbit);
+  expect(prediction.path).toHaveLength(sent.samples);expect(prediction.full_orbit_au).toHaveLength(257);
+  expect(prediction.assumptions.measured_motion).toBe(false);
+  await expect(dialog).not.toBeVisible();
+  await expect(page.getByTestId('p9-preset')).toHaveValue('caltech-row-2413');
+  for(const [field,value] of [['mass_earth','6.14'],['a_au','390.78'],['e','0.139'],['i_deg','16.32']] as const)await expect(page.getByTestId('p9-'+field)).toHaveValue(value);
+  await expect(page.getByTestId('p9-sky-path')).toBeVisible();
+  await expect(page.getByTestId('p9-orbit-run-status')).toHaveText(orbitAnalogueCopy('en').pathReady);
+  await expect(page.getByTestId('p9-sample-auto-run-note')).toContainText('2413');
+  await expect(page.getByTestId('timeline-clock')).toHaveText(clockBefore);
+  const panel=page.getByTestId('p9-orbit-analogues');
+  await expect(panel).toHaveAttribute('data-algorithm',ORBIT_ANALOGUE_RULE);
+  await expect(page.getByTestId('p9-analogue-count')).toContainText('8,340 / 8,341');
+  await expect(page.getByTestId('p9-analogue-exclusions')).toContainText('No complete orbit record: 1');
+  await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(10);
+  const first=page.getByTestId('p9-orbit-analogue-1'),object=catalogue.objects.find(row=>row.object_id==='sbdb-20689335')!;
+  expect(object).toBeTruthy();expect(object.spkid).toBe('20689335');expect(object.orbit).not.toBeNull();
+  await expect(first).toHaveAttribute('data-object-id','sbdb-20689335');await expect(first).toHaveAttribute('data-spkid','20689335');
+  await expect(first).toContainText(object.name);
+  await expect(first.getByRole('link')).toHaveAttribute('href','https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=20689335');
+  await expect(first).toContainText(object.orbit!.epoch_jd_tdb.toLocaleString('en',{maximumSignificantDigits:12}));
+  expect(object.orbit!.epoch_jd_tdb).not.toBe(sent.orbit.epoch_jd_tdb);
+  await panel.locator('summary').click();
+  await expect(panel).toContainText(sourceSha);await expect(panel).toContainText('heliocentric_IAU76_80_ecliptic_J2000');
+  await expect(panel.locator('a[href="https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html"]')).toHaveCount(1);
+  for(const language of languages){
+    await page.getByTestId('language').selectOption(language);const copy=orbitAnalogueCopy(language);
+    await expect(panel).toContainText(copy.title);await expect(panel).toContainText(copy.knownNote);
+    await expect(panel).toContainText(copy.method);await expect(panel).toContainText(copy.limitation);
+    await expect(page.getByTestId('p9-analogue-target-epoch')).toContainText(copy.targetEpoch);
+    await expect(panel).not.toContainText(/undefined|NaN/);
+    await page.getByTestId('p9-analogue-method').selectOption('unidentified');
+    const future=page.getByTestId('p9-future-unidentified-sources');
+    await expect(future).toHaveAttribute('role','status');await expect(future).toContainText(copy.futureNote);await expect(future).toContainText(copy.futureSteps);
+    await expect(page.getByTestId('p9-orbit-analogue-table')).toHaveCount(0);
+    await page.getByTestId('p9-analogue-return-catalogue').click();
+    await expect(page.getByTestId('p9-analogue-method')).toHaveValue('catalogue');
+    await expect(page.getByTestId('p9-orbit-analogue-table').locator('tbody tr')).toHaveCount(10);
+  }
+  await page.getByTestId('language').selectOption('en');expect(requests).toHaveLength(1);
+  await page.getByTestId('p9-view-hypothesis-orbit').click();
+  await expect(page.getByTestId('planet-nine-panel')).toBeHidden();
+  const scene=page.getByTestId('universe-scene');
+  await expect(scene).toHaveAttribute('data-hypothesis-orbit-points','257');
+  await expect(scene).toHaveAttribute('data-camera-mode','overview');
+  await expect(scene).toHaveAttribute('data-selected-object','');
+  await page.getByTestId('open-planet-nine').click();
+  await expect(page.getByTestId('p9-orbit-analogue-1')).toHaveAttribute('data-object-id','sbdb-20689335');
+  await page.getByTestId('p9-inspect-analogue-1').click();
+  await expect(page.getByTestId('planet-nine-panel')).toBeVisible();
+  await expect(scene).toHaveAttribute('data-selected-object','sbdb-20689335');
+  await expect(scene).toHaveAttribute('data-camera-mode','focused');
+  await expect(scene).toHaveAttribute('data-follow-object','sbdb-20689335');
+  const selected=page.getByTestId('outer-tno-panel');await expect(selected).toBeVisible();
+  await expect(selected.getByTestId('outer-tno-id')).toContainText('sbdb-20689335');
+  await expect(selected.getByTestId('selected-object-name')).toContainText(object.name);
+  await expect(selected.getByTestId('outer-tno-source-facts').getByRole('link').filter({hasText:'JPL SBDB'})).toHaveAttribute('href','https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=20689335');
+  expect(requests).toHaveLength(1);
+  await testInfo.attach('dev023-auto-orbit-and-catalogue-comparison.json',{body:JSON.stringify({source_sha256:sourceSha,automatic_prediction_request:sent,prediction_status:prediction.status,path_samples:prediction.path.length,orbit_points:prediction.full_orbit_au.length,source_count:8341,compared_count:8340,missing_orbit:1,first_analogue:{id:object.object_id,spkid:object.spkid,epoch_jd_tdb:object.orbit!.epoch_jd_tdb},automatic_posts:requests.length}),contentType:'application/json'});
+});

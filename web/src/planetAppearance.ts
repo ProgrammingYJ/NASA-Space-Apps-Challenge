@@ -126,7 +126,7 @@ function displayLighting(mode:AppearanceLightingMode):[number,number]{
   // Inspection makes the recorded map readable on the model's night side.
   // Neither display setting is a radiometric prediction or a new observation.
   if(mode==='inspection')return [.42,.92];
-  if(mode==='solar')return [.035,1.55];
+  if(mode==='solar')return [0,1.55];
   throw new Error('invalid_appearance_lighting_mode');
 }
 

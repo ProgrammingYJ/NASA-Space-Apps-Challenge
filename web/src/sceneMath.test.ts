@@ -1,5 +1,5 @@
 import {describe, expect, it} from 'vitest';
-import {displayPosition, displayDirection, displayRadius, displayMoonRadius, displayOrbitPoints, displayMoonOffset, bodyDisplayPositions, focusDistance, surfaceClearanceDistance, makeFocus, sampleFocus, advanceNavigationForBody, validCamera, type CameraState} from './sceneMath';
+import {displayPosition, displayDirection, displayRadius, displayMoonRadius, displayOrbitPoints, displayMoonOffset, bodyDisplayPositions, bodySourcePositions, distanceViewPosition, distanceViewOrbitPoints, LOCAL_DISTANCE_SCALE, focusDistance, surfaceClearanceDistance, makeFocus, sampleFocus, advanceNavigationForBody, validCamera, type CameraState, type DistanceView, type DisplayBodyInput, type Vec3} from './sceneMath';
 
 const camera: CameraState = {position:[0,65,100],target:[0,0,0],representation_version:'solar-display-v1'};
 describe('source coordinates and navigable display',()=>{
@@ -78,5 +78,46 @@ describe('source coordinates and navigable display',()=>{
   it('locates moons after their parent even when catalog order differs and does not invent a missing ephemeris',()=>{const positions=bodyDisplayPositions([{object_id:'moon-301',kind:'moon',parent_id:'earth',parent_relative_position_au:[.0025,0,0],position_au:[1.0025,0,0],radius_km:1737},{object_id:'earth',kind:'solar_system',position_au:[1,0,0],radius_km:6371},{object_id:'moon-missing',kind:'moon',parent_id:'earth',radius_km:null}]);expect(positions.get('moon-301')![0]).toBeGreaterThan(positions.get('earth')![0]);expect(positions.has('moon-missing')).toBe(false);});
   it('keeps the near plane outside small moons and displayed ring bounds without scaling their geometry',()=>{
     for(const radius of [.035,.037,.22,.45,2.65,6]){const minimum=surfaceClearanceDistance(radius,.025);expect(minimum-radius).toBeGreaterThanOrEqual(.075-1e-12);expect(minimum).toBeGreaterThan(radius);}
+  });
+});
+
+describe('DEV-024 common overview and parent-centred linear distance views',()=>{
+  const overview:DistanceView={algorithm_version:'solar-overview-common-v2'},local:DistanceView={algorithm_version:'parent-linear-distance-v1',origin_object_id:'earth'};
+  const bodies:DisplayBodyInput[]=[
+    {object_id:'moon-301',kind:'moon',parent_id:'earth',parent_relative_position_au:[.00257,0,0],position_au:[9,9,9],radius_km:1737.4},
+    {object_id:'venus',kind:'solar_system',position_au:[.72,0,0],radius_km:6051.8},
+    {object_id:'earth',kind:'solar_system',position_au:[1,0,0],radius_km:6371},
+  ];
+  it('preserves the Earth–Moon and Earth–Venus source-distance ratio under the same fixed linear scale',()=>{
+    const before=JSON.stringify(bodies),positions=bodyDisplayPositions(bodies,local),earth=positions.get('earth')!,moon=positions.get('moon-301')!,venus=positions.get('venus')!;
+    expect(LOCAL_DISTANCE_SCALE).toBe(10000);expect(earth).toEqual([0,0,-0]);expect(moon[0]).toBeCloseTo(25.7,10);expect(venus[0]).toBeCloseTo(-2800,9);
+    const moonDistance=Math.hypot(...moon),venusDistance=Math.hypot(...venus);expect(venusDistance/moonDistance).toBeCloseTo(.28/.00257,9);expect(moonDistance).toBeLessThan(venusDistance);
+    expect(JSON.stringify(bodies)).toBe(before);expect(bodySourcePositions(bodies).get('moon-301')).toEqual([1.00257,0,0]);
+    expect(displayMoonRadius(1737.4)).toBeCloseTo(.20874,12);expect(displayRadius(6371)).toBeCloseTo(.4+.43*Math.log(2),12);
+  });
+  it('uses one heliocentric mapper for overview moons rather than the legacy expanded satellite offset',()=>{
+    const positions=bodyDisplayPositions(bodies,overview),earth=positions.get('earth')!,moon=positions.get('moon-301')!,venus=positions.get('venus')!;
+    expect(moon).toEqual(displayPosition([1.00257,0,0]));expect(Math.abs(moon[0]-earth[0])).toBeLessThan(Math.abs(venus[0]-earth[0]));
+    const legacy=bodyDisplayPositions(bodies),explicit=bodyDisplayPositions(bodies,{algorithm_version:'legacy-expanded-v1'});
+    expect(explicit).toEqual(legacy);const expectedLegacyOffset=(.4+.43*Math.log(2))*(1.8+1.35*Math.log1p(.00257/(6371/149597870.7)));
+    expect(legacy.get('moon-301')![0]).toBeCloseTo(18*Math.log(2)+expectedLegacyOffset,12);
+  });
+  it('maps all guide vertices identically to body centres, including parent-relative moon guides and changing origins',()=>{
+    const points:Vec3[]=[[1.00257,0,0],[1,.00257,0],[1,0,.00257],[1.00257,0,0]],before=JSON.stringify(points);
+    const mapped=distanceViewOrbitPoints(points,local,[1,0,0]);expect(mapped[0]).toEqual(bodyDisplayPositions(bodies,local).get('moon-301'));expect(mapped[1]).toEqual([0,0,-25.7]);expect(mapped[2]).toEqual([0,25.7,-0]);expect(mapped[0]).toEqual(mapped[3]);
+    expect(distanceViewPosition([.72,0,0],local,[1,0,0])![0]).toBeCloseTo(-2800,9);
+    expect(distanceViewPosition([.72,0,0],{...local,origin_object_id:'venus'},[.72,0,0])).toEqual([0,0,-0]);expect(JSON.stringify(points)).toBe(before);
+    expect(distanceViewOrbitPoints(points,overview)).toEqual(displayOrbitPoints(points));expect(distanceViewOrbitPoints(points)).toEqual(displayOrbitPoints(points));
+  });
+  it('fails closed for missing origins and incomplete source coordinates without inventing a satellite position',()=>{
+    expect(distanceViewPosition([1,0,0],local)).toBeNull();expect(distanceViewPosition([NaN,0,0],local,[1,0,0])).toBeNull();expect(distanceViewOrbitPoints([[1,0,0],[0,1,0],[0,0,1]],local)).toEqual([]);
+    expect(bodyDisplayPositions(bodies,{...local,origin_object_id:'missing'}).size).toBe(0);
+    expect(bodySourcePositions([{object_id:'moon-missing',kind:'moon',parent_id:'missing'}]).size).toBe(0);
+  });
+  it('allows large finite camera coordinates only when an explicit local frame accompanies the unchanged camera token',()=>{
+    const large:CameraState={position:[10000000,0,25],target:[10000000,0,0],representation_version:'solar-display-v1'};
+    expect(validCamera(large)).toBe(false);expect(validCamera(large,overview)).toBe(false);expect(validCamera(large,{algorithm_version:'legacy-expanded-v1'})).toBe(false);expect(validCamera(large,local)).toBe(true);
+    expect(validCamera(large,{algorithm_version:'parent-linear-distance-v1'})).toBe(false);expect(validCamera({...large,position:[1e8,0,0]},local)).toBe(false);expect(validCamera({...large,target:[Infinity,0,0]},local)).toBe(false);
+    expect(validCamera(camera)).toBe(true);expect(validCamera({...camera,position:[10000,0,0]})).toBe(false);
   });
 });

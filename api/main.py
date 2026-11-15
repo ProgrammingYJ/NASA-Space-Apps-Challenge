@@ -104,7 +104,7 @@ def create_app(state_dir: Path | None = None):
         yield
         app.state.service.close()
 
-    app = FastAPI(title="Planet X · SPHEREx", version="0.14.1", lifespan=lifespan)
+    app = FastAPI(title="Planet X · SPHEREx", version="0.15.1", lifespan=lifespan)
 
     @app.middleware("http")
     async def bounds(request, call_next):

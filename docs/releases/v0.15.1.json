@@ -1,0 +1,81 @@
+{
+  "release": "0.15.1",
+  "work_id": "DEV-024",
+  "status": "deployed_and_verified",
+  "public_url": "https://nasaspaceappschallenge.marulee.dev/",
+  "delivery": {
+    "delivery_format": "directory",
+    "directory": "NASA_SPACE_APPS_CHALLENGE_v0.15.1_20261115_095903KST",
+    "directory_manifest_sha256": "2c7f4bb5936bed64951bcf23c7e89f03bce22e1af1686165cb6463af4435a099",
+    "file_count": 1665,
+    "payload_bytes": 669112211,
+    "directory_bytes": 669427829
+  },
+  "runtime_manifest_sha256": "cdd9d4591d84b2e5eb4c962233531106c1284b776a6af9c7d68e09db4de9a204",
+  "checks": {
+    "strict_typecheck_vite": "pass, including final selection-order correction",
+    "vitest": {
+      "pass": 122,
+      "files": 23
+    },
+    "node_pass": 80,
+    "python_pass": 65,
+    "python_subtests": 16,
+    "ruff": "pass",
+    "isolated_browser_unique_paths": 9,
+    "legacy_catalogue_mass_race_browser": 2,
+    "clean_directory_node_only_restart": "pass",
+    "initial_public_browser": {
+      "pass": 6,
+      "failed": 1,
+      "failure": "Pluto selected before source coordinates arrived; fixed by preserving identity-based local-view intent"
+    },
+    "corrected_public_followup": {
+      "pass": 2,
+      "scope": "delayed real Pluto coordinates/evidence/fresh-session restore + epsilonIndiB originals/quality/evidence/fresh restore/five locales"
+    },
+    "public_camera_mass_P9_screenshots": "passed before selection-order correction; these code paths unchanged",
+    "legacy_three_evidence_after_actual_restart": "pass",
+    "new_release_zip_created": false
+  },
+  "deployment": {
+    "previous_verified_release": "0.15.0",
+    "first_0151_candidate": "095159 KST; 6/7 public paths passed, superseded after selection race correction",
+    "active_directory": "NASA_SPACE_APPS_CHALLENGE_v0.15.1_20261115_095903KST",
+    "old_pid": 13781,
+    "activated_pid": 14484,
+    "actual_restarted_pid": 14572,
+    "preserved_evidence_comparison_files": 20,
+    "stopped_writer_backup_files": 36,
+    "backup_sha256": "04d6cbe6429af1deae7fbdd2cb4b07df8e5a9115865adf4c6be37a25b31dbe73"
+  },
+  "distance": {
+    "algorithm": "parent-linear-distance-v1",
+    "scale_display_per_au": 10000,
+    "source_distance_ratios_preserved": true,
+    "mesh_radii_unchanged": true,
+    "legacy_projection_preserved": true,
+    "known_body_intent_while_coordinates_pending": true
+  },
+  "P9": {
+    "dock_max_width_px": 580,
+    "actual_object_info": "left",
+    "continuous_selection_keeps_hypothesis": true,
+    "verified_widths_px": [
+      1440,
+      2542
+    ]
+  },
+  "mass": {
+    "algorithm": "source-size-or-H-albedo-density-mass-v1",
+    "source_population": 8341,
+    "finite_source_H": 8339,
+    "no_H_or_size": 2,
+    "project_density_kg_m3": 1000,
+    "project_albedo_if_absent": 0.1,
+    "per_body_measured_density": false,
+    "original_classification_and_source_mass_preserved": true
+  },
+  "evidence_navigation": "single evidence tab inside actual observation workbench; global signed imports preserved",
+  "followup": "DEV-025 registered observation extension, epsilonIndiB detail and supplied Gemini Canvas layout; not included in this immutable release"
+}

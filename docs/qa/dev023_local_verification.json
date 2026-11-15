@@ -1,0 +1,52 @@
+{
+  "work_id": "DEV-023",
+  "release": "0.15.0",
+  "phase": "isolated_build_before_release",
+  "runtime_manifest_sha256": "b95a10ca2cd3761d5e42b38098886bc2d2c8174e64f0987f3ea6dd0d8b333c16",
+  "source_files": 1274,
+  "required_sources": 1184,
+  "snapshots": 39,
+  "snapshot_bytes": 19203311,
+  "checks": {
+    "strict_typecheck_and_vite": "pass",
+    "vitest": {
+      "pass": 109,
+      "files": 22
+    },
+    "new_analogue_browser": "pass",
+    "representative_appearance_regression": "pass",
+    "late_p9_camera_regression": "pass",
+    "solar_lighting_browser": "pending"
+  },
+  "matching": {
+    "algorithm": "tno-source-aei-exploratory-v1",
+    "source_total": 8341,
+    "compared": 8340,
+    "excluded_no_complete_orbit": 1,
+    "source_sample": 2413,
+    "first_comparison_id": "sbdb-20689335",
+    "score_formula": "abs(a-a_h)/a_h + abs(e-e_h) + abs(i-i_h)/180",
+    "score_is_probability": false,
+    "identifies_planet_nine": false,
+    "common_epoch_or_phase_matching": false,
+    "unknown_point_source_detection": "not_implemented_preparation_state"
+  },
+  "source_observations_and_opal_originals_changed": false,
+  "solar_lighting": {
+    "default": "solar",
+    "surface_night_fill": 0,
+    "fallback_night_fill": 0,
+    "inspection_mode_preserved": true,
+    "calibrated_photometry": false
+  },
+  "independent_reviews": [
+    "r030_appearance source/frame/epoch/probability and hidden stale-response review; hidden requests now aborted",
+    "tno_metadata independent browser scenario and actual source IDs"
+  ],
+  "delivery": "verified_directory_no_new_zip",
+  "logs": [
+    "var/qa/dev023/build.log",
+    "var/qa/dev023/browser.log",
+    "var/qa/dev023/lighting-browser.log"
+  ]
+}

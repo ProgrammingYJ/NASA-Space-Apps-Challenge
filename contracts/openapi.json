@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Planet X · SPHEREx",
-    "version": "0.14.1"
+    "version": "0.15.1"
   },
   "paths": {
     "/health/live": {
@@ -799,6 +799,38 @@
         ],
         "title": "ComparisonRequest"
       },
+      "DistanceView": {
+        "properties": {
+          "algorithm_version": {
+            "type": "string",
+            "enum": [
+              "solar-overview-common-v2",
+              "parent-linear-distance-v1",
+              "legacy-expanded-v1"
+            ],
+            "title": "Algorithm Version"
+          },
+          "origin_object_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 50,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Origin Object Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "algorithm_version"
+        ],
+        "title": "DistanceView"
+      },
       "Evidence": {
         "properties": {
           "schema_version": {
@@ -1147,6 +1179,28 @@
       },
       "UniverseContext": {
         "properties": {
+          "distance_view": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DistanceView"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "approximate_mass_algorithm_version": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "source-size-or-H-albedo-density-mass-v1"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approximate Mass Algorithm Version"
+          },
           "scene_filter": {
             "anyOf": [
               {

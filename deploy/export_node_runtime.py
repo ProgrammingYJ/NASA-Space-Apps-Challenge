@@ -166,6 +166,7 @@ def _sources(root: Path) -> list[dict]:
     add("data/reference/outer-tno/r029-r031-20261115/jpl-tno-identity-bulk.json", True, "selected_TNO_exact_identity_facts")
     add("data/reference/outer-tno/r029-r031-20261115/jpl-tno-identity-bulk.source.json", True, "selected_TNO_identity_provenance")
     add("data/reference/outer-tno/r029-r031-20261115/audit-index.json", False, "MCP_metadata_audit_not_new_observations")
+    add("data/manifests/approximate_mass.json", False, "client_display_mass_assumptions_and_formula_provenance")
     add("contracts/openapi.json", True, "Node_strict_input_validation_schema")
     add("contracts/planet-nine.schema.json", True, "Planet_Nine_hypothesis_contract")
     for path in [

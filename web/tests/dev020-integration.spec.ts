@@ -81,6 +81,8 @@ test('DEV-020: real catalogue facts, FO563 identity and missing-phase criteria r
   expect(detail.info?.provenance).toMatchObject({sha256:identitySha,bytes:506627,received_at_utc:identityReceived,api_version:'1.0',snapshot_manifest_sha256:snapshotSha});
   expect(detail.info?.provenance.url).toBe('https://ssd-api.jpl.nasa.gov/sbdb_query.api?sb-class=TNO&fields=spkid%2Ckind%2Cprefix%2Cpdes%2Cfull_name%2Cclass&sort=spkid');
   expect(detail.physical.mass_kg).toBeNull();expect(detail.physical.diameter_km).toBeNull();
+  expect(Number(detail.source_fields?.H)).toBe(9.08);expect(detail.source_fields?.albedo).toBeNull();
+  const foDiameter=1329/Math.sqrt(.1)*10**(-9.08/5),foMassKg=Math.PI/6*1000*(foDiameter*1000)**3;
   expect(detail.full_orbit_au).toHaveLength(257);
   await page.getByTestId('open-tno-catalogue').click();
   await expect(page.getByTestId('tno-catalogue-count')).toContainText('8,341');
@@ -108,7 +110,10 @@ test('DEV-020: real catalogue facts, FO563 identity and missing-phase criteria r
     await expect(dialog).toHaveAttribute('data-generic-tno','true');
     await expect(dialog.getByTestId('criterion-orbits_sun')).toHaveAttribute('data-status','met');
     for(const id of ['equilibrium_shape','orbital_dominance'])await expect(dialog.getByTestId('criterion-'+id)).toHaveAttribute('data-status','unknown');
-    await expect(dialog.getByTestId('criteria-minimum-mass')).toHaveAttribute('data-current-mass-kind','unavailable');
+    const massLine=dialog.getByTestId('criteria-minimum-mass'),estimate=dialog.getByTestId('approximate-mass-details');
+    await expect(massLine).toHaveAttribute('data-current-mass-kind','estimate');await expect(massLine).toHaveAttribute('data-applied-density','1000');await expect(massLine).toContainText('≈');
+    await expect(estimate).toHaveAttribute('data-mass-kind','estimate');await expect(estimate).toHaveAttribute('data-size-origin','h_albedo');await expect(estimate).toHaveAttribute('data-absolute-magnitude','9.08');await expect(estimate).toHaveAttribute('data-albedo','0.1');await expect(estimate).toHaveAttribute('data-source-sha256',snapshotSha);
+    await expect.poll(async()=>Number(await massLine.getAttribute('data-current-mass-kg'))/foMassKg).toBeCloseTo(1,12);await expect.poll(async()=>Number(await massLine.getAttribute('data-current-mass-earth'))/(foMassKg/5.97217e24)).toBeCloseTo(1,12);
     await expect(dialog.getByTestId('criteria-orbit-diagram')).toBeVisible();
     await expect(dialog.getByTestId('criteria-orbit-diagram')).toHaveAttribute('data-semimajor-au',String(detail.semimajor_axis_au));
     await expect(dialog.getByTestId('mass-scenario-panel')).toHaveCount(0);
@@ -128,6 +133,8 @@ test('DEV-020: real catalogue facts, FO563 identity and missing-phase criteria r
   await expect(facts).toContainText('Normalised orbit-fit RMS (dimensionless): 0.14971');
   await expect(facts).not.toContainText(/0\.14971\s*[″"]/);
   const missing=catalogue.objects.find(row=>row.pdes==='2002 PD153');expect(missing).toBeTruthy();expect(missing!.orbit).toBeNull();
+  const missingDetail=await json<OuterTnoObject>(page.request,`/api/v1/catalog/outer-tno/object?object_id=${missing!.object_id}&jd_tdb=${catalogue.reference_jd_tdb}`);
+  expect(Number(missingDetail.source_fields?.H)).toBe(8.66);expect(missingDetail.physical.mass_kg).toBeNull();
   await browseChoose(page,'2002 PD153',missing!.object_id);
   await expect(scene(page)).toHaveAttribute('data-outer-tno-orbit-points','0');
   await page.getByTestId('open-planet-criteria').click();
@@ -135,7 +142,8 @@ test('DEV-020: real catalogue facts, FO563 identity and missing-phase criteria r
   await expect(missingDialog.getByTestId('criterion-orbits_sun')).toHaveAttribute('data-status','met');
   await expect(missingDialog.getByTestId('criterion-orbits_sun')).toContainText('missing orbital phase');
   await expect(missingDialog.getByTestId('criteria-orbit-diagram')).toHaveAttribute('data-eccentricity','0');
-  await expect(missingDialog.getByTestId('criteria-minimum-mass')).toHaveAttribute('data-current-mass-kind','unavailable');
+  await expect(missingDialog.getByTestId('criteria-minimum-mass')).toHaveAttribute('data-current-mass-kind','estimate');await expect(missingDialog.getByTestId('criteria-minimum-mass')).toHaveAttribute('data-applied-density','1000');
+  await expect(missingDialog.getByTestId('approximate-mass-details')).toHaveAttribute('data-size-origin','h_albedo');await expect(missingDialog.getByTestId('approximate-mass-details')).toHaveAttribute('data-absolute-magnitude','8.66');
   expect(massCalculations).toEqual([]);
   await testInfo.attach('dev020-selected-source-contract.json',{body:JSON.stringify({catalogue_count:catalogue.objects.length,usable_orbits:8340,source_sha256:catalogue.source_manifest_sha256,fo563:detail.info,missing_phase_object_id:missing!.object_id,mass_calculations:massCalculations}),contentType:'application/json'});
 });
@@ -189,7 +197,7 @@ test('DEV-020: four published maps keep source dates, lighting controls and phys
   await ready(page);
   await page.getByTestId('settings-toggle').click();
   await expect(page.getByTestId('render-preset')).toHaveValue('balanced');
-  await expect(page.getByTestId('settings-appearance-lighting')).toHaveValue('inspection');
+  await expect(page.getByTestId('settings-appearance-lighting')).toHaveValue('solar');
   for(const language of languages){
     await page.getByTestId('language').selectOption(language);
     const copy=sceneSettingsCopy(language),settings=page.locator('#universe-settings');
@@ -220,6 +228,7 @@ test('DEV-020: four published maps keep source dates, lighting controls and phys
     const notice=page.getByTestId('source-map-note');await expect(notice).toContainText(entry.note);
     await expect(notice.getByRole('link')).toHaveAttribute('href',entry.url);
     await expect(page.getByTestId('appearance-coverage-note')).toContainText(sceneSettingsCopy('en').gaps);
+    await page.getByTestId('appearance-lighting').selectOption('inspection');
     await expect(page.getByTestId('appearance-lighting')).toHaveValue('inspection');
     await expect(label).toHaveAttribute('data-appearance-lighting','inspection');
     await page.getByTestId('appearance-lighting').selectOption('solar');

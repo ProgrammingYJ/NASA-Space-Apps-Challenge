@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "algorithm_version": "source-size-or-H-albedo-density-mass-v1",
+  "formula_source": {
+    "url": "https://cneos.jpl.nasa.gov/tools/ast_size_est.html",
+    "title": "NASA/JPL CNEOS Asteroid Size Estimator",
+    "retrieved_utc": "2026-11-15T00:18:27.989374+00:00",
+    "audit_html_sha256": "1da595e02b33709a9e2fea92f4482cd6fd0fcadaccab3ff1f796f475a86c1b30",
+    "audit_html_bytes": 88355,
+    "audit_html_distribution": "local QA only; source link used in app"
+  },
+  "formula": {
+    "diameter_km": "1329 / sqrt(p_V) * 10 ** (-H_V/5)",
+    "mass_kg": "pi/6 * density_kg_m3 * (diameter_km * 1000) ** 3",
+    "mass_earth": "mass_kg / earth_mass_kg"
+  },
+  "project_assumptions": {
+    "default_geometric_albedo": 0.1,
+    "default_density_kg_m3": 1000,
+    "defaults_are_measured_for_each_body": false,
+    "catalogue_H_assumed_V_equivalent_without_per_object_band_validation": true,
+    "shape": "equal-volume sphere; not measured shape",
+    "earth_mass_kg": 5.97217e+24,
+    "defaults_are_a_population_fit_or_statistical_prior": false
+  },
+  "priority": [
+    "independently sourced primary-body mass",
+    "existing explicitly applied density scenario",
+    "source radius or diameter with stated project density assumption",
+    "source H and sourced/assumed albedo with stated project density assumption",
+    "unavailable; never zero"
+  ],
+  "limits": [
+    "Not an observed mass, discovery probability, official classification or clearing proof.",
+    "H, albedo, shape and density uncertainties are not propagated into a confidence interval.",
+    "No TNO H value is copied to a different body, and no empty input is interpreted as zero.",
+    "Original source fields and physical.mass_kg remain unchanged."
+  ],
+  "catalogue": {
+    "path": "data/manifests/outer_tno.json",
+    "sha256": "6dd683ace22417072aaba17ee3f61937aa926598265b6082edeea278bfd452c1",
+    "coverage": {
+      "total": 8341,
+      "source_diameter_available": 13,
+      "source_H_finite": 8339,
+      "no_source_diameter_or_H": [
+        "sbdb-50255373",
+        "sbdb-54316819"
+      ]
+    }
+  }
+}

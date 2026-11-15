@@ -87,3 +87,12 @@
 
 .moonSimulationStatus{position:absolute;left:24px;bottom:220px;max-width:min(410px,calc(100vw - 48px));padding:8px 12px;background:#091421e8;border:1px solid #344b61;border-radius:8px;color:#b9cee0;font-size:.78rem;pointer-events:auto}.moonSimulationStatus button{margin-left:8px}
 @media(max-width:700px){.moonSimulationStatus{left:12px;bottom:285px;max-width:calc(100vw - 24px)}}
+
+/* Keep the hypothesis list beside the selected object's information and camera. */
+.p9Dock>.analysis{width:min(580px,43vw);right:18px;top:98px;bottom:180px}
+.p9Dock>.analysis .analysisBody{padding:12px;overflow-x:hidden}
+.p9Dock>.scene{left:340px;right:calc(min(580px,43vw) + 36px);bottom:180px;transition:none}
+.p9Dock>.objectPanel{left:18px;right:auto;top:98px;bottom:180px;width:304px;max-height:none;box-sizing:border-box;padding:16px;overflow:auto}
+.p9Dock>.representation,.p9Dock>.controlsHelp{max-width:calc(100vw - min(580px,43vw) - 64px)}
+@media(max-width:1100px){.p9Dock>.analysis{width:48vw;right:12px;top:110px;bottom:200px}.p9Dock>.scene{left:0;right:calc(48vw + 24px);bottom:38vh}.p9Dock>.objectPanel{left:12px;top:auto;bottom:200px;width:calc(52vw - 36px);max-height:28vh}.p9Dock>.representation,.p9Dock>.controlsHelp{max-width:calc(52vw - 36px)}}
+@media(max-width:760px){.p9Dock>.analysis{top:145px;right:8px;left:50%;width:auto;bottom:165px}.p9Dock>.scene{left:0;right:50%;bottom:45vh}.p9Dock>.objectPanel{left:8px;right:calc(50% + 8px);width:auto;bottom:165px;max-height:32vh;padding:10px}.p9Dock>.objectPanel h1{font-size:18px}.p9Dock>.objectPanel dl{display:grid}.p9Dock>.analysis .analysisBody{padding:8px}}
