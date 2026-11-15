@@ -581,3 +581,5 @@ v0.16.0의 실제 등록부는10대상/40제품/37무순서쌍/74방향별비교
 최종사후기록은docs/releases/v0.16.0.json과docs/qa/dev025_local_verification.json이다. 검증한배포디렉터리·Data_Spec원MD/PDF·원FITS·이전ZIP은사후문서때문에변경하지않는다. 새ZIP을만들지않았고사용자untracked복사본MD/로컬논문PDF/개인키/내부계획서는공개Git대상에서제외한다. NASA·우주기관자료의PPT용설명을출처와함께세션텍스트로제공했으며TOP5를발견행성/존재확률로부르지않았다. 이후Git commit/push와원격HEAD확인이남아있다.
 
 DEV-025 Git 원본보존 점검: 새 공개 ref 디렉터리의 XML/JSON/TXT·서체/OFL에 한정해 .gitattributes의 -text/-eol을 적용했다. Git 자동 줄바꿈 변환이 공식 원응답·source sidecar의 byte/SHA를 바꾸지 않도록 하며 원파일이나 검증 배포디렉터리의 바이트는 수정하지 않았다. Data_Spec/PDF·실행manifest의 staged blob을 원파일과 대조하고 개인키/내부문서/원FITS/연구논문/사용자복사본 추가를 제외했다.
+
+DEV-025 Git 확정: 구현·자료·문서 commit `8ef356d2bcc712a5d9af5f984c3431e2bbc67503`를공개 ProgrammingYJ/NASA-Space-Apps-Challenge/main에push했고ls-remote와로컬HEAD가같았다. stage226경로/새공개ref130파일의rawbyte·DataSpec/PDF/manifest SHA·실행/계약/검사266파일의줄바꿈정규화동일성을대조했다. 동결source-transfer와다른검사소스는공개POST본문대기/반지름1ulp비교2파일뿐이며앱/과학값은변경되지않았다. 이확인기록과완료체크만별도문서커밋으로보존한다. 사용자untracked복사본은유지했다.

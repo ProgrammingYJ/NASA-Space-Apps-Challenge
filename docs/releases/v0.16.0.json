@@ -113,5 +113,14 @@
     "Two-body long-range display and optional restricted gravity do not implement all physics or verified historical reconstruction.",
     "No native-speaker review for Japanese, Traditional Chinese or French; CSS125% is not browser-toolbar zoom.",
     "No new release ZIP, no old FITS/evidence/release mutation, no private keys/research papers/internal documents in public source."
-  ]
+  ],
+  "git": {
+    "implementation_commit": "8ef356d2bcc712a5d9af5f984c3431e2bbc67503",
+    "branch": "main",
+    "pushed": true,
+    "remote_HEAD_matches": true,
+    "verified_utc": "2026-11-15T03:08:50.259859+00:00",
+    "url": "https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge/commit/8ef356d2bcc712a5d9af5f984c3431e2bbc67503",
+    "later_changes": "This verification record/TODO/worklog only; immutable deployed directory unchanged."
+  }
 }

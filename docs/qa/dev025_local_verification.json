@@ -803,5 +803,20 @@
     "Two-body long-range display and optional restricted gravity do not implement all physics or verified historical reconstruction.",
     "No native-speaker review for Japanese, Traditional Chinese or French; CSS125% is not browser-toolbar zoom.",
     "No new release ZIP, no old FITS/evidence/release mutation, no private keys/research papers/internal documents in public source."
-  ]
+  ],
+  "git_staging": {
+    "status": "passed",
+    "staged_paths": 226,
+    "reference_files_raw_bytes_preserved": 130,
+    "code_source_transfer_files_checked": 266,
+    "post_freeze_test_only_changes": [
+      "web/tests/dev025-epsilon-detail.spec.ts",
+      "web/tests/dev025-native-zoom.spec.ts"
+    ],
+    "Data_Spec_MD_and_PDF_and_science_manifest_bytes_preserved": true,
+    "forbidden_paths_or_key_material": false,
+    "pdf_builder_git_mode": "100755",
+    "implementation_commit": "8ef356d2bcc712a5d9af5f984c3431e2bbc67503",
+    "remote_HEAD_match_verified_utc": "2026-11-15T03:08:50.259859+00:00"
+  }
 }
