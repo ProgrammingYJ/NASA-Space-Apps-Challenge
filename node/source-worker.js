@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { hash, parse, safePath } = require('./storage');
 const { SOURCE_VERIFICATION_POLICY } = require('./verification-policy');
+const { resolveRegisteredPair } = require('./schema');
 const root = workerData.root, bundle = path.join(root, 'data', 'node-runtime');
 let manifest, manifestHash, initialized = false, failure = null;
 const metadata = new Map(), payloads = new Map();
@@ -46,7 +47,7 @@ function verify(strong = false) {
   initialized = true;
 }
 function verifyAsset(relative, strong = false) {
-  if (typeof relative !== 'string' || !/^(?:textures|brand)\//.test(relative)) throw new Error('invalid_asset_key');
+  if (typeof relative !== 'string' || !/^(?:textures|brand|reference|downloads)\//.test(relative)) throw new Error('invalid_asset_key');
   const target = 'web/dist/' + relative;
   const source = manifest.source_files.find(file => file.runtime_required && (file.path === 'web/public/' + relative || file.serving_copy_path === target));
   if (!source) throw new Error('asset_not_in_source_manifest');
@@ -81,11 +82,12 @@ function drain() {
     try {
       let sourceError = null;
       if (verificationError) {
-        if (action !== 'importComparison' || verificationError.validationScope !== 'source') throw verificationError;
+        if (!['importComparison','importRegistry'].includes(action) || verificationError.validationScope !== 'source') throw verificationError;
         sourceError = verificationError.code === 'ENOENT' ? 'source_missing' : 'source_integrity';
       }
       let value;
       if (action === 'asset') value = verifyAsset(key);
+      else if (action === 'registry' || action === 'importRegistry') value = manifest.snapshots.observation_registry ? snapshot('observation_registry') : null;
       else if (action === 'manifest') value = manifest;
       else if (action === 'snapshot') value = snapshot(key);
       else if (action === 'snapshots') {
@@ -93,6 +95,8 @@ function drain() {
         value = Object.fromEntries(key.map(item => [item, snapshot(item)]));
       } else if (action === 'comparison' || action === 'importComparison') {
         const entry = manifest.comparisons[key]; if (!entry) throw new Error('comparison_cache_unavailable');
+        const selection = resolveRegisteredPair(manifest.snapshots.observation_registry ? snapshot('observation_registry') : null, key.split(','), entry.object_id);
+        if (entry.algorithm_version !== selection.algorithm_version) throw new Error('registered_comparison_algorithm_mismatch');
         value = { ...entry, raw: load(entry.path, true), source_validation_error: sourceError };
       } else if (action === 'verify') value = { ready: true };
       else if (action === 'diagnostics') value = { ...stats, verification_policy: SOURCE_VERIFICATION_POLICY };

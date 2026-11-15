@@ -1,0 +1,32 @@
+{
+  "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27799%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27500%40-163182%27&TLIST=%272026-08-30+06%3A02%3A29.666%27&TLIST_TYPE=%27CAL%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27&QUANTITIES=%271%2C20%2C23%27&ANG_FORMAT=%27DEG%27&EXTRA_PREC=%27YES%27&CSV_FORMAT=%27YES%27&REF_SYSTEM=%27ICRF%27",
+  "source_url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27799%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27500%40-163182%27&TLIST=%272026-08-30+06%3A02%3A29.666%27&TLIST_TYPE=%27CAL%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27&QUANTITIES=%271%2C20%2C23%27&ANG_FORMAT=%27DEG%27&EXTRA_PREC=%27YES%27&CSV_FORMAT=%27YES%27&REF_SYSTEM=%27ICRF%27",
+  "parameters": {
+    "format": "json",
+    "COMMAND": "'799'",
+    "OBJ_DATA": "'YES'",
+    "MAKE_EPHEM": "'YES'",
+    "EPHEM_TYPE": "'OBSERVER'",
+    "CENTER": "'500@-163182'",
+    "TLIST": "'2026-08-30 06:02:29.666'",
+    "TLIST_TYPE": "'CAL'",
+    "TIME_TYPE": "'UT'",
+    "TIME_DIGITS": "'FRACSEC'",
+    "QUANTITIES": "'1,20,23'",
+    "ANG_FORMAT": "'DEG'",
+    "EXTRA_PREC": "'YES'",
+    "CSV_FORMAT": "'YES'",
+    "REF_SYSTEM": "'ICRF'"
+  },
+  "retrieved_utc": "2026-11-15T01:33:20.501865+00:00",
+  "bytes": 9068,
+  "sha256": "8455c7a927a2d715d52f34aa88b6be4bae01ca8f6851df15f42f7c10f686ed5c",
+  "local_relative_path": "data/reference/spherex-extended-20261115/uranus_2026W35_2A_0527_4_observer.json",
+  "object_id": "uranus",
+  "target_id": "799",
+  "observer_id": "-163182",
+  "epoch": "2026-08-30T06:02:29.666",
+  "ra_deg": 63.367617395,
+  "dec_deg": 21.023847796,
+  "coordinate_kind": "astrometric_ICRF_lighttime_observer_prediction_not_measured_centroid"
+}

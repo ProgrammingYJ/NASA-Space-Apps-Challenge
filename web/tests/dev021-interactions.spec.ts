@@ -1,6 +1,7 @@
 import {test,expect,type Page} from '@playwright/test';
 import {planetNineInteractionCopy} from '../src/PlanetNineInteractionCopy';
 import {r029Copy} from '../src/R029Copy';
+import {p9StepCopy} from '../src/P9StepCopy';
 
 // Run against root's isolated built server. These checks do not run external
 // archives or fabricate source observations. Only explicit network-error/race
@@ -58,7 +59,7 @@ test('DEV-021: actual top-region samples open immediately in a native dialog and
   expect(actual.samples[0]).toMatchObject({id:'caltech-row-2413',row_index:firstRow,kind:'synthetic_literature_sample',mass_earth:6.14,assumed_radius_earth:2.05});
   expect(actual.source.sha256).toBe('050b68182ecbf7fd76f280d8cc43c0683d207499aba1488a68092b834420a422');
   await ready(page);await openP9(page);
-  await expect(page.getByTestId('p9-regions').locator('tbody tr')).toHaveCount(5);
+  await expect(page.getByTestId('p9-region-cards').getByRole('listitem')).toHaveCount(5);
   let release!:()=>void,finish!:()=>void;
   const gate=new Promise<void>(resolve=>release=resolve),finished=new Promise<void>(resolve=>finish=resolve);
   await page.route(/\/api\/v1\/planet-nine\/regions\/3682\/members(?:\?|$)/,async route=>{
@@ -81,7 +82,7 @@ test('DEV-021: actual top-region samples open immediately in a native dialog and
     await expect(membersDialog(page)).not.toBeVisible();
     await expect(page.getByTestId('p9-mass_earth')).toHaveValue('6.14');
     await expect(page.getByTestId('p9-sample-applied')).toContainText('#2413');
-    await expect(page.getByTestId('p9-sample-applied')).toContainText(planetNineInteractionCopy('en').applied);
+    await expect(page.getByTestId('p9-sample-applied')).toContainText(p9StepCopy('en').applied);
     await expect(page.getByTestId('p9-current-mass')).toContainText('6.14 M⊕');
     await expect(page.getByTestId('p9-current-mass-kg')).toContainText((6.14*earthMassKg).toExponential(6)+' kg');
     await expect(page.getByTestId('p9-current-mass')).toContainText(planetNineInteractionCopy('en').massNote);

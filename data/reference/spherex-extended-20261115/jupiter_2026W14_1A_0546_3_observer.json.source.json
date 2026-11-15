@@ -1,0 +1,32 @@
+{
+  "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27599%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27500%40-163182%27&TLIST=%272026-04-01+18%3A41%3A49.043%27&TLIST_TYPE=%27CAL%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27&QUANTITIES=%271%2C20%2C23%27&ANG_FORMAT=%27DEG%27&EXTRA_PREC=%27YES%27&CSV_FORMAT=%27YES%27&REF_SYSTEM=%27ICRF%27",
+  "source_url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27599%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27500%40-163182%27&TLIST=%272026-04-01+18%3A41%3A49.043%27&TLIST_TYPE=%27CAL%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27&QUANTITIES=%271%2C20%2C23%27&ANG_FORMAT=%27DEG%27&EXTRA_PREC=%27YES%27&CSV_FORMAT=%27YES%27&REF_SYSTEM=%27ICRF%27",
+  "parameters": {
+    "format": "json",
+    "COMMAND": "'599'",
+    "OBJ_DATA": "'YES'",
+    "MAKE_EPHEM": "'YES'",
+    "EPHEM_TYPE": "'OBSERVER'",
+    "CENTER": "'500@-163182'",
+    "TLIST": "'2026-04-01 18:41:49.043'",
+    "TLIST_TYPE": "'CAL'",
+    "TIME_TYPE": "'UT'",
+    "TIME_DIGITS": "'FRACSEC'",
+    "QUANTITIES": "'1,20,23'",
+    "ANG_FORMAT": "'DEG'",
+    "EXTRA_PREC": "'YES'",
+    "CSV_FORMAT": "'YES'",
+    "REF_SYSTEM": "'ICRF'"
+  },
+  "retrieved_utc": "2026-11-15T01:33:19.475696+00:00",
+  "bytes": 9104,
+  "sha256": "eaa616ff9f89182cacbbf651d799ea8bd512df3d77e0c65319e7e4c8f43c7237",
+  "local_relative_path": "data/reference/spherex-extended-20261115/jupiter_2026W14_1A_0546_3_observer.json",
+  "object_id": "jupiter",
+  "target_id": "599",
+  "observer_id": "-163182",
+  "epoch": "2026-04-01T18:41:49.043",
+  "ra_deg": 106.825083175,
+  "dec_deg": 22.909135984,
+  "coordinate_kind": "astrometric_ICRF_lighttime_observer_prediction_not_measured_centroid"
+}

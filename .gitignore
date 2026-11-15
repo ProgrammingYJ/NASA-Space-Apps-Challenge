@@ -53,6 +53,7 @@ htmlcov/
 /var/
 /tmp/
 /artifacts/
+/output/pdf/
 /downloads/
 /.tools/
 *.fits

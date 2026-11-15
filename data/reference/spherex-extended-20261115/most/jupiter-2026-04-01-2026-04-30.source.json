@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "target": "jupiter",
+  "naif_id": "599",
+  "query": {
+    "catalog": "spherex",
+    "input_type": "naifid_input",
+    "obj_naifid": "599",
+    "obs_begin": "2026 04 01 00:00:00",
+    "obs_end": "2026 04 30 23:59:59",
+    "output_mode": "Brief"
+  },
+  "source_url": "https://irsa.ipac.caltech.edu/cgi-bin/MOST/nph-most?catalog=spherex&input_type=naifid_input&obj_naifid=599&obs_begin=2026+04+01+00%3A00%3A00&obs_end=2026+04+30+23%3A59%3A59&output_mode=Brief",
+  "retrieved_utc": "2026-11-15T01:29:26.713768+00:00",
+  "tls_verification": "default_urllib_verified",
+  "claim": "predicted_footprint_overlap_only_not_detection",
+  "max_bytes": 2000000,
+  "error": null,
+  "http_status": 200,
+  "content_type": "text/plain",
+  "response_sha256": "957eb0c996631a07b1b2be95fd87bd71b5986d89128b7f19d09b0fe2793d8161",
+  "response_bytes": 54847
+}

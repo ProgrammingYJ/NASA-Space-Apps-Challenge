@@ -1,0 +1,12 @@
+{
+  "id": "S12",
+  "source_url": "https://irsa.ipac.caltech.edu/datalink/links/spherex?ID=ivo%3A%2F%2Firsa.ipac%2Fspherex_qr3%3F2026W40_1A_0373_4%2FD3",
+  "retrieved_utc": "2026-11-15T01:05:20.348990+00:00",
+  "http_status": 200,
+  "content_type": "application/x-votable+xml",
+  "bytes": 16095,
+  "sha256": "4c0480980932ad39f9cd5ee6e99a1fbdba6cc0aeec69b8e9f1b86d4a3ca5afb5",
+  "calibration_family": "cal-swcs-v5-2026-191",
+  "status": "retrieved",
+  "local_path": "data/reference/spherex-registry/dev025/S12-datalink.xml"
+}

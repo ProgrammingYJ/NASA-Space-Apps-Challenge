@@ -1,0 +1,43 @@
+{
+  "family": "Noto Sans KR",
+  "license": "OFL-1.1",
+  "upstream_commit": "b38c5c93af322c45f633e17ac440ec1e6c94d489",
+  "retrieved_utc": "2026-11-15T01:48:22.133098+00:00",
+  "use": "embedded PDF typesetting only; not astronomy data",
+  "files": [
+    {
+      "path": "data/reference/document-fonts/NotoSansKR[wght].ttf",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/b38c5c93af322c45f633e17ac440ec1e6c94d489/ofl/notosanskr/NotoSansKR%5Bwght%5D.ttf",
+      "bytes": 10414588,
+      "sha256": "194018e6b2b293a7964f037b25c0249ce1418bc9ab3c971060a03aa57861e252"
+    },
+    {
+      "path": "data/reference/document-fonts/OFL.txt",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/b38c5c93af322c45f633e17ac440ec1e6c94d489/ofl/notosanskr/OFL.txt",
+      "bytes": 4388,
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+    },
+    {
+      "path": "data/reference/document-fonts/METADATA.pb",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/b38c5c93af322c45f633e17ac440ec1e6c94d489/ofl/notosanskr/METADATA.pb",
+      "bytes": 767,
+      "sha256": "9b8b27c0dd1adbb0057d1fbe9534207ab3606114ace6755453d14668912471a1"
+    },
+    {
+      "path": "data/reference/document-fonts/NotoSans[wdth,wght].ttf",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5/ofl/notosans/NotoSans%5Bwdth%2Cwght%5D.ttf",
+      "bytes": 2049096,
+      "sha256": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
+      "role": "fallback for five Latin/superscript glyphs absent from Noto Sans KR"
+    },
+    {
+      "path": "data/reference/document-fonts/NotoSans-OFL.txt",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5/ofl/notosans/OFL.txt",
+      "bytes": 4396,
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "role": "fallback for five Latin/superscript glyphs absent from Noto Sans KR"
+    }
+  ],
+  "fallback_license": "OFL-1.1",
+  "fallback_upstream_commit": "8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5"
+}

@@ -1,0 +1,117 @@
+{
+  "release": "0.16.0",
+  "work_id": "DEV-025",
+  "status": "deployed_and_verified",
+  "checked_utc": "2026-11-15T03:05:25.852427+00:00",
+  "public_url": "https://nasaspaceappschallenge.marulee.dev/",
+  "delivery": {
+    "delivery_format": "directory",
+    "directory": "NASA_SPACE_APPS_CHALLENGE_v0.16.0_20261115_115623KST",
+    "directory_manifest_sha256": "ab8c13a8b2e49feb4ae7d527dd08107e23ecfc318d7bb91c4f28abc592d6ebd7",
+    "file_count": 1951,
+    "payload_bytes": 1103298864,
+    "directory_bytes": 1103676202,
+    "new_release_zip_created": false
+  },
+  "runtime": {
+    "manifest_sha256": "0ac22b38cb819369e16bdb6835aeddc0ff6a2ddad70020174d2932aab73b7b39",
+    "files": 114,
+    "bytes": 63027446,
+    "sources": 1365,
+    "required_verified": 1270,
+    "optional_present_verified": 28,
+    "optional_not_deployed": 67,
+    "server": "Node.js only; Python used for offline build/science/verification"
+  },
+  "source_revision": {
+    "base_commit": "84811e52eba64f5cdf0ad1d511a5b6e77d3f395a",
+    "build_working_tree_has_uncommitted_changes": true,
+    "source_transfer_manifest_sha256": "6d20ba3e2281470e5e1be5f2e2751af70d991b65d22b4867c71198adb0f5b795",
+    "source_files_verified": 594,
+    "post_freeze_changes": "Post-deployment documentation/QA records and two public test assertion corrections only; verified immutable deployment directory remains unchanged."
+  },
+  "deployment": {
+    "previous_verified_release": "0.15.1",
+    "old_pid": 14572,
+    "activated_pid": 22206,
+    "actual_restarted_pid": 22451,
+    "preserved_evidence_comparison_files": 22,
+    "stopped_writer_backup_files": 41,
+    "backup_sha256": "f719705ca632144cb13974c3580e8785c00df758b8bac89207f10bd64df5abc3",
+    "HTTPS_ready": true,
+    "source_bundle_verified": true,
+    "nginx_config": "passed",
+    "legacy_three_evidence_after_actual_restart": "passed; original envelopes/result IDs/judgments/raw SHA unchanged"
+  },
+  "observation_registry": {
+    "targets": 10,
+    "products": 40,
+    "unordered_pairs": 37,
+    "ordered_pairs": 74,
+    "all_ordered_HTTP_checks_passed": true,
+    "DataLink_spectral_verified": 17,
+    "native_only_spectral_not_verified": 23,
+    "datasets_entries": 110,
+    "datasets_bytes": 1020687104,
+    "new_Solar_raw_products": 8,
+    "new_Solar_raw_bytes": 32699520,
+    "canonical_four_comparison_bytes_preserved": true
+  },
+  "features": [
+    "Registered real SPHEREx A/B/quality/evidence/restore for 10 targets.",
+    "Separate epsilonIndiBa/Bb actual Gemini photo and sourced literature detail outside the 1000 AU scene.",
+    "Semantic TOP5 region cards with original rows and persistent actual-TNO browsing.",
+    "Source-centred zoom-out navigation markers; source-pinned native small-body past/future origins.",
+    "2026 SNHS Alpha credits, public repository/attributions and complete downloadable Data Spec PDF.",
+    "Normal-flow scrollable intro card without obscuring the exploration text."
+  ],
+  "checks": {
+    "strict_vite": "passed",
+    "vitest": 132,
+    "node": 86,
+    "python": 45,
+    "python_subtests": 22,
+    "ruff": "passed",
+    "ordered_comparison_HTTP": 74,
+    "isolated_browser_unique": 18,
+    "public_browser_unique": 5,
+    "public_initial_pass_fail": [
+      3,
+      2
+    ],
+    "public_followup_pass_fail": [
+      2,
+      0
+    ],
+    "exact_directory_Node_only_restart": "passed",
+    "actual_production_restart_and_legacy_three_evidence": "passed",
+    "record": "docs/qa/dev025_local_verification.json"
+  },
+  "PDF": {
+    "verification": "docs/qa/dev025_pdf_verification.json",
+    "pages": 380,
+    "bytes": 5354288,
+    "sha256": "20bbb99c50dcc9f7a72b0911829b2cd526368a3e97e3c365d8ab65fdb50f96e9",
+    "source_MD_sha256": "3e57da2c438e4e98c6af65a7712ba0f080e6a3b1eb5e04a09a7a09bae5d00052",
+    "whole_document_preserved": true,
+    "screen_scope": "all 380 pages rasterized/contact sheets plus independent representative full pages; final changed opening page inspected"
+  },
+  "public_repository": {
+    "url": "https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge",
+    "visibility": "PUBLIC",
+    "user_authorized": true,
+    "GitHub_API_and_unauthenticated_web_checked": true
+  },
+  "release_metadata": {
+    "updated_at": "2026-11-15T02:42:00+00:00",
+    "meaning": "actual release source freeze UTC; distinct from PDF build time"
+  },
+  "limits": [
+    "Node serves source-verified build caches; not arbitrary on-demand FITS analysis.",
+    "SOURCE/coverage/finite pixels do not establish a detection, motion or flux.",
+    "TOP5 is conditional 2018 literature sky-position regions, not existence probability or discovered planet candidates.",
+    "Two-body long-range display and optional restricted gravity do not implement all physics or verified historical reconstruction.",
+    "No native-speaker review for Japanese, Traditional Chinese or French; CSS125% is not browser-toolbar zoom.",
+    "No new release ZIP, no old FITS/evidence/release mutation, no private keys/research papers/internal documents in public source."
+  ]
+}

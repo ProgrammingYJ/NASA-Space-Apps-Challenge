@@ -1,0 +1,31 @@
+{
+  "tool": "Horizons lookup",
+  "input": {
+    "query": "SPHEREx"
+  },
+  "retrieved_utc": "2026-11-15T00:40:50.134Z",
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"signature\":{\"source\":\"NASA/JPL Horizons Lookup API\",\"version\":\"1.1\"},\"count\":1,\"result\":[{\"name\":\"SPHEREx (spacecraft)\",\"pdes\":\"2025-047E\",\"alias\":[],\"type\":\"spacecraft\",\"spkid\":\"-163182\"}]}"
+      }
+    ],
+    "structuredContent": {
+      "signature": {
+        "source": "NASA/JPL Horizons Lookup API",
+        "version": "1.1"
+      },
+      "count": 1,
+      "result": [
+        {
+          "name": "SPHEREx (spacecraft)",
+          "pdes": "2025-047E",
+          "alias": [],
+          "type": "spacecraft",
+          "spkid": "-163182"
+        }
+      ]
+    }
+  }
+}

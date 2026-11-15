@@ -4,6 +4,7 @@ import hashlib
 import json
 import sys
 import time
+from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
@@ -16,6 +17,16 @@ def call(base, path, body=None):
 
 
 def main(base):
+    root = Path(__file__).resolve().parents[1]
+    bundle = json.loads((root / "data/node-runtime/runtime_manifest.json").read_text(encoding="utf-8"))
+    sources = {item["id"]: item for item in json.loads((root / "data/manifests/datasets.json").read_text(encoding="utf-8"))["files"]}
+    registry = None
+    if bundle.get("observation_registry"):
+        pin = bundle["observation_registry"]
+        assert pin["path"] == "data/manifests/observation_registry.json"
+        raw_registry = (root / pin["path"]).read_bytes()
+        assert hashlib.sha256(raw_registry).hexdigest() == pin["sha256"]
+        registry = json.loads(raw_registry)
     assert call(base, "/health/ready")["status"] == "ready"
     assert b"/assets/" in call(base, "/")
     runtime = call(base, "/api/v1/runtime")
@@ -39,9 +50,36 @@ def main(base):
     for entry in appearance["objects"].values():
         assert hashlib.sha256(call(base, entry["texture_url"])).hexdigest() == entry["sha256"]
     out = {"status": "passed", "scope": runtime["public_scope"], "surface_maps": len(appearance["objects"])}
+    if registry is not None:
+        targets = call(base, "/api/v1/objects")["objects"]
+        assert {item["object_id"] for item in targets} == set(registry["objects"])
+        for object_id, definition in registry["objects"].items():
+            listing = call(base, "/api/v1/observations?object_id=" + object_id)
+            entries = {key: value for key, value in registry["exposures"].items() if value["object_id"] == object_id and value["enabled"]}
+            assert listing["object_id"] == object_id and listing["status"] == "available"
+            assert listing["default_pair"] == definition["default_pair"]
+            assert len(listing["observations"]) == len(entries)
+            assert {item["observation_id"] for item in listing["observations"]} == set(entries)
+            pairs = [pair for pair in registry["pairs"] if all(registry["exposures"][key]["object_id"] == object_id for key in pair)]
+            assert sorted(map(tuple, listing["available_pairs"])) == sorted(map(tuple, pairs))
+            for observation in listing["observations"]:
+                entry = entries[observation["observation_id"]]
+                source = sources[entry["source_id"]]
+                assert observation["object_id"] == object_id
+                for key in ("sha256", "bytes", "source_url"):
+                    assert observation[key] == entry["source"][key] == source[key]
+                for key in ("date_avg", "detector", "release", "timesys"):
+                    assert observation[key] == entry[key]
+            assert next(item for item in targets if item["object_id"] == object_id)["default_pair"] == definition["default_pair"]
+        assert runtime["ordered_comparison_count"] == 2 * len({tuple(sorted(pair)) for pair in registry["pairs"]})
+        out["registered_targets"] = len(registry["objects"])
+        out["registered_unordered_pairs"] = len(registry["pairs"])
     for object_id, ids, key in [("epsilon-indi-b", ["S01", "S02"], ""), ("pluto", ["S12", "S14"], "pluto_")]:
         observations = call(base, "/api/v1/observations?object_id=" + object_id)
-        assert [item["observation_id"] for item in observations["observations"]] == ids
+        if registry is None:
+            assert [item["observation_id"] for item in observations["observations"]] == ids
+        else:
+            assert set(ids) <= {item["observation_id"] for item in observations["observations"]}
         job = call(base, "/api/v1/comparison-jobs", {"observation_ids": ids})
         for _ in range(160):
             job = call(base, "/api/v1/jobs/" + job["job_id"])
@@ -50,6 +88,14 @@ def main(base):
             time.sleep(0.1)
         assert job["state"] == "succeeded", job
         result = call(base, "/api/v1/comparisons/" + job["result_id"] + "/manifest")
+        expected_id = "cmp_d88083664b6fd27592eb68c1" if object_id == "epsilon-indi-b" else "cmp_0d749ea3f9ec3a8da925dc44"
+        assert job["result_id"] == result["result_id"] == expected_id
+        assert result["object_id"] == object_id and [frame["observation_id"] for frame in result["frames"]] == ids
+        for frame in result["frames"]:
+            for field in ("provenance", "calibration"):
+                source = sources[frame[field]["id"]]
+                assert frame[field]["sha256"] == source["sha256"] and frame[field]["bytes"] == source["bytes"]
+                assert frame[field]["source_url"] == source["source_url"]
         if object_id == "epsilon-indi-b":
             assert [frame["quality"]["pixel_count"] for frame in result["frames"]] == [29, 32]
         context = {"selected_object_id": object_id, "model_epoch": "2026-11-14T00:00:00Z", "source_manifest_sha256": scene["source_manifest_sha256"], "orbit_manifest_sha256": scene["orbit_manifest_sha256"], "timeline_algorithm_version": timeline["algorithm_version"], "show_orbits": True, "show_galaxies": False, "show_kuiper_belt": True, "panel_open": True}

@@ -3,8 +3,8 @@ import time
 import pytest
 from fastapi.testclient import TestClient
 
-from api.main import create_app
-from api.storage import atomic_json, digest
+from api.main import ROOT, create_app
+from api.storage import atomic_json, digest, read_json
 
 
 def wait_job(client, job):
@@ -65,10 +65,20 @@ def test_real_save_export_restore_and_rejection(completed):
 
 def test_no_data_validation_and_traversal(completed):
     client, _, _result = completed
+    registry = read_json(ROOT / "data/manifests/observation_registry.json")
     for object_id in ("barnards-star", "wise0855", "rw-aurigae", "r-draconis"):
         body = client.get("/api/v1/observations", params={"object_id": object_id}).json()
-        assert body["status"] == "unverified" and body["observations"] == []
-        assert body["available_sources"]
+        expected = {identifier: entry for identifier, entry in registry["exposures"].items() if entry["object_id"] == object_id and entry["enabled"]}
+        assert body["status"] == "available"
+        assert body["default_pair"] == registry["objects"][object_id]["default_pair"]
+        assert {row["observation_id"] for row in body["observations"]} == set(expected)
+        assert {tuple(ids) for ids in body["available_pairs"]} == {tuple(ids) for ids in registry["pairs"] if registry["exposures"][ids[0]]["object_id"] == object_id}
+        for row in body["observations"]:
+            source = expected[row["observation_id"]]
+            assert (row["sha256"], row["bytes"], row["date_avg"]) == (source["source"]["sha256"], source["source"]["bytes"], source["date_avg"])
+            assert row["quantitative_comparison_validated"] is False
+            if source.get("calibration_verification_status", "verified") != "verified":
+                assert row["wavelength_um"] is None and row["bandwidth_um"] is None
     assert (
         client.post("/api/v1/comparison-jobs", json={"observation_ids": ["S01", "S01"]}).status_code
         == 422

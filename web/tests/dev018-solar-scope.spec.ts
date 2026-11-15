@@ -1,22 +1,59 @@
 import {appearanceCopy} from '../src/AppearanceCopy';
+import {creditsCopy} from '../src/CreditsCopy';
+import {registeredObservationCopy} from '../src/RegisteredObservationCopy';
+import type {Comparison,ObservationList} from '../src/types';
 import {test,expect,type Page} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 const copy=(locale:string)=>JSON.parse(readFileSync(new URL('../src/locales/'+locale+'.json',import.meta.url),'utf8')) as Record<string,string>;
 async function choose(page:Page,id:string){await page.locator('#universe-search').fill(id);await page.getByTestId('search-'+id).click();await expect(page.getByTestId('universe-scene')).toHaveAttribute('data-selected-object',id);await expect(page.getByTestId('universe-scene')).toHaveAttribute('data-camera-mode','focused');}
 
-test('unlinked Quaoar and Neptune observations are compact normal states without empty A/B controls',async({page})=>{
+test('unlinked Quaoar, Mercury, Venus, Earth, Mars and Sun retain honest empty observation states',async({page})=>{
+  test.setTimeout(120000);
   await page.goto('/');
-  for(const id of ['quaoar','neptune']){
+  for(const id of ['quaoar','mercury','venus','earth','mars','sun']){
+    const response=await page.request.get('/api/v1/observations?object_id='+id);expect(response.ok()).toBe(true);const available=await response.json();expect(available.object_id).toBe(id);expect(available.status).toBe('no_linked_observations');expect(available.observations).toEqual([]);
     await choose(page,id);await page.getByTestId('open-object-observations').click();const panel=page.getByTestId('observation-panel');await expect(panel.getByTestId('observation-availability')).toContainText(copy('ko').noLinkedObservationTitle);await expect(panel.getByRole('combobox')).toHaveCount(0);await expect(panel.getByTestId('frame-A')).toHaveCount(0);await expect(panel.getByRole('alert')).toHaveCount(0);await expect(panel.getByTestId('observation-availability').getByRole('link').first()).toHaveAttribute('href','https://irsa.ipac.caltech.edu/applications/MOST/');
     for(const locale of ['en','ja','zh-Hant','fr','ko']){await page.getByTestId('language').selectOption(locale);await expect(panel).toContainText(copy(locale).noLinkedObservationTitle);await expect(panel).not.toContainText('undefined');}
     await panel.getByRole('button',{name:copy('ko').returnToSpace,exact:true}).click();
   }
 });
 
-test('provided logo and central empty credits preserve focus and five-language labels',async({page})=>{
+test('the ten registered targets include real Jupiter, Saturn, Uranus and Neptune pairs, with Neptune original A/B source integrity',async({page})=>{
+  test.setTimeout(120000);await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');await page.getByTestId('language').selectOption('en');
+  const objectsResponse=await page.request.get('/api/v1/objects');expect(objectsResponse.ok()).toBe(true);const objectList=await objectsResponse.json();
+  expect(objectList.objects.map((object:{object_id:string})=>object.object_id).sort()).toEqual(['epsilon-indi-b','pluto','barnards-star','wise0855','rw-aurigae','r-draconis','jupiter','saturn','uranus','neptune'].sort());
+  const solar=[['jupiter',['SPX-J01','SPX-J02']],['saturn',['SPX-S01','SPX-S02']],['uranus',['SPX-U01','SPX-U02']],['neptune',['SPX-N01','SPX-N02']]] as const;
+  for(const [objectId,ids] of solar){
+    const response=await page.request.get('/api/v1/observations?object_id='+objectId);expect(response.ok()).toBe(true);const listing=await response.json() as ObservationList;
+    expect(listing.object_id).toBe(objectId);expect(listing.status).toBe('available');expect(listing.default_pair).toEqual(ids);expect(listing.observations.map(row=>row.observation_id)).toEqual(ids);expect(listing.available_pairs).toEqual([[...ids]]);
+    for(const exposure of listing.observations){expect(exposure.detector).toBe(objectId==='jupiter'?'D1':'D3');expect(exposure.date_avg).toMatch(/^202[56]-/);}
+    expect(listing.observations[0].date_avg).not.toBe(listing.observations[1].date_avg);
+    await choose(page,objectId);await page.getByTestId('open-object-observations').click();const panel=page.getByTestId('observation-panel');
+    await expect(panel.getByTestId('observation-availability')).toHaveCount(0);const selectors=panel.getByRole('combobox');await expect(selectors).toHaveCount(2);
+    await expect(selectors.nth(0)).toHaveValue(ids[0]);await expect(selectors.nth(1)).toHaveValue(ids[1]);
+    await expect(panel.getByRole('button',{name:copy('en').open,exact:true})).toBeEnabled();
+    if(objectId==='neptune'){
+      const comparisonResponse=page.waitForResponse(value=>value.request().method()==='GET'&&/^\/api\/v1\/comparisons\/cmp_[a-f0-9]{24}\/manifest$/.test(new URL(value.url()).pathname));
+      await panel.getByRole('button',{name:copy('en').open,exact:true}).click();const resultResponse=await comparisonResponse;expect(resultResponse.ok()).toBe(true);const result=await resultResponse.json() as Comparison;
+      expect(result.object_id).toBe('neptune');expect(result.algorithm_version).toBe('spherex-registered-native-v1');expect(result.frames.map(frame=>frame.observation_id)).toEqual(ids);expect(result.scientific_status).toBe('association_insufficient');
+      const expectedSha=['591f5002e487fd439ddc0d5f5200523e1fed8b53d2f32cc014b3c7f0e12ae347','e3bbc3b37ba77993396c0c5a350a8c6dbc5853df8b12b6d3bb8fa03b8264eb56'];
+      for(const [index,frame] of result.frames.entries()){
+        expect(frame.provenance.id).toBe(ids[index]);expect(frame.provenance.sha256).toBe(expectedSha[index]);expect(frame.metadata.date_avg).toBe(listing.observations[index].date_avg);expect(frame.metadata.timesys).toBe('UTC');expect(frame.metadata.detector).toBe('D3');expect(frame.prediction.kind).toBe('observer_ephemeris_prediction');expect(frame.prediction.source).toMatchObject({target_id:'899',observer_id:'-163182'});expect(frame.quality.quantitative.status).toBe('not_validated');
+        const view=panel.getByTestId(index===0?'frame-A':'frame-B');await expect(view).toContainText(ids[index]);await expect(view).toContainText(frame.metadata.date_avg);await expect(view.locator('canvas')).toHaveAttribute('width',String(frame.cutout.width));await expect(view.locator('canvas')).toHaveAttribute('height',String(frame.cutout.height));
+      }
+      await expect(panel.getByTestId('registered-observation-disclosures')).toContainText(registeredObservationCopy('en').note);await expect(page.getByTestId('result-id')).toHaveText(result.result_id);
+    }
+    await panel.getByRole('button',{name:copy('en').returnToSpace,exact:true}).click();
+  }
+});
+
+test('provided logo and approved central credits preserve exact contributors, focus and five-language roles',async({page})=>{
   await page.goto('/');const logo=page.getByTestId('project-logo');await expect(logo).toBeVisible();await expect(logo).toHaveAttribute('src','/brand/planet-x-logo.png');expect(await logo.evaluate(element=>{const image=element as HTMLImageElement;return image.complete&&image.naturalWidth===1024&&image.naturalHeight===1024;})).toBe(true);
   for(const locale of ['ko','en','ja','zh-Hant','fr']){
-    await page.getByTestId('language').selectOption(locale);await page.getByTestId('settings-toggle').click();const opener=page.getByTestId('open-credits');await opener.click();const dialog=page.getByTestId('credits-dialog');await expect(dialog).toBeVisible();await expect(dialog.getByRole('heading')).toHaveText(copy(locale).creditsTitle);await expect(dialog).toContainText(copy(locale).creditsPlaceholder);await expect(page.getByTestId('credits-close')).toBeFocused();await page.keyboard.press('Tab');await expect(page.getByTestId('credits-close')).toBeFocused();await page.keyboard.press('Escape');await expect(dialog).not.toBeVisible();await expect(opener).toBeFocused();await page.getByTestId('settings-toggle').click();
+    await page.getByTestId('language').selectOption(locale);await page.getByTestId('settings-toggle').click();const opener=page.getByTestId('open-credits');await opener.click();const dialog=page.getByTestId('credits-dialog'),words=creditsCopy(locale);await expect(dialog).toBeVisible();await expect(dialog.getByTestId('credits-title')).toHaveText(words.title);await expect(dialog.getByTestId('credits-team')).toHaveText('2026 SNHS Alpha');
+    for(const [role,label,names] of [['science',words.science,['송내고교 1학년 윤서진']],['testers',words.testers,['SNHS Alpha 전원 참여']],['design',words.design,['송내고교 1학년 김민정']],['backend',words.backend,['송내고교 1학년 이용진']],['management',words.management,['송내고교 2학년 유영준','송내고교 1학년 박형섭']],['leader',words.leader,['송내고교 1학년 이용진']]] as const){const row=dialog.getByTestId('credits-role-'+role);await expect(row.locator('dt')).toHaveText(label);await expect(row.locator('dd > span')).toHaveText([...names]);}
+    await expect(dialog.getByTestId('credits-advisor')).toContainText('김민세');await expect(dialog.getByTestId('credits-venue')).toHaveText('송내고교');await expect(dialog.getByTestId('credits-data-pdf')).toHaveAttribute('href','/downloads/PlanetX_Data_Spec.pdf');await expect(dialog.getByTestId('credits-repository')).toHaveAttribute('href','https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge');
+    await expect(page.getByTestId('credits-close')).toBeFocused();await page.keyboard.press('Tab');await expect(dialog.getByTestId('credits-data-pdf')).toBeFocused();await page.keyboard.press('Shift+Tab');await expect(page.getByTestId('credits-close')).toBeFocused();await page.keyboard.press('Shift+Tab');await expect(dialog.getByTestId('credits-repository')).toBeFocused();await page.keyboard.press('Tab');await expect(page.getByTestId('credits-close')).toBeFocused();await page.keyboard.press('Escape');await expect(dialog).not.toBeVisible();await expect(opener).toBeFocused();await page.getByTestId('settings-toggle').click();
   }
 });
 

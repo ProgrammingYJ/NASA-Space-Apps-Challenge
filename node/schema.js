@@ -38,9 +38,31 @@ function omitNullFields(value) {
   if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).filter(([, v]) => v != null).map(([k, v]) => [k, omitNullFields(v)]));
   return value;
 }
-function sessionRules(session) {
-  const ids = session.observation_ids, expected = session.object_id === 'epsilon-indi-b' ? ['S01', 'S02'] : ['S12', 'S14'];
-  if (ids.length !== 2 || ids[0] === ids[1] || !ids.every(id => expected.includes(id))) throw new Error('invalid_request');
+function nativeTnoContextReasons(context, current) {
+  if (context.outer_tno_manifest_sha256 == null && context.native_tno_simulation_algorithm_version == null) return [];
+  if (!current || typeof current.source_manifest_sha256 !== 'string' || typeof current.algorithm_version !== 'string') return ['outer_tno_data_unavailable'];
+  if (context.outer_tno_manifest_sha256 != null && context.outer_tno_manifest_sha256 !== current.source_manifest_sha256) return ['outer_tno_sources_changed'];
+  if (context.native_tno_simulation_algorithm_version != null && context.native_tno_simulation_algorithm_version !== current.algorithm_version) return ['native_tno_algorithm_changed'];
+  return [];
+}
+function resolveRegisteredPair(registry, ids, objectId) {
+  if (!Array.isArray(ids) || ids.length !== 2 || ids[0] === ids[1] || ids.some(id => typeof id !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$/.test(id))) throw new Error('invalid_request');
+  const epsilon = ids.every(id => ['S01','S02'].includes(id)), pluto = ids.every(id => ['S12','S14'].includes(id));
+  let target;
+  if (registry == null) { if (!epsilon && !pluto) throw new Error('invalid_request'); target = epsilon ? 'epsilon-indi-b' : 'pluto'; }
+  else {
+    if (registry.algorithm_version !== 'spherex-registered-native-v1' || !registry.objects || !registry.exposures || !Array.isArray(registry.pairs)) throw new Error('invalid_request');
+    const entries = ids.map(id => Object.hasOwn(registry.exposures,id) ? registry.exposures[id] : null);
+    if (entries.some((entry,index) => !entry || entry.enabled !== true || entry.observation_id !== ids[index] || typeof entry.source_id !== 'string' || !entry.source_id) || entries[0].object_id !== entries[1].object_id || entries[0].detector !== entries[1].detector || entries[0].source_id === entries[1].source_id || entries[0].source?.sha256 === entries[1].source?.sha256 || !entries[0].date_avg || entries[0].date_avg === entries[1].date_avg || !registry.pairs.some(pair => Array.isArray(pair) && pair.length === 2 && pair.includes(ids[0]) && pair.includes(ids[1]))) throw new Error('invalid_request');
+    target = entries[0].object_id;
+    if (!Object.hasOwn(registry.objects,target)) throw new Error('invalid_request');
+    if (epsilon && target !== 'epsilon-indi-b' || pluto && target !== 'pluto') throw new Error('invalid_request');
+  }
+  if (objectId != null && target !== objectId) throw new Error('invalid_request');
+  return { object_id:target, observation_ids:[...ids], algorithm_version:epsilon ? 'spherex-native-v1' : pluto ? 'pluto-native-v1' : 'spherex-registered-native-v1' };
+}
+function sessionRules(session, registry) {
+  resolveRegisteredPair(registry,session.observation_ids,session.object_id);
   const c = session.universe_context;
   if (!c) return session;
   if (c.selected_object_id !== session.object_id || c.follow_object_id != null && c.follow_object_id !== session.object_id) throw new Error('invalid_request');
@@ -82,4 +104,4 @@ function migrateSolarSession(session, currentVisualHashes = {}, compatibleRefere
   }
   return { session: migrated, omitted_contexts };
 }
-module.exports = { validator, sessionRules, omitNullFields, migrateSolarSession };
+module.exports = { validator, sessionRules, resolveRegisteredPair, omitNullFields, migrateSolarSession, nativeTnoContextReasons };

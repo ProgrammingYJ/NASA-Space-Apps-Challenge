@@ -1,8 +1,8 @@
 # Data_Spec — 데이터 원천·입력·가공·사용 상태 전수 기록
 
-## DEV-023 / DEV-024 / OPS-020 우선 적용 데이터 상태 · 실제 활성 export/출처 기록
+**자료 정본 DEV-025 / v0.16.0:** 실제 SPHEREx 등록부는10대상40개 노출×검출기 제품·37개 무순서 A/B쌍(양방향74선택)이다. 기존 원자료102행/네comparison정본을 보존하고 새 태양계8제품을 추가한110행의 dataset 목록을 사용한다. 이 문서는 사용/확보/이전보존을 구분한 데이터 목록이다. 현재 구현·실행검사·AWS 배포/재시작 확정과 runtime SHA는 순환 해시를 피하기 위해 [FSD](FSD.md)와 [사후 릴리스 기록](https://github.com/ProgrammingYJ/NASA-Space-Apps-Challenge/blob/main/docs/releases/v0.16.0.json)에서 확인한다. PDF는 명시된 빌드 시각의 이 전체 원문이며 이전 절의 당시 완료·미완료 상태를 소급 수정하지 않는다.
 
-아래 기존2,186파일 전수표는 v0.11.0 시점의 보존 snapshot이다. 그 표의 ‘현재 실사용’은 당시 상태이며, **현재 채택/제거·새 입력의 의미는 이 절이 우선**한다. 자료 원본을 임의 수정하지 않았다. 공개 기능은 FSD1.1의 태양계/관측/P9로 축소했고 은하/역사/외계행성/블랙홀/범용실험/역사혜성 구현과 공개 복제 자산을 실제 제거했다. 불변 원자료/이전 ZIP·Git은 보존한다. 현재 active closure는 data/manifests/node_runtime.json의 source1,275개(필수1,184/선택91)·생성39JSON/19,203,311B이며 전 항목의 경로/바이트/SHA/역할을 그 기계 판독 전수표로 추적한다. 현재 정본 SHA는cdd9d4591d84b2e5eb4c962233531106c1284b776a6af9c7d68e09db4de9a204다. 새ZIP 없이 디렉터리를 검증·배포했으며 후속 DEV-024 절과 docs/releases/v0.15.1.json을 따른다. DEV-024 거리표시는 동일자료의 새표현이며 신규관측이 아니다.
+보존된 DEV-023/DEV-024/OPS-020 자료 상태(현재 DEV-025 정본으로 오해하지 않음): 아래 기존2,186파일 전수표는 v0.11.0 시점의 보존 snapshot이다. 그 표의 ‘현재 실사용’은 당시 상태이며, **당시 채택/제거·새 입력의 의미는 해당 절이 우선**한다. 자료 원본을 임의 수정하지 않았다. 공개 기능은 FSD1.1의 태양계/관측/P9로 축소했고 은하/역사/외계행성/블랙홀/범용실험/역사혜성 구현과 공개 복제 자산을 실제 제거했다. 불변 원자료/이전 ZIP·Git은 보존한다. 당시 active closure는 data/manifests/node_runtime.json의 source1,275개(필수1,184/선택91)·생성39JSON/19,203,311B이며 전 항목의 경로/바이트/SHA/역할을 그 기계 판독 전수표로 추적한다. 당시 정본 SHA는cdd9d4591d84b2e5eb4c962233531106c1284b776a6af9c7d68e09db4de9a204다. 새ZIP 없이 디렉터리를 검증·배포했으며 후속 DEV-024 절과 docs/releases/v0.15.1.json을 따른다. DEV-024 거리표시는 동일자료의 새표현이며 신규관측이 아니다.
 
 ### 실제 채택·확보와 출처
 
@@ -3922,3 +3922,216 @@ Gemini 사용자 제공 저장본은 과학 입력이 아닌 디자인 참조다
 
 
 DEV-024 배포확정: DEV-024 / v0.15.1: 혼합척도를 공통 부모중심 선형거리/전체개략도로 분리했고 원자료 거리비율·mesh반지름·구판카메라 복원을 보존한다. P9오른쪽580px/왼쪽INFO/연속이름선택과출처H·크기/명시ρ·albedo가정의M⊕어림값을 구현했다. 중복전역근거버튼을제거하고관측작업대근거탭으로통합했다. strict/Vite·Vitest122/Node80/Python65+16subtests/Ruff,독립브라우저9경로와구판2경로,정확디렉터리Node-only재시작을확인했다. 공개초회6/7에서좌표도착전Pluto선택race를발견해교정했고실제응답지연/Pluto저장복원과εB5언어원본품질/근거복원2후속을공개HTTPS에서통과했다. 운영PID14484→실제재시작14572,기존3근거원봉투/ID/판단과네comparison정본을보존한다. runtimeSHA cdd9d4591d84b2e5eb4c962233531106c1284b776a6af9c7d68e09db4de9a204,source1275/필수1184·39JSON/19,203,311B. 새ZIP없이095903 검증디렉터리를활성화했으며사후정본은 docs/releases/v0.15.1.json이다.
+
+
+### DEV-025 실행 등록부와 원자료 전수 연결 (검증 진행 중)
+
+등록부는6대상·32개 노출×검출기 제품·29개 서로다른 OBSID·33개 무순서 A/B쌍(역순66선택)이다. 한 visit의 여러 검출기를 별도 관측시각으로 세지 않는다. 기존4정본은재계산하지않고원바이트·원소스검증후보존한다. 새62ordered결과는원격 빌드 중이며 공개완료/운동검증으로 읽지 않는다.
+
+| 입력 ID | 대상·DATE-AVG UTC·검출기 | 불변 원본 bytes / SHA256 | 보정 ID·DataLink 상태 | 원출처 |
+| --- | --- | --- | --- | --- |
+| L001 | barnards-star · 2025-08-15T20:46:08.896 · D6 | 5,129,280 / `a7c222316390568b37f4701761c16642a65cf55940872779f1da790c5c552f5c` | L042 · unverified_archive_metadata_unavailable | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W33_2C/l2b-v20-2025-266/6/level2_2025W33_2C_0321_1D6_spx_l2b-v20-2025-266.fits?center=269.4463433352,4.7672324093deg&size=0.12deg) |
+| L002 | barnards-star · 2025-09-30T15:41:37.244 · D1 | 5,129,280 / `b108e8a55a0a798938907de6abd3963ac727a30efd0bca3c36496a126c1e55de` | L039 · unverified_archive_metadata_unavailable | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W40_1A/l2b-v20-2025-277/1/level2_2025W40_1A_0367_1D1_spx_l2b-v20-2025-277.fits?center=269.4463152342,4.7675944008deg&size=0.12deg) |
+| L003 | barnards-star · 2026-05-04T14:35:12.724 · D3 | 5,132,160 / `5b7817df3df3af370a7f90e671baa6df427d09be28df43fd77e63f2154af96c7` | L052 · unverified_service_error | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2026W19_1A/l2b-v24-2026-131/3/level2_2026W19_1A_0216_1D3_spx_l2b-v24-2026-131.fits?center=269.4461826944,4.7693017489deg&size=0.12deg) |
+| L004 | barnards-star · 2026-08-20T21:45:51.099 · D3 | 4,106,880 / `9215375520587776aeb75f5e5154019903f2ac064fdb057ec73926c8044c761b` | L051 · unverified_service_error | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W34_2A/l2b-v27-2026-243/3/level2_2026W34_2A_0081_1D3_spx_l2b-v27-2026-243.fits?center=269.4461162230,4.7701580164deg&size=0.12deg) |
+| L005 | barnards-star · 2026-08-20T21:45:51.099 · D6 | 4,020,480 / `361a7603c8b800f6c7e5ff9b83119323dcf55ca85df3c5b35b735aaf77ae7259` | S10 · unverified_service_error | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W34_2A/l2b-v27-2026-243/6/level2_2026W34_2A_0081_1D6_spx_l2b-v27-2026-243.fits?center=269.4461162230,4.7701580164deg&size=0.12deg) |
+| L006 | barnards-star · 2026-09-02T06:11:05.473 · D1 | 4,023,360 / `ec55c17cd9c22f789407df4f395efb1e2d88eac09e283d05f372dec3090744aa` | L049 · verified | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W36_1A/l2b-v27-2026-252/1/level2_2026W36_1A_0510_1D1_spx_l2b-v27-2026-252.fits?center=269.4461086421,4.7702556706deg&size=0.12deg) |
+| L007 | r-draconis · 2025-06-06T11:23:21.434 · D1 | 5,129,280 / `6a379d07994f4d0dc9d7dac79de5e4ee6c6e849d538ae8374d5cf174975cf524` | L039 · unverified_archive_metadata_unavailable | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W23_2B/l2b-v20-2025-252/1/level2_2025W23_2B_0206_1D1_spx_l2b-v20-2025-252.fits?center=248.1672413671,66.7550228511deg&size=0.12deg) |
+| L008 | r-draconis · 2025-10-19T00:56:14.061 · D1 | 5,129,280 / `40940684410dee24f53b66789fb778e9af2b7236b53d90dd3e298d9ddce446ff` | L039 · unverified_service_error | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W42_2A/l2b-v20-2025-293/1/level2_2025W42_2A_0526_1D1_spx_l2b-v20-2025-293.fits?center=248.1672360142,66.7550234803deg&size=0.12deg) |
+| L009 | r-draconis · 2025-12-30T03:42:04.746 · D3 | 5,132,160 / `8bfcc1e180f94a87ff521754ef40ec9a58d1e1c3630b208d0e21d10015c11dad` | L052 · unverified_service_error | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2026W01_1A/l2b-v22-2026-007/3/level2_2026W01_1A_0257_2D3_spx_l2b-v22-2026-007.fits?center=248.1672331455,66.7550238176deg&size=0.12deg) |
+| L010 | r-draconis · 2025-12-30T03:42:04.746 · D6 | 5,132,160 / `0249b06c502ff2da5764ce6a04e7a0ffffb229e277467764df352f36ecba5c83` | L042 · unverified_service_error | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2026W01_1A/l2b-v22-2026-007/6/level2_2026W01_1A_0257_2D6_spx_l2b-v22-2026-007.fits?center=248.1672331455,66.7550238176deg&size=0.12deg) |
+| L011 | r-draconis · 2026-06-12T20:40:39.719 · D3 | 5,132,160 / `9be557e149b513186261a7a5dd4d984f1a0e1a1ba195bbd5770c3b5576f55642` | L052 · unverified_archive_metadata_unavailable | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2026W24_2B/l2b-v25-2026-166/3/level2_2026W24_2B_0242_4D3_spx_l2b-v25-2026-166.fits?center=248.1672265936,66.7550245878deg&size=0.12deg) |
+| L012 | r-draconis · 2026-06-12T20:40:39.718 · D6 | 5,129,280 / `f81515286d12ca166ebab8f6373a97bfb16cd079780320b3185e9b5f6d05c213` | L042 · unverified_service_error | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2026W24_2B/l2b-v25-2026-166/6/level2_2026W24_2B_0242_4D6_spx_l2b-v25-2026-166.fits?center=248.1672265936,66.7550245878deg&size=0.12deg) |
+| L013 | rw-aurigae · 2025-09-04T01:38:54.954 · D1 | 5,129,280 / `fa64c568891142560f9e7ce75cb692e87e4247254f083ef8161fb730cbc189b9` | L039 · unverified_service_error | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W36_1A/l2b-v20-2025-271/1/level2_2025W36_1A_0677_2D1_spx_l2b-v20-2025-271.fits?center=76.9565858173,30.4012931849deg&size=0.12deg) |
+| L014 | rw-aurigae · 2025-09-11T16:16:31.527 · D6 | 5,129,280 / `1a8e4b4e1856ab67531b9188684dfd354e1e718f6471f59341cb9684be30fffd` | L042 · unverified_archive_metadata_unavailable | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W37_2A/l2b-v20-2025-267/6/level2_2025W37_2A_0051_1D6_spx_l2b-v20-2025-267.fits?center=76.9565858658,30.4012930673deg&size=0.12deg) |
+| L015 | rw-aurigae · 2025-09-20T05:35:07.356 · D3 | 5,129,280 / `9a271f3b87d724dfd0f0bd7af4031f086f14c36de44e8961b0875ee594bd59b0` | L052 · unverified_archive_metadata_unavailable | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W38_2C/l2b-v20-2025-269/3/level2_2025W38_2C_0342_2D3_spx_l2b-v20-2025-269.fits?center=76.9565859203,30.4012929350deg&size=0.12deg) |
+| L016 | rw-aurigae · 2026-09-09T21:43:11.435 · D1 | 4,023,360 / `1c8f3a52087075941ba5c457a4cb8c60e02ea35499ca41ad6f6a399b8176d624` | L049 · verified | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W37_1A/l2b-v27-2026-255/1/level2_2026W37_1A_0524_1D1_spx_l2b-v27-2026-255.fits?center=76.9565881814,30.4012874513deg&size=0.12deg) |
+| L017 | rw-aurigae · 2026-09-13T07:09:29.383 · D6 | 4,020,480 / `b7a76c52325cb74ab7762a55aca6d8ec0d98c4d1517fc75946eec4fa60b47f97` | S10 · unverified_service_error | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W37_2A/l2b-v27-2026-259/6/level2_2026W37_2A_0581_1D6_spx_l2b-v27-2026-259.fits?center=76.9565882030,30.4012873989deg&size=0.12deg) |
+| L018 | rw-aurigae · 2026-09-16T21:31:03.042 · D3 | 4,106,880 / `1900882b9f9e213d1acf93ace8c21c5db687f6648dc91717c64837925defd63d` | L051 · verified | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W38_1A/l2b-v27-2026-261/3/level2_2026W38_1A_0565_1D3_spx_l2b-v27-2026-261.fits?center=76.9565882260,30.4012873432deg&size=0.12deg) |
+| L023 | wise0855 · 2025-05-05T16:49:00.018 · D6 | 5,071,680 / `7046c131e306e5a32c83b3495182ca0b235b95a2742499f595ec682dc7263e77` | L042 · unverified_archive_metadata_unavailable | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W19_1B/l2b-v20-2025-241/6/level2_2025W19_1B_0116_1D6_spx_l2b-v20-2025-241.fits?center=133.76126180203863%2C-7.242305400887234d&size=0.06) |
+| L024 | wise0855 · 2025-11-10T08:50:32.077 · D6 | 5,071,680 / `98f5df5b44eef22043ec439c318afbf4609b6be686d5d3bcb14f310a884309c5` | L042 · unverified_archive_metadata_unavailable | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W46_1A/l2b-v20-2025-318/6/level2_2025W46_1A_0090_3D6_spx_l2b-v20-2025-318.fits?center=133.76008681677718%2C-7.242208657840784d&size=0.06) |
+| L025 | wise0855 · 2026-04-23T10:29:27.447 · D6 | 5,074,560 / `0fb3eae09bd59b31cce4b65efe2f6ef6142fcd6a3524d5613ad9e48f0b08fec6` | L042 · unverified_archive_metadata_unavailable | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2026W17_1B/l2b-v24-2026-115/6/level2_2026W17_1B_0634_1D6_spx_l2b-v24-2026-115.fits?center=133.75906502989113%2C-7.242124525981952d&size=0.06) |
+| L026 | wise0855 · 2026-05-11T02:19:42.221 · D6 | 5,071,680 / `7f25819c4ca6530c61a0d1d48ab85555f44dfa2072528e38889f136cc089b2e4` | L042 · unverified_service_error | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2026W20_1A/l2b-v24-2026-135/6/level2_2026W20_1A_0033_1D6_spx_l2b-v24-2026-135.fits?center=133.75895504764637%2C-7.242115470129375d&size=0.06) |
+| L027 | rw-aurigae · 2026-03-06T05:34:00.986 · D1 | 5,132,160 / `59ff154712fb1dd9665e2e33ffadfb1c399ce1af7b663de3ecd3e74f3fa6a1a2` | L039 · unverified_archive_metadata_unavailable | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2026W10_2B/l2b-v24-2026-094/1/level2_2026W10_2B_0137_2D1_spx_l2b-v24-2026-094.fits?center=76.9565869850,30.4012903530deg&size=0.12deg) |
+| L028 | rw-aurigae · 2026-03-04T08:02:02.357 · D1 | 5,132,160 / `e480d2c639f74f1e39d9a386c37be424ae7aa48d08ca9df55bce1e3eb73621db` | L039 · unverified_archive_metadata_unavailable | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2026W10_1A/l2b-v24-2026-094/1/level2_2026W10_1A_0445_4D1_spx_l2b-v24-2026-094.fits?center=76.9565869729,30.4012903823deg&size=0.12deg) |
+| L029 | rw-aurigae · 2025-09-03T17:29:47.849 · D1 | 5,129,280 / `bcc6c99bfe9fa06f80f5c505f3e421891a640993a34196b2ac86705425a4a455` | L039 · unverified_archive_metadata_unavailable | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W36_1A/l2b-v20-2025-271/1/level2_2025W36_1A_0606_4D1_spx_l2b-v20-2025-271.fits?center=76.9565858151,30.4012931902deg&size=0.12deg) |
+| L033 | epsilon-indi-b · 2025-04-29T16:20:18.265 · D6 | 5,394,240 / `2f59c95e5938459c3e3b1836c94de7c7235f3273493d38a769643f4093dc216b` | L042 · unverified_archive_metadata_unavailable | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/level2/2025W18_1B/l2b-v20-2025-240/6/level2_2025W18_1B_0175_2D6_spx_l2b-v20-2025-240.fits?center=330.99325327004783%2C-56.80204046439604d&size=0.25) |
+| L035 | epsilon-indi-b · 2026-09-22T21:49:17.535 · D6 | 4,273,920 / `efd7f0c6fec286a91c7066748d65e2d859f683267d3eb901cb4b516172d5ef16` | S10 · verified | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W39_1A/l2b-v27-2026-268/6/level2_2026W39_1A_0434_3D6_spx_l2b-v27-2026-268.fits?center=330.99607681264683%2C-56.80301186237472d&size=0.25) |
+| S01 | epsilon-indi-b · 2025-04-30T02:06:28.716 · D6 | 66,456,000 / `aac83ad1e0b4b908b76789da67d69b3c558f9917a412554523dcbf26b7a29146` | S10 · verified | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W18_1B/l2b-v27-2026-196/6/level2_2025W18_1B_0238_4D6_spx_l2b-v27-2026-196.fits) |
+| S02 | epsilon-indi-b · 2026-09-23T17:21:46.185 · D6 | 68,112,000 / `7cf59b624e5cc53545014dc86be95b1708a1bb0b52280dd945035357d7735d51` | S10 · verified | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W39_1A/l2b-v27-2026-268/6/level2_2026W39_1A_0578_3D6_spx_l2b-v27-2026-268.fits) |
+| S12 | pluto · 2026-09-29T16:33:19.251 · D3 | 66,896,640 / `be563eceb4dec44175e244b46124709a5014c62ed0b70f640790ca3c00195ac0` | L051 · verified | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W40_1A/l2b-v27-2026-276/3/level2_2026W40_1A_0373_4D3_spx_l2b-v27-2026-276.fits) |
+| S13 | pluto · 2026-10-01T15:42:02.869 · D3 | 65,724,480 / `e658743a6b19998f5e3e54eb3950fa9c6c51fc29fa794fa218cb063b241e4c6d` | L051 · verified | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W40_2A/l2b-v27-2026-285/3/level2_2026W40_2A_0033_1D3_spx_l2b-v27-2026-285.fits) |
+| S14 | pluto · 2026-10-02T14:30:41.058 · D3 | 65,727,360 / `21de3fea996a89844a3d2ea7ee4328c68dee01c7286ecf6a5e61f30cea8c701f` | L051 · verified | [IRSA 원본](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W40_2A/l2b-v27-2026-285/3/level2_2026W40_2A_0244_1D3_spx_l2b-v27-2026-285.fits) |
+
+검증된 DataLink 매핑9개는 채택 SWCS의 제품군·검출기·파일크기를 대조한다. 현재 QR2 검색이 중단돼 정상0행을 반환한13개와 HTTP502를 반환한10개는 원응답/오류를 보존하고 SWCS를 샘플링하지 않는다. 이23개 영상의 파장·대역폭은null이며 실제 IMAGE/FLAGS/VARIANCE/ZODI·주 천구WCS의 native검사만 허용한다. 이것은 원래 자료의 부재·불량이나 대상의 물리적 부재를 뜻하지 않는다. 검증되지 않은 정량 flux·정합 차분·움직임 검출은 산출하지 않는다.
+
+| 보정 ID | bytes / SHA256 | 원출처 |
+| --- | --- | --- |
+| L039 | 33,312,960 / `a4f1057aeece7f85ab16dff958a4396c99b36f6021734485176c41ac089623f1` | [IRSA SWCS](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/spectral_wcs/cal-wcs-v4-2025-254/1/spectral_wcs_D1_spx_cal-wcs-v4-2025-254.fits) |
+| L042 | 33,312,960 / `8872df333578ac80c308c7077bb86e4d3d2a639ee53c75f0f2fe94ee04ab6a96` | [IRSA SWCS](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/spectral_wcs/cal-wcs-v4-2025-254/6/spectral_wcs_D6_spx_cal-wcs-v4-2025-254.fits) |
+| L049 | 33,312,960 / `44fb48b236e25a99d42c8986da0064cc58359527e1fc76e182eda52371a1ae23` | [IRSA SWCS](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/spectral_wcs/cal-swcs-v5-2026-191/1/spectral_wcs_D1_spx_cal-swcs-v5-2026-191.fits) |
+| L051 | 33,312,960 / `51750c8f948a30541d391e54930279aa067c62c398a7cc2679e592bc6044427a` | [IRSA SWCS](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/spectral_wcs/cal-swcs-v5-2026-191/3/spectral_wcs_D3_spx_cal-swcs-v5-2026-191.fits) |
+| L052 | 33,312,960 / `8ba38095e547645b8a77072cf683764c791df5cc49bc17b5adf0b8880c3a5563` | [IRSA SWCS](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr2/spectral_wcs/cal-wcs-v4-2025-254/3/spectral_wcs_D3_spx_cal-wcs-v4-2025-254.fits) |
+| S10 | 33,312,960 / `19195d253892883586aa2183cb66238b32f6032ade62d490b36b85b0dd18f212` | [IRSA SWCS](https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/spectral_wcs/cal-swcs-v5-2026-191/6/spectral_wcs_D6_spx_cal-swcs-v5-2026-191.fits) |
+
+보정후보 파일의 실제 해시 보존과 노출별 적용 검증은 별개다. 검증되지 않은 매핑에 후보 파일을 적용하지 않는다. DataLink 전체XML/요청/크기/해시는등록부와아래원응답sidecar에보존한다.
+
+| 신규 확보 참고 원파일 | bytes / SHA256 | 출처·사용 |
+| --- | --- | --- |
+| data/reference/spherex-registry/dev025/L001-datalink.xml | 3,466 / `bbe2f8e88ccfbea3625befb4dbbf2fd8f44a4a9b2829079ee750b33ec166a5de` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L001-datalink.xml.source.json | 536 / `6e7e7660d0560a5ccbe9bcbcf02a9eed18a6d8ca872111598c3d2f16ed9ccd0f` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L002-datalink.xml | 3,466 / `bbe2f8e88ccfbea3625befb4dbbf2fd8f44a4a9b2829079ee750b33ec166a5de` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L002-datalink.xml.source.json | 536 / `5fa743cc561f4df01cbf44edff88756fbd230fa21eaa1f93906e6bb09bc7cd60` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L003-datalink.xml.source.json | 226 / `489038a13404ac1e4c3d05a426bd57d474b484d9829abdad56443e80c903348b` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L004-datalink.xml.source.json | 226 / `44f2825fd1831c30cb8192950fdf619e762b0dd817af6cd977dddfaba91c4e6c` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L005-datalink.xml.source.json | 226 / `5e79a325ecf33c5aa840f70adb20cb74adb55aeb343d411364fbc8b69321bd8d` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L006-datalink.xml | 17,792 / `bae66a8487098f2764175b48ff50a98e8887bf5333366f951052c99d73180f05` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L006-datalink.xml.source.json | 538 / `3131ea2b15af819f8c9342535871ef3761f28a977496d526acc97dd433db346c` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L007-datalink.xml | 3,466 / `bbe2f8e88ccfbea3625befb4dbbf2fd8f44a4a9b2829079ee750b33ec166a5de` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L007-datalink.xml.source.json | 536 / `312609b873791bba93a5b73b59a402669d381f0e9e004a2c3d617e91a984c157` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L008-datalink.xml.source.json | 226 / `12582c55c76c73876852d3eaf85337f16190ed8745760caf7d0380969324d4d7` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L009-datalink.xml.source.json | 226 / `9f491e00d204c4129d3e6efad91419e3a73e6659622ff8b4a93799676ec5ccf3` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L010-datalink.xml.source.json | 226 / `8fced16e0c03169ea26b24fb514f4837c63871316f4eb7ac604584c9f1401eec` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L011-datalink.xml | 3,466 / `bbe2f8e88ccfbea3625befb4dbbf2fd8f44a4a9b2829079ee750b33ec166a5de` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L011-datalink.xml.source.json | 536 / `aa50dbb37a83cf80c0e65b4633bb647a0849458b94bac790cac9fa698e5e1f28` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L012-datalink.xml.source.json | 226 / `1dfaaf1674297d4d8f094c6c338875f1ecfcfe6ca445ccb2a1050918c4ea20b6` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L013-datalink.xml.source.json | 226 / `60a203796d9e1d14071aee63cd53ecaf329b15f6f6d7c973230e35a6b524bfd4` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L014-datalink.xml | 3,466 / `bbe2f8e88ccfbea3625befb4dbbf2fd8f44a4a9b2829079ee750b33ec166a5de` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L014-datalink.xml.source.json | 536 / `9df1b50ec118771556784f96ae7abd47f3ce09898372cbd88273bf74062a4443` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L015-datalink.xml | 3,466 / `bbe2f8e88ccfbea3625befb4dbbf2fd8f44a4a9b2829079ee750b33ec166a5de` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L015-datalink.xml.source.json | 536 / `afda71800f099c439d5dd752a7804f744f85511d24d1c2a8846471b9616ca0c1` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L016-datalink.xml | 17,792 / `a595c13a94cb042f96138f2ce6d3a4a2fd08f590810b9f267ef65f0b2387029b` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L016-datalink.xml.source.json | 538 / `a62e50cee2b4b288fd8a625cd9c0d62bd1b90096f5763a23e45a2d423b4ca9b0` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L017-datalink.xml.source.json | 226 / `477d5efda4a2fcc5ef59c13810f1e63586a65f631efa39e28c92585792a05b6d` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L018-datalink.xml | 16,093 / `7c8e9cd53c18bfccac2fb6d2fbae96e039c3870f0a11247b5e1ef3e549fa1951` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L018-datalink.xml.source.json | 538 / `37df7570649ef6d1f6c45cc66e3be0734cfcd05b8a36a704a95a08bfee655636` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L023-datalink.xml | 3,466 / `bbe2f8e88ccfbea3625befb4dbbf2fd8f44a4a9b2829079ee750b33ec166a5de` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L023-datalink.xml.source.json | 536 / `7438ba67fbb63223e6f9947e3cd627e4fa79e5d9edf1e5b3052f932e4988fe3c` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L024-datalink.xml | 3,466 / `bbe2f8e88ccfbea3625befb4dbbf2fd8f44a4a9b2829079ee750b33ec166a5de` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L024-datalink.xml.source.json | 536 / `60a4adf1cebec42e82382d4539cd3904a21bebd28d620657ecf89971efa8a107` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L025-datalink.xml | 3,466 / `bbe2f8e88ccfbea3625befb4dbbf2fd8f44a4a9b2829079ee750b33ec166a5de` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L025-datalink.xml.source.json | 536 / `2cddca0d16b53c89a5459ee3319db4f73f1295b3af26d15e33e5243346a383bc` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L026-datalink.xml.source.json | 226 / `0eaf11cddb7d042a8bec6249e1c5d7ef8c6ffbf59392c9cba665a20bb9581dd3` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L027-datalink.xml | 3,466 / `bbe2f8e88ccfbea3625befb4dbbf2fd8f44a4a9b2829079ee750b33ec166a5de` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L027-datalink.xml.source.json | 536 / `a907d6105207683fed32fd78e92dde00722dd64428886c4750f28cf01c17bb82` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L028-datalink.xml | 3,466 / `bbe2f8e88ccfbea3625befb4dbbf2fd8f44a4a9b2829079ee750b33ec166a5de` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L028-datalink.xml.source.json | 536 / `3e32c10beae830dc0f6eb9e94958563672676957e1f6cc8f2f0eb16d9bb4127e` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L029-datalink.xml | 3,466 / `bbe2f8e88ccfbea3625befb4dbbf2fd8f44a4a9b2829079ee750b33ec166a5de` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L029-datalink.xml.source.json | 536 / `57df24608cb938e7459c81ce5f9ba32202f4354794d8f6064a2d3dfe392d0f95` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L033-datalink.xml | 3,466 / `bbe2f8e88ccfbea3625befb4dbbf2fd8f44a4a9b2829079ee750b33ec166a5de` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L033-datalink.xml.source.json | 536 / `78e18ce62020bf6939f2a3ee02745f03bd35fcddba24542c320ade5ec0fbcb5e` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/L035-datalink.xml | 15,251 / `ffcd3a2864d46b5dfa7134f4f2d3bd350981f84601f70f9bd5b8485b5a787e3e` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/L035-datalink.xml.source.json | 538 / `e8edc0b583cf7b2b7fa87b89853e0ce9a63c86e6ae4d07f2813cda18d832a200` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/pluto-S13-spherex-observer.json | 8,911 / `fa3ebabb6441fbbdf7d36c23ce316d7bc09e614c918af6ea57dc12b6cc18e9ff` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/pluto-S13-spherex-observer.json.source.json | 1,174 / `cbd90f092ca03bc916adcd5119512dfb5b0c6625281ca0c89fb1cb5c1570c0aa` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/S01-datalink.xml | 15,252 / `e85dde15c76756750726884b44ccfc94f91d104b8ce8e6ac6ab9f790c1106a87` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/S01-datalink.xml.source.json | 536 / `a5ba6f8e33a2921c94fa960e86ac802d98a18dce657e08a6a9a2af22eee8bce3` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/S02-datalink.xml | 15,252 / `693324c368a04fd5c4620523c9e4f07b1186299562f0ec9a9733545f4ca72a79` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/S02-datalink.xml.source.json | 536 / `ee036b16872ecca00de7958ff34d19bf5df333f36b8164dc422e418d94252cf0` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/S12-datalink.xml | 16,095 / `4c0480980932ad39f9cd5ee6e99a1fbdba6cc0aeec69b8e9f1b86d4a3ca5afb5` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/S12-datalink.xml.source.json | 536 / `25fa899b5c44ba1ad8486e270071d1f07df1c97d1c52a7cc276b54ba3f3241d3` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/S13-datalink.xml | 16,095 / `4b78d20f13de923e343a570a8e1b49bd30a74d9b0c755f0f05fde9135f853831` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/S13-datalink.xml.source.json | 536 / `dfa65db2973ee2d632931e7e37d80f08229ccf8413cd040fabd66b486531e379` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/spherex-registry/dev025/S14-datalink.xml | 16,095 / `6ff7a7d0ed44db6b20d5a38f10498c7b9f5ebfd0383f993ff834cb2d62810a55` | 공식 API 원응답·보정연결 검토 |
+| data/reference/spherex-registry/dev025/S14-datalink.xml.source.json | 536 / `88aa828334d8d44892d0bccd098cc7aed4100ca2572d860784e0f6802efb4229` | 직전 원응답의 요청 URL·취득시각·전체SHA sidecar |
+| data/reference/mcp/dev025/horizons-spherex-lookup.json | 807 / `bffbcfcabdce6458837357841e1c3653cc31ded8a3dcc9504c5142626bb1abcb` | 실제 MCP 개발 조회·독립 거친대조; 원영상 취득 아님 |
+| data/reference/mcp/dev025/pds-spherex-host.json | 543 / `4ac0cad4faed6edb2246ef1251e62790997de98dda07d6b4c99ffdce7a63d269` | 실제 MCP 개발 조회·독립 거친대조; 원영상 취득 아님 |
+| data/reference/mcp/dev025/pluto-s13-observer.json | 72,218 / `976779fc8339a0ec2f7ab970932ff2467fb630fcb57cd5b54e3a3e0a8d4084af` | 실제 MCP 개발 조회·독립 거친대조; 원영상 취득 아님 |
+
+명왕성S13의새정밀예측은target999/observer−163182(SPHEREx), DATE-AVG2026-10-01T15:42:02.869 UTC, ICRF astrometric RA306.091086531°/Dec−23.720483541°이며원정밀JSON SHA `fa3ebabb6441fbbdf7d36c23ce316d7bc09e614c918af6ea57dc12b6cc18e9ff`다. 이는관측으로측정한중심/이동이아니다. 원본주WCS예측점이y≈2037.45의경계에있어81×43으로잘린영역과품질경계손실을유지한다. 이전S12/S14천체력/네비교원봉투를수정하지않는다.
+
+기타 고유운동 예측은εB 기존J2000/pm소스를유지한다. Barnard/WISE0855/RW Aur/R Dra의새영상표식은각원본의아카이브요청중심을참고방향으로명시하며정밀카탈로그전파·실측중심/동일천체연관으로승격하지않는다. 원본업로드·이름일치·SOURCE bit만으로검출을주장하지않는다.
+
+
+### DEV-025 추가 태양계 실제 SPHEREx 8제품 전수
+
+신규 목성·토성·천왕성·해왕성 두시각씩8개 공식 native cutout의 합은32,699,520B다. 기존102개 dataset 기록은 그대로이고110행·1,020,687,104B로 추가했다. 등록부 최종10대상40제품37무순서쌍/74ordered선택이며 기존 네 canonical comparison 바이트를 복사·검증한다. 아래8개는 관측 시각/검출기가 다른 실제 아카이브 제품이고 중복 재다운로드·화면 확대를 추가 관측으로 세지 않는다. 새로운 채택 바이트/SHA/DataLink/Horizons 검증은 공개 배포 전에 수행한다.
+
+| ID | 대상 · UTC DATE-AVG · release/detector | 원본 bytes / SHA256 | 보정 · 원출처 |
+| --- | --- | --- | --- |
+| SPX-J01 | jupiter · 2026-04-01T18:41:49.043 · DR1/D1 · VERSION7.0.5 | 4,023,360 / `f8d7f8dac40fb00189112bd1f94796c9d116438ea6ab530d3ae797ee42709015` | L049 / cal-swcs-v5-2026-191 · [IRSA 원 cutout](https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W14_1A/l2b-v27-2026-238/1/level2_2026W14_1A_0546_3D1_spx_l2b-v27-2026-238.fits?center=106.82503%2C22.909107deg&size=0.12deg) |
+| SPX-J02 | jupiter · 2026-04-06T04:31:39.504 · DR1/D1 · VERSION7.0.5 | 4,023,360 / `648275f0973288333710940eb29c03e5469a8d78ca4eeba1c1c382bed6487d8e` | L049 / cal-swcs-v5-2026-191 · [IRSA 원 cutout](https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2026W15_1A/l2b-v27-2026-239/1/level2_2026W15_1A_0038_1D1_spx_l2b-v27-2026-239.fits?center=107.175705%2C22.874125deg&size=0.12deg) |
+| SPX-N01 | neptune · 2025-06-24T11:10:03.755 · DR1/D3 · VERSION7.0.5 | 4,118,400 / `591f5002e487fd439ddc0d5f5200523e1fed8b53d2f32cc014b3c7f0e12ae347` | L051 / cal-swcs-v5-2026-191 · [IRSA 원 cutout](https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W26_1A/l2b-v27-2026-213/3/level2_2025W26_1A_0318_2D3_spx_l2b-v27-2026-213.fits?center=2.16572%2C-0.498301deg&size=0.12deg) |
+| SPX-N02 | neptune · 2025-06-29T13:22:59.789 · DR1/D3 · VERSION7.0.5 | 4,106,880 / `e3bbc3b37ba77993396c0c5a350a8c6dbc5853df8b12b6d3bb8fa03b8264eb56` | L051 / cal-swcs-v5-2026-191 · [IRSA 원 cutout](https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W26_2A/l2b-v27-2026-214/3/level2_2025W26_2A_0600_1D3_spx_l2b-v27-2026-214.fits?center=2.186946%2C-0.493903deg&size=0.12deg) |
+| SPX-S01 | saturn · 2025-06-24T11:07:54.824 · DR1/D3 · VERSION7.0.5 | 4,106,880 / `5c27202c811f6cb410e7b05d5af4dc955bb13e24e0826749195d9e0823d871be` | L051 / cal-swcs-v5-2026-191 · [IRSA 원 cutout](https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W26_1A/l2b-v27-2026-213/3/level2_2025W26_1A_0318_1D3_spx_l2b-v27-2026-213.fits?center=2.056606%2C-1.514136deg&size=0.12deg) |
+| SPX-S02 | saturn · 2025-06-29T08:34:44.658 · DR1/D3 · VERSION7.0.5 | 4,106,880 / `0e468aacd2d4a224e1a00f949d86990c299b117d4d90cde7443e9d00e5650ef2` | L051 / cal-swcs-v5-2026-191 · [IRSA 원 cutout](https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/level2/2025W26_2A/l2b-v27-2026-214/3/level2_2025W26_2A_0564_4D3_spx_l2b-v27-2026-214.fits?center=2.186534%2C-1.481967deg&size=0.12deg) |
+| SPX-U01 | uranus · 2026-08-30T06:02:29.666 · QR3/D3 · VERSION7.0.5 | 4,106,880 / `ad30af7d37fd673d7aac312d82369ff73737c9700c39cabbaabcf37691e92c0b` | L051 / cal-swcs-v5-2026-191 · [IRSA 원 cutout](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W35_2A/l2b-v27-2026-246/3/level2_2026W35_2A_0527_4D3_spx_l2b-v27-2026-246.fits?center=63.367594%2C21.023852deg&size=0.12deg) |
+| SPX-U02 | uranus · 2026-08-31T11:12:14.662 · QR3/D3 · VERSION7.0.5 | 4,106,880 / `27576175be862e4a0ff1f530eb996a258ca5e98746ba45d966a8759bb117d843` | L051 / cal-swcs-v5-2026-191 · [IRSA 원 cutout](https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W36_1A/l2b-v27-2026-252/3/level2_2026W36_1A_0106_1D3_spx_l2b-v27-2026-252.fits?center=63.379328%2C21.025942deg&size=0.12deg) |
+
+JPL Horizons의 정확 DATE-AVG/ICRF astrometric 도 단위 응답을 사용하고 관측자는 SPHEREx −163182다. 목성 target599,토성699,천왕성799,해왕성899다. MOST의 둥근 query 중심은 cutout 취득용 참고이며 실측 중심으로 승격하지 않는다. IMAGE/VARIANCE의 NaN/FLAGS/EPSF/native WCS와 출처를 보존한다. 목성/토성의 일부 중심 창은 비유한 IMAGE가 많거나 전부일 수 있으며 A/B에 실제 n/N 경고를 보인다. 이는 검출/정량 광도/변광·이동 성공이 아니다. 천왕성/해왕성의 finite 값도 플래그0·독립 검출/정합을 보장하지 않는다. 실제 품질 수치는 최종 JPL 예측 위치에서 계산하며 임시 MOST query 중심의 품질 상수를 복사하지 않는다.
+
+MOST는 천왕성134행/해왕성66행/목성40행/토성64행의 제한 월 조회를 보존한다. Mars의 제한2조회가 빈 결과인 사실만 기록하며 전체 기간의 관측 불가능이나 수성/금성/지구 원본의 부재를 주장하지 않는다.
+
+| 신규 메타데이터/원응답 경로 | bytes / SHA256 | 용도 |
+| --- | --- | --- |
+| data/reference/spherex-extended-20261115/jupiter_2026W14_1A_0546_3_D1.headers.txt | 66,431 / `45c77d15ab1784f001edcd5e3e215c4b083d7af1a13e1090d080ea65c9666e14` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/jupiter_2026W14_1A_0546_3_D1.source.json | 8,388 / `c69727ed208234d1ca8fc5738eea557e6d49025a45fa4f1602634cdb679ff2db` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/jupiter_2026W14_1A_0546_3_D1_datalink.xml | 17,792 / `33022da3e986747a1b000c1ae73aa758d839cdc3efa7ab8bae76d1f8b492099b` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/jupiter_2026W14_1A_0546_3_observer.json | 9,104 / `eaa616ff9f89182cacbbf651d799ea8bd512df3d77e0c65319e7e4c8f43c7237` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/jupiter_2026W14_1A_0546_3_observer.json.source.json | 1,807 / `ccb1c320ff247438e641fcf071b18f4215d60035cd9d36c4269a11feb18d1d98` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/jupiter_2026W15_1A_0038_1_D1.headers.txt | 66,431 / `37ec1751e636589e8ec6a8294e27454e6017df3cc407e717ed3599294c078f3c` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/jupiter_2026W15_1A_0038_1_D1.source.json | 8,392 / `41055120ba6c1f3ce93d7db8e72daf6a18daed553d5c54eaf2d57767323f9740` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/jupiter_2026W15_1A_0038_1_D1_datalink.xml | 17,792 / `f19314819c37305bc717ec8a5350b91e348923236aae7e281e14acf2ddb23f17` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/jupiter_2026W15_1A_0038_1_observer.json | 9,104 / `6fa4c90c4484baa4c099c3dfd9c5c26d756614434feacb3d2a9e631744998561` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/jupiter_2026W15_1A_0038_1_observer.json.source.json | 1,806 / `fe2a658e14f3e37d4a210f66d9ebb92539b1032b36199555ba08e096e323af18` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/most/acquired-eight-header-summary.json | 27,934 / `aab0f35a25ef4fd9c45ff5226a4722a0ed666a63b0b5a377f3dfad882c1e5a92` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/crop-reference-quality.json | 41,750 / `6add3482f84e237b3708d3208ccf3888d2850749a3d971c3035ac715668c3860` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/jupiter-2026-04-01-2026-04-30.parsed.json | 86,502 / `dc2508dd03a663be32f70478b8db557748e75a6321b4ff80089aaadd3fe8584e` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/jupiter-2026-04-01-2026-04-30.response.txt | 54,847 / `957eb0c996631a07b1b2be95fd87bd71b5986d89128b7f19d09b0fe2793d8161` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/jupiter-2026-04-01-2026-04-30.source.json | 890 / `ec490fd270063d4c3f19f7a0d7015bf91594b959478b5f914315fb66668b4241` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/mars-2025-05-01-2025-05-31.parsed.json | 142 / `10ae63c55c0c13d5f65e584209f8cdf655bf5aacbc90c6666f891ad435d188c1` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/mars-2025-05-01-2025-05-31.response.txt | 3,284 / `51e9940483925d1bc93315acfbd758df9b2f4d318f60317189996615d4b58d81` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/mars-2025-05-01-2025-05-31.source.json | 886 / `2859376cd0f5e73b31def4dcb7f92aee118a0e3b588bbee092292267a7aaa0ba` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/mars-2026-09-01-2026-09-30.parsed.json | 142 / `13ffcf5f49d762ad3512ca610c1f4ab7fcb0fa1a57fc43ce3227bdc5dc9f4bb5` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/mars-2026-09-01-2026-09-30.response.txt | 3,283 / `6b9e55c86960a2053242726174217e30993224963f465701e1714d6c05e3db01` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/mars-2026-09-01-2026-09-30.source.json | 886 / `5bf76f58234d4ed788cf3e3522a15d7d526440d7edb5e41ec398aee5346aef3e` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/neptune-2025-06-01-2025-06-30.parsed.json | 140,361 / `f5a6f97d0f89825f5078fad5f2e0755ae2ad9954889daca3d13251be0b7caf9d` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/neptune-2025-06-01-2025-06-30.response.txt | 88,362 / `ed8d9763c4f6e224c5b612cc9c9d90f1dde6490ad9ea300b3928eded77839c14` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/neptune-2025-06-01-2025-06-30.source.json | 890 / `0999284b6f1b45172b1a4a01b6c5f9143e10647a69b460c90a128fc555df5305` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/README.md | 4,993 / `f385096ba17a82fb60e185bbab4ceab5c1c675cd7804986b6033edc0faae5053` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/saturn-2025-06-01-2025-06-30.parsed.json | 136,698 / `34f4d4178b5d4e8627029fe14e54b5d66aa1cb1f4378f02f7afe1fb2394a7fa6` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/saturn-2025-06-01-2025-06-30.response.txt | 85,783 / `3cefc8438b12b11dc7c1dbb2090c563e2167b1d0cd34fb4e784615837eb31b7c` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/saturn-2025-06-01-2025-06-30.source.json | 889 / `7629e226e62c7fe56f519030032d07a878e40fdd1bd5da6eae37558d65f72ab9` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/uranus-2026-08-01-2026-08-31.parsed.json | 260,605 / `9a0f30c8b4f1cd41db8b14eabaac1495c5e010b14a4d0a0574c60f1f6d88d079` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/uranus-2026-08-01-2026-08-31.response.txt | 176,011 / `1c56539b52e26aef0a971cf3a23d5a2c09c95f2671228eb8ff4d87b02bada54d` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/most/uranus-2026-08-01-2026-08-31.source.json | 890 / `d2150e88f60e2a22d7a736bb250f111d1f6a58f48efc53437b2252517254e530` | 조회/선택·출처 감사, 신규 검출 아님 |
+| data/reference/spherex-extended-20261115/neptune_2025W26_1A_0318_2_D3.headers.txt | 64,955 / `e1b982b22f942a7966330541e9a2b34d006ce23aac12cc2f653eab3c5c0bd10a` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/neptune_2025W26_1A_0318_2_D3.source.json | 8,496 / `30ddb0f3b96f55dda50f5d54d26ca73e8bcdc64850f9b210dabf5cc38b553ea3` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/neptune_2025W26_1A_0318_2_D3_datalink.xml | 16,097 / `dfac4074491f55755652688a9f7a1c1ec7c94b5061c318943a33dfd9e1b87093` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/neptune_2025W26_1A_0318_2_observer.json | 9,066 / `31d3ed9e1fb8f482894da588391e1558142d8fdbcab5d85fb69e9f0f3386958a` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/neptune_2025W26_1A_0318_2_observer.json.source.json | 1,805 / `41d834cf1bf62fb910b9aeec9b62eab0ab0d8d2110bd7167995a0e0e659f37dd` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/neptune_2025W26_2A_0600_1_D3.headers.txt | 64,955 / `a07bf3763ad842b77eda546855204290656bd5379eb7b28f4c6eb54bb93f6a3e` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/neptune_2025W26_2A_0600_1_D3.source.json | 8,387 / `72a939df52ac7076135d233571d33cfb12eb8229c14f7f071c78c70cb4ab469e` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/neptune_2025W26_2A_0600_1_D3_datalink.xml | 16,095 / `a8b27ddd3166d0d3fa8d600dda4d33647c953587f0d4314c4bc920aaa2581d4f` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/neptune_2025W26_2A_0600_1_observer.json | 9,066 / `c62ad29284e8ea6f6709211416c6042a919d025c1c99376dc2ec28e951f7fb9d` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/neptune_2025W26_2A_0600_1_observer.json.source.json | 1,805 / `9c821cc6156974f610d2740829babaf8120583cc336513dfa1ffc6300d86d1f5` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/saturn_2025W26_1A_0318_1_D3.headers.txt | 64,955 / `3ccd05022517d47675a65c04176869b8635d5484a902e161e8c30bcf062b72e4` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/saturn_2025W26_1A_0318_1_D3.source.json | 8,377 / `57f8d492f49b6aa7299df661e5d0fab87cac12aba34609c158bdc91b659673c7` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/saturn_2025W26_1A_0318_1_D3_datalink.xml | 16,096 / `f1b7307e050774b20f12223530096541ee8a5928f16869936005508fa40fcb14` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/saturn_2025W26_1A_0318_1_observer.json | 9,068 / `8cd2421c917eed8052730088c8856a0e172c7f602fdd9d18e32c42faf6efced8` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/saturn_2025W26_1A_0318_1_observer.json.source.json | 1,803 / `f0fcc10bee611057f9d2ca621591004203bd7baf185b6edddef62ec7ceb003a3` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/saturn_2025W26_2A_0564_4_D3.headers.txt | 64,955 / `bf2d22d8ee7b069c5e06438210c8b7a7d88a74f164288339ec19e9b98d3cef39` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/saturn_2025W26_2A_0564_4_D3.source.json | 8,377 / `0d9afbfca141800124f24f1f8463c90c011e8f36e22f829dae7fb15f2abd5c8e` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/saturn_2025W26_2A_0564_4_D3_datalink.xml | 16,094 / `daea5fe63e97dc1ce6fdfc3c9364d46158a400278736a5d6ba38cb9fd6cfb2c6` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/saturn_2025W26_2A_0564_4_observer.json | 9,068 / `c34f4f6e4130f82cdc4395f001572254ed6db4b74ae71ed17582a379bd003734` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/saturn_2025W26_2A_0564_4_observer.json.source.json | 1,802 / `ab192550cf4eb8ebfccbbdcb3df169033449410d715a62e414435ffd63e7a3e8` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/uranus_2026W35_2A_0527_4_D3.headers.txt | 64,955 / `8a16b0c2e15302f5d07948febc7ac4653cc5883acc023137fe33ff79ef0116cb` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/uranus_2026W35_2A_0527_4_D3.source.json | 8,377 / `c67d1964d37434ef06000a51656960aa7242aa1865ea789dc9c3ac61bd9528ae` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/uranus_2026W35_2A_0527_4_D3_datalink.xml | 16,094 / `f20950003a4007f57f2549cf3de983f7684ee81e53af3c56e34a01fad5b69c46` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/uranus_2026W35_2A_0527_4_observer.json | 9,068 / `8455c7a927a2d715d52f34aa88b6be4bae01ca8f6851df15f42f7c10f686ed5c` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/uranus_2026W35_2A_0527_4_observer.json.source.json | 1,804 / `87984f3e586f59dcb38613af35d5504e3caacbf19b2cdfaac797a2ab9f008c13` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/uranus_2026W36_1A_0106_1_D3.headers.txt | 64,955 / `0915f00772f43ed89342ab90ccb2b5ff1e84ea9f371efec02e1892c94c593cdb` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/uranus_2026W36_1A_0106_1_D3.source.json | 8,376 / `c692c398f55709104d550b3b86eb00b65a8d281357d7a7424193a2c4f4865b8d` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/uranus_2026W36_1A_0106_1_D3_datalink.xml | 16,094 / `93a1a4ffae6fbf23867e749f2011d201b8d7c57d854438ea4cf0735c4ad87717` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/uranus_2026W36_1A_0106_1_observer.json | 9,068 / `660535b88f461aa00cf2591f135cbd3ab700a6b6f114ff664e14eee3430b17ec` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+| data/reference/spherex-extended-20261115/uranus_2026W36_1A_0106_1_observer.json.source.json | 1,804 / `226b072d00e44c939ae7eb3225ec2191591d0ff5c5eee081c92c62aad0100ad7` | DataLink/정밀 관측자 예측 원응답 또는 출처 sidecar |
+
+
+### DEV-025 공개 데이터 명세서 PDF와 서체
+
+크레딧의 데이터 다운로드는 이 Markdown 전체의 PDF다. 현재 사용/확보/이전 보존 자료 구분을 유지하고 과거 범위의 목록을 현재 앱 기능으로 재승격하지 않는다. HTTP(S)/DOI 출처는 클릭 가능 링크로 보존하고 Git 제외 로컬 원본 경로를 공개 GitHub 파일로 오인시키지 않는다. PDF는 관측이나 과학 입력이 아닌 문서 파생 산출물이며 원MD SHA/PDF SHA/bytes/생성 UTC/도구 버전은 별도 data/manifests/data_spec_pdf.json에 기록한다. 원문 첨부의 바이트도 동일 SHA를 유지한다.
+
+한글 조판은 Google/Adobe **Noto Sans KR**, OFL-1.1이다. [공식 OFL](https://github.com/google/fonts/blob/b38c5c93af322c45f633e17ac440ec1e6c94d489/ofl/notosanskr/OFL.txt), [공식 서체](https://github.com/google/fonts/blob/b38c5c93af322c45f633e17ac440ec1e6c94d489/ofl/notosanskr/NotoSansKR%5Bwght%5D.ttf)를 사용한다. 원파일10,414,588B/SHA `194018e6b2b293a7964f037b25c0249ce1418bc9ab3c971060a03aa57861e252`,OFL4,388B/SHA `1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9`;400/700 인스턴스·PDF subset 임베딩은 문서 조판 변환이며 천문자료가 아니다. 원출처/commit/취득시각/권리/서체 변환 SHA는 font-source 및 PDF manifest로 연결한다. ReportLab·markdown-it-py/linkify·fonttools·pypdf/Poppler는 빌드/문서검증에만 사용하며 Node 운영 서버에 Python을 요구하지 않는다.
+
+
+Noto Sans KR에 없는 라틴 ħ 및 위첨자 ⁶/⁺/⁻/ⁿ 다섯 글자는 공식 **Noto Sans** OFL-1.1 보조서체로 조판한다. 의미가 다른 ASCII로 고치거나 사각형으로 누락하지 않는다. [공식 Noto Sans 원서체](https://github.com/google/fonts/blob/8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5/ofl/notosans/NotoSans%5Bwdth%2Cwght%5D.ttf) 2,049,096B/SHA `bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d`, [별도 OFL](https://github.com/google/fonts/blob/8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5/ofl/notosans/OFL.txt)4,396B/SHA `cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a`를 원서체 원장에 함께 핀한다. PDF에 두 서체의 권리 고지를 첨부하고 모든 글자의 glyph 존재를 확인한다.

@@ -25,6 +25,23 @@ test('real exported bundle serves UI contracts, source-verified comparison and e
     throw new Error('comparison timed out');
   };
   try {
+    await t.test('Credits PDF is served with verified source bytes and attachment headers', async t => {
+      const manifest = parse(fs.readFileSync(path.join(root, 'data/node-runtime/runtime_manifest.json'), 'utf8'));
+      const source = manifest.source_files.find(row => row.path === 'web/public/downloads/PlanetX_Data_Spec.pdf');
+      if (!source) { t.skip('historical bundle predates the public PDF'); return; }
+      assert.equal(source.runtime_required, true);
+      const response = await fetch(base + '/downloads/PlanetX_Data_Spec.pdf');
+      assert.equal(response.status, 200);
+      assert.equal(response.headers.get('content-type'), 'application/pdf');
+      assert.equal(response.headers.get('content-disposition'), 'attachment; filename="PlanetX_Data_Spec.pdf"');
+      const bytes = Buffer.from(await response.arrayBuffer());
+      assert.equal(bytes.length, source.bytes);
+      assert.equal(createHash('sha256').update(bytes).digest('hex'), source.sha256);
+      assert.equal(bytes.subarray(0, 5).toString(), '%PDF-');
+      const head = await fetch(base + '/downloads/PlanetX_Data_Spec.pdf', { method: 'HEAD' });
+      assert.equal(head.status, 200); assert.equal((await head.arrayBuffer()).byteLength, 0);
+      assert.equal((await fetch(base + '/downloads/undeclared.pdf')).status, 404);
+    });
     await t.test('health and current getter/filter contracts use the actual exported data', async () => {
       assert.equal((await request('/health/ready')).status, 200);
       await assert.rejects(start({ root, stateDir: state, port: 0, host: '127.0.0.1', noSignals: true }));
@@ -69,15 +86,51 @@ test('real exported bundle serves UI contracts, source-verified comparison and e
         assert.equal(response.value.display_algorithm_version, 'extended-solar-parent-hermite-v1', suffix + ': display algorithm');
       }
     });
-    await t.test('Sun and all eight base planets retain normal empty observation state', async () => {
+    await t.test('Solar targets expose exact registered sources and allowed pairs, or a normal empty observation state', async () => {
+      const manifest = parse(fs.readFileSync(path.join(root, 'data/node-runtime/runtime_manifest.json'), 'utf8'));
+      let registry = null;
+      if (manifest.observation_registry) {
+        assert.equal(manifest.observation_registry.path, 'data/manifests/observation_registry.json');
+        const registryBytes = fs.readFileSync(path.join(root, manifest.observation_registry.path));
+        assert.equal(createHash('sha256').update(registryBytes).digest('hex'), manifest.observation_registry.sha256);
+        registry = parse(registryBytes.toString('utf8'));
+      }
+      const assertRegistered = (id, value) => {
+        const entries = Object.values(registry.exposures).filter(entry => entry.object_id === id && entry.enabled);
+        const expectedIds = entries.map(entry => entry.observation_id).sort();
+        const expectedPairs = registry.pairs.filter(ids => ids.every(key => registry.exposures[key].object_id === id));
+        assert.equal(value.status, 'available', id);
+        assert.deepEqual(value.default_pair, registry.objects[id].default_pair, id + ': default pair');
+        assert.deepEqual(value.observations.map(observation => observation.observation_id).sort(), expectedIds, id + ': source IDs');
+        assert.deepEqual(value.available_pairs.map(ids => ids.join(',')).sort(), expectedPairs.map(ids => ids.join(',')).sort(), id + ': allowed pairs');
+        for (const observation of value.observations) {
+          const entry = registry.exposures[observation.observation_id];
+          assert.equal(observation.sha256, entry.source.sha256, entry.source_id + ': source SHA');
+          assert.equal(observation.bytes, entry.source.bytes, entry.source_id + ': source bytes');
+        }
+        assert.deepEqual(Object.entries(manifest.comparisons).filter(([, entry]) => entry.object_id === id).map(([key]) => key).sort(),
+          expectedPairs.flatMap(ids => [ids.join(','), [...ids].reverse().join(',')]).sort(), id + ': ordered cache pairs');
+      };
       for (const id of ['sun', 'mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune']) {
         const response = await request(api + 'observations?object_id=' + id);
         assert.equal(response.status, 200, id + ': ' + response.text);
-        assert.equal(response.value.object_id, id); assert.equal(response.value.status, 'no_linked_observations');
-        assert.deepEqual(response.value.observations, []); assert.equal(response.value.next_cursor, null);
+        assert.equal(response.value.object_id, id); assert.equal(response.value.next_cursor, null);
+        if (registry && Object.hasOwn(registry.objects, id)) assertRegistered(id, response.value);
+        else {
+          assert.equal(response.value.status, 'no_linked_observations');
+          assert.deepEqual(response.value.observations, []);
+        }
       }
       const pluto = await request(api + 'observations?object_id=pluto');
-      assert.equal(pluto.status, 200); assert.equal(pluto.value.status, 'available'); assert.equal(pluto.value.observations.length, 2);
+      assert.equal(pluto.status, 200); assert.equal(pluto.value.status, 'available');
+      if (registry) assertRegistered('pluto', pluto.value);
+      else {
+        const expectedIds = ['S12', 'S14'], expectedPairs = [['S12', 'S14']];
+        assert.deepEqual(pluto.value.available_pairs ?? expectedPairs, expectedPairs);
+        assert.deepEqual(pluto.value.observations.map(observation => observation.observation_id).sort(), expectedIds);
+        assert.deepEqual(Object.entries(manifest.comparisons).filter(([, entry]) => entry.object_id === 'pluto').map(([key]) => key).sort(),
+          expectedPairs.flatMap(ids => [ids.join(','), [...ids].reverse().join(',')]).sort());
+      }
     });
     let evidence, rawEvidence, legacyEvidence;
     await t.test('both actual observation pairs and reversed ordering preserve source dates and result ids', async () => {

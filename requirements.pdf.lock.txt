@@ -1,0 +1,9 @@
+# Build-only PDF authoring/inspection dependencies; not Node runtime dependencies.
+charset-normalizer==3.5.2
+fonttools==4.68.0
+linkify-it-py==2.2.0
+markdown-it-py==4.3.0
+mdurl==0.1.2
+pillow==13.0.0
+pypdf==6.21.4
+reportlab==4.5.1

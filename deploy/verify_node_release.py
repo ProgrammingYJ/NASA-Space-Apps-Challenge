@@ -31,6 +31,12 @@ from urllib.error import URLError
 from urllib.request import Request, urlopen
 
 ACTIVE_INPUTS = {"S01", "S02", "S10", "S12", "S14", "L051", "L046"}
+PROTECTED_COMPARISONS = {
+    "S01,S02": ("cmp_d88083664b6fd27592eb68c1", "88219adf492f225e5be126e8f7e5577b74475aff4067f5797d63540ba044d74c"),
+    "S02,S01": ("cmp_15919fc7bf2adfbed9b46935", "ad3755c1803fce01a669128fd260b1679f65d84ba279612d3c1d272a085f8d94"),
+    "S12,S14": ("cmp_0d749ea3f9ec3a8da925dc44", "9ebe635e2ddd0230b50e38cce35a468acf826654199a9403d36f4189fa1d12f8"),
+    "S14,S12": ("cmp_e544e54be8b8ddadb2cecda8", "a71d4d7fbfb286a84ca66e85bb65af6d0090b311adc9b7042323366cb1989648"),
+}
 LOCAL_ONLY_GROUPS = {
     "extragalactic-planets",
     "exoplanet-observations",
@@ -381,14 +387,32 @@ def verify_payload(target: Path, archive_files: set[str]) -> tuple[dict, dict, d
             and expected["sha256"] == record["sha256"],
             "release_runtime_FITS_provenance_mismatch",
         )
-    require(
-        set(runtime["comparisons"]) == {"S01,S02", "S02,S01", "S12,S14", "S14,S12"},
-        "comparison_cache_selection_mismatch",
-    )
+    expected_comparisons = set(PROTECTED_COMPARISONS)
+    registry_reference = runtime.get("observation_registry")
+    if registry_reference:
+        require(registry_reference.get("path") == "data/manifests/observation_registry.json", "invalid_observation_registry_reference")
+        registry_source = source_by_path.get(registry_reference["path"])
+        require(registry_source is not None and registry_source["runtime_required"] and registry_source["sha256"] == registry_reference["sha256"], "observation_registry_source_binding_mismatch")
+        registry = json.loads(verify_record(target, registry_source).read_bytes())
+        expected_comparisons = {",".join(ids) for pair in registry["pairs"] for ids in (pair, list(reversed(pair)))}
+        require(len(expected_comparisons) == 2 * len(registry["pairs"]), "duplicate_registry_comparison_selection")
+        datasets = {record["id"]: record for record in json.loads((target / "data/manifests/datasets.json").read_bytes())["files"]}
+        for exposure in registry["exposures"].values():
+            if exposure.get("enabled") is not True:
+                continue
+            for id_key, pin_key in [("source_id", "source"), ("calibration_id", "calibration_source")]:
+                record = datasets.get(exposure[id_key])
+                require(record is not None and record["sha256"] == exposure[pin_key]["sha256"] and record["bytes"] == exposure[pin_key]["bytes"], "registered_input_inventory_binding_mismatch")
+                source = source_by_path.get(record["local_relative_path"])
+                require(source is not None and source["runtime_required"] and source["sha256"] == record["sha256"] and source["bytes"] == record["bytes"], "registered_input_runtime_binding_mismatch")
+    require(set(PROTECTED_COMPARISONS).issubset(expected_comparisons) and set(runtime["comparisons"]) == expected_comparisons, "comparison_cache_selection_mismatch")
     for key, record in runtime["comparisons"].items():
         path = verify_record(bundle, record)
         content = path.read_bytes()
         value = json.loads(content)
+        if key in PROTECTED_COMPARISONS:
+            identifier, expected_sha = PROTECTED_COMPARISONS[key]
+            require(value["result_id"] == identifier and hashlib.sha256(content).hexdigest() == expected_sha, "protected_comparison_bytes_changed")
         body = {name: item for name, item in value.items() if name != "result_id"}
         require(
             content == canonical(value)

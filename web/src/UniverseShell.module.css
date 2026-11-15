@@ -96,3 +96,24 @@
 .p9Dock>.representation,.p9Dock>.controlsHelp{max-width:calc(100vw - min(580px,43vw) - 64px)}
 @media(max-width:1100px){.p9Dock>.analysis{width:48vw;right:12px;top:110px;bottom:200px}.p9Dock>.scene{left:0;right:calc(48vw + 24px);bottom:38vh}.p9Dock>.objectPanel{left:12px;top:auto;bottom:200px;width:calc(52vw - 36px);max-height:28vh}.p9Dock>.representation,.p9Dock>.controlsHelp{max-width:calc(52vw - 36px)}}
 @media(max-width:760px){.p9Dock>.analysis{top:145px;right:8px;left:50%;width:auto;bottom:165px}.p9Dock>.scene{left:0;right:50%;bottom:45vh}.p9Dock>.objectPanel{left:8px;right:calc(50% + 8px);width:auto;bottom:165px;max-height:32vh;padding:10px}.p9Dock>.objectPanel h1{font-size:18px}.p9Dock>.objectPanel dl{display:grid}.p9Dock>.analysis .analysisBody{padding:8px}}
+
+.epsilonOverview{display:grid;gap:8px;margin:18px 0;padding:12px;background:#111723;border:1px solid #395574;border-radius:8px}.epsilonOverview img{width:100%;height:auto;max-height:240px;object-fit:contain}.epsilonOverview a{font-size:10px;line-height:1.5}.epsilonOverview p{font-size:11px;margin:0}.epsilonOverview button{width:100%}
+
+/* Search and discovery share one scrollable flow above the footer/timeline.
+   The introduction lives inside its discovery card, so translated content can
+   grow without competing absolute top/bottom offsets. */
+.shell>.exploreSidebar{grid-column:1;grid-row:1;align-self:stretch;justify-self:start;position:relative;z-index:8;display:flex;flex-direction:column;gap:18px;min-height:0;min-width:0;width:min(340px,calc(100% - 64px));margin:110px 0 16px 32px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:2px 4px 4px 0;box-sizing:border-box}
+.shell>.exploreSidebar[hidden]{display:none}
+.shell>.exploreSidebar:not(:has(.catalogGateway)){pointer-events:none}
+.exploreSidebar>.search{position:relative;inset:auto;flex:none;width:100%;min-width:0;z-index:auto}
+.exploreSidebar>.search{pointer-events:auto}
+.exploreSidebar .results{max-height:35dvh}
+.exploreSidebar>.catalogGateway{position:static;inset:auto;flex:none;width:100%;max-height:none;overflow:visible;display:block;padding:16px;box-sizing:border-box}
+.exploreSidebar .intro{position:static;inset:auto;display:block;width:auto;max-width:none;margin:0;pointer-events:auto}
+.exploreSidebar .intro h1{font-size:26px;line-height:1.35;margin:10px 0;max-width:100%;text-wrap:balance;overflow-wrap:anywhere}
+.exploreSidebar .intro p,.exploreSidebar .catalogGateway details p{display:block;max-width:none;font-size:12px;line-height:1.8;margin:10px 0 14px;overflow-wrap:anywhere}
+.exploreSidebar .catalogGateway button{margin-top:8px;min-height:40px;white-space:normal;overflow-wrap:anywhere}
+.exploreSidebar .catalogGateway summary{line-height:1.7;overflow-wrap:anywhere}
+@media(max-width:1100px){.shell>.exploreSidebar{margin-left:22px;width:min(320px,calc(100% - 44px))}}
+@media(min-width:761px) and (max-width:1100px){.shell>.exploreSidebar{margin-top:150px}}
+@media(max-width:760px){.shell>.exploreSidebar{margin:176px 12px 12px;width:calc(100% - 24px);gap:14px}.exploreSidebar>.catalogGateway{padding:14px}.exploreSidebar .intro h1{font-size:24px}.exploreSidebar>.search{width:100%}.exploreSidebar .catalogGateway button{font-size:11px}}

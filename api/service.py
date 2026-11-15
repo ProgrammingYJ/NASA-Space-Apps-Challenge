@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import multiprocessing as mp
 import threading
 import time
@@ -12,6 +13,40 @@ import psutil
 
 from api.storage import InstanceLock, atomic_json, digest, read_json
 from worker.process import run
+
+NATIVE_TNO_SIMULATION_ALGORITHM = "jpl-sbdb-tno-two-body-v2"
+
+
+def outer_tno_context_reasons(context, root: Path):
+    """Check optional native TNO display pins without recalculating any orbit.
+
+    The stored source manifest is v1; the adopted runtime two-body propagator is
+    v2. Missing fields deliberately retain the previous restoration behaviour.
+    """
+    expected = context.outer_tno_manifest_sha256
+    algorithm = context.native_tno_simulation_algorithm_version
+    if expected is None and algorithm is None:
+        return []
+    try:
+        raw = (root / "data/manifests/outer_tno.json").read_bytes()
+    except OSError:
+        return ["outer_tno_data_unavailable"]
+    if expected is not None and hashlib.sha256(raw).hexdigest() != expected:
+        return ["outer_tno_sources_changed"]
+    try:
+        source = json.loads(raw)
+        if (
+            source.get("schema_version") != "1.0"
+            or source.get("algorithm_version") != "jpl-sbdb-tno-two-body-v1"
+            or source.get("time_scale") != "TDB"
+            or source.get("coordinate_frame") != "heliocentric_IAU76_80_ecliptic_J2000"
+        ):
+            return ["outer_tno_data_unavailable"]
+    except (ValueError, AttributeError):
+        return ["outer_tno_data_unavailable"]
+    if algorithm is not None and algorithm != NATIVE_TNO_SIMULATION_ALGORITHM:
+        return ["native_tno_algorithm_changed"]
+    return []
 
 
 def now():
@@ -31,6 +66,8 @@ class Service:
         self.pluto_catalog = None
         self.pluto_catalog_error = None
         self.catalog_error = None
+        self.catalogues = {}
+        self.catalogue_errors = {}
         # An abandoned worker must be confirmed stopped before jobs become interrupted.
         worker_record = state / "worker.json"
         if worker_record.exists():
@@ -66,7 +103,24 @@ class Service:
         job["updated_at"] = now()
         atomic_json(self.state / "jobs" / f"{job['job_id']}.json", job)
 
+    def registry(self):
+        from science.registered_observations import load_registry
+
+        return load_registry(root=self.root, registry_path=self.root / "data/manifests/observation_registry.json")
+
+    def resolve_pair(self, ids, object_id=None):
+        from science.registered_observations import resolve_registered_pair
+
+        return resolve_registered_pair(ids, root=self.root, registry_path=self.root / "data/manifests/observation_registry.json", object_id=object_id)
+
+    def registered_objects(self):
+        registry = self.registry()
+        return [{"object_id": key, "name": value["name"], "status": "available", "default_pair": value["default_pair"],
+                 "observation_ids": [identifier for identifier, entry in registry["exposures"].items() if entry["object_id"] == key and entry.get("enabled") is True]}
+                for key, value in registry["objects"].items()]
+
     def submit(self, ids):
+        selection = self.resolve_pair(ids)
         with self.guard:
             if not self.process.is_alive():
                 raise RuntimeError("worker_unavailable")
@@ -78,7 +132,8 @@ class Service:
                 "job_id": job_id,
                 "attempt_id": uuid.uuid4().hex,
                 "observation_ids": ids,
-                "object_id": "pluto" if set(ids) == {"S12", "S14"} else "epsilon-indi-b",
+                "object_id": selection["object_id"],
+                "algorithm_version": selection["algorithm_version"],
                 "state": "queued",
                 "stage": "waiting",
                 "progress": 0,
@@ -108,7 +163,15 @@ class Service:
                     message = self.connection.recv()
                     with self.guard:
                         self.heartbeat = time.monotonic()
-                        if message["kind"] == "catalog":
+                        if message["kind"] == "registered_catalog":
+                            self.catalogues[message["object_id"]] = message["observations"]
+                            if message["object_id"] == "epsilon-indi-b":
+                                self.catalog = message["observations"]
+                            elif message["object_id"] == "pluto":
+                                self.pluto_catalog = message["observations"]
+                        elif message["kind"] == "registered_catalog_error":
+                            self.catalogue_errors[message["object_id"]] = message["code"]
+                        elif message["kind"] == "catalog":
                             self.catalog = message["observations"]
                         elif message["kind"] == "catalog_error":
                             self.catalog_error = message["code"]
@@ -211,7 +274,22 @@ class Service:
         records = read_json(self.root / "data/manifests/datasets.json")["files"]
         by_id = {r["id"]: r for r in records}
         reasons = []
-        if comparison.get("object_id") == "pluto":
+        if comparison.get("algorithm_version") == "spherex-registered-native-v1":
+            registry = self.root / "data/manifests/observation_registry.json"
+            if comparison.get("registry_manifest_path") != "data/manifests/observation_registry.json":
+                reasons.append("observation_registry_reference_changed")
+            elif not registry.is_file():
+                reasons.append("observation_registry_missing")
+            elif hashlib.sha256(registry.read_bytes()).hexdigest() != comparison.get("registry_manifest_sha256"):
+                reasons.append("observation_registry_changed")
+            from science.spherex import verify_source
+
+            for reference in comparison.get("prediction_source_refs", []):
+                try:
+                    verify_source(self.root, reference)
+                except (ValueError, OSError, KeyError, TypeError):
+                    reasons.append("prediction_source_integrity")
+        if comparison.get("object_id") == "pluto" and comparison.get("algorithm_version") == "pluto-native-v1":
             ephemeris = self.root / "data/manifests/pluto_ephemeris.json"
             if comparison.get("ephemeris_manifest_path") != "data/manifests/pluto_ephemeris.json":
                 reasons.append("ephemeris_reference_changed")
@@ -249,11 +327,22 @@ class Service:
                 if ref["id"] in found and found[ref["id"]]["sha256"] != ref["sha256"]:
                     raise ValueError("conflicting_provenance")
                 found[ref["id"]] = {"id": ref["id"], "sha256": ref["sha256"]}
-        required = (
-            {"S12", "S14", "L051"}
-            if comparison.get("object_id") == "pluto"
-            else {"S01", "S02", "S10"}
-        )
+        ids = [frame["observation_id"] for frame in comparison.get("frames", [])]
+        algorithm = comparison.get("algorithm_version")
+        if algorithm in {"spherex-native-v1", "pluto-native-v1"}:
+            # The four immutable original results predate the registry. Their
+            # exact algorithm/object/order tuple defines their independent closure.
+            epsilon = algorithm == "spherex-native-v1"
+            target = "epsilon-indi-b" if epsilon else "pluto"
+            pair = {"S01", "S02"} if epsilon else {"S12", "S14"}
+            if comparison.get("object_id") != target or len(ids) != 2 or set(ids) != pair:
+                raise ValueError("legacy_comparison_selection_mismatch")
+            required = pair | ({"S10"} if epsilon else {"L051"})
+        else:
+            selection = self.resolve_pair(ids, comparison.get("object_id"))
+            if algorithm == "spherex-registered-native-v1" and selection["algorithm_version"] != algorithm:
+                raise ValueError("registered_comparison_algorithm_mismatch")
+            required = set(selection["source_ids"]) | set(selection["calibration_ids"])
         if set(found) != required:
             raise ValueError("missing_provenance")
         return found.values()

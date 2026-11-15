@@ -1,10 +1,12 @@
 """Build source-bound JSON for a Node-only host; Python is build-time only.
 
 This exporter runs the existing scientific readers and FITS calculations. It
-never downloads, edits source manifests, copies an old comparison cache, or
+never downloads or edits source manifests. Its explicit preserve option copies
+only four fixed, source-reverified canonical comparisons without reserialization;
+all other comparisons are fresh scientific calculations. It never
 turns an unverified legacy target into a valid measurement. The exported FITS
-comparison cache supports exactly the current two observation pairs, in both
-orders, with the existing fixed 81-pixel request behavior.
+comparison cache supports the authored observation pairs in both orders, with
+the existing fixed 81-pixel request behavior.
 """
 
 from __future__ import annotations
@@ -28,6 +30,13 @@ from api.storage import canonical, digest
 SCHEMA_VERSION = "1.0"
 ALGORITHM_VERSION = "python-built-node-snapshot-v1"
 RUNTIME_INPUT_IDS = {"S01", "S02", "S10", "S12", "S14", "L051", "L046", "L047"}
+REGISTRY_PATH = "data/manifests/observation_registry.json"
+CANONICAL_COMPARISONS = {
+    "S01,S02": ("cmp_d88083664b6fd27592eb68c1", "88219adf492f225e5be126e8f7e5577b74475aff4067f5797d63540ba044d74c"),
+    "S02,S01": ("cmp_15919fc7bf2adfbed9b46935", "ad3755c1803fce01a669128fd260b1679f65d84ba279612d3c1d272a085f8d94"),
+    "S12,S14": ("cmp_0d749ea3f9ec3a8da925dc44", "9ebe635e2ddd0230b50e38cce35a468acf826654199a9403d36f4189fa1d12f8"),
+    "S14,S12": ("cmp_e544e54be8b8ddadb2cecda8", "a71d4d7fbfb286a84ca66e85bb65af6d0090b311adc9b7042323366cb1989648"),
+}
 ACTIVE_MANIFESTS = (
     "datasets.json",
     "solar_system_ephemeris.json",
@@ -66,13 +75,28 @@ def _sources(root: Path) -> list[dict]:
     """Collect only the adopted Solar/P9 source closure.
 
     Original acquisition manifests remain byte-identical historical inventories;
-    only the selected four observations, two calibrations and P9 population are
-    executable inputs. Excluded feature files stay outside the active closure.
+    registered observations/calibrations and the P9 population are executable
+    inputs. Excluded feature files stay outside the active closure.
     """
+    pdf_manifest = root / "data/manifests/data_spec_pdf.json"
+    if pdf_manifest.is_file():
+        from deploy.update_release_metadata import validate
+
+        validate(root)
     records: dict[str, dict] = {}
+    active_ids = set(RUNTIME_INPUT_IDS)
+    active_manifests = list(ACTIVE_MANIFESTS)
+    if (root / REGISTRY_PATH).is_file():
+        from science.registered_observations import load_registry
+
+        registry = load_registry(root=root, registry_path=root / REGISTRY_PATH)
+        active_manifests.append("observation_registry.json")
+        for exposure in registry["exposures"].values():
+            if exposure.get("enabled") is True:
+                active_ids.update((exposure["source_id"], exposure["calibration_id"]))
 
     def add(path: str, required: bool, reason: str, expected=None, size=None):
-        if not path.startswith(
+        if path != "Data_Spec.md" and not path.startswith(
             ("data/", "web/", "contracts/", "science/", "api/", "deploy/", "worker/")
         ):
             return
@@ -119,7 +143,7 @@ def _sources(root: Path) -> list[dict]:
         if isinstance(value, dict):
             required = inherited_required
             if origin == "datasets.json" and "id" in value:
-                if value["id"] not in RUNTIME_INPUT_IDS:
+                if value["id"] not in active_ids:
                     return
                 required = True
             for key, hash_key in path_keys.items():
@@ -147,7 +171,7 @@ def _sources(root: Path) -> list[dict]:
             for child in value:
                 walk(child, origin, inherited_required)
 
-    for name in ACTIVE_MANIFESTS:
+    for name in active_manifests:
         path = root / "data/manifests" / name
         add(path.relative_to(root).as_posix(), True, "canonical_scientific_manifest")
         walk(json.loads(path.read_bytes()), path.name)
@@ -161,12 +185,21 @@ def _sources(root: Path) -> list[dict]:
         if path.is_file() and path.relative_to(root / "web/public").parts[0] in {
             "textures",
             "brand",
+            "reference",
+            "downloads",
         }:
             add(path.relative_to(root).as_posix(), True, "published_static_asset_or_metadata")
     add("data/reference/outer-tno/r029-r031-20261115/jpl-tno-identity-bulk.json", True, "selected_TNO_exact_identity_facts")
     add("data/reference/outer-tno/r029-r031-20261115/jpl-tno-identity-bulk.source.json", True, "selected_TNO_identity_provenance")
     add("data/reference/outer-tno/r029-r031-20261115/audit-index.json", False, "MCP_metadata_audit_not_new_observations")
     add("data/manifests/approximate_mass.json", False, "client_display_mass_assumptions_and_formula_provenance")
+    if pdf_manifest.is_file():
+        add("data/manifests/data_spec_pdf.json", True, "published_data_specification_document_provenance")
+        add("Data_Spec.md", False, "exact_source_of_published_data_specification_pdf")
+    detail_manifest = root / "data/manifests/epsilon_indi_b_detail.json"
+    if detail_manifest.is_file():
+        add("data/manifests/epsilon_indi_b_detail.json", False, "optional_official_validation_target_detail_not_solar_population")
+        walk(json.loads(detail_manifest.read_bytes()), detail_manifest.name, False)
     add("contracts/openapi.json", True, "Node_strict_input_validation_schema")
     add("contracts/planet-nine.schema.json", True, "Planet_Nine_hypothesis_contract")
     for path in [
@@ -174,6 +207,7 @@ def _sources(root: Path) -> list[dict]:
         root / "api/models.py",
         root / "api/storage.py",
         root / "api/main.py",
+        root / "api/service.py",
         root / "worker/process.py",
         root / "deploy/export_node_runtime.py",
     ]:
@@ -252,11 +286,51 @@ def verify_export(root: Path) -> dict:
     }
 
 
-def export(root: Path) -> dict:
+def preserved_canonical_comparisons(root: Path) -> dict[str, bytes]:
+    """Preserve only the four published byte strings, after independent input verification."""
+    root = root.resolve()
+    bundle = root / "data/node-runtime"
+    manifest = json.loads((bundle / "runtime_manifest.json").read_bytes())
+    datasets = {record["id"]: record for record in json.loads((root / "data/manifests/datasets.json").read_bytes())["files"]}
+    raw_values = {}
+    for key, (identifier, expected_sha) in CANONICAL_COMPARISONS.items():
+        entry = manifest["comparisons"][key]
+        path = (bundle / entry["path"]).resolve()
+        if not path.is_relative_to(bundle) or not path.is_file():
+            raise ValueError("canonical_comparison_path")
+        raw = path.read_bytes()
+        value = json.loads(raw)
+        content = {name: item for name, item in value.items() if name != "result_id"}
+        if hashlib.sha256(raw).hexdigest() != expected_sha or entry["sha256"] != expected_sha or entry["comparison_sha256"] != expected_sha or entry["result_id"] != identifier or value["result_id"] != identifier or canonical(value) != raw or "cmp_" + digest(content)[:24] != identifier or key != ",".join(frame["observation_id"] for frame in value["frames"]):
+            raise ValueError("canonical_comparison_identity_or_bytes_changed")
+        references = {reference["id"]: reference for frame in value["frames"] for reference in (frame["provenance"], frame["calibration"])}
+        expected_ids = {"S01", "S02", "S10"} if key.startswith(("S01,", "S02,")) else {"S12", "S14", "L051"}
+        if set(references) != expected_ids:
+            raise ValueError("canonical_comparison_source_closure_changed")
+        for source_id, reference in references.items():
+            source = datasets[source_id]
+            source_path = (root / source["local_relative_path"]).resolve()
+            if not source_path.is_relative_to(root / "data") or not source_path.is_file() or source["sha256"] != reference["sha256"] or source_path.stat().st_size != source["bytes"] or file_digest(source_path) != source["sha256"]:
+                raise ValueError("canonical_comparison_source_integrity")
+        if value.get("ephemeris_manifest_path"):
+            ephemeris = root / "data/manifests/pluto_ephemeris.json"
+            if value["ephemeris_manifest_path"] != "data/manifests/pluto_ephemeris.json" or file_digest(ephemeris) != value.get("ephemeris_manifest_sha256"):
+                raise ValueError("canonical_comparison_ephemeris_changed")
+        raw_values[key] = raw
+    return raw_values
+
+
+def export(root: Path, preserve_canonical_comparisons: bool = False) -> dict:
     root = root.resolve()
     started = datetime.now(UTC).isoformat()
     started_clock = time.monotonic()
     source_files = _sources(root)
+    preserved = preserved_canonical_comparisons(root) if preserve_canonical_comparisons else {}
+    registry = None
+    if (root / REGISTRY_PATH).is_file():
+        from science.registered_observations import load_registry
+
+        registry = load_registry(root=root, registry_path=root / REGISTRY_PATH)
     print("source inventory verified", len(source_files), flush=True)
     staging = (root / "var/node-runtime-builds" / uuid.uuid4().hex).resolve()
     if not staging.is_relative_to(root):
@@ -267,11 +341,10 @@ def export(root: Path) -> dict:
     routes = {}
     comparisons = {}
 
-    def emit(relative: str, value) -> dict:
+    def emit_raw(relative: str, raw: bytes) -> dict:
         path = staging / relative
         if not path.resolve().is_relative_to(staging):
             raise ValueError("export_output_path_unsafe")
-        raw = canonical(value)
         path.parent.mkdir(parents=True, exist_ok=True)
         with path.open("xb") as stream:
             stream.write(raw)
@@ -283,6 +356,9 @@ def export(root: Path) -> dict:
         }
         files.append(record)
         return record
+
+    def emit(relative: str, value) -> dict:
+        return emit_raw(relative, canonical(value))
 
     from science.appearance import get_appearance
     from science.extended_solar import CATALOG_PARENTS, get_extended_solar
@@ -327,8 +403,14 @@ def export(root: Path) -> dict:
             "display_algorithm_version": "extended-solar-parent-hermite-v1",
         }
 
+    core_objects = CORE_OBJECTS
+    if registry:
+        core_objects = [{"object_id": key, "name": value["name"], "status": "available", "default_pair": value["default_pair"],
+                         "observation_ids": [identifier for identifier, entry in registry["exposures"].items() if entry["object_id"] == key and entry.get("enabled") is True]}
+                        for key, value in registry["objects"].items()]
+        snapshots["observation_registry"] = emit("snapshots/observation_registry.json", registry)["path"]
     getters = {
-        "objects": (lambda: {"objects": CORE_OBJECTS}, "/api/v1/objects"),
+        "objects": (lambda: {"objects": core_objects}, "/api/v1/objects"),
         "universe": (solar_scene, "/api/v1/universe"),
         "timeline": (lambda: get_timeline(root), "/api/v1/timeline"),
         "appearance": (lambda: get_appearance(root), "/api/v1/appearance"),
@@ -381,18 +463,46 @@ def export(root: Path) -> dict:
     record = emit("snapshots/python_parity_samples.json", parity)
     snapshots["python_parity_samples"] = record["path"]
 
-    for ids, builder in [
+    selections = [
         (["S01", "S02"], build_comparison),
         (["S02", "S01"], build_comparison),
         (["S12", "S14"], build_pluto_comparison),
         (["S14", "S12"], build_pluto_comparison),
-    ]:
-        print("fresh FITS calculation", ",".join(ids), flush=True)
-        result = builder(root, ids, cutout_size=81)
+    ]
+    if registry:
+        from science.registered_observations import (
+            build_registered_comparison,
+            list_registered_observations,
+            resolve_registered_pair,
+        )
+
+        selections = []
+        for pair_ids in registry["pairs"]:
+            for ids in [list(pair_ids), list(reversed(pair_ids))]:
+                key = ",".join(ids)
+                if key in {",".join(item[0]) for item in selections}:
+                    raise ValueError("duplicate_registered_pair")
+                builder = build_comparison if set(ids) == {"S01", "S02"} else build_pluto_comparison if set(ids) == {"S12", "S14"} else None
+                selections.append((ids, builder))
+        if not set(CANONICAL_COMPARISONS).issubset({",".join(item[0]) for item in selections}):
+            raise ValueError("registry_missing_protected_canonical_pair")
+    fresh_count = 0
+    for ids, builder in selections:
+        key = ",".join(ids)
+        if key in preserved:
+            result = json.loads(preserved[key])
+        else:
+            print("fresh FITS calculation", key, flush=True)
+            result = builder(root, ids, cutout_size=81) if builder else build_registered_comparison(ids, root=root, registry_path=root / REGISTRY_PATH, object_id=resolve_registered_pair(ids, root=root, registry_path=root / REGISTRY_PATH)["object_id"], cutout_size=81)
+            fresh_count += 1
         content_hash = digest(result)
-        result["result_id"] = "cmp_" + content_hash[:24]
-        record = emit("comparisons/" + "_".join(ids) + ".json", result)
-        comparisons[",".join(ids)] = {
+        if key in preserved:
+            content_hash = digest({name: value for name, value in result.items() if name != "result_id"})
+        else:
+            result["result_id"] = "cmp_" + content_hash[:24]
+        relative = "comparisons/" + "_".join(ids) + ".json" if key in CANONICAL_COMPARISONS else "comparisons/registered_" + hashlib.sha256(key.encode()).hexdigest() + ".json"
+        record = emit_raw(relative, preserved[key]) if key in preserved else emit(relative, result)
+        comparisons[key] = {
             **record,
             "object_id": result["object_id"],
             "observation_ids": ids,
@@ -402,7 +512,7 @@ def export(root: Path) -> dict:
             "comparison_sha256": digest(result),
             "schema_version": result["schema_version"],
             "algorithm_version": result["algorithm_version"],
-            "calculation_origin": "fresh_python_source_FITS_build_not_Node_request_recalculation",
+            "calculation_origin": "preserved_source_reverified_canonical_bytes_not_recalculated" if key in preserved else "fresh_python_source_FITS_build_not_Node_request_recalculation",
         }
         if record["sha256"] != digest(result):
             raise ValueError("export_comparison_canonical_digest_mismatch")
@@ -414,9 +524,11 @@ def export(root: Path) -> dict:
         "r-draconis": range(7, 13),
     }
     inventory = json.loads((root / "data/manifests/datasets.json").read_bytes())["files"]
-    for obj in CORE_OBJECTS:
+    for obj in core_objects:
         identifier = obj["object_id"]
-        if identifier in {"pluto", "epsilon-indi-b"}:
+        if registry:
+            value = {"object_id": identifier, "observations": list_registered_observations(identifier, root=root, registry_path=root / REGISTRY_PATH), "status": "available", "default_pair": registry["objects"][identifier]["default_pair"], "available_pairs": [ids for ids in registry["pairs"] if registry["exposures"][ids[0]]["object_id"] == identifier], "next_cursor": None}
+        elif identifier in {"pluto", "epsilon-indi-b"}:
             reader = list_pluto_observations if identifier == "pluto" else list_observations
             value = {
                 "object_id": identifier,
@@ -463,6 +575,7 @@ def export(root: Path) -> dict:
         "snapshots": snapshots,
         "routes": routes,
         "comparisons": comparisons,
+        **({"observation_registry": {"path": REGISTRY_PATH, "sha256": file_digest(root / REGISTRY_PATH), "snapshot_key": "observation_registry"}} if registry else {}),
         "runtime_mode": "node_only_with_disclosed_Python_build_calculation_snapshots",
         "public_scope": "solar_system_1000au",
         "scope_migration_policy": "solar-scope-context-v1",
@@ -473,21 +586,22 @@ def export(root: Path) -> dict:
             "scipy": version("scipy"),
         },
         "selection_contract": {
-            "comparison_pairs": [["S01", "S02"], ["S12", "S14"]],
+            "comparison_pairs": registry["pairs"] if registry else [["S01", "S02"], ["S12", "S14"]],
             "comparison_cutout_size": 81,
             "extended_parent_ids": CATALOG_PARENTS,
         },
         "verification": {
             "source_files_before_after_match": True,
             "generated_files_sha_verified": True,
-            "fresh_comparison_calculations": 4,
+            "fresh_comparison_calculations": fresh_count,
+            "preserved_canonical_comparisons": len(preserved),
             "comparison_full_canonical_sha_verified": True,
-            "active_manifest_allowlist": list(ACTIVE_MANIFESTS),
+            "active_manifest_allowlist": [*ACTIVE_MANIFESTS, *(["observation_registry.json"] if registry else [])],
             "excluded_feature_snapshots": False,
         },
         "limitations": [
             "This is a build-time result cache. Node comparison requests verify original source and exported-file hashes, then retrieve a fixed precomputed result; they do not run Astropy/FITS analysis on demand.",
-            "Only the existing S01/S02 and S12/S14 pair selections, either order, are available for comparison. No arbitrary coordinates, new exposures, alternative mask/cutout sizes or unsupported quantitative measurements are fabricated.",
+            "Only the authored registered observation pairs, either order, are available for comparison. No arbitrary coordinates, unregistered exposures, alternative mask/cutout sizes or unsupported quantitative measurements are fabricated.",
             "Null fields, scientific statuses, source provenance and all original calculation limitations remain unchanged. A successful cache lookup is not a new observation, discovery, or validated motion measurement.",
             "Runtime formulas for time interpolation, long-term approximations and mass hypotheses require separate JavaScript implementation/parity validation. Exported Python samples are reference cases, not whole-domain proof.",
             "Only adopted Solar/P9 source files are in this active dependency closure. Historical acquisition metadata is preserved without requiring excluded feature files. Required source records must remain byte-identical; a matching declared dist asset may substitute for its public copy.",
@@ -529,8 +643,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--verify-only", action="store_true")
+    parser.add_argument("--preserve-canonical-comparisons", action="store_true", help="Copy only the four fixed published comparison byte strings after source and identity verification")
     arguments = parser.parse_args()
     if arguments.verify_only:
         print(json.dumps(verify_export(arguments.root), indent=2))
     else:
-        export(arguments.root)
+        export(arguments.root, preserve_canonical_comparisons=arguments.preserve_canonical_comparisons)

@@ -1,5 +1,6 @@
-"""The adopted Solar/P9 source closure must produce a self-contained ZIP."""
+"""The adopted Solar/P9 and registered observation closure must be self-contained."""
 
+import json
 from pathlib import Path
 
 from deploy.export_node_runtime import ACTIVE_MANIFESTS, _sources
@@ -33,9 +34,21 @@ def test_actual_dependency_closure_requires_only_adopted_science_inputs():
     )
     assert not any(path.startswith(excluded) for path in sources)
     assert "data/manifests/node_runtime.json" not in sources
-    required_fits = [
+    required_fits = {
         path
         for path, value in sources.items()
         if value["runtime_required"] and path.endswith(".fits")
-    ]
-    assert len(required_fits) == 6
+    }
+    registry = json.loads((ROOT / "data/manifests/observation_registry.json").read_bytes())
+    inventory = {record["id"]: record for record in json.loads((ROOT / "data/manifests/datasets.json").read_bytes())["files"]}
+    enabled = [entry for entry in registry["exposures"].values() if entry["enabled"]]
+    identifiers = {entry[key] for entry in enabled for key in ("source_id", "calibration_id")}
+    expected_paths = {inventory[identifier]["local_relative_path"] for identifier in identifiers}
+    assert required_fits == expected_paths
+    assert sources["data/manifests/observation_registry.json"]["runtime_required"] is True
+    for entry in enabled:
+        for identifier_key, pin_key in [("source_id", "source"), ("calibration_id", "calibration_source")]:
+            record = inventory[entry[identifier_key]]
+            exported = sources[record["local_relative_path"]]
+            assert exported["runtime_required"] is True
+            assert (exported["sha256"], exported["bytes"]) == (entry[pin_key]["sha256"], entry[pin_key]["bytes"])

@@ -558,3 +558,26 @@ DEV-024 시작: 사용자가EarthMoon보다Venus가가깝게보이는혼합척�
 DEV-024 공개확정: DEV-024 / v0.15.1: 혼합척도를 공통 부모중심 선형거리/전체개략도로 분리했고 원자료 거리비율·mesh반지름·구판카메라 복원을 보존한다. P9오른쪽580px/왼쪽INFO/연속이름선택과출처H·크기/명시ρ·albedo가정의M⊕어림값을 구현했다. 중복전역근거버튼을제거하고관측작업대근거탭으로통합했다. strict/Vite·Vitest122/Node80/Python65+16subtests/Ruff,독립브라우저9경로와구판2경로,정확디렉터리Node-only재시작을확인했다. 공개초회6/7에서좌표도착전Pluto선택race를발견해교정했고실제응답지연/Pluto저장복원과εB5언어원본품질/근거복원2후속을공개HTTPS에서통과했다. 운영PID14484→실제재시작14572,기존3근거원봉투/ID/판단과네comparison정본을보존한다. runtimeSHA cdd9d4591d84b2e5eb4c962233531106c1284b776a6af9c7d68e09db4de9a204,source1275/필수1184·39JSON/19,203,311B. 새ZIP없이095903 검증디렉터리를활성화했으며사후정본은 docs/releases/v0.15.1.json이다. 초회095159배포는Pluto초기선택race로후속095903에교체했다. 중지writer36파일backupSHA04d6cbe6429af1deae7fbdd2cb4b07df8e5a9115865adf4c6be37a25b31dbe73,기존20comparison/evidence파일SHA보존. 공개6PASS와교정후2PASS를분리기록한다.
 
 DEV-025 착수: 사용자Gemini저장폴더의실제Canvas코드를읽고목업과실데이터를구별했다. FSD29/DataSpec의등록형실관측·εB상세·TOP5디자인계약을먼저작성했고원관측/네정본/1000AU범위/5언어를보호하며독립분담했다.
+
+
+DEV-025 사용자 크레딧 확정: 최상단 2026 SNHS Alpha/제작자·소속·역할/감사·장소 후원/전체 Data_Spec PDF/데이터기관·오픈소스·AI고지/단일 릴리스 버전과 갱신일을 반영 중이다. 공개 명시된 실명에 GitHub ID 대응표를 추가하지 않는다. GitHub 저장소는 사용자 지시로 PRIVATE→PUBLIC 전환했고 gh repo view에서 isPrivate=false/visibility=PUBLIC을 확인했다. 이후 AWS 배포 검증 후 최신 소스를 commit/push한다.
+
+
+DEV-025 중앙진행: 원격 strict/Vite·Vitest127/25파일,Python43+22subtests/Ruff와Node83PASS/역사PDFskip1을확인했고새37쌍/74ordered 실제HTTP조회가전부성공했다. Chrome첫후속11경로중6PASS/5FAIL을기록했다: εB원사진5언어·근거/새세션,TOP5의미/5언어·공유query재시도,공식4대상새실관측·S13잘림/새근거는PASS.5실패중3은Playwrightread-only GET socketreset(실제동일ID재조회정상),1은innerText/textContent 줄바꿈QA불일치,1은실제1371년Eris기준점누락이다. GET만제한재시도·동일바이트확인,summary오라클일관화,source검증TNO/세레스2체표시를수정했고후속검증예정이다. PDF는NotoKR+공식보조서체/OFL,긴표분할·모든sourceSHA감사부록·원문첨부를사용해380쪽/5,354,471B/SHA fd552d17b70761729cfad08eb9b095a09545af209f40ee5daccbd206078417ed로생성했다. MD정본은LF/SHA59835bebea6e708726e45864073db702f1f65a5497c9ced098a7af880f1db15f다. 원문/HTTP링크/2499uniqueSHA/전체heading추출검증과380면 raster를확인했고시각검수중이다.
+
+
+### DEV-025 공개 검증 확정 — 2026-11-15 12:04 KST 이후
+
+v0.16.0의 실제 등록부는10대상/40제품/37무순서쌍/74방향별비교다. 기존102개datasets행과4comparison 정본을 보존하고 새Solar4대상8native원응답32,699,520B/정확SPHEREx관측자−163182 예측·DataLink를 추가했다. 전체dataset은110행/1,020,687,104B다. 17제품은분광DataLink검증,23제품은native-only/파장null 한계를 유지한다. εIndiBa/Bb 원Gemini사진·문헌상세는태양계1000AU 밖의별도상세이며표면/현재공전위상을만들지않는다.
+
+사용자제공Gemini의TOP5카드/표본→실제TNO연속선택흐름,같은source를사용하는공유query,1371/2035/3000의8nativeTNO/세레스기준점,줌아웃별도위치표식/labelwheel전달,크레딧focus/재열람scroll,탐색설명카드가림을수정했다. 좌표/mesh반지름/관측시각/조건부문헌분포와실측부재를보존한다. 2026 SNHS Alpha 제작자/감사/장소후원/기관·라이선스·AI·공개GitHub링크와전체명세PDF를연결했다. 실제일자2026-11-15T02:42:00Z는소스동결시각이며PDF빌드시각/방문시각과구별한다.
+
+최종PDF는380쪽/5,354,288B/SHA20bbb99c50dcc9f7a72b0911829b2cd526368a3e97e3c365d8ab65fdb50f96e9다. sourceMD는LF/SHA3e57da2c438e4e98c6af65a7712ba0f080e6a3b1eb5e04a09a7a09bae5d00052를동결했다. 전체4137행·원문첨부/HTTP링크·2499uniqueSHA감사부록·한국어/수학기호glyph검사를확인했다. 전380면raster/contact sheet및독립대표페이지검수후개시문단의남은별표2개를정리하고동일레이아웃재생성·최종2쪽을직접열람했다. 앞선fd552…는중간검증본이며최종본으로대체표시하지않는다. fonts/OFL/도구잠금·생성검증manifest를함께보존한다.
+
+원격strict/Vite·Vitest132/26파일·Node86(no skips)·영향Python45+22subtests/Ruff,실제74orderedHTTP·중앙Chrome18고유최종경로를통과했다. 첫브라우저실패/부분통과와수정원인은docs/qa/dev025_local_verification.json에구분했다. metadata CRLF/LF source-proof불일치와2대상고정smoke오라클도검증실패로남기고정본LF writer/실제10대상등록부오라클로교정했다. 마지막정확115623KST디렉터리1951files/1,103,298,864B/manifest ab8c13a8b2e49feb4ae7d527dd08107e23ecfc318d7bb91c4f28abc592d6ebd7를새폴더copy/Node-only PATH에서실제재시작·관측/가설근거복원검증한후AWS에같은바이트로배포했다. Node runtimeSHA0ac22b38cb819369e16bdb6835aeddc0ff6a2ddad70020174d2932aab73b7b39·114JSON/63,027,446B/source1365필수1270·선택28검증/67미배포다.
+
+정지writer백업41파일SHAf719705ca632144cb13974c3580e8785c00df758b8bac89207f10bd64df5abc3와기존22comparison/evidence원바이트를보존했다. 공개초회5중3PASS/2FAIL은실제복원거부가아니라HTTP200본문수신중15초에새컨텍스트를닫은검사와세레스반지름문자열1ulp차이였다. 동일POST1회본문완료를기다리고12자리수치비교로검사만교정한후후속2/2PASS,공개5고유경로전체PASS다. 새제품/과학코드는소스동결후변경하지않았다. 실제운영PID14572→22206→별도재시작22451·정상TLSHTTPS ready/sourceverified/storage/worker를확인했고기존εB·명왕성·P9의3근거export원봉투/ID/판단/전체SHA를재대조해모두restored를확인했다.
+
+최종사후기록은docs/releases/v0.16.0.json과docs/qa/dev025_local_verification.json이다. 검증한배포디렉터리·Data_Spec원MD/PDF·원FITS·이전ZIP은사후문서때문에변경하지않는다. 새ZIP을만들지않았고사용자untracked복사본MD/로컬논문PDF/개인키/내부계획서는공개Git대상에서제외한다. NASA·우주기관자료의PPT용설명을출처와함께세션텍스트로제공했으며TOP5를발견행성/존재확률로부르지않았다. 이후Git commit/push와원격HEAD확인이남아있다.
+
+DEV-025 Git 원본보존 점검: 새 공개 ref 디렉터리의 XML/JSON/TXT·서체/OFL에 한정해 .gitattributes의 -text/-eol을 적용했다. Git 자동 줄바꿈 변환이 공식 원응답·source sidecar의 byte/SHA를 바꾸지 않도록 하며 원파일이나 검증 배포디렉터리의 바이트는 수정하지 않았다. Data_Spec/PDF·실행manifest의 staged blob을 원파일과 대조하고 개인키/내부문서/원FITS/연구논문/사용자복사본 추가를 제외했다.

@@ -204,5 +204,28 @@
     "pds": true,
     "astronomy": true,
     "horizons": true
-  }
+  },
+  "dev025_native_calls": [
+    {
+      "path": "data/reference/mcp/dev025/pds-spherex-host.json",
+      "bytes": 543,
+      "sha256": "4ac0cad4faed6edb2246ef1251e62790997de98dda07d6b4c99ffdce7a63d269",
+      "use": "PDS has no matching SPHEREx host record in this query; this is not IRSA coverage absence.",
+      "is_new_SPHEREx_observation": false
+    },
+    {
+      "path": "data/reference/mcp/dev025/horizons-spherex-lookup.json",
+      "bytes": 807,
+      "sha256": "bffbcfcabdce6458837357841e1c3653cc31ded8a3dcc9504c5142626bb1abcb",
+      "use": "Native Horizons lookup confirms SPHEREx spacecraft ID -163182.",
+      "is_new_SPHEREx_observation": false
+    },
+    {
+      "path": "data/reference/mcp/dev025/pluto-s13-observer.json",
+      "bytes": 72218,
+      "sha256": "976779fc8339a0ec2f7ab970932ff2467fb630fcb57cd5b54e3a3e0a8d4084af",
+      "use": "Native Horizons observer call provides a coarse HMS cross-check; exact marker uses separately preserved official high-precision API response.",
+      "is_new_SPHEREx_observation": false
+    }
+  ]
 }

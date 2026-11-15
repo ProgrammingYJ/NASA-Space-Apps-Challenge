@@ -1,0 +1,11 @@
+{
+  "url": "https://noirlab.edu/public/media/archives/images/large/geminiann04016a.jpg",
+  "final_url": "https://storage.noirlab.edu/media/archives/images/large/geminiann04016a.jpg",
+  "retrieved_utc": "2026-11-15T00:47:36.159237+00:00",
+  "bytes": 84074,
+  "sha256": "9398a48e727675900f2776522941cd81e2e3b45ec17c2ed32d59f90dfaccf722",
+  "content_type": "image/jpeg",
+  "local_relative_path": "data/reference/epsilon-indi-b/research-20261115/geminiann04016a.jpg",
+  "tls": "default_certificate_and_hostname_validation",
+  "role": "optional_local_research_reference_not_current_runtime_dependency"
+}

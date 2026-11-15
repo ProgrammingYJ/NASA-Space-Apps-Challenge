@@ -1,13 +1,15 @@
 # Planet X and SPHEREx — 기능·개발 명세서
 
-**현재 운영 DEV-024 / v0.15.1: 혼합척도를 공통 부모중심 선형거리/전체개략도로 분리했고 원자료 거리비율·mesh반지름·구판카메라 복원을 보존한다. P9오른쪽580px/왼쪽INFO/연속이름선택과출처H·크기/명시ρ·albedo가정의M⊕어림값을 구현했다. 중복전역근거버튼을제거하고관측작업대근거탭으로통합했다. strict/Vite·Vitest122/Node80/Python65+16subtests/Ruff,독립브라우저9경로와구판2경로,정확디렉터리Node-only재시작을확인했다. 공개초회6/7에서좌표도착전Pluto선택race를발견해교정했고실제응답지연/Pluto저장복원과εB5언어원본품질/근거복원2후속을공개HTTPS에서통과했다. 운영PID14484→실제재시작14572,기존3근거원봉투/ID/판단과네comparison정본을보존한다. runtimeSHA cdd9d4591d84b2e5eb4c962233531106c1284b776a6af9c7d68e09db4de9a204,source1275/필수1184·39JSON/19,203,311B. 새ZIP없이095903 검증디렉터리를활성화했으며사후정본은 docs/releases/v0.15.1.json이다.**
+**현재 운영 DEV-025 / v0.16.0:** 실제SPHEREx10대상40제품·37무순서쌍/74방향별 비교, ε Indi Ba/Bb 별도 상세, TOP5 카드/연속 실제천체 탐색, source 검증 native 기준점/위치표식, 크레딧/전체 데이터 PDF와 설명 카드 가림 수정을 적용했다. 원격 strict/Vite·Vitest132/26파일·Node86·Python45+22subtests/Ruff, 로컬Chrome18고유 경로와 공개HTTPS5고유 경로를 확인했다. 정확115623KST 디렉터리1951payload파일/1,103,298,864B, manifestSHA ab8c13a8b2e49feb4ae7d527dd08107e23ecfc318d7bb91c4f28abc592d6ebd7, runtimeSHA 0ac22b38cb819369e16bdb6835aeddc0ff6a2ddad70020174d2932aab73b7b39·114JSON/63,027,446B다. 운영PID22206→22451 실제재시작후ready/source검증을확인했다. 공개검사초회실패와후속결과·구판근거원봉투복원·Git상태의최종정본은 docs/releases/v0.16.0.json과 docs/qa/dev025_local_verification.json을 따른다. 사후문서가 동결 배포디렉터리를 수정하지 않는다.**
 
-**진행 중 DEV-025:** 실제 관측 등록 확장·ε Indi B 별도 상세·사용자 제공 Gemini Canvas 화면 구성은29절의 구현/검증 중 계약을 따른다.
+**보존 이력 DEV-024 / v0.15.1: 혼합척도를 공통 부모중심 선형거리/전체개략도로 분리했고 원자료 거리비율·mesh반지름·구판카메라 복원을 보존한다. P9오른쪽580px/왼쪽INFO/연속이름선택과출처H·크기/명시ρ·albedo가정의M⊕어림값을 구현했다. 중복전역근거버튼을제거하고관측작업대근거탭으로통합했다. strict/Vite·Vitest122/Node80/Python65+16subtests/Ruff,독립브라우저9경로와구판2경로,정확디렉터리Node-only재시작을확인했다. 공개초회6/7에서좌표도착전Pluto선택race를발견해교정했고실제응답지연/Pluto저장복원과εB5언어원본품질/근거복원2후속을공개HTTPS에서통과했다. 운영PID14484→실제재시작14572,기존3근거원봉투/ID/판단과네comparison정본을보존한다. runtimeSHA cdd9d4591d84b2e5eb4c962233531106c1284b776a6af9c7d68e09db4de9a204,source1275/필수1184·39JSON/19,203,311B. 새ZIP없이095903 검증디렉터리를활성화했으며사후정본은 docs/releases/v0.15.1.json이다.**
+
+**DEV-025 계약과 검증:** 실제 관측 등록 확장·ε Indi B 별도 상세·사용자 제공 Gemini Canvas 화면 구성 및 후속 오류 교정의 상세는29절을 따른다. 과거 릴리스의 아래 검증 이력은 당시 범위다.
 
 **보존 이력 DEV-020 / v0.13.0:** R029~31의 TNO 전수 설명·판정 대화상자·밀도 선택 기능, 공식 RGB 지도/고리/조명/LOD 복구, 8행성·P9문헌/조합 표시 필터를 구현했다. TypeScript/Vite·Vitest84·Node72·관련Python63·Ruff와 Chrome15개 고유 경로(영향 범위 후속 포함)를 확인했다. runtime SHA ea500e152d49734fcb2dfd65db3f6a2abbf967d77d6a7ae79bc2e8ddcff16f46,39JSON/19,200,366B/source1272·필수1182다. 기존4comparison ID/SHA와 3운영 근거 원봉투를 보존한다. 현재 Sydney 운영은 검증된0.13ZIP으로 갱신됐고 실제 재시작·HTTPS Chrome5흐름·기존근거복원이 완료됐다. 정확기록은 docs/releases/v0.13.0.json이다. 상세계약24절,검증정본 docs/qa/dev020_local_verification.json. 아래 이전 릴리스는 당시 이력이다.
 
 
-문서 버전 `FSD-0.26` · 2026-11-15 KST · DEV-023·DEV-024·OPS-020 EC2이전. 현재범위/기능/자료계약은1.1/2.21/8.14/11.1~2/17.4/21과후속22~29를연결하며충돌시최신29를우선한다. 제외기능의과거완료이력은현재유지범위가아니다.
+문서 버전 `FSD-0.27` · 2026-11-15 KST · DEV-025·DEV-023·DEV-024·OPS-020 EC2이전. 현재범위/기능/자료계약은1.1/2.21/8.14/11.1~2/17.4/21과후속22~29를연결하며충돌시최신29를우선한다. 제외기능의과거완료이력은현재유지범위가아니다.
 
 **이 파일은 프로젝트의 기능·화면·계산·API·데이터·실행·검사·배포 명세를 통합 관리하는 문서다.** 기능이나 계약을 바꾸는 작업에서는 관련 절과 아래 구현 현황을 함께 갱신한다. 규칙은 [AGENTS.md](./AGENTS.md), 실제 작업 증거는 [작업 기록](./docs/worklog.md), 적용 스킬은 [SKILLS.md](./SKILLS.md)에서 연결한다. 기능·개발 명세는 이 파일에서 유지한다. 사용자의 명시적 요청으로 만든 [Data_Spec.md](./Data_Spec.md)는 실제 사용/확보/이전 데이터의 전수 목록·출처·해시·가공/권리·한계를 담당하며 실행 manifest/타입과 함께 갱신한다. OpenAPI/타입/스키마·lockfile·테스트는 실행 가능한 계약으로 별도 유지하고 이 문서에서 경로/버전을 참조한다.
 
@@ -1254,13 +1256,13 @@ UniverseContext.distance_view에 algorithm_version·origin_object_id를 저장�
 상단의중복비교·근거버튼을제거하고실제관측작업대안의근거탭을단일진입점으로쓴다. 관측판단/저장/JSON·CSV내보내기/새세션복원의기존봉투·ID·해시와전역가져오기는유지한다. 제9행성가설근거는관측측정과다른기존형식/검증을보존한다. 관측확대와갈색왜성상세의후속DEV-025는이릴리스에서완료로주장하지않는다.
 
 
-## 29. DEV-025 — 관측 등록 확장·ε Indi B 상세·디자이너 참조 반영 (진행 중)
+## 29. DEV-025 — 관측 등록 확장·ε Indi B 상세·디자이너 참조 반영·공개 검증
 
-최신 사용자 지시로 실제 관측 화면 안의 근거 탭을 단일 진입점으로 유지하고 중복 전역 비교·근거 버튼을 제거했다(DEV-024). 다음 범위는 아래와 같다. 이 절의 신규 기능은 별도 실행·공개 검증 전 완료로 표시하지 않는다.
+최신 사용자 지시로 실제 관측 화면 안의 근거 탭을 단일 진입점으로 유지하고 중복 전역 비교·근거 버튼을 제거했다(DEV-024). 아래 계약을 구현했고 실행/공개 검증의 정확 범위와 남은 후속 상태는29.9절 및 외부 릴리스 기록으로 구분한다.
 
 ### 29.1 검증 가능한 원본 연결
 
-고정 두 대상 분기를 등록부 `data/manifests/observation_registry.json`의 대상/노출/허용 쌍으로 교체한다. 현재 확보된 SPHEREx FITS43개 중 같은 대상·검출기·서로 다른 DATE-AVG로 중복 재처리를 제외한33개 무순서 쌍(εB6, 명왕성3, Barnard3, R Dra3, RW Aur12, WISE0855 6)을 검토한다. 준비된 쌍만 활성화하며 역순을 포함한 최대66개 빌드 캐시를 제공한다. 기존 S01/S02·S12/S14 양방향 네 정본의 ID/원JSON SHA는 유지한다. Linux 새 계산으로 Windows 정본을 덮어쓰지 않는다. 새 알고리즘은 `spherex-registered-native-v1`이고 새 입력/등록부/보정/관측자 예측의 SHA를 추적한다.
+고정 두 대상 분기를 등록부 `data/manifests/observation_registry.json`의 대상/노출/허용 쌍으로 교체했다. 최초 검토는 확보된 SPHEREx FITS43개에서 같은 대상·검출기·서로 다른 DATE-AVG 및 중복 재처리 제외 조건을 적용한6대상32제품·33무순서 쌍(εB6, 명왕성3, Barnard3, R Dra3, RW Aur12, WISE0855 6)이었다. 이후29.5절의 Solar4대상8제품·4쌍을 추가해 최종10대상40제품·37무순서쌍과 역순 포함74개 빌드 캐시를 제공한다. 기존 S01/S02·S12/S14 양방향 네 정본의 ID/원JSON SHA는 유지하며 Linux 새 계산으로 Windows 정본을 덮어쓰지 않는다. 새 알고리즘은 `spherex-registered-native-v1`이고 새 입력/등록부/보정/관측자 예측의 SHA를 추적한다.17제품은 DataLink/분광보정 연결을 확인했고23제품은 해당 분광 검증이 없어 파장/대역폭null과native-only 상태를 유지한다.
 
 QR2의 MP_*는 비트 위치(0 포함)이고 현대 MSKN/MSKM은 선언 마스크다. 별도 reader 경로로 해석하며 PSF image cube와 EPSF table을 혼동하지 않는다. SWCS v4/v5를 DataLink로 각 노출과 연결하고 원단위·WCS·FLAGS·VARIANCE·ZODI를 유지한다. 원본 전체 바이트·SHA 검증 뒤 생성한 native 영상/품질/출처를 제공한다. 색상·밝기/파장·처리 버전 차이는 명시하며 정합·정밀 측광·독립 운동 검증을 자동 주장하지 않는다. 명왕성 새 S13 위치는 SPHEREx 관측자 Horizons의 정확 DATE-AVG 예측을 별도로 등록한다.
 
@@ -1278,3 +1280,49 @@ MCP는 실제 호출 결과와 범위를 저장한다. PDS에서 SPHEREx host �
 
 
 DEV-024 공개 확정: DEV-024 / v0.15.1: 혼합척도를 공통 부모중심 선형거리/전체개략도로 분리했고 원자료 거리비율·mesh반지름·구판카메라 복원을 보존한다. P9오른쪽580px/왼쪽INFO/연속이름선택과출처H·크기/명시ρ·albedo가정의M⊕어림값을 구현했다. 중복전역근거버튼을제거하고관측작업대근거탭으로통합했다. strict/Vite·Vitest122/Node80/Python65+16subtests/Ruff,독립브라우저9경로와구판2경로,정확디렉터리Node-only재시작을확인했다. 공개초회6/7에서좌표도착전Pluto선택race를발견해교정했고실제응답지연/Pluto저장복원과εB5언어원본품질/근거복원2후속을공개HTTPS에서통과했다. 운영PID14484→실제재시작14572,기존3근거원봉투/ID/판단과네comparison정본을보존한다. runtimeSHA cdd9d4591d84b2e5eb4c962233531106c1284b776a6af9c7d68e09db4de9a204,source1275/필수1184·39JSON/19,203,311B. 새ZIP없이095903 검증디렉터리를활성화했으며사후정본은 docs/releases/v0.15.1.json이다.
+
+
+### 29.4 선택 후 줌아웃 시 native 본체 위치 식별
+
+사용자 추가 제보에서 부모중심 선형거리의 10000 display/AU와 고정 mesh반지름 때문에 다른 천체의 투영직경이1픽셀 미만이 되어 이름만 남는 현상을 확인했다. 원좌표·mesh반지름·태양조명·카메라저장계약을 바꾸지 않고 동일한 투영중심에 별도 화면픽셀 위치표식을 제공한다. 3px미만에서 표시·4px초과에서 숨기는 이력 규칙으로 깜빡임을 막고, 표식은 실제 크기/광도가 아니라고5언어로알린다. glyph또는정해진화면hit범위에서다른천체로선택할수있어야하며위성LOD/겹침구분을유지한다. 과거·미래·재생·복원과확대시원래mesh복귀를검사한다. 타임라인을이유로공간전체를자동재축척하거나실제본체를키우지않는다.
+
+
+### 29.5 새 태양계 SPHEREx 실제 입력
+
+문헌·기존 샘플에 더해 실제 MOST 촬영범위를 조사해 천왕성·해왕성·목성·토성의 두시각씩8개 공식 native cutout 원응답(총32,699,520B)을 확보했다. 촬영범위는 검출이 아니다. 별도8개 Horizons 정밀 원응답의 SPHEREx관측자−163182/DATE-AVG/ICRF 예측을 표식으로 사용하고, MOST 조회중심을 실측중심으로 쓰지 않는다. datasets에기존102행을보존한채8새source를추가하고등록부에4대상·8제품·4쌍을추가한다. 최초6대상32제품33쌍에서최종10대상40제품37쌍(양방향74선택)으로확장했고74개실제HTTP비교조회와등록/API검증을통과했다. 새자료의정확DataLink/분광SWCS/원본/헤더/SHA와cutout출처를연결한다. 목성·토성중앙의비유한/강한플래그는원본그대로진단상태로보존하고원A/B옆에사실을표시한다. 표면대기모형이나새검출/변광/이동/광도로대체하지않는다. Mars의두제한월빈조회는해당조회결과일뿐글로벌관측불가를뜻하지않으며Earth/Mercury/Venus부재를추론하지않는다.
+
+
+### 29.6 공개 크레딧과 데이터 명세서 PDF
+
+사용자가 공개를 명시한 제작자·학교·역할은 원문 그대로 표기하고 GitHub ID 대응표를 만들지 않는다. 크레딧 최상단은 크게 **2026 SNHS Alpha**다. 수/과학 검산 윤서진, UI/UX 김민정, 백엔드 개발·프로젝트 리더 이용진, 문서·일정 관리 유영준·박형섭, SNHS Alpha 전원 테스터, 김민세 동아리 담당 선생님 감사, 송내고교 장소 후원을 사용자 지정 학년/소속과 함께 표시한다. 추가 승인된 데이터 제공 기관의 공식 링크, 오픈소스 라이선스 고지, AI 활용 대장, 릴리스 버전과 갱신일을 연결한다. 기관의 보증·심사 참여·협업을 암시하지 않는다. 역할/상태 제목은5언어이고 실명/학교를 임의 로마자로 변환하지 않는다.
+
+`Data_Spec.md` 전체를 PDF로 변환해 `/downloads/PlanetX_Data_Spec.pdf`에서 다운로드한다. 현재 사용/확보/이전 보존 자료·원출처/해시·권리·한계 구분과 긴 표/링크를 유지한다. PDF는 관측 원본이나 새 과학 입력이 아닌 문서 파생 산출물이다. OFL Noto Sans KR 내장·본문/표 페이지분할·출처 링크·페이지 번호를 확인한다. 별도 `data/manifests/data_spec_pdf.json`에 원MD SHA·PDF SHA/bytes·문서판/작성시각·서체/빌드 도구를 기록하며 원MD에 자기 PDF 해시를 넣는 순환을 만들지 않는다. `deploy/update_release_metadata.py`가 원MD/PDF SHA와 package 버전을 대조하고 Credits의 단일 generated metadata를 갱신한다. 수정 배포 시 PDF→metadata→Vite→runtime exporter 순서이며 불일치는 빌드를 중단한다. 실제 갱신일은 --updated-at으로 고정한 릴리스 소스 동결 UTC 시각이며 PDF 빌드 시각과 따로 관리한다. 방문 시각으로 바꾸지 않고 이후 동일 릴리스 빌드에서 보존한다. 정적 PDF도 source-worker의 선언 경로/bytes/SHA 확인 후 attachment MIME으로 제공한다.
+
+
+### 29.7 과거·미래 native 기준점 보존
+
+실제 브라우저의1371년/Eris에서 부모중심 모드의 원점 천체가8행성 fit 장면에서 빠져 `distance-origin-available=false`가 되고 모든 본체/궤도가 함께 사라지는 오류를 확인했다. 고정8행성 fit만으로 비지원 천체 좌표를 만들지 않는다. 현재 검증된 JPL SBDB TNO catalogue의 정확 known native ID/SPK와원base메타가일치하는8개(명왕성·하우메아·마케마케·에리스·세드나·콰오아·오르쿠스·공공)는 기존 `jpl-sbdb-tno-two-body-v2` 태양중심 J2000/TDB 원소 전파를 그대로 사용해 누락 native 본체와source가고정된순간궤도 guide를 추가한다. 원카탈로그/manifest SHA·frame/단위/algorithm/원소·유한 위상 조건을 검증하며 같은ID/8행성 중복을 금한다.100Julian년 초과는 미검증 장기외삽이고 근접 시각의 정밀도/전파공분산도 보장하지 않는다.
+
+세레스는 TNO로 분류하지 않는다. 기존 정확 `ceres`/Horizons `1;`/부모Sun10의73knot 원응답 SHA `6851c4fd5c5389db14ca85944dd7a93c676fa3181a726845af13e3dfd0852d82`, ECLIPTIC/ICRF/AU-D/VECTORS/NONE/UT와첫knot의별도숫자TDB를 확인하고 기존 상태→2체 fit/propagation과출처있는태양GM을재사용한다. UTC표시문자열을TDB숫자로오인하지않는다. 새천체력/장기정밀복원·새질량/반지름측정·전체섭동계산이아니다. 누락·잘못된source/식별자/phase는0이나정지위치로채우지않고누락사유를보존한다. 기존8행성/위성 fit·원반지름/source·카메라 refit 동작은 변경하지 않는다.
+
+새 근거는 선택적으로 outer_tno_manifest_sha256와 native_tno_simulation_algorithm_version을 저장하고 존재하면 API가현재source/algorithm과대조한다. 기존필드없는근거의원봉투/네comparison정본은보존한다. 기존 extended_solar_manifest_sha256가 세레스 원응답을 추적한다.1371/2035/3000/Eris와Ceres 확대·줌아웃/시간변경에서유한원점/표식·거리/반지름/카메라와미검증상태를검사한다.
+
+
+### 29.8 탐색 설명 카드의 가림 수정
+
+사용자가 보낸 실제 화면에서 absolute catalogGateway와 별도 grid intro가 겹쳐 텍스트를 가렸다. 검색과 발견 안내를 같은 독립 스크롤 sidebar 흐름으로 묶고 제목·전체 설명·가설/실관측 비교 CTA·공식5대상 진입을 하나의 카드에 보존한다. 같은 설명은 중복 표시하지 않는다. 짧은 PC/모바일/긴 번역에서 읽을 수 있으며 footer·타임라인과 공간을 나눈다. 선택/관측 상태의 빈 sidebar는 canvas나 관측 클릭을 가로채지 않고 search 자체만 입력을 받는다. P9 왼쪽INFO/오른쪽작업대·카메라와 실제관측시각/소스는 변경하지 않는다. 실제rect교차·가로넘침·CTA/공식검사 진입과1440×1000/1280×720/390×844 및CSS125% 확대/5언어로 검증한다. CSS zoom 검사는 실제브라우저toolbar 확대검증과구별한다.
+
+이름표/위치표식이 마우스 아래 들어오면 canvas OrbitControls에 wheel이 도달하지 않아 줌이 멈추는 실제 조작 오류도 수정한다. 두 레이어에서만 passive:false native wheel을 받아 canvas에 delta/좌표/modifier를 한 번 전달하고 원이벤트를 취소한다. 실제canvas 입력은 재위임하지 않으며 listener정리로StrictMode 중복을 막는다. 클릭/키보드와패널스크롤·반지름·궤도·모형카메라 계산은 유지한다. 고정포인터에서Mars라벨이겹치는Ceres3000년 회귀를 그대로검사한다.
+
+크레딧은 열 때마다 스크롤을 맨 위로 돌리고 닫기버튼에 명시적으로 포커스한다. 닫기/ESC 후 원래설정버튼으로 돌아가며5언어/실제PDF다운로드/모바일내부스크롤을검사한다. 갱신일은 실제릴리스소스동결UTC이며문서PDF의빌드시각과분리한다.
+
+
+### 29.9 DEV-025 검증·배포 상태와 기록 경계
+
+- 원격 TypeScript strict/Vite·Vitest132개/26파일·Node86개·관련Python45개와22subtests/Ruff를 통과했다. 실제 등록된74방향별 비교의HTTP 조회를 전부 확인했다. Node 런타임은 검증된 빌드 캐시를 제공하며 새 FITS 요청 분석·검출/측광 성공을 주장하지 않는다.
+- 로컬Chrome18개 고유 경로는 실제 원사진/품질/저장·새 세션, 등록 선택 수화/가져오기 보호, TOP5 카드/연속 선택, Solar4대상, native 표식/1371·2035·3000년, 크레딧/5언어/실제PDF 다운로드와4종 설명 카드 레이아웃을 포함한다.1440×1000·1280×720·390×844 및CSS125% 확대를 확인했으며 CSS zoom을 실제 브라우저toolbar 확대 검사로 부르지 않는다.
+- 공개HTTPS의5고유 경로는3개 초회PASS,2개 후속PASS로 구분한다. 최초 εB 새 세션 검사는 import POST HTTP200 본문 수신 중15초 UI 기대가 끝나 페이지를 닫았고, Ceres 반지름 검사는 수치1ulp 차이를 문자열 불일치로 판단했다. POST를 재전송하지 않고 실제1회 응답 본문 완료를 기다리며 반지름은12자리 수치 정밀도로 비교하도록 검사 오라클만 교정했다. UI/과학 코드는 다시 변경하지 않았으며 후속2개는24.5초/9.9초에 통과했다. 최초 실패 자료를 보존한다.
+- 전체 Data_Spec PDF는380쪽/5,354,288B, SHA256 `20bbb99c50dcc9f7a72b0911829b2cd526368a3e97e3c365d8ab65fdb50f96e9`다. 원MD는 SHA256 `3e57da2c438e4e98c6af65a7712ba0f080e6a3b1eb5e04a09a7a09bae5d00052`로 동결했고 전체 raster/한글·링크/긴 표와 최종 표지·본문을 열람했다. 제작 문서의 원문·폰트/OFL·모든 해시 추적과 PDF 내 첨부를 보존한다. PDF 빌드시각은2026-11-15T02:14:48Z, 공개 릴리스 갱신일은 별도 실제 소스 동결2026-11-15T02:42:00Z다.
+- 정확 디렉터리 `NASA_SPACE_APPS_CHALLENGE_v0.16.0_20261115_115623KST`의1951payload파일/1,103,298,864B·manifest SHA `ab8c13a8b2e49feb4ae7d527dd08107e23ecfc318d7bb91c4f28abc592d6ebd7`를 새 빈 폴더에 복사해 검증했다. Node-only PATH의 실제PID22039→22052 재시작과 원본 비교/가설 근거 복원을 통과했다. 이 독립 검사 당시의 `public_service=not_deployed`는 이력 그대로 보존하고 실제 운영 결과와 분리한다.
+- 같은 검증 디렉터리를Sydney EC2에 직접 활성화했다. runtime manifest SHA `0ac22b38cb819369e16bdb6835aeddc0ff6a2ddad70020174d2932aab73b7b39`,114JSON/63,027,446B, source1365개 중 필수1270·선택28개 present 검증/선택67개 미배포다. writer 중지 백업41파일과 기존22comparison/evidence파일 원바이트 보존을 확인했고 실제운영PID22206→22451 재시작 뒤 정상TLS·ready/sourceverified 상태를 확인했다. 새ZIP은 생성하지 않았다.
+- 기존3운영근거의 최종 원봉투/ID/판단 복원, 공개검사 세부 및 Git commit/push 결과는 [외부 릴리스 정본](docs/releases/v0.16.0.json)과 [DEV-025 검사 정본](docs/qa/dev025_local_verification.json)에서 확정한다. 검증 디렉터리와 과거 ZIP을 사후 문서 기록으로 덮어쓰지 않는다. GitHub 저장소는 사용자 지시로PUBLIC 전환됐고 개인키/계정·내부 계획서·연구 원문 논문PDF를 공개 소스에 추가하지 않는다.

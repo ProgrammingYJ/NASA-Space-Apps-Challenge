@@ -1,0 +1,807 @@
+{
+  "work_id": "DEV-025",
+  "release": "0.16.0",
+  "checked_utc": "2026-11-15T03:05:25.852427+00:00",
+  "status": "passed_with_recorded_initial_failures",
+  "build": {
+    "host": "user-authorized AWS Ubuntu 24.04 amd64",
+    "node": "24.22.3",
+    "strict_typecheck_vite": "passed",
+    "vitest": {
+      "passed": 132,
+      "files": 26
+    },
+    "node_tests": {
+      "passed": 86,
+      "skipped": 0
+    },
+    "python": {
+      "passed": 45,
+      "subtests_passed": 22,
+      "scope": "affected science/API/export/schema/PDF contracts; not the full historical suite",
+      "warnings": "one Starlette/httpx deprecation and 24 synthetic FITS HIERARCH keyword warnings"
+    },
+    "ruff": "passed",
+    "vite_warning": "main chunk exceeds 500 kB; optional workbench/detail code split"
+  },
+  "registered_observations": {
+    "targets": 10,
+    "products": 40,
+    "unordered_pairs": 37,
+    "ordered_pairs": 74,
+    "all_ordered_HTTP_checks_passed": true,
+    "DataLink_spectral_verified": 17,
+    "native_only_spectral_not_verified": 23,
+    "datasets_entries": 110,
+    "datasets_bytes": 1020687104,
+    "new_Solar_raw_products": 8,
+    "new_Solar_raw_bytes": 32699520,
+    "canonical_four_comparison_bytes_preserved": true
+  },
+  "isolated_browser": {
+    "unique_final_passed": 18,
+    "cases": [
+      {
+        "title": "DEV-025 ε Indi Ba/Bb original photo, five-language accessible tabs and modal leave the Solar System state intact",
+        "file": "dev025-epsilon-detail.spec.ts",
+        "status": "passed",
+        "duration_ms": 24846
+      },
+      {
+        "title": "DEV-025 separate brown-dwarf detail opens preserved S01/S02 quality and one real evidence export restores in a clean session",
+        "file": "dev025-epsilon-detail.spec.ts",
+        "status": "passed",
+        "duration_ms": 79990
+      },
+      {
+        "title": "DEV-025: TOP5 cards preserve real n/N, density, epoch, source links and five-language selection meaning",
+        "file": "dev025-p9-cards.spec.ts",
+        "status": "passed",
+        "duration_ms": 23789
+      },
+      {
+        "title": "DEV-025: catalogue errors remain retryable and App/P9 share one genuine retry across panel hide and reopen",
+        "file": "dev025-p9-cards.spec.ts",
+        "status": "passed",
+        "duration_ms": 25984
+      },
+      {
+        "title": "DEV-025 four official targets use registered real pairs, keep warnings in five languages, and reject unsupported detector/target combinations",
+        "file": "dev025-registered-observations.spec.ts",
+        "status": "passed",
+        "duration_ms": 77869
+      },
+      {
+        "title": "DEV-025 Pluto S13 native edge geometry and verified provenance survive generic evidence export and one fresh-session restore",
+        "file": "dev025-registered-observations.spec.ts",
+        "status": "passed",
+        "duration_ms": 61159
+      },
+      {
+        "title": "DEV-025: source default hydration cannot discard a pending global real-evidence import",
+        "file": "dev025-hydration-import.spec.ts",
+        "status": "passed",
+        "duration_ms": 24943
+      },
+      {
+        "title": "DEV-025: sample cards show loading, cancel stale selection and keep P9 hypotheses while real names focus",
+        "file": "dev025-p9-cards.spec.ts",
+        "status": "passed",
+        "duration_ms": 41491
+      },
+      {
+        "title": "DEV-025 four Solar System planets open source-pinned SPHEREx A/B with diagnostic gaps while model time, geometry and globe maps stay unchanged",
+        "file": "dev025-solar-observations.spec.ts",
+        "status": "passed",
+        "duration_ms": 105675
+      },
+      {
+        "title": "DEV-025 credits: the download is an actual PDF whose bytes match the generated publication hash",
+        "file": "dev025-credits.spec.ts",
+        "status": "passed",
+        "duration_ms": 41198
+      },
+      {
+        "title": "DEV-025 credits: narrow Korean and French layouts scroll inside the dialog without horizontal overflow",
+        "file": "dev025-credits.spec.ts",
+        "status": "passed",
+        "duration_ms": 6751
+      },
+      {
+        "title": "DEV-025: source default hydration cannot discard a pending local real-evidence import",
+        "file": "dev025-hydration-import.spec.ts",
+        "status": "passed",
+        "duration_ms": 34798
+      },
+      {
+        "title": "DEV-025 credits: exact approved contributors, five-language roles, direct sources and keyboard focus",
+        "file": "dev025-credits.spec.ts",
+        "status": "passed",
+        "duration_ms": 7021
+      },
+      {
+        "title": "DEV-025 introduction and 1000 AU actions stay in one scroll flow at 1440x1000",
+        "file": "dev025-intro-layout.spec.ts",
+        "status": "passed",
+        "duration_ms": 14207
+      },
+      {
+        "title": "DEV-025 introduction and 1000 AU actions stay in one scroll flow at 1280x720",
+        "file": "dev025-intro-layout.spec.ts",
+        "status": "passed",
+        "duration_ms": 18443
+      },
+      {
+        "title": "DEV-025 introduction and 1000 AU actions stay in one scroll flow at 390x844",
+        "file": "dev025-intro-layout.spec.ts",
+        "status": "passed",
+        "duration_ms": 11625
+      },
+      {
+        "title": "DEV-025 translated introduction remains accessible under 125 percent desktop CSS zoom stress",
+        "file": "dev025-intro-layout.spec.ts",
+        "status": "passed",
+        "duration_ms": 7261
+      },
+      {
+        "title": "DEV-025: wheel zoom-out keeps source-centred native position markers clickable without resizing bodies or camera-on-date rescaling",
+        "file": "dev025-native-zoom.spec.ts",
+        "status": "passed",
+        "duration_ms": 17658
+      }
+    ],
+    "final_followup_report": "browser5: 6/6 passed",
+    "coverage": "five locales, official registry/default hydration, epsilon photo/real quality/evidence/clean restore, TOP5 semantics/continuous selection, four Solar inputs, native zoom/past-future, credits/PDF, intro viewport layouts"
+  },
+  "public_browser": {
+    "url": "https://nasaspaceappschallenge.marulee.dev/",
+    "unique_final_passed": 5,
+    "initial_run": {
+      "passed": 3,
+      "failed": 2
+    },
+    "targeted_followup": {
+      "passed": 2,
+      "failed": 0
+    },
+    "cases": [
+      {
+        "title": "DEV-025 credits: exact approved contributors, five-language roles, direct sources and keyboard focus",
+        "file": "dev025-credits.spec.ts",
+        "status": "passed",
+        "duration_ms": 5196
+      },
+      {
+        "title": "DEV-025 credits: the download is an actual PDF whose bytes match the generated publication hash",
+        "file": "dev025-credits.spec.ts",
+        "status": "passed",
+        "duration_ms": 8425
+      },
+      {
+        "title": "DEV-025 introduction and 1000 AU actions stay in one scroll flow at 1440x1000",
+        "file": "dev025-intro-layout.spec.ts",
+        "status": "passed",
+        "duration_ms": 4690
+      },
+      {
+        "title": "DEV-025 separate brown-dwarf detail opens preserved S01/S02 quality and one real evidence export restores in a clean session",
+        "file": "dev025-epsilon-detail.spec.ts",
+        "status": "passed",
+        "duration_ms": 24466
+      },
+      {
+        "title": "DEV-025: wheel zoom-out keeps source-centred native position markers clickable without resizing bodies or camera-on-date rescaling",
+        "file": "dev025-native-zoom.spec.ts",
+        "status": "passed",
+        "duration_ms": 9912
+      }
+    ],
+    "corrections": "Test only: await the one successful import response body before UI assertion (no POST retry); compare Ceres radius numerically to 12 decimal places instead of differing 1-ulp string representations. No production UI/scientific code changed after frozen build."
+  },
+  "directory_verification": {
+    "checked_at": "2026-11-15T02:56:26.865492+00:00",
+    "status": "passed",
+    "delivery_format": "directory",
+    "logs": "/home/ubuntu/planet-x-dev020-build/tmp/node-release-verify-95yh_dkf",
+    "development_verifier": {
+      "runtime": "Python standard library",
+      "executable": "/home/ubuntu/planet-x-dev020-build/.venv/bin/python",
+      "role": "Directory-copy/hash orchestration and HTTP test client only; not the server"
+    },
+    "server_python_required": false,
+    "linux_container": "not_run",
+    "public_service": "not_deployed",
+    "input_directory": "/home/ubuntu/planet-x-dev020-build/artifacts/NASA_SPACE_APPS_CHALLENGE_v0.16.0_20261115_115623KST",
+    "clean_copy": "/home/ubuntu/planet-x-dev020-build/tmp/node-release-verify-95yh_dkf/clean_copy",
+    "input_semantics": "complete directory copied to a new empty folder; no ZIP creation or extraction",
+    "directory_manifest_sha256": "ab8c13a8b2e49feb4ae7d527dd08107e23ecfc318d7bb91c4f28abc592d6ebd7",
+    "directory_bytes": 1103676202,
+    "release": "0.16.0",
+    "release_base_commit": "84811e52eba64f5cdf0ad1d511a5b6e77d3f395a",
+    "manifest_files_verified": 1951,
+    "runtime_integrity": {
+      "required_sources_verified": 1270,
+      "optional_sources_present_verified": 28,
+      "optional_sources_not_deployed": 67,
+      "runtime_manifest_sha256": "0ac22b38cb819369e16bdb6835aeddc0ff6a2ddad70020174d2932aab73b7b39"
+    },
+    "directory_policy": "path/case/symlink/special-file/private-path/environment/key-header/local-only exclusions passed",
+    "solar_scope_checks": {
+      "radius_au": 1000,
+      "P9_source_sha256": "050b68182ecbf7fd76f280d8cc43c0683d207499aba1488a68092b834420a422",
+      "removed_API_status": 410
+    },
+    "p9_restart_restore": {
+      "evidence_id": "p9ev_77b2fec7c9364f82b4b369214bf44bb7",
+      "same_export_bytes": true,
+      "gravity_recomputed": true
+    },
+    "stage": "complete",
+    "node_runtime": {
+      "status": "passed",
+      "scope": "solar_system_1000au",
+      "surface_maps": 31,
+      "registered_targets": 10,
+      "registered_unordered_pairs": 37,
+      "evidence_id": "ev_d856191e2c0a4582b035ea572c4c36fb",
+      "result_id": "cmp_d88083664b6fd27592eb68c1",
+      "pluto_evidence_id": "ev_e9921695255d4b94a879301747691ecc",
+      "pluto_result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+      "p9_evidence_id": "p9ev_77b2fec7c9364f82b4b369214bf44bb7",
+      "p9_source_sha256": "050b68182ecbf7fd76f280d8cc43c0683d207499aba1488a68092b834420a422"
+    },
+    "server": {
+      "engine": "Node.js",
+      "version": "v24.22.3",
+      "executable": "/usr/local/lib/planet-x-node-v24.22.3/bin/node",
+      "argv": [
+        "/usr/local/lib/planet-x-node-v24.22.3/bin/node",
+        "app.js"
+      ],
+      "PATH": "/usr/local/lib/planet-x-node-v24.22.3/bin",
+      "PORT": "8013",
+      "APP_PORT": null,
+      "actual_http_port": 8013,
+      "startup_port_source": "PORT_environment",
+      "APP_STATE_DIR": "/home/ubuntu/planet-x-dev020-build/tmp/node-release-verify-95yh_dkf/clean_copy/var/node",
+      "owned_process_ids": [
+        22039,
+        22052
+      ],
+      "worker_model": "node:worker_threads, verified through actual health/source responses",
+      "Python_interpreters_resolvable_on_PATH": {
+        "python": null,
+        "python3": null,
+        "python.exe": null,
+        "python3.exe": null,
+        "py": null,
+        "py.exe": null,
+        "uvicorn": null
+      },
+      "source_child_process_import_scan": "none",
+      "stop_method": "only owned Popen process SIGTERM; kill only on timeout"
+    },
+    "runtime_disclosure": {
+      "arbitrary_fits_inputs": false,
+      "feature_flags": {
+        "black_holes": false,
+        "cosmic_history": false,
+        "exoplanets": false,
+        "galaxies": false,
+        "galaxy_atlas": false,
+        "historical_comets": false,
+        "observer_experiment": false,
+        "physics_lab": false,
+        "planet_nine_hypothesis": true
+      },
+      "observation_processing": "verified_build_cache",
+      "ordered_comparison_count": 74,
+      "physics_capabilities": {
+        "all_bodies_known": false,
+        "all_physics": false,
+        "force_cutoff_au": null,
+        "gravity": "newtonian_prescribed_sun_and_eight_planets_restricted_test_particle",
+        "hypothesis": "p9-kepler-sky-v1",
+        "max_integrator_steps": 4096,
+        "optional_solar_1pn": true,
+        "study_radius_au": 1000
+      },
+      "public_scope": "solar_system_1000au",
+      "runtime": "node",
+      "schema_version": "1.0",
+      "snapshot_exported_utc": "2026-11-15T02:17:57.906806+00:00",
+      "source_verification_policy": {
+        "asset_readiness": "asset_success_does_not_mark_science_sources_ready",
+        "batching": "simultaneously_queued_transactions_share_one_validation_pass_no_time_ttl",
+        "comparison_payload": "raw_sha256_checked_each_read",
+        "deployment_input_contract": "immutable_read_only_source_files",
+        "each_transaction": "science_transactions_check_all_required_paths_and_file_fingerprints",
+        "fingerprint": [
+          "dev",
+          "ino",
+          "size",
+          "mtimeNs",
+          "ctimeNs"
+        ],
+        "full_audit": "startup_and_node_app_js_verify_sources_and_exact_release_audit",
+        "initial_verification": "full_sha256_all_bundle_and_required_source_files",
+        "limit": "A host administrator able to forge file identity and all timestamps is outside this metadata-cache trust boundary.",
+        "metadata_change": "full_sha256_required_before_use",
+        "static_assets": "after_initial_full_audit_check_manifest_identity_and_requested_registered_serving_file_fingerprint_and_sha_only",
+        "unchanged_fingerprint": "reuse_previously_verified_sha256",
+        "version": "sha256-stat-fingerprint-v2-scoped-assets"
+      },
+      "supported_observation_pairs": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S01",
+          "L033"
+        ],
+        [
+          "S01",
+          "L035"
+        ],
+        [
+          "S02",
+          "L033"
+        ],
+        [
+          "S02",
+          "L035"
+        ],
+        [
+          "S12",
+          "S13"
+        ],
+        [
+          "S12",
+          "S14"
+        ],
+        [
+          "S13",
+          "S14"
+        ],
+        [
+          "L001",
+          "L005"
+        ],
+        [
+          "L002",
+          "L006"
+        ],
+        [
+          "L003",
+          "L004"
+        ],
+        [
+          "L007",
+          "L008"
+        ],
+        [
+          "L009",
+          "L011"
+        ],
+        [
+          "L010",
+          "L012"
+        ],
+        [
+          "L013",
+          "L016"
+        ],
+        [
+          "L013",
+          "L027"
+        ],
+        [
+          "L013",
+          "L028"
+        ],
+        [
+          "L013",
+          "L029"
+        ],
+        [
+          "L014",
+          "L017"
+        ],
+        [
+          "L015",
+          "L018"
+        ],
+        [
+          "L016",
+          "L027"
+        ],
+        [
+          "L016",
+          "L028"
+        ],
+        [
+          "L016",
+          "L029"
+        ],
+        [
+          "L033",
+          "L035"
+        ],
+        [
+          "L023",
+          "L024"
+        ],
+        [
+          "L023",
+          "L025"
+        ],
+        [
+          "L023",
+          "L026"
+        ],
+        [
+          "L024",
+          "L025"
+        ],
+        [
+          "L024",
+          "L026"
+        ],
+        [
+          "L025",
+          "L026"
+        ],
+        [
+          "L027",
+          "L028"
+        ],
+        [
+          "L027",
+          "L029"
+        ],
+        [
+          "L028",
+          "L029"
+        ],
+        [
+          "SPX-J01",
+          "SPX-J02"
+        ],
+        [
+          "SPX-N01",
+          "SPX-N02"
+        ],
+        [
+          "SPX-S01",
+          "SPX-S02"
+        ],
+        [
+          "SPX-U01",
+          "SPX-U02"
+        ]
+      ]
+    },
+    "health_before_restart": {
+      "runtime": "node",
+      "science_mode": "verified_build_cache_and_ported_display_models",
+      "source_bundle_verified": true,
+      "status": "ready",
+      "storage_writable": true,
+      "worker_alive": true
+    },
+    "health_after_restart": {
+      "runtime": "node",
+      "science_mode": "verified_build_cache_and_ported_display_models",
+      "source_bundle_verified": true,
+      "status": "ready",
+      "storage_writable": true,
+      "worker_alive": true
+    },
+    "runtime_disclosure_after_restart": {
+      "arbitrary_fits_inputs": false,
+      "feature_flags": {
+        "black_holes": false,
+        "cosmic_history": false,
+        "exoplanets": false,
+        "galaxies": false,
+        "galaxy_atlas": false,
+        "historical_comets": false,
+        "observer_experiment": false,
+        "physics_lab": false,
+        "planet_nine_hypothesis": true
+      },
+      "observation_processing": "verified_build_cache",
+      "ordered_comparison_count": 74,
+      "physics_capabilities": {
+        "all_bodies_known": false,
+        "all_physics": false,
+        "force_cutoff_au": null,
+        "gravity": "newtonian_prescribed_sun_and_eight_planets_restricted_test_particle",
+        "hypothesis": "p9-kepler-sky-v1",
+        "max_integrator_steps": 4096,
+        "optional_solar_1pn": true,
+        "study_radius_au": 1000
+      },
+      "public_scope": "solar_system_1000au",
+      "runtime": "node",
+      "schema_version": "1.0",
+      "snapshot_exported_utc": "2026-11-15T02:17:57.906806+00:00",
+      "source_verification_policy": {
+        "asset_readiness": "asset_success_does_not_mark_science_sources_ready",
+        "batching": "simultaneously_queued_transactions_share_one_validation_pass_no_time_ttl",
+        "comparison_payload": "raw_sha256_checked_each_read",
+        "deployment_input_contract": "immutable_read_only_source_files",
+        "each_transaction": "science_transactions_check_all_required_paths_and_file_fingerprints",
+        "fingerprint": [
+          "dev",
+          "ino",
+          "size",
+          "mtimeNs",
+          "ctimeNs"
+        ],
+        "full_audit": "startup_and_node_app_js_verify_sources_and_exact_release_audit",
+        "initial_verification": "full_sha256_all_bundle_and_required_source_files",
+        "limit": "A host administrator able to forge file identity and all timestamps is outside this metadata-cache trust boundary.",
+        "metadata_change": "full_sha256_required_before_use",
+        "static_assets": "after_initial_full_audit_check_manifest_identity_and_requested_registered_serving_file_fingerprint_and_sha_only",
+        "unchanged_fingerprint": "reuse_previously_verified_sha256",
+        "version": "sha256-stat-fingerprint-v2-scoped-assets"
+      },
+      "supported_observation_pairs": [
+        [
+          "S01",
+          "S02"
+        ],
+        [
+          "S01",
+          "L033"
+        ],
+        [
+          "S01",
+          "L035"
+        ],
+        [
+          "S02",
+          "L033"
+        ],
+        [
+          "S02",
+          "L035"
+        ],
+        [
+          "S12",
+          "S13"
+        ],
+        [
+          "S12",
+          "S14"
+        ],
+        [
+          "S13",
+          "S14"
+        ],
+        [
+          "L001",
+          "L005"
+        ],
+        [
+          "L002",
+          "L006"
+        ],
+        [
+          "L003",
+          "L004"
+        ],
+        [
+          "L007",
+          "L008"
+        ],
+        [
+          "L009",
+          "L011"
+        ],
+        [
+          "L010",
+          "L012"
+        ],
+        [
+          "L013",
+          "L016"
+        ],
+        [
+          "L013",
+          "L027"
+        ],
+        [
+          "L013",
+          "L028"
+        ],
+        [
+          "L013",
+          "L029"
+        ],
+        [
+          "L014",
+          "L017"
+        ],
+        [
+          "L015",
+          "L018"
+        ],
+        [
+          "L016",
+          "L027"
+        ],
+        [
+          "L016",
+          "L028"
+        ],
+        [
+          "L016",
+          "L029"
+        ],
+        [
+          "L033",
+          "L035"
+        ],
+        [
+          "L023",
+          "L024"
+        ],
+        [
+          "L023",
+          "L025"
+        ],
+        [
+          "L023",
+          "L026"
+        ],
+        [
+          "L024",
+          "L025"
+        ],
+        [
+          "L024",
+          "L026"
+        ],
+        [
+          "L025",
+          "L026"
+        ],
+        [
+          "L027",
+          "L028"
+        ],
+        [
+          "L027",
+          "L029"
+        ],
+        [
+          "L028",
+          "L029"
+        ],
+        [
+          "SPX-J01",
+          "SPX-J02"
+        ],
+        [
+          "SPX-N01",
+          "SPX-N02"
+        ],
+        [
+          "SPX-S01",
+          "SPX-S02"
+        ],
+        [
+          "SPX-U01",
+          "SPX-U02"
+        ]
+      ]
+    },
+    "server_restart_evidence_restore": [
+      {
+        "evidence_id": "ev_d856191e2c0a4582b035ea572c4c36fb",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_assumptions_present": true
+      },
+      {
+        "evidence_id": "ev_e9921695255d4b94a879301747691ecc",
+        "result_id": "cmp_0d749ea3f9ec3a8da925dc44",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_assumptions_present": true
+      },
+      {
+        "evidence_id": "ev_a8b903128422482a9d4a67149c4ce81e",
+        "result_id": "cmp_d88083664b6fd27592eb68c1",
+        "same_export_bytes_session_judgment": true,
+        "camera_and_mass_assumptions_present": true
+      }
+    ],
+    "actual_comparison_raw_hashes": {
+      "cmp_d88083664b6fd27592eb68c1": {
+        "cache_and_evidence_raw_sha256": "88219adf492f225e5be126e8f7e5577b74475aff4067f5797d63540ba044d74c",
+        "HTTP_JSON_wire_sha256": "90d4b829f3a467bd71a8462a453901fb90df62a6836af5703a01775078c402bd",
+        "semantic_equality": true
+      },
+      "cmp_0d749ea3f9ec3a8da925dc44": {
+        "cache_and_evidence_raw_sha256": "9ebe635e2ddd0230b50e38cce35a468acf826654199a9403d36f4189fa1d12f8",
+        "HTTP_JSON_wire_sha256": "bb5b7f410d32ba78189a4d64e750f0218536ea414549b904de678f23132c0217",
+        "semantic_equality": true
+      }
+    },
+    "comparison_hash_scope": "Evidence comparison_sha256 covers the preserved Python-canonical build-cache bytes. HTTP JSON serialization may have a different raw SHA while preserving the same parsed values.",
+    "hosting_scope": "Node-only server verified under closed PATH; Python executed only as this development verifier and the packaged standard-library HTTP smoke client. This is not an OS sandbox or proof that Python is uninstalled.",
+    "completed_at": "2026-11-15T02:56:40.436743+00:00"
+  },
+  "production": {
+    "status": "deployed_and_verified",
+    "directory": "NASA_SPACE_APPS_CHALLENGE_v0.16.0_20261115_115623KST",
+    "activation_pid": 22206,
+    "actual_restarted_pid": 22451,
+    "HTTPS_ready": true,
+    "storage_writable": true,
+    "worker_alive": true,
+    "source_bundle_verified": true,
+    "legacy_three_evidence_after_restart": {
+      "checked_utc": "2026-11-15T03:03:58.190274+00:00",
+      "base": "https://nasaspaceappschallenge.marulee.dev",
+      "evidence": [
+        {
+          "id": "ev_e764a2eb3a294ca890b39ce8be85dc5d",
+          "status": "restored",
+          "original_export_bytes_and_sha_preserved": true,
+          "comparison_and_judgment_preserved": true,
+          "only_verified_visual_context_updated": false,
+          "bytes": 870988,
+          "sha256": "ca26330aab98a9d26cd7b3c440445ef1068b375b75ca2ca784e3c1ec03d57746"
+        },
+        {
+          "id": "ev_4872494bb4c649e3af2ad8d43b0bf4f8",
+          "status": "restored",
+          "original_export_bytes_and_sha_preserved": true,
+          "comparison_and_judgment_preserved": true,
+          "only_verified_visual_context_updated": false,
+          "bytes": 906270,
+          "sha256": "659e6ecf9de6c5572127f5b8d9c68cb2c74f98a76b17c08e35a49def46239e07"
+        },
+        {
+          "id": "p9ev_5453e41e76da4a9786e2aff1503d2134",
+          "status": "restored",
+          "original_export_bytes_and_sha_preserved": true,
+          "comparison_and_judgment_preserved": true,
+          "only_verified_visual_context_updated": false,
+          "bytes": 32807,
+          "sha256": "46f6398b6f28e868326d3d16f56b03bff6553b8b37311439dcc6b28c9d5f1dfb"
+        }
+      ],
+      "status": "passed"
+    }
+  },
+  "initial_failures_and_resolutions": [
+    "Windows canonical comparison bytes differed from Linux fresh floating-point calculation; preserved original four source-verified canonical payloads and recomputed only new comparisons.",
+    "Photo cached-load state race, duplicate TNO catalogue requests, selected-body origin missing outside source ephemeris, credits initial focus/reopen scroll, overlapping scope intro, and label-layer wheel delivery were reproduced and fixed; final affected browser paths passed.",
+    "Initial browser read-only GET socket reset and innerText/textContent whitespace oracle corrected; GET retry is bounded and checks identical source IDs/bytes. Mutations are not retried.",
+    "Initial package source verification caught generated metadata CRLF/LF mismatch; writer changed to canonical LF and full 594-file source verification passed.",
+    "First directory HTTP smoke expected the obsolete two-observation listing; corrected oracle checks exact 10/40/37 registry plus preserved legacy IDs/quality/evidence. Final clean-copy restart verification passed.",
+    "First public browser run: import HTTP200 body still arriving when 15-second UI expectation closed clean context, and Ceres radius differed by one floating-point ulp. Single-response completion and numeric comparison followups passed."
+  ],
+  "PDF": {
+    "verification": "docs/qa/dev025_pdf_verification.json",
+    "pages": 380,
+    "bytes": 5354288,
+    "sha256": "20bbb99c50dcc9f7a72b0911829b2cd526368a3e97e3c365d8ab65fdb50f96e9",
+    "source_MD_sha256": "3e57da2c438e4e98c6af65a7712ba0f080e6a3b1eb5e04a09a7a09bae5d00052",
+    "whole_document_preserved": true,
+    "screen_scope": "all 380 pages rasterized/contact sheets plus independent representative full pages; final changed opening page inspected"
+  },
+  "limits": [
+    "Node serves source-verified build caches; not arbitrary on-demand FITS analysis.",
+    "SOURCE/coverage/finite pixels do not establish a detection, motion or flux.",
+    "TOP5 is conditional 2018 literature sky-position regions, not existence probability or discovered planet candidates.",
+    "Two-body long-range display and optional restricted gravity do not implement all physics or verified historical reconstruction.",
+    "No native-speaker review for Japanese, Traditional Chinese or French; CSS125% is not browser-toolbar zoom.",
+    "No new release ZIP, no old FITS/evidence/release mutation, no private keys/research papers/internal documents in public source."
+  ]
+}

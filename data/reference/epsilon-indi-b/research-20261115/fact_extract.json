@@ -1,0 +1,238 @@
+{
+  "schema_version": "1.0",
+  "research_status": "primary_sources_verified_proposal_only_not_implemented",
+  "created_utc": "2026-11-15T00:49:26.528383+00:00",
+  "identity": {
+    "object_id": "epsilon-indi-b",
+    "name": "Epsilon Indi B",
+    "kind": "binary_brown_dwarf_system",
+    "components": [
+      "Epsilon Indi Ba",
+      "Epsilon Indi Bb"
+    ],
+    "not_same_object_as": "Epsilon Indi Ab exoplanet",
+    "product_scope": "official SPHEREx validation target outside the heliocentric 1000 au science scene; separate detail viewer only"
+  },
+  "adopted_primary_reference": {
+    "id": "chen-2022",
+    "authors": "Chen et al.",
+    "title": "Precise Dynamical Masses of Epsilon Indi Ba and Bb: Evidence of Slowed Cooling at the L/T Transition",
+    "year": 2022,
+    "doi": "10.3847/1538-3881/ac66d2",
+    "url": "https://doi.org/10.3847/1538-3881/ac66d2",
+    "arxiv_url": "https://arxiv.org/abs/2205.08077",
+    "local_pdf": "chen2022.pdf",
+    "pdf_sha256": "61a92c47691a1f2d90be6e9a667224984a5566eb6ffa3d228ee4d597575a9be2",
+    "locator": "Table 4 (PDF page 14), section 7.3 (PDF pages 17-18)",
+    "rights": "Raw paper retained as local research audit; factual extraction and direct citation do not grant blanket redistribution rights for the PDF/figures."
+  },
+  "dynamical_measurements": {
+    "reference": "chen-2022",
+    "uncertainty": "posterior mean and one standard deviation per Table 4",
+    "Ba_mass_jupiter": {
+      "value": 66.92,
+      "sigma": 0.36
+    },
+    "Bb_mass_jupiter": {
+      "value": 53.25,
+      "sigma": 0.29
+    },
+    "system_mass_jupiter": {
+      "value": 120.17,
+      "sigma": 0.62
+    },
+    "parallax_mas": {
+      "value": 274.99,
+      "sigma": 0.43
+    },
+    "mass_fraction_Bb_of_total": {
+      "value": 0.4431,
+      "sigma": 0.0008
+    },
+    "distance_pc_derived": {
+      "value": 3.6364958725771843,
+      "first_order_sigma": 0.0056863639594464865,
+      "formula": "1000/parallax_mas",
+      "kind": "derived_from_binary_parallax_not_independent_distance_measurement"
+    },
+    "distance_au_derived": 750081.1165754986,
+    "Gaia_EDR3_A_distance_pc_quoted_in_paper": {
+      "value": 3.638,
+      "sigma": 0.001,
+      "body": "Epsilon Indi A; not a direct independent Ba/Bb distance"
+    }
+  },
+  "relative_orbit": {
+    "reference": "chen-2022",
+    "kind": "relative_astrometric_keplerian_fit",
+    "period_year": {
+      "value": 11.0197,
+      "sigma": 0.0076
+    },
+    "angular_semimajor_mas": {
+      "value": 661.58,
+      "sigma": 0.37
+    },
+    "semimajor_au": {
+      "value": 2.4058,
+      "sigma": 0.004
+    },
+    "eccentricity": {
+      "value": 0.54042,
+      "sigma": 0.00063
+    },
+    "argument_periastron_deg": {
+      "value": 328.27,
+      "sigma": 0.12
+    },
+    "ascending_node_deg": {
+      "value": 147.959,
+      "sigma": 0.023
+    },
+    "inclination_deg": {
+      "value": 77.082,
+      "sigma": 0.032
+    },
+    "time_of_periastron": null,
+    "phase_at_2026": null,
+    "full_absolute_3d_ephemeris_verified": false,
+    "limitation": "T0 was fitted but no numerical T0 is present in the reviewed Table 4. Do not invent orbital phase or assign representative body locations to the current SPHEREx epoch. Sky-plane orbit and line-of-sight branch/conventions require explicit validation before a time-accurate 3D orbit."
+  },
+  "atmosphere": {
+    "spectral_types": {
+      "Ba": "T1-T1.5",
+      "Bb": "T6"
+    },
+    "SM08_hybrid_model_inference_from_Chen_2022": {
+      "Ba_effective_temperature_K": {
+        "value": 1312,
+        "sigma": 13
+      },
+      "Bb_effective_temperature_K": {
+        "value": 972,
+        "sigma": 13
+      },
+      "Ba_logg_cgs": {
+        "value": 5.365,
+        "sigma": 0.006
+      },
+      "Bb_logg_cgs": {
+        "value": 5.288,
+        "sigma": 0.003
+      },
+      "kind": "evolutionary_model_inferred_not_surface_thermometry"
+    },
+    "King_2010_BT_Settl_atmosphere_model_ranges": {
+      "Ba_effective_temperature_K": [
+        1300,
+        1340
+      ],
+      "Bb_effective_temperature_K": [
+        880,
+        940
+      ],
+      "kind": "spectral_model_fit_distinct_from_SM08_evolutionary_solution"
+    },
+    "resolved_surface_texture_available": false,
+    "natural_RGB_calibration_available": false,
+    "claims_not_supported": [
+      "solid terrain map",
+      "measured cloud belts on the surface",
+      "true natural colour of a resolved globe",
+      "a newly imaged surface from SPHEREx"
+    ]
+  },
+  "radius_reference": {
+    "id": "king-2010",
+    "doi": "10.1051/0004-6361/200912981",
+    "url": "https://arxiv.org/abs/0911.3143",
+    "locator": "Table 7, PDF page 14",
+    "model": "COND03 at adopted system age 3.7-4.3 Gyr, original luminosities and preliminary total mass",
+    "Ba_radius_solar_range": [
+      0.08,
+      0.081
+    ],
+    "Bb_radius_solar_range": [
+      0.082,
+      0.083
+    ],
+    "kind": "historical_evolutionary_model_ranges_not_measured_radii",
+    "warning": "Do not combine these older COND03 radii with Chen-2022 SM08 temperatures as a single internally fitted physical solution. A viewer can expose this distinct literature range or leave physical radius null; its display radius must be marked illustrative."
+  },
+  "historical_binary_discovery": {
+    "id": "mccaughrean-2004",
+    "url": "https://arxiv.org/abs/astro-ph/0309256",
+    "title": "Epsilon Indi Ba/Bb: the nearest binary brown dwarf",
+    "instrument": "ESO VLT NACO",
+    "observation_date": "2003-08-13",
+    "angular_separation_arcsec": 0.732,
+    "projected_separation_au": 2.65,
+    "distance_pc_used": 3.626,
+    "kind": "single_epoch_projected_separation_not_semimajor_axis_not_current_epoch",
+    "locator": "abstract and Figure 1"
+  },
+  "resolved_image": {
+    "id": "geminiann04016a",
+    "canonical_page": "https://noirlab.edu/public/images/geminiann04016a/",
+    "download_url": "https://noirlab.edu/public/media/archives/images/large/geminiann04016a.jpg",
+    "actual_storage_url": "https://storage.noirlab.edu/media/archives/images/large/geminiann04016a.jpg",
+    "local_path": "geminiann04016a.jpg",
+    "bytes": 84074,
+    "sha256": "9398a48e727675900f2776522941cd81e2e3b45ec17c2ed32d59f90dfaccf722",
+    "dimensions_px": [
+      447,
+      446
+    ],
+    "kind": "actual_resolved_binary_point_sources_not_resolved_body_surfaces",
+    "instrument": "Gemini South PHOENIX",
+    "observation_date": "2003-08-18",
+    "band": "narrow-band filter within J band",
+    "fov_arcsec": [
+      4,
+      4
+    ],
+    "adaptive_optics": false,
+    "colour": "published intensity-colour rendering; not natural RGB colour",
+    "credit": "International Gemini Observatory/NOIRLab/NSF/AURA/PHOENIX Image",
+    "license": "Creative Commons Attribution 4.0 International License",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "rights_source": "Unmodified original JPEG embedded XMP xmpRights:UsageTerms and photoshop:Credit; extracted XMP saved alongside raw JPEG",
+    "page_access_status": "Canonical web page returned JS challenge/403 via web tool; official image storage retrieval successful with default TLS validation",
+    "provider_scope_note": "Additional direct primary observatory image beyond requested ESO/NASA/paper providers; no third-party image copy was used."
+  },
+  "eso_context_image": {
+    "id": "eso0303a",
+    "url": "https://www.eso.org/public/images/eso0303a/",
+    "kind": "SSS I-band and 2MASS Ks sky collage; does not resolve Ba/Bb surfaces or binary detail",
+    "credit": "ESO/R.-D.Scholz et al. (AIP)",
+    "license": "CC BY 4.0 unless image-specific exception",
+    "license_url": "https://www.eso.org/public/copyright/",
+    "keep_credit_visible": true,
+    "rights_not_extended_to_scientific_papers": true
+  },
+  "conflicting_old_mass_reference": {
+    "id": "dieterich-2018",
+    "url": "https://arxiv.org/abs/1807.09880",
+    "Ba_mass_jupiter": 75.0,
+    "Ba_sigma": 0.82,
+    "Bb_mass_jupiter": 70.1,
+    "Bb_sigma": 0.68,
+    "status": "disagrees with adopted Chen-2022 study; do not merge or silently average"
+  },
+  "implementation_proposal": {
+    "status": "proposal_only",
+    "entry": "Existing epsilon-indi-b target selection opens an explicit separate binary detail view; retain official actual-observation CTA and same target ID.",
+    "default_content": "Real Gemini snapshot with fixed 2003 acquisition label plus Ba/Bb physical facts and source links.",
+    "three_d_content": "Optional two-globe atmosphere illustration and literature relative-orbit shape; representative arrangement/view scale explicitly labelled. No observed surface texture or date-accurate orbital phase claim.",
+    "distance_scope": "Do not add a fabricated Ba/Bb physical position inside 1000 au or turn a sky-direction ring into a fake heliocentric orbit.",
+    "state_separation": "Separate detail camera from solar scene/observation epoch. Going back preserves time, selected observation IDs, source hashes, quality policy and evidence context.",
+    "phase_accurate_orbit_followup": "Acquire verified machine-readable T0/covariance and coordinate/node conventions; independently compare positions to published relative astrometry before any current-date animation."
+  },
+  "validation_limits": [
+    "No app/Scene/API/source-manifest edits or current-release integration performed.",
+    "Raw paper/image bytes and acquisition SHA preserved; no generated appearance asset replaces observation data.",
+    "A surface-unresolved brown dwarf must not be presented as a resolved photographic globe.",
+    "The current SPHEREx EPSF/pixel sampling cannot be treated as a resolved Ba/Bb surface image.",
+    "No galaxy/exoplanet catalogue, arbitrary interstellar scene or additional population is reintroduced."
+  ]
+}

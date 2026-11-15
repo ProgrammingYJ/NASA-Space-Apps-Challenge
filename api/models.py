@@ -1,5 +1,5 @@
 import math
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
@@ -8,13 +8,17 @@ class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
 
 
+ObservationID = Annotated[str, Field(min_length=1, max_length=64, pattern=r"^[A-Za-z0-9][A-Za-z0-9_-]*$")]
+ObjectID = Annotated[str, Field(min_length=1, max_length=50, pattern=r"^[A-Za-z0-9][A-Za-z0-9_-]*$")]
+
+
 class ComparisonRequest(StrictModel):
-    observation_ids: list[Literal["S01", "S02", "S12", "S14"]] = Field(min_length=2, max_length=2)
+    observation_ids: list[ObservationID] = Field(min_length=2, max_length=2)
 
     @model_validator(mode="after")
     def distinct(self):
-        if set(self.observation_ids) not in ({"S01", "S02"}, {"S12", "S14"}):
-            raise ValueError("A supported distinct observation pair is required")
+        if len(set(self.observation_ids)) != 2:
+            raise ValueError("Two distinct observation identifiers are required")
         return self
 
 
@@ -88,6 +92,8 @@ class UniverseContext(StrictModel):
     appearance_coverage: Literal["representative", "marked", "original"] | None = None
     appearance_display_version: Literal["nasa-vtad-ice-giants-v1"] | None = None
     moon_simulation_algorithm_version: Literal["parent-relative-osculating-kepler-v1"] | None = None
+    outer_tno_manifest_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    native_tno_simulation_algorithm_version: Literal["jpl-sbdb-tno-two-body-v2"] | None = None
     show_outer_tno: bool | None = None
     selected_object_id: str = Field(max_length=50)
     model_epoch: str = Field(max_length=40)
@@ -146,8 +152,8 @@ class UniverseContext(StrictModel):
 
 
 class Session(StrictModel):
-    object_id: Literal["epsilon-indi-b", "pluto"] = "epsilon-indi-b"
-    observation_ids: list[Literal["S01", "S02", "S12", "S14"]] = Field(min_length=2, max_length=2)
+    object_id: ObjectID = "epsilon-indi-b"
+    observation_ids: list[ObservationID] = Field(min_length=2, max_length=2)
     active_frame: Literal["A", "B"] = "A"
     view_mode: Literal["split", "blink"] = "split"
     contrast: float = Field(default=1, ge=0.1, le=10)
@@ -156,9 +162,8 @@ class Session(StrictModel):
 
     @model_validator(mode="after")
     def matching_object(self):
-        expected = {"S01", "S02"} if self.object_id == "epsilon-indi-b" else {"S12", "S14"}
-        if set(self.observation_ids) != expected:
-            raise ValueError("Observation pair must belong to selected object")
+        if len(set(self.observation_ids)) != 2:
+            raise ValueError("Two distinct observation identifiers are required")
         if self.universe_context and self.universe_context.selected_object_id != self.object_id:
             raise ValueError("Exploration context must belong to selected object")
         if self.universe_context and self.universe_context.follow_object_id not in (
@@ -199,7 +204,7 @@ class SourceReference(BaseModel):
 
 
 class FrameReference(BaseModel):
-    observation_id: Literal["S01", "S02", "S12", "S14"]
+    observation_id: ObservationID
     provenance: SourceReference
     calibration: SourceReference
     metadata: dict
@@ -212,7 +217,7 @@ class ComparisonManifest(BaseModel):
     schema_version: Literal["1.0"]
     result_id: str = Field(pattern=r"^cmp_[a-f0-9]{24}$")
     algorithm_version: str = Field(max_length=100)
-    object_id: Literal["epsilon-indi-b", "pluto"]
+    object_id: ObjectID
     scientific_status: str = Field(max_length=100)
     mask_policy_id: str = Field(max_length=100)
     frames: list[FrameReference] = Field(min_length=2, max_length=2)

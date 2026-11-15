@@ -5,7 +5,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { Sources } = require('./sources');
 const { parse, canonical, hash, safePath, atomic, atomicRaw, lock } = require('./storage');
-const { validator, sessionRules, omitNullFields, migrateSolarSession } = require('./schema');
+const { validator, sessionRules, resolveRegisteredPair, omitNullFields, migrateSolarSession, nativeTnoContextReasons } = require('./schema');
 const { massScenario, longTerm, timelineScene, calendarMs, finite } = require('./science');
 const { SOURCE_VERIFICATION_POLICY } = require('./verification-policy');
 const { loadPresets, normalizeOrbit, skyPath } = require('./planet-nine');
@@ -20,8 +20,7 @@ const uuid = () => crypto.randomUUID().replaceAll('-', '');
 const now = () => new Date().toISOString();
 class HTTPError extends Error { constructor(status, code) { super(code); this.status = status; } }
 const fail = (status, code) => { throw new HTTPError(status, code); };
-function pair(ids) { return Array.isArray(ids) && ids.length === 2 && ids[0] !== ids[1] && (ids.every(x => ['S01', 'S02'].includes(x)) || ids.every(x => ['S12', 'S14'].includes(x))); }
-const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.woff2': 'font/woff2' };
+const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.pdf': 'application/pdf' };
 async function readBody(request) {
   if (Number(request.headers['content-length']) > LIMIT) fail(413, 'request_too_large');
   const chunks = []; let length = 0;
@@ -89,11 +88,13 @@ async function start(options = {}) {
   const p9Evidence = evidenceStore({ stateDir: state, normalizeOrbit, predict: p9Prediction, presets: p9Presets, populationRow: async index => { await getManifest(); return p9Regions().row(index); }, validateRegion, coverage: p9Coverage, gravity: p9Gravity });
   const checkSchema = (name, value) => { try { return validate(name, value); } catch { fail(422, 'invalid_request'); } };
   const checkP9 = (name, value) => { try { return validateP9(name, value); } catch { fail(422, 'invalid_planet_nine_request'); } };
+  const observationRegistry = async (forImport = false) => { try { return await sources.call(forImport ? 'importRegistry' : 'registry'); } catch { fail(503,'source_unavailable'); } };
+  const selectionFor = async (ids, objectId, forImport = false) => { const registry = await observationRegistry(forImport); try { return resolveRegisteredPair(registry,ids,objectId); } catch { fail(422,'invalid_request'); } };
   async function comparisonFor(ids, strong = false, forImport = false) {
     try {
       const record = await sources.call(forImport ? 'importComparison' : 'comparison', ids.join(','), strong);
       const result = parse(record.raw);
-      if (!/^cmp_[a-f0-9]{24}$/.test(result.result_id) || result.frames.map(v => v.observation_id).join(',') !== ids.join(',') || hash(record.raw) !== record.comparison_sha256) throw new Error('comparison_integrity');
+      if (!/^cmp_[a-f0-9]{24}$/.test(result.result_id) || result.object_id !== record.object_id || result.algorithm_version !== record.algorithm_version || result.frames.map(v => v.observation_id).join(',') !== ids.join(',') || hash(record.raw) !== record.comparison_sha256) throw new Error('comparison_integrity');
       return { record, result };
     } catch { fail(503, 'source_unavailable'); }
   }
@@ -145,6 +146,10 @@ async function start(options = {}) {
     if (!c.timeline_algorithm_version && c.orbit_manifest_sha256 && epoch !== Date.parse(timeline.default_epoch)) return ['orbit_guide_reference_changed'];
     const fields = [ ['source_manifest_sha256', 'solar_system_ephemeris.json', 'universe_ephemeris_changed'], ['orbit_manifest_sha256', 'solar_system_orbits.json', 'orbit_ephemeris_changed'], ['appearance_manifest_sha256', 'appearance.json', 'appearance_sources_changed'], ['small_body_appearance_manifest_sha256', 'small_body_appearance.json', 'small_body_appearance_sources_changed'], ['planet_criteria_manifest_sha256', 'planet_criteria.json', 'planet_criteria_sources_changed'], ['mass_scenarios_manifest_sha256', 'mass_scenarios.json', 'mass_scenario_sources_changed'], ['extended_solar_manifest_sha256', 'extended_solar.json', 'extended_solar_sources_changed'] ];
     for (const [field, name, reason] of fields) if (c[field] && hashes.get('data/manifests/' + name) !== c[field]) return [reason];
+    if (c.outer_tno_manifest_sha256 != null || c.native_tno_simulation_algorithm_version != null) {
+      let current; try { current = tnoCatalog().catalog(); } catch { return ['outer_tno_data_unavailable']; }
+      const reasons = nativeTnoContextReasons(c, current); if (reasons.length) return reasons;
+    }
     if (c.mass_scenario) { try { massScenario(values.mass_scenarios, c.mass_scenario); } catch { return ['mass_scenario_data_unavailable']; } }
     if (c.simulation_context) {
       const model = values.long_term_model;
@@ -203,7 +208,7 @@ async function start(options = {}) {
             let raw; try { raw = p9Evidence.raw(p9Export[1]); } catch (error) { fail(error.status || 503, error.status ? error.message : 'evidence_unavailable'); }
             response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Content-Disposition': `attachment; filename="${p9Export[1]}.json"` }); return response.end(raw);
           }
-          if (routeName === 'runtime') { const m = await getManifest().catch(() => fail(503, 'source_unavailable')); return send({ schema_version: '1.0', runtime: 'node', public_scope: 'solar_system_1000au', feature_flags: { galaxies: false, galaxy_atlas: false, exoplanets: false, black_holes: false, cosmic_history: false, historical_comets: false, physics_lab: false, observer_experiment: false, planet_nine_hypothesis: true }, physics_capabilities: { hypothesis: 'p9-kepler-sky-v1', gravity: 'newtonian_prescribed_sun_and_eight_planets_restricted_test_particle', optional_solar_1pn: true, all_physics: false, all_bodies_known: false, study_radius_au: 1000, force_cutoff_au: null, max_integrator_steps: 4096 }, observation_processing: 'verified_build_cache', snapshot_exported_utc: m.exported_utc, supported_observation_pairs: [['S01', 'S02'], ['S12', 'S14']], arbitrary_fits_inputs: false, source_verification_policy: SOURCE_VERIFICATION_POLICY }); }
+          if (routeName === 'runtime') { const m = await getManifest().catch(() => fail(503, 'source_unavailable')); return send({ schema_version: '1.0', runtime: 'node', public_scope: 'solar_system_1000au', feature_flags: { galaxies: false, galaxy_atlas: false, exoplanets: false, black_holes: false, cosmic_history: false, historical_comets: false, physics_lab: false, observer_experiment: false, planet_nine_hypothesis: true }, physics_capabilities: { hypothesis: 'p9-kepler-sky-v1', gravity: 'newtonian_prescribed_sun_and_eight_planets_restricted_test_particle', optional_solar_1pn: true, all_physics: false, all_bodies_known: false, study_radius_au: 1000, force_cutoff_au: null, max_integrator_steps: 4096 }, observation_processing: 'verified_build_cache', snapshot_exported_utc: m.exported_utc, supported_observation_pairs: m.selection_contract?.comparison_pairs ?? [['S01', 'S02'], ['S12', 'S14']], ordered_comparison_count: Object.keys(m.comparisons).length, arbitrary_fits_inputs: false, source_verification_policy: SOURCE_VERIFICATION_POLICY }); }
           const fixed = { objects: ['objects'], timeline: ['timeline'], appearance: ['appearance', 'appearance_unavailable'], 'small-body-appearance': ['small_body_appearance', 'small_body_appearance_unavailable'], 'mass-scenarios': ['mass_scenarios', 'mass_scenario_source_unavailable'], 'kuiper-belt': ['kuiper_belt'], 'long-term-model': ['long_term_model', 'simulation_source_unavailable'] };
           if (fixed[routeName]) return send(await snapshot(...fixed[routeName]));
           if (routeName === 'universe') { const scene = await snapshot('universe'), timeline = await snapshot('timeline'); try { return send(timelineScene(scene, timeline, q('epoch') ?? timeline.default_epoch)); } catch { fail(422, 'unsupported_model_epoch'); } }
@@ -257,15 +262,15 @@ async function start(options = {}) {
         }
         if (routeName === 'mass-scenarios/calculate') { const input = checkSchema('MassScenarioInput', body); try { return send(massScenario(await snapshot('mass_scenarios', 'mass_scenario_source_unavailable'), input)); } catch (error) { if (error instanceof HTTPError) throw error; fail(422, 'invalid_mass_scenario'); } }
         if (routeName === 'comparison-jobs') {
-          const input = checkSchema('ComparisonRequest', body); if (!pair(input.observation_ids)) fail(422, 'invalid_request');
+          const input = checkSchema('ComparisonRequest', body), selection = await selectionFor(input.observation_ids);
           if (!sources.alive) fail(503, 'worker_unavailable'); if ([...jobs.values()].filter(j => ['queued', 'running'].includes(j.state)).length >= 8) fail(503, 'queue_full');
-          const job = { schema_version: '1.0', job_id: 'job_' + uuid(), attempt_id: uuid(), observation_ids: input.observation_ids, object_id: input.observation_ids.includes('S12') ? 'pluto' : 'epsilon-indi-b', state: 'queued', stage: 'waiting', progress: 0, created_at: now(), result_id: null, error: null, cancel_requested: false };
+          const job = { schema_version: '1.0', job_id: 'job_' + uuid(), attempt_id: uuid(), observation_ids: input.observation_ids, object_id: selection.object_id, algorithm_version: selection.algorithm_version, state: 'queued', stage: 'waiting', progress: 0, created_at: now(), result_id: null, error: null, cancel_requested: false };
           jobs.set(job.job_id, job); persist(job); send(job, 202); setImmediate(pump); return;
         }
         let match = /^jobs\/(job_[a-f0-9]{32})\/cancel$/.exec(routeName);
         if (match) { const job = jobs.get(match[1]); if (!job) fail(404, 'job_not_found'); if (['queued', 'running'].includes(job.state)) { job.cancel_requested = true; if (job.state === 'queued') { job.state = 'cancelled'; job.stage = 'cancelled'; } persist(job); } return send(job); }
         if (routeName === 'evidence') {
-          const input = checkSchema('EvidenceRequest', body); try { sessionRules(input.session); } catch { fail(422, 'invalid_request'); }
+          const input = checkSchema('EvidenceRequest', body), registry = await observationRegistry(); try { sessionRules(input.session,registry); } catch { fail(422, 'invalid_request'); }
           const migration = migrateSolarSession(input.session);
           if (migration.omitted_contexts.length) fail(422, 'removed_context_requires_import');
           input.session = migration.session;
@@ -280,9 +285,10 @@ async function start(options = {}) {
           response.writeHead(201, { 'Content-Type': 'application/json; charset=utf-8' }); return response.end(raw);
         }
         if (routeName === 'evidence/import') {
-          const input = checkSchema('Evidence', body); try { sessionRules(input.session); } catch { fail(422, 'invalid_request'); }
+          const input = checkSchema('Evidence', body), registry = await observationRegistry(true); try { sessionRules(input.session,registry); } catch { fail(422, 'invalid_request'); }
           const ids = input.comparison.frames.map(v => v.observation_id);
-          if (!pair(ids) || input.comparison.result_id !== input.result_id || input.comparison.object_id !== input.session.object_id || ids.join(',') !== input.session.observation_ids.join(',')) fail(409, 'selection_mismatch');
+          try { resolveRegisteredPair(registry,ids,input.session.object_id); } catch { fail(409,'selection_mismatch'); }
+          if (input.comparison.result_id !== input.result_id || input.comparison.object_id !== input.session.object_id || ids.join(',') !== input.session.observation_ids.join(',')) fail(409, 'selection_mismatch');
           const { record, result } = await comparisonFor(ids, false, true);
           if (record.comparison_sha256 !== input.comparison_sha256 || canonical(result) !== canonical(input.comparison)) fail(409, 'integrity_mismatch');
           const currentMetadata = await manifestMetadata();
@@ -312,10 +318,11 @@ async function start(options = {}) {
       }
       if (!['GET', 'HEAD'].includes(request.method)) fail(405, 'method_not_allowed');
       let relative = pathname === '/' ? 'index.html' : decoded.slice(1);
-      if (relative !== 'index.html' && !['assets/', 'textures/', 'brand/'].some(prefix => relative.startsWith(prefix))) fail(404, 'not_found');
+      if (relative !== 'index.html' && !['assets/', 'textures/', 'brand/', 'reference/', 'downloads/'].some(prefix => relative.startsWith(prefix))) fail(404, 'not_found');
       let file; try { file = safePath(path.join(root, 'web', 'dist'), relative); if (!fs.statSync(file).isFile()) throw new Error(); } catch { fail(404, 'not_found'); }
-      if (relative.startsWith('textures/') || relative.startsWith('brand/')) { try { await sources.call('asset', relative); } catch { fail(503, 'source_unavailable'); } }
-      response.writeHead(200, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Content-Length': fs.statSync(file).size });
+      if (['textures/', 'brand/', 'reference/', 'downloads/'].some(prefix => relative.startsWith(prefix))) { try { await sources.call('asset', relative); } catch { fail(503, 'source_unavailable'); } }
+      const downloadHeaders = relative === 'downloads/PlanetX_Data_Spec.pdf' ? { 'Content-Disposition': 'attachment; filename="PlanetX_Data_Spec.pdf"', 'Cache-Control': 'no-cache' } : {};
+      response.writeHead(200, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Content-Length': fs.statSync(file).size, ...downloadHeaders });
       if (request.method === 'HEAD') return response.end(); fs.createReadStream(file).on('error', () => response.destroy()).pipe(response);
     } catch (error) {
       if (!response.headersSent) send({ code: error instanceof HTTPError ? error.message : 'internal_error', message_key: 'errors.' + (error instanceof HTTPError ? error.message : 'internal_error'), details: {}, request_id: requestId }, error.status || 500);

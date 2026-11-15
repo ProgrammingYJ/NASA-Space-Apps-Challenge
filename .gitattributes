@@ -9,6 +9,12 @@
 /api/main.py -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /web/src/objectNames.ts -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /web/public/**/*.source.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Preserve official response/license bytes, including FITS 80-character card padding.
+/data/reference/document-fonts/** -text -eol -whitespace
+/data/reference/epsilon-indi-b/research-20261115/** -text -eol -whitespace
+/data/reference/mcp/dev025/** -text -eol -whitespace
+/data/reference/spherex-registry/dev025/** -text -eol -whitespace
+/data/reference/spherex-extended-20261115/** -text -eol -whitespace
 *.toml text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf

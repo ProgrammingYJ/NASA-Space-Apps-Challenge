@@ -16,7 +16,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from api.models import ComparisonRequest, Evidence, EvidenceRequest, MassScenarioInput
-from api.service import Service, now
+from api.service import Service, now, outer_tno_context_reasons
 from api.storage import atomic_json, canonical, digest, read_json
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -104,7 +104,7 @@ def create_app(state_dir: Path | None = None):
         yield
         app.state.service.close()
 
-    app = FastAPI(title="Planet X · SPHEREx", version="0.15.1", lifespan=lifespan)
+    app = FastAPI(title="Planet X · SPHEREx", version="0.16.0", lifespan=lifespan)
 
     @app.middleware("http")
     async def bounds(request, call_next):
@@ -191,18 +191,20 @@ def create_app(state_dir: Path | None = None):
         )
 
     @app.get("/api/v1/runtime")
-    def runtime_capabilities():
+    def runtime_capabilities(request: Request):
+        registry = service(request).registry()
         return {
             "schema_version": "1.0",
             "runtime": "python",
             "observation_processing": "runtime_fits_or_verified_cache",
-            "supported_observation_pairs": [["S01", "S02"], ["S12", "S14"]],
+            "supported_observation_pairs": registry["pairs"],
+            "ordered_comparison_count": len(registry["pairs"]) * 2,
             "arbitrary_fits_inputs": False,
         }
 
     @app.get("/api/v1/objects")
-    def objects():
-        return {"objects": OBJECTS}
+    def objects(request: Request):
+        return {"objects": service(request).registered_objects()}
 
     @app.get("/api/v1/universe")
     def universe(epoch: str | None = None):
@@ -463,6 +465,9 @@ def create_app(state_dir: Path | None = None):
                 not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected
             ):
                 return [reason]
+        native_tno_reasons = outer_tno_context_reasons(context, ROOT)
+        if native_tno_reasons:
+            return native_tno_reasons
         # Verify the actual bytes without rebuilding the display's numerical
         # arrays or evicting its immutable cache on each save/import.
         from science.appearance import get_appearance
@@ -526,58 +531,30 @@ def create_app(state_dir: Path | None = None):
 
     @app.get("/api/v1/observations")
     def observations(request: Request, object_id: str = "epsilon-indi-b"):
-        if object_id == "pluto":
-            svc = service(request)
-            if svc.pluto_catalog is None:
-                raise HTTPException(
-                    503, "source_unavailable" if svc.pluto_catalog_error else "loading"
-                )
+        svc = service(request)
+        registry = svc.registry()
+        target = registry["objects"].get(object_id)
+        if target is not None:
+            if object_id not in svc.catalogues:
+                raise HTTPException(503, "source_unavailable" if object_id in svc.catalogue_errors else "loading")
             return {
                 "object_id": object_id,
-                "observations": svc.pluto_catalog,
+                "observations": svc.catalogues[object_id],
                 "status": "available",
+                "default_pair": target["default_pair"],
+                "available_pairs": [ids for ids in registry["pairs"] if registry["exposures"][ids[0]]["object_id"] == object_id],
                 "next_cursor": None,
             }
-        if object_id == "epsilon-indi-b":
-            svc = service(request)
-            if svc.catalog is None:
-                raise HTTPException(503, "source_unavailable" if svc.catalog_error else "loading")
-            return {
-                "object_id": object_id,
-                "observations": svc.catalog,
-                "status": "available",
-                "next_cursor": None,
-            }
-        if object_id not in LEGACY:
-            if any(obj["object_id"] == object_id for obj in universe()["objects"]) or any(
-                obj["object_id"] == object_id for obj in extended_catalog()["objects"]
-            ):
-                return {
-                    "object_id": object_id,
-                    "observations": [],
-                    "status": "no_linked_observations",
-                    "next_cursor": None,
-                }
-            raise HTTPException(404, "object_not_found")
-        records = read_json(ROOT / "data/manifests/datasets.json")["files"]
-        ids = {f"L{number:03d}" for number in LEGACY[object_id]}
-        return {
-            "object_id": object_id,
-            "observations": [],
-            "status": "unverified",
-            "reason": "legacy_quality_not_validated",
-            "available_sources": [
-                {key: r.get(key) for key in ("id", "source_url", "sha256", "bytes", "planned_use")}
-                for r in records
-                if r["id"] in ids
-            ],
-            "next_cursor": None,
-        }
+        if any(obj["object_id"] == object_id for obj in universe()["objects"]) or any(obj["object_id"] == object_id for obj in extended_catalog()["objects"]):
+            return {"object_id": object_id, "observations": [], "status": "no_linked_observations", "next_cursor": None}
+        raise HTTPException(404, "object_not_found")
 
     @app.post("/api/v1/comparison-jobs", status_code=202)
     def comparison(body: ComparisonRequest, request: Request):
         try:
             return service(request).submit(body.observation_ids)
+        except ValueError:
+            raise HTTPException(422, "invalid_request") from None
         except RuntimeError as exc:
             raise HTTPException(503, str(exc)) from None
 
@@ -602,6 +579,10 @@ def create_app(state_dir: Path | None = None):
 
     @app.post("/api/v1/evidence", status_code=201)
     def save(body: EvidenceRequest, request: Request):
+        try:
+            service(request).resolve_pair(body.session.observation_ids, body.session.object_id)
+        except ValueError:
+            raise HTTPException(422, "invalid_request") from None
         active, session_value, omitted = migrate_solar_session(body.session)
         if omitted:
             raise HTTPException(422, "removed_context_requires_import")
@@ -690,13 +671,11 @@ def create_app(state_dir: Path | None = None):
                 reasons.append("result_changed")
         except HTTPException:
             reasons.append("result_missing")
-        from science.spherex import ALGORITHM_VERSION
-
-        expected_algorithm = ALGORITHM_VERSION
-        if body.session.object_id == "pluto":
-            from science.pluto import ALGORITHM_VERSION as PLUTO_ALGORITHM_VERSION
-
-            expected_algorithm = PLUTO_ALGORITHM_VERSION
+        try:
+            selection = service(request).resolve_pair(body.session.observation_ids, body.session.object_id)
+        except ValueError:
+            raise HTTPException(409, "selection_mismatch") from None
+        expected_algorithm = selection["algorithm_version"]
         if result.get("object_id") != body.session.object_id:
             raise HTTPException(409, "selection_mismatch")
         if result.get("algorithm_version") != expected_algorithm:

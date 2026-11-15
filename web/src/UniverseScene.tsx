@@ -10,6 +10,8 @@ import {TransNeptunianLayer} from './TransNeptunianLayer';
 import type {OuterTnoCatalog,OuterTnoObject} from './OuterTnoPanel';
 import type {TransNeptunianEpochStats} from './TransNeptunianMath';
 import {renderingBudget,type RenderPreset,type LightingMode} from './sceneView';
+import {needsBodyPositionMarker,projectedBodyDiameterPx} from './BodyNavigationMath';
+import {tnoPickCandidates} from './tnoSelection';
 import styles from './UniverseScene.module.css';
 
 export type {CameraState} from './sceneMath';
@@ -87,10 +89,11 @@ export interface UniverseSceneProps {
   representationLabel?: string;
   directionLabel?: string;
   errorLabel?: string;
+  positionMarkerLabel?:string;
   onError?: (message:string) => void;
 }
 
-interface BodyView {pendingAppearance?:BodyAppearance|null;pendingEntry?:AppearanceEntry;pendingRings?:RingEntry;pendingTextureSize?:number;failedLodKey?:string|null;failedLodSequence?:number;body:UniverseBody;group:THREE.Group;radius:number;framingRadius:number;position:THREE.Vector3;direction:THREE.Vector3|null;label:HTMLButtonElement;appearance:BodyAppearance|null;appearanceEntry:AppearanceEntry|undefined;ringEntry:RingEntry|undefined;textureSize?:number;fallback:THREE.Mesh|null}
+interface BodyView {pendingAppearance?:BodyAppearance|null;pendingEntry?:AppearanceEntry;pendingRings?:RingEntry;pendingTextureSize?:number;failedLodKey?:string|null;failedLodSequence?:number;body:UniverseBody;group:THREE.Group;radius:number;framingRadius:number;position:THREE.Vector3;direction:THREE.Vector3|null;label:HTMLButtonElement;marker:HTMLButtonElement;markerVisible:boolean;appearance:BodyAppearance|null;appearanceEntry:AppearanceEntry|undefined;ringEntry:RingEntry|undefined;textureSize?:number;fallback:THREE.Mesh|null}
 interface Runtime {
   distanceFrameKey:string;
   tno:TransNeptunianLayer|null;
@@ -230,6 +233,8 @@ function moonGuideExtent(body:UniverseBody,parent:BodyView,distanceView?:Distanc
 export default function UniverseScene(props:UniverseSceneProps) {
   const host=useRef<HTMLDivElement>(null);
   const labelsLayer=useRef<HTMLDivElement>(null);
+  const markersLayer=useRef<HTMLDivElement>(null);
+  const markerLegend=useRef<HTMLDivElement>(null);
   const runtime=useRef<Runtime|null>(null);
   const latest=useRef(props);latest.current=props;
   const sceneObjects=useMemo(()=>props.data?.objects??[],[props.data]);
@@ -283,21 +288,47 @@ export default function UniverseScene(props:UniverseSceneProps) {
       const intersections=raycaster.intersectObjects(groups,true);
       const actual=intersections.find(hit=>typeof hit.object.userData.objectId==='string');
       if(actual){latest.current.onSelect(actual.object.userData.objectId as string);return;}
+      // A subpixel mesh cannot be reliably raycast. Pick its separately labelled
+      // navigation glyph by a CSS-pixel hit radius; never enlarge its geometry.
+      camera.updateMatrixWorld();
+      const native=[...rt.bodies.values()].filter(view=>view.markerVisible).map(view=>{
+        const point=view.group.position.clone().project(camera);
+        return {object_id:view.body.object_id,x:(point.x+1)*bounds.width/2,y:(1-point.y)*bounds.height/2,depth:point.z};
+      });
+      const nativeHits=tnoPickCandidates(native,event.clientX-bounds.left,event.clientY-bounds.top,9);
+      if(nativeHits.length){latest.current.onSelect(nativeHits[0].object_id);return;}
       const candidates=rt.tno?.pickCandidates(camera,position,bounds.width,bounds.height)??[];
       if(candidates.length===1)latest.current.onSelect(candidates[0].object_id);
       else if(candidates.length>1)latest.current.onTnoPick?.(candidates.map(value=>value.object_id));
     };
     const wheel=()=>cancelFocus();
+    // Labels and fixed-pixel position buttons are siblings of the WebGL
+    // canvas. Forward only their wheel input to OrbitControls so a label
+    // moving underneath a stationary pointer cannot interrupt a zoom gesture.
+    const navigationOverlays=[labelsLayer.current,markersLayer.current].filter((layer):layer is HTMLDivElement=>layer!==null);
+    const overlayWheel=(event:WheelEvent)=>{
+      if(event.target===renderer.domElement||!(event.target instanceof Node)||!navigationOverlays.some(layer=>layer.contains(event.target as Node)))return;
+      event.preventDefault();event.stopPropagation();
+      renderer.domElement.dispatchEvent(new WheelEvent('wheel',{
+        bubbles:true,cancelable:true,composed:true,view:window,detail:event.detail,
+        deltaX:event.deltaX,deltaY:event.deltaY,deltaZ:event.deltaZ,deltaMode:event.deltaMode,
+        clientX:event.clientX,clientY:event.clientY,screenX:event.screenX,screenY:event.screenY,
+        ctrlKey:event.ctrlKey,shiftKey:event.shiftKey,altKey:event.altKey,metaKey:event.metaKey,
+        button:event.button,buttons:event.buttons,
+      }));
+    };
+    navigationOverlays.forEach(layer=>layer.addEventListener('wheel',overlayWheel,{capture:true,passive:false}));
     renderer.domElement.addEventListener('pointerdown',pointerDown,{capture:true});renderer.domElement.addEventListener('pointerup',pointerUp);renderer.domElement.addEventListener('wheel',wheel,{capture:true,passive:true});
     const resize=new ResizeObserver(()=>{const w=container.clientWidth;const h=container.clientHeight;if(w===0||h===0)return;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h);});resize.observe(container);
     let previous=performance.now(),lastRendered=-Infinity,lastAppearanceRefresh=-Infinity,lastTnoRefresh=-Infinity,lastTnoEpoch=NaN;let followedTnoPosition:Vec3|null=null;
-    const forward=new THREE.Vector3();const right=new THREE.Vector3();const move=new THREE.Vector3();const projection=new THREE.Vector3();const clearance=new THREE.Vector3();const sunlight=new THREE.Vector3();const previousEye=camera.position.clone();
+    const forward=new THREE.Vector3();const right=new THREE.Vector3();const move=new THREE.Vector3();const projection=new THREE.Vector3();const cameraSpace=new THREE.Vector3();const clearance=new THREE.Vector3();const sunlight=new THREE.Vector3();const previousEye=camera.position.clone();
     const animate=(now:number)=>{
       if(rt.disposed)return;if(latest.current.active===false||document.hidden){rt.animationId=0;rt.pausedAt=now;keys.clear();return;}rt.animationId=requestAnimationFrame(animate);if(rt.distanceFrameKey!==distanceFrameKey(latest.current.distanceView))return;const budget=renderingBudget(latest.current.renderPreset??'balanced');if(now-lastRendered<1000/budget.fps-.5)return;lastRendered=now;container.dataset.renderFpsLimit=String(budget.fps);container.dataset.renderDprLimit=String(budget.dpr);
       const elapsed=Math.min(.05,(now-previous)/1000);previous=now;if(localDistanceView(latest.current.distanceView))followedTnoPosition=null;if(rt.tno&&!localDistanceView(latest.current.distanceView)&&now-lastTnoRefresh>=250&&latest.current.outerTnoEpochJd!==lastTnoEpoch){lastTnoRefresh=now;lastTnoEpoch=latest.current.outerTnoEpochJd??NaN;const stats=rt.tno.updateEpoch(lastTnoEpoch);if(stats){latest.current.onOuterTnoStats?.(stats);container.dataset.outerTnoJd=String(stats.jd_tdb);container.dataset.outerTnoExtrapolated=String(stats.extrapolated_count);container.dataset.outerTnoPlotted=String(stats.plotted_count);container.dataset.outerTnoUnavailable=String(stats.unavailable_count);container.dataset.outerTnoOutside=String(stats.outside_1000_au_count);}const selected=latest.current.selectedObjectId;const next=selected&&!rt.bodies.has(selected)&&latest.current.outerTnoSelected?rt.tno.positionFor(latest.current.outerTnoSelected.object_id):null;if(next&&followedTnoPosition&&rt.followedId===selected){const state=advanceNavigationForBody({camera:rt.cameraState(),transition:rt.focus,followedObjectId:rt.followedId},selected!,followedTnoPosition,next);rt.focus=state.transition;camera.position.fromArray(state.camera.position);controls.target.fromArray(state.camera.target);}followedTnoPosition=next;}
       if(rt.focus){const sampled=sampleFocus(rt.focus,now);camera.position.fromArray(sampled.camera.position);controls.target.fromArray(sampled.camera.target);if(sampled.done){rt.focusedId=rt.focus.objectId||null;rt.followedId=rt.focus.objectId||null;rt.mode=rt.focus.objectId?'focused':'overview';rt.focus=null;controls.enableDamping=true;rt.emit();}}
       if(keys.size){camera.getWorldDirection(forward);right.crossVectors(forward,camera.up).normalize();move.set(0,0,0);if(keys.has('KeyW')||keys.has('ArrowUp'))move.add(forward);if(keys.has('KeyS')||keys.has('ArrowDown'))move.sub(forward);if(keys.has('KeyD')||keys.has('ArrowRight'))move.add(right);if(keys.has('KeyA')||keys.has('ArrowLeft'))move.sub(right);if(keys.has('KeyE'))move.add(camera.up);if(keys.has('KeyQ'))move.sub(camera.up);const distance=Math.max(3,camera.position.distanceTo(controls.target));move.normalize().multiplyScalar(elapsed*distance*.6);camera.position.add(move);controls.target.add(move);}
       controls.update();
+      camera.updateMatrixWorld();
       // Keep the free camera outside the exaggerated visible surfaces.
       for(const view of rt.bodies.values()){
         if(view.direction||!view.group.visible)continue;
@@ -311,6 +342,7 @@ export default function UniverseScene(props:UniverseSceneProps) {
       const epochMs=Date.parse(latest.current.data?.epoch??'2026-11-14T00:00:00Z');
       const selectedBody=latest.current.selectedObjectId?rt.bodies.get(latest.current.selectedObjectId)?.body:null;const selectedParent=selectedBody?.kind==='moon'?selectedBody.parent_id:latest.current.selectedObjectId;
       const occupied:{left:number;top:number;right:number;bottom:number}[]=[];
+      let visibleMarkers=0;
       const ordered=[...rt.bodies.entries()].sort(([a],[b])=>Number(b===latest.current.selectedObjectId)-Number(a===latest.current.selectedObjectId));
       for(const [id,view] of ordered){
         if(view.body.position_au){const p=view.body.position_au;sunlight.set(-p[0],-p[2],p[1]).normalize();view.appearance?.update(epochMs,sunlight);if(view.fallback?.material instanceof THREE.MeshStandardMaterial)updateFallbackSun(view.fallback.material,sunlight);}
@@ -318,6 +350,20 @@ export default function UniverseScene(props:UniverseSceneProps) {
         const world=view.group.position;projection.copy(world).project(camera);
         const lodVisible=view.body.kind!=='moon'||id===latest.current.selectedObjectId||(view.body.parent_id===selectedParent&&view.label.dataset.majorMoon==='true');
         const visible=view.group.visible&&lodVisible&&projection.z>-1&&projection.z<1&&projection.x>-.96&&projection.x<.96&&projection.y>-.93&&projection.y<.93;
+        cameraSpace.copy(world).applyMatrix4(camera.matrixWorldInverse);
+        const diameter=view.direction?null:projectedBodyDiameterPx(view.radius,-cameraSpace.z,h,camera.fov);
+        view.label.dataset.projectedDiameterPx=diameter===null?'':diameter.toFixed(6);
+        view.markerVisible=visible&&!view.direction&&needsBodyPositionMarker(diameter,view.markerVisible);
+        view.marker.hidden=!view.markerVisible;view.label.dataset.positionMarkerVisible=String(view.markerVisible);
+        view.marker.dataset.projectedBodyDiameterPx=diameter===null?'':diameter.toFixed(6);
+        if(view.markerVisible){
+          visibleMarkers++;const markerX=(projection.x+1)*w/2,markerY=(1-projection.y)*h/2;
+          view.marker.style.transform=`translate(${markerX}px,${markerY}px) translate(-50%,-50%)`;
+          view.marker.dataset.screenX=String(markerX);view.marker.dataset.screenY=String(markerY);
+          view.marker.dataset.selected=String(id===latest.current.selectedObjectId);
+          view.marker.style.zIndex=id===latest.current.selectedObjectId?'2':'1';
+          view.marker.setAttribute('aria-pressed',String(id===latest.current.selectedObjectId));
+        }
         if(view.label.hidden===visible)view.label.hidden=!visible;
         if(visible){
           const x=(projection.x+1)*w/2;const originY=(-projection.y+1)*h/2;const width=view.label.offsetWidth||90;const height=view.label.offsetHeight||28;
@@ -326,6 +372,8 @@ export default function UniverseScene(props:UniverseSceneProps) {
           view.label.style.transform=`translate(${x}px,${y}px) translateX(-50%)`;view.label.dataset.selected=String(id===latest.current.selectedObjectId);
         }
       }
+      container.dataset.nativePositionMarkers=String(visibleMarkers);
+      if(markerLegend.current)markerLegend.current.hidden=visibleMarkers===0;
       // Translate the reference sphere with the eye, retaining fixed sky
       // directions when the free camera pans; never create a stellar parallax.
       renderer.render(scene,camera);
@@ -336,8 +384,9 @@ export default function UniverseScene(props:UniverseSceneProps) {
     return()=>{
       rt.disposed=true;document.removeEventListener('visibilitychange',onVisibility);cancelAnimationFrame(rt.animationId);resize.disconnect();controls.dispose();
       window.removeEventListener('keydown',onKeyDown);window.removeEventListener('keyup',onKeyUp);window.removeEventListener('blur',onBlur);
+      navigationOverlays.forEach(layer=>layer.removeEventListener('wheel',overlayWheel,true));
       renderer.domElement.removeEventListener('pointerdown',pointerDown,true);renderer.domElement.removeEventListener('pointerup',pointerUp);renderer.domElement.removeEventListener('wheel',wheel,true);
-      if(rt.tno){scene.remove(rt.tno.group);rt.tno.dispose();rt.tno=null;}rt.bodies.forEach(view=>{view.pendingAppearance?.dispose();if(view.appearance){view.group.remove(view.appearance.group);view.appearance.dispose();}view.label.remove();});disposeObject(scene);renderer.dispose();renderer.domElement.remove();runtime.current=null;
+      if(rt.tno){scene.remove(rt.tno.group);rt.tno.dispose();rt.tno=null;}rt.bodies.forEach(view=>{view.pendingAppearance?.dispose();if(view.appearance){view.group.remove(view.appearance.group);view.appearance.dispose();}view.label.remove();view.marker.remove();});disposeObject(scene);renderer.dispose();renderer.domElement.remove();runtime.current=null;
     };
   },[]);
 
@@ -345,7 +394,7 @@ export default function UniverseScene(props:UniverseSceneProps) {
   useEffect(()=>{const rt=runtime.current;if(rt)refreshBodyAppearances(rt,props);},[props.renderPreset,props.lightingMode,props.coverageMode]);
 
   useEffect(()=>{
-    const rt=runtime.current;const layer=labelsLayer.current;if(!rt||!layer)return;
+    const rt=runtime.current;const layer=labelsLayer.current;const markerLayer=markersLayer.current;if(!rt||!layer||!markerLayer)return;
     const frameChanged=rt.distanceFrameKey!==frameKey;
     if(frameChanged){
       rt.distanceFrameKey=frameKey;rt.focus=null;rt.focusRequest=null;rt.followedId=null;rt.focusedId=null;rt.mode='manual';
@@ -354,7 +403,7 @@ export default function UniverseScene(props:UniverseSceneProps) {
     rt.camera.far=local?1e8:6000;rt.camera.updateProjectionMatrix();rt.controls.maxDistance=local?1e7:1100;
     const locations=bodyDisplayPositions(sceneObjects,props.distanceView);
     const retained=new Set(sceneObjects.filter(body=>directionOnlyBody(body)?!local&&(body.direction_ecliptic??body.direction_ecliptic_unit):locations.has(body.object_id)).map(body=>body.object_id));
-    for(const [id,view] of rt.bodies){if(!retained.has(id)){view.pendingAppearance?.dispose();rt.scene.remove(view.group);if(view.appearance){view.group.remove(view.appearance.group);view.appearance.dispose();}disposeObject(view.group);view.label.remove();rt.bodies.delete(id);}}
+    for(const [id,view] of rt.bodies){if(!retained.has(id)){view.pendingAppearance?.dispose();rt.scene.remove(view.group);if(view.appearance){view.group.remove(view.appearance.group);view.appearance.dispose();}disposeObject(view.group);view.label.remove();view.marker.remove();rt.bodies.delete(id);}}
     const previousFraming=new Map([...rt.bodies].map(([id,view])=>[id,view.framingRadius]));
     const majorMoons=new Set<string>();const parents=new Set(sceneObjects.filter(body=>body.kind==='moon').map(body=>body.parent_id));for(const parent of parents){sceneObjects.filter(body=>body.kind==='moon'&&body.parent_id===parent).sort((a,b)=>(b.radius_km??0)-(a.radius_km??0)).slice(0,12).forEach(body=>majorMoons.add(body.object_id));}
     for(const body of sceneObjects){
@@ -385,7 +434,8 @@ export default function UniverseScene(props:UniverseSceneProps) {
           if(body.object_id==='sun')group.add(makeGlow('rgba(255,199,122,0.8)',radius*7));
         }
         const label=document.createElement('button');label.className=styles.bodyLabel;label.type='button';label.dataset.testid=`object-label-${body.object_id}`;label.addEventListener('click',event=>{event.stopPropagation();latest.current.onSelect(body.object_id);});layer.append(label);
-        view={body,group,radius,framingRadius:radius,position,direction:directionOnly?position.clone():null,label,appearance:null,appearanceEntry:undefined,ringEntry:undefined,fallback:group.children.find(child=>child instanceof THREE.Mesh) as THREE.Mesh??null};rt.bodies.set(body.object_id,view);rt.scene.add(group);
+        const marker=document.createElement('button');marker.className=styles.positionMarker;marker.type='button';marker.hidden=true;marker.dataset.testid=`object-position-marker-${body.object_id}`;marker.dataset.objectId=body.object_id;marker.dataset.kind='source_centre_navigation_marker';marker.addEventListener('click',event=>{event.stopPropagation();latest.current.onSelect(body.object_id);});markerLayer.append(marker);
+        view={body,group,radius,framingRadius:radius,position,direction:directionOnly?position.clone():null,label,marker,markerVisible:false,appearance:null,appearanceEntry:undefined,ringEntry:undefined,fallback:group.children.find(child=>child instanceof THREE.Mesh) as THREE.Mesh??null};rt.bodies.set(body.object_id,view);rt.scene.add(group);
       }
       if(view.radius!==radius&&view.fallback){view.fallback.geometry.dispose();view.fallback.geometry=new THREE.SphereGeometry(radius,body.kind==='moon'?12:48,body.kind==='moon'?8:32);}
       view.radius=radius;view.framingRadius=radius;
@@ -395,6 +445,8 @@ export default function UniverseScene(props:UniverseSceneProps) {
       view.body=body;view.position.copy(position);view.direction=directionOnly?position.clone():null;
       if(!directionOnly)view.group.position.copy(position);
       const name=props.labels?.[body.object_id]??body.name;const text=directionOnly?`${name} · ${props.directionLabel??'direction'}`:name;if(view.label.textContent!==text)view.label.textContent=text;if(view.label.getAttribute('aria-label')!==name)view.label.setAttribute('aria-label',name);
+      const markerDescription=`${name} · ${props.positionMarkerLabel??'Position marker · not actual size or brightness'}`;
+      view.marker.setAttribute('aria-label',markerDescription);view.marker.title=markerDescription;view.marker.tabIndex=props.active===false?-1:0;
       view.label.setAttribute('aria-pressed',String(props.selectedObjectId===body.object_id));
       view.label.dataset.kind=body.kind;view.label.dataset.parentId=body.parent_id??'';view.label.tabIndex=props.active===false?-1:0;view.label.dataset.majorMoon=String(majorMoons.has(body.object_id));
       view.label.dataset.worldPosition=position.toArray().map(value=>value.toFixed(9)).join(',');
@@ -414,7 +466,7 @@ export default function UniverseScene(props:UniverseSceneProps) {
     if(props.frameSelectedSystem&&props.selectedObjectId){const parent=rt.bodies.get(props.selectedObjectId);if(parent){for(const view of rt.bodies.values()){if(view.body.kind==='moon'&&view.body.parent_id===props.selectedObjectId)parent.framingRadius=Math.max(parent.framingRadius,(moonGuideExtent(view.body,parent,props.distanceView)??parent.position.distanceTo(view.position))+view.radius);}}}
     for(const [id,view] of rt.bodies){view.label.dataset.framingRadius=String(view.framingRadius);const before=previousFraming.get(id);if(before!==undefined&&Math.abs(before-view.framingRadius)>1e-6&&props.selectedObjectId===id&&(rt.followedId===id||rt.focus?.objectId===id))rt.focusRequest=null;}
     rt.motionTick++;if(host.current){host.current.dataset.modelEpoch=props.data?.epoch??'';host.current.dataset.motionTick=String(rt.motionTick);host.current.dataset.distanceOriginSourceAu=originAu?.map(value=>value.toFixed(15)).join(',')??'';}if(frameChanged)rt.emit();
-  },[sceneObjects,props.data,props.labels,props.directionLabel,props.selectedObjectId,props.appearance,props.frameSelectedSystem,props.active,frameKey,originAu]);
+  },[sceneObjects,props.data,props.labels,props.directionLabel,props.positionMarkerLabel,props.selectedObjectId,props.appearance,props.frameSelectedSystem,props.active,frameKey,originAu]);
 
   useEffect(()=>{
     const rt=runtime.current;if(!rt)return;
@@ -508,7 +560,9 @@ export default function UniverseScene(props:UniverseSceneProps) {
   },[props.showExplorationBoundary,props.hypothesisOrbitAu,local]);
 
   return <div ref={host} className={styles.scene} style={props.active===false?{visibility:'hidden'}:undefined} aria-hidden={props.active===false?true:undefined} data-testid="universe-scene" data-distance-algorithm={props.distanceView?.algorithm_version??'legacy-expanded-v1'} data-distance-origin-object-id={local?props.distanceView?.origin_object_id??'':''} data-distance-scale-per-au={local?LOCAL_DISTANCE_SCALE:undefined} data-distance-origin-available={String(!local||Boolean(originAu))} data-exploration-radius-au={1000} data-exploration-boundary={String(Boolean(props.showExplorationBoundary)&&!local)} data-hypothesis-orbit-points={local?0:props.hypothesisOrbitAu?.length??0} data-selected-object={props.selectedObjectId??''}>
+    <div ref={markersLayer} className={styles.markers}/>
     <div ref={labelsLayer} className={styles.labels} aria-label={props.controlsLabel}/>
+    <div ref={markerLegend} hidden className={styles.positionMarkerLegend} data-testid="native-position-marker-legend">{props.positionMarkerLabel??'Position marker · not actual size or brightness'}</div>
     <div className={styles.representation}>{props.representationLabel??'Distance compressed · radii enlarged · artistic appearance'}</div>
     {error&&<div className={styles.error} role="alert"><p>{props.errorLabel??'3D rendering is unavailable in this browser.'}</p><div>{sceneObjects.map(body=><button key={body.object_id} onClick={()=>props.onSelect(body.object_id)}>{props.labels?.[body.object_id]??body.name}</button>)}</div></div>}
   </div>;

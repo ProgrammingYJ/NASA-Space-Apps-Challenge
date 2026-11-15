@@ -1,0 +1,73 @@
+{
+  "schema_version": "qa-report-v1",
+  "work_id": "DEV-025",
+  "status": "passed",
+  "pdf_sha256": "20bbb99c50dcc9f7a72b0911829b2cd526368a3e97e3c365d8ab65fdb50f96e9",
+  "pdf_bytes": 5354288,
+  "source_sha256": "3e57da2c438e4e98c6af65a7712ba0f080e6a3b1eb5e04a09a7a09bae5d00052",
+  "pages": 380,
+  "built_at": "2026-11-15T02:14:48Z",
+  "raw_source_embedded_byte_identical": true,
+  "all_source_headings_extracted": true,
+  "source_sha256_index_count": 2507,
+  "missing_displayed_hashes": [],
+  "all_http_targets_retained": true,
+  "all_glyphs_supported_and_cjk_fonts_embedded": true,
+  "pdf_javascript": false,
+  "rasterized_pages": 380,
+  "visual_review": {
+    "independent_draft_sha256": "fd552d17b70761729cfad08eb9b095a09545af209f40ee5daccbd206078417ed",
+    "independent_review": "6 contact sheets covering 380 pages and full-resolution pages 1,2,84,85,150,250,330,380; no clipped cells, overlaps or missing glyph boxes. Source unmatched trailing Markdown noted.",
+    "final_revision": "Removed two unmatched Markdown closing asterisks only; re-created and rasterized all380 final pages. Root inspected final page2; source/attachments/hash/link/heading checks repeated successfully.",
+    "limitations": "Visual layout sample review is not a character-by-character proofread of every row; historic scientific statuses stay historic."
+  },
+  "fonts": [
+    {
+      "role": "PlanetXDocument-Regular",
+      "input_filename": "NotoSansKR[wght].ttf",
+      "input_bytes": 10414588,
+      "input_sha256": "194018e6b2b293a7964f037b25c0249ce1418bc9ab3c971060a03aa57861e252",
+      "embedded_instance_sha256": "18ef86f7e65164e0266942c2a74e03fd1ccf88af7c636a6f0b372399f26288ff",
+      "instance_axes": {
+        "wght": 400
+      },
+      "modified_family_name": "PlanetXDocumentFont",
+      "embedding": "ReportLab subset with ToUnicode mapping"
+    },
+    {
+      "role": "PlanetXDocument-Bold",
+      "input_filename": "NotoSansKR[wght].ttf",
+      "input_bytes": 10414588,
+      "input_sha256": "194018e6b2b293a7964f037b25c0249ce1418bc9ab3c971060a03aa57861e252",
+      "embedded_instance_sha256": "7758afd5ec8f6e66a0393586384f0f50556adf30851345dc81d7227ffb7b41c8",
+      "instance_axes": {
+        "wght": 700
+      },
+      "modified_family_name": "PlanetXDocumentFont",
+      "embedding": "ReportLab subset with ToUnicode mapping"
+    },
+    {
+      "role": "PlanetXDocument-Fallback-0",
+      "input_filename": "NotoSans[wdth,wght].ttf",
+      "input_bytes": 2049096,
+      "input_sha256": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
+      "embedded_instance_sha256": "4189c95997529015241cc809cfa387d24382c9c045300d478c5dbdce31a679ba",
+      "instance_axes": {
+        "wght": 400,
+        "wdth": 100.0
+      },
+      "modified_family_name": "PlanetXDocumentFont",
+      "embedding": "ReportLab subset with ToUnicode mapping"
+    }
+  ],
+  "font_license_sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+  "fallback_font_licenses": [
+    {
+      "font_filename": "NotoSans[wdth,wght].ttf",
+      "license_filename": "NotoSans-OFL.txt",
+      "license_sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "license_bytes": 4396,
+      "attachment_filename": "DocumentFallbackFont-1-OFL.txt"
+    }
+  ]
+}

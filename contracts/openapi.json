@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Planet X · SPHEREx",
-    "version": "0.15.1"
+    "version": "0.16.0"
   },
   "paths": {
     "/health/live": {
@@ -779,12 +779,9 @@
           "observation_ids": {
             "items": {
               "type": "string",
-              "enum": [
-                "S01",
-                "S02",
-                "S12",
-                "S14"
-              ]
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
             },
             "type": "array",
             "maxItems": 2,
@@ -1052,22 +1049,18 @@
         "properties": {
           "object_id": {
             "type": "string",
-            "enum": [
-              "epsilon-indi-b",
-              "pluto"
-            ],
+            "maxLength": 50,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
             "title": "Object Id",
             "default": "epsilon-indi-b"
           },
           "observation_ids": {
             "items": {
               "type": "string",
-              "enum": [
-                "S01",
-                "S02",
-                "S12",
-                "S14"
-              ]
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
             },
             "type": "array",
             "maxItems": 2,
@@ -1287,6 +1280,30 @@
               }
             ],
             "title": "Moon Simulation Algorithm Version"
+          },
+          "outer_tno_manifest_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Outer Tno Manifest Sha256"
+          },
+          "native_tno_simulation_algorithm_version": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "jpl-sbdb-tno-two-body-v2"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Tno Simulation Algorithm Version"
           },
           "show_outer_tno": {
             "anyOf": [

@@ -1,0 +1,20 @@
+{
+  "tool": "PDS search_instrument_hosts",
+  "input": {
+    "keywords": "SPHEREx",
+    "limit": 5
+  },
+  "retrieved_utc": "2026-11-15T00:40:50.084Z",
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"summary\": {\n    \"hits\": 0,\n    \"properties\": [],\n    \"facets\": []\n  },\n  \"data\": []\n}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\n  \"summary\": {\n    \"hits\": 0,\n    \"properties\": [],\n    \"facets\": []\n  },\n  \"data\": []\n}"
+    },
+    "isError": false
+  }
+}

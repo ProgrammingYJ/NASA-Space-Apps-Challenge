@@ -1,4 +1,6 @@
-import {useEffect,useMemo,useState} from 'react';
+import {useMemo,useState} from 'react';
+import {useQuery} from '@tanstack/react-query';
+import {request} from './api';
 import type {OuterTnoCatalog} from './OuterTnoPanel';
 import type {PlanetNineOrbit} from './PlanetNineTypes';
 import {rankOrbitAnalogues,ORBIT_ANALOGUE_RULE,type AnalogueSource} from './OrbitAnalogueMath';
@@ -9,16 +11,15 @@ export interface OrbitAnaloguePanelProps {language:string;orbit:PlanetNineOrbit;
 
 export default function OrbitAnaloguePanel({language,orbit,active=true,onInspectKnownObject,selectedKnownObjectId}:OrbitAnaloguePanelProps){
   const c=orbitAnalogueCopy(language),number=(value:number,digits=6)=>Number.isFinite(value)?value.toLocaleString(language,{maximumSignificantDigits:digits}):'—';
-  const [catalogue,setCatalogue]=useState<Catalogue|null>(null),[loading,setLoading]=useState(false),[error,setError]=useState(false),[attempt,setAttempt]=useState(0),[method,setMethod]=useState<'catalogue'|'unidentified'>('catalogue');
+  const [method,setMethod]=useState<'catalogue'|'unidentified'>('catalogue');
+  // App keeps this same immutable source query mounted. A second observer shares
+  // both its in-flight request and its cached data; hiding this panel cannot
+  // cancel the App observer's request or start a second 5 MB transfer.
+  const source=useQuery({queryKey:['outer-tno-catalog'],queryFn:({signal})=>request<Catalogue>('/catalog/outer-tno',{signal}),enabled:active,retry:false,retryOnMount:false,staleTime:Infinity});
+  const catalogue=source.data&&typeof source.data==='object'&&Array.isArray(source.data.objects)?source.data:null;
+  const loading=source.isFetching&&!catalogue,error=source.isError||(source.data!=null&&!catalogue);
   const [clickedObject,setClickedObject]=useState<string|null>(null),currentObject=selectedKnownObjectId===undefined?clickedObject:selectedKnownObjectId;
   function inspect(objectId:string){setClickedObject(objectId);onInspectKnownObject?.(objectId);}
-  useEffect(()=>{
-    if(!active||catalogue)return;
-    const controller=new AbortController(),timeout=window.setTimeout(()=>controller.abort(),15000);let current=true;
-    setLoading(true);setError(false);
-    void fetch('/api/v1/catalog/outer-tno',{signal:controller.signal}).then(async response=>{if(!response.ok)throw new Error('TNO_CATALOGUE_UNAVAILABLE');const value:unknown=await response.json();if(!value||typeof value!=='object'||!Array.isArray((value as Catalogue).objects))throw new Error('TNO_CATALOGUE_INVALID');if(current)setCatalogue(value as Catalogue);}).catch(()=>{if(current)setError(true);}).finally(()=>{window.clearTimeout(timeout);if(current)setLoading(false);});
-    return()=>{current=false;window.clearTimeout(timeout);controller.abort();};
-  },[active,catalogue,attempt]);
   const result=useMemo(()=>catalogue?rankOrbitAnalogues(orbit,catalogue.objects,catalogue):null,[catalogue,orbit.a_au,orbit.e,orbit.i_deg,orbit.epoch_jd_tdb]);
   const excluded=result?Object.values(result.excluded).reduce((sum,value)=>sum+value,0):0;
   return <section className={styles.panel} data-testid="p9-orbit-analogues" data-algorithm={ORBIT_ANALOGUE_RULE} aria-labelledby="p9-orbit-analogue-title">
@@ -27,7 +28,7 @@ export default function OrbitAnaloguePanel({language,orbit,active=true,onInspect
     {method==='unidentified'?<div role="status" data-testid="p9-future-unidentified-sources"><h3>{c.futureTitle}</h3><p>{c.futureNote}</p><p>{c.futureSteps}</p><button data-testid="p9-analogue-return-catalogue" onClick={()=>setMethod('catalogue')}>{c.returnCatalogue}</button></div>:<>
     <p className={styles.note}>{c.knownNote}</p>
     <p data-testid="p9-analogue-target-epoch">{c.targetEpoch}: JD {number(orbit.epoch_jd_tdb,12)} · TDB · a {number(orbit.a_au)} au · e {number(orbit.e)} · i {number(orbit.i_deg)}°</p>
-    {loading&&<p role="status">{c.loading}</p>}{error&&<p role="alert">{c.error} <button data-testid="p9-analogue-retry" onClick={()=>setAttempt(value=>value+1)}>{c.retry}</button></p>}
+    {loading&&<p role="status">{c.loading}</p>}{error&&<p role="alert">{c.error} <button data-testid="p9-analogue-retry" disabled={source.isFetching} onClick={()=>void source.refetch({cancelRefetch:false})}>{c.retry}</button></p>}
     {result?.status==='invalid_hypothesis'&&<p role="alert">{c.invalidTarget}</p>}{result?.status==='unsupported_source'&&<p role="alert">{c.unsupportedFrame}</p>}
     {result?.status==='ready'&&<>
       <p data-testid="p9-analogue-count">{c.count}: {number(result.compared_count)} / {number(result.input_count)} · {c.excluded}: {number(excluded)}</p>

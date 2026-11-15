@@ -1,0 +1,32 @@
+{
+  "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27899%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27500%40-163182%27&TLIST=%272025-06-24+11%3A10%3A03.755%27&TLIST_TYPE=%27CAL%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27&QUANTITIES=%271%2C20%2C23%27&ANG_FORMAT=%27DEG%27&EXTRA_PREC=%27YES%27&CSV_FORMAT=%27YES%27&REF_SYSTEM=%27ICRF%27",
+  "source_url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27899%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27500%40-163182%27&TLIST=%272025-06-24+11%3A10%3A03.755%27&TLIST_TYPE=%27CAL%27&TIME_TYPE=%27UT%27&TIME_DIGITS=%27FRACSEC%27&QUANTITIES=%271%2C20%2C23%27&ANG_FORMAT=%27DEG%27&EXTRA_PREC=%27YES%27&CSV_FORMAT=%27YES%27&REF_SYSTEM=%27ICRF%27",
+  "parameters": {
+    "format": "json",
+    "COMMAND": "'899'",
+    "OBJ_DATA": "'YES'",
+    "MAKE_EPHEM": "'YES'",
+    "EPHEM_TYPE": "'OBSERVER'",
+    "CENTER": "'500@-163182'",
+    "TLIST": "'2025-06-24 11:10:03.755'",
+    "TLIST_TYPE": "'CAL'",
+    "TIME_TYPE": "'UT'",
+    "TIME_DIGITS": "'FRACSEC'",
+    "QUANTITIES": "'1,20,23'",
+    "ANG_FORMAT": "'DEG'",
+    "EXTRA_PREC": "'YES'",
+    "CSV_FORMAT": "'YES'",
+    "REF_SYSTEM": "'ICRF'"
+  },
+  "retrieved_utc": "2026-11-15T01:32:40.488378+00:00",
+  "bytes": 9066,
+  "sha256": "31d3ed9e1fb8f482894da588391e1558142d8fdbcab5d85fb69e9f0f3386958a",
+  "local_relative_path": "data/reference/spherex-extended-20261115/neptune_2025W26_1A_0318_2_observer.json",
+  "object_id": "neptune",
+  "target_id": "899",
+  "observer_id": "-163182",
+  "epoch": "2025-06-24T11:10:03.755",
+  "ra_deg": 2.165720345,
+  "dec_deg": -0.498308745,
+  "coordinate_kind": "astrometric_ICRF_lighttime_observer_prediction_not_measured_centroid"
+}

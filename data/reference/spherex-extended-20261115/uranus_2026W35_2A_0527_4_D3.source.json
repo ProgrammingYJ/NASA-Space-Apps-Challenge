@@ -1,0 +1,223 @@
+{
+  "schema_version": "1.0",
+  "target": "uranus",
+  "obs_id": "2026W35_2A_0527_4",
+  "detector": "D3",
+  "release": "QR3",
+  "kind": "archive_cutout",
+  "source_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W35_2A/l2b-v27-2026-246/3/level2_2026W35_2A_0527_4D3_spx_l2b-v27-2026-246.fits?center=63.367594%2C21.023852deg&size=0.12deg",
+  "full_original_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W35_2A/l2b-v27-2026-246/3/level2_2026W35_2A_0527_4D3_spx_l2b-v27-2026-246.fits",
+  "retrieved_utc": "2026-11-15T01:28:08.448185+00:00",
+  "crop_center": {
+    "ra_deg": 63.367594,
+    "dec_deg": 21.023852,
+    "kind": "MOST_predicted_query_direction_not_measured_centroid",
+    "source_response": "uranus-2026-08-01-2026-08-31.response.txt",
+    "source_response_sha256": "1c56539b52e26aef0a971cf3a23d5a2c09c95f2671228eb8ff4d87b02bada54d",
+    "most_metadata": {
+      "observation_id": "2026W35_2A_0527_4",
+      "detector": "D3",
+      "observation_start_utc": "2026-08-30 06:01:32.106",
+      "observation_end_utc": "2026-08-30 06:03:27.224",
+      "ra_deg": 63.367594,
+      "dec_deg": 21.023852,
+      "uri": "ibe/data/spherex/qr3/level2/2026W35_2A/l2b-v27-2026-246/3/level2_2026W35_2A_0527_4D3_spx_l2b-v27-2026-246.fits",
+      "original_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W35_2A/l2b-v27-2026-246/3/level2_2026W35_2A_0527_4D3_spx_l2b-v27-2026-246.fits",
+      "metadata": {
+        "ra_obj": "63.367594",
+        "dec_obj": "21.023852",
+        "sun_dist": "19.4470",
+        "geo_dist": "19.3985",
+        "dist_ctr": "1.0300",
+        "phase": "2.9741",
+        "vmag": "99.00",
+        "match": "1",
+        "proposal_id": "null",
+        "target_name": "SPS_069859_S34",
+        "target_moving": "0",
+        "observationid": "2026W35_2A_0527_4",
+        "planeid": "01A0EF71-865E-750C-A686-1195712B41C4",
+        "productid": "D3",
+        "instrument": "SPHEREx",
+        "start_date": "2026-08-30 06:01:32.106",
+        "end_date": "2026-08-30 06:03:27.224",
+        "mjd_start": "61282.251066053",
+        "mjd_end": "61282.252398432",
+        "exposure_time": "113.5826",
+        "ra": "64.4631547125178",
+        "dec": "21.150079893223424",
+        "ra1": "66.5943275928366",
+        "dec1": "19.654976642957756",
+        "ra2": "62.93766870171604",
+        "dec2": "19.214655950090417",
+        "ra3": "62.25516361901019",
+        "dec3": "22.647341700523913",
+        "ra4": "66.02872629666184",
+        "dec4": "23.09969263720826",
+        "uri": "ibe/data/spherex/qr3/level2/2026W35_2A/l2b-v27-2026-246/3/level2_2026W35_2A_0527_4D3_spx_l2b-v27-2026-246.fits"
+      }
+    }
+  },
+  "cutout_size": "0.12deg",
+  "maximum_download_bytes": 10000000,
+  "tls_verification": "default_urllib_verified",
+  "datalink": {
+    "source_url": "https://irsa.ipac.caltech.edu/datalink/links/spherex?ID=ivo%3A%2F%2Firsa.ipac%2Fspherex_qr3%3F2026W35_2A_0527_4%2FD3",
+    "response_sha256": "f20950003a4007f57f2549cf3de983f7684ee81e53af3c56e34a01fad5b69c46",
+    "response_bytes": 16094,
+    "local_relative_path": "data/reference/spherex-extended-20261115/uranus_2026W35_2A_0527_4_D3_datalink.xml",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": 200,
+        "bytes": 16094,
+        "content_type": "application/x-votable+xml"
+      }
+    ],
+    "spectral_calibration_row": {
+      "id": "ivo://irsa.ipac/spherex_qr3?2026W35_2A_0527_4/D3",
+      "access_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/spectral_wcs/cal-swcs-v5-2026-191/3/spectral_wcs_D3_spx_cal-swcs-v5-2026-191.fits",
+      "service_def": "",
+      "error_message": "",
+      "semantics": "#calibration",
+      "description": "spectral_wcs_D3_spx_cal-swcs-v5-2026-191",
+      "content_type": "application/fits",
+      "content_length": "33312960",
+      "content_qualifier": "",
+      "local_semantics": "",
+      "link_auth": "optional",
+      "link_authorized": "1",
+      "path": "",
+      "center_ra": "",
+      "center_dec": "",
+      "cloud_access": "{\"aws\": {\"bucket_name\": \"nasa-irsa-spherex\", \"key\":\"dr1/spectral_wcs/cal-swcs-v5-2026-191/3/spectral_wcs_D3_spx_cal-swcs-v5-2026-191.fits\", \"region\": \"us-east-1\"}}"
+    },
+    "cutout_service_urls": [
+      "https://irsa.ipac.caltech.edu/ibe/cutout"
+    ]
+  },
+  "claim": "real_archive_pixels_and_predicted_coverage_not_validated_detection_or_motion",
+  "bytes": 4106880,
+  "sha256": "ad30af7d37fd673d7aac312d82369ff73737c9700c39cabbaabcf37691e92c0b",
+  "local_relative_path": "data/raw/spherex-extended-20261115/uranus_2026W35_2A_0527_4_D3_nativecut_0p12deg.fits",
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": 200,
+      "bytes": 4106880,
+      "content_type": "application/fits"
+    }
+  ],
+  "actual_fits_metadata": {
+    "target": "uranus",
+    "obs_id": "2026W35_2A_0527_4",
+    "detector": "3",
+    "date_avg": "2026-08-30T06:02:29.666",
+    "timesys": "UTC",
+    "version": "7.0.5",
+    "raw_bytes": 4106880,
+    "raw_sha256": "ad30af7d37fd673d7aac312d82369ff73737c9700c39cabbaabcf37691e92c0b",
+    "native_shape_yx": [
+      70,
+      70
+    ],
+    "primary_wcs_ctype": [
+      "RA---TAN-SIP",
+      "DEC--TAN-SIP"
+    ],
+    "crop_query_reference_pixel_xy": [
+      34.72866463899969,
+      34.33279462755816
+    ],
+    "crop_reference_is_centroid": false,
+    "epsf_rows": 451,
+    "hdus": [
+      {
+        "name": "PRIMARY",
+        "class": "PrimaryHDU",
+        "shape_yx_or_header_dims": [
+          null,
+          null
+        ],
+        "unit": null
+      },
+      {
+        "name": "IMAGE",
+        "class": "ImageHDU",
+        "shape_yx_or_header_dims": [
+          70,
+          70
+        ],
+        "unit": "MJy / sr"
+      },
+      {
+        "name": "FLAGS",
+        "class": "ImageHDU",
+        "shape_yx_or_header_dims": [
+          70,
+          70
+        ],
+        "unit": ""
+      },
+      {
+        "name": "VARIANCE",
+        "class": "ImageHDU",
+        "shape_yx_or_header_dims": [
+          70,
+          70
+        ],
+        "unit": "MJy2 / sr2"
+      },
+      {
+        "name": "ZODI",
+        "class": "ImageHDU",
+        "shape_yx_or_header_dims": [
+          70,
+          70
+        ],
+        "unit": "MJy / sr"
+      },
+      {
+        "name": "EPSF",
+        "class": "BinTableHDU",
+        "shape_yx_or_header_dims": [
+          451,
+          8752
+        ],
+        "unit": null
+      },
+      {
+        "name": "WCS-WAVE",
+        "class": "BinTableHDU",
+        "shape_yx_or_header_dims": [
+          1,
+          1100
+        ],
+        "unit": null
+      }
+    ],
+    "spectral_calibration_row": {
+      "id": "ivo://irsa.ipac/spherex_qr3?2026W35_2A_0527_4/D3",
+      "access_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/dr1/spectral_wcs/cal-swcs-v5-2026-191/3/spectral_wcs_D3_spx_cal-swcs-v5-2026-191.fits",
+      "service_def": "",
+      "error_message": "",
+      "semantics": "#calibration",
+      "description": "spectral_wcs_D3_spx_cal-swcs-v5-2026-191",
+      "content_type": "application/fits",
+      "content_length": "33312960",
+      "content_qualifier": "",
+      "local_semantics": "",
+      "link_auth": "optional",
+      "link_authorized": "1",
+      "path": "",
+      "center_ra": "",
+      "center_dec": "",
+      "cloud_access": "{\"aws\": {\"bucket_name\": \"nasa-irsa-spherex\", \"key\":\"dr1/spectral_wcs/cal-swcs-v5-2026-191/3/spectral_wcs_D3_spx_cal-swcs-v5-2026-191.fits\", \"region\": \"us-east-1\"}}"
+    },
+    "source_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W35_2A/l2b-v27-2026-246/3/level2_2026W35_2A_0527_4D3_spx_l2b-v27-2026-246.fits?center=63.367594%2C21.023852deg&size=0.12deg",
+    "full_original_url": "https://irsa.ipac.caltech.edu/ibe/data/spherex/qr3/level2/2026W35_2A/l2b-v27-2026-246/3/level2_2026W35_2A_0527_4D3_spx_l2b-v27-2026-246.fits",
+    "local_relative_path": "data/raw/spherex-extended-20261115/uranus_2026W35_2A_0527_4_D3_nativecut_0p12deg.fits",
+    "headers_relative_path": "data/reference/spherex-extended-20261115/uranus_2026W35_2A_0527_4_D3.headers.txt",
+    "headers_sha256": "8a16b0c2e15302f5d07948febc7ac4653cc5883acc023137fe33ff79ef0116cb"
+  }
+}

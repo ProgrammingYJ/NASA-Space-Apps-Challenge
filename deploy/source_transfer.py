@@ -30,7 +30,7 @@ def prepare(base_stage: Path, destination: Path):
     paths = {ROOT / name for name in FILES}
     for directory in DIRECTORIES:
         paths.update((ROOT / directory).rglob("*"))
-    for directory in ("data/reference/outer-tno/r029-r031-20261115", "data/reference/appearance/dev020", "data/reference/visual-manifest-history"):
+    for directory in ("data/reference/outer-tno/r029-r031-20261115", "data/reference/appearance/dev020", "data/reference/visual-manifest-history", "data/reference/spherex-registry/dev025", "data/reference/mcp/dev025", "data/reference/spherex-extended-20261115", "data/reference/document-fonts"):
         paths.update((ROOT / directory).rglob("*"))
     runtime = json.loads((ROOT / "data/node-runtime/runtime_manifest.json").read_bytes())
     paths.update(ROOT / row["path"] for row in runtime["source_files"] if not row["runtime_required"])

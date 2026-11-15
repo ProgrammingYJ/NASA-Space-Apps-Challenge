@@ -1,4 +1,5 @@
 import {test,expect,type Locator} from '@playwright/test';
+import {scopeCopy} from '../src/solarScope';
 
 const languages=['ko','en','ja','zh-Hant','fr'];
 const widths=[1440,2560];
@@ -11,7 +12,8 @@ for(const width of widths)test(`translated hero, return action and time notice r
   const rows=[];
   for(const language of languages){
     await page.getByTestId('language').selectOption(language);
-    const hero=page.locator(direct('intro')),heading=hero.locator('h1');await expect(heading).toBeVisible();
+    const hero=page.getByTestId('solar-scope-intro'),heading=hero.locator('h1');await heading.scrollIntoViewIfNeeded();await expect(heading).toBeInViewport();
+    const copy=scopeCopy(language);await expect(heading).toHaveText(copy.headline);await expect(page.getByTestId('solar-scope-note')).toHaveText(copy.note);await expect(page.getByTestId('open-p9-discovery')).toHaveText(copy.open+' ?');
     const lines=await heading.evaluate(element=>{
       const node=element.firstChild!,text=node.textContent??'',lines:Record<string,string>={};
       for(let i=0;i<text.length;i++){const range=document.createRange();range.setStart(node,i);range.setEnd(node,i+1);const y=range.getBoundingClientRect().y.toFixed(1);lines[y]=(lines[y]??'')+text[i];}
@@ -38,7 +40,8 @@ for(const width of widths)test(`translated hero, return action and time notice r
     expect(helpBox.y+helpBox.height+8).toBeLessThanOrEqual(representationBox.y);
     expect(representationBox.y+representationBox.height+8).toBeLessThanOrEqual(timelineBox.y);
     expect(await notice.evaluate(element=>element.scrollWidth<=element.clientWidth)).toBe(true);
-    const heroBox=await bounds(page.locator(direct('intro')));expect(heroBox.y+heroBox.height+8).toBeLessThanOrEqual(noticeBox.y);
+    const sidebarBox=await bounds(page.getByTestId('exploration-sidebar'));expect(sidebarBox.y+sidebarBox.height+8).toBeLessThanOrEqual(noticeBox.y);
+    const hero=page.getByTestId('solar-scope-intro');await expect(hero.locator('h1')).toHaveText(scopeCopy(language).headline);await expect(page.getByTestId('solar-scope-note')).toHaveText(scopeCopy(language).note);
     rows.push({language,notice:noticeBox,help:helpBox,representation:representationBox,timeline:timelineBox});
   }
   await page.getByTestId('language').selectOption('ko');await page.screenshot({path:`../var/browser-results/dev019-after-${width}-notice.png`});
@@ -53,7 +56,7 @@ test('the full TNO browser stays bounded and below its catalogue toggle',async({
     await page.setViewportSize(viewport);
     for(const language of languages){
       await page.getByTestId('language').selectOption(language);
-      const toggle=page.getByTestId('open-tno-catalogue'),toggleBox=await bounds(toggle),gatewayBox=await bounds(page.locator(direct('catalogGateway')));
+      const toggle=page.getByTestId('open-tno-catalogue');await toggle.scrollIntoViewIfNeeded();const toggleBox=await bounds(toggle),gatewayBox=await bounds(page.getByTestId('solar-scope-discovery'));
       expect(toggleBox.y+toggleBox.height+8).toBeLessThanOrEqual(gatewayBox.y);
       await toggle.click();const panel=page.getByTestId('tno-catalogue-browser');await expect(panel).toBeVisible();
       const panelBox=await bounds(panel),listBox=await bounds(page.getByTestId('tno-catalogue-list'));
